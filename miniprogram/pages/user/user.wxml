@@ -1,0 +1,132 @@
+  <view class="body" wx:if="{{remind}}">
+    <view class='zong'>
+      <view class="spinner" >
+        <view class="spinner-container container1">
+          <view class="circle1"></view>
+          <view class="circle2"></view>
+          <view class="circle3"></view>
+          <view class="circle4"></view>
+        </view>
+        <view class="spinner-container container2">
+          <view class="circle1"></view>
+          <view class="circle2"></view>
+          <view class="circle3"></view>
+          <view class="circle4"></view>
+        </view>
+        <view class="spinner-container container3">
+          <view class="circle1"></view>
+          <view class="circle2"></view>
+          <view class="circle3"></view>
+          <view class="circle4"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 加载页面结束 -->
+  <block wx:else>
+    <view style='width:100%;height:100%'>
+      <!-- 用户基本信息 -->
+      <view class='user_top' style="background-color:{{bgcolor}}">
+        <view class='user_top_two'>
+              <image style='display:block;' class='user_top_image' src="{{user.headimgurl ? user.headimgurl:'../../images/users.png'}}" />
+              <view class='user_mc' bindtap="copyText" data-text="{{user.user_id}}" style='display:block;'>
+                <view>{{user.wx_name}}</view>
+                <text class='username_font'>用户ID：{{user.user_id}}</text>
+                <text class='username_font' wx:if="{{tjr}}" style="margin-left: 16px;">{{tjr}}</text>
+              </view>
+        </view>  
+        <!-- 我的订单 -->
+        <view class='user_dd' >
+          <view class='dd_stu'>
+            <navigator class="order" url="../order/order?currentTab=0&otype=pay">
+              <view>
+                <text>我的订单</text>
+              </view>
+              <view class='order_right'>
+                <view class='order_my'>查看全部订单</view>
+                <view class="iconfont icon-iconset0424"></view>
+              </view>
+            </navigator>
+            <view class='order_list'>
+              <navigator class='list' url="../order/order?currentTab=1&order_type1=payment&otype=pay">
+                <text class='tishi' wx:if="{{dfk_num > 0}}">{{dfk_num}}</text>
+                   <view class='dd_img'>
+                    <image src='../../images/icons/5.png'></image>
+                  </view>
+                <view style='margin-top:5px'>待付款</view>
+              </navigator>
+              <navigator class='list' url="../order/order?currentTab=2&order_type1=send&otype=pay">
+                <text class='tishi' wx:if="{{dfh_num > 0}}">{{dfh_num}}</text>
+                  <view class='dd_img'>
+                      <image src='../../images/icons/1.png'></image>
+                  </view>
+                <view style='margin-top:5px'>待发货</view>
+              </navigator>
+              <navigator class='list' url="../order/order?currentTab=3&order_type1=receipt&otype=pay">
+                <text class='tishi'  wx:if="{{dsh_num > 0}}">{{dsh_num}}</text>
+                  <view class='dd_img'>
+                  <image src='../../images/icons/3.png'></image>
+                  </view>
+                <view style='margin-top:5px'>待收货</view>
+              </navigator>
+              <navigator class='list' url="../order/order?currentTab=4&order_type1=evaluate&otype=pay">
+                <text class='tishi' wx:if="{{dpj_num > 0}}">{{dpj_num}}</text>
+                  <view class='dd_img'>
+                    <image src='../../images/icons/4.png'></image>
+                  </view>
+                <view style='margin-top:5px'>待评价</view>
+              </navigator>
+              <navigator class='list' url="../return_goods/index?currentTab=0&otype=whole">
+                 <text class='tishi' wx:if="{{th > 0}}">{{th}}</text> 
+                <view class='dd_img'>
+                    <image src='../../images/icons/2.png'></image>
+                </view>
+                <view style='margin-top:5px'>退货</view>
+              </navigator>
+            </view> 
+          </view>   
+          <!-- 功能列表 -->
+          <view class="function" style='background:#fff'>
+            <block wx:for="{{plug_ins}}" wx:key="{{item.id}}">
+              <view class="function_list" bindtap='go' data-url="{{item.subtitle_url}}">
+                <view class='function_left'>
+                  <image style="width: 25px;height: 25px;margin: auto;" src='{{item.subtitle_image}}'></image>
+                  <view class='function_text'>{{item.subtitle_name}} </view>
+                </view>
+                <view class='function_right jiantou'>
+                  <image src="../../images/x_right.png"></image>
+                </view>
+              </view>
+            </block>
+          </view>
+          <view class="function" style='background:#fff'>
+            <block wx:for="{{list}}" wx:key="{{item.id}}">
+              <navigator class="function_list" url="../{{item.url}}">
+                <view class='function_left'>
+                  <image style="width: 25px;height: 25px;margin: auto;" src='../../images/icons/{{item.icon}}'></image>
+                  <view class='function_text'>{{item.text}} </view>
+                </view>
+                <view class='function_right jiantou'>
+                  <image src="../../images/x_right.png"></image>
+                </view>
+              </navigator>
+            </block>
+          </view>
+          <view class="hh" >
+            <navigator url="../article/article?id={{item.Article_id}}" wx:for="{{article}}" wx:key="{{item.Article_id}}">
+              <view class="qbdd mt10 jiantou">
+                <span class="font_14 c3">{{item.Article_title}}</span>
+                <span class="fl_r c9 font_12 l_h20" hover-class="none" style="margin-right: 5px;height: 100%;">{{item.Article_prompt}}
+                  <image src="../../images/x_right.png" style="border: 0;border-radius: 0;margin: auto;"></image>
+                </span>
+              </view>
+            </navigator>
+          </view>
+          <view class='bottom'>
+            <view class='bottom_1'><image src="{{logo}}"></image></view>
+            {{support}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>

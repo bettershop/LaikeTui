@@ -1,0 +1,89 @@
+<view class='center'>
+<view class='portrait'>
+  <image src="{{re}}" />
+</view>
+ <form bindsubmit="set_share" report-submit='true' data-status="1">
+<view class='input_all'>
+<view class='input'> 
+  <text wx:if="{{show == 1}}" >总金额</text>
+  <text wx:if="{{show == 2}}">单个金额</text>
+  <input type='digit' placeholder='请填写红包总金额'name='money' value='{{money}}'data-type='money' bindblur ="n1"></input>
+</view>
+<view wx:if="{{show == 1}}"style='font-size:12px;position:relative;top:-25px;color:#808080' data-status="1" bindtap="tapName">
+      每人抽到的金额随机，<span style='font-size:12px;color:#34A4E4;'>改为普通红包</span>
+      <input hidden="true"  name='show' value='1'></input>
+  </view>
+  <view wx:if="{{show ==2}}"style='font-size:12px;position:relative;top:-25px;color:#808080' data-status="2" bindtap="tapName">
+        群里每人收到固定金额，<span style='font-size:12px;color:#34A4E4;'>改为拼手气红包</span>
+        <input hidden="true"  name='show' value='2'></input>
+  </view>
+<view class='input'>
+<text>红包个数</text>
+<input type='digit' placeholder='填写红包数量'name= 'num' value='{{num}}' data-type='num' bindblur='n1'></input>
+<input hidden="true"  name='bizhi' value='{{bizhi.bizhi}}'></input>
+</view>
+<view class='input'>
+<text>留言</text>
+<input type='text' name='remarks' placeholder='恭喜发财 大吉大利' value='{{remarks}}' data-type='remarks'  bindblur='n1'></input>
+</view>
+</view>
+<button class='but' data-status="1" style="background-color:#FE6347"  type="primary" formType="submit">塞进红包</button>
+<!-- <navigator url="../red_packet/red_record?id=135"> -->
+<navigator url="../red_packet/red_envelopes">
+<view class='record' >我的记录</view>
+</navigator>
+
+</form>
+<view class ='guize'>
+<view style='text-align:center;'>红包规则</view>
+<view class='ne'>1.发红包的金额为虚拟金额，当好友领取了自己也可以得到相应金额的红包。</view>
+<view class='ne'>2.最多可以同时发{{bizhi.send_redpacket}}个红包，当领取完或者红包失效后，才可以继续发新的红包。</view>
+<view class='ne' >3.最多可以同时领{{bizhi.receive_redpacket}}个红包，当领取红包用完或者红包失效以后才可以继续领取新的红包</view>
+<view wx:if="{{bizhi.tixian==1}}">
+<view class='ne'>4.在有效时间内，红包可以提现或者购物抵扣</view>
+</view>
+<block wx:else>
+<view class='ne'>4.在有效时间内，红包可以购物抵扣</view>
+</block>
+<view class='ne'>5.当为普通红包时，系统将不遵循红包金额与数量按比例发送</view>
+<view class='ne'>6.其他</view>
+</view >
+
+<!-- 弹窗 -->
+<view class="drawer_screen" bindtap="set_share" data-index="0" data-status="0"  wx:if="{{show_share}}"></view>
+<view animation="{{animationData}}" class="drawer_attr_share" catchtouchmove="preventTouchMove" wx:if="{{show_share}}" >
+<view class='myyhq'> </view>
+  <view class='share_top'>
+  分享
+  <view class='close_share' bindtap="set_share1" data-index="0" data-status="0" >x</view>
+  </view> 
+<view  class='fx_box'> 
+ <view class='fx_img_box'>
+     <button open-type="share" hover-class="button-hover" style='line-height:normal;border:0;border-radius:0px;padding:0;font-size:12px;'>
+        <view><image class='fx_img' src='/images/wx.png'></image></view>
+        <view>微信好友</view>
+     </button>
+    </view>
+    <view class='fx_img_box' bindtap='user_share' >
+    <view> <image class='fx_img' src='/images/pyq.png'></image></view> 
+      <view>朋友圈</view>
+    </view>
+</view>
+</view>
+
+  <view class='imagePathBox' hidden="{{maskHidden == false}}">
+    <view class='images_bg'>
+        <view class='share_top'>
+        分享到朋友圈
+        <view class='close_share' bindtap='close_share'>x</view>
+        </view>
+        <image src="{{imagePath}}" data-src="{{imagePath}}" catchtap="previewImage" class='shengcheng'></image>
+        <button class='baocun' style='background:{{backgroundColor}};' bindtap='baocun'>保存相册</button>
+        <view class='share_bottom'>保存图片到手机后，您可到朋友圈分享该商品图片</view>
+    </view>
+  </view>
+  <view hidden="{{maskHidden == false}}" class="mask"></view> 
+<!-- end -->
+
+</view>
+

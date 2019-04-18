@@ -1,0 +1,32 @@
+.block {
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+}
+
+.left{
+    width:375px;
+    height:667px;
+    border:1px #bbb solid;
+    border-radius: 10px;
+    position: relative;
+}
+
+.top{
+    width:100%;
+    height:50px;
+    border-bottom:1px #bbb solid;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 10px 10px 0 0;
+}
+
+.bottom{
+    position: absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:50px;
+    border-radius: 0 0 10px 10px;
+    border-top:1px #bbb solid;
+}

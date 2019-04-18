@@ -1,0 +1,603 @@
+.item .cp_photo{ 
+    width: 60px; 
+    height: 60px;
+    overflow: hidden; 
+    border-radius: 3px; 
+    margin-right: 10px;
+}
+.wx_pay_submit{
+  margin-top: 10px;
+}
+.item .cp_photo image{ 
+    width: 60px; 
+    height: 60px;
+}
+.gm_ovh_2h{
+    line-height:25px; 
+    height: 50px; 
+    margin:0; 
+    overflow:hidden;  
+    text-overflow:ellipsis; 
+    display:-webkit-box; 
+    -webkit-line-clamp:2;  
+    -webkit-box-orient:vertical; 
+    font-size: 16px;
+}
+.gm_ovh_1h{
+    line-height:25px; 
+    height: 25px; 
+    margin:0; 
+    overflow:hidden;  
+    text-overflow:ellipsis; 
+    display:-webkit-box; 
+    -webkit-line-clamp:2;  
+    -webkit-box-orient:vertical; 
+    font-size: 14px;
+} 
+.h10_hui{
+    height: 10px;
+    width: 100%;
+    background: #eee;
+}
+
+.min_60{
+    min-height: 60px;
+}
+
+.w100{ width: 100%}
+
+.iconWarn{
+   vertical-align:top;padding-right:2px;
+}
+
+.iconClear{
+  float:right;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right:10px;
+  margin-top:-36px;
+  height: 28px;
+}
+
+.inputStyle{
+  height: 36px;
+  line-height: 36px;
+  padding-left: 2px;
+  width:80%;
+}
+
+.tips{
+  margin-bottom:10px;
+}
+.x_right{
+    width:16px;
+    height: 18px;
+    display:inline-block; 
+    vertical-align: middle;
+    float: right;
+}
+.zhifu{
+  background: #fff;
+  height:51px;
+  line-height: 51px;
+  text-align: center;
+  width:65%;
+  border-top:1px solid #eee;
+  font-size:18px;
+}
+.font_20{
+    font-size: 18px;
+    font-weight: bold;
+}
+.xx_pay_submit{
+  margin-top: 10px;
+  text-align:center;
+  padding:10px;
+  border-radius:4px;
+  color:#fff;
+}
+.gms_view{  
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+}
+.pay_foot{
+position:fixed;
+bottom:0;
+right:0;
+width: 100%;
+}
+.pay_zf,.pay_fk,.pay_qb{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 16px;
+  width: 100%；
+}
+.pay_fk{
+  margin: 0;
+}
+.pay_zf{
+  border-bottom: 1px solid #eee;
+}
+.pd{
+  padding:10px;
+}
+.btn_zf{
+background:#ff6347;
+color:#fff !important;
+width:35%;
+height:52px;
+text-align:center;
+line-height:52px;
+}
+.left {
+  
+}
+
+.right {
+ color: #333;
+}
+dl{
+  width: 100%;
+}
+dt{
+  padding:10px 0;
+display:block;
+
+}
+li{
+   font-size: 14px; line-height: 34px;color: #575757;height: 34px;display: block;padding-left: 10px;
+   margin:10px;
+border:2px solid #ff4081;
+border-radius:20rpx;
+text-align:center;
+
+}
+.show {
+   display: block;
+}
+.hidden {
+ display: none;
+}
+.gms_view navigator{
+    border: 1px solid #ddd;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+    line-height: 22px;
+    float: right;
+    font-weight: bold;
+    
+}
+.gms_view input{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    font-size: 12px;
+    width: 30px;
+    margin: 0 5px;
+    text-align: center;
+    color: #999;
+    float: right;
+}
+.che{
+    border-radius:50% ;
+    width: 20px;
+    height: 20px;
+}
+.hui{
+    margin-left: 28rpx;
+    font-size: 30rpx;
+    
+}
+.xuan{
+    padding: 10rpx 0;
+    font-size: 30rpx;
+}
+
+.orderDetails {
+  border-bottom: 1rpx solid #f3f3f3;
+  background: #fff;
+  height: 70px;
+}
+
+.orderListTitle {
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+
+.orderListTitle .userImg {
+  float: left;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  margin: 15rpx;
+}
+
+.orderListTitle .userImg image {
+  border-radius: 35rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.orderListTitle .userName {
+  padding-right: 50rpx;
+  background: url(../../../images/member_list_arrow.png) no-repeat 90% center;
+  background-size: 35rpx 35rpx;
+}
+
+.orderListTitle .orderStatus {
+  float: right;
+  margin-right: 20rpx;
+  color: #2f7b27;
+  font-size: 34rpx;
+}
+
+.orderListDetails {
+  margin: 10px;
+  display: flex;
+  height: 120rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+  border:2px solid #ff4081;
+  border-radius: 20rpx;
+}
+
+.orderListDetails .productImg {
+  flex: 1.3;
+  height: 217rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+.productInfo image{
+  width: 50px;
+  height: 45px;
+}
+.orderListDetails .productImg image {
+  width: 100%;
+  height: 100%;
+}
+
+.orderListDetails .productInfo {
+  /* flex: 1.5; */
+  padding: 20rpx 10rpx;
+  text-align: center;
+}
+
+.pr {
+  flex: 2.6;
+  padding: 0 10rpx;
+  line-height: 44rpx;
+}
+
+.n {
+  margin-top: 22rpx;
+  font-size: 30rpx;
+  display: inline-block;
+  line-height: 40rpx;
+  font-weight: 900;
+}
+
+.b {
+  margin-top: 8rpx;
+  font-size: 27rpx;
+  display: inline-block;
+  line-height: 30rpx;
+  color: #999;
+  margin-left:10px;
+}
+
+.y {
+  font-size: 112rpx;
+  font-weight: 900;
+  color: #ff4081;
+}
+
+.x {
+  color: #ff4081;
+  font-size: 38rpx;
+  font-weight: 900;
+}
+
+.hh {
+  font-weight: 800;
+  color: #ff4081;
+  padding: 20rpx 0rpx;
+  text-align: center;
+  border-left: 1px dashed #ccc;
+  line-height:15px;
+}
+
+.hb {
+  width: 80%;
+  margin-top: 10rpx;
+  font-size: 30rpx;
+  padding: 18rpx;
+  border-radius: 4rpx;
+}
+
+.c {
+  font-size: 21rpx;
+  position: relative;
+  top: -80rpx;
+  left: 140rpx;
+  width: 400rpx;
+  color: #ccc;
+}
+
+.classname {
+  font-size: 25rpx;
+  color: #ccc;
+}
+.orderDetailson{
+  margin:10px;
+  height:60rpx;
+  border-bottom:1rpx solid #f3f3f3;
+  border:2px solid #ff4081;
+  border-radius:20rpx;
+  text-align: center;
+  font-size:16px;
+line-height:30px;
+
+}
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1524452049296'); /* IE9*/
+  src: url('iconfont.eot?t=1524452049296#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAWMAAsAAAAAB/wAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kgrY21hcAAAAYAAAABeAAABhpo8Br5nbHlmAAAB4AAAAb8AAAHoJdKnXWhlYWQAAAOgAAAALwAAADYRJhukaGhlYQAAA9AAAAAcAAAAJAfeA4RobXR4AAAD7AAAAAwAAAAMC+kAAGxvY2EAAAP4AAAACAAAAAgAdgD0bWF4cAAABAAAAAAfAAAAIAESAF1uYW1lAAAEIAAAAUUAAAJtPlT+fXBvc3QAAAVoAAAAIgAAADPOfPRzeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2Bk/sE4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVDxzZG7438AQw9zA0AAUZgTJAQAoLwyteJzFkMENgDAMAy9t6QMxCA+W6Ba8mKMTd41iQnkwQS05VhxLiQIsQBQPMYFdGA9OueZ+ZHU/eSZLjUBtpXf1nyqiWXYNKplpsHmr/9i87qPTV6iDOrGVl4Qb9VcMkwAAeJw9jz1v02AQx5+7B9tJ4/g1fsmTJk7iJk9QwAhj4oHiSoBSp0IqEhNDI3Xr0iwdOpSiLqiVChLtxNAJoeZLlG/AwszEywYDXwDDUypx+t/p7nT3k/5EIuTPF3pBfWKTAblNHpEnhIA8hK6GTejwJMIhOB3J8Woa5SHvKGE3ovfB68o1Nx4lfU9WZB00aMGdTjziEXK4m2R4D2K3CVBvsKdWb9Gib2DB562XxRq+AycIF/XsZjG5sVKL23ZpV7WsumW9KsmSVEK8pmuw7bllqbwgF+8lnTkXwXUMQK1z9vhZtd2wNo+SWbPnlQEODsButLX5islMoefMta26YlRLPquGSzXY/V7xbbXZ/0ZEXHr9RDlNSIV4JCS3SC68RsA1UFrgZdDLIBWNGCPoXe1d4o2IMOfJqPSRZ2DL4tbRoNsXQ3r1Go/SCPAcp+PVDcSN1fG0+AyTNM0R8zSdwJzO91+cUwvQFln83D6lxldDCE9/qZXlHA8/HlLIl/0H60DPfpxRWMfqeIr/gYJxyftX9+dU4I6Lt6YJW/Cansz2ig+6Dg/3Zie/d0xdYYYfBL7BlLY6ZIMkGbAh+QtEC1XCAHicY2BkYGAA4vR9K1nj+W2+MnCzMIDAdebsiwj6/0UWBmYTIJeDgQkkCgAaNgnFAHicY2BkYGBu+N/AEMPCAAJAkpEBFTADAEcJAmwEAAAAA+kAAAQAAAAAAAAAAHYA9HicY2BkYGBgZghkYGUAASYg5gJCBob/YD4DABD3AXAAeJxlj01OwzAQhV/6B6QSqqhgh+QFYgEo/RGrblhUavdddN+mTpsqiSPHrdQDcB6OwAk4AtyAO/BIJ5s2lsffvHljTwDc4Acejt8t95E9XDI7cg0XuBeuU38QbpBfhJto41W4Rf1N2MczpsJtdGF5g9e4YvaEd2EPHXwI13CNT+E69S/hBvlbuIk7/Aq30PHqwj7mXle4jUcv9sdWL5xeqeVBxaHJIpM5v4KZXu+Sha3S6pxrW8QmU4OgX0lTnWlb3VPs10PnIhVZk6oJqzpJjMqt2erQBRvn8lGvF4kehCblWGP+tsYCjnEFhSUOjDFCGGSIyujoO1Vm9K+xQ8Jee1Y9zed0WxTU/3OFAQL0z1xTurLSeTpPgT1fG1J1dCtuy56UNJFezUkSskJe1rZUQuoBNmVXjhF6XNGJPyhnSP8ACVpuyAAAAHicY2BigAAuBuyAmZGJkZmRhYGxgjUlsyojk4EBABHxArIAAA==') format('woff'),
+  url('iconfont.ttf?t=1524452049296') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1524452049296#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:25px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dizhi:before { content: "\e641"; }
+
+.pay_xt{
+  padding: 4px;
+}
+.top_xt{
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.gb_fr{
+ background:red;
+width:20px;
+height:20px;
+border-radius:50%;
+line-height:18px;
+text-align:center;
+font-size:15px;
+margin-left:10px;
+color:#fff;
+
+}
+
+/*余额支付 */
+
+.pay {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.pay .title {
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  color: #353535;
+  padding: 0 23rpx;
+  border-bottom: 1rpx solid #ddd;
+  box-sizing: border-box;
+}
+
+.pay .wx_pay, .pay .offline_pay, .pay .wallet_pay {
+  margin: 0 26rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: 2rpx solid #ddd;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.pay .wx_pay .icon, .pay .offline_pay .icon,
+.pay .wallet_pay .icon {
+  width: 34rpx;
+  height: 34rpx;
+  border: 2rpx solid #ddd;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.pay .wx_pay .icon.active, .pay .offline_pay .icon.active,
+.pay .wallet_pay .icon.active {
+  border: 10rpx solid #00a2ff;
+}
+
+.pay .wx_pay text, .pay .offline_pay text, .pay .wallet_pay text {
+  margin-left: 20rpx;
+  color: #353535;
+  font-size: 26rpx;
+}
+
+.pay .wallet_pay {
+  border: 0;
+  border-top: 2rpx solid #ddd;
+}
+
+.pay .offline_pay {
+  border: 0 none;
+}
+
+.save {
+  margin: 80rpx 23rpx;
+  color: #fff;
+  background: #00a2ff;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+}
+
+.wallets-password {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 110%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.wallets-password .input-content-wrap {
+  position: absolute;
+  top: 200rpx;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 600rpx;
+  margin-left: -300rpx;
+  background: #fff;
+  border-radius: 20rpx;
+}
+
+.wallets-password .input-content-wrap .top {
+  display: flex;
+  align-items: center;
+  height: 90rpx;
+  border-bottom: 2rpx solid #ddd;
+  justify-content: space-around;
+}
+
+.wallets-password .input-content-wrap .top .close {
+  font-size: 44rpx;
+  color: #999;
+  font-weight: 100;
+}
+
+.wallets-password .input-content-wrap .top .forget {
+  color: #00a2ff;
+  font-size: 22rpx;
+}
+
+.wallets-password .input-content-wrap .actual_fee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  height: 100rpx;
+  margin: 0 23rpx;
+  border-bottom: 2rpx solid #ddd;
+}
+
+.wallets-password .input-content-wrap .actual_fee span {
+  font-size: 24rpx;
+}
+
+.wallets-password .input-content-wrap .actual_fee text {
+  font-size: 36rpx;
+}
+
+.wallets-password .input-content-wrap .input-password-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150rpx;
+}
+
+.wallets-password .input-content-wrap .input-password-wrap .password_dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #000;
+  box-sizing: border-box;
+  width: 90rpx;
+  height: 90rpx;
+  border: 2rpx solid #ddd;
+  border-left: none 0;
+}
+
+.wallets-password .input-content-wrap .input-password-wrap .password_dot:nth-child(1) {
+  border-left: 2rpx solid #ddd;
+}
+
+.wallets-password .input-content-wrap .input-password-wrap .password_dot i {
+  background: #000;
+  border-radius: 50%;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.wallets-password .input-content {
+  position: absolute;
+  opacity: 0;
+  left: -100%;
+  top: 600rpx;
+  background: #f56;
+  z-index: -999;
+}
+
+.wallets-password .input-content.active {
+  z-index: -99;
+}
+
+.example {
+  display: block;
+  width: 100%;
+  height: 100rpx;
+  overflow:hidden;
+  margin-top:80px;
+
+}
+
+.marquee_box {
+  width: 100%;
+  position: relative;
+}
+
+.marquee_text {
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  color: #FF6347;
+}
+
+
+
+.radio-group {
+display:block;
+width:100%;
+}
+
+/*swtich样式-start*/
+/*swtich整体大小*/
+.wx-switch-input{
+  width:82rpx !important;
+  height:40rpx !important;
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+  width:80rpx !important;
+  height: 36rpx !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+  width: 40rpx !important;
+  height: 36rpx !important;
+}
+/*swtich样式end*/

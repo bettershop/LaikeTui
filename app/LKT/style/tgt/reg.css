@@ -1,0 +1,346 @@
+@charset "utf-8";
+body{
+    /*background-color: #3895e8;*/
+}
+.wrap{
+    box-sizing: border-box;
+    height: 100vh;
+    background: url("../img/bj.jpg") no-repeat center;
+    background-size: auto 100vh;
+    position:  relative;
+}
+.form-data{
+    background-color: #ffffff;
+    width: 460px;
+    left: 50%;
+    margin-left: -230px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,0,0,.1);
+    padding: 65px 0 30px 0;
+    position: fixed;
+    top: 25%;
+}
+.form-data .tel-warn{
+    position: absolute;
+    color: #ea5d5f;
+    font-size: 12px;
+    right: 0;
+    top: 22px;
+}
+.form-data .tel-warn i{
+    display: inline-block;
+    vertical-align: middle;
+    color: #ea5d5f;
+    font-size: 16px;
+    margin-top: -3px;
+    margin-left: 5px;
+}
+.form-data .p-input,.find_password .p-input{
+    padding: 5px 0;
+    height: 44px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e5e5e5;
+    width: 340px;
+    margin: 0 auto 16px;
+    line-height: 14px;
+    display: block;
+}
+.form-data .code{
+    width: 340px;
+    margin-left: 60px;
+}
+.form-data .code input{
+    width: 200px;
+}
+.form-data .code img{
+    width: 120px;
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+}
+.form-data .code .img-err{
+    right: 120px;
+    top: 15px
+}
+.form-data .code a{
+    display: inline-block;
+    position: absolute;
+    width: 80px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    color: #000;
+    left: 320px;
+    bottom: 0;
+}
+.form-data .send{
+    color: #969696;
+    position: absolute;
+    right: 0;
+    top: 24px;
+    z-index: 10;
+}
+.form-data .send:hover{
+    color: #3895e8;
+}
+.form-data .time{
+    color: #969696;
+    position: absolute;
+    right: 0;
+    top: 24px;
+    font-size: 14px;
+}
+.form-data label,.find_password label{
+    font-size: 14px;
+    position: absolute;
+    display: inline-block;
+    color: #cacaca;
+    top: 22px;
+}
+.form-data input,.find_password input{
+    outline: none;
+    border: none;
+    z-index: 5;
+    position: absolute;
+    top: 13px;
+    width: 340px;
+    background-color: transparent;
+    font-size: 14px;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.form-data .head-logo{
+    position: absolute;
+    top: -70px;
+    left: 116px;
+}
+.reg_checkboxline{
+    font-size: 14px;
+    color: #cacaca;
+    height: 30px;
+    margin: 20px auto 20px;
+    line-height: 30px;
+    width: 340px;
+}
+.form-data .pass-warn{
+    width: 400px;
+    color: #ea5d5f;
+    font-size: 14px;
+    margin: 0 auto;
+}
+.reg_checkboxline p{
+    line-height: 30px;
+    padding: 0;
+    border-bottom: 0;
+}
+.reg_checkboxline a{
+    color: #9e9e9e;
+}
+.reg_checkboxline a:hover{
+    color: #3895e8;
+}
+.reg_checkboxline i.boxcol {
+    background: #3498db;
+    color: #fff;
+}
+.icon-ok-sign {
+    background: #b8c4ce;
+    border-radius: 2px;
+    margin-right: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    display: block;
+    margin-top: 7px;
+    line-height: 16px;
+    text-align: center;
+}
+.form-data .lang-btn{
+    width: 340px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #42a5f5;
+}
+.form-data .lang-btn.off{
+    color: #a0a0a0;
+    background-color: #e5e5e5;
+}
+.bottom-info{
+    width: 400px;
+    line-height: 18px;
+    font-size: 14px;
+    color: #cacaca;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+.bottom-info a{
+    color: #42a5f5;
+}
+.form-data .error{
+    color: #ea5d5f;
+    font-size: 14px;
+    top: -5px;
+    right: 0;
+    position: absolute;
+}
+.form-data .r-forget{
+    width: 340px;
+    margin: 0 auto;
+}
+.form-data .r-forget a{
+    font-size: 12px;
+    color: #8d8d8d;
+}
+.form-data .r-forget a:hover{
+    color: #3895e8;
+}
+.form-data .third-party{
+    width: 400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+.form-data .third-party .icon-qq-round{
+    font-size: 40px;
+    color: #e5e5e5;
+    display: inline-block;
+    vertical-align: middle;
+}
+.form-data .third-party .icon-qq-round:hover{
+    color: #42a5f5;
+}
+.form-data .third-party .icon-weixin:hover{
+    color: #0fccbc;
+}
+.form-data .third-party .icon-sina1:hover{
+    color: #da2a2e;
+}
+.form-data .third-party .icon-weixin{
+    font-size: 40px;
+    color: #e5e5e5;
+    display: inline-block;
+    vertical-align: middle;
+}
+.form-data .third-party .icon-sina1{
+    font-size: 36px;
+    color: #e5e5e5;
+    display: inline-block;
+    vertical-align: middle;
+}
+.form-data .change-login{
+    width: 400px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    color: #cacaca;
+}
+.form-data .change-login p{
+    cursor: pointer;
+}
+.form-data .change-login p.on{
+    color: #76b9f7;
+}
+.find_password{
+    background-color: #ffffff;
+    width: 460px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,0,0,.1);
+    padding: 30px 0;
+    left: 50%;
+    margin-left: -230px;
+    position: fixed;
+    top: 15%;
+}
+.find_password h4{
+    font-size: 18px;
+    color: #42a5f5;
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
+}
+.find_password .right_now{
+    width: 380px;
+    text-align: right;
+    margin: 20px auto 30px;
+    font-size: 12px;
+    color: #cacaca;
+}
+.find_password .right_now a{
+    color: #42a5f5;
+}
+.find_password .pc-very,.find_password .pc-code{
+    display: none;
+}
+.find_password .very2{
+    font-size: 14px;
+    position: absolute;
+    display: inline-block;
+    color: #cacaca;
+    top: 14px;
+    right: 0;
+}
+#pc_reset,#pc_reset2{
+    width: 280px;
+}
+.pc_reset span{
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    /* color: #cacaca; */
+    top: 14px;
+    right: 0;
+}
+.error-tip{
+    position: absolute;
+    right: 0;
+    top: 15px;
+    color: #ea5d5f;
+    font-size: 14px;
+    /* width: 400px; */
+    margin: 0 auto;
+    display: none;
+}
+.find_password .jihuo_email{
+    width: 400px;
+    text-align: center;
+    font-size: 14px;
+    color: #8d8d8d;
+    margin: 0 auto;
+}
+.find_password .again{
+    width: 400px;
+    color: #cacaca;
+    font-size: 12px;
+    text-align: center;
+    margin: 0 auto;
+}
+.find_password .again a{
+    color: #42a5f5;
+}
+.wrap .right{
+    position: absolute;
+    width: 1180px;
+    bottom: -80px;
+    text-align: center;
+    line-height: 30px;
+    left: 50%;
+    margin-left: -590px;
+    color: rgb(0, 0, 0);
+}

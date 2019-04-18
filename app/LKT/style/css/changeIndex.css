@@ -1,0 +1,142 @@
+.Hui-aside .menu_dropdown .active dt{
+	color: #0880ff;
+}
+/*.Hui-aside .menu_dropdown .active a{
+	color: #0880ff;
+}*/
+
+a:hover{
+	text-decoration: none;
+}
+aside{
+	padding-top: 0px!important;
+	overflow: visible!important;
+
+}
+.Hui-aside::-webkit-scrollbar {
+	display: none;
+}
+.news{
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+	border-radius: 50%;
+	background-color: #d24636;
+	position: absolute;
+	top: 10px;
+	right: 0px;
+	font-size: 12px;
+	text-align: center;
+}
+.newsSpan{
+	position: absolute;
+	top: -22px;
+	right: 5px;
+}
+.message-bell-btn{
+	margin:0 10px;
+}
+.headerLi{
+	margin: 0px 5px;
+	position: relative;
+}
+.userIdImg{
+	width: 40px;
+	height: 40px;
+}
+.bigUl{
+	height: 100%;
+	float: left;
+}
+.bigUl li{
+	width: 120px;
+	height: 100%;
+	float: left;
+	line-height: 60px;
+	color:#ffffff;
+	font-size: 20px;
+	text-align: center;
+}
+.bigUl li a{
+	color: #fff;
+}
+.asideImg{
+	position: absolute;
+}
+.asideImgWrap .asideImg:nth-child(even){
+	display: none;
+}
+.asideImgWrapRight .asideImgRight:nth-child(even){
+	display: none;
+}
+.menu-system dt span{
+	pointer-events: none;
+}
+.asideImgRight{
+	width: 10px;
+	position: absolute;
+}
+.asideImgWrap{
+	height: 100%;
+	float: left;
+	display: inline-block;
+	display: flex;
+	align-items: center;
+	width: 20px;
+	margin-right: 10px;
+	position: relative;
+}
+.asideImgWrapRight{
+	text-align: center;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	display: flex;
+	align-items: center;
+	width: 20px;
+	margin-left: 10px;
+	position: absolute;
+	right: 5px;
+	top: 0;
+
+}
+.changeAside{
+	float: left;
+	width: 60px;
+	height: 100%;
+	display: inline-block;
+	line-height: 60px;
+	text-align: center;
+}
+.changeAside i{
+	color: #fff;
+	font-size: 20px;
+}
+.Hui-logo{
+	width: 200px;
+	display: inline-block;
+	padding-left: 20px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+.Hui-aside .menu_dropdown dl{
+	background: #fff;
+	font-size: 16px;
+}
+.Hui-aside .menu_dropdown dl dt{
+	position: relative;
+	height: 50px;
+	line-height: 50px!important;
+	padding-left: 30px;
+	box-sizing: border-box;
+}
+.Hui-aside .menu_dropdown dl dd{
+	font-size: 14px;
+}
+.Hui-aside .menu_dropdown dl dt i:first-child{
+	margin-right: 10px;
+}
+.Hui-aside .menu_dropdown dd li a{
+	padding-left: 52px;
+}

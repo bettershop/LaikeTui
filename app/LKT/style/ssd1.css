@@ -1,0 +1,34 @@
+ .ww {
+  width:167px;
+  top:9px;
+  outline:none;
+  position:relative;
+  line-height:30px;
+  left:8px;
+  border:1px solid #999;
+}
+.selectName {
+  position:absolute;
+   width: 153px;
+    margin-top: 1px;
+    margin-left: 0px;
+  z-index:999999;
+  outline:none;
+}
+.search select option:hover {
+  color:white;
+  background-color:rgb(12,172,249);
+}
+ .ww {
+      width: 257px;
+    top: 0px;
+    outline: none;
+    position: relative;
+    line-height: 30px;
+    left: 0px;
+    border: 1px solid #ddd;
+}
+.search select option:hover {
+  color:white;
+  background-color:rgb(12,172,249);
+}

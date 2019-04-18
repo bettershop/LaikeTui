@@ -1,0 +1,71 @@
+body {min-width: 320px; }
+a:focus {outline:none; -moz-outline:none}
+ a:hover, a:focus{ text-decoration: none;}
+ .mt15{margin-top: 15px;}
+ .mt20{margin-top: 20px;}
+ .mt40{margin-top: 40px;}
+ .red{ color: #f00;}
+.wryh { font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu }
+.warper { max-width: 1000px; margin: 0 auto; width:100%; position: relative; }
+.warper2{ width: 400px;margin: 0 auto;}
+/**/
+.header { padding: 30px 0 0; height: 100px; position: relative; z-index: 2;  }
+.header .warper{ position: relative; height: 100%;}
+.logo{ padding: 0 10px; float: left;}
+.header_text { color: #4c4c4c; font-size: 16px; margin: 30px 0 0 0; }
+/**/
+.loginCon {padding: 70px 0 70px;}
+.loginImg{ position: relative; width: 63.7%; float: left;}
+.loginImg img{ position: absolute; margin-left: -1.2%;width: 485px; height: 445px;}
+.loginForm { width: 350px; height: 360px; margin-top: 15px; float: right; position: relative;z-index: 2; background:#f9f9f9;border-radius:3px;}
+.loginFormTop { position: absolute; top: 0; right: 0; width: 80px; height:80px; display:block;}
+.loginFormTop a{border-radius:5px; width: 80px; height: 80px; display: block; background: url(../images/logintab.png) no-repeat;}
+.loginFormTop .nav-password{background-position:0 0;}
+.loginFormTop .nav-code{ background-position:-90px 0;}
+.loginFormTop a.on{ display: none;}
+
+.loginForm-text { font-size: 20px; color: #3f3f3f; padding:20px 5% 10px;}
+.loginForm-text-in { padding-left: 5%; font-size: 12px; color:red;}
+.loginFormMiddle{ padding: 10px 5% 0;}
+.loginInput{ border: 1px solid #cecece; border-radius: 2px; overflow: hidden; height: 40px;}
+.loginInput .input-icon { height: 40px; position: relative;}
+.loginInput .input-icon+.input-icon{ border-top: 1px solid #cecece;}
+.loginInput .input-icon input{ width: 100%; padding:0 10px 0 40px; height: 40px; display: block; border: 0 none;  font-size: 14px; background:#f9f9f9 ; color:#8e8e8e;}
+.input-icon .icon{ display:block; background: url(../images/icon-in.png); position: absolute; top: 8px; left: 6px;}
+.input-icon .icon-user{ width: 24px;height: 24px; background-position: 0 0;}
+.input-icon .icon-lock{ width: 24px;height: 22px;background-position: 0 -24px;}
+
+.loginFormMiddle .btns { margin:15px 0 10px; }
+.loginForm-zc { line-height: 24px; color: #1c9ae4; font-size: 12px; margin-bottom: 15px; display:block;}
+a:hover.loginForm-zc{ text-decoration: underline; color: #1c9ae4;opacity: 0.8;}
+.loginFormMiddle .btn-blue {-webkit-transition: all .2s ease-in-out; -o-transition: all .2s ease-in-out; transition: all .2s ease-in-out; font-size: 16px; height: 34px; line-height: 17px; color: #fff; width: 100%; text-align: center; background-color: #1c9ae4;border-radius:4px; }
+.loginFormMiddle .btn-blue:hover { opacity: 0.8; }
+
+.loginForm-Bottom { color: #4c4c4c; line-height: 24px;font-size: 12px; padding: 0 5%;color: #908f8f; }
+/*.loginForm-Bottom span { color: #908f8f;  }*/
+.loginForm-Bottom .icon-tel{ background: url(../images/icon-in.png) 0 -46px; display: inline-block; position: relative; width: 16px; height: 15px; margin-top: 5px; vertical-align: sub;}
+.loginBot-div2{ letter-spacing: -0.3px; }
+
+.codeImg{ width: 175px; height: 175px; margin:5px 0 5px;}
+.codetext{ font-size: 14px; color: #4c4c4c; line-height: 24px; }
+
+.phoneImg{ width: 89px; height: 160px; background: url(../images/logintab.png) no-repeat 0 -90px; display: inline-block; margin-bottom: 10px;}
+a.red:hover{ color: #f00; text-decoration: underline;}
+/**/
+.footer-bottom { text-align: center; line-height: 20px; overflow: hidden;}
+.footer-bottom .warper{ font-size: 12px; color: #ffffff;padding: 20px 0; }
+.footer-bottom a { font-size: 12px; color: #3cc5f8; padding: 0 10px; }
+.footer-bottom a:hover { color: #4c4c4c;  opacity: 0.8;}
+
+@media screen and (max-width:990px){
+	.loginImg{ width: 100%; position: absolute; top: 0;width: 385px; height: 366px; /*padding-right: 486px;*/}
+	.loginForm{ margin-right: 10px;}
+}
+@media screen and (max-width:765px){
+	.logo{ text-align: center; float: none;}
+	.loginForm{ float: none; margin: 0 auto;}
+	.loginCon{ padding: 20px 0 ;}
+	.warper{ border: 0 none !important;}
+	.loginImg,.header_text{ display: none;}
+}
+

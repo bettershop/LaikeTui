@@ -1,0 +1,38 @@
+<!--pages/set/set.wxml-->
+	<view class="function" style='background:#fff'>
+  
+      <button open-type="getUserInfo" class="function_list" bindgetuserinfo="agreeGetUser" lang="zh_CN">
+              <view class='function_left'>
+              <view class='function_text'>更新个人资料 </view>
+            </view>
+            <view class='function_right'>
+              <image class="jiantou" src="../../images/x_right.png"></image>
+            </view>
+      </button>
+
+      <button class="function_list" bindtap='clearStorage'>
+              <view class='function_left'>
+              <view class='function_text'>清除缓存 </view>
+            </view>
+            <view class='function_right'>
+              <image class="jiantou" src="../../images/x_right.png"></image>
+            </view>
+      </button>
+      <!-- <view class="function_list" bindtap='update'>
+				<view class='function_left'>
+					<view class='function_text'>更新个人资料 </view>
+				</view>
+				<view class='function_right'>
+					<image class="jiantou" src="../../images/x_right.png"></image>
+				</view>
+			</view> -->
+
+			<!-- <view class="function_list" bindtap='clearStorage'>
+				<view class='function_left'>
+					<view class='function_text'>清除缓存</view>
+				</view>
+				<view class='function_right'>
+					<image class="jiantou" src="../../images/x_right.png"></image>
+				</view>
+			</view>		 -->
+	</view>

@@ -1,0 +1,26 @@
+/***** 输入框（无边框悬停状态） *****/
+.uew-select .uew-select-value{height:32px;padding:0 5px; margin-top:0px; margin-bottom:12px;line-height:32px;font-family:Tahoma,'微软雅黑','宋体';*font-family:'微软雅黑','宋体';color:#000;resize:none;border-width:1px;border-style:solid;border-color:#a7b5bc #ced9df #ced9df #a7b5bc;}
+.uew-border-flag,.uew-border-flag,textarea.uew-border-flag,.uew-select .uew-select-value.uew-border-flag{border-width:1px;border-style:solid;border-color:#bababa #e9e9e9 #e9e9e9 #bababa;}
+/***** 下拉框 *****/
+.uew-select{position:relative;}
+.uew-select .uew-select-value{z-index:1;position:relative;padding-right:20px;background:#fff;font-size:12px; text-indent:5px;background:url(../images/inputbg.gif) repeat-x;_background:none;_border:none;}
+.uew-select-value em{font-style:normal;}
+.uew-select .uew-icon{position:absolute;right:5px;top:10px;}
+.uew-select select{z-index:2;position:absolute;top:3px;_top:6px;cursor:pointer; height:28px;}
+/***** 去除聚焦虚线框 *****/
+a:focus,input[type=checkbox]:focus,input[type=radio]:focus,button:focus,select{outline:none;}
+select{opacity:0;filter:alpha(opacity=0);}
+option{overflow:auto;}
+
+/*----------------------------------*
+ * 	组件公用图标库         				*
+ *----------------------------------*/
+.uew-icon,.ue-state-default .uew-icon{display:inline-block;width:16px;height:16px;background-image:url(../images/uew_icon.png);}
+.ue-state-hover .uew-icon{background-image:url(../images/uew_icon_hover.png);}
+.uew-icon-triangle-1-s{background-position:-80px 0;}
+
+.vocation,.usercity{float:left;}
+.cityleft{float:left; padding-right:10px;_padding-right:15px;}
+.cityright{float:left;}
+
+

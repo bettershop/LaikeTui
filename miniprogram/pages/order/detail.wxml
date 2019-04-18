@@ -1,0 +1,184 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<view style="padding-bottom: 60px;">
+  <view class="djs" wx:if="{{rstatus == 0}}">  
+    <text >支付关闭: {{clock}}</text>  
+    <text>{{micro_second}}</text>  
+  </view>
+  <view class="top_1" style="border-bottom: 1px solid #eee;">
+    <view class="df">
+      <view class='iconfont icon-dizhi' style='margin:auto 0;'></view>
+        <view class="df_1 c6">
+          <view class="l_h20 pay_xt" style='color:#333333;font-size:16px;'><text style='color:#333333;font-size:18px;'>{{name}}</text>　{{mobile}}</view>
+          <view class="l_h20 mt5 pay_xt" style='color:#333333;'>地址：{{address}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="shop df" wx:for="{{list}}">
+      <navigator url="../product/detail?productId={{item.p_id}}&size={{item.sid}}"  hover-class="changestyle">
+        <image class="sh_slt" src="{{item.imgurl}}"></image>
+      </navigator>
+    <view class="df_1" style='padding-left:7px;'>            
+      <view class="sp_text">
+        <navigator style='width:70%;' url="../product/detail?productId={{item.p_id}}&size={{item.sid}}" hover-class="changestyle">
+          <view class="sp_tit ovh1" style="color: #000;">{{item.p_name}} </view>
+          <view class="sp_tit ovh1" style='color:#808080'>颜色规格: [{{item.size}}]</view>
+        </navigator>
+        <view class="sp_jg">
+          <view class='guige'>¥ {{item.p_price}} </view> 
+          <view class='guige'>x{{item.num}}</view>
+          <view wx:if="{{item.r_status > 0 && item.r_status < 4 && item.otype == ''}}" class='guige sqsh' bindtap='return_goods' data-order-id="{{item.id}}">申请售后</view>
+        </view>
+      </view>
+      <view style='clear:both;'></view>
+      <view style='margin-top: 5px;'>
+        <!--抽奖订单状态  -->
+         <!--<view wx:if="{{type1 == 11 }}"> 
+           <navigator url="../draw/cantuan?orderId={{orderId}}" class="font_12 red fl_r mr_5" style="width: 50px;" wx:if="{{item.r_status == 1}}">{{lottery_status}}</navigator>
+            <view class="font_12 red fl_r mr_5" wx:if="{{item.r_status == 5}}">已评价</view>
+            <view class="font_12 red fl_r mr_5" style='color:#dd2727;' bindtap="recOrder" data-order-id="{{item.id}}" wx:if="{{item.r_status == 2}}">确认收货</view>
+          <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{sNo}}&details={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.r_status == 2 || item.r_status == 3}}" >查看物流</navigator>
+            <navigator url="../comment/comment?id={{item.id}}&ordersn={{sNo}}&pid={{item.p_id}}&attribute_id={{item.sid}}" wx:if="{{item.r_status == 3}}" class="font_12 red fl_r mr_5" style='color:#dd2727;'>待评价</navigator>
+            <navigator url="../return_goods/return_goods?id={{item.id}}&oid={{sNo}}" wx:if="{{item.r_status == 3}}" class="font_12 red fl_r mr_5">退货</navigator>
+            <view class="font_12 red fl_r mr_5" data-order-id="{{item.id}}" wx:if="{{item.r_status == 4 && item.r_type == 0}}">审核中</view>
+            <view class="font_12 red fl_r mr_5" data-order-id="{{item.id}}" wx:if="{{item.r_status == 4 && item.r_type == 1}}">同意</view>
+            <view class="font_12 red fl_r mr_5" data-order-id="{{item.id}}" wx:if="{{item.r_status == 4 && item.r_type == 2}}">拒绝</view>
+        </view> -->
+        <!--<block wx:else>-->
+        <!--普通订单状态  -->
+        <!--<view class="font_12 red fl_r mr_5" wx:if="{{item.r_status == 1 && status_pid == ''}}">发货中
+        </view>
+        <view class="font_12 red fl_r mr_5" wx:if="{{item.r_status == 5 && status_pid == ''}}">已评价</view>
+        <view class="font_12 red fl_r mr_5" style='color:#dd2727;' bindtap="recOrder" data-order-id="{{item.id}}" wx:if="{{item.r_status == 2 && status_pid == ''}}">确认收货</view>
+        <navigator url="../comment/comment?id={{item.id}}&ordersn={{sNo}}&pid={{item.p_id}}&attribute_id={{item.sid}}" wx:if="{{item.r_status == 3 && status_pid == ''}}" class="font_12 red fl_r mr_5" style='color:#dd2727;'>待评价</navigator>
+        <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{sNo}}&details={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.r_status == 2 && status_pid == '' || item.r_status == 3 && status_pid == ''}}" >查看物流</navigator>
+        
+        <navigator url="../return_goods/return_goods?id={{item.id}}&oid={{sNo}}" wx:if="{{item.r_status == 3 && status_pid == ''}}" class="font_12 red fl_r mr_5">退货</navigator>
+        <view class="font_12 red fl_r mr_5" data-order-id="{{item.id}}" wx:if="{{item.r_status == 4 && item.r_type == 0 && status_pid == ''}}">审核中</view>
+        <view class="font_12 red fl_r mr_5" data-order-id="{{item.id}}" wx:if="{{item.r_status == 4 && item.r_type == 1 && status_pid == ''}}">同意</view>
+        <view class="font_12 red fl_r mr_5" data-order-id="{{item.id}}" wx:if="{{item.r_status == 4 && item.r_type == 2 && status_pid == ''}}">拒绝</view>
+        <view class="font_12 red fl_r mr_6" wx:if="{{item.r_status == 0 && status_pid != ''}}">未付款</view>
+        <view class="font_12 red fl_r mr_6" wx:if="{{item.r_status == 9 && status_pid != ''}}">拼团中-待成团</view>
+        <view class="font_12 red fl_r mr_6" data-order-id="{{item.id}}" wx:if="{{item.r_status == 1 && status_pid != ''}}">拼团成功-待发货</view>
+        <navigator class="font_12 red fl_r mr_6" url="../logistics/logistics?orderId={{sNo}}&details={{item.id}}" style='border:1px solid #dd2727;;color:#dd2727;' wx:if="{{item.r_status == 2 && status_pid != '' }}" >拼团成功-已发货</navigator>
+        <navigator url="../comment/comment?id={{item.id}}&ordersn={{sNo}}&pid={{item.p_id}}" wx:if="{{item.r_status == 3 && status_pid != ''}}" class="font_12 red fl_r mr_6" style='color:#dd2727;'>已签收-去评价</navigator>
+        <view class="font_12 red fl_r mr_6" data-order-id="{{item.id}}" wx:if="{{item.r_status == 10 && status_pid != ''}}">拼团失败-未退款</view>
+        <view class="font_12 red fl_r mr_6" data-order-id="{{item.id}}" wx:if="{{item.r_status == 11 && status_pid != ''}}">拼团失败-已退款</view>
+        </block> -->
+      </view>
+      <view style='clear:both'></view>
+    </view>
+    <view style='clear:both'></view>
+  </view>
+
+  <view class="top_1">
+    <view class='ddlb'>
+      <view class='ddlb_v'>订单号：<text class='fright'>{{sNo}}</text></view>
+      <view class='ddlb_v'>时间：<text class='fright'>{{add_time}}</text></view>
+      <view class='ddlb_v'>商品总价：<text class='fright'>￥{{pro_price}}</text></view>
+      <view class='ddlb_v' wx:if="{{coupon_money != 0}}">优惠券：<text class='fright'>-￥{{coupon_money}}</text></view>
+      <view class='ddlb_v' wx:if="{{consumer_money != 0}}">消费金：<text class='fright'>-{{consumer_money}}</text></view>
+      <view class='ddlb_v' wx:if="{{red_packet != 0}}">红包：<text class='fright'>-{{red_packet}}</text></view>
+      <view class='ddlb_v' wx:if="{{coupon_activity_name != ''}}">满减：<text class='fright'>{{coupon_activity_name}}</text></view>
+      
+      <view class='ddlb_v'>运费：<text class='fright'>￥{{freight}}</text></view>
+      <view class='ddlb_v'>订单总价：<text class='fright'>￥{{z_price}}</text></view>
+    </view>
+    <view style='clear:both'></view>
+  </view>
+  <view class="top" style='border-top:0;'>
+    <view class='ddlb'>
+      <view class='ddlb_v' style='font-size:18px;'>实付款<text class='fright' style='color:#f85654;'>￥{{z_price}}</text></view>
+    </view>
+  </view>
+
+  <view wx:if="{{rstatus == 0}}" style='margin:15px 0 0 0;border-bottom:1px solid #eee;padding-bottom:15px'>
+    <view class="pay_zf pd" >
+      <text class="left" style='font-size:15px;'>选择支付方式</text>
+    </view>
+    <view class="pay_zf pd" style='border-bottom:none'>
+      <checkbox-group class="radio-group left" >
+        <label class="radio" wx:for-items="{{pays}}" wx:key="key"  style='border-bottom:1px solid #eee;'>
+          <view style='width:100%;padding:13px 0;'>
+            <image class='img' src='{{item.icon}}' style='width:20px;height:20px;vertical-align:-5px;'></image> {{item.name}}
+            <switch bindchange="switchChange" checked="{{item.checked}}" data-index="{{index}}"  data-check="{{item.value}}" class="right" style='vertical-align:2px;float:right;margin-bottom:15px;' />
+          </view>  
+        </label>
+      </checkbox-group>   
+    </view>
+  </view> 
+    <view class='pay_bottom'  wx:if="{{rstatus == 0}}" style='padding-top: 8px'>
+        <view class="font_12 red fl_r mr_5" style='border:0;height: 60px;width:100%;padding:0;' >
+        
+
+        <form bindsubmit="payOrder" report-submit="true" style='width: 90px;height: 50px;float: right;padding-right:12px;'>
+          <button class="pay_foot" style='color:{{bgcolor}};border:1px solid {{bgcolor}};border-radius:30px;margin: 12px 0!important;font-size:14px;padding:0;width:90px;height:32px;line-height:32px;' wx:if="{{rstatus == 0}}" data-pay="{{paytype}}" data-orderId="{{id}}"  data-price="{{payment}}" data-ordersn="{{sNo}}"  formType="submit" wx:if="{{rstatus == 0}}">立即支付</button> 
+        </form>
+        <view style='color:#808080;border-color:#808080;font-size:14px;width:60px;height:30px;line-height:30px;border-radius:30px;' class="font_12 red fl_r mr_5 anniu" bindtap="t_index" wx:if="{{rstatus == 0}}" data-order-id="{{id}}">返回首页</view>
+
+        <view style='color:#808080;border-color:#808080;font-size:14px;width:60px;height:30px;line-height:30px;border-radius:30px;margin:12px 0' class="font_12 red fl_r mr_5 " bindtap="removeOrder" wx:if="{{rstatus == 0}}" data-order-id="{{id}}">取消订单</view>
+
+
+        </view> 
+    </view>
+
+    <view class='pay_bottom' wx:if="{{rstatus == 1}}" style='padding-top: 8px'>
+      <view class="font_12 red fl_r mr_5" style='border: 0;height: 60px;display: flex;justify-content: flex-end	;width: 100%;padding: 0;'  >   
+		 <form bindsubmit="add_fromid" report-submit="true" > 
+          <button class="pay_foot" style='color: #808080;height: 50px;border: 1px solid #808080;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;' formType="submit" data-order-id="{{id}}" >返回首页</button> 
+         </form> 
+           <button class="pay_foot" style='color: #fff;background: #FF6347;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;' data-orderId="{{id}}" data-ordersn="{{sNo}}" open-type="contact" >联系客服</button> 
+  
+      </view> 
+  </view>
+
+    <view class='pay_bottom'  wx:if="{{rstatus != 0 && type1 == 11 && dr != 11}}" style='padding-top: 8px'>
+      <view class="font_12 red fl_r mr_5" style='border: 0;height: 60px;display: flex;justify-content: flex-end	;width: 100%;padding: 0;'  >
+        <form bindsubmit="getUserformid" report-submit="true" >
+          <button class="pay_foot" style='color: #808080;border: 1px solid #808080;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;' data-orderId="{{id}}"  data-ordersn="{{sNo}}"  formType="submit" >拼单详情</button> 
+        </form>
+        <form bindsubmit="getUserformid" report-submit="true" >
+          <button class="pay_foot" style='color: #fff;background: #FF6347;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;' data-orderId="{{id}}" data-ordersn="{{sNo}}"  formType="submit" >分享好友</button> 
+        </form>
+      </view> 
+  </view>
+
+  <view class='pay_bottom'  wx:if="{{rstatus != 0 && otype == 'pt'}}" style='padding-top: 8px'>
+    <view class="font_12 red fl_r mr_5" style='border: 0;height: 60px;display: flex;justify-content: flex-end	;width: 100%;padding: 0;'  >
+    <navigator url="../group_buy/cantuan?id={{ptcode}}&groupid={{groupid}}&pro_id={{p_id}}&man_num={{man_num}}" >
+      <view style='color: #808080;border: 1px solid #808080;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;' class="pay_foot">拼单详情</view>
+    </navigator>
+    <navigator url="../group_buy/cantuan?id={{ptcode}}&groupid={{groupid}}&pro_id={{p_id}}&man_num={{man_num}}" >
+      <view style='color: #fff;background: #FF6347;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;' class="pay_foot">分享好友</view>
+    </navigator>
+    </view> 
+  </view>
+
+
+</view>
+</block>

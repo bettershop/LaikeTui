@@ -1,0 +1,771 @@
+body
+{
+  color:#222222;
+}
+
+input   { 
+
+} 
+
+.titl_bg {
+	LINE-HEIGHT: 28px; BACKGROUND: url(../images/tech_06.gif) repeat-x; HEIGHT: 28px
+}
+.titl_adbg {
+	LINE-HEIGHT: 30px; BACKGROUND: url(../images/expobak.gif) repeat-x; HEIGHT: 30px
+}
+.prd_border {
+	BORDER-BOTTOM: #bbbbbb 1px solid; BORDER-LEFT: #bbbbbb 1px solid; OVERFLOW: hidden; BORDER-TOP: #bbbbbb 1px solid; BORDER-RIGHT: #bbbbbb 1px solid
+}
+.prd_title_bg {
+	BACKGROUND: #37576C
+}
+.tb_left {
+	BORDER-BOTTOM: #d9f2f5 1px solid; BORDER-LEFT: #d9f2f5 1px solid; BACKGROUND-COLOR: #e5f8fc; COLOR: #929599; BORDER-TOP: #d9f2f5 1px solid
+}
+.tb_right {
+	BORDER-BOTTOM: #f8f6f8 1px solid; BORDER-TOP: #f8f6f8 1px solid; BORDER-RIGHT: #f8f6f8 1px solid
+}
+.YFTbodybg_gj {
+	BACKGROUND-COLOR: #f7f7f7
+}
+.YFTbodybg_gn {
+	BACKGROUND-COLOR: #fffeee
+}
+.YFTTopNavigtion {
+	BORDER-BOTTOM: #cfcfcf 1px solid; BORDER-LEFT: #cfcfcf 1px solid; LINE-HEIGHT: 20px; BACKGROUND: url(../images/view_mode_bg.jpg); HEIGHT: 20px; BORDER-TOP: #cfcfcf 1px solid; BORDER-RIGHT: #cfcfcf 1px solid
+}
+.YFTTopNavigtion_Rg {
+	LINE-HEIGHT: 40px; BACKGROUND: url(../images/bodyback.gif); HEIGHT: 70px
+}
+.YFTProductListBg {
+	LINE-HEIGHT: 25px; BACKGROUND: url(../images/PrdList.jpg); HEIGHT: 25px
+}
+.YFTProductListImg {
+	LINE-HEIGHT: 16px; WIDTH: 16px; BACKGROUND: url(../images/ico_folder.gif); HEIGHT: 16px
+}
+.YFTProductListFont {
+	FONT-FAMILY: ΢���ź�; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+.YFTMainStepImg {
+	BORDER-BOTTOM: #ffcc66 1px solid
+}
+.YFTPageBgImgOne {
+	BACKGROUND: url(../images/backgroundf.gif)
+}
+.YFTBasicImg {
+	WIDTH: 16px; BACKGROUND: url(../ico/basic_info.gif); HEIGHT: 16px
+}
+.YFTHomeImg {
+	WIDTH: 16px; BACKGROUND: url(../ico/home_info.gif); HEIGHT: 16px; MARGIN-LEFT: 2px
+}
+.YFTBankImg {
+	WIDTH: 16px; BACKGROUND: url(../ico/bank_info.gif); HEIGHT: 16px; MARGIN-LEFT: 2px
+}
+.YFTShopping {
+	WIDTH: 16px; BACKGROUND: url(../ico/shopping_cart.gif); HEIGHT: 16px; MARGIN-LEFT: 2px
+}
+.YFTOtherImg {
+	WIDTH: 16px; BACKGROUND: url(../ico/other_info.gif); HEIGHT: 16px; MARGIN-LEFT: 2px
+}
+
+.YFTMailImg {
+	WIDTH: 16px; BACKGROUND: url(../ico/mail_info.gif); HEIGHT: 16px; MARGIN-LEFT: 2px
+}
+.YFTHandBackImg {
+	WIDTH: 16px; BACKGROUND: url(../ico/hand_back.gif); HEIGHT: 16px; MARGIN-LEFT: 2px
+}
+.YFTBasicImg {
+	WIDTH: 16px; BACKGROUND: url(../ico/basic_info.gif); HEIGHT: 16px
+}
+.YFTSearch_WH {
+	LINE-HEIGHT: 20px; MARGIN-LEFT: 10px; MARGIN-RIGHT: 10px
+}
+.YFTmain_admintopbg {
+	BACKGROUND: url(../images/company/main_top_bl.jpg)
+}
+.YFTmain_admintop_r1_c1 {
+	BACKGROUND: url(../images/company/main_top_r1_c1.jpg)
+}
+.YFTmain_admintop_logo {
+	BACKGROUND: url(../images/company/logo.jpg)
+}
+.YFTmain_admintop_outlogo {
+	BACKGROUND: url(../images/company/outlogin.jpg)
+}
+.YFTmain_admintop_home {
+	BACKGROUND: url(../images/company/home.jpg)
+}
+.YFTadmin_Leftmain {
+	Z-INDEX: 2; BACKGROUND: url(../images/company/leftMenu.jpg); BORDER-TOP: #b6c0c9 1px solid
+}
+.YFTadmin_Leftmainbg {
+	Z-INDEX: 1; BACKGROUND: url(../images/company/main_left_r2_c3.jpg) repeat-y
+}
+.YFTadmin_Leftmain_r1_c1 {
+	BACKGROUND: #f7f7f7
+}
+.YFTadmin_Leftmain_r2_c2 {
+	BACKGROUND: url(../images/company/main_left_r2_c2.jpg)
+}
+.YFTadmin_Leftmain_r3_c2 {
+	BACKGROUND: url(../images/company/main_left_r3_c2.jpg)
+}
+.YFTadmin_mainright_r1_c1 {
+	BACKGROUND: url(../images/company/main_right_r1_c1.jpg)
+}
+.YFTadmin_mainright_r1_c2 {
+	BACKGROUND: url(../images/internal/main_right_r1_c2_1.jpg)
+}
+.YFTadmin_mainright_r3_c2 {
+	BACKGROUND: url(../images/company/main_right_r3_c2.jpg)
+}
+.YFTadmin_mainright_r1_c3 {
+	BACKGROUND: url(../images/company/main_right_r1_c3.jpg)
+}
+.YFTadmin_mainfooter {
+	BACKGROUND: url(../images/company/main_r4_c1.jpg)
+}
+.YFTadmin_mainline {
+	BORDER-LEFT: #c9c9c7 1px solid
+}
+.YFTmaintopbg_gj {
+	BACKGROUND: url(../images/internal/main_top_bl.jpg)
+}
+.YFTmaintopbg_gn {
+	BACKGROUND: url(../images/domestic/main_top_bl.jpg)
+}
+.YFTmaintopbg_brh {
+	BACKGROUND: url(../images/branch/main_top_bl.jpg)
+}
+.YFTmaintop_r1_c1_gj {
+	BACKGROUND: url(../images/internal/main_top_r1_c1.jpg)
+}
+.YFTmaintop_r1_c1_gn {
+	BACKGROUND: url(../images/domestic/main_top_r1_c1.jpg)
+}
+.YFTmaintop_r1_c1_brh {
+	BACKGROUND: url(../images/branch/main_top_r1_c1.jpg)
+}
+.YFTmaintop_logo_gj {
+	BACKGROUND: url(../images/internal/logo.jpg) no-repeat;
+}
+.YFTmaintop_logo_db {
+	BACKGROUND: url(../images/internal/logo2.jpg)
+}
+.YFTmaintop_logo_zb {
+	BACKGROUND: url(../images/internal/logo1.jpg) no-repeat;
+}
+.YFTmaintop_logo_gn {
+	BACKGROUND: url(../images/domestic/logo.jpg)
+}
+.YFTmaintop_logo_brh {
+	BACKGROUND: url(../images/branch/logo.jpg)
+}
+.YFTmaintop_outlogo_gj {
+	BACKGROUND: url(../images/internal/outlogin.jpg)
+}
+.YFTmaintop_outlogo_gn {
+	BACKGROUND: url(../images/domestic/outlogin.jpg)
+}
+.YFTmaintop_outlogo_brh {
+	BACKGROUND: url(../images/branch/outlogin.jpg)
+}
+.YFTmaintop_home_gj {
+	BACKGROUND: url(../images/internal/home.jpg)
+}
+.YFTmaintop_home_gn {
+	BACKGROUND: url(../images/domestic/home.jpg)
+}
+.hengcss {
+	BACKGROUND: url(../images/heng.jpg) ;
+}
+.dicss {
+	BACKGROUND: url(../images/di.jpg) ;
+}
+.YFTLeftmain_gj {
+	Z-INDEX: 2; BACKGROUND: url(../images/internal/leftMenu.jpg); BORDER-TOP: #b6c0c9 1px solid
+}
+.YFTLeftmain_gn {
+	Z-INDEX: 2; BACKGROUND: url(../images/domestic/leftMenu.jpg); BORDER-TOP: #b6c0c9 1px solid
+}
+.YFTLeftmain_brh {
+	Z-INDEX: 2; BACKGROUND: url(../images/branch/leftMenu.jpg); BORDER-TOP: #b6c0c9 1px solid
+}
+.YFTLeftmainbg {
+	Z-INDEX: 1; BACKGROUND-COLOR: #fdfdfd; font-size:14px; 
+}
+.YFTLeftmain_r1_c1_gj {
+	BACKGROUND: #f7f7f7
+}
+.YFTLeftmain_r1_c1_gn {
+	BACKGROUND: url(../images/domestic/main_left_r1_c1.jpg)
+}
+.YFTLeftmain_r1_c1_brh {
+	BACKGROUND: url(../images/branch/main_left_r1_c1.jpg)
+}
+.YFTLeftmain_r2_c2_gj {
+	BACKGROUND: url(../images/internal/main_left_r2_c2.jpg)
+}
+.YFTLeftmain_r2_c2_gn {
+	BACKGROUND: url(../images/domestic/main_left_r2_c2.jpg)
+}
+.YFTLeftmain_r2_c2_brh {
+	BACKGROUND: url(../images/branch/main_left_r2_c2.jpg)
+}
+.YFTLeftmain_r3_c2_gj {
+	BACKGROUND: url(../images/internal/main_left_r3_c2.jpg)
+}
+.YFTLeftmain_r3_c2_gn {
+	BACKGROUND: url(../images/domestic/main_left_r3_c2.jpg)
+}
+.YFTLeftmain_r3_c2_brh {
+	BACKGROUND: url(../images/branch/main_left_r3_c2.jpg)
+}
+.YFTmainright_r1_c1_gj {
+	BACKGROUND: url(../images/internal/main_right_r1_c1.jpg)
+}
+.YFTmainright_r1_c1_gn {
+	BACKGROUND: url(../images/domestic/main_right_r1_c1.jpg)
+}
+.YFTmainright_r1_c2_gj {
+	BACKGROUND: url(../images/internal/main_right_r1_c2_1.jpg)
+}
+.YFTmainright_r1_c2_gn {
+	BACKGROUND: url(../images/domestic/main_right_r1_c2.jpg)
+}
+.YFTmainright_r1_c2_brh {
+	BACKGROUND: url(../images/branch/main_right_r1_c2.jpg)
+}
+.YFTmainright_r3_c2_gj {
+	BACKGROUND: url(../images/internal/main_right_r3_c2.jpg)
+}
+.YFTmainright_r3_c2_gn {
+	BACKGROUND: url(../images/domestic/main_right_r3_c2.jpg)
+}
+.YFTmainright_r3_c2_brh {
+	BACKGROUND: url(../images/branch/main_right_r3_c2.jpg)
+}
+.YFTmainright_r1_c3_gj {
+	BACKGROUND: url(../images/internal/main_right_r1_c3.jpg)
+}
+.YFTmainright_r1_c3_gn {
+	BACKGROUND: url(../images/domestic/main_right_r1_c3.jpg)
+}
+.YFTmainfooter_gj {
+	BACKGROUND: url(../images/internal/main_r4_c1.jpg); border-top:solid 1px #dedede; text-align:center;
+}
+.YFTmainfooter_gn {
+	BACKGROUND: url(../images/domestic/main_r4_c1.jpg)
+}
+.YFTmainfooter_brh {
+	BACKGROUND: url(../images/branch/main_r4_c1.jpg)
+}
+.YFTButtonStand {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 18px; WIDTH: 80px; BACKGROUND: url(../images/button.gif) no-repeat 0px 0px; HEIGHT: 18px; COLOR: #faf8f1; FONT-SIZE: 12px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFTButtonHover {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 18px; WIDTH: 80px; BACKGROUND: url(../images/button.gif) no-repeat -80px 0px; HEIGHT: 18px; COLOR: #faf8f1; FONT-SIZE: 12px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFTButtonDisabled {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 18px; WIDTH: 80px; BACKGROUND: url(../images/button.gif) no-repeat -160px 0px; HEIGHT: 18px; COLOR: #faf8f1; FONT-SIZE: 12px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.IGBtnStand {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 18px; WIDTH: 35px; BACKGROUND: url(../images/rss_tab.gif) no-repeat 0px 0px; HEIGHT: 18px; COLOR: #faf8f1; FONT-SIZE: 12px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.IGBtnHover {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 18px; WIDTH: 35px; BACKGROUND: url(../images/rss_tab.gif) no-repeat -35px 0px; HEIGHT: 18px; COLOR: #faf8f1; FONT-SIZE: 12px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTLoginBtn {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; WIDTH: 80px; BACKGROUND: url(../images/login_an_01.jpg) no-repeat 0px 0px; HEIGHT: 29px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTResetBtn {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; WIDTH: 81px; BACKGROUND: url(../images/login_an_02.jpg) no-repeat 0px 0px; HEIGHT: 29px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTtxtuser {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; LINE-HEIGHT: 27px; WIDTH: 168px; BACKGROUND: url(../images/input_bl_01.jpg) no-repeat 0px 0px; HEIGHT: 27px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTtxtpwd {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; LINE-HEIGHT: 27px; WIDTH: 168px; BACKGROUND: url(../images/input_bl_01.jpg) no-repeat 0px 0px; HEIGHT: 27px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTtxtcode {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; LINE-HEIGHT: 27px; WIDTH: 93px; BACKGROUND: url(../images/input_bl_02.jpg) no-repeat 0px 0px; HEIGHT: 29px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTButton_StoreGN {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; WIDTH: 134px; BACKGROUND: url(../images/store/an01.jpg) no-repeat 0px 0px; HEIGHT: 43px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTButton_StoreGJ {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; WIDTH: 134px; BACKGROUND: url(../images/store/an02.jpg) no-repeat 0px 0px; HEIGHT: 43px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTButton_MemberGN {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; WIDTH: 134px; BACKGROUND: url(../images/member/an01.jpg) no-repeat 0px 0px; HEIGHT: 43px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.YFTButton_MemberGJ {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; WIDTH: 134px; BACKGROUND: url(../images/member/an02.jpg) no-repeat 0px 0px; HEIGHT: 43px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.GridEmptyContent {
+	LINE-HEIGHT: 130px; TEXT-INDENT: 130px; MARGIN: 20px auto; WIDTH: 260px; BACKGROUND: url(../images/data_ico_none.gif) no-repeat left 50%; HEIGHT: 130px; COLOR: #f16911; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.GridSearchEmpty {
+	LINE-HEIGHT: 130px; TEXT-INDENT: 130px; MARGIN: 20px auto; WIDTH: 450px; BACKGROUND: url(../images/data_ico_search.gif) no-repeat left 50%; HEIGHT: 130px; COLOR: #f16911; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.ico_stand18 {
+	WIDTH: 18px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: 0px 0px; FLOAT: left; HEIGHT: 18px; CURSOR: pointer
+}
+.ico_hover18 {
+	WIDTH: 18px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: -18px 0px; FLOAT: left; HEIGHT: 18px; CURSOR: pointer
+}
+.ico_page_arrow1 {
+	BACKGROUND-IMAGE: url(../ico/page_arrow1.gif)
+}
+.ico_page_arrow2 {
+	BACKGROUND-IMAGE: url(../ico/page_arrow2.gif)
+}
+.ico_page_arrow3 {
+	BACKGROUND-IMAGE: url(../ico/page_arrow3.gif)
+}
+.ico_page_arrow4 {
+	BACKGROUND-IMAGE: url(../ico/page_arrow4.gif)
+}
+.gridview_tl {
+	MARGIN: 0px; WIDTH: 100%; TEXT-OVERFLOW: ellipsis; BORDER-COLLAPSE: separate !important
+}
+.gridview_tl2 {
+	MARGIN: 0px; WIDTH: 370px; BORDER-COLLAPSE: separate !important; OVERFLOW: auto
+}
+.gridview_tl3 {
+	MARGIN: 0px; WIDTH: 300px; BORDER-COLLAPSE: separate !important; OVERFLOW: auto
+}
+.gridview_tl4 {
+	LINE-HEIGHT: 25px; MARGIN: 0px; WIDTH: 250px; TEXT-OVERFLOW: ellipsis; BORDER-COLLAPSE: separate !important
+}
+.gridview_thOne TH {
+	BORDER-BOTTOM: #faf8f1 1px solid; TEXT-ALIGN: left; LINE-HEIGHT: 25px; BACKGROUND: #737373; HEIGHT: 25px; COLOR: #ffffff; FONT-SIZE: 12px; FONT-WEIGHT: normal
+}
+.gridview_thTwo TH {
+	BORDER-BOTTOM: #faf8f1 1px solid; TEXT-ALIGN: center; LINE-HEIGHT: 28px; BACKGROUND: #fc883b; HEIGHT: 28px; COLOR: #ffffff; FONT-SIZE: 12px; FONT-WEIGHT: normal
+}
+.gridview_thThree TH {
+	BORDER-BOTTOM: #faf8f1 1px solid; TEXT-ALIGN: center; LINE-HEIGHT: 28px; BACKGROUND: #2aa499; HEIGHT: 28px; COLOR: #ffffff; FONT-SIZE: 12px; FONT-WEIGHT: normal
+}
+.gridview_th TH {
+	TEXT-ALIGN: center; BORDER-LEFT: #ece9d8 1px solid; LINE-HEIGHT: 32px; BACKGROUND: #737373; HEIGHT: 32px; COLOR: #ffffff; FONT-SIZE: 14px; FONT-WEIGHT: normal; BORDER-RIGHT: #ece9d8 1px solid
+}
+.gridview_thul {
+	BORDER-BOTTOM: #3c465a 1px solid; PADDING-BOTTOM: 0px; LINE-HEIGHT: 24px; MARGIN: 25px auto 0px; PADDING-LEFT: 0px; WIDTH: 550px; PADDING-RIGHT: 0px; BACKGROUND: #ecefef; HEIGHT: 24px; FONT-SIZE: 13px; BORDER-TOP: #3c465a 1px solid; FONT-WEIGHT: normal; PADDING-TOP: 0px
+}
+.gridview_thul LI {
+	TEXT-ALIGN: left; FLOAT: left; COLOR: #3c465a; OVERFLOW: hidden
+}
+.gridview_thuls {
+	BORDER-BOTTOM: #3c465a 1px solid; PADDING-BOTTOM: 0px; LINE-HEIGHT: 24px; MARGIN: 25px auto 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND: #ecefef; HEIGHT: 24px; FONT-SIZE: 13px; BORDER-TOP: #3c465a 1px solid; FONT-WEIGHT: normal; PADDING-TOP: 0px
+}
+.gridview_thuls LI {
+	TEXT-ALIGN: center; FLOAT: left; OVERFLOW: hidden
+}
+.gridview_tl TD {
+	BORDER-BOTTOM: #faf8f1 1px solid; LINE-HEIGHT: 24px; EMPTY-CELLS: show; HEIGHT: 24px; OVERFLOW: hidden
+}
+.gridview_tl TD IMG {
+	VERTICAL-ALIGN: middle
+}
+.gridview_tls {
+	WIDTH: 100%; BORDER-COLLAPSE: separate !important; MARGIN-LEFT: auto; MARGIN-RIGHT: auto
+}
+.gridview_tls TD {
+	LINE-HEIGHT: 25px; EMPTY-CELLS: show !important; HEIGHT: 25px
+}
+.gridview_tlc {
+	BORDER-BOTTOM: #c1d1da 1px solid; MARGIN: 0px; WIDTH: 100% !important; BORDER-COLLAPSE: separate !important
+}
+.gridview_tlc TD {
+	LINE-HEIGHT: 18px; EMPTY-CELLS: show; COLOR: #3c465a; VERTICAL-ALIGN: top
+}
+.gridview_tlc TD IMG {
+	VERTICAL-ALIGN: middle
+}
+.grid_hidden_cell {
+	TEXT-ALIGN: center; DISPLAY: none
+}
+.cbtr_OutO {
+	TEXT-ALIGN: center; BACKGROUND: #faf8f1
+}
+.cbtr_OutT {
+	TEXT-ALIGN: center; BACKGROUND: #eae7da
+}
+.cbtr_OutI_One {
+	TEXT-ALIGN: center; BACKGROUND: #e0e0e0
+}
+.cbtr_OutA {
+	BACKGROUND: #eae7da
+}
+.cbtr_Over {
+	BACKGROUND: #d6d3c5
+}
+.cbtr_Selected {
+	BACKGROUND: #ccc4a9
+}
+.cbtr_template {
+	
+}
+.gridview_thulOther {
+	BORDER-BOTTOM: #3c465a 1px solid; PADDING-BOTTOM: 0px; LINE-HEIGHT: 24px; MARGIN: 25px auto 0px; PADDING-LEFT: 0px; WIDTH: 750px; PADDING-RIGHT: 0px; BACKGROUND: #ecefef; HEIGHT: 24px; FONT-SIZE: 13px; BORDER-TOP: #3c465a 1px solid; FONT-WEIGHT: normal; PADDING-TOP: 0px
+}
+.gridview_thulOther LI {
+	TEXT-ALIGN: left; FLOAT: left; COLOR: #3c465a; OVERFLOW: hidden
+}
+.gridtitle_isShow {
+	DISPLAY: none
+}
+.dgBodyBackColor {
+	BACKGROUND-COLOR: #ffffc8
+}
+.dgBodyBackColor_two {
+	BACKGROUND-COLOR: #e7ca96
+}
+.leftNavigMenu {
+	DISPLAY: inline; FONT-FAMILY: ��Բ; COLOR: #476064; MARGIN-LEFT: 5px; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.leftNavigMenu_company {
+	DISPLAY: inline; FONT-FAMILY: ΢���ź�; COLOR: #000; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+.leftNavigMenu_hover {
+	DISPLAY: inline; FONT-FAMILY: ��Բ; COLOR: #e24880; MARGIN-LEFT: 5px; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.leftReturnMenuBg {
+	MARGIN-TOP: 4px; WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../ico/contents.ico) no-repeat; FLOAT: left; HEIGHT: 16px; MARGIN-LEFT: 18px
+}
+.leftNavigMenuBg {
+	MARGIN-TOP: 4px; WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../images/ico/ico_add_close.png) no-repeat; FLOAT: left; HEIGHT: 16px; MARGIN-LEFT: 18px
+}
+.leftNavigMenuBg_Open {
+	MARGIN-TOP: 4px; WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../images/ico/ico_add_open.png) no-repeat; FLOAT: left; HEIGHT: 16px; MARGIN-LEFT: 18px
+}
+.leftNavigMenuBg_company {
+	MARGIN-TOP: 5px; WIDTH: 15px; DISPLAY: inline; BACKGROUND: url(../ico/ico_menu.gif) no-repeat; FLOAT: left; HEIGHT: 15px; MARGIN-LEFT: 20px
+}
+.adminMainMenu_noselect_hover {
+	DISPLAY: inline; FONT-FAMILY: ��Բ; COLOR: #2b4c81; MARGIN-LEFT: 2px; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.adminMainMenu_select_hover {
+	DISPLAY: inline; FONT-FAMILY: ��Բ; COLOR: #dc6a1a; MARGIN-LEFT: 2px; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.adminMainMenuBg {
+	MARGIN-TOP: 5px; WIDTH: 14px; DISPLAY: inline; BACKGROUND: url(../ico/063339157.gif) no-repeat; FLOAT: left; HEIGHT: 9px; MARGIN-LEFT: 10px
+}
+.subtab_store_active {
+	Z-INDEX: 2; LINE-HEIGHT: 26px; WIDTH: 112px; BACKGROUND: url(../images/dian01.png) no-repeat; HEIGHT: 26px
+}
+.subtab_store_not {
+	Z-INDEX: 3; LINE-HEIGHT: 26px; WIDTH: 112px; BACKGROUND: url(../images/dian.png) no-repeat; HEIGHT: 26px
+}
+.subtab_member_active {
+	Z-INDEX: 2; LINE-HEIGHT: 26px; WIDTH: 118px; BACKGROUND: url(../images/hui.png) no-repeat; HEIGHT: 26px
+}
+.subtab_member_not {
+	Z-INDEX: 3; LINE-HEIGHT: 26px; WIDTH: 118px; BACKGROUND: url(../images/hui01.png) no-repeat; HEIGHT: 26px
+}
+.collspand {
+	WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../images/collspand.gif) no-repeat center 50%; FLOAT: left; HEIGHT: 16px; CURSOR: pointer
+}
+.expand {
+	WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../images/expand.gif) no-repeat center 50%; FLOAT: left; HEIGHT: 16px; CURSOR: pointer
+}
+.Line1 {
+	WIDTH: 22px; DISPLAY: inline; BACKGROUND: url(../images/line1.gif) no-repeat center 50%; FLOAT: left; HEIGHT: 24px; CURSOR: pointer
+}
+.Line2 {
+	WIDTH: 22px; DISPLAY: inline; BACKGROUND: url(../images/line2.gif) no-repeat center 50%; FLOAT: left; HEIGHT: 24px; CURSOR: pointer
+}
+.Line3 {
+	WIDTH: 22px; DISPLAY: inline; BACKGROUND: url(../images/line3.gif) no-repeat center 50%; FLOAT: left; HEIGHT: 24px; CURSOR: pointer
+}
+.collspandImg {
+	WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../images/foldclose.gif) no-repeat center 50%; FLOAT: left; HEIGHT: 16px; CURSOR: pointer
+}
+.expandImg {
+	WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../images/foldopen_1.gif) no-repeat center 50%; FLOAT: left; HEIGHT: 16px; CURSOR: pointer
+}
+.HideOverflow {
+	TEXT-OVERFLOW: ellipsis; OVERFLOW: hidden
+}
+.MainTitle {
+	LINE-HEIGHT: 30px; BACKGROUND: url(../images/maintitle.jpg); HEIGHT: 30px; COLOR: black; OVERFLOW: hidden; FONT-WEIGHT: bold
+}
+.MainTitleTwo {
+	LINE-HEIGHT: 30px; BACKGROUND-COLOR: #dfdac9; HEIGHT: 30px; COLOR: black; OVERFLOW: hidden; FONT-WEIGHT: bold
+}
+.line_bordercolor {
+	BORDER-BOTTOM: #808080 1px solid; COLOR: #071106
+}
+.line_leftright_borderclor {
+	BORDER-LEFT: #c9c9c7 1px solid; BORDER-RIGHT: #c9c9c7 1px solid
+}
+.ico_add {
+	BACKGROUND-IMAGE: url(../ico/24_ico_add.gif)
+}
+.ico_addprd {
+	BACKGROUND-IMAGE: url(../ico/24_ico_addpage.gif)
+}
+.ico_edit {
+	BACKGROUND-IMAGE: url(../ico/24_ico_edit.gif)
+}
+.ico_audit {
+	BACKGROUND-IMAGE: url(../ico/24_ico_audit.gif)
+}
+.ico_delete {
+	BACKGROUND-IMAGE: url(../ico/24_ico_delete.gif)
+}
+.ico_inputscore {
+	BACKGROUND-IMAGE: url(../ico/24_ico_inputscore.gif)
+}
+.ico_send {
+	BACKGROUND-IMAGE: url(../ico/24_ico_send.gif)
+}
+.ico_print {
+	BACKGROUND-IMAGE: url(../ico/24_ico_print.gif)
+}
+.ico_score {
+	BACKGROUND-IMAGE: url(../ico/24_ico_score.gif)
+}
+.ico_excel {
+	BACKGROUND-IMAGE: url(../ico/24_ico_excel.gif)
+}
+.ico_csv {
+	BACKGROUND-IMAGE: url(../ico/24_ico_csv.gif)
+}
+.ico_input {
+	BACKGROUND-IMAGE: url(../ico/24_ico_input.gif)
+}
+.ico_set {
+	BACKGROUND-IMAGE: url(../ico/24_ico_set.gif)
+}
+.ico_line {
+	WIDTH: 2px; DISPLAY: inline; BACKGROUND: url(../ico/ico_line.gif) no-repeat; FLOAT: left; HEIGHT: 24px
+}
+.ico_windows_close {
+	BACKGROUND-IMAGE: url(../ico/windows_close.gif)
+}
+.ico_stand11 {
+	WIDTH: 11px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: -11px 0px; FLOAT: left; HEIGHT: 11px; CURSOR: pointer
+}
+.ico_hover11 {
+	WIDTH: 11px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: -22px 0px; FLOAT: left; HEIGHT: 11px; CURSOR: pointer
+}
+.ico_stand {
+	WIDTH: 24px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: 0px 0px; FLOAT: left; HEIGHT: 24px; CURSOR: pointer
+}
+.ico_hover {
+	WIDTH: 24px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: -24px 0px; FLOAT: left; HEIGHT: 24px; CURSOR: pointer
+}
+.ico_disabled {
+	WIDTH: 24px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: -48px 0px; FLOAT: left; HEIGHT: 24px; CURSOR: pointer
+}
+.ico_left_direct_stand {
+	MARGIN-TOP: 5px; margin-left:22px; WIDTH: 12px; DISPLAY: inline; BACKGROUND: url(../images/ico/0633390.gif) no-repeat;  HEIGHT: 6px; 
+}
+.ico_left_direct_hover {
+	MARGIN-TOP: 5px; margin-left:22px; WIDTH: 12px; DISPLAY: inline;  BACKGROUND: url(../images/ico/0633391.gif) no-repeat;  HEIGHT: 6px
+}
+.ico_pro_edit {
+	MARGIN-TOP: 2px; WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../ico/proc_edit.gif) no-repeat; FLOAT: left; HEIGHT: 16px; CURSOR: pointer
+}
+.ico_pro_delete {
+	MARGIN-TOP: 2px; WIDTH: 16px; DISPLAY: inline; BACKGROUND: url(../ico/proc_delete.gif) no-repeat; FLOAT: left; HEIGHT: 16px; CURSOR: pointer
+}
+.PayMainbg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/pay_bgMain.gif) no-repeat; HEIGHT: 333px
+}
+.subtab_back {
+	Z-INDEX: 1; BORDER-BOTTOM: #ffcc66 1px solid; HEIGHT: 30px
+}
+.subtab_active {
+	Z-INDEX: 2; TEXT-ALIGN: center; LINE-HEIGHT: 30px; WIDTH: 101px; BACKGROUND: url(../ico/menuArea.gif); FLOAT: left; HEIGHT: 31px; COLOR: #a0410a; VERTICAL-ALIGN: middle; MARGIN-RIGHT: 10px
+}
+.subtab_not {
+	Z-INDEX: 3; TEXT-ALIGN: center; LINE-HEIGHT: 30px; WIDTH: 103px; BACKGROUND: url(../ico/MenuAreaHui.gif); FLOAT: left; HEIGHT: 31px; COLOR: #a0410a; VERTICAL-ALIGN: middle; MARGIN-RIGHT: 10px
+}
+.YFT_gnbg {
+	WIDTH: 590px; BACKGROUND: url(../images/gnbg.jpg) no-repeat; HEIGHT: 154px
+}
+.YFT_NotUntitled {
+	BACKGROUND: url(../images/NotPersiom.gif); HEIGHT: 440px
+}
+.YFT_MenuArea {
+	WIDTH: 101px; BACKGROUND: url(../ico/menuArea.gif); HEIGHT: 30px
+}
+.YFT_Button_One {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 33px; WIDTH: 166px; BACKGROUND: url(../ico/button_001.jpg); HEIGHT: 33px; COLOR: #fff; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFT_Button_Two {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 24px; WIDTH: 76px; BACKGROUND: url(../ico/button_002.jpg); HEIGHT: 24px; COLOR: #fff; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFT_Button_Three {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 33px; WIDTH: 86px; BACKGROUND: url(../ico/button_003.jpg); HEIGHT: 33px; COLOR: #fff; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFT_Button_Four {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 34px; WIDTH: 134px; BACKGROUND: url(../ico/button_004.jpg); HEIGHT: 34px; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFT_Button_Five {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 33px; WIDTH: 86px; BACKGROUND: url(../ico/button_005.jpg); HEIGHT: 33px; COLOR: #595758; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFT_Button_Five_hover {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 33px; WIDTH: 86px; BACKGROUND: url(../ico/button_005.jpg); HEIGHT: 33px; COLOR: red; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFT_Button_Six {
+	BORDER-BOTTOM: 0px; TEXT-ALIGN: center; BORDER-LEFT: 0px; LINE-HEIGHT: 29px; WIDTH: 151px; BACKGROUND: url(../ico/button_006.jpg); HEIGHT: 29px; COLOR: #737373; BORDER-TOP: 0px; CURSOR: pointer; BORDER-RIGHT: 0px
+}
+.YFT_MessageTitle_bg {
+	BACKGROUND: url(../ico/titlebarbg.gif); HEIGHT: 25px
+}
+.YFT_tw_table_left {
+	WIDTH: 6px; BACKGROUND: url(../ico/tw_table-left.jpg); HEIGHT: 27px
+}
+.YFT_tw_table_right {
+	WIDTH: 6px; BACKGROUND: url(../ico/tw_table-right.jpg); HEIGHT: 27px
+}
+.YFT_tw_table_bg {
+	WIDTH: 6px; BACKGROUND: url(../ico/tw_table-bg.jpg); HEIGHT: 27px
+}
+.YFT_up_pwd_bg {
+	MARGIN: 0px auto; WIDTH: 472px; BACKGROUND: url(../images/pwdupdate.gif) no-repeat; HEIGHT: 281px
+}
+.YFT_up_qita_bg {
+	MARGIN: 0px auto; WIDTH: 500px; BACKGROUND: url(../images/mimaxiugai.jpg) no-repeat; HEIGHT: 280px
+}
+.YFT_up_tongji_bg {
+	MARGIN: 0px auto; WIDTH: 500px; BACKGROUND: url(../images/xinxitongji.jpg) no-repeat; HEIGHT: 280px
+}
+.YFT_up_qita_bg {
+	MARGIN: 0px auto; WIDTH: 500px; BACKGROUND: url(../images/mimaxiugai.jpg) no-repeat; HEIGHT: 280px
+}
+.YFT_dianzihuobi_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/huobizhuanzhang.gif) no-repeat; HEIGHT: 320px
+}
+.YFT_huobichongzhi_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/huobichongzhi.jpg) no-repeat; HEIGHT: 320px
+}
+
+.YFT_tixianshenqing_bg
+{
+ MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/tixianshenqing.jpg) no-repeat; HEIGHT: 320px
+}
+.YFT_shenqing_bg
+{
+ MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/shenqing.jpg) no-repeat; HEIGHT: 320px
+}
+.YFT_xinxitongji_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/xinxitongji.gif) no-repeat; HEIGHT: 320px
+}
+.YFT_huiyuan_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/huiyuanchaxun.gif) no-repeat; HEIGHT: 320px
+}
+.YFT_lingshou_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/lingshou.gif) no-repeat; HEIGHT: 320px
+}
+.YFT_gaimi_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/huiyuangaimi.jpg) no-repeat; HEIGHT: 320px
+}
+.YFT_rongyujiang_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/rongyujiang.gif) no-repeat; HEIGHT: 320px
+}
+
+.YFT_vipjiang_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/VIPjiang.gif) no-repeat; HEIGHT: 320px
+}
+
+.YFT_fuxiaojiang_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/fuxiaojiang.gif) no-repeat; HEIGHT: 320px
+}
+
+.YFT_fenhongjiang_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/fenhongjiang.gif) no-repeat; HEIGHT: 320px
+}
+.YFT_lingshoujiang_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/lingshou.gif) no-repeat; HEIGHT: 320px
+}
+
+.YFT_dianpu_bg {
+	MARGIN: 0px auto; WIDTH: 540px; BACKGROUND: url(../images/dianbu.jpg) no-repeat; HEIGHT: 320px
+}
+
+.YFT_float_parentclass {
+	DISPLAY: inline; FLOAT: left
+}
+.YFT_float_subclass {
+	BORDER: #375A6E 3px solid;
+}
+.YFT_float_subclass1 {
+	BORDER: #CA7107 5px solid;
+}
+.xtop {
+	DISPLAY: block; BACKGROUND: none transparent scroll repeat 0% 0%; FONT-SIZE: 1px
+}
+.xbottom {
+	DISPLAY: block; BACKGROUND: none transparent scroll repeat 0% 0%; FONT-SIZE: 1px
+}
+.xb1 {
+	DISPLAY: block; OVERFLOW: hidden
+}
+.xb2 {
+	DISPLAY: block; OVERFLOW: hidden
+}
+.xb3 {
+	DISPLAY: block; OVERFLOW: hidden
+}
+.xb4 {
+	DISPLAY: block; OVERFLOW: hidden
+}
+.xb1 {
+	HEIGHT: 1px
+}
+.xb2 {
+	HEIGHT: 1px
+}
+.xb3 {
+	HEIGHT: 1px
+}
+.xb2 {
+	BORDER-LEFT: #767676 1px solid; BACKGROUND: url(../images/myboxtopback.gif) repeat-x 50% top; BORDER-RIGHT: #767676 1px solid
+}
+.xb3 {
+	BORDER-LEFT: #767676 1px solid; BACKGROUND: url(../images/myboxtopback.gif) repeat-x 50% top; BORDER-RIGHT: #767676 1px solid
+}
+.xb4 {
+	BORDER-LEFT: #767676 1px solid; BACKGROUND: url(../images/myboxtopback.gif) repeat-x 50% top; BORDER-RIGHT: #767676 1px solid
+}
+.xb1 {
+	MARGIN: 0px 5px; BACKGROUND: #767676
+}
+.xb2 {
+	BORDER-RIGHT-WIDTH: 2px; MARGIN: 0px 3px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 2px
+}
+.xb3 {
+	MARGIN: 0px 2px
+}
+.xb4 {
+	MARGIN: 0px 1px; HEIGHT: 2px
+}
+.xboxcontent {
+	BORDER-BOTTOM: #767676 0px solid; BORDER-LEFT: #767676 1px solid; DISPLAY: block; BACKGROUND: url(../images/myboxtopback.gif) repeat-x 50% top; BORDER-TOP: #767676 0px solid; BORDER-RIGHT: #767676 1px solid
+}
+.auto_arrange {
+	TABLE-LAYOUT: fixed
+}
+.auto_arrange TD {
+	PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; TEXT-OVERFLOW: ellipsis; PADDING-RIGHT: 2px; WHITE-SPACE: nowrap; OVERFLOW: hidden; PADDING-TOP: 2px
+}
+.disable {
+	BORDER-BOTTOM: thin; BORDER-LEFT: thin; BACKGROUND-COLOR: transparent; COLOR: #cccccc; BORDER-TOP: thin; CURSOR: wait; BORDER-RIGHT: thin
+}
+SPAN.ss {
+	CURSOR: hand
+}
+SPAN.bh {
+	COLOR: red; CURSOR: hand
+}
+SPAN.xm {
+	COLOR: black
+}
+SPAN.js {
+	COLOR: black
+}

@@ -1,0 +1,78 @@
+
+/* pages/red_packet/red_envelopes.wxss */
+.head{background-color: #FE6347;height: 150px;}
+.head_p{margin: 0 auto;font-size: 18px;color: #fff;padding: 16px 0;text-align: center}
+.head_mun{font-size: 40px;font-weight: bold;margin: 0 auto;text-align: center;color:#fff;}
+.head_but{width: 180px;height: 30px;border-radius: 15px;background-color: #FFF6D5;color: #FE6347;font-size: 18px;margin: 0 auto;text-align: center;line-height: 30px;margin-top: 25px;margin-bottom: 54px;}
+page{
+ height: 100%; 
+ background:#eee;
+}
+.swiper-tab{  
+  width: 100%;  
+  border-bottom: 1px solid #eee;  
+  text-align: center;  
+  line-height: 80rpx;
+  background: #fff;  
+  font-size: 15px;
+}  
+.swiper-tab-list{  
+  font-size: 12px;  
+  display: inline-block;  
+  width: 30%;  
+  color: #666;  
+} 
+.on{ 
+  color: #dd2727;  
+  border-bottom: 5rpx solid #dd2727;
+}  
+.swiper-box{ 
+  display: block; 
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden; 
+  margin-top:44px; 
+} 
+.back_color{background-color: #FFF6F6;padding-bottom: 35px;height:460px;overflow: hidden; }
+.dd{height:100%;overflow-y: auto;}
+.conter,.record_top,.flex,.monry_detailed{display: flex;flex-flow: row nowrap;justify-content: space-between;align-items: center;}
+.conter{height:66px;width:100%;text-align: center；}
+.conter_monry{font-size:12px;color:#999;margin: 0 auto;text-align: center}
+.conter_mun{font-size:18px;color:#333;margin: 0 auto;text-align: center}
+.conter>view{width: 50%;}
+.record{background-color: #fff;margin-bottom: 2px;}
+.record_top{font-size: 15px;color:#333;border: 1px solid #eee;}
+.record_left,.record_right{padding: 5px 10px;}
+.image{width: 50px;height: 50px;padding-right:10px;}
+.record_foot{padding:5px 10px;}
+.record_but{display: inline-block;width: 50px;height: 16px;border-radius: 8px;font-size: 12px;color:#fff;margin-left: 10px;text-align: center;line-height:16px;
+}
+.record_foot{font-size: 12px;color: #FE6347;text-align: right;padding: 3px 10px;width:95%;}
+.green{background-color: #68B300;}
+.gray{background-color: #999999;}
+.blue{background-color:#2B9CD5;}
+.border{border: none;}
+.comment_text{
+  display:flex;
+  justify-content:center;
+}
+.comment_text_bq{
+  float:left;
+  width:100rpx;
+  height:43rpx;
+  background:#fff;
+  border-radius:30rpx;
+  color:#333;
+  font-size:11px;
+  text-align:center;
+  vertical-align:center;
+  line-height:40rpx;
+  margin:20rpx 15rpx;
+}
+.yes{
+  color: #FF6347;
+}
+/* .monry_detailed{padding: 5px 60px;}
+.monry_d{width: 50px;height: 20px;background-color: #fff;color: #333;font-size: 12px;line-height: 20px;text-align: center;border-radius: 10px;} */
+/* .pdding_b{padding-bottom: 10px;} */
+.pdding_b>view{display: inline-block}

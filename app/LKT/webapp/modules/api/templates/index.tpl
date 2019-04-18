@@ -1,0 +1,2 @@
+{banner}
+{news_list}

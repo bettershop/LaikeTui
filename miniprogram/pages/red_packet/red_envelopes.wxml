@@ -1,0 +1,108 @@
+<!--pages/red_packet/red_envelopes.wxml-->
+<view class='head'>
+  <view class ='head_p'>红包总金额（元）</view>
+  <view class='head_mun'>{{total}}</view>
+</view>
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" data-otype="send" bindtap="swichNav">我发出的</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-otype="received" bindtap="swichNav">我收到的</view>
+       <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" data-otype="detailed" bindtap="swichNav">钱包明细</view>
+    </view>
+   
+      <!--  记录  -->
+     <view class='back_color'>
+     <view class ='dd'>
+     <!-- 领取金额和领取数量 -->
+       <view  wx:if="{{type1 != 3}}">
+       <view class='conter'>
+        <view>
+        <view class='conter_monry'>领取金额（元）</view>
+        <view class='conter_mun'>{{money}}</view>
+        </view>
+         <view>
+        <view class='conter_monry'>领取数量（个）</view>
+        <view class='conter_mun'>{{num}}</view>
+        </view>
+        </view>
+       </view>
+
+  
+        <!-- 我发出 -->
+        
+        <view wx:if="{{type1 == 1}}">
+        <view class='record' wx:for="{{r01}}" wx:for-item="r01" wx:key="id">
+        <navigator url="../red_packet/red_record?id={{r01.r_id}}">
+          <view class='record_top'>
+          <view  class='record_left'>
+          <view class='pdding_b'style='display: flex;align-items: center;'>
+          <view style='width:135px;overflow:hidden;text-overflow:ellipsis;'>{{r01.remarks}}</view>
+          <view wx:if="{{r01.type == 1}}"> <view class='record_but gray'>已失效</view></view>
+          <view wx:if="{{r01.type == 2}}">
+              <view class='record_but blue' wx:if="{{r01.num1 >=r01.num}}">已领完</view>
+              <view class='record_but green' wx:if="{{r01.num1 < r01.num}}">发放中</view>
+          </view>
+          </view>
+         <view style='font-size:12px;color:#666'>
+          {{r01.time}}
+         </view>
+          </view>
+           <view  class='record_right'>
+           <view>{{r01.money}}元</view>
+           <view style='font-size:12px;color:#666;text-align: right;'>{{r01.num1}}/{{r01.num}}</view>
+          </view>
+          </view>
+          <view class='record_foot' wx:if="{{r01.type2 == 1}}">部分红包已失效</view>
+          <view class='record_foot' wx:if="{{r01.type2 == 2}}">部分红包将于3日内失效</view>
+          </navigator>
+        </view>
+        </view>
+
+        <!-- 我收到的   -->
+       <view  wx:if="{{type1 == 2}}">
+
+        <view class='record' wx:for="{{r01}}" wx:for-item="r01" wx:key="id">
+        <navigator url="../red_packet/red_record?id={{r01.r_id}}">
+          <view class='record_top border'>
+          <view  class='record_left flex'>
+          <image class='image' src='{{r01.headimgurl}}'></image>
+         <view>
+          <view class='pdding_b'style='width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>{{r01.remarks}}</view>
+         <view style='font-size:12px;color:#666'>
+          {{r01.time}}
+         </view>
+         </view>
+          </view>
+           <view  class='record_right'>
+           <view>{{r01.money}}元</view>
+          </view>
+          </view>
+
+           </navigator>
+        </view>
+       </view>
+    <!-- 钱包明细 -->
+       <view wx:if="{{type1 == 3}}">
+        <view class='record'  wx:for="{{r}}" wx:for-item="r" wx:key="id">
+          <view class='record_top border'>
+          <view  class='record_left flex'>
+         <view>
+          <view class='pdding_b' wx:if="{{r.type == 2}}" style='width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>购物抵扣</view>
+          <view class='pdding_b' wx:if="{{r.type == 3}}" style='width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>转出至钱包</view>
+          <view class='pdding_b' wx:if="{{r.type == 1}}" style='width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>{{r.remarks}}</view>
+         <view style='font-size:12px;color:#666'>
+          {{r.time}}
+         </view>
+         </view>
+          </view>
+           <view  class='record_right'>
+           <view>{{r.money}}元</view>
+          </view>
+          </view>
+           <view class='record_foot'wx:if="{{r.type == 1 && r.time<time}}">已失效</view>
+        </view>
+       </view>
+     </view>
+     </view>
+
+     
+

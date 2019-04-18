@@ -1,0 +1,55 @@
+
+@font-face {font-family: "wb";
+  src: url('../fonts/webfont.eot?t=1492076554808'); /* IE9*/
+  src: url('../fonts/webfont.eot?t=1492076554808#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/webfont.woff?t=1492076554808') format('woff'), /* chrome, firefox */
+  url('../fonts/webfont.ttf?t=1492076554808') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/webfont.svg?t=1492076554808#wbfont') format('svg'); /* iOS 4.1- */
+}
+
+.wb {
+  font-family:"wb" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wb-jf:before { content: "\e622"; }
+
+.wb-sl:before { content: "\e651"; }
+
+.wb-pl:before { content: "\e603"; }
+
+.wb-yx:before { content: "\e609"; }
+
+.wb-gj:before { content: "\e60d"; }
+
+.wb-cw:before { content: "\e623"; }
+
+.wb-gw:before { content: "\e604"; }
+
+.wb-jc:before { content: "\e757"; }
+
+.wb-jt:before { content: "\e63a"; }
+
+.wb-hy:before { content: "\e601"; }
+
+.wb-rz:before { content: "\e664"; }
+
+.wb-dd:before { content: "\e605"; }
+
+.wb-ss:before { content: "\e502"; }
+
+.wb-fx:before { content: "\e69f"; }
+
+.wb-dl:before { content: "\e6f8"; }
+
+.wb-qx:before { content: "\e6fb"; }
+
+.wb-fh:before { content: "\e606"; }
+
+.wb-wh-:before { content: "\e624"; }
+
+.wb-fx:before { content: "\e63c"; }
+

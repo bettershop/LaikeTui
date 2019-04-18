@@ -1,0 +1,148 @@
+<!--pages/red_packet/red_record.wxml-->
+<!-- 加载 -->
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<block wx:else>
+<!-- 加载完毕后操作 -->
+<view class='page_box'  wx:if="{{money =='' && num < r01[0].num}}">
+ <view bindtap='red_open' animation="{{animationData}}" class="drawer_attr_box" catchtouchmove="preventTouchMove" wx:if="{{showModalStatus}}">
+ <image  style='width:130px;height:150px;' src='https://lg-8tgp2f4w-1252524862.cos.ap-shanghai.myqcloud.com/d060d4dc98b04ed92a11d4cb87201b08.png'></image><text class='drawer_attr_box_text'>開</text>
+ </view>
+<audio poster="{{poster}}" hidden='true' src="https://lg-8tgp2f4w-1252524862.cos.ap-shanghai.myqcloud.com/red_packet.mp3" id="myAudio" controls  ></audio>
+
+<view class="b1" hidden="{{flag}}">
+    <view class="share_1">
+        <image  style="position: absolute;z-index: 999;top: 15%;width: 50px;height: 50px;" src='{{r01[0].headimgurl}}'></image>
+        <view style="position: absolute;z-index: 999;top: 33%;color:#FFE6B8;font-size:20px;width:60%;font-weight:bolder;text-align: center;margin: 0 auto;margin-bottom: 23px;">{{r01[0].remarks}}</view>
+        <image src="https://lg-8tgp2f4w-1252524862.cos.ap-shanghai.myqcloud.com/hbb.jpg"/>
+    </view>
+</view>
+</view>
+<block wx:else>
+
+<view class='back_div'>
+<image class='back_header' src='{{r01[0].headimgurl}}'></image>
+<view class=' back_title'>{{r01[0].user_name}}的福利红包</view>
+<view class='prompt' >{{r01[0].remarks}}</view>
+    <view  wx:if="{{money ==''}}">
+      <view class='back_but' wx:if="{{num < r01[0].num}}" >
+      </view>
+      <block wx:else>
+          <view class='back_but' style='font-size:20px;color:#FFE6B8;'>{{text}}</view>
+      </block>
+    </view>
+    <block wx:else>
+      <view class='back_but'>
+        <view class='but_text' style='font-size:30px;color:#FFE6B8;'>{{money}}
+        <text style='font-size:11px'>元</text>
+      </view>
+      </view>
+    </block>
+
+
+<button class='nav_s'  bindtap="set_share" data-status="1" style='margin: 0;padding: 0;line-height: 21px;background-color: #FE7F68;'>
+<image style='height:22px;width:21px;' src='/images/147852@2x(2).png'></image>
+</button>
+
+<view class='nav_s_1'  bindtap="home" style='margin: 0;padding: 0;line-height: 21px;background-color: #FE7F68;'>
+<image style='height:22px;width:21px;' src='/images/icons/hhh.png'></image>
+</view>
+</view>
+<view class='text'>
+<view  wx:if="{{money == ''}}">
+<text>已领取{{num}}/{{r01[0].num}}个</text>
+</view>
+<block wx:else>
+<text><text  wx:if="{{openid == r01[0].openid}}" >共{{r01[0].money}}，</text> 已领取{{num}}/{{r01[0].num}}个</text>
+</block>
+<navigator url="../red_packet/red_envelopes">
+<text class='text_right'>我的记录</text>
+</navigator>
+</view>
+<!-- 循环领取记录 -->
+<view  wx:if="{{r02 == 1}}" style='text-align:center; width:100%; height:130px;'>
+ <view style='text-align:center; width:100%;font-size:14px:color:#666; height:30px;line-height: 30px;'>还没人领红包哦！</view>
+</view>
+<block wx:else>
+  <view class='content' wx:for="{{r02}}" wx:for-item="r01" wx:key="id">
+  <view class='content_left'>
+  <image src='{{r01.headimgurl}}'></image>
+  <view class='content_time'>
+  <view>{{r01.user_name}}</view>
+  <view>
+  <text>{{r01.time}}</text>
+  <!-- <text>20：00</text> -->
+  </view>
+  </view>
+  </view>
+  <view class='content_money'>{{r01.money}}</view>
+  </view>
+</block>
+
+
+
+
+
+
+<!-- 弹窗 -->
+<view class="drawer_screen" bindtap="set_share" data-index="0" data-status="0"  wx:if="{{show_share}}"></view>
+<view animation="{{animationData}}" class="drawer_attr_share" catchtouchmove="preventTouchMove" wx:if="{{show_share}}" >
+<view class='myyhq'> </view>
+  <view class='share_top'>
+  分享
+  <view class='close_share' bindtap="set_share1" data-index="0" data-status="0" >x</view>
+  </view> 
+  <view  class='fx_box'> 
+    
+  <view class='fx_img_box'>
+      <button open-type="share" hover-class="button-hover" style='line-height:normal;border:0;border-radius:0px;padding:0;font-size:12px;'>
+          <view><image class='fx_img' src='/images/wx.png'></image></view>
+          <view>微信好友</view>
+      </button>
+      </view>
+      <view class='fx_img_box' bindtap='user_share' >
+      <view> <image class='fx_img' src='/images/pyq.png'></image></view> 
+        <view>朋友圈</view>
+      </view>
+  </view>
+
+  </view>
+
+  <view class='imagePathBox' hidden="{{maskHidden == false}}">
+    <view class='images_bg'>
+        <view class='share_top'>
+        分享到朋友圈
+        <view class='close_share' bindtap='close_share'>x</view>
+        </view>
+        <image src="{{imagePath}}" data-src="{{imagePath}}" catchtap="previewImage" class='shengcheng'></image>
+        <button class='baocun' style='background:{{backgroundColor}};' bindtap='baocun'>保存相册</button>
+        <view class='share_bottom'>保存图片到手机后，您可到朋友圈分享该商品图片</view>
+    </view>
+  </view>
+  <view hidden="{{maskHidden == false}}" class="mask"></view> 
+<!-- end -->
+</block>
+<!-- 2222222222222222222222 -->
+</block>

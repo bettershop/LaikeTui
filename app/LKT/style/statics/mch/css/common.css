@@ -1,0 +1,172 @@
+
+.iconfont {
+    font-size: inherit;
+}
+
+body > .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 15rem;
+    overflow: hidden;
+    background: #fff;
+}
+
+body > .sidebar .sidebar-nav {
+    width: 16.5rem;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.sidebar ~ .main {
+    padding-left: 15rem;
+}
+
+body > .sidebar {
+    background: #404040;
+}
+
+body > .sidebar,
+body > .sidebar a {
+    color: #bfcade;
+    text-decoration: none;
+    color: hsla(0, 0%, 100%, .67);
+    transition: 250ms color;
+}
+
+body > .sidebar .nav-group a {
+    display: block;
+    padding: .75rem 2.5rem;
+}
+
+body > .sidebar .nav-group a .iconfont {
+    margin-right: .75rem;
+    width: 1rem;
+    display: inline-block;
+    margin-left: -.25rem;
+    color: hsla(0, 0%, 100%, .87);
+}
+
+body > .sidebar .sidebar-logo {
+    color: #f6f6f6;
+    padding: 1rem 1rem;
+}
+
+body > .sidebar .sidebar-logo a {
+    display: block;
+    text-align: center;
+    background: rgba(0, 0, 0, .25);
+    border-radius: .5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 .75rem;
+    transition: 250ms color;
+}
+
+body > .sidebar .sidebar-logo a:hover {
+    color: #fff;
+}
+
+body > .sidebar .nav-group > a:hover {
+    color: #fff;
+}
+
+body > .sidebar .sub-nav-list {
+    background: #333;
+    height: 0;
+    visibility: hidden;
+}
+
+body > .sidebar .nav-group.active .sub-nav-list {
+    height: auto;
+    visibility: visible;
+}
+
+body > .sidebar .sub-nav-list a {
+    padding-left: 4rem;
+}
+
+body > .sidebar .sub-nav-list a:hover {
+    color: #f6f6f6;
+}
+
+body > .sidebar .nav-group.active > a {
+    background: #555;
+    color: #fff;
+}
+
+body > .main > .main-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 15rem;
+    background: #fff;
+    border-bottom: .01rem solid #ddd;
+    height: 4.52rem;
+    z-index: 10;
+}
+
+body > .main > .main-nav ~ .main-body {
+    margin-top: 4.52rem;
+}
+
+body > .main > .main-nav .breadcrumb {
+    height: 100%;
+    background: #fff;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+label.required {
+    position: relative;
+}
+
+label.required:before {
+    content: "*";
+    display: inline;
+    position: absolute;
+    left: -.75rem;
+    color: #ff4544;
+    font-weight: bolder;
+    top: 25%;
+}
+
+.form {
+    max-width: 70rem;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+    border-top: 2px solid #ddd;
+}
+
+.form .form-title {
+    padding: .75rem 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.form .form-body {
+    padding: 1rem;
+}
+
+.input-hide {
+    position: relative;
+}
+
+.input-hide .tip-block {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    padding: .43rem .75rem;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .15rem;
+    color: #DE7C7C;
+}
+
+.main-nav .nav-right {
+    float: right;
+    padding-right: 1rem;
+}
