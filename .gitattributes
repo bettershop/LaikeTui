@@ -1,2 +1,6 @@
-*.h linguist-language=php
-*.m linguist-language=php
+*.js linguist-language=php
+*.css linguist-language=php
+*.html linguist-language=php
+*.php linguist-language=php
+*.tpl linguist-language=php
+
