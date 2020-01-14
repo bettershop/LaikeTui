@@ -18,16 +18,16 @@
 
 ### 小程序端截图
 
-| ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143851_4873d4b1_2029865.png "在这里输入图片标题") | ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143905_8775e557_2029865.png "在这里输入图片标题") |
+| ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github1.png "在这里输入图片标题") | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github2.png "在这里输入图片标题") |
 | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/144617_13ae4f17_2029865.png "在这里输入图片标题")                     | ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/144036_d70a43d6_2029865.png "在这里输入图片标题")                     |
+| ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github3.png "在这里输入图片标题")                     | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github4.png "在这里输入图片标题")                     |
 
 
 ### 后台截图
 
-| ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143003_6b9ecd53_2029865.png "在这里输入图片标题") | ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143319_3864b098_2029865.png "在这里输入图片标题") |
+| ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github5.png "在这里输入图片标题") | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github6.png "在这里输入图片标题") |
 | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143110_9cda6231_2029865.png "在这里输入图片标题") | ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143318_7e7574f6_2029865.png "在这里输入图片标题") |
+| ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github7.png "在这里输入图片标题") | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github8.png "在这里输入图片标题") |
 
 ### 最新版体验后台
 
@@ -43,7 +43,7 @@
 
 ### APP+公众号+小程序更多演示请用微信扫码
 
-![扫码体验](https://images.gitee.com/uploads/images/2019/0418/094953_2048c86e_2029865.jpeg)
+![扫码体验](http://www.laiketui.com/wp-content/uploads/2020/github9.jpeg)
 
 ### 功能列表 
 
@@ -72,16 +72,16 @@
 22. 会员制玩法（模仿京东Plus与淘宝会员特权）
 ```
 
-[![输入图片说明](https://images.gitee.com/uploads/images/2019/1030/082053_51b4b4e5_2029865.gif "1572394734266.gif")](http://www.laiketui.com)
+[![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github10.gif "1572394734266.gif")](http://www.laiketui.com)
 
 ### 分销小程序单店版本截图（开源版本截图）
 
-![稳定版皮肤](https://images.gitee.com/uploads/images/2019/0514/100638_e7f9fbc9_2029865.png "在这里输入图片标题")
+![稳定版皮肤](http://www.laiketui.com/wp-content/uploads/2020/github11.png "在这里输入图片标题")
 
 ### 百货小程序单店版本截图（新版炫彩皮肤）
 
-![新版本截图](https://images.gitee.com/uploads/images/2019/0927/080854_34db1391_2029865.png "100638_e7f9fbc9_2029865.png")
+![新版本截图](http://www.laiketui.com/wp-content/uploads/2020/github12.png "100638_e7f9fbc9_2029865.png")
 
 
 ### 相关思维导图
-![前端](https://images.gitee.com/uploads/images/2018/1101/171831_05d3ecb6_2029865.jpeg "来客小程序.jpg")
+![前端](http://www.laiketui.com/wp-content/uploads/2020/github13.jpeg "来客小程序.jpg")
