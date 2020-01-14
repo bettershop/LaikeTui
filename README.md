@@ -27,7 +27,7 @@
 
 | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github5.png "在这里输入图片标题") | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github6.png "在这里输入图片标题") |
 | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github7.png "在这里输入图片标题") | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github8.png "在这里输入图片标题") |
+| ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/github7.png "在这里输入图片标题") | ![输入图片说明](http://www.laiketui.com/wp-content/uploads/2020/gitbub8.png "在这里输入图片标题") |
 
 ### 最新版体验后台
 
