@@ -1,4 +1,4 @@
-var app = getApp();
+﻿var app = getApp();
 function getNowFormatDate() {
   var date = new Date();
   var seperator1 = "-";
@@ -15,9 +15,7 @@ function getNowFormatDate() {
   return currentdate;
 };
 Page({
-  /**
-   * 页面的初始数据
-   */
+
   data: {
     inp_money: 0,
     iv: '',
