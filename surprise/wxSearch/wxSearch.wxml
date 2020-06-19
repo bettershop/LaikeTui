@@ -1,0 +1,42 @@
+<template name="wxSearch">
+  <view class="wxSearch" bindtap="wxSearchTap"  style="display:{{wxSearchData.view.isShow ? 'block':'none'}};height:{{wxSearchData.view.seachHeight}}px;top:{{wxSearchData.view.barHeight}}px;">
+    <view  class="wxSearchInner">
+
+        <view class="wxSearchMindKey">
+            <view class="wxSearchMindKeyList">
+                <block wx:for="{{wxSearchData.mindKeys}}">
+                    <view class="wxSearchMindKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
+                </block>
+            </view>
+        </view>
+
+        <view class="wxSearchKey" style="display:{{wxSearchData.view.isShowSearchKey ? 'block':'none'}}">
+            <text class="wxSearchTitle">热门搜索</text>
+            <view class="wxSearchKeyList">
+                <block wx:for="{{wxSearchData.keys}}">
+                    <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
+                </block>
+            </view>
+        </view>
+        <view class="wxSearchKey" style="display:{{wxSearchData.view.isShowSearchHistory ? 'block':'none'}}">
+            <view>
+            <text class="wxSearchTitle" style='float:left;'>搜索历史</text>
+            <view class="wxSearchDeleteAllBtn" bindtap="wxSearchDeleteAll">
+              <image src='../../images/qingchu.png' style='width:30rpx;height:30rpx;'></image>
+            </view> 
+            </view>
+            <view style='clear:both;'></view>
+            <view wx:if="{{wxSearchData.his[0]}}" class="wxSearchKeyList">
+                <block wx:for="{{wxSearchData.his}}">
+                    <view class="wxSearchKeyItem">
+                        <text class="wxSearchHistoryItemText" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</text> 
+                    </view>
+                </block>
+            </view>
+            <view wx:else>
+                <view class="wxSearchHistoryEmpty">搜索历史为空</view>
+            </view>
+        </view>
+    </view>
+  </view>
+</template>

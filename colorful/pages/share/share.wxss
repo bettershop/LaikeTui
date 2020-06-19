@@ -1,0 +1,56 @@
+/* pages/share/share.wxss */
+.share_1{
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.share_2{
+  position: absolute;
+  text-align: center;
+  width: 90%;
+  left:5%;
+  top:80%;
+  z-index: 99;
+  /* color:#fff; */
+}
+.share_4{
+  padding-top: 10px;
+  margin: 40px;
+  color: gray;
+}
+.mtxt{
+  font-size: 60px;
+}
+.share_5{
+  width: 130px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #FFCC00;
+  margin: 66px auto;
+}
+.img{
+  margin: 0;
+  width: 100%;
+  z-index: 7;
+  height: 100px;
+  position: relative;
+}
+.userinfo-avatar {
+  display: block;
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx;
+  margin-top: 50rpx;
+  border-radius: 50%;
+}
+.userinfo{
+  position: absolute;
+  top: 10px;
+  width: 750rpx;
+  height: 320rpx;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}

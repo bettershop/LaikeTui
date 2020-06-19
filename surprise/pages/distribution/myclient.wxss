@@ -1,0 +1,109 @@
+/* pages/distribution/distribution.wxss */
+.wallet {
+  height: 221rpx;
+  background-color: #FF6347;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-balance {
+  font-weight:400;
+  font-size:72rpx;
+  color: #FFFFFF;
+
+}
+
+.wallet-balance-text {
+  font-size:28rpx;
+  font-weight:400;
+  color: #FFFFFF;
+}
+
+.wallet-title {
+  font-weight:500;
+  font-size:26rpx;
+  color: #FFFFFF;
+  opacity:0.8;
+}
+
+/* 记录 */
+.record {
+
+}
+
+.box {
+  display: flex;
+
+}
+
+.box image{
+  width: 64rpx;
+  height: 64rpx;
+  border-radius:50%;
+  margin-right: 12rpx;
+  background-color:#000000;
+}
+
+
+.list-item {
+  height: 120rpx;
+  padding: 0rpx 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2rpx solid #EAE9EC;
+}
+
+.item-title {
+  color: #020202;
+  font-size:28rpx;
+  font-weight:500;
+}
+
+.item-time {
+  color: #B8B8B8;
+  font-size: 22rpx;
+  font-weight:500;
+}
+
+.content-list {
+  /* height: 800rpx; */
+}
+
+.member {
+  display: flex;
+  align-items:center;
+}
+
+.member-con {
+  color: #000000;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align:end;
+}
+
+.member-text {
+  color: #666666;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.member image {
+  height: 30rpx;
+  width: 16rpx;
+}
+
+.member-right {
+  margin-right: 19rpx;
+}
+
+
+/* 加载更多 */
+.load {
+  text-align: center;
+  font-weight:500;
+  font-size:24rpx;
+  color: #B8B8B8;
+}

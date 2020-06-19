@@ -1,0 +1,45 @@
+/* pages/distribution/commission.wxss */
+/* 加载更多 */
+.load {
+  text-align: center;
+  font-weight:500;
+  font-size:24rpx;
+  color: #B8B8B8;
+  padding-top: 20rpx;
+}
+
+.jf_obtain {
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2rpx solid #E6E6E6;
+  padding:0rpx 30rpx;
+}
+
+.nav-head {
+  height: 90rpx;
+  background-color: #F6F6F6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0rpx 30rpx;
+}
+
+.head-title{
+  font-weight:bold;
+  font-size:30rpx;
+  color: #020202;
+}
+
+.head-num {
+  font-size:28rpx;
+  font-weight:bold;
+  color: #020202;
+}
+
+.user-name {
+  color: #020202;
+  font-size: 28rpx;
+  font-weight:500;
+}

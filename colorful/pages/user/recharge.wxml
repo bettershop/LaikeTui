@@ -1,0 +1,46 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<block wx:else>
+<view class="page">
+  <form bindsubmit="recharge">
+    <view class="tr_recharge">
+      <view class="tr_rechbox">
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>充值金额： </text>
+          </view>
+          <view class='inp'>
+            <input  name="money" style='font-size:13px;' type="number" maxlength="5" bindblur="bindblur" placeholder="充值金额不得小于{{min_cz}}元" />
+          </view>
+        </view>
+			</view>
+    </view>
+    <input  name="min_cz" value='{{min_cz}}' style='display:none' />
+    <view class="dibu">
+      <button form-type='submit' class="cz" hover-class="czz" style="background-color:#09bb07;height: 45px;">立即支付</button>
+    </view>
+  </form>
+</view>
+</block>

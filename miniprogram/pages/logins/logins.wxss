@@ -1,0 +1,160 @@
+.pupContentBG {
+  width: 100vw !important;
+  height: 100vh !important;
+  position: fixed !important;
+  top: 0 !important;
+}
+
+.pupContent {
+  width: 100% !important;
+  background: #FFFFFF !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  z-index: 999 !important;
+  border-radius: 16rpx 16rpx 0rpx 0rpx !important;
+}
+
+.pupContent >image {
+  width: 28rpx !important;
+  height: 28rpx !important;
+  float: right !important;
+  margin-right: 30rpx !important;
+  margin-top: 30rpx !important;
+}
+
+.pupContent-body {
+  margin: 60rpx 40rpx !important;
+}
+
+/* 设置显示的背景 */
+.pupContent-head {
+  display: flex !important;
+  align-items: center !important;
+  color: #020202 !important;
+  font-weight:bold !important;
+  font-size:34rpx !important;
+  padding-bottom: 60rpx !important;
+}
+.pupContent-head view{
+  padding-left: 20rpx !important;
+}
+.pupContent-head  image{
+  width: 80rpx !important;
+  height: 80rpx !important;
+}
+.showBG {
+  display: block !important;
+}
+
+.pupContent-title {
+  color: #020202 !important;
+  font-size: 30rpx !important;
+  font-weight:500 !important;
+  padding-bottom: 40rpx !important;
+}
+
+.pupContent-title {
+  color: #020202 !important;
+  font-size:30rpx !important;
+}
+
+.pupContent-btn {
+  height: 90rpx !important;
+  background-color: #1AAD19 !important;
+  color: #FFFFFF !important;
+  font-size:30rpx !important;
+  font-weight:500 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius:10rpx !important;
+}
+
+.pupContent-con {
+  color: #666666 !important;
+  font-size:26rpx !important;
+  padding-bottom: 68rpx !important;
+}
+
+.hideBG {
+  display: none;
+}
+
+/* 弹出或关闭动画来动态设置内容高度 */
+
+@keyframes slideBGtUp {
+  from {
+    background: transparent;
+  }
+
+  to {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes slideBGDown {
+  from {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  to {
+    background: transparent;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.openBG {
+  animation: slideBGtUp 0.5s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closeBG {
+  animation: slideBGDown 0.5s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+/* 设置显示内容 */
+
+.showContent {
+  display: block;
+}
+
+.hideContent {
+  display: none;
+}
+
+/* 弹出或关闭动画来动态设置内容高度 */
+
+@keyframes slideContentUp {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 520rpx;
+  }
+}
+
+@keyframes slideContentDown {
+  from {
+    height: 520rpx;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.open {
+  animation: slideContentUp 0.5s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closes {
+  animation: slideContentDown 0.5s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+

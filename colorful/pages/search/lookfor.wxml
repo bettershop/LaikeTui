@@ -1,0 +1,35 @@
+<view class="body" wx:if="{{remind}}">
+    <view class="zong">
+        <view class="spinner">
+            <view class="spinner-container container1">
+                <view class="circle1"></view>
+                <view class="circle2"></view>
+                <view class="circle3"></view>
+                <view class="circle4"></view>
+            </view>
+            <view class="spinner-container container2">
+                <view class="circle1"></view>
+                <view class="circle2"></view>
+                <view class="circle3"></view>
+                <view class="circle4"></view>
+            </view>
+            <view class="spinner-container container3">
+                <view class="circle1"></view>
+                <view class="circle2"></view>
+                <view class="circle3"></view>
+                <view class="circle4"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<block wx:else>
+    <import src="/wxSearch/wxSearch.wxml"></import>
+    <form bindsubmit="wxSearchFn" reportSubmit="true">
+        <view class="wxSearch-section">
+            <view class="wxSearch-pancel">
+                <input bindconfirm="search_confirmType" bindinput="wxSearchInput" bindtap="wxSerchFocus" class="wxSearch-input" confirmType="search" placeholder="搜索您想要的礼品..." value="{{wxSearchData.value}}"></input>
+            </view>
+        </view>
+    </form>
+    <template is="wxSearch" data="{{wxSearchData:wxSearchData}}"></template>
+</block>

@@ -1,0 +1,29 @@
+<import src="/pages/template/loading.wxml"/>
+<template name="groupList">
+<view wx:if="{{groupList.length>0}}">
+<block wx:for="{{groupList}}" wx:key="unique">
+	<view class="group-item bg-fff mt-10" bindtap="showGoodsDetail" data-id="{{item.pro_id}}" data-sum="{{item.sum}}">
+		<view class="goods-img p-20"><image src="{{item.img}}" mode="aspectFill"></image></view>
+		<view class="goods-info pull-right p-20">
+			<view class="goods-title">{{item.name}}</view>
+			<text class="color-ccc">{{item.groupNum}}人团</text>
+			<text class="goods-price">¥{{item.totalPrice}}</text>
+			<view class="pull-right text-red">{{item.groupStatus}}</view>
+		</view>
+		<view class="clearfix"></view>
+	</view>
+	<view class="user-option bg-fff pull-right">
+		<view class="pull-right btn" bindtap="showOrderInfo" data-id="{{item.ptordercode}}">查看订单详情</view>
+		<view class="pull-right btn" bindtap="showGroupInfo" data-id="{{item.ptcode}}" data-pid="{{item.pro_id}}">查看团详情</view>
+	</view>
+	<view class="clearfix"></view>
+</block>
+<template is="loading" data="{{loading:loading}}"/>
+</view>
+<view wx:else class="no-group">
+	<view class="text-center">
+		<image src="../../images/group/no-orders.png"></image>
+		<view class="mt-20">您没有相关订单</view>
+	</view>
+</view>
+</template>

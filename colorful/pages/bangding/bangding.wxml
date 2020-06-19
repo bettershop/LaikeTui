@@ -1,0 +1,124 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+  <block wx:if="{{binding}}" >
+    <view class="binding_pic">
+      <image src="/images/binding_pic.png" style="height:100%;width:288rpx;"></image>
+    </view>
+    <view class="binding_num">
+      <view style="font-size:13px;display: flex;justify-content: center;margin-bottom:16rpx;">已绑定手机</view>
+      <view style="font-size:15px;display: flex;justify-content: center;">{{mobile}}</view>
+    </view>
+    <button bindtap="renewal" class="binding-footer">更换绑定</button>
+  </block>
+  <block wx:else >
+    <form bindsubmit="perfect">
+      <view class="page">
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>您的姓名： </text>
+          </view>
+          <view class='inp'>
+            <input name="name" maxlength='10' style='font-size:13px;width:100%;' value='{{name}}' placeholder="姓名" type='text' />
+          </view>
+        </view>
+
+        <view class='xt'></view>
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>性 别 ： </text>
+          </view>
+          <view class='inp'>
+            
+            <radio-group class="radio-group" bindchange="radioChange">
+              <label class="radio" wx:for="{{items}}">
+                <radio value="{{item.name}}" checked="{{item.checked}}" color='#FF6347'/>{{item.value}}
+              </label>
+            </radio-group>
+
+          </view>
+        </view>
+
+        <view class='xt'></view>
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>手机号码： </text>
+          </view>
+          
+          <view class="Phone">
+            {{mobile}}
+            <button class='sj_btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号码</button>
+          </view>
+        </view>
+
+        <view class='xt'></view>
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>微信号 ： </text>
+          </view>
+          <view class='inp'>
+            <input name="wx_id" maxlength='32' style='font-size:13px;width:100%;' value='{{wx_id}}' placeholder="微信号" type='text' />
+          </view>
+        </view>
+
+        <view class='xt'></view>
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>出生日期： </text>
+          </view>
+          <view class='inp'>
+          <picker mode="date" value="{{date}}" start="1949-10-01" end="2017-09-01" bindchange="bindDateChange">
+              <view class="picker">
+                {{date}}
+              </view>
+            </picker>
+          </view>
+        </view>
+
+        <view class='xt'></view>
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>所在城市： </text>
+          </view>
+          <view class='inp'>
+            <!-- <input name="name" maxlength='10' style='font-size:13px;width:100%;' value='{{name}}' placeholder="姓名" type='text' /> -->
+<picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class="picker">
+    <text class='dpxzq'>{{region[0]}}</text><text class='dpxzq'>{{region[1]}}</text><text class='dpxzq'>{{region[2]}}</text>
+      <!-- {{region[0]}}，{{region[1]}}，{{region[2]}} -->
+    </view>
+  </picker>
+
+          </view>
+        </view>
+
+      </view>
+      <view>
+        <button form-type='submit' class="tx" style='background-color:#FF6347;border-radius:30px;'> 确认修改 </button>
+      </view>
+    </form>
+  </block>
+</block>

@@ -1,0 +1,35 @@
+<view class='wallet'>
+  <view class='wallet-balance'>{{ num }}<text class='wallet-balance-text'>人</text></view>
+  <view class='wallet-title'>客户总人数</view>
+</view>
+
+<view class='record'>
+  <view class='record-content'>
+    <view class='content-list'>
+
+      <view class='list-item' wx:for="{{ r01 }}" data-openid="{{ item.openid }}" data-title="{{ item.user_name }}" data-num="{{ item.num }}" bindtap="setNav">
+        <view class='box'>
+          <image src='{{ item.headimgurl }}'></image>
+          <view>
+            <view class='item-title'>
+              {{ item.user_name }}
+            </view>
+            <view class='item-time'>
+              {{ item.Register_data }}
+            </view>
+          </view>
+        </view>
+
+        <view class='member'>
+          <view class='member-right'>
+            <view class='member-con'>{{ item.num }}</view>
+            <view class='member-text'>成员</view>
+          </view>
+          <image src='../../images/icons/jt.png' wx:if="{{ item.num > 0 }}"></image>
+        </view>
+      </view>
+
+    </view>
+    <view class='load'>没有更多了</view>
+  </view>
+</view>

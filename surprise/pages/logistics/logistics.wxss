@@ -1,0 +1,108 @@
+/* pages/test/test.wxss */
+.body_1{
+  height: 100%;
+}
+.goods{  
+  margin: 50rpx;  
+  height: 150rpx;  
+  width: 150rpx;  
+  border-radius: 15rpx;  
+}  
+.logistics{  
+    font-size:28rpx;
+    width:100%;
+    margin:5%;
+    /* border-bottom:1px solid #eee; */
+}  
+.br{  
+  width: 95%;  
+  margin-left: 2.5%;  
+  margin-bottom: 30rpx;  
+  background: #d0d0d0;  
+  height: 1rpx;  
+}  
+  
+/* 下部分 */  
+.logistics_centent{  
+  position: absolute;  
+  left: 100rpx;  
+  font-size: 28rpx;  
+  color: #666  
+}  
+.icon{  
+  width: 20rpx;  
+  height: 20rpx;  
+  background: white;  
+  border-radius: 50%;  
+  display: inline-block;  
+  margin:0rpx 20rpx 0rpx 40rpx;  
+}  
+.in{  
+  border: 1rpx solid red;  
+  animation: my_animation 2s infinite;  
+}  
+@keyframes my_animation{  
+    100% {    
+    transform: scale(2);    
+    background-color: transparent;    
+    }    
+}  
+  
+.no_in{  
+  border: 1rpx solid #d0d0d0;  
+}  
+.on{  
+  background: #d0d0d0;  
+  height: 100rpx;  
+  width: 1px;  
+  margin-left: 50rpx;  
+}
+
+.logInf{
+  height: 100rpx;
+  padding:15rpx 30rpx;
+  position: relative;
+}
+.logInf .view1{
+  height: 50%;
+  font-size: 28rpx;
+  line-height: 50rpx
+}
+.text1{
+ color: #999999;
+ margin-right: 20rpx
+}
+.copy{
+  font-size: 22rpx;
+  color: #999;
+  display: inline-block;
+  width: 100rpx;
+  height: 40rpx;
+  position: absolute;
+  bottom: 20rpx;
+  right: 30rpx;
+  border: 1px solid #999999;
+  text-align: center;
+  line-height: 40rpx;
+}
+
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1525919149340'); /* IE9*/
+  src: url('iconfont.eot?t=1525919149340#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAXAAAsAAAAACHAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7khxY21hcAAAAYAAAABeAAABhptUBr5nbHlmAAAB4AAAAesAAAJQ55T8BWhlYWQAAAPMAAAALwAAADYRUuFaaGhlYQAAA/wAAAAcAAAAJAfeA4RobXR4AAAEGAAAAAwAAAAMC+kAAGxvY2EAAAQkAAAACAAAAAgAdgEobWF4cAAABCwAAAAfAAAAIAETAIFuYW1lAAAETAAAAUUAAAJtPlT+fXBvc3QAAAWUAAAALAAAAD3HvDRfeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2Bk/sE4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVDxrZ27438AQw9zA0AAUZgTJAQAtYQzzeJzFkMENgDAMAy9t6QMxCA8G4sUc3aCbdo1iQnkwQS05VhxLiQIsQBQPMYFdGA9OueZ+ZHU/eSZLjUBptXf1nyqiWXYNKplpsHmr/9i87qPTVyiDOrHVl4QbqvYNqwAAeJxFUE2L01AUvSeZpJ95nbx8tek0bVKbdIhG2qZpy9COg7NQx4UgCC5n405XwmxcdCMouPAfCIPgUnA94ODSdulaEP0BMmuJJlPRx+Wecz8P95FE9PubeCbWSaM+DeiQ7hFBDuExoQU3iCMhhOFKhqUzMegGbqHrReIclifr5jCJfUsuyDUwOBi5wySIhADjeCHsYWi2gEbTvs97O1x8jXI9cJ6nd4RTGO3uTm1xLb19dV8fdrTiSZXzBuevirIkFQVhq8bw2DJLUqksp2+lmm2ctXeFNqqNwL77UOk0+fGL+EmrZ5WA5RJas8Pe7au2mtkz29R4o7CtFOu20r2i4+RHpa5VW/53yp6c3XoqfhWPqUgqtWhMR/SUqMewOeUf0WQqmGQlNPFJjBB0GQoR4mTiwBotkIEui0PTGOj5R/nBZJzVBlnRkFgWzxH71xFhjs2soebZsZpNjvImK3PCy5phtA0j/bnBR+v0QpLA1iswSUovDtxR5aAy8sLpNPQuqRvOZkeMc3ZD4QBnuSfwJq+WvlSq4Mo543mIZPe8P8FHx8N76B09M/xF4UO2eb3aKK3WYL8+w3ccH8L0wVT4T3ErX88Vee9SSnHf5Lqfyttb+6JavrlJpss8iWU/AZJ+OCsP2kR/AIUbXTsAeJxjYGRgYADi9/rvX8fz23xl4GZhAIHrkufWIuj/i1gYmBOBXA4GJpAoAFu/C5IAeJxjYGRgYG7438AQw8IAAkCSkQEVMAMARwkCbAQAAAAD6QAABAAAAAAAAAAAdgEoeJxjYGRgYGBmKGVgYwABJiDmAkIGhv9gPgMAFJIBlQB4nGWPTU7DMBCFX/oHpBKqqGCH5AViASj9EatuWFRq911036ZOmyqJI8et1ANwHo7ACTgC3IA78EgnmzaWx9+8eWNPANzgBx6O3y33kT1cMjtyDRe4F65TfxBukF+Em2jjVbhF/U3YxzOmwm10YXmD17hi9oR3YQ8dfAjXcI1P4Tr1L+EG+Vu4iTv8CrfQ8erCPuZeV7iNRy/2x1YvnF6p5UHFockikzm/gple75KFrdLqnGtbxCZTg6BfSVOdaVvdU+zXQ+ciFVmTqgmrOkmMyq3Z6tAFG+fyUa8XiR6EJuVYY/62xgKOcQWFJQ6MMUIYZIjK6Og7VWb0r7FDwl57Vj3N53RbFNT/c4UBAvTPXFO6stJ5Ok+BPV8bUnV0K27LnpQ0kV7NSRKyQl7WtlRC6gE2ZVeOEXpc0Yk/KGdI/wAJWm7IAAAAeJxjYGKAAC4G7ICZkYmRmZGFgbGCvyIzMb8is7w0J7M0LTMnh4EBAE7iBxM=') format('woff'),
+  url('iconfont.ttf?t=1525919149340') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1525919149340#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:117px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #bfbfbf;
+}
+
+.icon-xiaoxiwuliufill:before { content: "\e687"; }
+

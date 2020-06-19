@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "优惠券",
+  "usingComponents": {
+    "pop": "../logins/logins"
+  }
+}

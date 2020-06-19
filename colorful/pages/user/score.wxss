@@ -1,0 +1,66 @@
+/* pages/user/score.wxss */
+.swiper-tab{  
+    width: 100%;  
+    text-align: center;  
+    line-height: 80rpx;
+    }  
+.swiper-tab-list{  
+    font-size: 30rpx;  
+    display: inline-block;  
+    width: 33.33%;  
+    color: #777777;  
+}  
+.on{ 
+  color: #7a896c;  
+  border-bottom: 5rpx solid #7a896c;
+    }  
+.swiper-box{
+   display: block; height: 100%; width: 100%; overflow: hidden;
+ }  
+.scoreuse{  
+    text-align: justify;
+    padding-bottom: 10px;
+}
+
+.detail{
+   display: flex;
+   flex-direction: column;
+   margin-top: 10px;
+   border-top:1px solid #eee; 
+}
+.scoreuse{
+   display: block;
+   line-height: 60rpx;
+   align-items: flex-start;
+   color: #777;
+   font-size: 35rpx;
+}
+.jf_text{
+  text-align: center;
+}
+.jf_obtain{
+  width:100%;
+  text-align:center;
+}
+.obtain_bt{
+  font-size:30rpx;
+  display:inline-block;
+  width:33.33%;
+}
+.obtain_box{
+  width:95%;
+margin:0 auto;
+border-top: 1px solid #eee;
+margin-top: 10px;
+}
+.detail image{
+  width: 100px;
+  height: 40px;
+  margin: auto;
+}
+.myscore{
+  background: #d62418;
+  color: #fff;
+}
+.jf_box {padding: 100rpx 30rpx; text-align: center; font-size: 24rpx; line-height: 2em;}
+.jf_box .n-title {font-size: 60rpx; font-weight: 700; padding-bottom: 10rpx;}

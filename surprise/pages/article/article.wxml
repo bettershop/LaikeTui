@@ -1,0 +1,42 @@
+<!--pages/article/article.wxml-->
+<view class="page">
+  <view class="h3">
+    <import src="../../wxParse/wxParse.wxml"/> 
+    <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+  </view>
+  <view class="dibu" wx:if="{{titstu}}"  style='background-color:{{bgcolor}}'>
+    <button class="dibu_2" open-type="share" style='background-color:{{bgcolor}}'>
+      <view  class="dibu_4">     
+        <view> <image class='img_2' src='../../images/icons/h.png'></image></view>
+        <view class="dibu_t"> 分享给朋友</view>
+      </view>
+    </button>
+    <view>
+      <text class="dibu_3">|</text>
+    </view>
+    <view class="dibu_2" style='background-color:{{bgcolor}}'>
+      <view bindtap='user_share'>
+          <view class="dibu_4">
+            <view style="display: flex;align-items: center;"><image class='img_2' src='../../images/icons/p.png'></image></view>
+            <view class="dibu_t"> 分享到朋友圈</view>
+          </view>
+       </view>
+    </view>
+  </view>
+
+
+
+    <view class='imagePathBox' hidden="{{maskHidden == false}}">
+    <view class='images_bg'>
+        <view class='share_top'>
+        分享到朋友圈
+        <view class='close_share' bindtap='close_share'>x</view>
+        </view>
+        <image src="{{imagePath}}" data-src="{{imagePath}}" catchtap="previewImage" class='shengcheng'></image>
+        <button class='baocun' style='background:{{bgcolor}};' bindtap='baocun'>保存相册</button>
+        <view class='share_bottom'>保存图片到手机后，您可到朋友圈分享该商品图片</view>
+    </view>
+  </view>
+  <view hidden="{{maskHidden == false}}" class="mask"></view> 
+
+</view>

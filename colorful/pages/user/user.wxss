@@ -1,0 +1,508 @@
+.head {
+  height: 0rpx;
+  background: linear-gradient(to right,#FF2F55,#FF002E);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 200rpx 300rpx;
+}
+
+.head image {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.head .image-fight {
+  margin-right: 46rpx;
+}
+
+.head .ke {
+  text-align: center;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 30px;
+}
+
+.bgimg {
+  width: 100%;
+  height: 37rpx;
+  position: relative;
+  top: -30rpx;
+}
+
+.user {
+  height: 385rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: 0rpx 30rpx;
+  background-color: #fff;
+}
+
+
+.user-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  position: absolute;
+  top: -135rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.user-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50rpx;
+  margin: 50rpx 30rpx;
+}
+
+.user-box .user-box-item {
+  width: 105rpx;
+  height: 105rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user-box .user-box-item image {
+  width: 54rpx;
+  height: 54rpx;
+}
+
+.user-box .user-box-item .item-title {
+  font-size: 26rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-top: 17rpx;
+}
+
+.user-resource {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.user-resource image {
+  width: 210rpx;
+  height: 100rpx;
+}
+
+.user-resource .resource-body {
+  width: 210rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user-resource .resource-body .resource-num {
+  font-size: 34rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.user-resource .resource-body .resource-title {
+  font-size: 24rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.user-resource .resource-ico {
+  font-size: 24rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.user-title {
+  color: #333333;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.line {
+  height: 20rpx;
+  background: #f6f6f6;
+}
+
+.order {
+  height: 484rpx;
+  margin: 0rpx 30rpx;
+}
+
+.order-head {
+  width: 100%;
+  height: 85rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-head .left {
+  color: #333;
+  font-size: 30rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.order-head .right {
+  color: #999;
+  font-size: 26rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.order-head .right text {
+  margin-right: 19rpx;
+}
+
+.order-head .right image {
+  width: 16rpx;
+  height: 28rpx;
+}
+
+.order-column {
+  display: flex;
+  justify-content: space-around;
+}
+
+.order-column-bottom {
+  margin-bottom: 49rpx;
+}
+
+.order-column-top {
+  margin-top: 20rpx;
+}
+
+.order-column .item {
+  width: 150rpx;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-column .item .item-title {
+  color: #333;
+  font-size: 26rpx;
+  font-weight: 500;
+  text-align: center;
+  padding-top: 18rpx;
+}
+
+.order-column .item image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.recommend {
+  background: #f6f6f6;
+}
+
+.recommend .recommend-head {
+  height: 98rpx;
+  display: flex;
+  padding: 0rpx 32rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recommend-head .left {
+  height: 5rpx;
+  width: 225rpx;
+  background: #999;
+}
+
+.recommend-head .right {
+  height: 5rpx;
+  width: 225rpx;
+  background: #999;
+  position: relative;
+}
+
+.recommend-head .right .right-item {
+  position: absolute;
+  top: 0;
+  width: 5rpx;
+  height: 5rpx;
+}
+
+.recommend-list {
+  padding: 0rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.recommend-list .list-item {
+  width: 335rpx;
+  height: 520rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+  border-radius: 8rpx;
+}
+
+.recommend-list .list-item .list-item-image {
+  width: 335rpx;
+  height: 335rpx;
+  border-bottom: 1rpx solid #EEEEEE;
+}
+
+.recommend-list .list-item .list-item-image image {
+  width: 335rpx;
+  height: 335rpx;
+  border-radius: 8rpx 8rpx 0rpx 0rpx;
+}
+
+.recommend-list .list-item .list-item-brand {
+  position: relative;
+  width: 100%;
+  height: 56rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.recommend-list .list-item .list-item-brand view {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid #E6E6E6;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: -68rpx;
+}
+
+.recommend-list .list-item .list-item-brand image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+}
+
+.recommend-list .list-item .list-item-title {
+  font-size: 26rpx;
+  color: #333333;
+  margin: 0rpx 19rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.recommend-list .list-item .list-item-num {
+  margin: 0rpx 19rpx;
+}
+
+.recommend-list .list-item .list-item-num .num-left {
+  font-size: 28rpx;
+  color: #FF3939;
+  font-weight: bold;
+}
+
+.recommend-list .list-item .list-item-num .num-right {
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  text-decoration: line-through;
+}
+
+.headtop {
+  background: linear-gradient(to right,#FF2F55,#FF002E);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #FFFFFF;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+.list-card-lj {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50rpx;
+}
+
+.list-card-lj item {
+  width: 335rpx;
+  height: 160rpx;
+}
+
+.list-card-lj image {
+  width: 210rpx;
+  height: 100rpx;
+}
+
+.list-card-lj .item {
+  position: relative;
+}
+
+.list-card-lj .item .item-body {
+  position: absolute;
+  top: 0;
+  margin: 15rpx 59rpx;
+}
+
+.list-card-lj .item .item-body .hd-title {
+  color: #fff;
+  font-weight: bold;
+  font-size: 30rpx;
+  margin: 0rpx 5rpx;
+}
+
+.list-card-lj .item .item-body .hd-titlejf {
+  color: #fff;
+  font-weight: bold;
+  font-size: 30rpx;
+  margin: 0rpx 20rpx;
+}
+
+.list-card-lj .item .item-body .hd-titleyhj {
+  color: #fff;
+  font-weight: bold;
+  font-size: 30rpx;
+  margin: 0rpx 36rpx;
+}
+
+.list-card-lj .item .item-body .hef-title {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 500;
+  margin: 0rpx 23rpx;
+}
+
+.list-card-lj .item .item-body .hef-titlejf {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 500;
+  margin: 0rpx 23rpx;
+}
+
+.list-card-lj .item .item-body .hef-titleyhj {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 500;
+  margin: 0rpx 11rpx;
+}
+
+.list-card-lj .item .item-body .hefs-title {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 500;
+  margin: 0rpx 20rpx;
+}
+
+.list-card-lj .item .item-body .hef-yuan {
+  margin-top: 20rpx;
+  height: 30rpx;
+  width: 60rpx;
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 15rpx;
+}
+.hh{
+background-color: #fff;
+margin-bottom: 20rpx;
+}
+
+.list-card-lj .item .item-body .hef-red {
+  background-color: #ff3e2e;
+}
+
+.list-card-lj .item .item-body .hef-zs {
+  background-color: #a438ff;
+}
+.user-header-right {position: absolute; top: 160px; right: -10px; width: 200rpx; height: 0rpx;}
+.user-header-icon {float: right; width: 80rpx; height: 40rpx;}
+.user-header-icon image {width: 40rpx; height: 40rpx; margin: 0 auto;}
+.user-area {background-color: #fff;}
+.user-title {height: 80rpx; line-height: 80rpx; padding: 0 30rpx;}
+.user-title text {font-size: 32rpx; font-weight: 700; color: #000;}
+.user-title .n-link {float: right; font-size: 24rpx; color: #a6a6a6; padding-right: 30rpx; position: relative;}
+.user-title .n-link image {width: 24rpx; height: 24rpx; position: absolute; top: 50%; right: 0; margin-top: -12rpx;}
+
+.jiantou {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.qbdd {
+height: 80rpx;
+line-height: 80rpx;
+padding: 0 30rpx;
+color: #333333;
+font-size: 30rpx;
+font-weight: bold;
+border-bottom: 1px solid #eee;
+}
+
+.c3 {
+font-size: 32rpx;
+font-weight: 700;
+color: #000;
+}
+
+.text-length {
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+overflow: hidden;
+width: 96rpx;
+}
+
+.fl_r {
+float: right;
+}
+
+.l_h20 {
+line-height: 20px;
+}
+
+.font_12 {
+font-size: 12px;
+}
+
+.c9 {
+color: #999;
+}
+
+.jiantou image {
+width: 10px;
+height: 10px;
+}
+
+.head-top {
+font-size: 35rpx;
+color: #fff;
+font-weight: 700;
+position: absolute; top: 80px; right: 120px; width: 200rpx;
+}
+
+.user-titlex {
+  color: #333333;
+  font-size: 30rpx;
+  font-weight: bold;
+  top: 700px;
+}

@@ -1,0 +1,243 @@
+page {
+  height: 100%;
+  background: white
+}
+.bxs{
+  display:none;
+}
+.xs{
+  display: block;
+}
+.list-tab {
+  height: 106rpx;
+  box-sizing: border-box;
+  padding: 5px 10px;
+}
+.class_img{
+  margin-top:90rpx;
+  width:100%;
+}
+.list-tab ul {
+  display: flex;
+  height: 72rpx;
+  border: 1px solid #b6aaec;
+  border-radius: 12rpx;
+}
+
+.list-tab li {
+  flex: 1;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  color: #b6aaec;
+}
+
+.list-tab .active {
+  background: #b6aaec;
+  color: #fff;
+}
+
+/*list-box*/
+
+.list-view {
+  border-top: 1px solid #ccc;
+}
+
+.list-box {
+  display: flex;
+  padding: 5px 10px;
+  border-bottom: 1px solid #aaa;
+}
+
+.list-images image {
+  width: 170rpx;
+  height: 170rpx;
+}
+
+.list-text {
+  font-size: 14px;
+  color: #666;
+  flex: 1;
+  background-size: 60rpx;
+}
+
+.list-text .name {
+  display: block;
+  height: 80rpx;
+  padding: 5px;
+}
+
+.list-text .txt {
+  padding: 5px;
+  color: #aaa;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-text .price {
+  font-size: 18px;
+  color: red;
+}
+
+.swiper-box {
+  height: 100%;
+}
+
+.scroll-box {
+  height: 100%;
+}
+
+.addcart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mt90{
+  margin-top: 90rpx;
+}
+.addcart{
+  width: 80rpx;
+  height: 80rpx;
+}
+.list{
+  width: 100%;
+  padding-top: 90rpx;
+}
+.ban{
+  width: 46%;
+  height: 100%;
+  padding: 10rpx ;
+  border: 1rpx solid #ccc;
+  display: inline-block;
+  margin-left:6rpx 
+}
+.ban image{
+  width: 100%;
+}
+.type{
+  font-size:30rpx;
+  font-weight: 700;
+  margin-left: 10rpx;
+}
+ .kkk{
+    font-size:26rpx;
+  /*font-weight: 700;*/
+  margin-left: 10rpx;
+  color: gray;
+}
+
+
+
+.commodity_screen {
+ width: 100%;
+ height: 100%;
+ position: fixed;
+ top: 0;
+ left: 0;
+ background: #000;
+ opacity: 0.2;
+ overflow: hidden;
+ z-index: 1000;
+ color: #fff;
+}
+.commodity_attr_box {
+ width: 100%;
+ overflow: hidden;
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ z-index: 2000;
+ background: #fff;
+ padding-top: 20rpx;
+}
+.mt10{
+  margin: 0 auto;
+  text-align: center;
+  height: 70rpx;
+  width: 450rpx;
+  line-height: 70rpx;
+  border-radius:10rpx; 
+  border: 1px solid #999;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+}
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1522395311345'); /* IE9*/
+  src: url('iconfont.eot?t=1522395311345#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff'),
+  url('iconfont.ttf?t=1522395311345') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1522395311345#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:23px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color:#bfbfbf;
+}
+
+.icon-yduipaibanleixingliebiao:before { content: "\e695"; }
+
+.icon-yduipaibanleixingduicheng:before { content: "\e60a"; }
+.margin-90 {padding-top: 20rpx;}
+/*products css*/
+.goods-block {padding: 20rpx 0 0;}
+.goods-block-tit {height: 90rpx; line-height: 90rpx; background-color: #fff; border-bottom: 1px solid #eee;
+font-size: 32rpx; font-weight: 700; color: #000;}
+.goods-block-tit image {width: 30rpx; height: 30rpx; float: left; margin: 30rpx 20rpx 0 30rpx;}
+
+.goods-area {padding: 0 30rpx; background-color: #fff;}
+.goods-box {border-bottom: 1rpx solid #eee; position: relative; display: flex; flex-direction: row;
+padding: 30rpx 0;}
+.goods-box:last-child {border-bottom: 0;}
+.goods-photo {width: 220rpx; height: 220rpx; border-radius: 15rpx;}
+.goods-info {width: 470rpx; box-sizing: border-box; padding-left: 30rpx; position: relative; 
+font-size: 24rpx; line-height: 48rpx;}
+.goods-title {font-size: 30rpx; font-weight: 700; color: #000; height: 84rpx; overflow: hidden; line-height: 42rpx;
+margin-bottom: 5rpx;}
+.p-sale {color: #999;}
+.goods-text {font-family: Arial; padding-top: 42rpx; line-height: 60rpx; height: 60rpx;}
+.p-price {color: #f00; font-weight: 600; padding-right: 20rpx; float: left; font-size: 32rpx; line-height: 56rpx;}
+.p-price-y {color: #999; text-decoration: line-through;}
+.icon-cart, .goods-button {width: 65rpx; height: 65rpx; position: absolute; right: 5rpx; bottom: 5rpx;}
+.goods-button {width: 150rpx; background-color: #d62418; color: #fff; font-size: 26rpx; box-sizing: border-box;
+padding: 15rpx 15rpx 0 25rpx; line-height: 30rpx; border-radius: 5rpx;}
+.goods-button image {float: right; width: 30rpx; height: 30rpx;}
+
+.bottom-pt {text-align: center; padding: 30rpx; font-size: 28rpx;}
+.icon-right-arrt {position: absolute; top: 50%; right: 30rpx; width: 30rpx; height: 30rpx; margin-top: -15rpx;}
+.datails-size-area .n-dt {width: 100rpx; display: inline-block;}
+.button-100 {width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; z-index: 110;}
+
+.content-box {padding: 20rpx 0; line-height: 2em; font-size: 28rpx; text-align: left;}
+.content-box .wxParse-p {padding: 0 30rpx;}
+.content-box .wxParse-img {display: block; margin: 0; width: 100%;}
+
+.block-area {background-color: #fff; margin-bottom: 20rpx;}
+.block-title {height: 80rpx; line-height: 80rpx; padding: 0 30rpx;}
+.block-title text {font-size: 32rpx; font-weight: 700; color: #000;}
+.block-title .n-link {float: right; font-size: 24rpx; color: #a6a6a6; padding-right: 30rpx; position: relative;}
+.block-title .n-link image {width: 24rpx; height: 24rpx; position: absolute; top: 50%; right: 0; margin-top: -12rpx;}
+.products-kefu, .products-kefu contact-button {position: absolute; top: 0; right: 20rpx; width: 120rpx; height: 90rpx;
+font-size: 28rpx; line-height: 90rpx; color: #000;}
+.products-kefu contact-button {top: 0; left: 0; opacity: 0;}
+.products-kefu image {width: 45rpx; height: 45rpx; float: left; margin: 27rpx 10rpx 0 0;}
+.shot-line {position: absolute; top: 30rpx; right: 0; width: 1px; height: 30rpx; background-color: #eee;}
+.goTop{
+  height: 80rpx;
+  width: 80rpx;
+  position: fixed;
+  bottom: 50rpx;
+  top: 1200rpx;
+  background: rgba(0,0,0,.7);
+  border-radius: 50rpx;
+  right: 30rpx;
+  /*                                                                         */
+  z-index: 9999;
+}

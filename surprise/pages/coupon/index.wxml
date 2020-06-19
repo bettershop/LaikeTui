@@ -1,0 +1,187 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner">
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+  <view wx:if="{{rtype}}">
+    <scroll-view scroll-y="true" style="height:100%;">
+      <view class="search_no" wx:if="{{list.length < 1}}">
+        <view class="font_14">
+          <image class="scimg" src="/images/search_no.png"></image>
+        </view>
+        <text>暂时还没有活动/(ㄒoㄒ)/~~</text>
+      </view>
+      <view class='coupon_box' wx:for="{{list}}">
+        <view class='coupon_left'>
+          <view style='margin-left:20px;color:#444;padding-top:5px;'>
+            <view class='gs'></view>
+          </view>
+          <view wx:if="{{ item.point == '已经领取' || item.point == '您来晚了' || item.point == '已经结束'}}" style='font-size:35px;color:#ADADAD;text-align:center;height:50%;'>
+            <view class='hdname ovh1' style='font-size:22px;color:#333333;'>
+              {{item.name}}
+              <text style='font-size:12px;color:#333333;' wx:if="{{item.activity_type == 1}}">(仅限新用户领取)</text>
+            </view>
+            <view class='gs' style='font-size:30px;color:#ff6347;;'>
+              ￥{{item.money}}
+              <text>(</text>
+              <text class="item-limit">{{item.limit}}</text>
+              <text>)</text>
+            </view>
+          </view>
+
+          <view wx:else style='font-size:35px;color:#ff6347;text-align:center;height:50%;'>
+            <view class='hdname ovh1' style='font-size:22px;color:#333333;'>
+              {{item.name}}
+              <text style='font-size:12px;color:#333333;' wx:if="{{item.activity_type == 1}}">(仅限新用户领取)</text>
+            </view>
+            <view class='gs' style='font-size:30px;color:#ff6347;'>
+              ￥{{item.money}}
+              <text>(</text>
+              <text class="item-limit">{{item.limit}}</text>
+              <text>)</text>
+            </view>
+          </view>
+
+          <view style='color:#666;font-size:12px;margin-left:20px;height:50%;line-height:60px;'>使用时间:{{item.start_time}}至{{item.end_time}}</view>
+          <view class='right_z'></view>
+        </view>
+        <view class='coupon_right' wx:if="{{ item.point == '已经领取' || item.point == '您来晚了' || item.point == '已经结束'}}" style='background:#ADADAD;'>
+          <view wx:if="{{item.point.length < 4 }}" style='width:30px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+          <view wx:else style='width:50px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+          <view class='right_y'></view>
+        </view>
+        <view class='coupon_right' wx:else>
+          <view wx:if="{{item.point.length < 4 }}" style='width:30px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+          <view wx:else style='width:50px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+          <view class='right_y'></view>
+        </view>
+      </view>
+      <view></view>
+    </scroll-view>
+  </view>
+  <block wx:else>
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" data-otype="award" bindtap="swichNav">优惠券活动</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-otype="coupon" bindtap="swichNav">我的优惠券</view>
+    </view>
+    <view class="c_t60"></view>
+    <swiper current="{{currentTab}}" class="swiper-box" bindchange="bindChange">
+      <!-- 优惠券活动 -->
+      <swiper-item>
+        <scroll-view scroll-y="true" style="height:100%;">
+          <view class="search_no" wx:if="{{list.length < 1}}">
+            <view class="font_14">
+              <image class="scimg" src="/images/search_no.png"></image>
+            </view>
+            <text>暂时还没有活动/(ㄒoㄒ)/~~</text>
+          </view>
+          <view class='coupon_box' wx:for="{{list}}">
+            <view class='coupon_left'>
+              <view style='margin-left:20px;color:#444;padding-top:5px;'>
+                <view class='gs'></view>
+              </view>
+
+              <view wx:if="{{ item.point == '已经领取' || item.point == '您来晚了' || item.point == '已经结束'}}" style='font-size:35px;color:#ADADAD;text-align:center;height:50%;'>
+                <view class='hdname ovh1' style='font-size:22px;color:#333333;'>
+                  {{item.name}}
+                  <text style='font-size:12px;color:#333333;' wx:if="{{item.activity_type == 1}}">(仅限新用户领取)</text>
+                </view>
+                <view class='gs' style='font-size:30px;color:#ff6347;;'>
+                  ￥{{item.money}}
+                  <text>(</text>
+                  <text class="item-limit">{{item.limit}}</text>
+                  <text>)</text>
+                </view>
+              </view>
+
+              <view wx:else style='font-size:35px;color:#ff6347;text-align:center;height:50%;'>
+                <view class='hdname ovh1' style='font-size:22px;color:#333333;'>
+                  {{item.name}}
+                  <text style='font-size:12px;color:#333333;' wx:if="{{item.activity_type == 1}}">(仅限新用户领取)</text>
+                </view>
+                <view class='gs' style='font-size:30px;color:#ff6347;'>
+                  ￥{{item.money}}
+                  <text>(</text>
+                  <text class="item-limit">{{item.limit}}</text>
+                  <text>)</text>
+                </view>
+              </view>
+
+              <view style='color:#666;font-size:12px;margin-left:20px;height:50%;line-height:60px;'>使用时间:{{item.start_time}}至{{item.end_time}}</view>
+              <view class='right_z'></view>
+            </view>
+            <view class='coupon_right' wx:if="{{ item.point == '已经领取' || item.point == '您来晚了' || item.point == '已经结束'}}" style='background:#ADADAD;'>
+              <view wx:if="{{item.point.length < 4 }}" style='width:30px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+              <view wx:else style='width:50px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+              <view class='right_y'></view>
+            </view>
+            <view class='coupon_right' wx:else>
+              <view wx:if="{{item.point.length < 4 }}" style='width:30px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+              <view wx:else style='width:50px;margin:32px auto;' bindtap='receive' data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}} </view>
+              <view class='right_y'></view>
+            </view>
+          </view>
+          <view></view>
+        </scroll-view>
+      </swiper-item>
+      <!-- 我的优惠券 -->
+      <swiper-item>
+        <scroll-view scroll-y="true" style="height:100%;">
+          <view class="search_no" wx:if="{{!mylist.length}}">
+            <view class="font_14">
+              <image class="scimg" src="/images/search_no.png"></image>
+            </view>
+            <text>没有可用订单/(ㄒoㄒ)/~~</text>
+          </view>
+          <view class='coupon_box' wx:for="{{mylist}}">
+            <view class='coupon_left'>
+              <view style='margin-left:20px;color:#444;padding-top:5px;'>
+                {{item.name}}
+                <view class='gs'></view>
+              </view>
+              <view class='gs' style='font-size:30px;color:#ff6347;'>
+                ￥{{item.money}}
+                <text>(</text>
+                <text class="item-limit">{{item.limit}}</text>
+                <text>)</text>
+              </view>
+              <view style='color:#666;font-size:12px;margin-left:20px;height:50%;line-height:60px;'>使用时间:{{item.add_time}}至{{item.expiry_time}}</view>
+              <view class='right_z'></view>
+            </view>
+            <view class='coupon_right' wx:if="{{item.point.length == 3}}" style='background:#ADADAD;'>
+              <view style='width:30px;margin:22px auto;' bindtap="getvou" data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}}</view>
+              <view class='right_y'></view>
+            </view>
+            <view class='coupon_right' wx:else>
+              <view style='width:50px;margin:32px auto;' bindtap="getvou" data-id='{{item.id}}' data-point='{{item.point}}'>{{item.point}}</view>
+              <view class='right_y'></view>
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </block>
+</block>
+
+<pop id='pop'></pop>

@@ -1,0 +1,219 @@
+.section{
+  font-size:14px;
+  padding: 10px;
+  border-bottom: 1px solid #dadada;
+  width:95%;
+}
+.section_right{
+  float:right;
+margin-top:-21px;
+}
+.xzdq{
+  width: 0;
+  display: none;
+}
+.section_right image{
+  width: 10px;
+  height: 10px;
+}
+
+.section_1{
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #dadada;
+}
+.section_title{
+  float:left;
+  line-height: 26px;
+  width:30%;
+}
+.section_input{
+   display: flex;
+}
+.animation-button {
+width:15%;
+height:49rpx;
+align-items:center;
+background-color:#FF6347;
+color:#fff;
+line-height:49rpx;
+text-align:center;
+margin-left:16px;
+}
+.btn-area{
+  margin:18px;
+
+}
+.btn-area button{
+  color: #fff;
+}
+ .btn-area{
+  color:#ffffff !important;
+} 
+
+.animation-element-wrapper {
+  display: flex;  
+  position: fixed;
+  left: 0;
+  top:0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+.animation-element {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 470rpx;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+.left-bt{
+  left: 30rpx;
+}
+.right-bt {
+  right: 30rpx;
+}
+
+.line{
+  display: block;
+  position: fixed;
+  height: 1rpx;
+  width: 100%;
+  margin-top: 89rpx; 
+  background-color: #eeeeee;
+}
+picker-view{
+  background-color: white;
+  padding: 0;
+  width: 100%; 
+  height: 380rpx;
+  bottom: 0;
+  position: fixed;
+}
+
+picker-view-column view{
+  vertical-align:middle; 
+  font-size: 28rpx;
+  line-height: 28rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+text{
+  color: #999999;
+  display: inline-flex;  
+  position: fixed;
+  margin-top: 20rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 34rpx;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.section_input input{
+  font-size: 16px;
+}
+
+.jiantou image{
+  width: 10px;
+  height: 10px;
+}
+
+@keyframes slideContentUp {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 480rpx;
+  }
+}
+
+@keyframes slideContentDown {
+  from {
+    height: 480rpx;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.open {
+  animation: slideContentUp 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closes {
+  animation: slideContentDown 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+@keyframes slideBGtUp {
+  from {
+    background: transparent;
+  }
+
+  to {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes slideBGDown {
+  from {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  to {
+    background: transparent;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.openBG {
+  animation: slideBGtUp 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closeBG {
+  animation: slideBGDown 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+@keyframes slideContentUppuls {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 326rpx;
+  }
+}
+
+@keyframes slideContentDownpuls {
+  from {
+    height: 326rpx;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.openpuls {
+  animation: slideContentUppuls 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closepuls {
+  animation: slideContentDownpuls 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}

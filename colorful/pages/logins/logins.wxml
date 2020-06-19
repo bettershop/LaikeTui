@@ -1,0 +1,29 @@
+<!-- 底部弹窗动画的内容 -->
+<!-- <include src="/commons/extension/extension" />
+<include src="/commons/navbar/navbar" /> -->
+<view class='pupContent {{click? "showContent": "hideContent"}} {{option? "open": "closes"}}' hover-stop-propagation='true'>
+  <image src="../../images/logonsgb.png" catchtap="setCloses"></image>
+  <view class="pupContent-body">
+    <view class="pupContent-head">
+      <image src="{{ logoimg }}"></image>
+      <view>欢迎来到{{ loadtitle }}</view>
+    </view>
+    
+    <view class="pupContent-title">
+      为提供更优质的服务，需要获取以下信息：
+    </view>
+    
+    <view class="pupContent-con">
+      <view>· 你的公开信息（昵称、头像等）</view>
+    </view>
+    
+    <view>
+      <button class="pupContent-btn" bindgetuserinfo="agreeGetUser" class="login-btn" openType="getUserInfo" style="background-color: #1AAD19; border-radius:10rpx;height:46px;display:flex;justify-content:center;align-items: center;" >确定</button>
+    </view>
+  </view>
+
+
+</view>
+<!-- 固定的背景 -->
+<view class='pupContentBG {{click?"showBG":"hideBG"}} {{option?"openBG":"closeBG"}}' catchtap='clickPup' catchtouchmove="myCatchTouch">
+</view>

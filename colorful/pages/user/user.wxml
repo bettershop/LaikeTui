@@ -1,0 +1,136 @@
+<view class="head" style="margin-top:{{headheight1+headheight2}}px;">
+    <view></view>
+    <view style="position:relative;top: 50px; right: -130px; width: 100px; height: 0rpx;">
+        <image class="image-fight" src="/images/icons/user/kf.png"></image>
+        <contact-button class="image-fight ke" sessionFrom="productId_{{itemData.id}}" type="default-light"></contact-button>
+        <image catchtap="jumpgo" data-id="../set/set" src="/images/icons/user/sz.png"></image>
+    </view>
+</view>
+        <view class="headtopx">
+<view class="head-top">个人中心</view>
+</view>
+<image catchtap="logins" class="bgimg" src="/images/icons/user/bg.png"></image>
+<view class="user">
+    <view class="user-avatar">
+        <image catchtap="jumpgo" class="user_top_image" src="{{user.headimgurl?user.headimgurl:'../../images/heads.png'}}" style="display:block;"></image>
+    </view>
+    <view catchtap="jumpgo" class="user-avatarx">{{user.wx_name?user.wx_name:'YOUMI'}}</view>
+    <view class="user-box">
+        <view catchtap="jumpgo" class="user-box-item" data-id="../sign_in/sign_in">
+            <image src="/images/icons/user/qd.png"></image>
+            <view class="item-title">签到有礼</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../order/order?currentTab=0&otype=pay6">
+            <image src="/images/icons/user/pt.png"></image>
+            <view class="item-title">我的拼团</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../footprint/footprint">
+            <image src="/images/icons/user/zj.png"></image>
+            <view class="item-title">我的足迹</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../collection/collection">
+            <image src="/images/icons/user/sc.png"></image>
+            <view class="item-title">我的收藏</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../address/index">
+            <image src="/images/icons/user/shdz.png"></image>
+            <view class="item-title">收货地址</view>
+        </view>
+    </view>
+        <view class="list-card-lj">
+           <navigator class="item" catchtap="jumpgo" data-id="../user/wallet">
+            <image src='/images/icons/user/qb.png'></image>
+            <view class="item-body">
+             <view class="hd-title">¥{{money}}</view>
+             <view class="hef-title">余额</view>
+              </view>
+          </navigator>
+
+          <navigator class="item" catchtap="jumpgo" data-id="../user/score">
+            <image src='/images/icons/user/jf.png'></image>
+            <view class="item-body">
+            <view class="hd-titlejf">{{score}}</view>
+             <view class="hef-titlejf">积分</view>
+              </view>
+          </navigator>
+
+          <navigator class="item" catchtap="jumpgo" data-id="../coupon/index?currentTab=1">
+            <image src='/images/icons/user/yhj.png'></image>
+            <view class="item-body">
+            <view class="hd-titleyhj">{{couponNum}}</view> 
+             <view class="hef-titleyhj">优惠券</view>
+              </view>
+          </navigator>
+                </view>
+      </view>
+<view class="line"></view>
+<view class="order">
+    <view catchtap="jumpgo" class="order-head" data-id="../order/order?currentTab=0&otype=pay">
+        <view class="left">
+      我的订单
+    </view>
+        <view class="right">
+            <text>查看全部</text>
+            <image src="/images/icons/user/back.png"></image>
+        </view>
+    </view>
+    <view class="order-column order-column-bottom order-column-top">
+        <view catchtap="jumpgo" class="item" data-id="../order/order?currentTab=1&order_type1=payment&otype=pay">
+            <image src="/images/icons/user/dfk.png"></image>
+            <view class="item-title">待付款({{dfk_num}})</view>
+        </view>
+        <view catchtap="jumpgo" class="item" data-id="../order/order?currentTab=2&order_type1=send&otype=pay">
+            <image src="/images/icons/user/dfh.png"></image>
+            <view class="item-title">待发货({{dfh_num}})</view>
+        </view>
+        <view catchtap="jumpgo" class="item" data-id="../order/order?currentTab=3&order_type1=receipt&otype=pay">
+            <image src="/images/icons/user/dsh.png"></image>
+            <view class="item-title">待收货({{dsh_num}})</view>
+        </view>
+    </view>
+    <view class="order-column">
+        <view catchtap="jumpgo" class="item" data-id="../order/order?currentTab=4&order_type1=evaluate&otype=pay">
+            <image src="/images/icons/user/dpj.png"></image>
+            <view class="item-title">待评价({{dpj_num}})</view>
+        </view>
+        <view catchtap="jumpgo" class="item" data-id="../return_goods/index?currentTab=0&otype=whole">
+            <image src="/images/icons/user/sh.png"></image>
+            <view class="item-title">退款({{th}})</view>
+        </view>
+        <view catchtap="jumpgo" class="item" data-id="../order/order?currentTab=0&otype=pay">
+            <image src="/images/icons/user/qbdd.png"></image>
+            <view class="item-title">全部订单</view>
+        </view>
+    </view>
+</view>
+<view class="line"></view>
+      <view class="user-area">
+        <view class="user-title" style="border-bottom: 1px solid #eee;">
+          <text>推荐阅读</text>
+        </view>
+    <view class="recommend-list">
+        <view catchtap="jumpgor" class="list-itemxs">
+            <view class="list-item-image">
+            </view>
+            <view class="list-item-brand">
+                <view>
+                </view>
+            </view>
+            <view class="list-item-title">
+      </view>
+            <view class="list-item-num">
+            </view>
+        </view>
+    </view>
+</view>
+          <view class="hh" >
+            <navigator url="../article/article?id={{item.Article_id}}" wx:for="{{article}}" wx:key="{{item.Article_id}}">
+              <view class="qbdd mt10 jiantou">
+                <view class="font_14 c3">{{item.Article_title}}</view>
+                <view class="fl_r c9 font_12 l_h20 text-length" hover-class="none" style="margin-right: 5px;height: 100%;">
+                </view>
+                <image src="../../images/x_right.png" style="border: 0;border-radius: 0;margin: auto;margin-right: 5px;top:10px;"></image>
+              </view>
+            </navigator>
+          </view>
+<pop id="pop"></pop>

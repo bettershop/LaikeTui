@@ -1,0 +1,78 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<form bindsubmit="withdrawals">
+  <view class="page">
+    <view class="section">
+      <view class="text">
+        <text class='t_3'>提现金额： </text>
+      </view>
+      <view class='inp'>
+        <input  name="money" style='font-size:13px;width:100%;' name='amoney' placeholder="{{min_amount}}-{{max_amount}}{{unit}}且是{{multiple}}的倍数" type='digit' />
+      </view>
+    </view>
+    <view class='xt'></view>
+    <view class="section">
+      <view class="text">
+        <text class='t_3'>银行卡号： </text>
+      </view>
+      <view class='inp'>
+        <input  name="money" style='font-size:13px;width:100%;' name='Bank_card_number' value='{{Bank_card_number}}' placeholder="请输入银行卡号" type='number'bindblur="verify_bank" />
+      </view>
+    </view>
+    <view class='xt'></view>
+    <view class="section">
+      <view class="text">
+        <text class='t_3'>开户银行： </text>
+      </view>
+      <view class='inp'>
+        <input  name="money" style='font-size:13px;width:100%;' name='Bank_name' value='{{Bank_name}}' placeholder="请选择银行名称" type='text'/>
+      </view>
+    </view>
+    <view class='xt'></view>
+    <view class="section">
+      <view class="text">
+        <text class='t_3'>持 卡 人 ： </text>
+      </view>
+      <view class='inp'>
+        <input  name="money" style='font-size:13px;width:100%;' name='Cardholder' value='{{Cardholder}}' placeholder="姓名" type='text' />
+      </view>
+    </view>
+
+    <view class='xt'></view>
+    <view class="section">
+      <view class="text">
+        <text class='t_3'>手机号码： </text>
+      </view>
+      <button class='sj_btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{islogin == false}}">获取手机号码</button>
+      <view class="Phone" wx:if="{{islogin == true}}">{{mobile}}</view>
+    </view>
+  </view>
+  <view>
+    <button form-type='submit' class="tx" style='background-color:#09bb07;border-radius:0px;'> 确认提现 </button>
+  </view>
+</form>
+</block>

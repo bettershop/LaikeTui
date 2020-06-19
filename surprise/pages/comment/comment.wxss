@@ -1,0 +1,110 @@
+.order_comment_bg {
+  overflow: scroll;
+  background: #efeff4;
+}
+
+.order_comment_item {
+  padding: 30rpx 0;
+  margin: 0 0 0 30rpx;
+}
+
+.order_comment_img {
+  width: 134rpx;
+  height: 134rpx;
+  border: 1px solid #e5e5e5;
+}
+
+.order_comment_content {
+  padding-bottom: 16rpx;
+}
+.weui-flex {
+display:-webkit-box;
+display:-webkit-flex;
+display:flex;
+}
+.weui-flex__item {
+-webkit-box-flex:1;
+-webkit-flex:1;
+flex:1;
+}
+
+.order_comment_textarea_box {
+  margin-left: 20rpx;
+}
+
+.order_comment_textarea {
+  font-size: 30rpx;
+}
+
+.order_comment_type {
+  padding: 12rpx 30rpx 0 0;
+}
+
+.order_comment_type_default, .order_comment_type_selected {
+    font-size:30rpx;
+    margin-left:10rpx;
+}
+.order_comment_type_default{
+    color: #888888;
+}
+
+.order_comment_type_selected{
+    color: #000000;
+}
+.commnet_btn_box{
+    /* width:90%; */
+    padding:20rpx 5%;
+    background-color: #fff;
+}
+/* .order_comment_h{
+  border-bottom: 1px solid gainsboro;
+} */
+
+/*输入框*/
+textarea {
+	background: #fcfcfc;
+	border: 1px solid #e2e2e2;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 14px;
+	/* min-height: 120px; */
+	width: 95%;
+	box-sizing: border-box;
+	margin: 0 auto;
+  height:134rpx;
+}
+
+
+/*画廊*/
+.gallery {
+	/*margin-bottom: 100rpx;*/
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+  border-bottom: 1px solid gainsboro;
+  background-color:#fff;
+}
+
+/*每张图片所占容器*/
+.item {
+	position: relative;
+	margin: 15rpx;
+  width:180rpx;
+height:180rpx;
+border:1px  dashed  #ddd;
+
+}
+.delete image {
+	width: 50rpx;
+	height: 50rpx;
+  margin:0 36%;
+}
+/*删除按钮*/
+.delete {
+	position: absolute;
+	height: 50rpx;
+	bottom: 0;
+	width: 100%;
+	background: #ccc;
+	opacity: .8;
+}
