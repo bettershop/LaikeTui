@@ -7,10 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>管理员列表</title>
 {literal}
@@ -24,25 +21,25 @@
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe62d;</i> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    用户管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=member">管理员列表</a>
+</nav>
+
+
 <div class="pd-20">
     <div style="clear:both;">
         <button class="btn newBtn radius" onclick="location.href='index.php?module=member&action=add';" >
         	<div style="height: 100%;display: flex;align-items: center;font-size: 14px;">
-                <img src="images/icon1/add.png"/>&nbsp;添加管理员
+                添加管理员
            	 </div>
         </button>
-        <!--<button class="btn radius" onclick="multiple_del()" style="height:36px;width: 84px;" >
-        	<div style="height: 100%;display: flex;align-items: center;font-size: 14px;background: #fff;text-align: center;">
-                <img src="images/icon1/del.png"/>&nbsp;删除
-           	</div>
-        </button>-->
     </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
                 <tr class="text-c">
-                    <!--<th width="25"><input type="checkbox" name="" value=""></th>-->
                     <th width="30">id</th>
                     <th width="150px">管理员账号</th>
                     <th>添加人</th>
@@ -54,7 +51,6 @@
             <tbody>
             {foreach from=$list item=item name=f1}
                 <tr class="text-c">
-                    <!--<td><input type="checkbox" value="{$item->id}" name="del[]"></td>-->
                     <td>{$item->id}</td>
                     <td>{$item->name}</td>
                     <td>{$item->admin_name}</td>
@@ -100,36 +96,22 @@
         </table>
     </div>
 </div>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
-<script type="text/javascript" src="style/js/jquery.js"></script>
-
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
 
 {literal}
 <script type="text/javascript">
-// $('.table-sort').dataTable({
-//     "aaSorting": [[ 1, "asc" ]],//默认第几个排序
-//     "bStateSave": true,//状态保存
-//     "aoColumnDefs": [
-//       //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-//       {"orderable":false,"aTargets":[0,5]}// 制定列不参与排序
-//     ]
-// });
 
 /*删除*/
 function del(obj,id){
     confirm('确认要删除吗？',"ts")
     $.get("index.php?module=member&action=del",{'id':id},function(res){
+        console.log(res)
             if(res.status=="1"){
-                appendMask('删除成功','cg');
+                appendMask('删除成功1','cg');
                 location.replace(location.href)
             }else{
-                appendMask('删除失败','ts');
+                appendMask('删除失败2','ts');
                  location.replace(location.href)
             }
         },"json");
@@ -218,33 +200,7 @@ function confirm (content,id){
 			</div>	
 		`)
 }
-function closeMask2(id,content){
-	$(".maskNew").remove();
-    $.ajax({
-    	type:"post",
-    	url:"index.php?module=member&action=status&id="+id,
-    	async:true,
-    	success:function(res){
-    		console.log(res);
-    		if(content=="启用"){
-    			if(res==1){
-    			appendMask("启用成功","cg");
-	    		}
-	    		else{
-	    			appendMask("启用失败","ts");
-	    		}
-    		}
-    		else{
-    			if(res==1){
-    			appendMask("禁用成功","cg");
-	    		}
-	    		else{
-	    			appendMask("禁用失败","ts");
-	    		}
-    		}
-    	}
-    });
-}
+
 function confirm1 (content,id,content1){
 	$("body").append(`
 			<div class="maskNew">
@@ -270,9 +226,9 @@ function closeMask2(id,content){
     	url:"index.php?module=member&action=status&id="+id,
     	async:true,
     	success:function(res){
-    		console.log(res);
+            var res1 = JSON.parse(res)
     		if(content=="启用"){
-    			if(res==1){
+    			if(res1.status==1){
     			appendMask("启用成功","cg");
 	    		}
 	    		else{
@@ -280,7 +236,7 @@ function closeMask2(id,content){
 	    		}
     		}
     		else{
-    			if(res==1){
+    			if(res1.status==1){
     			appendMask("禁用成功","cg");
 	    		}
 	    		else{

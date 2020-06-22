@@ -165,8 +165,18 @@ border-radius:5px;
 .c3{
   color: black;
   font-size: 16px;
-  padding-left: 10px
+  padding-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 496rpx;
 }
+.jiantou {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .jiantou image{
   width: 10px;
   height: 10px;
@@ -340,4 +350,20 @@ border-radius:5px;
   line-height:40px;
   padding:9px;
 }
+.logins {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 40rpx;
+  font-size:30rpx;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+}
 
+.text-length {
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:1;
+  overflow:hidden;
+  width: 96rpx;
+}

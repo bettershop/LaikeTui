@@ -19,7 +19,6 @@ class setscoreAction extends Action {
         $res = $db -> select($sql);
         $bili = '1';
         $str = '[';
-        //$res = array_reverse($res);
         if(!empty($res)){
         foreach ($res as $k => $v) {
         	if($v -> lever == -1){

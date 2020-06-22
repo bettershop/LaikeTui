@@ -7,10 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>菜单列表</title>
 {literal}
@@ -24,15 +21,21 @@
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe62e;</i> 配置管理 <span class="c-gray en">&gt;</span> 菜单列表 </nav>
+
+<nav class="breadcrumb">
+        配置管理 <span class="c-gray en">&gt;</span> 
+        菜单列管理
+    </nav>
+
+
 <div class="pd-20">
     <div class="text-c">
         <form name="form1" action="index.php" method="get" style="background: #fff;">
             <input type="hidden" name="module" value="menu" />
             <input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize" />
 
-            <input type="text" name="cart_id" size='8' value="{$cart_id}" id="" placeholder="菜单id" style="width:200px" class="input-text">
-            <input type="text" name="title" size='8' value="{$title}" id="" placeholder="菜单名称" style="width:200px" class="input-text">
+            <input type="text" name="cart_id" size='8' value="{$cart_id}" id="" placeholder="菜单id" autocomplete="off" style="width:200px" class="input-text">
+            <input type="text" name="title" size='8' value="{$title}" id="" placeholder="菜单名称" autocomplete="off" style="width:200px" class="input-text">
             <input name="" id="btn1" class="btn btn-success" type="submit" value="查询">
             
         </form>
@@ -46,6 +49,7 @@
     <div style="clear:both;">
     </div>
     <div class="mt-10">
+        <div class="mt-20 table-scroll" style="overflow: scroll; width: 100%; height: 495px;">
         <table class="table table-border table-bordered table-bg table-hover">
             <thead>
                 <tr class="text-c">
@@ -84,16 +88,12 @@
             </tbody>
         </table>
     </div>
+    </div>
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+
 
 {literal}
 <script type="text/javascript">

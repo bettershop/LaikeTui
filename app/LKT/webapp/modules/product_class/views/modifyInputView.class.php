@@ -26,6 +26,7 @@ class modifyInputView extends SmartyView {
         $this->setAttribute('ctype2', $request->getAttribute('ctype2'));
         $this->setAttribute('cid', $request->getAttribute('cid'));
         $this->setAttribute('level', $request->getAttribute('level'));
+        $this->setAttribute('pic', $request->getAttribute('pic'));
         $this->setAttribute("pages_show",$request->getAttribute("pages_show"));
 		$this->setTemplate("modify.tpl");
     }

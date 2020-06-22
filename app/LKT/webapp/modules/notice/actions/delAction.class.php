@@ -15,7 +15,7 @@ class delAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
-        $id = intval($request->getParameter('id')); // 插件id
+        $id = intval($request->getParameter('id'));
         $uploadImg = addslashes(trim($request->getParameter('uploadImg'))); // 图片上传位置
         
 

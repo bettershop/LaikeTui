@@ -26,7 +26,7 @@
 		}
 		require(['jquery.zclip'], function(){
 			$(elm).zclip({
-				path: './resource/components/zclip/ZeroClipboard.swf',
+				path: 'style/tgt/resource/components/zclip/ZeroClipboard.swf',
 				copy: str,
 				afterCopy: function(){
 					var obj = $('<em> &nbsp; <span class="label label-success"><i class="fa fa-check-circle"></i> 复制成功</span></em>');

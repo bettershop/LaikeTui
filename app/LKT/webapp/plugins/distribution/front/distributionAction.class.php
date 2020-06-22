@@ -72,25 +72,6 @@ class distributionAction extends PluginAction
     }
 
 
-    //确认收货后增加佣金明细
-    public function detailed_commission()
-    {
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $order_id = $request->getParameter('order_id'); // 订单号
-        $r = $db->select("select Referee,s_money from lkt_detailed_commission where sNo ='$order_id' and recycle =0");
-        echo json_encode(array('list' => $r));
-        exit();
-
-
-    }
-
-    //返现
-    public function commission()
-    {
-
-    }
-
     //分销中心
     public function user()
     {
@@ -124,18 +105,7 @@ class distributionAction extends PluginAction
 
     }
 
-    //预计佣金
-    public function money()
-    {
 
-
-    }
-
-    //佣金详情
-    public function show()
-    {
-
-    }
 
     //确认收货接口，在这里面加上分销的核心算法
     public function okOrder($order=null){

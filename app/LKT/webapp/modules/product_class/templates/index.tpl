@@ -8,10 +8,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>商品分类</title>
 {literal}
@@ -45,16 +43,23 @@ td a{
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe616;</i> 商品管理 <span class="c-gray en">&gt;</span> 商品分类 </nav>
+
+<nav class="breadcrumb">
+    商品管理 <span class="c-gray en">&gt;</span> 
+    商品分类 
+</nav>
+
 <div class="pd-20">
     <div style="clear:both;">
-        <input type="hidden" name="cid" id="cid" value="{$cid}">
-        <input type="button" class="btn btn-primary radius" id="syj" value="返回上一级" onclick="javascript :history.back(-1);" {if !$level} style="display: none;"{/if} />
-        <button type="button" class="btn newBtn radius"  onclick="location.href='index.php?module=product_class&action=add';" >
-        	<img src="images/icon1/add.png" alt="" />新增分类
+        <input type="hidden" name="cid" id="cid" value="{$cid}" >
+          <button type="button" class="btn newBtn radius"  onclick="location.href='index.php?module=product_class&action=add';" {if $level} style="display: none;"{/if}>
+            <img src="images/icon1/add.png" alt=""  />新增分类
         </button>
+
+        <input type="button" class="btn btn-primary radius" id="syj" value="返回上一级" onclick="location.href='index.php?module=product_class&action=Index&cid={$level01}';" {if !$level} style="display: none;"{/if} />
     </div>
     <div class="mt-20">
+        <div class="mt-20 table-scroll" style="overflow: scroll; width: 100%; height: 585px;">
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
                 <tr class="text-c">
@@ -62,6 +67,7 @@ td a{
                     <th>分类图片</th>
                     <th>分类名称</th>
                     <th>分类级别</th>
+                    <th>排序(从小到大)</th>
                     <th>添加时间</th>
                     <th>操作</th>
                 </tr>
@@ -73,16 +79,11 @@ td a{
                     <td>{if $item->img != ''}<image class="pimg" src="{$uploadImg}{$item->img}" style="width: 50px;height:50px;"/>{else}<span>暂无图片</span>{/if}</td>
                     <td>{$item->pname}</td>
                     <td>{$level_xs}</td>
+                    <td>{$item->sort}</td>
                     <td>{$item->add_date}</td>
                     <td style="width: 180px;" >
 
-						<a style="text-decoration:none" class="ml-5" href="javascript:void(0);" onclick="on_top(this,'{$item->cid}','{$item->sid}')">
-							<div style="align-items: center;font-size: 12px;display: flex;">
-                            	<div style="margin:0 auto;;display: flex;align-items: center;"> 
-                                    <img src="images/icon1/zd.png"/>&nbsp;置顶
-                            	</div>
-                            </div>
-						</a>
+						
 						<a style="text-decoration:none;" class="ml-5" onclick="del(this,'{$item->cid}','{$item->status}')" >
                         	<div style="align-items: center;font-size: 12px;display: flex;">
                                 <div style="margin:0 auto;display: flex;align-items: center;">
@@ -97,20 +98,22 @@ td a{
                             	</div>
                             </div>
                         </a>
-                        <a style="text-decoration:none;width: 44%;" class="ml-5" href="index.php?module=product_class&action=add&cid={$item->cid}" title="在此分类下添加" >
+                        {if $level <5}
+                        <a  style="text-decoration:none;width: 44%;" class="ml-5" href="index.php?module=product_class&action=add&val={$item->cid}" title="在此分类下添加" >
                         	<div style="align-items: center;font-size: 12px;display: flex;">
                             	<div style="margin:0 auto;;display: flex;align-items: center;"> 
                                     <img src="images/icon1/add_g.png"/>&nbsp;添加分类
                             	</div>
                             </div>
-                        </a>
-						<a style="text-decoration:none;width: 44%;" class="ml-5" href="index.php?module=product_class&action=Index&cid={$item->cid}" title="查看该分类的下级" >
+                        </a >
+						<a style="text-decoration:none;width: 46%;" class="ml-5" href="index.php?module=product_class&action=Index&cid={$item->cid}" title="查看该分类的下级" >
                         	<div style="align-items: center;font-size: 12px;display: flex;">
                             	<div style="margin:0 auto;;display: flex;align-items: center;"> 
                                     <img src="images/icon1/ck.png"/>&nbsp;查看下级
                             	</div>
                             </div>
                         </a>
+                        {/if}
                     </td>
                 </tr>
             </form>
@@ -118,17 +121,15 @@ td a{
             </tbody>
         </table>
     </div>
+    </div>
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
 <div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" src="" /></div></div>
 <script type="text/javascript" src="style/js/jquery.js"></script>
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 
 {literal}
 <script type="text/javascript">
@@ -259,7 +260,7 @@ function closeMask(id){
             if(res==1){
                 appendMask("删除成功","cg")
             }else if(res == 2){
-                appendMask("有下级不允删除","ts")
+                appendMask("有商品不允删除","ts")
             }else{
                 appendMask("删除失败","ts")
             }

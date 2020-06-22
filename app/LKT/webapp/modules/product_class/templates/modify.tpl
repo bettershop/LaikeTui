@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,13 +7,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<script language="javascript"  src="modpub/js/check.js"> </script>
-<script type="text/javascript" src="style/js/jquery.js"></script>
 {literal}
+<style type="text/css">
+#select_c {
+    /*将默认的select选择框样式清除*/
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    /*文字居中*/
+    padding-left: 9px;
+    /*文字颜色变灰*/
+    color: #ccc;
+}
+</style>
 <script type="text/javascript">
 function check(f){
     if(Trim(f.pname.value)==""){
@@ -83,9 +90,18 @@ function imgShow(outerdiv, innerdiv, bigimg, _this){
 <title>修改分类</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe616;</i> 产品管理 <span class="c-gray en">&gt;</span> 产品分类管理 <span class="c-gray en">&gt;</span> 修改产品分类 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=product_class';" title="关闭" ><i class="Hui-iconfont">&#xe6a6;</i></a></nav>
+
+<nav class="breadcrumb">
+    商品管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=product_class">商品分类</a> <span class="c-gray en">&gt;</span> 
+    修改商品分类 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
+
+
 <div class="pd-20">
-    <form name="form1" action="index.php?module=product_class&action=modify" class="form form-horizontal" method="post" enctype="multipart/form-data" >
+    <form name="form1" action="index.php?module=product_class&action=modify" class="form form-horizontal" method="post" enctype="multipart/form-data" onsubmit="return removeDisable()">
         <input type="hidden" name="cid" value="{$cid_r}" />
         <input type="hidden" name="uploadImg" value="{$uploadImg}" />
         <input type="hidden" name="val" class="val" value="{$cid}" >
@@ -93,8 +109,8 @@ function imgShow(outerdiv, innerdiv, bigimg, _this){
 
         <div class="row cl">
             <label class="form-label col-4"><span class="c-red"></span>分类级别：</label>
-            <div class="formControls col-1"> <span class="select-box">
-                <select name="select_c" class="select" onchange="slevel()" id="select_c">
+            <div class="formControls col-1"> 
+                <select name="select_c" class="select" onchange="slevel()" id="select_c"disabled="disabled" style="cursor: auto;">
                     <option {if $level == 0}selected="true"{/if} value="0">顶级</option>
                     <option {if $level == 1}selected="true"{/if} value="1">一级</option>
                     <option {if $level == 2}selected="true"{/if} value="2">二级</option>
@@ -102,48 +118,43 @@ function imgShow(outerdiv, innerdiv, bigimg, _this){
                     <option {if $level == 4}selected="true"{/if} value="4">四级</option>
                     <option {if $level == 5}selected="true"{/if} value="5">五级</option>
                 </select>
-                </span>
+                
             </div>
         </div>
 
         <div class="row cl slevel_box" style="display: none;">
             <label class="form-label col-4"><span class="c-red"></span>上级分类：</label>
-            <div class="formControls col-1 slevel_1"> <span class="select-box">
-                <select name="select_1" class="select" onchange="one()" id="select_1">
-                    <!-- <option selected="true" value="0">请选择</option> -->
+            <div class="formControls col-1 slevel_1"> 
+                <select name="select_1" class="select" onchange="one()" id="select_1" disabled="disabled">
                     {$ctype}
                 </select>
-                </span>
+                
             </div>
-            <div class="formControls col-1 slevel_2"> <span class="select-box">
-                <select name="select_2" class="select" onchange="two()" id="select_2">
-                    <!-- <option selected="true" value="0">请选择</option> -->
+            <div class="formControls col-1 slevel_2">
+                <select name="select_2" class="select" onchange="two()" id="select_2" disabled="disabled">
                     {$ctype1}
                 </select>
-                </span>
+                
             </div>
-            <div class="formControls col-1 slevel_3"> <span class="select-box" >
-                <select name="select_3" class="select" onchange="three()" id="select_3">
-                    <!-- <option selected="true" value="0">请选择</option> -->
+            <div class="formControls col-1 slevel_3"> 
+                <select name="select_3" class="select" onchange="three()" id="select_3" disabled="disabled">
                     {$ctype2}
                 </select>
-                </span>
-            </div>
-
-            <div class="formControls col-1 slevel_4"> <span class="select-box" >
-                <select name="select_4" class="select" onchange="four()" id="select_4">
-                    <!-- <option selected="true" value="0">请选择</option> -->
-                    {$ctype2}
-                </select>
-                </span>
+                
             </div>
 
-            <div class="formControls col-1 slevel_5"> <span class="select-box" >
-                <select name="select_5" class="select" onchange="five()" id="select_5">
-                    <!-- <option selected="true" value="0">请选择</option> -->
+            <div class="formControls col-1 slevel_4"> 
+                <select name="select_4" class="select" onchange="four()" id="select_4" disabled="disabled">
                     {$ctype2}
                 </select>
-                </span>
+               
+            </div>
+
+            <div class="formControls col-1 slevel_5"> 
+                <select name="select_5" class="select" onchange="five()" id="select_5" disabled="disabled">
+                    {$ctype2}
+                </select>
+               
             </div>
 
         </div>
@@ -160,9 +171,9 @@ function imgShow(outerdiv, innerdiv, bigimg, _this){
             <label class="form-label col-xs-4 col-sm-4"><span class="c-red"></span>图片：</label>
             <div class="formControls col-xs-8 col-sm-6"> 
                 {if $img != ''}
-                    <img id="thumb_url" class="cimage" src='{$uploadImg}{$img}' style="height:100px;width:150px;">
+                    <img id="thumb_url" class="cimage" src='{$uploadImg}{$img}' style="height:60px;width:60px;">
                 {else}
-                    <img id="thumb_url" class="cimage" src='{$uploadImg}noimg.jpg' style="height:100px;width:150px;">
+                    <img id="thumb_url" class="cimage" src='{$uploadImg}noimg.jpg' style="height:60px;width:60px;">
                 {/if}
                 <input type="hidden"  id="picurl" name="image" datatype="*" nullmsg="请选择图片"/> 
                 <input type="hidden" name="oldpic" value="{$img}" >
@@ -174,7 +185,7 @@ function imgShow(outerdiv, innerdiv, bigimg, _this){
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-4"><span class="c-red"></span>分类展示图片：</label>
             <div class="formControls col-xs-8 col-sm-6"> 
-                <img id="thumb_urlbg" class="cbg" src="{$uploadImg}{if $bg != ''}{$bg}{else}noimg.jpg{/if}" style="height:100px;width:150px">
+                <img id="thumb_urlbg" class="cbg" src="{$uploadImg}{if $bg != ''}{$bg}{else}noimg.jpg{/if}" style="height:145px;width:220px">
                 <input type="hidden"  id="picurlbg" name="bg" datatype="*" nullmsg="请选择图片"/> 
                 <input type="hidden" name="oldpicbg" value="{$bg}" >
                 <div>展示图尺寸:220*145</div>
@@ -182,7 +193,7 @@ function imgShow(outerdiv, innerdiv, bigimg, _this){
             <div class="col-4"> </div>
         </div>
 
-        <div class="row cl" style="display: none;">
+        <div class="row cl" >
             <label class="form-label col-4"><span class="c-red"></span>排序号：</label>
             <div class="formControls col-4">
                 <input type="text" class="input-text" name="sort" value="{$sort}" datatype="*6-18" style="width: 260px;">
@@ -191,25 +202,27 @@ function imgShow(outerdiv, innerdiv, bigimg, _this){
         </div>
 
         <div class="row cl">
-            <div class="col-8 col-offset-4">
+            <label class="form-label col-4"></label>
+            <div class="formControls col-4">
                 <input type="submit" name="Submit" value="提 交" class="btn btn-primary radius">
-                <input type="reset" name="reset" value="重 写"  class="btn btn-primary radius">
+                
+                <input type="button" name="reset" value="返回"  class="btn btn-primary radius" id="resetId" onclick="javascript :history.back(-1);">
+               
             </div>
         </div>
     </form>
 </div>
+    <input type="hidden" id="pic" value="{$pic}" >
 
 <div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:999;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" src="" /></div></div>
 
-<!-- 新增编辑器引入文件 -->
-<link rel="stylesheet" href="style/kindeditor/themes/default/default.css" />
-<script src="style/kindeditor/kindeditor-min.js"></script>
-<script src="style/kindeditor/lang/zh_CN.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
 <script>
 
 var str_option = {$str_option};
 var level = {$level};
+ var pic = $("#pic").val();
 {literal}
 
 $(function(){  
@@ -225,13 +238,9 @@ function onlaod() {
         arr.push(str_option[i]); //属性
         keds.push(i);
     }
-    console.log(keds);
-    console.log(arr);
     for (var i = 0; i < arr.length; i++) {
-        // console.log('str_option',str_option);
         var tid = i+1;
         var obj = $("#select_"+tid);
-        // console.log("#select_"+tid);
         var str = '';
         for (var j = 0; j < arr[i].length; j++) {
             if(keds[i]==arr[i][j].cid){
@@ -248,8 +257,6 @@ function onlaod() {
 
 function slevel() {
     var select_c = $("#select_c").val();
-    
-    console.log(select_c);
     if(select_c < 1){
        $(".slevel_box").hide(); 
     }else{
@@ -270,13 +277,13 @@ KindEditor.ready(function(K) {
   var editor = K.editor({
       allowFileManager : true,       
       uploadJson : "index.php?module=system&action=uploadImg", //上传功能
-      fileManagerJson : 'kindeditor/php/file_manager_json.php', //网络空间
+          fileManagerJson : 'style/kindeditor/php/file_manager_json.php', //网络空间
     });
   //上传背景图片
   K('.cimage').click(function() {
     editor.loadPlugin('image', function() {
       editor.plugin.imageDialog({
-        //showRemote : false, //网络图片不开启
+        showRemote : true, //网络图片不开启
         //showLocal : false, //不开启本地图片上传
         imageUrl : K('#picurl').val(),
           clickFn : function(url, title, width, height, border, align) {
@@ -290,7 +297,7 @@ KindEditor.ready(function(K) {
   K('.cbg').click(function() {
     editor.loadPlugin('image', function() {
       editor.plugin.imageDialog({
-        //showRemote : false, //网络图片不开启
+        showRemote : true, //网络图片不开启
         //showLocal : false, //不开启本地图片上传
         imageUrl : K('#picurlbg').val(),
           clickFn : function(url, title, width, height, border, align) {
@@ -442,6 +449,10 @@ function RemoveDropDownList(obj){
             }
         }
     }
+}
+// 提交前移除select_c的disable
+function removeDisable(){
+    $('#select_c').removeAttr("disabled");
 }
 </script>
 {/literal}

@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,12 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
-
-<script language="javascript"  src="modpub/js/check.js"> </script>
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 {literal}
 <style type="text/css">
 .inputC{
@@ -23,13 +17,31 @@
 	width: 100px;
     height: 20px;
     border: none;
-	}
-.inputC:checked +label::before{
-	display: inline-block;
-	position: absolute;
+}
+
+.inputC + label::before {
+    display: inline-block;
+    position: absolute;
     left: -17px;
     top: 4px;
-}	
+    border: 1px solid #ffffff;
+    width: 14px;
+    height: 14px;
+    background: #ffffff !important;
+}
+
+.inputC:checked + label::before {
+    display: block;
+    content: "";
+    width: 12px;
+    height: 12px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 100px;
+    z-index: 999;
+}
+	
 </style>
 <script type="text/javascript">
 function check(f){
@@ -45,7 +57,15 @@ function check(f){
 <title>添加规则</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe616;</i> 产品管理 <span class="c-gray en">&gt;</span> 运费管理 <span class="c-gray en">&gt;</span> 添加规则 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=freight';" title="关闭" ><i class="Hui-iconfont">&#xe6a6;</i></a></nav>
+
+
+<nav class="breadcrumb">
+    配置管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=freight">运费管理</a> <span class="c-gray en">&gt;</span> 
+    添加规则 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
 <div class="pd-20">
     <form name="form1" action="index.php?module=freight&action=add" enctype="multipart/form-data" method="post" class="form form-horizontal">
         <div class="row cl">
@@ -70,7 +90,7 @@ function check(f){
         <div class="row cl">
             <label class="form-label col-2">运费规则：</label>
             <div class="formControls col-2">
-                <button class = "btn btn-primary radius" type = "button" onclick="choice()" ><i class = "Hui-iconfont" > &#xe610;</i> 新增条目</button >
+                <button class = "btn btn-primary radius" type = "button" onclick="choice()" >新增条目</button >
             </div>
         </div>
         <div class='row cl' id='information' style='width: 80%;padding-left: 100px;display: none'>
@@ -92,7 +112,8 @@ function check(f){
             </table>
         </div>
         <div class="row cl">
-            <div class="col-8 col-offset-4">
+            <label class="form-label col-2"></label>
+            <div class="formControls col-2">
                 <input type="submit" name="Submit" value="提 交" class="btn btn-primary radius">
             </div>
         </div>
@@ -161,20 +182,8 @@ function check(f){
         </div>
     </div>
 </div>
-<script type = "text/javascript" src = "style/js/jquery.js" ></script>
-<script type="text/javascript" src="style/lib/ueditor/1.4.3/ueditor.config.js"></script>
-<script type="text/javascript" src="style/lib/ueditor/1.4.3/ueditor.all.min.js"></script>
-<script type="text/javascript" src="style/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
-<!-- 新增编辑器引入文件 -->
-<link rel="stylesheet" href="style/kindeditor/themes/default/default.css"/>
-<script src="style/kindeditor/kindeditor-min.js"></script>
-<script src="style/kindeditor/lang/zh_CN.js"></script>
 
-<!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="style/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="style/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 {literal}
 <style>
 .keep{
@@ -212,6 +221,11 @@ function check(f){
     margin:  0 auto;
     padding-top: 10px;
 }
+
+.readtitle {
+    left: -5px;
+    visibility: visible !important;
+}
 </style>
 {/literal}
 {literal}
@@ -226,6 +240,8 @@ $("#type").change(function(){
     $('.keep').hide();
     $('.pop_model').hide();
 });
+
+var chelen = 0
 function choice(){
     var type = $('input:radio:checked').val();
     if(freight_num == 0){
@@ -234,19 +250,21 @@ function choice(){
         var hidden_freight = document.getElementById("hidden_freight").value;
         var data = hidden_freight;
     }
-    var rew = '';
+    var rew = "<div class='radio-box' style='width: 32%;'><input name='list' class='inputC readtitle selectall' type='checkbox' onclick='checkboxOnclick(this)'><label for=''>全选</label></div>";
+
     $.get("index.php?module=freight&action=province",{data:data},function(res){
         var res = JSON.parse( res );
         if(res.status == 1){
             var list = res.list;
-
+            chelen = list.length
             for (var k in list) {
                 rew += "<div class='radio-box' style='width: 32%;'>" +
-                    "<input name='list' class='inputC' type='checkbox' id='sex-"+list[k]['GroupID']+"' value='"+list[k]['GroupID']+"'>" +
+                    "<input  onclick='checkbox(this)' name='list' class='inputC readtitle Sopen' type='checkbox' id='sex-"+list[k]['GroupID']+"' value='"+list[k]['GroupID']+"'>" +
                     "<label for='sex-"+list[k]['GroupID']+"'>"+list[k]['G_CName']+"</label>" +
                     "</div>"
             }
             document.getElementById("province").innerHTML=rew;
+
             $('.keep').show();
             $('.pop_model').show();
             if(type == 0){
@@ -261,6 +279,37 @@ function choice(){
             location.replace(location.href);
         }
     });
+}
+
+var checkcon = 0
+function checkbox(vm){
+    if ( vm.checked == true){
+        checkcon++
+    } else {
+        checkcon--
+    }
+    
+    if(checkcon == chelen){
+
+        $('.selectall')[0].checked = true
+    } else {
+        $('.selectall')[0].checked = false
+    }
+}
+
+function checkboxOnclick(checkbox){
+    var domList = $('.Sopen')
+    if ( checkbox.checked == true){
+        checkcon = chelen
+        for(var i in domList){
+            domList[i].checked = true
+        }
+    } else {
+        checkcon = 0
+        for(var i in domList){
+            domList[i].checked = false
+        }
+    }  
 }
 // 关闭
 function select_hid(){
@@ -309,6 +358,7 @@ function save_address(){
             }
             freight_list_value = freight_list_value.substring(0, freight_list_value.length - 1);
             freight_list_value += '}';
+            // console.log(freight_list_value);
             // 给隐藏域赋值
             $("#hidden_freight").val(freight_list_value);
 
@@ -347,8 +397,11 @@ function freight_del(obj){
     }
 
     freight_list_value = freight_list_value.substring(0, freight_list_value.length - 1);
-    freight_list_value += '}';
+    if( freight_list_value){
+          freight_list_value += '}';
 
+    }
+  
     $("#hidden_freight").val(freight_list_value);
     var num_1 = $('.tr_freight_num').length;
     if(num_1 == 0){
@@ -366,7 +419,7 @@ function appendMask(content,src){
         <div class="maskNew">
             <div class="maskNewContent">
                 <a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
-                <div class="maskTitle">删除</div>
+                <div class="maskTitle">提示</div>
                 <div style="text-align:center;margin-top:30px"><img src="images/icon1/${src}.png"></div>
                 <div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
                     ${content}

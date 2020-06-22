@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -10,12 +10,12 @@
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
-define("TOKEN", "weixin");
-define("APP_ID", "wxa9f7cdfa06b2fd0c");
-define("APP_SECRECT", "70a8039ea1b5ee9d78a61ac4aa04117e");
+define("TOKEN", "");
+define("APP_ID", "");
+define("APP_SECRECT", "");
 
 
-
+//这个类已经取消了
 class kfAction extends Action {
 
   public function getDefaultView() {
@@ -23,9 +23,6 @@ class kfAction extends Action {
   }
 
   public function execute(){
-    $db = DBAction::getInstance();
-    $request = $this->getContext()->getRequest();
-    $m = addslashes(trim($request->getParameter('m')));
     if(isset($_GET['echostr'])) {
       // 2.调用方法
   	  $this->valid();

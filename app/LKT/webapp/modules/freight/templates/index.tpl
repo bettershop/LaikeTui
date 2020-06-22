@@ -8,10 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>运费管理</title>
    {literal}
@@ -31,29 +28,31 @@
     {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe616;</i> 产品管理 <span class="c-gray en">&gt;</span> 运费管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+
+<nav class="breadcrumb">
+    配置管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=freight">运费管理</a>
+</nav>
+
+
 <div class="pd-20">
     <div class="text-c">
         <form name="form1" action="index.php" method="get">
             <input type="hidden" name="module" value="freight" />
             <input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize" />
 
-            <input type="text" name="name" size='8' value="{$name}" id="" placeholder="规则名称" style="width:200px" class="input-text">
+            <input type="text" name="name" size='8' value="{$name}" id="" placeholder="规则名称" autocomplete="off" style="width:200px" class="input-text">
             <input name="" id="btn1" class="btn btn-success" type="submit" value="查询">
             <a class="btn newBtn radius" style="border: none!important;" href="index.php?module=freight&action=add"><img src="images/icon1/add.png" />&nbsp;添加规则</a>
-        	<a href="javascript:;" onclick="datadel()" style="background-color: #fff!important;color: #6a7076!important; width: 80px;margin-left: 10px;" class="btn newBtn radius"><img src="images/icon1/del.png" />删除</a>
+        	
         </form>
     </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-bg table-hover">
             <thead>
                 <tr class="text-c">
-                    <th width="40">
-                    	<div style="display: flex;align-items: center;height: 40px;">
-                            <input name="id[]"  id="{$item->id}" type="checkbox" class="inputC " value="{$item->id}">
-                            <label for="{$item->id}"></label>
-                        </div>
-                    </th>
+                   
                     <th>规则名称</th>
                     <th>是否默认</th>
                     <th style="width: 160px;">操作</th>
@@ -62,12 +61,7 @@
             <tbody>
             {foreach from=$list item=item name=f1}
                 <tr class="text-c">
-                    <td>
-                    	<div style="display: flex;align-items: center;height: 40px;">
-                            <input name="id[]"  id="{$item->id}" type="checkbox" class="inputC " value="{$item->id}">
-                            <label for="{$item->id}"></label>
-                        </div>
-                    </td>
+                    
                     <td>{$item->name}</td>
                     <td><input name="is_default" id="is_default_{$item->id}" onclick="is_default({$item->id})" type="radio" value="{$item->id}" style="margin-right: 5px;" {if $item->is_default == 1}checked="checked"{/if}>默认</td>
                     <td>
@@ -93,15 +87,9 @@
     </div>
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
-<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" src="" /></div></div> 
-<script type="text/javascript" src="style/js/jquery.js"></script>
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 
 {literal}
 <script type="text/javascript">
@@ -119,32 +107,6 @@ function is_default(id){
     }else{
         confirm1('确认要修改默认吗？',id,2)
     }
-    // if(y_id == id){
-    //     $("#is_default_"+id).attr("checked",false);
-    //
-    // }else{
-    //     $("#is_default_"+y_id).attr("checked",false);
-    //     $("#is_default_"+id).attr("checked",true);
-    // }
-    //
-    // $.ajax({
-    //     type:'post',
-    //     url: "index.php?module=freight&action=is_default",
-    //     data: {
-    //         id:id
-    //     },
-    //     success: function(res){
-    //         var res = JSON.parse( res );
-    //
-    //         if(res.status == 1 ){
-    //             alert('修改成功');
-    //             location.href="index.php?module=freight";
-    //         }else{
-    //             alert('修改失败');
-    //             location.href="index.php?module=freight";
-    //         }
-    //     }
-    // });
 }
 
 var Id = '';
@@ -229,6 +191,8 @@ function closeMask(id){
     $.get("index.php?module=freight&action=del",{'id':id},function(res){
         if(res.status=="1"){
             appendMask("删除成功","cg");
+        }else if(res.status=="2"){
+               appendMask("正在使用中，无法删除","cg");
         }else{
             appendMask("删除失败","ts");
         }

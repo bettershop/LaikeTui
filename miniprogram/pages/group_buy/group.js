@@ -1,6 +1,7 @@
 var app = getApp();
 Page({
   data: {
+    pop: null,
     current: 0,
     list: [],
     ptype: '',
@@ -21,21 +22,18 @@ Page({
     period: false,//显示无数据
     select:0,//选中
     sort: 0,// 1 asc 升序   0 desc 降序
-    groupman: '',
-    groupid: ''
+    // groupman: '',
+    // groupid: '',
+     titlee: '',
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1000);
     var that = this;
     var select = that.data.select;
     var sort = that.data.sort;
     //ajax请求数据
     wx.request({
-      url: app.d.ceshiUrl + '&action=groupbuy&m=grouphome',
+      url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=grouphome',
       method: 'post',
       data: {
         cid: 1,
@@ -47,11 +45,10 @@ Page({
       },
       success: function (res) {
         if (res.data.code == 1){
-        that.setData({
-          list: res.data.list,
-          groupman: res.data.groupman,
-          groupid: res.data.groupid
-        })
+          that.setData({
+            list: res.data.list,
+            remind: false
+          })          
         }
       },
       error: function (e) {
@@ -61,6 +58,8 @@ Page({
         });
       }
     })
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   /*  tab   */
   choosesort1: function (e) {
@@ -179,19 +178,14 @@ Page({
   //上拉事件
   onReachBottom: function () {
     var that = this;
-  if (that.data.list.length > 0) {
-    setTimeout(function () {      
-      that.getMore();    
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-      that.setData({
-        loading: false,
-      });
-    }, 1800);
-    that.setData({
-      loading: true,
-    });
-  }
+    if (that.data.list.length > 0) {
+        that.getMore();    
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+        that.setData({
+          loading: true,
+        });
+    }
   },
   //排序
   sort:function (){
@@ -202,7 +196,7 @@ Page({
     var page = that.data.page;
     //ajax请求数据
     wx.request({
-      url: app.d.ceshiUrl + '&action=groupbuy&m=grouphome',
+      url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=grouphome',
       method: 'post',
       data: {
         cid: 1,
@@ -215,11 +209,9 @@ Page({
       },
       success: function (res) {
         if (res.data.code == 1){
-        that.setData({
-          list: res.data.list,
-          groupman: res.data.groupman,
-          groupid: res.data.groupid
-        })
+          that.setData({
+            list: res.data.list,
+          })
         }
       },
       error: function (e) {
@@ -232,22 +224,16 @@ Page({
   },
   //页面加载完成函数
   onReady: function () {
-    var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 800);
+    this.pop = this.selectComponent("#pop")
   },
   //点击加载更多
   getMore: function (e) {
     var that = this;
     var page = that.data.page + 1;
-    var objectId = that.data.objectId;
     var select = that.data.select;
     var sort = that.data.sort;
     wx.request({
-      url: app.d.ceshiUrl + '&action=groupbuy&m=grouphome',
+      url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=grouphome',
       method: 'post',
       data: {
         page: page,
@@ -261,24 +247,23 @@ Page({
       success: function (res) {
         var prolist = res.data.list;
         if (prolist == '' || res.data.status == 0) {
-          /*wx.showToast({
-            title: '没有更多数据！',
-            icon: 'warn',
-            duration: 2000
-          });*/
           that.setData({
             period: true
           });
           return false;
         }
+        if (res.data.code == 1) {
         //成功返回设置数据
         that.setData({
           page: page,
           list: that.data.list.concat(prolist),
-          groupman: res.data.groupman,
-          groupid: res.data.groupid
+          remind: false
         });
-
+        }else{
+          that.setData({
+            period: true
+          });
+        }
       },
       fail: function (e) {
         wx.showToast({
@@ -315,7 +300,7 @@ Page({
     var page = that.data.page;
     //ajax请求数据
     wx.request({
-      url: app.d.ceshiUrl + '&action=groupbuy&m=grouphome',
+      url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=grouphome',
       method: 'post',
       data: {
         cid: 1,
@@ -327,7 +312,6 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        
       if(res.data.code == 1){
         var list = res.data.list;
         var prolist = that.data.list;
@@ -335,15 +319,15 @@ Page({
           that.setData({
             page: page,
             list: list,
-            groupman: res.data.groupman,
-            groupid: res.data.groupid
+            remind: false
           });
+          
         }else{
           that.setData({
             list: list,
-            groupman: res.data.groupman,
-            groupid: res.data.groupid
+            remind: false
           })
+         
         }
       }
       
@@ -406,4 +390,10 @@ Page({
       })
     }
   },
+  jumpgo: function (event) {
+    let url = event.currentTarget.dataset.id
+    wx.navigateTo({
+      url: url
+    })
+  }
 })

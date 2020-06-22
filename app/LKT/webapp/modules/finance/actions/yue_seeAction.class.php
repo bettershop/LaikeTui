@@ -31,12 +31,12 @@ class yue_seeAction extends Action {
             $start = 0;
         }
 
-        $sql = "select a.*,b.user_name,b.mobile,b.source from lkt_record as a left join lkt_user as b on a.user_id = b.user_id where a.type !=0 and a.type !=6 and a.type !=7 and a.type !=8 and a.type !=9 and a.type !=10 and a.type !=15 and a.type !=16 and a.type !=17 and a.type !=18 and a.user_id = '$user_id' order by a.add_date desc ";
+        $sql = "select a.*,b.user_name,b.mobile,b.source from lkt_record as a left join lkt_user as b on a.user_id = b.user_id where a.type !=0 and a.type !=6 and a.type !=8 and a.type !=9 and a.type !=10 and a.type !=15 and a.type !=16 and a.type !=17 and a.type !=18 and a.type !=24 and a.user_id = '$user_id' order by a.add_date desc ";
         $r_total = $db -> select($sql);
         $total = count($r_total);
         $pager = new ShowPager($total,$pagesize,$page);
 
-        $sql = "select a.*,b.user_name,b.mobile,b.source from lkt_record as a left join lkt_user as b on a.user_id = b.user_id where a.type !=0 and a.type !=6 and a.type !=7 and a.type !=8 and a.type !=9 and a.type !=10 and a.type !=15 and a.type !=16 and a.type !=17 and a.type !=18 and a.user_id = '$user_id' order by a.add_date desc limit $start,$pagesize";
+        $sql = "select a.*,b.user_name,b.mobile,b.source from lkt_record as a left join lkt_user as b on a.user_id = b.user_id where a.type !=0 and a.type !=6  and a.type !=8 and a.type !=9 and a.type !=10 and a.type !=15 and a.type !=16 and a.type !=17 and a.type !=18 and a.type !=24 and a.user_id = '$user_id' order by a.add_date desc limit $start,$pagesize";
         $r = $db->select($sql);
 
         $url = "index.php?module=finance&action=yue_see&user_id=".urlencode($user_id)."&pagesize=".urlencode($pagesize);

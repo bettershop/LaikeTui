@@ -6,23 +6,16 @@ Page({
     currentTab: 0,
     remind: '加载中',
     rtype: true,
+    pop:null
   },
   //下拉刷新
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
+    
   },
   //页面加载完成函数
   onReady: function () {
+    this.pop = this.selectComponent("#pop")
     var that = this;
-    // setTimeout(function () {
-    //   that.setData({
-        
-    //   });
-    // }, 1000);
   },
   onLoad: function (options) {
     wx.setNavigationBarColor({
@@ -89,11 +82,18 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        var list = res.data.list;
-        that.setData({
-          list: list,
-          remind: ''
-        });
+        if (res.data.status == 2) {
+          wx.navigateBack({
+            delta: 1
+          });
+        }else{
+          var list = res.data.list;
+          that.setData({
+            list: list,
+            remind: ''
+          });
+        }
+        
       },
       error: function (e) {
         wx.showToast({
@@ -131,6 +131,11 @@ Page({
   },
   // 点击领取
   receive: function (e) {
+    if(app.userlogin(1)){
+      this.pop.clickPup(this)
+      return
+    }
+    
     if (e.currentTarget.dataset.point == '领取'){
       var that = this;
       wx.request({
@@ -169,7 +174,6 @@ Page({
   },
   // 点击使用
   getvou: function (e) {
-    // if (e.currentTarget.dataset.point == '立即使用') {
       var that = this;
       wx.request({
         url: app.d.ceshiUrl + '&action=Coupon&m=immediate_use',
@@ -199,6 +203,5 @@ Page({
           });
         }
       });
-    // }
   }
 })

@@ -1,4 +1,11 @@
 <?php
+/**
+
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
+
+ * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
+
+ */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
@@ -22,6 +29,7 @@ class IndexAction extends Action {
             $start = ($page-1)*$pagesize;
         }else{
             $start = 0;
+            $page =1;
         }
         $sql = "select * from lkt_brand_class where recycle = 0 ";
         $r_pager = $db->select($sql);
@@ -33,10 +41,10 @@ class IndexAction extends Action {
         $pager = new ShowPager($total,$pagesize,$page);
 
         // 查询新闻分类表，根据sort顺序排列
-        $sql = "select * from lkt_brand_class where recycle = 0 order by brand_time desc limit $start,$pagesize ";
+        $sql = "select * from lkt_brand_class where recycle = 0 order by sort asc, brand_time desc limit $start,$pagesize ";
         $r = $db->select($sql);
 
-        $url = "index.php?module=product&action=Index&pagesize=".urlencode($pagesize);
+        $url = "index.php?module=brand_class&action=Index&pagesize=".urlencode($pagesize);
         $pages_show = $pager->multipage($url,$total,$page,$pagesize,$start,$para = '');
 
         $request->setAttribute("uploadImg",$uploadImg);

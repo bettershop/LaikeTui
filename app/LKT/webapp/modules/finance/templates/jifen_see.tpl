@@ -7,16 +7,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
 <title>积分列表</title>
 </head>
 
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe627;</i> 财务管理 <span class="c-gray en">&gt;</span> 积分列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=finance&action=jifen';" title="关闭"><i class="Hui-iconfont">&#xe6a6;</i></a></nav>
+<nav class="breadcrumb">
+    财务管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=finance&action=jifen">积分列表</a> <span class="c-gray en">&gt;</span> 
+    积分详情 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
 <div class="pd-20">
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-hover">
@@ -64,15 +67,7 @@
     </div>
 	<div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
-
-<script type="text/javascript" src="style/js/jquery.js"></script>
-
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="style/js/H-ui.js"></script>
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
 </body>
 </html>

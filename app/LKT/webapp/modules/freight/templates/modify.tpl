@@ -7,28 +7,43 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<script language="javascript"  src="modpub/js/check.js"> </script>
 {literal}
 <style type="text/css">
 .inputC{
     display: inline-block!important;
-}
+    }
 .inputC + label{
     display: inline-block!important;
     width: 100px;
     height: 20px;
     border: none;
 }
-.inputC:checked +label::before{
+
+.inputC + label::before {
     display: inline-block;
     position: absolute;
     left: -17px;
     top: 4px;
+    border: 1px solid #ffffff;
+    width: 14px;
+    height: 14px;
+    background: #ffffff !important;
 }
+
+.inputC:checked + label::before {
+    display: block;
+    content: "";
+    width: 12px;
+    height: 12px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 100px;
+    z-index: 999;
+}
+    
 </style>
 <script type="text/javascript">
 function check(f){
@@ -44,7 +59,16 @@ return true;
 <title>修改规则</title>
 </head>
 <body>
-<div class="breadcrumb"><i class="Hui-iconfont">&#xe616;</i> 产品管理 <span class="c-gray en">&gt;</span> 运费管理 <span class="c-gray en">&gt;</span> 修改规则 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=freight';" title="关闭"><i class="Hui-iconfont">&#xe6a6;</i></a></div>
+
+
+<nav class="breadcrumb">
+    配置管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=freight">运费管理</a> <span class="c-gray en">&gt;</span> 
+    修改规则 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
+
 <div class="pd-20">
     <form name="form1" action="index.php?module=freight&action=modify" enctype="multipart/form-data" method="post">
         <input type="hidden" name="id" value='{$id}'/>
@@ -70,7 +94,7 @@ return true;
         <div class="row cl">
             <label class="form-label col-2">运费规则：</label>
             <div class="formControls col-2">
-                <button class = "btn btn-primary radius" type = "button" onclick="choice()" ><i class = "Hui-iconfont" > &#xe610;</i> 新增条目</button >
+                <button class = "btn btn-primary radius" type = "button" onclick="choice()" >新增条目</button >
             </div>
         </div>
 
@@ -161,14 +185,9 @@ return true;
         </div>
     </div>
 </div>
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<script type="text/javascript" src="style/lib/ueditor/1.4.3/ueditor.config.js"></script>
-<script type="text/javascript" src="style/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
-<script type="text/javascript" src="style/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
-<!-- 新增编辑器引入文件 -->
-<link rel="stylesheet" href="style/kindeditor/themes/default/default.css" />
-<script src="style/kindeditor/kindeditor-min.js"></script>
-<script src="style/kindeditor/lang/zh_CN.js"></script>
+
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 {literal}
 <style>
 .keep{
@@ -206,6 +225,11 @@ return true;
     margin:  0 auto;
     padding-top: 10px;
 }
+
+.readtitle {
+    left: -5px;
+    visibility: visible !important;
+}
 </style>
 {/literal}
 {literal}
@@ -221,6 +245,7 @@ $("#type").change(function(){
     $('.keep').hide();
     $('.pop_model').hide();
 });
+
 function choice(){
     var type = $('input:radio:checked').val();
     if(freight_num == 0){
@@ -230,7 +255,8 @@ function choice(){
         var data = hidden_freight;
     }
 
-    var rew = '';
+    var rew = "<div class='radio-box' style='width: 32%;'><input name='list' class='inputC readtitle selectall' type='checkbox' onclick='checkboxOnclick(this)'><label for=''>全选</label></div>";
+
     $.get("index.php?module=freight&action=province",{data:data},function(res){
         var res = JSON.parse( res );
         if(res.status == 1){
@@ -238,7 +264,7 @@ function choice(){
 
             for (var k in list) {
                 rew += "<div class='radio-box' style='width: 32%;'>" +
-                    "<input name='list' class='inputC' type='checkbox' id='sex-"+list[k]['GroupID']+"' value='"+list[k]['GroupID']+"'>" +
+                    "<input name='list' class='inputC readtitle' type='checkbox' id='sex-"+list[k]['GroupID']+"' value='"+list[k]['GroupID']+"'>" +
                     "<label for='sex-"+list[k]['GroupID']+"'>"+list[k]['G_CName']+"</label>" +
                     "</div>"
             }
@@ -347,7 +373,12 @@ function freight_del(obj){
     }
 
     freight_list_value = freight_list_value.substring(0, freight_list_value.length - 1);
-    freight_list_value += '}';
+
+    if( freight_list_value){
+          freight_list_value += '}';
+
+    }
+  
 
     $("#hidden_freight").val(freight_list_value);
     var num_1 = $('.tr_freight_num').length;
@@ -366,7 +397,7 @@ function appendMask(content,src){
         <div class="maskNew">
             <div class="maskNewContent">
                 <a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
-                <div class="maskTitle">删除</div>
+                <div class="maskTitle">提示</div>
                 <div style="text-align:center;margin-top:30px"><img src="images/icon1/${src}.png"></div>
                 <div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
                     ${content}

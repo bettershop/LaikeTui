@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -22,7 +22,6 @@ class delAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
         // 接收信息
         $id = intval($request->getParameter('id'));
         $sql = "delete from lkt_comments where id = '$id'";

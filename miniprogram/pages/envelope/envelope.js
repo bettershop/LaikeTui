@@ -149,16 +149,8 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        // wx.showToast({
-        //   title: '信息存储成功！',
-        //   duration: 2000
-        // });
       },
       fail: function (e) {
-        // wx.showToast({
-        //   title: '信息存储失败！',
-        //   duration: 2000
-        // });
       },
     });
   }

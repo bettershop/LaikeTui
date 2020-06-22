@@ -197,10 +197,23 @@ left:-13px;
 font-size:14px;
 color:#666;
 margin-left:10px;
-
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
 }
 
 .hdname{
     overflow:hidden;
     text-overflow:ellipsis;
+}
+.gs text{
+	font-size:12px;
+	color:#333333;
+}
+.gs .item-limit{
+	overflow: hidden; 
+	white-space: nowrap; 
+	text-overflow: ellipsis;
+	max-width:200rpx;
 }

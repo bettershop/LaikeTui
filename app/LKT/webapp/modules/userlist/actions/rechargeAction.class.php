@@ -34,14 +34,6 @@ class rechargeAction extends Action {
 
                         $sqll = "insert into lkt_record (user_id,money,oldmoney,add_date,event,type) values ('$user_id','$price','$rprice',CURRENT_TIMESTAMP,'$event',11)";
                         $rr = $db -> insert($sqll);
-                    }else if($types == 'consumer_money'){
-                        $event = '系统扣除' . $price . '消费金';
-
-                        $sqll = "insert into lkt_record (user_id,money,oldmoney,add_date,event,type) values ('$user_id','$price','$rprice',CURRENT_TIMESTAMP,'$event',18)";
-                        $rr = $db -> insert($sqll);
-                        $event1 = '系统扣除' . $price . '消费金';
-                        $sql = "insert into lkt_distribution_record(user_id,from_id,money,level,event,type,add_date) values ('$user_id',0,'$price',0,'$event1',6,CURRENT_TIMESTAMP)";
-                        $db->insert($sql);
                     }else{
                         $event = '系统扣除' . $price . "积分";
 
@@ -67,15 +59,6 @@ class rechargeAction extends Action {
 
                     $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$user_id','$price','$rprice','$event',14)";
                     $rr = $db -> insert($sqll);
-                }else if($types == 'consumer_money'){
-                    $event = $user_id . '系统充值' . $price .'消费金';
-
-                    $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$user_id','$price','$rprice','$event',16)";
-                    $rr = $db -> insert($sqll);
-
-                    $event1 = '系统充值' . $price . '消费金';
-                    $sql = "insert into lkt_distribution_record(user_id,from_id,money,level,event,type,add_date) values ('$user_id',0,'$price',0,'$event1',13,CURRENT_TIMESTAMP)";
-                    $db->insert($sql);
                 }else{
                     $event = $user_id . '系统充值' . $price ."积分";
 

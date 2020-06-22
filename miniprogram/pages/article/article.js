@@ -33,14 +33,9 @@ Page({
       id: id,
     });
     that.y_detail(id);
-    that.storage();
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
+    
   },
   // 获取文章详情
   y_detail: function (id) {
@@ -104,7 +99,6 @@ Page({
       title: Article_title,
       imageUrl:that.data.article.Article_imgurl,
       path: '/pages/index/index?id?p_openid=' + app.globalData.userInfo.openid,
-      // path: '/pages/user/envelope?id=' + id + '&p_openid=' + app.globalData.userInfo.openid,
       success: function (res) {
         // 转发成功
         wx.request({
@@ -172,7 +166,7 @@ Page({
       icon: 'loading',
       duration: 1500,
     });
-    console.log(app.globalData.userInfo)
+    
     app.request.wxRequest({
       url: '&action=getcode&m=product_share',
       data: {
@@ -258,7 +252,7 @@ Page({
                   })
                 }
               }, fail: function (res) {
-                console.log(11111)
+                
               }
             })
           }

@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,11 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
 {literal}
 <style type="text/css">
 i{
@@ -31,6 +27,21 @@ i{
     function setSize() {
         document.documentElement.style.fontSize = document.documentElement.clientWidth/750*100+'px';
     }   
+    function ShowElement(element)
+        {
+        var oldhtml = element.innerHTML;
+        var newobj = document.createElement('input');
+        //创建新的input元素
+        newobj.type = 'text';
+        //为新增元素添加类型
+        newobj.onblur = function(){
+        element.innerHTML = this.value ? this.value : oldhtml;
+        //当触发时判断新增元素值是否为空，为空则不修改，并返回原有值 
+        }
+        element.innerHTML = '';
+        element.appendChild(newobj);
+        newobj.focus();
+        }
     /*alert弹出层*/
     function jqalert(param) {
         var title = param.title,
@@ -48,6 +59,7 @@ i{
             obj = param.obj,
             type = param.type,
             price = param.price,
+            status = param.status,
             str = `<a style="text-decoration:none" class="ml-5" href="index.php?module=return&action=view&id=${id}" title="查看">
             		<div style="align-items: center;font-size: 12px;display: flex;">
                     	<div style="margin: 0 auto;display: flex;align-items: center;">
@@ -89,7 +101,8 @@ i{
                        	 		<p class="prompt-content" style="text-align:center;font-size:22px;margin:30px auto;">${content}</p>
                        	 		<div style="text-align:center;margin-bottom:20px;">
                        	 			<span class="pd20" >应退：${price} <input type="hidden" value="${price}" class="ytje"> &nbsp; 实退:</span>
-                        			<input type="text" style="width:100px" value="${price}" class="prompt-text inp_maie textIpt" readonly="readonly">
+                                    <input type="text" oninput="ShowElement(this)" style="width:100px" value="${price}" class="prompt-text inp_maie textIpt">
+                        	
                         		</div>
                        	 	</div>
                         	
@@ -124,31 +137,39 @@ i{
             event.stopPropagation();
         });
         $("#yes_btn").click( function () {
+            if(status != 1){
+                 window.location.href="index.php?module=return&action=set";
+            }
+
             if(type == 2 || type == 5 || type == 8){
+
                     var text = $(".prompt-text").val();
-                    if(text.length >1){
-                          $.ajax({
+            console.log(text);
+
+                    if(text == ''){
+                       // jqtoast('理由不能为空');
+                       layer.msg('理由不能为空');
+                       return false;
+
+                    }
+                       $.ajax({
                            type: "POST",
                            url: url,
                            data: "id="+id+'&text='+text+'&m='+type,
                            success: function(res){
-                           	console.log(res);
+                            console.log(res);
                             if(res){
                                 td.html(str);
                                 td.prev().html('<span style="color:#ff2a1f;">已拒绝</span>');
-                                jqtoast('提交成功');
+                                layer.msg('提交成功');
                                 setTimeout(function () {
                                     al.remove();
                                 },300);     
                             }else{
-                                jqtoast('操作失败!');
+                                layer.msg('操作失败!');
                             }
                            }
                         });
-
-                    }else{
-                        jqtoast('原由不能为空!');
-                    }
             }else{
 
                     var text = $(".prompt-text").val();
@@ -168,19 +189,19 @@ i{
                                    var status = '<span style="color:#A4D3EE;">待买家发货</span>';
                                 }
                                 td.prev().html('<span style="color:#30c02d;">'+status+'</span>');
-                                jqtoast('提交成功');
+                                layer.msg('提交成功');
                                 setTimeout(function () {
                                     al.remove();
                                 },300);     
                             }else{
-                                jqtoast('操作失败!');
+                                layer.msg('操作失败!');
                             }
                            }
                         });
-                    }
-                    else{
-                    	console.log(url)
-                         if(Number(text) > 0 && Number(text) <= Number(price)){
+                    }else{
+                    	console.log(Number(text))
+
+                         if(Number(text) > 0 || Number(text) == 0 ){
                             $.ajax({
                                type: "POST",
                                url: url,
@@ -195,17 +216,17 @@ i{
                                        var status = '<span style="color:#A4D3EE;">待买家发货</span>';
                                     }
                                     td.prev().html('<span style="color:#30c02d;">'+status+'</span>');
-                                    jqtoast('退款成功'+text);
+                                    layer.msg('退款成功'+text);
                                     setTimeout(function () {
                                         al.remove();
                                     },300);     
                                 }else{
-                                    jqtoast('操作失败!');
+                                    layer.msg('操作失败!');
                                 }
                                }
                             });
                         }else{
-                            jqtoast('输入金额有误,请重新输入!');
+                            layer.msg('输入金额有误,请重新输入!');
                         }
                                               
                     }
@@ -450,13 +471,19 @@ i{
 <title>退货列表</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe627;</i> 订单管理 <span class="c-gray en">&gt;</span> 退货列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    订单管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=return">退货列表</a>
+</nav>
+
+
 <div class="pd-20">
 <input type="hidden" class="price" value="">
     <div class="text-c"> 
         <form name="form1" action="index.php" method="get">
             <input type="hidden" name="module" value="return" />
-            <input type="text" name="p_name" size='8' value="{$p_name}" id="" placeholder="订单号" style="width:200px" class="input-text">
+            <input type="text" name="p_name" size='8' value="{$p_name}" id="" placeholder="订单号/用户ID" autocomplete="off" style="width:200px" class="input-text">
             <select name="r_type" class="select" style="width: 120px;height: 31px;vertical-align: middle;">
                 <option value="">订单状态</option>
 <option {if $r_type == 1}selected="selected"{/if} value="1">审核中</option>
@@ -467,13 +494,13 @@ i{
 <option {if $r_type == 6}selected="selected"{/if} value="6" >拒绝并退回商品</option>
             </select>
           	<div style="position: relative;display: inline-block;">
-				<input name="startdate" value="{$startdate}" size="8" readonly class="scinput_s iptRl" style="" />
-				<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 25px;top: 7px;" onclick="new Calendar().show(document.form1.startdate);" />~
+				<input name="startdate" id="startdate" placeholder="请输入开始时间" value="{$startdate}" size="8" readonly class="scinput_s iptRl" style="" />
 				</div>
+                至
 				<div style="position: relative;display: inline-block;">
-				<input  name="enddate" value="{$enddate}" size="8" readonly class="scinput_s iptRl" style="" />
-				<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 10px;top: 7px;" onclick="new Calendar().show(document.form1.enddate);" />
-				</div>
+				<input  placeholder="请输入结束时间" name="enddate" id="enddate" value="{$enddate}" size="8" readonly class="scinput_s iptRl" style="" />
+				
+                </div>
 			<input name="" id="btn1" class="btn btn-success" type="submit" value="查询">
             <input type="button" id="btn2"  value="导出" class="btn btn-success" onclick="excel('all')">
         </form>
@@ -482,10 +509,11 @@ i{
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
                 <tr class="text-c">
-                    <th>序号</th>
-                    <th width="150" aria-valuetext="user_id">用户id</th>
+                    <th width="50">序号</th>
+                    <th width="150" aria-valuetext="user_id">用户ID</th>
                     <th width="130" aria-valuetext="p_name">产品名称</th>
                     <th width="150" aria-valuetext="p_price">产品价格</th>
+                    <th width="150" aria-valuetext="p_price">运费</th>
                     <th width="150" aria-valuetext="num">数量</th>
                     <th width="150" aria-valuetext="r_sNo">订单号</th>
                     <th width="150" aria-valuetext="add_time">发布时间</th>
@@ -501,6 +529,7 @@ i{
                     <td>{$item->user_id}</td>
                     <td style="text-align:left!important;width: 400px;">{$item->p_name}</td>
                     <td>{$item->p_price}</td>
+                    <td>{$item->freight}</td>
                     <td>{$item->num}</td>
                     <td>{$item->r_sNo}</td>
                     <td>{$item->add_time}</td>
@@ -532,13 +561,24 @@ i{
                         </a>
                         {if $item->r_type == 0}
                             {if $item->re_type == 1}
-                                <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_ok(this,{$item->id},1,'确定要通过该用户的申请,并让用户寄回?')">
+                                {if $status1 == 1}  <!-- 有地址 -->
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_ok(this,{$item->id},1,'确定要通过该用户的申请,并让用户寄回?')">
+                                        <div style="align-items: center;font-size: 12px;display: flex;">
+                                            <div style="margin: 0 auto;display: flex;align-items: center;">
+                                            <img src="images/icon1/qy.png"/>&nbsp;通过
+                                            </div>
+                                        </div>
+                                    </a>
+                                {else}
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="通过" onclick="is_add(this,{$item->id},1,'请添加售后地址')">
                                     <div style="align-items: center;font-size: 12px;display: flex;">
-	                                    <div style="margin: 0 auto;display: flex;align-items: center;">
-	                                    <img src="images/icon1/qy.png"/>&nbsp;通过
-	                                    </div>
+                                        <div style="margin: 0 auto;display: flex;align-items: center;">
+                                        <img src="images/icon1/qy.png"/>&nbsp;通过
+                                        </div>
                                     </div>
-                                </a>
+                                    </a>
+                                {/if}
+                                
                                 <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核拒绝" onclick="refuse(this,{$item->id},2)">
                                     <div style="align-items: center;font-size: 12px;display: flex;">
 	                                    <div style="margin: 0 auto;display: flex;align-items: center;">
@@ -562,12 +602,23 @@ i{
                                     </div>
                                 </a>
                             {else}
-                                <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_ok(this,{$item->id},6,'确定要通过该用户的申请,并让用户寄回?')"><div style="align-items: center;font-size: 12px;display: flex;">
-                                    <div style="margin: 0 auto;display: flex;align-items: center;">
-                                    <img src="images/icon1/qy.png"/>&nbsp;通过
-                                    </div>
-                                    </div>
-                                </a>
+
+                                {if $status1 == 1}  <!-- 有地址 -->
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_ok(this,{$item->id},6,'确定要通过该用户的申请,并让用户寄回?')"><div style="align-items: center;font-size: 12px;display: flex;">
+                                        <div style="margin: 0 auto;display: flex;align-items: center;">
+                                        <img src="images/icon1/qy.png"/>&nbsp;通过
+                                        </div>
+                                        </div>
+                                    </a>
+                                {else}
+
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_add(this,{$item->id},6,',请添加售后地址')"><div style="align-items: center;font-size: 12px;display: flex;">
+                                        <div style="margin: 0 auto;display: flex;align-items: center;">
+                                        <img src="images/icon1/qy.png"/>&nbsp;通过
+                                        </div>
+                                        </div>
+                                    </a>
+                                {/if}
                                 <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核拒绝" onclick="refuse(this,{$item->id},2)"><div style="align-items: center;font-size: 12px;display: flex;">
                                     <div style="margin: 0 auto;display: flex;align-items: center;">
                                     <img src="images/icon1/jy.png"/>&nbsp;拒绝
@@ -615,19 +666,25 @@ i{
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
 
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<script type='text/javascript' src='modpub/js/calendar.js'> </script>
-
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 <script type="text/javascript" src="style/js/H-ui.js"></script> 
 <script type="text/javascript" src="style/js/H-ui.admin.js"></script>
 
 {literal}
 <script type="text/javascript">
 
+laydate.render({
+          elem: '#startdate', //指定元素
+           trigger: 'click',
+          type: 'date',
+
+        });
+       
+        laydate.render({
+          elem: '#enddate',
+          trigger: 'click',
+          type: 'date'
+        });
 
 
 function excel(pageto) {
@@ -655,6 +712,7 @@ function refuse(obj,id,type) {
         url:"index.php?module=return&action=examine",
         obj:obj,
         type:type,
+        status:1
     })
 };
 
@@ -681,7 +739,8 @@ function is_ok(obj,id,type,content) {
                         notext:'取消',
                         obj:obj,
                         type:type,
-                        price:res
+                        price:res,
+                        status: 1
                     })
                 }else{
                     jqtoast('操作失败!');
@@ -700,8 +759,38 @@ function is_ok(obj,id,type,content) {
             notext:'取消',
             obj:obj,
             type:type,
+            status: 1
         })
     }
+
+};
+
+function is_add(obj,id,type,content) {  
+        $.ajax({
+            type: "GET",
+            url: "index.php?module=return&action=examine",
+            // data: "id="+id+'&f=check'+'&m='+type,、
+            success: function(res){
+                if(res){
+                    $(".price").val(res);
+                    jqalert({
+                        title:'提示',
+                        content:content,
+                        yestext:'去添加',
+                        // url:"index.php?module=return&action=set",
+                        id:id,
+                        notext:'取消',
+                        obj:obj,
+                        type:type,
+                        price:res
+                    })
+                   
+                }else{
+                    jqtoast('操作失败!');
+                }
+            }
+        });
+    
 
 };
         function appendMask(content,src){

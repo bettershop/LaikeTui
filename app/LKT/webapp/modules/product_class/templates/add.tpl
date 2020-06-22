@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,39 +7,25 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<script language="javascript"  src="modpub/js/check.js"> </script>
+
 {literal}
 
-<script type="text/javascript">
-function check(f){
-    if(Trim(f.pname.value)==""){
-        alert("分类名称不能为空！");
-        f.pname.value = '';
-        return false;
-    }
-    if(Trim(f.sort.value)==""){
-        alert("分类排序号不能为空！");
-        f.sort.value = '';
-        return false;
-    }
-    f.sort.value = Trim(f.sort.value);
-    if(!/^(([1-9][0-9]*)|0)(\.[0-9]{1,2})?$/.test(f.sort.value)){
-        alert("排序号必须为数字，且格式为 ####.## ！");
-        f.sort.value = '';
-        return false;
-    }
-    return true;
-}
-</script>
+
 {/literal}
-<title>添加产品分类</title>
+<title>添加商品分类</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe616;</i> 产品管理 <span class="c-gray en">&gt;</span> 产品分类管理 <span class="c-gray en">&gt;</span> 添加产品分类 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=product_class';" title="关闭" ><i class="Hui-iconfont">&#xe6a6;</i></a></nav>
+
+<nav class="breadcrumb">
+    商品管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=product_class">商品分类</a> <span class="c-gray en">&gt;</span> 
+    添加商品子类 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
+
 <div class="pd-20">
     <form name="form1" action="index.php?module=product_class&action=add" class="form form-horizontal" method="post" enctype="multipart/form-data" >
         <input type="hidden" name="val" class="val" value="{$cid}" >
@@ -48,57 +33,75 @@ function check(f){
 
         <div class="row cl">
             <label class="form-label col-4"><span class="c-red"></span>分类级别：</label>
-            <div class="formControls col-1"> <span class="select-box">
-                <select name="select_c" class="select" onchange="slevel()" id="select_c">
+            <div class="formControls col-1">
+                <select name="select_c" class="select" onchange="slevel()" id="select_c"  disabled>
+                    {if $level01 == 0}
                     <option {if $level == 0}selected="true"{/if} value="0">顶级</option>
+                    {/if}
+                    {if $level01 == 1}
                     <option {if $level == 1}selected="true"{/if} value="1">一级</option>
+                    {/if}
+                    {if $level01 == 2}
                     <option {if $level == 2}selected="true"{/if} value="2">二级</option>
+                    {/if}
+                    {if $level01 == 3}
                     <option {if $level == 3}selected="true"{/if} value="3">三级</option>
+                    {/if}
+                    {if $level01 == 4}
                     <option {if $level == 4}selected="true"{/if} value="4">四级</option>
+                    {/if}
+                    {if $level01 == 5}
                     <option {if $level == 5}selected="true"{/if} value="5">五级</option>
+                    {/if}
+                    {if $level01 == 6}
+                    <option {if $level == 5}selected="true"{/if} value="6">六级</option>
+                    {/if}
+                    {if $level01 >= 7}
+                    <option {if $level == 5}selected="true"{/if} value="7">七级</option>
+                    {/if}
                 </select>
-                </span>
+               
             </div>
         </div>
 
         <div class="row cl slevel_box" style="display: none;">
             <label class="form-label col-4"><span class="c-red"></span>上级分类：</label>
-            <div class="formControls col-1 slevel_1"> <span class="select-box">
-                <select name="select_1" class="select" onchange="one()" id="select_1">
-                    <option selected="true" value="0">请选择</option>
+            <div class="formControls col-1 slevel_1">
+                <select name="select_1" class="select" onchange="one()" id="select_1"  disabled>
+                    <!-- <option selected="true" value="0">请选择</option> -->
                     {$ctype}
                 </select>
-                </span>
+               
             </div>
-            <div class="formControls col-1 slevel_2"> <span class="select-box">
-                <select name="select_2" class="select" onchange="two()" id="select_2">
-                    <option selected="true" value="0">请选择</option>
+            <div class="formControls col-1 slevel_2">
+                <select name="select_2" class="select" onchange="two()" id="select_2"  disabled>
+                    <!-- <option selected="true" value="0">请选择</option> -->
                     {$ctype1}
                 </select>
-                </span>
+                
             </div>
-            <div class="formControls col-1 slevel_3"> <span class="select-box" >
-                <select name="select_3" class="select" onchange="three()" id="select_3">
-                    <option selected="true" value="0">请选择</option>
+            <div class="formControls col-1 slevel_3"> 
+                <select name="select_3" class="select" onchange="three()" id="select_3"  disabled>
+                    <!-- <option selected="true" value="0">请选择</option> -->
                     {$ctype2}
                 </select>
-                </span>
-            </div>
-
-            <div class="formControls col-1 slevel_4"> <span class="select-box" >
-                <select name="select_4" class="select" onchange="four()" id="select_4">
-                    <option selected="true" value="0">请选择</option>
-                    {$ctype2}
-                </select>
-                </span>
+                
             </div>
 
-            <div class="formControls col-1 slevel_5"> <span class="select-box" >
-                <select name="select_5" class="select" onchange="five()" id="select_5">
-                    <option selected="true" value="0">请选择</option>
+            <div class="formControls col-1 slevel_4"> 
+                <select name="select_4" class="select" onchange="four()" id="select_4"  disabled>
+                    <!-- <option selected="true" value="0">请选择</option> -->
                     {$ctype2}
                 </select>
-                </span>
+                
+            </div>
+
+            <div class="formControls col-1 slevel_5"> 
+                <select name="select_5" class="select" onchange="five()" id="select_5"  disabled>
+                    <!-- <option selected="true" value="0">请选择</option> -->
+                    {$ctype2}
+                </select>
+                
             </div>
 
         </div>
@@ -106,7 +109,8 @@ function check(f){
         <div class="row cl">
             <label class="form-label col-4"><span class="c-red">*</span>分类名称：</label>
             <div class="formControls col-6">
-                <input type="text" class="input-text" name="pname" datatype="*6-18" style="width: 260px;">
+                <input type="text" class="input-text" autocomplete="off" name="pname" datatype="*6-18" style="width: 260px; " placeholder="
+请输入分类名称">
             </div>
             <div class="col-4"> </div>
         </div>
@@ -114,7 +118,7 @@ function check(f){
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-4"><span class="c-red"></span>图片：</label>
             <div class="formControls col-xs-8 col-sm-6"> 
-                <img id="thumb_url" src='{$uploadImg}noimg.jpg' class="cinage"  style="height:100px;width:150px;">
+                <img id="thumb_url" src='{$uploadImg}noimg.jpg' class="cinage"  style="height:60px;width:60px;">
                 <input type="hidden"  id="picurl" name="image" datatype="*"nullmsg="请选择图片"/> 
                 <input type="hidden" name="oldpic" value="" >
                 <div>图片尺寸:60*60</div>
@@ -125,7 +129,7 @@ function check(f){
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-4"><span class="c-red"></span>分类展示图片：</label>
             <div class="formControls col-xs-8 col-sm-6"> 
-                <img id="thumb_urlbg" src='{$uploadImg}noimg.jpg' class="bg" style="height:100px;width:150px">
+                <img id="thumb_urlbg" src='{$uploadImg}noimg.jpg' class="bg" style="height:60px;width:60px">
                 <input type="hidden"  id="picurlbg" name="bg" datatype="*" nullmsg="请选择图片"/> 
                 <input type="hidden" name="oldpic" value="" >
                 <div>展示图尺寸:220*145</div>
@@ -141,22 +145,24 @@ function check(f){
             <div class="col-4"> </div>
         </div>
         <div class="row cl">
-            <div class="col-8 col-offset-4">
+            <label class="form-label col-4"></label>
+            <div class="formControls col-4">
                 <input type="submit" name="Submit" value="提 交" class="btn btn-primary radius">
-                <input type="reset" name="reset" value="清 空"  class="btn btn-primary radius">
+                <input type="button" name="reset" value="返 回"  class="btn btn-primary radius" id="resetId" onclick="javascript:location.href='index.php?module=product_class';">
+                <!-- <input type="reset" name="reset" value="清 空"  class="btn btn-primary radius"> -->
             </div>
         </div>
     </form>
+    <input type="hidden" id="pic" value="{$pic}" >
 </div>
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<!-- 新增编辑器引入文件 -->
-<link rel="stylesheet" href="style/kindeditor/themes/default/default.css" />
-<script src="style/kindeditor/kindeditor-min.js"></script>
-<script src="style/kindeditor/lang/zh_CN.js"></script>
+
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 
 <script>
 
 var str_option = {$str_option};
+ var pic = $("#pic").val();
 
 {literal}
 
@@ -211,13 +217,15 @@ KindEditor.ready(function(K) {
   var editor = K.editor({
       allowFileManager : true,       
       uploadJson : "index.php?module=system&action=uploadImg", //上传功能
-      fileManagerJson : 'kindeditor/php/file_manager_json.php', //网络空间
+        fileManagerJson : 'style/kindeditor/php/file_manager_json.php', //网络空间
+
+
     });
   //上传背景图片
   K('.cinage').click(function() {
     editor.loadPlugin('image', function() {
       editor.plugin.imageDialog({
-        //showRemote : false, //网络图片不开启
+         showRemote : true, //网络图片不开启
         //showLocal : false, //不开启本地图片上传
         imageUrl : K('#picurl').val(),
           clickFn : function(url, title, width, height, border, align) {
@@ -232,12 +240,13 @@ KindEditor.ready(function(K) {
   K('.bg').click(function() {
     editor.loadPlugin('image', function() {
       editor.plugin.imageDialog({
-        //showRemote : false, //网络图片不开启
+         showRemote : true, //网络图片不开启
         //showLocal : false, //不开启本地图片上传
         imageUrl : K('#picurlbg').val(),
           clickFn : function(url, title, width, height, border, align) {
           K('#picurlbg').val(url);
           $('#thumb_urlbg').attr("src",url);
+          $('#thumb_urlbg').attr("style","width:220px;height:145px");
           editor.hideDialog();
         }
       });

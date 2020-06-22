@@ -6,7 +6,6 @@ class ajaxAction extends Action {
 	public function getDefaultView(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 接收信息
         $s_id = $request->getParameter("s_id");
 
         // 根据id，查询菜单
@@ -47,7 +46,6 @@ class ajaxAction extends Action {
 
 	public function getRequestMethods(){
         return Request :: POST;
-//        return Request :: NONE;
 	}
 
 }

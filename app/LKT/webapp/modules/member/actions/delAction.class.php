@@ -1,4 +1,8 @@
 <?php
+/**
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
+ * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
+ */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 
 class delAction extends Action {
@@ -18,7 +22,6 @@ class delAction extends Action {
             $admin_name = $r[0]->name;
 
             $sql = "update lkt_admin set recycle = 1 , status = 1 where id = $v";
-            // print_r($sql);die;
             $db->update($sql);
 
             $db->admin_record($admin_id,' 删除管理员 '.$admin_name,3);

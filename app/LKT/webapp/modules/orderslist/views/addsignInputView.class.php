@@ -21,8 +21,10 @@ class addsignInputView extends SmartyView {
 		$this->setAttribute("id",$request->getAttribute("id"));
 
 		$this->setAttribute("otype",$request->getAttribute("otype"));
-
-        $this->setTemplate("addsign.tpl");
+		$this->setAttribute("pro",$request->getAttribute("pro"));
+		$this->setAttribute("uploadImg",$request->getAttribute("uploadImg"));
+		
+		$this->setTemplate("addsign.tpl");
 
     }
 

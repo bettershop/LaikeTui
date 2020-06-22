@@ -27,7 +27,6 @@ class viewAction extends Action {
         // 根据新闻id，查询分享列表
         $sql = "select * from lkt_share where Article_id = $id";
         $rr = $db->select($sql);
-
         // 根据新闻id，查询总条数
         $sql2 = "select count(id) c from lkt_share where Article_id = $id";
         $rrr = $db->select($sql2);

@@ -15,11 +15,9 @@ Page({
   //页面加载完成函数 
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   onLoad: function () {
     var that = this;
@@ -49,10 +47,8 @@ Page({
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   /** 
    * 滑动切换tab 
@@ -80,7 +76,7 @@ Page({
   getRequest: function () {
      var that = this
      wx.request({
-       url: app.d.ceshiUrl + '&action=sign&m=integral',
+       url: app.d.ceshiUrl + '&index.php?module=api&action=pi&p=sign&c=Home&m=integral',
        method: 'post',
        data: {
          openid: app.globalData.userInfo.openid,
@@ -94,13 +90,12 @@ Page({
           that.setData({
             score: res.data.score, // 积分
             logo: res.data.logo, 
-            // rule: res.data.rule,
             sign: res.data.sign, // 获取记录
             consumption: res.data.consumption, // 使用记录
             switch: res.data.switch//转账按钮（0 关闭  1.开启）
           })
          console.log(res.data.sign);
-         console.log(333336666);
+         
        },
        
        error: function (e) {

@@ -7,10 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>财务管理</title>
 {literal}
@@ -41,7 +38,13 @@ td a{
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe63a;</i> 财务管理 <span class="c-gray en">&gt;</span> 余额列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    财务管理 <span class="c-gray en">&gt;</span> 
+    余额列表 
+</nav>
+
+
 <div class="pd-20">
 	<div class="text-c">
 		<form name="form1" action="index.php?module=finance&action=yue" method="get">
@@ -55,6 +58,7 @@ td a{
 					<option value="2" {if $type =='2' }selected {/if}>申请提现</option>
 					<option value="4" {if $type =='4' } selected{/if}>余额消费</option>
 					<option value="5" {if $type =='5' } selected{/if}>退款</option>
+					<option value="7" {if $type =='7' } selected{/if}>佣金</option>
 					<option value="11" {if $type =='11' } selected{/if}>系统扣款</option>
 					<option value="12" {if $type =='12' } selected{/if}>给好友转余额</option>
 					<option value="13" {if $type =='13'} selected{/if}>转入余额</option>
@@ -65,15 +69,15 @@ td a{
 					<option value="22" {if $type =='22'} selected{/if}>提现失败</option>
 					<option value="23" {if $type =='23'} selected{/if}>取消订单</option>
 				</select>
-				<input type="text" class="input-text" style="width:150px" placeholder="用户ID" name="name" value="{$name}">
+				<input type="text" class="input-text" style="width:150px" placeholder="用户ID" autocomplete="off" name="name" value="{$name}">
 
 				<div style="position: relative;display: inline-block;">
-				<input name="startdate" value="{$startdate}" size="8" readonly class="scinput_s iptRl" style="" />
-				<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 25px;top: 7px;" onclick="new Calendar().show(document.form1.startdate);" />~
+				<input name="startdate" id="startdate" placeholder="请输入开始时间" value="{$startdate}" size="8" readonly class="scinput_s iptRl" style="" />
 				</div>
+				至
 				<div style="position: relative;display: inline-block;">
-				<input  name="enddate" value="{$enddate}" size="8" readonly class="scinput_s iptRl" style="" />
-				<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 10px;top: 7px;" onclick="new Calendar().show(document.form1.enddate);" />
+				<input  name="enddate" id="enddate" value="{$enddate}" placeholder="请输入结束时间" size="8" readonly class="scinput_s iptRl" style="" />
+				
 				</div>
 				<input type="submit" class="btn btn-success" id="btn1" value="查 询">
 				&nbsp;
@@ -88,7 +92,6 @@ td a{
 				<tr class="text-c">
 					<th width="150" aria-valuetext="user_id">用户ID</th>
 					<th width="130" aria-valuetext="user_name">用户名</th>
-					<th width="150" aria-valuetext="typename">会员等级</th>
 					<th width="150" aria-valuetext="money">金额</th>
 					<th width="130" aria-valuetext="source">来源</th>
 					<th width="150" aria-valuetext="add_date">时间</th>
@@ -101,7 +104,6 @@ td a{
 	                <tr class="text-c">
 	                    <td>{$item->user_id}</td>
 	                    <td>{$item->user_name}</td>
-	                    <td>{$item->typename}</td>
 						<td>
 							{if $item->type == 1 ||$item->type == 5 || $item->type == 13 || $item->type == 14 || $item->type == 19 || $item->type == 20 || $item->type == 22 || $item->type == 23}+{$item->money}{/if}
 							{if $item->type == 2 ||$item->type == 4 || $item->type == 11 || $item->type == 12 || $item->type == 21}-{$item->money}{/if}
@@ -140,13 +142,10 @@ td a{
     </div>
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<script type='text/javascript' src='modpub/js/calendar.js'></script>
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 <script type="text/javascript" src="style/js/H-ui.js"></script> 
 <script type="text/javascript" src="style/js/H-ui.admin.js"></script>
 
@@ -156,6 +155,20 @@ function excel(pageto) {
 	var pagesize = $("#pagesize").val();
 	location.href=location.href+'&pageto='+pageto+'&pagesize='+pagesize;
 }
+
+laydate.render({
+          elem: '#startdate', //指定元素
+           trigger: 'click',
+          type: 'date',
+
+        });
+       
+        laydate.render({
+          elem: '#enddate',
+          trigger: 'click',
+          type: 'date'
+        });
+
 </script>
 {/literal}
 </body>

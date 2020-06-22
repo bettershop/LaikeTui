@@ -7,17 +7,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>文章管理</title>
 {literal}
 <style>
    	td a{
-        width: 44%;
+        min-width: 44%;
         margin: 2%!important;
         float: left;
     }
@@ -25,7 +21,15 @@
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe646;</i> 文章管理 <span class="c-gray en">&gt;</span> 所有文章 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+
+<nav class="breadcrumb">
+    系统管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=Article">文章列表</a>
+    
+</nav>
+
+
 <div class="pd-20">
     <div style="clear:both;">
         <input type="button" class="btn btn-primary radius" value="发表文章" onclick="location.href='index.php?module=Article&action=add';" />
@@ -93,14 +97,8 @@
     </div>
 </div>
 <div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" src="" /></div></div> 
-<script type="text/javascript" src="style/js/jquery.js"></script>
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
 
 {literal}

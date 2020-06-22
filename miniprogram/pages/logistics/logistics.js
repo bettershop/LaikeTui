@@ -29,13 +29,17 @@ Page({
     var orderId = options.orderId;
     var details = options.details ? options.details:'';
     var type = options.type ? options.type : '';
+    var courier_num = options.courier_num;//kuaididanhao
+    var express_id = options.express_id;//快递编号
     wx.request({
       url: app.d.ceshiUrl + '&action=order&m=logistics',
       method: 'post',
       data: {
         id: orderId,
         details: details,
-        type: type
+        type: type,
+        courier_num: courier_num,
+        express_id: express_id
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -50,7 +54,8 @@ Page({
             });
           }else{
             that.setData({
-              res: false
+              wuliu: res.data.res_1.data,
+              res: res.data
             });
           }
           console.log(res.data.res_1.data)

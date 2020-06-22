@@ -43,7 +43,7 @@ Page({
   onShow: function () {
     var that = this
     app.request.wxRequest({
-      url: '&action=groupbuy&m=getcomment',
+      url: '&action=pi&p=pintuan&c=groupbuy&m=getcomment',
       data: { pid: that.pid, page: that.data.page, checked: that.data.checked },
       method: 'post',
       success: function (res) {
@@ -67,7 +67,7 @@ Page({
   getMore: function () {
     var that = this
     app.request.wxRequest({
-      url: '&action=groupbuy&m=getcomment',
+      url: '&action=pi&p=pintuan&c=groupbuy&m=getcomment',
       data: { pid: that.pid, page: that.data.page, checked: that.data.checked },
       method: 'post',
       success: function (res) {
@@ -95,21 +95,17 @@ Page({
       loading: true,
       page: that.data.page + 1
     })
-    setTimeout(function () {
-      that.getMore()
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 800);
+    that.getMore()
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   
   //下拉事件
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1000);
+    wx.showNavigationBarLoading() //在标题栏中显示加载    
     this.onShow();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
 
   /**
@@ -131,7 +127,7 @@ Page({
          loading:false
        })
       app.request.wxRequest({
-         url: '&action=groupbuy&m=getcomment',
+        url: '&action=pi&p=pintuan&c=groupbuy&m=getcomment',
          data: { pid: that.pid, page: that.data.page, checked: that.data.checked },
          method: 'post',
          success: function (res) {

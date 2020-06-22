@@ -1,7 +1,1 @@
-<?php
-global $_thd_modules; 
-
-$_thd_modules = array(
-		
-	);
-?>
+<?phpglobal $_thd_modules; $_thd_modules = array();?>

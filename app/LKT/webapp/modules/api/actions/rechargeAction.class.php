@@ -2,46 +2,20 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
-require_once(MO_LIB_DIR . '/ShowPager.class.php');
-require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once('BaseAction.class.php');
 
-class rechargeAction extends Action {
+class rechargeAction extends BaseAction {
 
-    public function getDefaultView() {
-
-        return ;
-    }
-
-    public function execute(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $m = addslashes(trim($request->getParameter('m')));
-        if($m == 'index'){
-            $this->index();
-        }else if($m == 'recharge'){
-            $this->recharge();
-        }else if($m == 'cz'){
-            $this->cz();
-        }
-        return;
-    }
-
-    public function getRequestMethods(){
-        return Request :: POST;
-    }
-
-    // 请求我的详细数据
     public function index(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
-        $openid = $_POST['openid']; // 微信id
+        $openid = addslashes($_POST['openid']); // 微信id
         
         // 查询会员信息
         $sql = "select * from lkt_user where wx_id = '$openid'";
@@ -89,27 +63,6 @@ class rechargeAction extends Action {
     public function cz(){
         echo json_encode(array('status'=>1));
         exit();
-        // $db = DBAction::getInstance();
-        // $request = $this->getContext()->getRequest();
-
-        // $openid = $_POST['openid']; // 微信id
-        // $cmoney = $_POST['cmoney']; // 充值金额
-        // $type = addslashes(trim($request->getParameter('type'))); // 参数
-        // // 查询会员信息
-        // $sql = "select * from lkt_user where wx_id = '$openid'";
-        // $r = $db -> select($sql);
-        // $money = $r[0]->money; // 用户金额
-        // $user_id = $r[0]->user_id; // 用户id
-        // if(empty($type)){
-        //     //事件
-        //     $event = '会员' . $user_id . '充值' . $money;
-        //     $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$user_id','$cmoney','$money','$event',1)";
-        //     $rr = $db->insert($sqll);
-        // }
-        // //修改金额   
-        // $sql = "update lkt_user set money = money+'$cmoney' where wx_id = '$openid'";
-        // $r = $db->update($sql);
-        // exit;
     }
 
     //充值
@@ -118,8 +71,8 @@ class rechargeAction extends Action {
         $request = $this->getContext ()->getRequest ();
 
         // 接收信息
-        $openid = $_POST['openid']; // 微信id
-        $cmoney = $_POST['cmoney']; // 充值金额
+        $openid = addslashes($_POST['openid']); // 微信id
+        $cmoney = addslashes($_POST['cmoney']); // 充值金额
 
         // 查询余额参数表
         $sql = "select cz_multiple from lkt_finance_config where id = 1";

@@ -13,6 +13,7 @@ class IndexInputView extends SmartyView {
         $this->setAttribute("cid",$request->getAttribute("cid"));
         $this->setAttribute("list",$request->getAttribute("list"));
         $this->setAttribute("level",$request->getAttribute("level"));
+        $this->setAttribute("level01",$request->getAttribute("level01"));
         $this->setAttribute("level_xs",$request->getAttribute("level_xs"));
 		$this->setAttribute("uploadImg",$request->getAttribute("uploadImg"));
 		// $this->setAttribute("pages",$request->getAttribute("pages"));

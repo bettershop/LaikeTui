@@ -1,4 +1,8 @@
 <?php
+/**
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
+ * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
+ */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
@@ -8,13 +12,6 @@ class IndexAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-//        $admin_name = $this->getContext()->getStorage()->read('admin_id'); // 管理员账号
-
-//        $sql = "select id from lkt_admin where name = '$admin_name'";
-//        $r = $db->select($sql);
-//        $id = $r[0]->id;
-        // 查询管理员信息
-//        $sql = "select * from lkt_admin where admin_type is NULL and sid = '$id'";
         $sql = "select * from lkt_admin where recycle = 0";
         $rr = $db->select($sql);
         if($rr){

@@ -106,7 +106,6 @@ class addAction extends Action {
             return $this->getDefaultView();
         }else{
             $db->admin_record($admin_id,' 添加菜单 '.$title,1);
-
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('添加成功！');" .

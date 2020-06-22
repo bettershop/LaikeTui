@@ -7,10 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>活动列表</title>
 {literal}
@@ -43,21 +40,27 @@ td a{
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe6ca;</i> 插件管理 <span class="c-gray en">&gt;</span>优惠券 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    插件管理 <span class="c-gray en">&gt;</span> 
+    优惠券
+</nav>
+
+
 <div class="pd-20">
     <div class="text-c"> 
         <form name="form1" action="index.php" method="get">
             <input type="hidden" name="module" value="coupon" />
             <input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize" />
 
-            <select name="activity_type" class="select" style="width: 150px;height: 31px;vertical-align: middle;">
+            <select name="activity_type" id="activity_type" class="select" style="width: 150px;height: 31px;vertical-align: middle;">
                 <option value="0" {if $activity_type == '0'}selected{/if}>请选择活动类型</option>
                 <option value="1" {if $activity_type == '1'}selected{/if}>注册</option>
                 <option value="2" {if $activity_type == '2'}selected{/if}>节日/活动</option>
-                <option value="3" {if $activity_type == '3'}selected{/if}>满减</option>
             </select>
-            <input type="text" name="name" size='8' value="{$name}" id="" placeholder="活动名称" style="width:200px" class="input-text">
+            <input type="text" name="name" size='8' value="{$name}" id="name" placeholder="活动名称" autocomplete="off" style="width:200px" class="input-text">
             <input name="" id="" class="btn btn-success" type="submit" value="查询" >
+            <input type="button" value="重 置" id="btn8" style="border: 1px solid #D5DBE8; color: #6a7076;" class="reset" onclick="resetButton()"  />
             <a class="btn newBtn radius" href="index.php?module=coupon&action=add" style="height: 31px!important;border: none;">
             	<div style="height: 100%;display: flex;align-items: center;font-size: 14px;">
                 	<img src="images/icon1/add.png" style="margin: 0px;"/>&nbsp;发布活动
@@ -66,7 +69,7 @@ td a{
         </form>
         <div class="swivch">
         	<a href="index.php?module=coupon" class="btn1" style="background-color: #62b3ff;color: #fff;">活动</a>
-            <a href="index.php?module=coupon&action=coupon" class="btn1" style="color: #6a7076;">优惠券列表</a>
+            <a href="index.php?module=coupon&action=coupon" class="btn1" style="color: #6a7076;">列表</a>
 			<div class="clearfix"></div>
         </div>
     </div>
@@ -146,14 +149,10 @@ td a{
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
 
-<script type="text/javascript" src="style/js/jquery.js"></script>
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
+
 
 {literal}
 <script type="text/javascript">
@@ -260,6 +259,11 @@ function confirm (content,id){
 				</div>
 			</div>	
 		`)
+}
+
+function resetButton(){
+    $("#name").val("");
+    $("#activity_type").val("");
 }
 </script>
 {/literal}

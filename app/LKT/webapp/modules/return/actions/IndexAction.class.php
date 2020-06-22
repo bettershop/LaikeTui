@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -17,7 +17,7 @@ class IndexAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
-        $p_name = addslashes(trim($request->getParameter('p_name'))); // 产品名称
+        $p_name = addslashes(trim($request->getParameter('p_name'))); 
         $startdate = $request->getParameter("startdate");
         $enddate = $request->getParameter("enddate");
         $pageto = $request->getParameter('pageto'); // 导出
@@ -27,11 +27,9 @@ class IndexAction extends Action {
         $r_type = trim($request->getParameter('r_type'));
 
 
-
-
         $condition = ' r_status = 4 ';
         if($p_name != ''){
-            $condition .= " and r_sNo like '%$p_name%' ";
+            $condition .= " and (r_sNo like '%$p_name%' or user_id like '%$p_name%' ) ";
         }
         if($r_type){
 
@@ -76,8 +74,7 @@ class IndexAction extends Action {
         }else{
             $start = 0;
         }
-        // $sql .= " order by add_time desc limit $start,$pagesize ";
-        // $r = $db->select($sql);
+     
 
         $pager = new ShowPager($total,$pagesize,$page);
         $url = 'index.php?module=return'.$con;
@@ -92,8 +89,16 @@ class IndexAction extends Action {
             $r = $db->select($sql);
         }else{
             $sql = "select * from lkt_order_details where $condition limit $start,$pagesize ";
+
             $r = $db->select($sql);
+
         }
+        // 查询商家是否添加售后地址，没添加提示添加后才能通过审核 $status 1 存在  2 不存在
+        $sql1 = "select * from lkt_user_address where uid = 'admin'";
+        $r01 = $db->select($sql1);
+        $status = $r01?'1':'2';
+
+        $request->setAttribute("status",$status);
         $request->setAttribute("pages_show",$pages_show);
         $request->setAttribute("r_type",$r_type);
         $request->setAttribute("p_name",$p_name);

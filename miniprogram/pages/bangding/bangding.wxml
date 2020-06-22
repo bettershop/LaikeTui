@@ -90,7 +90,6 @@
             <text class='t_3'>出生日期： </text>
           </view>
           <view class='inp'>
-            <!-- <input name="name" maxlength='10' style='font-size:13px;width:100%;' value='{{name}}' placeholder="姓名" type='text' /> -->
           <picker mode="date" value="{{date}}" start="1949-10-01" end="2017-09-01" bindchange="bindDateChange">
               <view class="picker">
                 {{date}}

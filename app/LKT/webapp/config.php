@@ -18,10 +18,10 @@ define('MO_DEBUG', false);
 define('MO_ERROR_REPORTING', E_ALL | E_STRICT);
 
 // +---------------------------------------------------------------------------+
-// | An absolute filesystem path to the mojavi package. This directory         |
+// | An absolute filesystem path to the LaiKeTui package. This directory         |
 // | contains all the Mojavi packages.                                         |
 // +---------------------------------------------------------------------------+
-define('MO_APP_DIR', dirname(dirname(dirname(__FILE__))).'/mojavi');
+define('MO_APP_DIR', dirname(dirname(dirname(__FILE__))).'/LaiKeTui');
 
 // +---------------------------------------------------------------------------+
 // | An absolute filesystem path to your web application directory. This       |
@@ -42,5 +42,7 @@ define('MO_CACHE_DIR', MO_WEBAPP_DIR . '/_cache');
 
 // Smarty
 define('SMARTY_COMPILE_DIR', MO_WEBAPP_DIR . "/_compile/");
+
+define('BASE_PATH',str_replace('\\','/',realpath(dirname(__FILE__).'/'))."/");
 
 ?>

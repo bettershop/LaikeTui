@@ -38,7 +38,7 @@ class list1Action extends Action {
 
 		$condition = 'a.status = 2';
 		if($name){
-			$condition .= " and a.name = '$name' ";
+			$condition .= " and a.user_id = '$name' ";
 		}
         if($Bank_card_number != ''){
             $condition .= " and b.Bank_card_number like '%$Bank_card_number%' ";
@@ -56,18 +56,10 @@ class list1Action extends Action {
             $b = array_unique($r,SORT_REGULAR);
             $total = count($b);
 
-            $sql = "select user_id,max(add_date) as t from lkt_withdraw where status = 2 group by user_id order by t desc limit $start,$pagesize";
-            $r1 = $db->select($sql);
-            $b1 = array_unique($r1,SORT_REGULAR);
+            $sql = "select a.id,a.user_id,a.name,a.add_date,a.money,a.s_charge,a.mobile,a.status,b.Cardholder,b.Bank_name,b.Bank_card_number,b.mobile,c.source from lkt_withdraw as a left join lkt_user_bank_card as b on a.Bank_id = b.id right join lkt_user as c on a.user_id = c.user_id where $condition  order by a.add_date desc limit $start,$pagesize";
+            $list = $db->select($sql);
 
-            foreach ($b1 as $k => $v){
-                $user_id = $v->user_id;
-                $sql = "select a.id,a.user_id,a.name,a.add_date,a.money,a.s_charge,a.mobile,a.status,b.Cardholder,b.Bank_name,b.Bank_card_number,b.mobile,c.source from lkt_withdraw as a left join lkt_user_bank_card as b on a.Bank_id = b.id right join lkt_user as c on a.user_id = c.user_id where $condition and a.user_id = '$user_id' order by a.add_date desc limit 1";
-                $rr = $db->select($sql);
-                if($rr){
-                    $list[] = $rr[0];
-                }
-            }
+            
             if($pageto == 'all') { // 导出全部
                 $db->admin_record($admin_id,' 导出提现拒绝列表 ',4);
             }else if($pageto == 'ne'){ // 导出本页

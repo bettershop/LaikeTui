@@ -7,11 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 {literal}
 <style type="text/css">
@@ -46,6 +42,7 @@ function setSize() {
 }
 /*alert弹出层*/
 function jqalert(param) {
+    console.log(param)
     var title = param.title,
         content = param.content,
         yestext = param.yestext,
@@ -69,7 +66,6 @@ function jqalert(param) {
         else if(type=="money"){
             title="金额充值"
         }
-    console.log(id);
     if (click_bg === undefined){
         click_bg = true;
     }
@@ -95,7 +91,7 @@ function jqalert(param) {
         }
         htm += '<div class="content"  style="text-align:center;font-size:22px;margin:0 auto;"><div class="prompt">';
         htm += `<span class="prompt-content"style=" display:inline-block;text-align:center;font-size:16px;margin-top:30px;padding-right:10px">${prompt}</span>
-                    <input type="number" style="width:200px;padding-left:20px" placeholder="请输入充值的金额"  maxlength="11" oninput="if(value.length>10)value=value.slice(0,10)"
+                    <input type="number" style="width:200px;padding-left:20px" name="chargeInput" placeholder="请输入充值的金额"  maxlength="11" oninput="if(value.length>10)value=value.slice(0,10)""
                     min="0" max="1000000" class="prompt-text textIpt">
                     <div style="color:#ff453d;font-size:12px;margin-top:10px;"><i><img style="margin-right:5px;width:12px;height:12px;" src="images/icon1/ts1.png"/></i>扣除请添加负号</div>
 
@@ -156,7 +152,7 @@ function jqalert(param) {
                         location.replace(location.href);
                     },300);
                 }else{
-                    jqtoast('操作失败!');
+                    alert('操作失败!');
                 }
             }
         });
@@ -418,30 +414,36 @@ a{
 
 </style>
 {/literal}
+
 <title>订单列表</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe705;</i> 用户管理 <span class="c-gray en">&gt;</span> 用户列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    用户管理 <span class="c-gray en">&gt;</span> 
+    用户列表 
+</nav>
+
+
 <div class="pd-20">
     <div class="text-c">
         <form method="get" action="index.php" name="form1" style="    padding-bottom: 15px">
             <div style="height:30px; border-left:solid 1px #fff;">
                 <input type="hidden" name="module" value="userlist"  />
                 <input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize" />
-                <input type="text" class="input-text" style="width:200px" placeholder="用户名" name="name" value="{$name}">
+                <input type="text" class="input-text" style="width:200px" autocomplete="off" placeholder="用户名/用户ID" name="name" value="{$name}">
                 <input type="text" class="input-text" style="width:200px" placeholder="手机号码" name="tel" value="{$tel}">
                 <select name="source" class="select" style="width: 120px;height: 31px;vertical-align: middle;">
                     <option value="0" selected>用户来源</option>
                     <option value="1" {if $source == 1} selected {/if}>小程序</option>
-                    <option value="2" {if $source == 2} selected {/if}>手机app</option>
+                    <option value="2" {if $source == 2} selected {/if}>APP</option>
                 </select>
                 <div style="position: relative;display: inline-block;">
-					<input name="startdate" value="{$startdate}" size="8" readonly class="scinput_s iptRl" style="" />
-					<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 10px;top: 7px;" onclick="new Calendar().show(document.form1.startdate);" />
+					<input name="startdate" value="{$startdate}" id="startdate" placeholder="请输入开始时间"  size="8" readonly class="scinput_s iptRl" style="" />
 				</div>至
 				<div style="position: relative;display: inline-block;margin-left: 5px;">
-					<input  name="enddate" value="{$enddate}" size="8" readonly class="scinput_s iptRl" style="" />
-					<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 10px;top: 7px;" onclick="new Calendar().show(document.form1.enddate);" />
+					<input  name="enddate"  id="enddate" placeholder="请输入结束时间"  value="{$enddate}" size="8" readonly class="scinput_s iptRl" style="" />
+					
 				</div>
                 <input name="" id="btn1" class="btn btn-success" type="submit" value="查询">
                 <!--<input type="button" id="btn2" value="导出本页" class="btn btn-success" onclick="excel('ne')">-->
@@ -452,20 +454,14 @@ a{
     </div>
 
     <div class="mt-20">
-        <div style="width:80%;margin:20px 0 20px 0px;height: 41px;line-height: 41px;display: flex; align-items: center;">
-        	<input type="checkbox" id="allAndNotAll"/>
-        	<label for="allAndNotAll" id="qxIpt" style="height: 29px;line-height: 29px;">全选</label>
-           	<a class="btn radius"  style="background-color:#38b4ed;color: #fff;margin-left: 20px;" id="getAllSelectedId" href="javascript:void(0);" title="发私信"  style="margin-left:20px;">
-           		<div style="height: 100%;display: flex;align-items: center;font-size: 14px;">
-                    <img src="images/icon1/fsx.png"/>&nbsp;发私信
-           	 	</div>
-           	</a>
-        </div>
+        
+        <div class="mt-20 table-scroll" style="overflow: scroll; width: 100%; height: 495px;">
         <table class="table table-border table-bordered table-bg table-hover">
             <thead>
                 <tr class="text-c">
-                    <th width="40">选择</th>
-                    <th width="40">ID</th>
+                    <th width="40"><input type="checkbox" id="allAndNotAll"/>
+            <label for="allAndNotAll" id="qxIpt" style="height: 29px;line-height: 29px;">全选</label></th>
+                    <th width="50">用户ID</th>
                     <th width="100">头像</th>
                     <th width="150">用户昵称</th>
                     <th width="100">余额</th>
@@ -489,7 +485,7 @@ a{
                         </div>
                     	
                     </td>
-                    <td>{$item->id}</td>
+                    <td>{$item->user_id}</td>
                     <td><image class='pimg' src="{$item->headimgurl}" style="width: 60px;height:60px;border-radius: 30px;border: 1px solid darkgray;"/></td>
                     <td>{$item->user_name}</td>
                     <td>￥{$item->money}</td>
@@ -534,26 +530,32 @@ a{
             {/foreach}
             </tbody>
         </table>
+        </div>
     </div>
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
+
 </div>
 
-<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" src="" /></div></div>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
-<script type='text/javascript' src='modpub/js/calendar.js'> </script>
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<script type="text/javascript" src="style/FineMessBox/js/common.js"></script>
-<script type="text/javascript" src="style/FineMessBox/js/subModal.js"></script>
-
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="style/js/H-ui.js"></script>
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
 
 {literal}
 <script type="text/javascript">
+
+laydate.render({
+          elem: '#startdate', //指定元素
+           trigger: 'click',
+          type: 'date',
+
+        });
+       
+        laydate.render({
+          elem: '#enddate',
+          trigger: 'click',
+          type: 'date'
+        });
+
+        
 function excel(pageto) {
     var pagesize = $("#pagesize").val();
     location.href=location.href+'&pageto='+pageto+'&pagesize='+pagesize;
@@ -675,7 +677,7 @@ function closeMask(id){
     	async:true,
     	success:function(res){
     		console.log(res)
-    		if(res==1){
+    		if(JSON.parse(res).status==1){
     			appendMask("删除成功","cg");
     		}
     		else{
@@ -708,7 +710,7 @@ function confirm (content,id){
 		</div>	
 	`)
 };
-    </script>
+</script>
 {/literal}
 </body>
 </html>

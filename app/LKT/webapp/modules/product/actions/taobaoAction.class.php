@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -21,74 +21,46 @@ class taobaoAction extends Action {
       $db = DBAction::getInstance();
       $request = $this->getContext()->getRequest();
       //获取产品类别
-
-        $sql = "select cid,pname from lkt_product_class where sid = 0 ";
-
-        $r = $db->select($sql);
-
-        $res = '';
-
-        foreach ($r as $key => $value) {
-
+      $sql = "select cid,pname from lkt_product_class where sid = 0 ";
+      $r = $db->select($sql);
+      $res = '';
+      foreach ($r as $key => $value) {
             $c = '-'.$value->cid.'-';
-
             $res .= '<option  value="-'.$value->cid.'-">'.$value->pname.'</option>';
-
             //循环第一层
-
             $sql_e = "select cid,pname from lkt_product_class where sid = $value->cid";
-
             $r_e = $db->select($sql_e);
-
             if($r_e){
-
                 $hx = '-----';
-
                 foreach ($r_e as $ke => $ve){
-
                    $cone = $c . $ve->cid.'-';
-
                    $res .= '<option  value="'.$cone.'">'.$hx.$ve->pname.'</option>';
-
                    //循环第二层
-
                    $sql_t = "select cid,pname from lkt_product_class where sid = $ve->cid";
-
                    $r_t = $db->select($sql_t);
-
                     if($r_t){
-
                         $hxe = $hx.'-----';
-
                         foreach ($r_t as $k => $v){
-
                            $ctow = $cone . $v->cid.'-';
-
                            $res .= '<option  value="'.$ctow.'">'.$hxe.$v->pname.'</option>';
-
                         }
-
                     }
-
                 }
-
             }
-
         }
-        // print_r($res);die;
-    $request->setAttribute("ctype",$res);
+
+    
+      $request->setAttribute("ctype",$res);
       return View :: INPUT;
+    
     }
 
     public function execute() {
       $db = DBAction::getInstance();
       $request = $this->getContext()->getRequest();
-      // print_r($request);die;
       $url = $request->getParameter('url');
-     $product_class = $request->getParameter('product_class');
-
+      $product_class = $request->getParameter('product_class');
       preg_match('|\.(.*).com|isU',$url, $type);
-      
       $type = $type[1];
       if ($type == "1688") {
           $ret = $this->getalbb($url,$product_class);
@@ -120,10 +92,8 @@ class taobaoAction extends Action {
       $text=file_get_contents($url);//将url地址上页面内容保存进$text
        preg_match_all('|<h3 class="tb-main-title" data-title="(.*)</h3>|isU',$text, $title);
        $title1 = iconv('GBK','UTF-8', $title[1][0]); 
-       // print_r($title1);
        $title2 = explode('">', $title1); 
        $dte['product_title']=$title2[0];//产品标题
-       // print_r($title2);die;
        $sql = "select * from lkt_product_list where product_title = '$title2[1]'";//查询是否有相同名称的商品
         $r001 = $db->select($sql);
         if(!empty($r001)){
@@ -154,9 +124,7 @@ class taobaoAction extends Action {
                 if(!empty($value02)){//判断单个值是否存在
 
                   $chicunid =$value01['chicunid'];
-                  // print_r($chicunid);die;
                   $idd=explode(':', $chicunid); 
-                  // print_r($type1);
                   if($type1 == 1 ){
                     $keyy = $idd[0];
                   }else{
@@ -167,12 +135,7 @@ class taobaoAction extends Action {
                   $colorid = $value02['colorid'] ;
                   $img = $value02['img'];
                   $colorname = $value02['colorname'];
-                  // echo "<br/>";
-                  //     print_r($idd[1]);
-                  //     echo "<br/>";
-                  //     print_r($colorid);
-                  //     echo "<br/>";
-                  //     echo '-----------------------------------';
+
                       if($type1 == 1 ){//尺寸
                         $ids = $idd[1].';'.$colorid;
                       }elseif ($type1 == 2) {//高度
@@ -213,7 +176,6 @@ class taobaoAction extends Action {
                   $colorid = $value02['colorid'] ;
                   $img = $value02['img'];
                   $colorname = $value02['colorname'];
-                  // print_r($colorname);die;
                   $ids =$colorid;
                   $price = $this->price($text,$keyy);//淘宝商品对应的商品规格价格及ID
                   foreach ($price as $key03 => $value03) {
@@ -224,8 +186,6 @@ class taobaoAction extends Action {
                         $pricee[$key03]['price'] = $value03['price'];
                         $pricee[$key03]['chicun'] = '默认';
                         $pricee[$key03]['img'] = $img;
-                        // $pricee[$key03]['colorname'] = iconv('GBK','UTF-8', $colorname);
-                        // $pricee[$key03]['color'] = iconv('GBK','UTF-8', $colorname); 
                         $pricee[$key03]['colorname'] = $colorname;
                         $pricee[$key03]['color'] = $colorname;
                       }
@@ -281,8 +241,7 @@ class taobaoAction extends Action {
                  }else{
                     $kee = '";';
                     $dd= explode($kee , $price001[1][0]);//价格
-                    // print_r($dd);die;
-                      foreach ($dd as $key01 => $value01) {
+                    foreach ($dd as $key01 => $value01) {
                                if(!empty($value01) && $value01 !='{'){
                                   $dd1 = 'id'.$value01;
                                   
@@ -342,8 +301,7 @@ class taobaoAction extends Action {
     function color($text){//淘宝商品对应的商品规格颜色包括图片
           preg_match_all('|<dl class="J_Prop tb-prop tb-clear  J_Prop_Color ">(.*)</dl>|isU',$text, $color);
           if(!empty($color[1][0])){
-                preg_match_all('|<li (.*)</li>|isU',$color[1][0], $color1);
-               // print_r($color1);die;
+              preg_match_all('|<li (.*)</li>|isU',$color[1][0], $color1);
               if(!empty($color1)){
                     foreach ($color1[1] as $key => $value) {
 
@@ -352,17 +310,11 @@ class taobaoAction extends Action {
                      preg_match_all('|<font>(.*)</font>|isU',$dd, $color2id);
                       $arr[$key]['colorid'] = $color2id[1][0];//尺寸对应的ID
                       $urlimg = $color2id[1][2];//尺寸对应的图片地址
-                      // print_r($urlimg);die;
                       if(!empty($urlimg)){
                         preg_match_all("/(?:\()(.*)(?:\))/i",$urlimg,$img);
-                        // print_r($img);die;
                         if(!empty($img[1][0])){
-
-                          $img = $this->getImage('https:'.$img[1][0]);//储存图片
-                          
-                          // $dte['imgurl'] = $img['file_name'];
+                          $img = $this->getImage('https:'.$img[1][0]);//储存图片                          
                           $arr[$key]['img'] = $img['file_name'];
-                          // $dd[] = $img['file_name'];
                           unset($img['file_name']);
                         }else{
                         
@@ -399,19 +351,16 @@ class taobaoAction extends Action {
             
             return $content;
         }
+
     function getalbb($url,$product_class){//1688抓取
       if(!empty($product_class)){
         $dte['product_class']=$product_class;
-     }else{
-         $dte['product_class']='-1-';
-     }
+       }else{
+           $dte['product_class']='-1-';
+       }
       $db = DBAction::getInstance();
       $text=file_get_contents($url);//将url地址上页面内容保存进$text
-      // $text = $this->getcurl($url);
-       // var_dump($text);die;
       preg_match('/<(h1)[^c]*class=\"d-title\"[^>]*>.*<\/\\1>/is', $text, $title);
-      // print_r($text);
-      // print_r($title);
        $product_title = preg_replace('/"/', '',$title[0]);
        preg_match('|<span>(.*)</span>|isU',$product_title,$product_title1);
 
@@ -469,9 +418,6 @@ class taobaoAction extends Action {
                 $tupian1[$key02]->img = '';
               }
               foreach ($chicun1 as $key03 => $value03) {
-
-                // $arr1['colorname'] = $title1 = iconv('GBK','UTF-8', $value02->name);
-                // $arr1['color'] = $title1 = iconv('GBK','UTF-8', $value02->name);
                 $arr1['colorname'] = $title1 = $value02->name;
                 $arr1['color'] = $title1 = $value02->name;
                 $arr1['img'] = $value02->img;
@@ -583,7 +529,6 @@ function getImage($url,$save_dir='./images/',$filename='',$type=0){
             "location.href='index.php?module=product';</script>";
             return '成功了'.$id;
           }else{
-           // echo "失败了1";
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
             "alert('商品已经获取成功, 是否跳转到产品列表?');" .

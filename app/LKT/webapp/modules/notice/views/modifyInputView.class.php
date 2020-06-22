@@ -15,6 +15,7 @@ class modifyInputView extends SmartyView {
 		$request = $this->getContext()->getRequest();
 
 		$this->setAttribute("uploadImg",$request->getAttribute("uploadImg"));
+		$this->setAttribute('pic', $request->getAttribute('pic'));
 
 		$this->setAttribute("id",$request->getAttribute("id"));
 

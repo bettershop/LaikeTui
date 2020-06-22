@@ -6,6 +6,7 @@ class maskContentInputView extends SmartyView {
         $this->setAttribute('version',$request->getAttribute('version'));
         $this->setAttribute('list',$request->getAttribute('list'));
         $this->setAttribute('admin_id',$request->getAttribute('admin_id'));
+        
         $this->setTemplate("index.tpl");
     }
 }

@@ -1,2 +1,0 @@
-{banner}
-{news_list}

@@ -71,7 +71,7 @@
       </view>
       <view class="{{heng}}">
         <navigator class="pr pr_xt" style='display:flex;margin-bottom:0px;width:100%;margin-left:0px;' url="../product/detail?productId={{item.id}}&size={{item.sizeid}}" hover-class="changestyle" wx:for="{{shopList}}" wx:key="*this" data-id="{{item.id}}" >
-          <view>
+          <view style="border-bottom:1px solid #eee;">
             <image style='height:220rpx;width:230rpx;margin-left:10px;' src="{{item.imgurl}}"></image>
           </view>
           <view class='shu shu_xt' style='width:65%;padding:0 10px;'>

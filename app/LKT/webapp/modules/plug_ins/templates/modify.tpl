@@ -8,11 +8,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
+
 {literal}
 <script>
 function change(){
@@ -31,7 +29,14 @@ function change(){
 <title>修改插件</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe646;</i>插件管理 <span class="c-gray en">&gt;</span> 插件列表 <span class="c-gray en">&gt;</span> 修改插件 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=plug_ins';" title="关闭" ><i class="Hui-iconfont">&#xe6a6;</i></a></nav>
+<nav class="breadcrumb">
+    插件管理 <span class="c-gray en">&gt;</span>
+    <a href="index.php?module=plug_ins">插件列表</a> <span class="c-gray en">&gt;</span>
+    编辑插件 <span class="c-gray en">&gt;</span>
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
+
 <div class="pd-20">
   <form name="form1" action="index.php?module=plug_ins&action=modify" class="form form-horizontal" method="post" enctype="multipart/form-data" >
     <input type="hidden" name="id" value="{$id}" >
@@ -48,29 +53,7 @@ function change(){
         <input type="text" class="input-text" value="{$subtitle_name}" placeholder="" id="" name="subtitle_name">
       </div>
     </div>
-    <div class="row cl">
-        <label class="form-label col-4"><span class="c-red"></span>插件类型：</label>
-        <div class="formControls col-4 skin-minimal">
-            <div class="radio-box">
-                <input name="type" type="radio" value="0" {if type == 0} checked="checked" {/if} onclick="change()"/>
-                <label for="sex-0">小程序</label>
-            </div>
-            <div class="radio-box">
-                <input name="type" type="radio" value="1" {if type == 1} checked="checked" {/if} onclick="change()"/>
-                <label for="sex-1">app</label>
-            </div>
-        </div>
-        <div class="col-4"> </div>
-    </div>
-    <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>请选择软件：</label>
-        <div class="formControls col-xs-8 col-sm-4"> 
-            <select name="software_id" class="select" style="width: 80px;height: 31px;vertical-align: middle;">
-                {$list}
-            </select>
-        </div>
-        <div class="col-4"> </div>
-    </div>
+
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>首页插件图标：</label>
       <div class="formControls col-xs-8 col-sm-4"> 
@@ -117,39 +100,41 @@ function change(){
             <input type="text" class="input-text" value="{$sort}" placeholder="" id="" name="sort">
         </div>
     </div>
+
     <div class="row cl">
-      <label class="form-label col-4">参数设置地址：</label>
+      <label class="form-label col-4">插件标志code:</label>
       <div class="formControls col-4">
-        <input type="text" class="input-text" disabled value="{$http}" placeholder="" id="" name="http">
+        <input type="text" class="input-text" disabled value="{$code}" placeholder="" id="" name="code">
       </div>
     </div>
     <div class="row cl">
-      <div class="col-10 col-offset-4">
-        <button class="btn btn-primary radius" type="submit" name="Submit"><i class="Hui-iconfont">&#xe632;</i> 提 交</button>
-        <!-- <button class="btn btn-secondary radius" type="reset" name="reset"><i class="Hui-iconfont">&#xe632;</i> 重 写</button> -->
+      <label class="form-label col-4"></label>
+      <div class="formControls col-4">
+        <button class="btn btn-primary radius" type="submit" name="Submit">提 交</button>
+        <button class="btn btn-secondary radius" type="reset" name="reset">重 写</button>
       </div>
     </div>
   </form>
+  <input type="hidden" id="pic" value="{$pic}" >
 </div>
-<script type="text/javascript" src="modpub/js/check.js" > </script>
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<!-- 新增编辑器引入文件 -->
-<link rel="stylesheet" href="style/kindeditor/themes/default/default.css" />
-<script src="style/kindeditor/kindeditor-min.js"></script>
-<script src="style/kindeditor/lang/zh_CN.js"></script>
+
+
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 {literal}
 <script>
 KindEditor.ready(function(K) {
+  var pic = $("#pic").val();
   var editor = K.editor({
       allowFileManager : true,       
       uploadJson : "index.php?module=system&action=uploadImg", //上传功能
-      fileManagerJson : 'kindeditor/php/file_manager_json.php', //网络空间
+      fileManagerJson : 'style/kindeditor/php/file_manager_json.php?dirpath='+pic, //网络空间
     });
   //上传背景图片
   K('#image1').click(function() {
     editor.loadPlugin('image', function() {
       editor.plugin.imageDialog({
-        //showRemote : false, //网络图片不开启
+        showRemote : false, //网络图片不开启
         //showLocal : false, //不开启本地图片上传
         imageUrl : K('#picurl1').val(),
           clickFn : function(url, title, width, height, border, align) {
@@ -164,7 +149,7 @@ KindEditor.ready(function(K) {
   K('#image2').click(function() {
     editor.loadPlugin('image', function() {
       editor.plugin.imageDialog({
-        //showRemote : false, //网络图片不开启
+        showRemote : false, //网络图片不开启
         //showLocal : false, //不开启本地图片上传
         imageUrl : K('#picurl2').val(),
           clickFn : function(url, title, width, height, border, align) {

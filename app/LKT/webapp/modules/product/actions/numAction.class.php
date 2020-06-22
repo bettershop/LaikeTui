@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -12,13 +12,7 @@ require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
 
 class numAction extends Action {
-    /*
-    时间2018年03月13日
-    修改内容：修改产品分类显示
-    修改人：苏涛
-    主要功能：处理后台库存
-    公司：湖南壹拾捌号网络技术有限公司
-     */
+    
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
@@ -79,7 +73,6 @@ class numAction extends Action {
         }
 
         $url = "index.php?module=product&action=num&product_title=".urlencode($product_title)."&pagesize=".urlencode($pagesize);
-//        $pages_show = $pager->multipage($url,ceil($total/$pagesize),$page, $para = '');
         $pages_show = $pager->multipage($url,$total,$page,$pagesize,$start,$para = '');
 
         $sql = "select * from lkt_config where id = '1'";

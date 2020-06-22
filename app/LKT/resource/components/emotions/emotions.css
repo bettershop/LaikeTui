@@ -1,9 +1,0 @@
-.emotions{background-color:#f6f6f6;}
-.emotions td{padding:1px;}
-.emotions td div{background: url("https://res.mail.qq.com/zh_CN//images/mo/DEFAULT2/default.gif") no-repeat 0 0 scroll transparent;width:24px;height:24px;cursor:pointer; border:1px solid #dfe6f6;}
-.emotions div:hover{border:1px solid blue;}
-.emotionsGif{position:absolute;top:10px;left:410px;border:1px solid #AAA;padding:8px;background-color:#FFF;text-align:center;width:40px;height:40px}
-.emotionsGif img {border:0;width:24px;height:24px}
-.iconEmotion{font-size:14px;}
-
-.popover{max-width: none;width:470px;}

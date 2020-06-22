@@ -2,40 +2,17 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
-require_once(MO_LIB_DIR . '/ShowPager.class.php');
-require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once('BaseAction.class.php');
 
-class drawAction extends Action {
-
-    public function getDefaultView() {
-        return;
-        
-    }
-
-    public function execute(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $m = addslashes(trim($request->getParameter('m')));
-        
-        if($m == 'getFormid'){
-            $this -> getformid();
-        }elseif($m == 'ceshi'){
-            $this -> ceshi();
-        }else if($m == 'getdraw'){
-            $this->getdraw();
-        }
-        return;
-    } 
-    
+class drawAction extends BaseAction {
 
     //存formid
-    public function getformid(){
+    public function getFormid(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $uid = addslashes(trim($request->getParameter('userid')));
@@ -54,6 +31,7 @@ class drawAction extends Action {
             }
         }
     }
+
     public function ceshi(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
@@ -112,6 +90,7 @@ class drawAction extends Action {
             }
         }
     }
+    
     public function Send_success($rew){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
@@ -157,9 +136,9 @@ class drawAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
-        $openid = trim($request->getParameter('openid')); // 本人微信id
-        $referee_openid = trim($request->getParameter('referee_openid')); // 本人微信id
-        $order_id = trim($request->getParameter('order_id')); // 订单id
+        $openid = addslashes(trim($request->getParameter('openid'))); // 本人微信id
+        $referee_openid = addslashes(trim($request->getParameter('referee_openid'))); // 本人微信id
+        $order_id = addslashes(trim($request->getParameter('order_id'))); // 订单id
         
         // 查询系统参数
         $sql = "select * from lkt_config where id = 1";
@@ -255,7 +234,6 @@ class drawAction extends Action {
                 $commodityAttr[$key] = array('priceId' => $value->id,'price' => $value->price,'stock' => $value->num,'img' => $cimgurl, 'attrValueList' => $attrValueList);
             }
         }
-        /* 获取商品属性 */
         echo json_encode(array('status'=>1,'arr'=>$arr,'user'=>$user,'commodityAttr'=>$commodityAttr));
         exit;
 

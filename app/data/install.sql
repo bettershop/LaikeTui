@@ -157,7 +157,9 @@ CREATE TABLE `lkt_banner` (
 
 LOCK TABLES `lkt_banner` WRITE;
 /*!40000 ALTER TABLE `lkt_banner` DISABLE KEYS */;
-INSERT INTO `lkt_banner` VALUES (18,'1541599397768.jpeg','../product/detail?productId=18',9,'2018-06-21 03:33:37');
+INSERT INTO `lkt_banner` VALUES ('20', '1571912030366.png', 'undefined', '100', '2019-10-24 18:13:59');
+INSERT INTO `lkt_banner` VALUES ('21', '1571912056696.png', 'undefined', '100', '2019-10-24 18:14:28');
+INSERT INTO `lkt_banner` VALUES ('22', '1571912083753.png', 'undefined', '100', '2019-10-24 18:14:48');
 /*!40000 ALTER TABLE `lkt_banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,6 +272,7 @@ CREATE TABLE `lkt_cart` (
   `Goods_num` int(11) DEFAULT NULL COMMENT '数量',
   `Create_time` timestamp NULL DEFAULT NULL COMMENT '添加时间',
   `Size_id` char(15) NOT NULL DEFAULT '' COMMENT '商品属性id',
+  `plugin` varchar(255) DEFAULT NULL COMMENT '插件标志',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='购物车';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -428,6 +431,7 @@ CREATE TABLE `lkt_configure` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0:未开启砍价 1:开启砍价 2 上架 3 缺货 4下架',
   `attribute` text COMMENT '属性',
   `recycle` tinyint(4) NOT NULL DEFAULT '0' COMMENT '回收站 0.不回收 1.回收',
+  `total_num` int(11) NOT NULL DEFAULT '0' COMMENT '总库存',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品配置表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -438,7 +442,25 @@ CREATE TABLE `lkt_configure` (
 
 LOCK TABLES `lkt_configure` WRITE;
 /*!40000 ALTER TABLE `lkt_configure` DISABLE KEYS */;
-INSERT INTO `lkt_configure` VALUES (1,'默认','默认','默认',0.00,60.00,100.00,'1541597053657.jpeg',1,64,'',0.00,2,'a:3:{s:6:\"类型\";s:6:\"默认\";s:6:\"颜色\";s:6:\"默认\";s:6:\"规格\";s:6:\"默认\";}',0);
+-- INSERT INTO `lkt_configure` VALUES (1,'默认','默认','默认',20.00,60.00,100.00,'1541597053657.jpeg',1,64,'',0.00,2,'a:3:{s:6:\"类型\";s:6:\"默认\";s:6:\"颜色\";s:6:\"默认\";s:6:\"规格\";s:6:\"默认\";}',0,0);
+INSERT INTO `lkt_configure` VALUES ('1', '默认', '默认', '默认', '20.00', '60.00', '100.00', '1541597053657.jpeg', '1', '64', '', '0.00', '2', 'a:3:{s:6:\"类型\";s:6:\"默认\";s:6:\"颜色\";s:6:\"默认\";s:6:\"规格\";s:6:\"默认\";}', '0', '0');
+INSERT INTO `lkt_configure` VALUES ('2', null, null, '0', '20.00', '100.00', '200.00', '1571906940994.png', '2', '100', '件', null, '0', 'a:2:{s:6:\"格数\";s:6:\"三格\";s:6:\"颜色\";s:6:\"白色\";}', '0', '100');
+INSERT INTO `lkt_configure` VALUES ('3', null, null, '0', '20.00', '100.00', '200.00', '1571906947845.png', '2', '100', '件', null, '0', 'a:2:{s:6:\"格数\";s:6:\"三格\";s:6:\"颜色\";s:6:\"混搭\";}', '0', '100');
+INSERT INTO `lkt_configure` VALUES ('4', null, null, '0', '20.00', '100.00', '200.00', '1571906954576.png', '2', '100', '件', null, '0', 'a:2:{s:6:\"格数\";s:6:\"四格\";s:6:\"颜色\";s:6:\"白色\";}', '0', '100');
+INSERT INTO `lkt_configure` VALUES ('5', null, null, '0', '20.00', '100.00', '200.00', '1571906962618.png', '2', '100', '件', null, '0', 'a:2:{s:6:\"格数\";s:6:\"四格\";s:6:\"颜色\";s:6:\"混搭\";}', '0', '100');
+INSERT INTO `lkt_configure` VALUES ('6', null, null, '0', '20.00', '100.00', '200.00', '1571906969663.png', '2', '100', '件', null, '0', 'a:2:{s:6:\"格数\";s:6:\"五格\";s:6:\"颜色\";s:6:\"白色\";}', '0', '100');
+INSERT INTO `lkt_configure` VALUES ('7', null, null, '0', '20.00', '100.00', '200.00', '1571906978785.png', '2', '100', '件', null, '0', 'a:2:{s:6:\"格数\";s:6:\"五格\";s:6:\"颜色\";s:6:\"混搭\";}', '0', '100');
+INSERT INTO `lkt_configure` VALUES ('8', null, null, '0', '100.00', '499.00', '1000.00', '1571907182144.png', '3', '300', '组', null, '0', 'a:1:{s:12:\"颜色分类\";s:9:\"玫瑰金\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('9', null, null, '0', '100.00', '499.00', '1000.00', '1571907188114.png', '3', '300', '组', null, '0', 'a:1:{s:12:\"颜色分类\";s:9:\"黑凤凰\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('10', null, null, '0', '2599.00', '2999.00', '4100.00', '1571907693760.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"香槟金\";s:12:\"储存容量\";s:6:\"4+64GB\";s:12:\"网络类型\";s:4:\"WIFI\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('11', null, null, '0', '2599.00', '3299.00', '4100.00', '1571907701361.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"香槟金\";s:12:\"储存容量\";s:6:\"4+64GB\";s:12:\"网络类型\";s:9:\"全网通\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('12', null, null, '0', '2599.00', '3299.00', '4100.00', '157190770721.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"香槟金\";s:12:\"储存容量\";s:7:\"4+128GB\";s:12:\"网络类型\";s:4:\"WIFI\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('13', null, null, '0', '2599.00', '3499.00', '4100.00', '1571907713251.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"香槟金\";s:12:\"储存容量\";s:7:\"4+128GB\";s:12:\"网络类型\";s:9:\"全网通\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('14', null, null, '0', '2599.00', '3499.00', '4100.00', '1571907720959.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"银钻灰\";s:12:\"储存容量\";s:6:\"4+64GB\";s:12:\"网络类型\";s:4:\"WIFI\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('15', null, null, '0', '2599.00', '3699.00', '4100.00', '1571907727425.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"银钻灰\";s:12:\"储存容量\";s:6:\"4+64GB\";s:12:\"网络类型\";s:9:\"全网通\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('16', null, null, '0', '2599.00', '3699.00', '4100.00', '1571907733579.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"银钻灰\";s:12:\"储存容量\";s:7:\"4+128GB\";s:12:\"网络类型\";s:4:\"WIFI\";}', '0', '300');
+INSERT INTO `lkt_configure` VALUES ('17', null, null, '0', '2599.00', '3999.00', '4100.00', '1571907741848.png', '4', '300', '组', null, '0', 'a:3:{s:6:\"颜色\";s:9:\"银钻灰\";s:12:\"储存容量\";s:7:\"4+128GB\";s:12:\"网络类型\";s:9:\"全网通\";}', '0', '300');
+
 /*!40000 ALTER TABLE `lkt_configure` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,9 +497,22 @@ CREATE TABLE `lkt_core_menu` (
 
 LOCK TABLES `lkt_core_menu` WRITE;
 /*!40000 ALTER TABLE `lkt_core_menu` DISABLE KEYS */;
-INSERT INTO `lkt_core_menu` VALUES (1,0,'用户管理','user','../LKT/images/menu/154150078990.png','../LKT/images/menu/1541500800692.png','','','',4,1,0,0,'2018-09-26 09:46:49',0),(2,1,'用户列表','user','',NULL,'userlist','index','index.php?module=userlist',100,2,0,0,'2018-09-26 09:47:18',0),(3,2,'浏览','user','','','userlist','index','index.php?module=userlist&action=index',100,3,0,0,'2018-10-25 19:08:04',0),(4,2,'查看','user','','','userlist','view','index.php?module=userlist&action=view',100,3,0,0,'2018-10-25 19:09:11',0),(5,2,'私信','user','',NULL,'userlist','seng','index.php?module=userlist&action=seng',100,3,0,0,'2018-09-26 09:48:17',0),(6,2,'删除','user','',NULL,'userlist','del','index.php?module=userlist&action=del',100,3,0,0,'2018-09-26 09:54:29',0),(7,2,'充值','user','',NULL,'userlist','recharge','index.php?module=userlist&action=recharge',100,3,0,0,'2018-09-26 10:43:27',0),(8,0,'商品管理','product','../LKT/images/menu/1541501138430.png','../LKT/images/menu/1541501147772.png','','','',2,1,0,0,'2018-09-24 14:46:22',0),(9,8,'商品列表','product','',NULL,'product','index','index.php?module=product',100,2,0,0,'2018-09-25 15:26:51',0),(10,9,'查看详细','product','',NULL,'product','see','index.php?module=product&action=see',100,3,0,0,'2018-09-25 15:53:57',0),(11,9,'添加','product','',NULL,'product','add','index.php?module=product&action=add',100,3,0,0,'2018-09-25 15:29:36',0),(12,9,'修改','product','',NULL,'product','modify','index.php?module=product&action=modify',100,3,0,0,'2018-09-25 15:30:10',0),(13,9,'批量操作','','','','product','operation','index.php?module=product&action=operation',100,3,0,0,'2018-10-25 19:25:44',0),(14,9,'上下架','product','',NULL,'product','shelves','index.php?module=product&action=shelves',100,3,0,0,'2018-09-25 15:32:43',0),(15,9,'删除','product','',NULL,'product','del','index.php?module=product&action=del',100,3,0,1,'2018-09-25 15:34:19',0),(16,9,'浏览','product','',NULL,'product','index','index.php?module=product&action=index',100,3,0,0,'2018-09-25 15:34:51',0),(20,17,'删除','','','','product_class','del','index.php?module=product_class&action=del',100,3,0,0,'2018-10-25 19:31:21',0),(19,17,'修改','','','','product_class','modify','index.php?module=product_class&action=modify',100,3,0,0,'2018-10-25 19:30:52',0),(18,17,'添加','','','','product_class','add','index.php?module=product_class&action=add',100,3,0,0,'2018-10-25 19:30:25',0),(17,8,'商品分类','','','','product_class','index','index.php?module=product_class',100,2,0,0,'2018-10-25 19:29:13',0),(21,17,'浏览','','','','product_class','index','index.php?module=product_class&action=index',100,3,0,0,'2018-10-25 19:31:53',0),(22,8,'品牌管理','','','','brand_class','index','index.php?module=brand_class',100,2,0,0,'2018-10-25 19:35:48',0),(23,22,'添加','','','','brand_class','add','index.php?module=brand_class&action=add',100,3,0,0,'2018-10-25 19:36:37',0),(24,22,'修改','','','','brand_class','modify','index.php?module=brand_class&action=modify',100,3,0,0,'2018-10-25 19:37:04',0),(25,22,'删除','','','','brand_class','del','index.php?module=brand_class&action=del',100,3,0,0,'2018-10-25 19:37:27',0),(26,22,'启用/禁用','','','','brand_class','status','index.php?module=brand_class&action=status',100,3,0,0,'2018-10-25 19:38:22',0),(27,22,'浏览','','','','brand_class','index','index.php?module=brand_class&action=index',100,3,0,0,'2018-10-25 19:38:57',0),(28,8,'库存预警','','','','product','num','index.php?module=product&action=num',100,2,0,0,'2018-10-25 19:40:31',0),(29,28,'修改','','','','product','see','index.php?module=product&action=see',100,3,0,0,'2018-10-25 19:42:09',0),(30,28,'浏览','','','','product','num','index.php?module=product&action=num',100,3,0,0,'2018-10-25 19:43:13',0),(31,0,'订单管理','order','../LKT/images/menu/1541501221567.png','../LKT/images/menu/1541501228585.png','','','',3,1,0,0,'2018-09-25 19:49:13',0),(32,31,'订单列表','','','','orderslist','index','index.php?module=orderslist',100,2,0,0,'2018-10-25 19:55:01',0),(33,32,'发货','','','','orderslist','addsign','index.php?module=orderslist&action=addsign',100,3,0,0,'2018-10-25 19:56:26',0),(34,32,'订单详情','','','','orderslist','Detail','index.php?module=orderslist&action=Detail',100,3,0,0,'2018-10-25 19:56:57',0),(35,32,'物流','','','','orderslist','kuaidishow','index.php?module=orderslist&action=kuaidishow',100,3,0,0,'2018-10-25 19:57:31',0),(36,32,'修改','','','','orderslist','Modify','index.php?module=orderslist&action=Modify',100,3,0,0,'2018-10-25 19:58:21',0),(37,32,'退款','','','','orderslist','Status','index.php?module=orderslist&action=Status',100,3,0,0,'2018-10-25 19:59:00',0),(38,32,'浏览','','','','orderslist','index','index.php?module=orderslist&action=index',100,3,0,0,'2018-10-25 20:00:01',0),(39,31,'退货商品','','','','return','index','index.php?module=return',100,2,0,0,'2018-10-25 20:01:30',0),(40,39,'查看','','','','return','view','index.php?module=return&action=view',100,3,0,0,'2018-10-25 20:03:05',0),(41,39,'通过/拒绝','','','','return','examine','index.php?module=return&action=examine',100,3,0,0,'2018-10-25 20:05:07',0),(42,39,'浏览','','','','return','index','index.php?module=return&action=index',100,3,0,0,'2018-10-25 20:05:55',0),(55,0,'财务管理','finance','../LKT/images/menu/1541501258586.png','../LKT/images/menu/1541501264113.png','','','',3,1,0,0,'2018-09-26 12:01:13',0),(56,55,'提现管理','','','','finance','index','index.php?module=finance',100,2,0,0,'2018-10-25 21:47:39',0),(57,56,'已通过','','','','finance','list','index.php?module=finance&action=list',100,3,0,0,'2018-10-25 21:50:21',0),(58,56,'已拒绝','','','','finance','list1','index.php?module=finance&action=list1',100,3,0,0,'2018-10-25 21:50:43',0),(59,56,'通过/拒绝','','','','finance','del','index.php?module=finance&action=del',100,3,0,0,'2018-10-25 21:52:44',0),(60,56,'查看','','','','finance','see','index.php?module=finance&action=see',100,3,0,0,'2018-10-25 21:53:26',0),(61,56,'浏览','','','','finance','index','index.php?module=finance&action=index',100,3,0,0,'2018-10-25 21:54:31',0),(62,55,'充值管理','','','','finance','recharge','index.php?module=finance&action=recharge',100,2,0,0,'2018-10-25 21:55:29',0),(63,55,'余额管理','','','','finance','yue','index.php?module=finance&action=yue',100,2,0,0,'2018-10-25 21:56:24',0),(64,63,'查看','','','','finance','yue_see','index.php?module=finance&action=yue_see',100,3,0,0,'2018-10-25 21:57:43',0),(65,63,'删除','','','','finance','yuedel','index.php?module=finance&action=yuedel',100,3,0,0,'2018-10-25 21:58:26',0),(66,63,'浏览','','','','finance','yue','index.php?module=finance&action=yue',100,3,0,0,'2018-10-25 21:58:53',0),(67,55,'积分管理','','','','finance','jifen','index.php?module=finance&action=jifen',100,2,0,0,'2018-10-25 21:59:27',0),(68,67,'查看','','','','finance','jifen_see','index.php?module=finance&action=jifen_see',100,3,0,0,'2018-10-25 22:05:31',0),(69,67,'删除','','','','finance','jifendel','index.php?module=finance&action=jifendel',100,3,0,0,'2018-10-25 22:06:02',0),(70,67,'浏览','','','','finance','jifen','index.php?module=finance&action=jifen',100,3,0,0,'2018-10-25 22:09:57',0),(72,0,'配置管理','configure','../LKT/images/menu/1541501300403.png','../LKT/images/menu/1541501306110.png','','','',99,1,0,0,'2018-10-16 18:55:34',0),(73,72,'菜单管理','','','','menu','index','index.php?module=menu',100,2,0,0,'2018-10-25 22:14:08',0),(74,72,'权限管理','','','','role','index','index.php?module=role',100,2,0,0,'2018-10-25 22:15:19',0),(75,74,'添加','','','','role','add','index.php?module=role&action=add',100,3,0,0,'2018-10-25 22:16:35',0),(76,74,'修改','','','','role','modify','index.php?module=role&action=modify',100,3,0,0,'2018-10-25 22:16:58',0),(77,74,'删除','','','','role','del','index.php?module=role&action=del',100,3,0,0,'2018-10-25 22:17:18',0),(78,74,'浏览','','','','role','index','index.php?module=role&action=index',100,3,0,0,'2018-10-25 22:17:43',0),(79,72,'充值/提现设置','','','','finance','config','index.php?module=finance&action=config',100,2,0,0,'2018-10-25 22:28:22',0),(80,72,'积分设置','','','','score','setscore','index.php?module=score&action=setscore',100,2,0,0,'2018-10-25 22:31:08',0),(82,72,'售后地址设置','','','','return','set','index.php?module=return&action=set',100,2,0,0,'2018-10-25 22:35:06',0),(83,72,'库存设置','','','','product_config','index','index.php?module=product_config',100,2,0,0,'2018-10-25 22:36:04',0),(85,72,'订单设置','','','','orderslist','config','index.php?module=orderslist&action=config',100,2,0,0,'2018-10-25 22:39:52',0),(86,0,'系统管理','system','../LKT/images/menu/1541501330925.png','../LKT/images/menu/1541501336713.png','','','',100,1,0,0,'2018-09-24 15:13:49',0),(87,86,'公告管理','','','','notice','index','index.php?module=notice',100,2,0,0,'2018-10-25 22:49:19',0),(88,87,'添加','','','','notice','add','index.php?module=notice&action=add',100,3,0,0,'2018-10-25 22:50:10',0),(89,87,'修改','','','','notice','modify','index.php?module=notice&action=modify',100,3,0,0,'2018-10-25 22:50:31',0),(90,87,'删除','','','','notice','del','index.php?module=notice&action=del',100,3,0,0,'2018-10-25 22:50:54',0),(91,87,'只看','','','','notice','index','index.php?module=notice&action=index',100,3,0,0,'2018-10-25 22:51:14',0),(92,86,'文章管理','','','','Article','index','index.php?module=Article',100,2,0,0,'2018-10-25 22:52:34',0),(93,92,'添加','','','','Article','add','index.php?module=Article&action=add',100,3,0,0,'2018-10-25 22:53:03',0),(94,92,'查看','','','','Article','view','index.php?module=Article&action=view',100,3,0,0,'2018-10-25 22:53:49',0),(95,92,'分享设置','','','','Article','amount','index.php?module=Article&action=amount',100,3,0,0,'2018-10-25 22:54:24',0),(96,92,'修改','','','','Article','modify','index.php?module=Article&action=modify',100,3,0,0,'2018-10-25 22:54:49',0),(97,92,'删除','','','','Article','del','index.php?module=Article&action=del',100,3,0,0,'2018-10-25 22:55:17',0),(98,92,'浏览','','','','Article','index','index.php?module=Article&action=index',100,3,0,0,'2018-10-25 22:56:21',0),(99,86,'日志管理','','','','member','member_record','index.php?module=member&action=member_record',100,2,0,0,'2018-10-25 22:57:32',0),(155,153,'优惠券','','','','coupon','index','index.php?module=coupon',100,2,0,0,'2018-10-26 00:09:44',0),(101,72,'运费管理','','','','freight','index','index.php?module=freight',100,2,0,0,'2018-10-25 23:02:05',0),(102,101,'添加','','','','freight','add','index.php?module=freight&action=add',100,3,0,0,'2018-10-25 23:02:32',0),(103,101,'修改','','','','freight','modify','index.php?module=freight&action=modify',100,3,0,0,'2018-10-25 23:02:56',0),(104,101,'删除','','','','freight','del','index.php?module=freight&action=del',100,3,0,0,'2018-10-25 23:03:28',0),(105,101,'浏览','','','','freight','index','index.php?module=freight&action=index',100,3,0,0,'2018-10-25 23:03:52',0),(106,154,'添加','','','','plug_ins','add','index.php?module=plug_ins&action=add',100,3,0,0,'2018-10-25 23:07:15',0),(107,154,'修改','','','','plug_ins','modify','index.php?module=plug_ins&action=modify',100,3,0,0,'2018-10-25 23:07:49',0),(108,154,'启用/禁用','','','','plug_ins','whether','index.php?module=plug_ins&action=whether',100,3,0,0,'2018-10-25 23:08:17',0),(109,154,'删除','','','','plug_ins','del','index.php?module=plug_ins&action=del',100,3,0,0,'2018-10-25 23:08:36',0),(110,154,'浏览','','','','plug_ins','index','index.php?module=plug_ins&action=index',100,3,0,0,'2018-10-25 23:09:02',0),(111,86,'评价管理','','','','comments','index','index.php?module=comments',100,2,0,0,'2018-10-25 23:12:17',0),(112,111,'回复','','','','comments','reply','index.php?module=comments&action=reply',100,3,0,0,'2018-10-25 23:12:54',0),(113,111,'修改','','','','comments','modify','index.php?module=comments&action=modify',100,3,0,0,'2018-10-25 23:13:20',0),(114,111,'删除','','','','comments','del','index.php?module=comments&action=del',100,3,0,0,'2018-10-25 23:13:41',0),(115,111,'浏览','','','','comments','index','index.php?module=comments&action=index',100,3,0,0,'2018-10-25 23:14:01',0),(116,212,'轮播图管理','','','','banner','index','index.php?module=banner',100,2,0,0,'2018-10-25 23:16:10',0),(117,116,'添加','','','','banner','add','index.php?module=banner&action=add',100,3,0,0,'2018-10-25 23:16:48',0),(118,116,'修改','','','','banner','modify','index.php?module=banner&action=modify',100,3,0,0,'2018-10-25 23:17:10',0),(119,116,'删除','','','','banner','del','index.php?module=banner&action=del',100,3,0,0,'2018-10-25 23:17:33',0),(120,116,'浏览','','','','banner','index','index.php?module=banner&action=index',100,3,0,0,'2018-10-25 23:17:55',0),(121,212,'支付设置','','','','system','pay','index.php?module=system&action=pay',100,2,0,1,'2018-10-25 23:19:24',0),(122,212,'消息管理','','','','system','template_message','index.php?module=system&action=template_message',100,2,0,1,'2018-10-25 23:21:34',0),(123,86,'推广图设置','','','','extension','index','index.php?module=extension',100,2,0,0,'2018-10-25 23:22:03',0),(124,123,'添加','','','','extension','add','index.php?module=extension&action=add',100,3,0,0,'2018-10-25 23:22:23',0),(125,123,'修改','','','','extension','modify','index.php?module=extension&action=modify',100,3,0,0,'2018-10-25 23:22:58',0),(126,123,'删除','','','','extension','del','index.php?module=extension&action=del',100,3,0,0,'2018-10-25 23:23:20',0),(127,123,'清推广图缓存','','','','extension','del_simg','index.php?module=extension&action=del_simg',100,3,0,0,'2018-10-25 23:24:13',0),(128,123,'浏览','','','','extension','index','index.php?module=extension&action=index',100,3,0,0,'2018-10-25 23:24:35',0),(129,212,'前台背景颜色','','','','bgcolor','index','index.php?module=bgcolor',100,2,0,0,'2018-10-25 23:26:46',0),(130,129,'添加','','','','bgcolor','add','index.php?module=bgcolor&action=add',100,3,0,0,'2018-10-25 23:27:09',0),(131,129,'启用','','','','bgcolor','enable','index.php?module=bgcolor&action=enable',100,3,0,0,'2018-10-25 23:27:44',0),(132,129,'修改','','','','bgcolor','modify','index.php?module=bgcolor&action=modify',100,3,0,0,'2018-10-25 23:28:04',0),(133,129,'删除','','','','bgcolor','del','index.php?module=bgcolor&action=del',100,3,0,0,'2018-10-25 23:28:23',0),(134,129,'浏览','','','','bgcolor','index','index.php?module=bgcolor&action=index',100,3,0,0,'2018-10-25 23:28:41',0),(135,99,'批量删除','','','','member','member_record_del','index.php?module=member&action=member_record_del',100,3,0,0,'2018-10-25 23:34:21',0),(136,99,'浏览','','','','member','member_record','index.php?module=member&action=member_record',100,3,0,0,'2018-10-25 23:34:49',0),(137,73,'添加','','','','menu','modify','index.php?module=menu&action=modify',100,3,0,0,'2018-10-25 23:35:46',0),(138,73,'修改','','','','menu','modify','index.php?module=menu&action=modify',100,3,0,0,'2018-10-25 23:36:40',0),(139,73,'删除','','','','menu','del','index.php?module=menu&action=del',100,3,0,0,'2018-10-25 23:37:04',0),(140,212,'系统设置','','','','system','index','index.php?module=system',97,2,0,0,'2018-10-25 23:37:52',0),(142,86,'版本控制','','','','software','index','index.php?module=software',100,2,1,0,'2018-10-25 23:47:29',1),(143,142,'添加','','','','software','add','index.php?module=software&action=add',100,3,1,0,'2018-10-25 23:47:53',1),(144,142,'修改','','','','software','modify','index.php?module=software&action=modify',100,3,1,0,'2018-10-25 23:48:18',1),(145,142,'删除','','','','software','del','index.php?module=software&action=del',100,3,1,0,'2018-10-25 23:48:38',1),(153,0,'插件管理','','../LKT/images/menu/154150136137.png','../LKT/images/menu/1541501366796.png','','','',100,1,0,0,'2018-10-25 23:58:38',0),(154,153,'插件列表','','','','plug_ins','index','index.php?module=plug_ins',100,2,0,0,'2018-10-25 23:59:57',0),(156,162,'添加','','','','coupon','add','index.php?module=coupon&action=add',100,4,0,0,'2018-10-26 00:10:50',0),(157,162,'启用/禁用','','','','coupon','whether','index.php?module=coupon&action=whether',100,3,0,0,'2018-10-26 00:11:46',0),(158,162,'修改','','','','coupon','modify','index.php?module=coupon&action=modify',100,3,0,0,'2018-10-26 00:12:35',0),(159,162,'删除','','','','coupon','del','index.php?module=coupon&action=del',100,3,0,0,'2018-10-26 00:13:01',0),(160,162,'浏览','','','','coupon','index','index.php?module=coupon&action=index',100,3,0,0,'2018-10-26 00:13:30',0),(161,155,'优惠券列表','','','','coupon','coupon','index.php?module=coupon&action=coupon',100,3,0,0,'2018-10-26 00:14:38',0),(162,155,'优惠券活动','','','','coupon','index','index.php?module=coupon',100,3,0,0,'2018-10-26 00:15:25',0),(163,153,'签到','','','','sign','index','index.php?module=sign',100,2,0,0,'2018-10-26 00:18:14',0),(164,163,'签到活动','','','','sign','index','index.php?module=sign',100,3,0,0,'2018-10-26 00:18:52',0),(165,164,'添加','','','','sign','add','index.php?module=sign&action=add',100,4,0,0,'2018-10-26 00:19:40',0),(166,164,'修改','','','','sign','modify','index.php?module=sign&action=modify',100,4,0,0,'2018-10-26 00:20:43',0),(167,164,'删除','','','','sign','del','index.php?module=sign&action=del',100,4,0,0,'2018-10-26 00:22:25',0),(168,164,'浏览','','','','sign','index','index.php?module=sign&action=index',100,4,0,0,'2018-10-26 00:23:18',0),(169,163,'签到记录','','','','sign','record','index.php?module=sign&action=record',100,3,0,0,'2018-10-26 00:23:58',0),(170,153,'拼团','','','','go_group','index','index.php?module=go_group&action=index',100,2,0,0,'2018-10-26 00:26:22',0),(171,170,'添加','','','','go_group','addgroup','index.php?module=go_group&action=addgroup',100,3,0,0,'2018-10-26 00:27:03',0),(172,170,'修改','','','','go_group','modify','index.php?module=go_group&action=modify',100,3,0,0,'2018-10-26 00:27:39',0),(173,170,'修改商品','','','','go_group','grouppro','index.php?module=go_group&action=grouppro',100,3,0,0,'2018-10-26 00:28:45',0),(174,170,'删除','','','','go_group','del','index.php?module=go_group&action=del',100,3,0,0,'2018-10-26 00:29:08',0),(175,170,'浏览','','','','go_group','index','index.php?module=go_group&action=index',100,3,0,0,'2018-10-26 00:29:32',0),(176,153,'抽奖','','','','draw','index','index.php?module=draw',100,2,0,0,'2018-10-26 00:30:26',1),(177,176,'添加','','','','draw','addsign','index.php?module=draw&action=addsign',100,3,0,0,'2018-10-26 00:33:53',1),(178,176,'修改','','','','draw','modify','index.php?module=draw&action=modify',100,3,0,0,'2018-10-26 00:34:26',1),(179,176,'抽奖','','','','draw','whether','index.php?module=draw&action=whether',100,3,0,0,'2018-10-26 00:35:51',1),(180,176,'参数','','','','draw','parameters','index.php?module=draw&action=parameters',100,3,0,0,'2018-10-26 00:36:16',1),(181,176,'详情','','','','draw','operation','index.php?module=draw&action=operation',100,3,0,0,'2018-10-26 00:37:44',1),(182,176,'删除','','','','draw','del','index.php?module=draw&action=del',100,3,0,0,'2018-10-26 00:38:13',1),(183,176,'浏览','','','','draw','index','index.php?module=draw&action=index',100,3,0,0,'2018-10-26 00:38:47',1),(212,0,'小程序','','../LKT/images/menu/1540551247907.png','../LKT/images/menu/1540551255968.png','system','index','index.php?module=system',100,1,0,1,'2018-10-26 01:11:01',0),(213,212,'小程序首页','','','','software','pageindei','index.php?module=software&action=pageindex',98,2,0,1,'2018-10-26 01:11:45',0),(214,213,'添加','','','','software','pageadd','index.php?module=software&action=pageadd',100,3,0,0,'2018-10-26 01:12:51',0),(215,213,'修改','','','','software','pagemodify','index.php?module=software&action=pagemodify',100,3,0,1,'2018-10-26 01:13:17',0),(216,213,'删除','','','','software','pagedel','index.php?module=software&action=pagedel',100,3,0,1,'2018-10-26 01:13:58',0),(217,213,'浏览','','','','software','pageindex','index.php?module=software&action=pageindex',100,3,0,0,'2018-10-26 01:14:32',0),(218,212,'小程序积分设置','','','','software','jifen','index.php?module=software&action=jifen',99,2,0,1,'2018-10-26 01:15:31',0),(225,1,'管理员管理','','','','member','index','index.php?module=member',100,2,0,0,'2018-10-26 09:23:05',0);
+INSERT INTO `lkt_core_menu` VALUES (1,0,'用户管理','user','../LKT/images/menu/154150078990.png','../LKT/images/menu/1541500800692.png','','','',4,1,0,0,'2018-09-26 09:46:49',0),(2,1,'用户列表','user','',NULL,'userlist','index','index.php?module=userlist',100,2,0,0,'2018-09-26 09:47:18',0),(3,2,'浏览','user','','','userlist','index','index.php?module=userlist&action=index',100,3,0,0,'2018-10-25 19:08:04',0),(4,2,'查看','user','','','userlist','view','index.php?module=userlist&action=view',100,3,0,0,'2018-10-25 19:09:11',0),(5,2,'私信','user','',NULL,'userlist','seng','index.php?module=userlist&action=seng',100,3,0,0,'2018-09-26 09:48:17',0),(6,2,'删除','user','',NULL,'userlist','del','index.php?module=userlist&action=del',100,3,0,0,'2018-09-26 09:54:29',0),(7,2,'充值','user','',NULL,'userlist','recharge','index.php?module=userlist&action=recharge',100,3,0,0,'2018-09-26 10:43:27',0),(8,0,'商品管理','product','../LKT/images/menu/1541501138430.png','../LKT/images/menu/1541501147772.png','','','',2,1,0,0,'2018-09-24 14:46:22',0),(9,8,'商品列表','product','',NULL,'product','index','index.php?module=product',100,2,0,0,'2018-09-25 15:26:51',0),(10,9,'查看详细','product','',NULL,'product','see','index.php?module=product&action=see',100,3,0,0,'2018-09-25 15:53:57',0),(11,9,'添加','product','',NULL,'product','add','index.php?module=product&action=add',100,3,0,0,'2018-09-25 15:29:36',0),(12,9,'修改','product','',NULL,'product','modify','index.php?module=product&action=modify',100,3,0,0,'2018-09-25 15:30:10',0),(13,9,'批量操作','','','','product','operation','index.php?module=product&action=operation',100,3,0,0,'2018-10-25 19:25:44',0),(14,9,'上下架','product','',NULL,'product','shelves','index.php?module=product&action=shelves',100,3,0,0,'2018-09-25 15:32:43',0),(15,9,'删除','product','',NULL,'product','del','index.php?module=product&action=del',100,3,0,1,'2018-09-25 15:34:19',0),(16,9,'浏览','product','',NULL,'product','index','index.php?module=product&action=index',100,3,0,0,'2018-09-25 15:34:51',0),(20,17,'删除','','','','product_class','del','index.php?module=product_class&action=del',100,3,0,0,'2018-10-25 19:31:21',0),(19,17,'修改','','','','product_class','modify','index.php?module=product_class&action=modify',100,3,0,0,'2018-10-25 19:30:52',0),(18,17,'添加','','','','product_class','add','index.php?module=product_class&action=add',100,3,0,0,'2018-10-25 19:30:25',0),(17,8,'商品分类','','','','product_class','index','index.php?module=product_class',100,2,0,0,'2018-10-25 19:29:13',0),(21,17,'浏览','','','','product_class','index','index.php?module=product_class&action=index',100,3,0,0,'2018-10-25 19:31:53',0),(22,8,'品牌管理','','','','brand_class','index','index.php?module=brand_class',100,2,0,0,'2018-10-25 19:35:48',0),(23,22,'添加','','','','brand_class','add','index.php?module=brand_class&action=add',100,3,0,0,'2018-10-25 19:36:37',0),(24,22,'修改','','','','brand_class','modify','index.php?module=brand_class&action=modify',100,3,0,0,'2018-10-25 19:37:04',0),(25,22,'删除','','','','brand_class','del','index.php?module=brand_class&action=del',100,3,0,0,'2018-10-25 19:37:27',0),(26,22,'启用/禁用','','','','brand_class','status','index.php?module=brand_class&action=status',100,3,0,0,'2018-10-25 19:38:22',0),(27,22,'浏览','','','','brand_class','index','index.php?module=brand_class&action=index',100,3,0,0,'2018-10-25 19:38:57',0),(28,8,'库存管理','','','','stock','index','index.php?module=stock&action=Index',100,2,0,0,'2018-10-25 19:40:31',0),(29,28,'修改','','','','product','see','index.php?module=product&action=see',100,3,0,0,'2018-10-25 19:42:09',0),(30,28,'浏览','','','','product','num','index.php?module=product&action=num',100,3,0,0,'2018-10-25 19:43:13',0),(31,0,'订单管理','order','../LKT/images/menu/1541501221567.png','../LKT/images/menu/1541501228585.png','','','',3,1,0,0,'2018-09-25 19:49:13',0),(32,31,'订单列表','','','','orderslist','index','index.php?module=orderslist',100,2,0,0,'2018-10-25 19:55:01',0),(33,32,'发货','','','','orderslist','addsign','index.php?module=orderslist&action=addsign',100,3,0,0,'2018-10-25 19:56:26',0),(34,32,'订单详情','','','','orderslist','Detail','index.php?module=orderslist&action=Detail',100,3,0,0,'2018-10-25 19:56:57',0),(35,32,'物流','','','','orderslist','kuaidishow','index.php?module=orderslist&action=kuaidishow',100,3,0,0,'2018-10-25 19:57:31',0),(36,32,'修改','','','','orderslist','Modify','index.php?module=orderslist&action=Modify',100,3,0,0,'2018-10-25 19:58:21',0),(37,32,'退款','','','','orderslist','Status','index.php?module=orderslist&action=Status',100,3,0,0,'2018-10-25 19:59:00',0),(38,32,'浏览','','','','orderslist','index','index.php?module=orderslist&action=index',100,3,0,0,'2018-10-25 20:00:01',0),(39,31,'退货商品','','','','return','index','index.php?module=return',100,2,0,0,'2018-10-25 20:01:30',0),(40,39,'查看','','','','return','view','index.php?module=return&action=view',100,3,0,0,'2018-10-25 20:03:05',0),(41,39,'通过/拒绝','','','','return','examine','index.php?module=return&action=examine',100,3,0,0,'2018-10-25 20:05:07',0),(42,39,'浏览','','','','return','index','index.php?module=return&action=index',100,3,0,0,'2018-10-25 20:05:55',0),(55,0,'财务管理','finance','../LKT/images/menu/1541501258586.png','../LKT/images/menu/1541501264113.png','','','',3,1,0,0,'2018-09-26 12:01:13',0),(56,55,'提现管理','','','','finance','index','index.php?module=finance',100,2,0,0,'2018-10-25 21:47:39',0),(57,56,'已通过','','','','finance','list','index.php?module=finance&action=list',100,3,0,0,'2018-10-25 21:50:21',0),(58,56,'已拒绝','','','','finance','list1','index.php?module=finance&action=list1',100,3,0,0,'2018-10-25 21:50:43',0),(59,56,'通过/拒绝','','','','finance','del','index.php?module=finance&action=del',100,3,0,0,'2018-10-25 21:52:44',0),(60,56,'查看','','','','finance','see','index.php?module=finance&action=see',100,3,0,0,'2018-10-25 21:53:26',0),(61,56,'浏览','','','','finance','index','index.php?module=finance&action=index',100,3,0,0,'2018-10-25 21:54:31',0),(62,55,'充值管理','','','','finance','recharge','index.php?module=finance&action=recharge',100,2,0,0,'2018-10-25 21:55:29',0),(63,55,'余额管理','','','','finance','yue','index.php?module=finance&action=yue',100,2,0,0,'2018-10-25 21:56:24',0),(64,63,'查看','','','','finance','yue_see','index.php?module=finance&action=yue_see',100,3,0,0,'2018-10-25 21:57:43',0),(65,63,'删除','','','','finance','yuedel','index.php?module=finance&action=yuedel',100,3,0,0,'2018-10-25 21:58:26',0),(66,63,'浏览','','','','finance','yue','index.php?module=finance&action=yue',100,3,0,0,'2018-10-25 21:58:53',0),(67,55,'积分管理','','','','finance','jifen','index.php?module=finance&action=jifen',100,2,0,0,'2018-10-25 21:59:27',0),(68,67,'查看','','','','finance','jifen_see','index.php?module=finance&action=jifen_see',100,3,0,0,'2018-10-25 22:05:31',0),(69,67,'删除','','','','finance','jifendel','index.php?module=finance&action=jifendel',100,3,0,0,'2018-10-25 22:06:02',0),(70,67,'浏览','','','','finance','jifen','index.php?module=finance&action=jifen',100,3,0,0,'2018-10-25 22:09:57',0),(72,0,'配置管理','configure','../LKT/images/menu/1541501300403.png','../LKT/images/menu/1541501306110.png','','','',99,1,0,0,'2018-10-16 18:55:34',0),(73,72,'菜单管理','','','','menu','index','index.php?module=menu',100,2,0,0,'2018-10-25 22:14:08',0),(74,72,'权限管理','','','','role','index','index.php?module=role',100,2,0,0,'2018-10-25 22:15:19',0),(75,74,'添加','','','','role','add','index.php?module=role&action=add',100,3,0,0,'2018-10-25 22:16:35',0),(76,74,'修改','','','','role','modify','index.php?module=role&action=modify',100,3,0,0,'2018-10-25 22:16:58',0),(77,74,'删除','','','','role','del','index.php?module=role&action=del',100,3,0,0,'2018-10-25 22:17:18',0),(78,74,'浏览','','','','role','index','index.php?module=role&action=index',100,3,0,0,'2018-10-25 22:17:43',0),(79,72,'充值/提现设置','','','','finance','config','index.php?module=finance&action=config',100,2,0,0,'2018-10-25 22:28:22',0),(80,72,'积分设置','','','','score','setscore','index.php?module=score&action=setscore',100,2,0,0,'2018-10-25 22:31:08',0),(82,72,'售后地址设置','','','','return','set','index.php?module=return&action=set',100,2,0,0,'2018-10-25 22:35:06',0),(83,72,'库存设置','','','','product_config','index','index.php?module=product_config',100,2,0,0,'2018-10-25 22:36:04',0),(85,72,'订单设置','','','','orderslist','config','index.php?module=orderslist&action=config',100,2,0,0,'2018-10-25 22:39:52',0),(86,0,'系统管理','system','../LKT/images/menu/1541501330925.png','../LKT/images/menu/1541501336713.png','','','',100,1,0,0,'2018-09-24 15:13:49',0),(87,86,'公告管理','','','','notice','index','index.php?module=notice',100,2,0,0,'2018-10-25 22:49:19',0),(88,87,'添加','','','','notice','add','index.php?module=notice&action=add',100,3,0,0,'2018-10-25 22:50:10',0),(89,87,'修改','','','','notice','modify','index.php?module=notice&action=modify',100,3,0,0,'2018-10-25 22:50:31',0),(90,87,'删除','','','','notice','del','index.php?module=notice&action=del',100,3,0,0,'2018-10-25 22:50:54',0),(91,87,'只看','','','','notice','index','index.php?module=notice&action=index',100,3,0,0,'2018-10-25 22:51:14',0),(92,86,'文章管理','','','','Article','index','index.php?module=Article',100,2,0,0,'2018-10-25 22:52:34',0),(93,92,'添加','','','','Article','add','index.php?module=Article&action=add',100,3,0,0,'2018-10-25 22:53:03',0),(94,92,'查看','','','','Article','view','index.php?module=Article&action=view',100,3,0,0,'2018-10-25 22:53:49',0),(95,92,'分享设置','','','','Article','amount','index.php?module=Article&action=amount',100,3,0,0,'2018-10-25 22:54:24',0),(96,92,'修改','','','','Article','modify','index.php?module=Article&action=modify',100,3,0,0,'2018-10-25 22:54:49',0),(97,92,'删除','','','','Article','del','index.php?module=Article&action=del',100,3,0,0,'2018-10-25 22:55:17',0),(98,92,'浏览','','','','Article','index','index.php?module=Article&action=index',100,3,0,0,'2018-10-25 22:56:21',0),(99,86,'日志管理','','','','member','member_record','index.php?module=member&action=member_record',100,2,0,0,'2018-10-25 22:57:32',0),(155,153,'优惠券','','','','coupon','index','index.php?module=coupon',100,2,0,0,'2018-10-26 00:09:44',0),(101,72,'运费管理','','','','freight','index','index.php?module=freight',100,2,0,0,'2018-10-25 23:02:05',0),(102,101,'添加','','','','freight','add','index.php?module=freight&action=add',100,3,0,0,'2018-10-25 23:02:32',0),(103,101,'修改','','','','freight','modify','index.php?module=freight&action=modify',100,3,0,0,'2018-10-25 23:02:56',0),(104,101,'删除','','','','freight','del','index.php?module=freight&action=del',100,3,0,0,'2018-10-25 23:03:28',0),(105,101,'浏览','','','','freight','index','index.php?module=freight&action=index',100,3,0,0,'2018-10-25 23:03:52',0),(106,154,'添加','','','','plug_ins','add','index.php?module=plug_ins&action=add',100,3,0,0,'2018-10-25 23:07:15',0),(107,154,'修改','','','','plug_ins','modify','index.php?module=plug_ins&action=modify',100,3,0,0,'2018-10-25 23:07:49',0),(108,154,'启用/禁用','','','','plug_ins','whether','index.php?module=plug_ins&action=whether',100,3,0,0,'2018-10-25 23:08:17',0),(109,154,'删除','','','','plug_ins','del','index.php?module=plug_ins&action=del',100,3,0,0,'2018-10-25 23:08:36',0),(110,154,'浏览','','','','plug_ins','index','index.php?module=plug_ins&action=index',100,3,0,0,'2018-10-25 23:09:02',0),(111,86,'评价管理','','','','comments','index','index.php?module=comments',100,2,0,0,'2018-10-25 23:12:17',0),(112,111,'回复','','','','comments','reply','index.php?module=comments&action=reply',100,3,0,0,'2018-10-25 23:12:54',0),(113,111,'修改','','','','comments','modify','index.php?module=comments&action=modify',100,3,0,0,'2018-10-25 23:13:20',0),(114,111,'删除','','','','comments','del','index.php?module=comments&action=del',100,3,0,0,'2018-10-25 23:13:41',0),(115,111,'浏览','','','','comments','index','index.php?module=comments&action=index',100,3,0,0,'2018-10-25 23:14:01',0),(116,212,'轮播图管理','','','','banner','index','index.php?module=banner',100,2,0,0,'2018-10-25 23:16:10',0),(117,116,'添加','','','','banner','add','index.php?module=banner&action=add',100,3,0,0,'2018-10-25 23:16:48',0),(118,116,'修改','','','','banner','modify','index.php?module=banner&action=modify',100,3,0,0,'2018-10-25 23:17:10',0),(119,116,'删除','','','','banner','del','index.php?module=banner&action=del',100,3,0,0,'2018-10-25 23:17:33',0),(120,116,'浏览','','','','banner','index','index.php?module=banner&action=index',100,3,0,0,'2018-10-25 23:17:55',0),(121,212,'支付设置','','','','system','pay','index.php?module=system&action=pay',100,2,0,1,'2018-10-25 23:19:24',0),(122,212,'消息管理','','','','system','template_message','index.php?module=system&action=template_message',100,2,0,1,'2018-10-25 23:21:34',0),(123,86,'推广图设置','','','','extension','index','index.php?module=extension',100,2,0,0,'2018-10-25 23:22:03',0),(124,123,'添加','','','','extension','add','index.php?module=extension&action=add',100,3,0,0,'2018-10-25 23:22:23',0),(125,123,'修改','','','','extension','modify','index.php?module=extension&action=modify',100,3,0,0,'2018-10-25 23:22:58',0),(126,123,'删除','','','','extension','del','index.php?module=extension&action=del',100,3,0,0,'2018-10-25 23:23:20',0),(127,123,'清推广图缓存','','','','extension','del_simg','index.php?module=extension&action=del_simg',100,3,0,0,'2018-10-25 23:24:13',0),(128,123,'浏览','','','','extension','index','index.php?module=extension&action=index',100,3,0,0,'2018-10-25 23:24:35',0),(129,212,'前台背景颜色','','','','bgcolor','index','index.php?module=bgcolor',100,2,0,0,'2018-10-25 23:26:46',0),(130,129,'添加','','','','bgcolor','add','index.php?module=bgcolor&action=add',100,3,0,0,'2018-10-25 23:27:09',0),(131,129,'启用','','','','bgcolor','enable','index.php?module=bgcolor&action=enable',100,3,0,0,'2018-10-25 23:27:44',0),(132,129,'修改','','','','bgcolor','modify','index.php?module=bgcolor&action=modify',100,3,0,0,'2018-10-25 23:28:04',0),(133,129,'删除','','','','bgcolor','del','index.php?module=bgcolor&action=del',100,3,0,0,'2018-10-25 23:28:23',0),(134,129,'浏览','','','','bgcolor','index','index.php?module=bgcolor&action=index',100,3,0,0,'2018-10-25 23:28:41',0),(135,99,'批量删除','','','','member','member_record_del','index.php?module=member&action=member_record_del',100,3,0,0,'2018-10-25 23:34:21',0),(136,99,'浏览','','','','member','member_record','index.php?module=member&action=member_record',100,3,0,0,'2018-10-25 23:34:49',0),(137,73,'添加','','','','menu','modify','index.php?module=menu&action=modify',100,3,0,0,'2018-10-25 23:35:46',0),(138,73,'修改','','','','menu','modify','index.php?module=menu&action=modify',100,3,0,0,'2018-10-25 23:36:40',0),(139,73,'删除','','','','menu','del','index.php?module=menu&action=del',100,3,0,0,'2018-10-25 23:37:04',0),(140,212,'系统设置','','','','system','index','index.php?module=system',97,2,0,0,'2018-10-25 23:37:52',0),(142,86,'版本控制','','','','software','index','index.php?module=software',100,2,1,0,'2018-10-25 23:47:29',1),(143,142,'添加','','','','software','add','index.php?module=software&action=add',100,3,1,0,'2018-10-25 23:47:53',1),(144,142,'修改','','','','software','modify','index.php?module=software&action=modify',100,3,1,0,'2018-10-25 23:48:18',1),(145,142,'删除','','','','software','del','index.php?module=software&action=del',100,3,1,0,'2018-10-25 23:48:38',1),(153,0,'插件管理','','../LKT/images/menu/154150136137.png','../LKT/images/menu/1541501366796.png','','','',100,1,0,0,'2018-10-25 23:58:38',0),(154,153,'插件列表','','','','plug_ins','index','index.php?module=plug_ins',100,2,0,0,'2018-10-25 23:59:57',0),(156,162,'添加','','','','coupon','add','index.php?module=coupon&action=add',100,4,0,0,'2018-10-26 00:10:50',0),(157,162,'启用/禁用','','','','coupon','whether','index.php?module=coupon&action=whether',100,3,0,0,'2018-10-26 00:11:46',0),(158,162,'修改','','','','coupon','modify','index.php?module=coupon&action=modify',100,3,0,0,'2018-10-26 00:12:35',0),(159,162,'删除','','','','coupon','del','index.php?module=coupon&action=del',100,3,0,0,'2018-10-26 00:13:01',0),(160,162,'浏览','','','','coupon','index','index.php?module=coupon&action=index',100,3,0,0,'2018-10-26 00:13:30',0),(161,155,'优惠券列表','','','','coupon','coupon','index.php?module=coupon&action=coupon',100,3,0,0,'2018-10-26 00:14:38',0),(162,155,'优惠券活动','','','','coupon','index','index.php?module=coupon',100,3,0,0,'2018-10-26 00:15:25',0),(163,153,'签到','','','','sign','index','index.php?module=pi&p=sign',100,2,0,0,'2018-10-26 00:18:14',0),(164,163,'签到活动','','','','sign','index','index.php?module=pi&p=sign',100,3,0,0,'2018-10-26 00:18:52',0),(165,164,'添加','','','','sign','add','index.php?module=pi&p=sign&c=add',100,4,0,0,'2018-10-26 00:19:40',0),(166,164,'修改','','','','sign','modify','index.php?module=pi&p=sign&c=modify',100,4,0,0,'2018-10-26 00:20:43',0),(167,164,'删除','','','','sign','del','index.php?module=pi&p=sign&c=del',100,4,0,0,'2018-10-26 00:22:25',0),(168,164,'浏览','','','','sign','index','index.php?module=pi&p=sign',100,4,0,0,'2018-10-26 00:23:18',0),(169,163,'签到记录','','','','sign','record','index.php?module=pi&p=sign&c=record',100,3,0,0,'2018-10-26 00:23:58',0),(170,153,'拼团','','','','go_group','index','index.php?module=pi&p=pintuan',100,2,0,0,'2018-10-26 00:26:22',0),(171,170,'添加','','','','go_group','addgroup','index.php?module=go_group&action=addgroup',100,3,0,0,'2018-10-26 00:27:03',0),(172,170,'修改','','','','go_group','modify','index.php?module=go_group&action=modify',100,3,0,0,'2018-10-26 00:27:39',0),(173,170,'修改商品','','','','go_group','grouppro','index.php?module=go_group&action=grouppro',100,3,0,0,'2018-10-26 00:28:45',0),(174,170,'删除','','','','go_group','del','index.php?module=go_group&action=del',100,3,0,0,'2018-10-26 00:29:08',0),(175,170,'浏览','','','','go_group','index','index.php?module=pi&p=pintuan',100,3,0,0,'2018-10-26 00:29:32',0),(176,153,'抽奖','','','','draw','index','index.php?module=draw',100,2,0,0,'2018-10-26 00:30:26',1),(177,176,'添加','','','','draw','addsign','index.php?module=draw&action=addsign',100,3,0,0,'2018-10-26 00:33:53',1),(178,176,'修改','','','','draw','modify','index.php?module=draw&action=modify',100,3,0,0,'2018-10-26 00:34:26',1),(179,176,'抽奖','','','','draw','whether','index.php?module=draw&action=whether',100,3,0,0,'2018-10-26 00:35:51',1),(180,176,'参数','','','','draw','parameters','index.php?module=draw&action=parameters',100,3,0,0,'2018-10-26 00:36:16',1),(181,176,'详情','','','','draw','operation','index.php?module=draw&action=operation',100,3,0,0,'2018-10-26 00:37:44',1),(182,176,'删除','','','','draw','del','index.php?module=draw&action=del',100,3,0,0,'2018-10-26 00:38:13',1),(183,176,'浏览','','','','draw','index','index.php?module=draw&action=index',100,3,0,0,'2018-10-26 00:38:47',1),(212,0,'小程序','','../LKT/images/menu/1540551247907.png','../LKT/images/menu/1540551255968.png','system','index','index.php?module=system',100,1,0,1,'2018-10-26 01:11:01',0),(213,212,'小程序首页','','','','software','pageindei','index.php?module=software&action=pageindex',98,2,0,1,'2018-10-26 01:11:45',0),(214,213,'添加','','','','software','pageadd','index.php?module=software&action=pageadd',100,3,0,0,'2018-10-26 01:12:51',0),(215,213,'修改','','','','software','pagemodify','index.php?module=software&action=pagemodify',100,3,0,1,'2018-10-26 01:13:17',0),(216,213,'删除','','','','software','pagedel','index.php?module=software&action=pagedel',100,3,0,1,'2018-10-26 01:13:58',0),(217,213,'浏览','','','','software','pageindex','index.php?module=software&action=pageindex',100,3,0,0,'2018-10-26 01:14:32',0),(218,212,'积分参数','','','','software','jifen','index.php?module=software&action=jifen',99,2,0,1,'2018-10-26 01:15:31',0),(225,1,'管理员管理','','','','member','index','index.php?module=member',100,2,0,0,'2018-10-26 09:23:05',0);
 /*!40000 ALTER TABLE `lkt_core_menu` ENABLE KEYS */;
 UNLOCK TABLES;
+
+LOCK TABLES `lkt_core_menu` WRITE;
+/*!40000 ALTER TABLE `lkt_core_menu` DISABLE KEYS */;
+insert into lkt_core_menu(s_id,title,module,action,level,url,image,image1,sort,type,add_time) value('86','热门搜索设置','keyword','index','2','index.php?module=keyword','','','100','0',CURRENT_TIMESTAMP);
+update lkt_core_menu set recycle = 1 where id = '217';
+update lkt_core_menu set recycle = 1 where id = '216';
+update lkt_core_menu set recycle = 1 where id = '215';
+update lkt_core_menu set recycle = 1 where id = '214';
+update lkt_core_menu set recycle = 1 where id = '213';
+INSERT INTO `lkt_core_menu` (`s_id`, `title`, `name`, `image`, `image1`, `module`, `action`, `url`, `sort`, `level`, `is_core`, `type`, `add_time`, `recycle`) VALUES (153, '分销', '', '', '', 'distribution', 'index', 'index.php?module=pi&p=distribution&c=Home', '100', '2', '0', '0', '2020-05-02 20:01:01', '0');
+/*!40000 ALTER TABLE `lkt_core_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 --
 -- Table structure for table `lkt_coupon`
@@ -867,67 +902,7 @@ INSERT INTO `lkt_freight` VALUES (1,'偏远地区20元',0,'a:5:{i:0;a:5:{s:3:\"o
 /*!40000 ALTER TABLE `lkt_freight` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `lkt_group_buy`
---
 
-DROP TABLE IF EXISTS `lkt_group_buy`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `lkt_group_buy` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `groupname` varchar(100) NOT NULL DEFAULT '' COMMENT '拼团活动名称',
-  `man_num` int(2) unsigned DEFAULT NULL COMMENT '拼团人数',
-  `time_over` char(10) NOT NULL DEFAULT '' COMMENT '活动时限',
-  `starttime` char(15) NOT NULL DEFAULT '' COMMENT '活动开始时间',
-  `endtime` char(15) NOT NULL DEFAULT '' COMMENT '活动结束时间',
-  `groupnum` int(2) unsigned DEFAULT NULL COMMENT '可同时进行的参团数',
-  `productnum` int(2) unsigned DEFAULT NULL COMMENT '用户参团可购买产品数',
-  `status` char(6) NOT NULL DEFAULT '' COMMENT '活动编号',
-  `is_show` smallint(6) DEFAULT '0' COMMENT '是否正在执行? 0:未执行,1:执行',
-  `overtype` char(2) DEFAULT NULL COMMENT '结束时间radio:1,长期 2,定期',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='关于拼团活动设置';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `lkt_group_buy`
---
-
-LOCK TABLES `lkt_group_buy` WRITE;
-/*!40000 ALTER TABLE `lkt_group_buy` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lkt_group_buy` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `lkt_group_config`
---
-
-DROP TABLE IF EXISTS `lkt_group_config`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `lkt_group_config` (
-  `refunmoney` smallint(6) NOT NULL COMMENT '退款方式: 1,自动 2,手动'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='拼团参数配置表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `lkt_group_config`
---
-
-LOCK TABLES `lkt_group_config` WRITE;
-/*!40000 ALTER TABLE `lkt_group_config` DISABLE KEYS */;
-INSERT INTO `lkt_group_config` VALUES (1);
-/*!40000 ALTER TABLE `lkt_group_config` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `lkt_group_open`
---
-
-DROP TABLE IF EXISTS `lkt_group_open`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lkt_group_open` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` char(40) NOT NULL DEFAULT '' COMMENT '用户id',
@@ -938,47 +913,42 @@ CREATE TABLE `lkt_group_open` (
   `endtime` datetime DEFAULT NULL COMMENT '结束时间',
   `ptstatus` tinyint(1) DEFAULT '0' COMMENT '0:未付款 1:拼团中，2:拼团成功, 3：拼团失败, ',
   `group_id` char(10) NOT NULL COMMENT '所属拼团',
+  `sNo` varchar(255) DEFAULT NULL COMMENT '订单号',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户拼团表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `lkt_group_open`
---
 
-LOCK TABLES `lkt_group_open` WRITE;
-/*!40000 ALTER TABLE `lkt_group_open` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lkt_group_open` ENABLE KEYS */;
+CREATE TABLE `lkt_group_config` (
+  `id` int(11) unsigned NOT NULL COMMENT 'id',
+  `refunmoney` smallint(6) NOT NULL COMMENT '退款方式: 1,自动 2,手动',
+  `group_time` int(11) NOT NULL COMMENT '拼团时限',
+  `open_num` int(11) NOT NULL COMMENT '开团数量',
+  `can_num` int(11) NOT NULL COMMENT '参团数量',
+  `can_again` tinyint(1) NOT NULL COMMENT '是否可重复参团1 是 0 否',
+  `open_discount` tinyint(1) NOT NULL COMMENT '是否开启团长优惠 1 是 0 否',
+  `rule` text NOT NULL COMMENT '规则',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='拼团参数配置表';
+
+LOCK TABLES `lkt_group_config` WRITE;
+/*!40000 ALTER TABLE `lkt_group_config` DISABLE KEYS */;
+INSERT INTO `lkt_group_config` (`id`, `refunmoney`, `group_time`, `open_num`, `can_num`, `can_again`, `open_discount`, `rule`) VALUES ('1', '1', '1', '10', '10', '1', '1', '<p style=\"text-align: left;\"><span style=\"font-size: 18px;\">拼团规则：</span></p><p style=\"text-align: left;\"><span style=\"font-size: 14px;\">1、卖家点击商品详情查看活动，下单支付成功算开团，成为团长</span></p><p style=\"text-align: left;\"><span style=\"font-size: 14px;\">2、开团后进入团详情，分享给好友，好友拍下支付成功则开团成功</span></p><p style=\"text-align: left;\"><span style=\"font-size: 10px;\">温馨提示：开团后有效期以拼团时限；有效期内凑成人数算成团；等待商家发货，若有效期内没成团，原路退回。最终解释权归本商城所有。</span></p><p><br/></p>');
+/*!40000 ALTER TABLE `lkt_group_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `lkt_group_product`
---
-
-DROP TABLE IF EXISTS `lkt_group_product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lkt_group_product` (
+  `group_id` int(11) NOT NULL COMMENT '活动ID',
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `group_title` varchar(255) NOT NULL DEFAULT '' COMMENT '拼团活动标题',
   `attr_id` int(11) NOT NULL COMMENT '规格id',
-  `group_id` int(11) DEFAULT NULL COMMENT '所属拼团',
   `product_id` int(11) unsigned DEFAULT NULL COMMENT '产品id',
-  `group_price` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT '拼团价格',
-  `member_price` decimal(12,2) NOT NULL DEFAULT '0.00' COMMENT '团长价',
-  `classname` char(30) NOT NULL DEFAULT '' COMMENT '产品类名',
+  `group_level` varchar(200) NOT NULL DEFAULT '' COMMENT '拼团等级价格参数',
+  `group_data` varchar(300) NOT NULL DEFAULT '' COMMENT '拼团参数数据',
+  `g_status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '活动状态: 1--未开始 2--活动中 3--已结束',
+  `is_show` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否显示',
+  `recycle` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0不回收，1.回收',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='拼团产品';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `lkt_group_product`
---
-
-LOCK TABLES `lkt_group_product` WRITE;
-/*!40000 ALTER TABLE `lkt_group_product` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lkt_group_product` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `lkt_guide`
 --
@@ -1014,7 +984,7 @@ DROP TABLE IF EXISTS `lkt_hotkeywords`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lkt_hotkeywords` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL  AUTO_INCREMENT,
   `keyword` char(60) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1285,6 +1255,7 @@ CREATE TABLE `lkt_order` (
   `allow` int(8) DEFAULT '0' COMMENT '积分',
   `parameter` text COMMENT '参数',
   `source` tinyint(4) DEFAULT NULL COMMENT '来源 1.小程序 2.app',
+  `plugin` varchar(255) DEFAULT NULL COMMENT '插件标志',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1386,6 +1357,7 @@ CREATE TABLE `lkt_order_details` (
   `freight` int(4) DEFAULT '0' COMMENT '运费',
   `size` varchar(100) DEFAULT NULL COMMENT '配置名称',
   `sid` char(11) DEFAULT NULL,
+  `plugin` varchar(255) DEFAULT NULL COMMENT '插件标志',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单详情列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1420,6 +1392,7 @@ CREATE TABLE `lkt_plug_ins` (
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0：未启用 1：启用',
   `Customer_id` varchar(15) DEFAULT '' COMMENT '客户id',
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '插件标志',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='插件表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1430,7 +1403,11 @@ CREATE TABLE `lkt_plug_ins` (
 
 LOCK TABLES `lkt_plug_ins` WRITE;
 /*!40000 ALTER TABLE `lkt_plug_ins` DISABLE KEYS */;
-INSERT INTO `lkt_plug_ins` VALUES (1,'3','优惠劵','我的优惠劵',0,'1541641112751.png','1541641131972.png','../coupon/index?currentTab=0&type=receive','../coupon/index?currentTab=1','2018-11-08 01:38:53',2,1,''),(2,'3','钱包','我的钱包',0,'1541641206532.png','1541641182932.png','../user/wallet','../user/wallet','2018-11-08 01:40:06',1,1,''),(3,'3','签到','我的积分',0,'1541641221938.png','1541641238944.png','../sign_in/sign_in','../user/score','2018-11-08 01:40:39',4,1,''),(5,'3','拼团','我的拼团',0,'1541641254824.png','154164126521.png','../group_buy/group','../order/order?currentTab=0&otype=pay6','2018-11-08 01:41:06',5,1,'');
+INSERT INTO `lkt_plug_ins` VALUES ('1', '3', '优惠劵', '我的优惠劵', '0', '1541641112751.png', '1541641131972.png', '../coupon/index?currentTab=0&type=receive', '../coupon/index?currentTab=1', '2018-11-08 17:38:53', '2', '1', '', 'YHQ');
+INSERT INTO `lkt_plug_ins` VALUES ('2', '3', '钱包', '我的钱包', '0', '1571913117990.png', '1571904693789.png', '../user/wallet', '../user/wallet', '2019-10-24 18:31:59', '1', '1', '', 'QB');
+INSERT INTO `lkt_plug_ins` VALUES ('3', '3', '签到', '我的积分', '0', '1541641221938.png', '1541641238944.png', '../sign_in/sign_in', '../user/score', '2018-11-08 17:40:39', '4', '1', '', 'QD');
+INSERT INTO `lkt_plug_ins` VALUES ('5', '3', '拼团', '我的拼团', '0', '1541641254824.png', '1571904730253.png', '../group_buy/group', '../order/order?currentTab=0&otype=pay6', '2019-10-25 00:12:12', '5', '1', '', 'PT');
+INSERT INTO `lkt_plug_ins` (`id`, `software_id`, `name`, `subtitle_name`, `type`, `image`, `subtitle_image`, `url`, `subtitle_url`, `add_time`, `sort`, `status`, `Customer_id`, `code`) VALUES (NULL, '3', '直播间', '进入直播间', '0', '1571905532198.png', '1571904730253.png', 'plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=直播房间id', 'plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=直播房间id', '2019-10-25 08:12:12', '5', '1', '', 'LIVE');
 /*!40000 ALTER TABLE `lkt_plug_ins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1461,7 +1438,26 @@ CREATE TABLE `lkt_product_class` (
 
 LOCK TABLES `lkt_product_class` WRITE;
 /*!40000 ALTER TABLE `lkt_product_class` DISABLE KEYS */;
-INSERT INTO `lkt_product_class` VALUES (1,0,'百货','1541601571889.jpeg','1541601586943.jpeg',0,139,'2018-05-01 14:07:03',0);
+-- INSERT INTO `lkt_product_class` VALUES (1,0,'百货','1541601571889.jpeg','1541601586943.jpeg',0,139,'2018-05-01 14:07:03',0);
+INSERT INTO `lkt_product_class` VALUES ('1', '0', '日用百货', '1571902493657.png', '1571904192519.png', '0', '100', '2018-05-01 22:07:03', '0');
+INSERT INTO `lkt_product_class` VALUES ('2', '0', '手机数码', '1571902538514.png', '1571904235115.png', '0', '100', '2018-05-01 22:07:03', '0');
+INSERT INTO `lkt_product_class` VALUES ('3', '0', '家居家纺', '1571902573296.png', '157190426397.png', '0', '100', '2018-05-01 22:07:03', '0');
+INSERT INTO `lkt_product_class` VALUES ('4', '0', '家用电器', '157190229434.png', '1571904336804.png', '0', '100', '2018-05-01 22:07:03', '0');
+INSERT INTO `lkt_product_class` VALUES ('5', '0', '美妆护理', '1571902336563.png', '1571904350158.png', '0', '100', '2018-05-01 22:07:03', '0');
+INSERT INTO `lkt_product_class` VALUES ('6', '0', '服饰箱包', '1571902376170.png', '1571904382225.png', '0', '100', '2018-05-01 22:07:03', '0');
+INSERT INTO `lkt_product_class` VALUES ('7', '0', '精致鞋靴', '157190239316.png', '1571904402862.png', '0', '100', '2018-05-01 22:07:03', '0');
+INSERT INTO `lkt_product_class` VALUES ('18', '1', '收纳整理', '1571905532198.png', '', '1', '100', '2019-10-24 16:25:34', '0');
+INSERT INTO `lkt_product_class` VALUES ('19', '1', '厨房工具', '1571905819306.png', '', '1', '100', '2019-10-24 16:30:21', '0');
+INSERT INTO `lkt_product_class` VALUES ('20', '2', '手机', '1571905896705.png', '', '1', '100', '2019-10-24 16:31:38', '0');
+INSERT INTO `lkt_product_class` VALUES ('21', '2', '平板', '1571906215766.png', '', '1', '100', '2019-10-24 16:35:40', '0');
+INSERT INTO `lkt_product_class` VALUES ('22', '3', '卧室家具', '1571906316856.jpeg', '', '1', '100', '2019-10-24 16:38:37', '0');
+INSERT INTO `lkt_product_class` VALUES ('23', '4', '厨房电器', '1571906401230.jpeg', '', '1', '100', '2019-10-24 16:40:06', '0');
+INSERT INTO `lkt_product_class` VALUES ('24', '4', '大家电', '1571906455925.jpeg', '', '1', '100', '2019-10-24 16:40:56', '0');
+INSERT INTO `lkt_product_class` VALUES ('25', '5', '美容护肤', '1571906498482.jpeg', '', '1', '100', '2019-10-24 16:41:39', '0');
+INSERT INTO `lkt_product_class` VALUES ('26', '6', '女装', '1571906576506.png', '', '1', '100', '2019-10-24 16:42:58', '0');
+INSERT INTO `lkt_product_class` VALUES ('27', '6', '行李箱', '1571906612578.png', '', '1', '100', '2019-10-24 16:43:33', '0');
+INSERT INTO `lkt_product_class` VALUES ('28', '7', '女鞋', '1571906639760.png', '', '1', '100', '2019-10-24 16:44:00', '0');
+
 /*!40000 ALTER TABLE `lkt_product_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1500,7 +1496,7 @@ CREATE TABLE `lkt_product_img` (
   `id` int(11) unsigned NOT NULL COMMENT '图片id',
   `product_url` varchar(100) NOT NULL COMMENT '产品图片',
   `product_id` int(11) NOT NULL COMMENT '所属产品id',
-  `seller_id` char(15) NOT NULL DEFAULT '' COMMENT '用户id',
+  `seller_id` char(15) DEFAULT '' COMMENT '用户id',
   `add_date` timestamp NULL DEFAULT NULL COMMENT '添加时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='图片表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1508,6 +1504,12 @@ CREATE TABLE `lkt_product_img` (
 --
 -- Dumping data for table `lkt_product_img`
 --
+
+INSERT INTO `lkt_product_img` VALUES ('1', '154164716539.jpg', '1', '', '2018-04-19 18:23:39');
+INSERT INTO `lkt_product_img` VALUES ('0', '157190702561.png', '2', '', '2019-10-24 16:50:25');
+INSERT INTO `lkt_product_img` VALUES ('0', '15719072704.png', '3', '', '2019-10-24 16:54:30');
+INSERT INTO `lkt_product_img` VALUES ('0', '157190795624.png', '4', '', '2019-10-24 17:05:56');
+ALTER TABLE `lkt_product_img` ADD `seq` TINYINT NOT NULL DEFAULT '0' AFTER `product_id`;
 
 LOCK TABLES `lkt_product_img` WRITE;
 /*!40000 ALTER TABLE `lkt_product_img` DISABLE KEYS */;
@@ -1524,10 +1526,9 @@ DROP TABLE IF EXISTS `lkt_product_list`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lkt_product_list` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '产品id',
-  `product_number` varchar(100) NOT NULL COMMENT '商品编号',
+  `product_number` varchar(100)  COMMENT '商品编号',
   `product_title` varchar(100) NOT NULL DEFAULT '' COMMENT '产品名字',
   `subtitle` varchar(100) DEFAULT NULL COMMENT '副标题',
-  `scan` varchar(250) NOT NULL COMMENT '条形码',
   `product_class` varchar(32) NOT NULL COMMENT '产品类别',
   `imgurl` varchar(200) NOT NULL DEFAULT '' COMMENT '产品图片',
   `content` text NOT NULL COMMENT '产品内容',
@@ -1536,18 +1537,26 @@ CREATE TABLE `lkt_product_list` (
   `volume` int(12) NOT NULL DEFAULT '0' COMMENT '销量',
   `s_type` varchar(20) DEFAULT NULL COMMENT '产品值属性 1：新品,2：热销，3：推荐',
   `num` int(11) NOT NULL DEFAULT '0' COMMENT '数量',
-  `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '状态 0::上架 1:下架',
+  `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '状态 0::上架 1:下架2:待上架',
   `seller_id` char(15) NOT NULL DEFAULT '' COMMENT '用户id',
   `brand_id` int(11) NOT NULL DEFAULT '0' COMMENT '品牌ID',
   `is_distribution` int(2) DEFAULT '0' COMMENT '是否为分销商品',
   `is_default_ratio` int(2) DEFAULT '0' COMMENT '是否默认比例',
-  `keyword` varchar(100) DEFAULT NULL COMMENT '关键词',
   `weight` varchar(100) DEFAULT NULL COMMENT '重量',
   `distributor_id` int(5) DEFAULT '0' COMMENT '分销等级id 购买就升级',
   `freight` text NOT NULL COMMENT '运费',
   `is_zhekou` int(2) DEFAULT '0' COMMENT '是否开启会员',
   `separate_distribution` varchar(50) DEFAULT '0' COMMENT '单独分销',
   `recycle` tinyint(4) NOT NULL DEFAULT '0' COMMENT '回收站 0.显示 1.回收',
+  `initial` varchar(255) DEFAULT NULL COMMENT '初始值',
+  `leve` int(2) DEFAULT '0' COMMENT '向上返几级',
+  `leve1` float(4,2) DEFAULT '0.00' COMMENT '一级佣金比例',
+  `leve2` float(4,2) DEFAULT '0.00' COMMENT '二级佣金比例',
+  `leve3` float(4,2) DEFAULT '0.00' COMMENT '三级佣金比例',
+  `leve4` float(4,2) DEFAULT '0.00' COMMENT '四级佣金比例',
+  `leve5` float(4,2) DEFAULT '0.00' COMMENT '五级佣金比例',
+  `type` int(2) DEFAULT '1' COMMENT '佣金发放类型，1 支付成功 2.确认收货',
+  `commissions` float(11,2) DEFAULT '0.00' COMMENT '分销佣金所需手续费',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='产品表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1558,9 +1567,29 @@ CREATE TABLE `lkt_product_list` (
 
 LOCK TABLES `lkt_product_list` WRITE;
 /*!40000 ALTER TABLE `lkt_product_list` DISABLE KEYS */;
-INSERT INTO `lkt_product_list` VALUES (1,'','LEGO 乐高积木 创意百变系列 玩具和百货商店 31036','','610610','-1-','1541597062168.jpeg','<p style=\"text-align: center;\"><img src=\"/ueditor/php/upload/image/20181107/1541597101.jpg\" title=\"1541597101.jpg\" alt=\"59bb872eNf44497eb.jpg\"/></p>',100,'2018-06-21 15:50:03',49,'1,2,3',64,0,'',9,0,0,'乐高积木','12.00',0,'0',0,'0',0);
+-- INSERT INTO `lkt_product_list` VALUES ('1', '', 'LEGO 乐高积木 创意百变系列 玩具和百货商店 31036', '', '-1-', '1541597062168.jpeg','<p style=\"text-align: center;\"><img src=\"/ueditor/php/upload/image/20181107/1541597101.jpg\" title=\"1541597101.jpg\" alt=\"59bb872eNf44497eb.jpg\"/></p>','100', '2018-06-21 15:50:03', '49', '1,2,3', '64', '0', '', '9', '0', '0', '12.00', '0', '1', '0', '0', '0', 'a:5:{s:3:\"cbj\";s:2:\"20\";s:2:\"yj\";s:3:\"100\";s:2:\"sj\";s:2:\"60\";s:4:\"unit\";s:3:\"盒\";s:5:\"kucun\";s:2:\"64\";}','0','0.00','0.00','0.00','0.00','0.00','1','0.00');
+INSERT INTO `lkt_product_list` VALUES ('1', '', 'LEGO 乐高积木 创意百变系列 玩具和百货商店 31036', '', '-1-', '1541597062168.jpeg', '<p style=\"text-align: center;\"><img src=\"/ueditor/php/upload/image/20181107/1541597101.jpg\" title=\"1541597101.jpg\" alt=\"59bb872eNf44497eb.jpg\"/></p>', '100', '2018-06-21 23:50:03', '49', '1,2,3,4', '64', '0', '', '9', '0', '0', '12.00', '0', '1', '0', '0', '0', 'a:5:{s:3:\"cbj\";s:2:\"20\";s:2:\"yj\";s:3:\"100\";s:2:\"sj\";s:2:\"60\";s:4:\"unit\";s:3:\"盒\";s:5:\"kucun\";s:2:\"64\";}', '0', '0.00', '0.00', '0.00', '0.00', '0.00', '1', '0.00');
+INSERT INTO `lkt_product_list` VALUES ('2', null, '夹缝收纳柜抽屉式间隙储物柜子塑料窄缝箱缝隙置物架20/25/35cm宽', '夹缝收纳柜抽屉式间隙储物柜子塑料窄缝箱缝隙置物架', '-1-18-', '1571906756206.png', '<p><br/></p><p class=\"attr-list-hd tm-clear\" style=\"margin-top: 0px; margin-bottom: 0px; padding: 5px 20px; line-height: 22px; color: rgb(153, 153, 153); font-family: tahoma, arial, 微软雅黑, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"margin: 0px; padding: 0px; font-weight: 700; float: left;\">产品参数：</span></p><ul id=\"J_AttrUL\" data-spm-anchor-id=\"a220o.1000855.0.i5.3d596566ZpPyl8\" style=\"list-style-type: none;\" class=\" list-paddingleft-2\"><li><p>品牌:&nbsp;KAFEE BEAR/咖啡熊</p></li><li><p>型号:&nbsp;2551</p></li><li><p>材质:&nbsp;塑料</p></li><li><p>风格:&nbsp;北欧风格</p></li><li><p>产地:&nbsp;中国大陆</p></li><li><p>省份:&nbsp;广东省</p></li><li><p>地市:&nbsp;揭阳市</p></li><li><p>格数:&nbsp;3个&nbsp;4个&nbsp;5个&nbsp;</p></li><li><p>流行元素:&nbsp;马卡龙色</p></li><li><p>适用空间:&nbsp;厨房</p></li><li><p>适用人群:&nbsp;大众</p></li><li><p>产品出口必备单证:&nbsp;原产地证</p></li><li><p>出口检测机构:&nbsp;sgs</p></li><li><p>验厂标准:&nbsp;BSCI</p></li><li><p>企业出口资质:&nbsp;对外贸易经营者备案登记表</p></li><li><p>国家/地区:&nbsp;香港</p></li><li><p>出口国:&nbsp;亚洲</p></li><li><p>层数:&nbsp;5层</p></li><li><p>是否手工:&nbsp;否</p></li></ul><p><br/></p>', null, '2019-10-24 16:50:25', '0', '1,2,4', '600', '0', '', '9', '0', '0', '', '0', '2', '0', '0', '0', 'a:5:{s:3:\"cbj\";s:2:\"20\";s:2:\"yj\";s:3:\"200\";s:2:\"sj\";s:3:\"100\";s:4:\"unit\";s:3:\"件\";s:5:\"kucun\";s:3:\"100\";}', '0', '0.00', '0.00', '0.00', '0.00', '0.00', '1', '0.00');
+INSERT INTO `lkt_product_list` VALUES ('3', null, '拜格刀具套装厨房家用全套厨具不锈钢宝宝婴儿辅食工具水果刀菜刀', '拜格刀具套装厨房家用全套厨具不锈钢宝宝婴儿辅食工具水果刀菜刀', '-1-19-', '1571907986688.png', '<p class=\"attr-list-hd tm-clear\" style=\"margin-top: 0px; margin-bottom: 0px; padding: 5px 20px; line-height: 22px; color: rgb(153, 153, 153);\"><span style=\"margin: 0px; padding: 0px; font-weight: 700; float: left;\">产品参数：</span></p><p><br/></p><ul id=\"J_AttrUL\" data-spm-anchor-id=\"a220o.1000855.0.i0.186c7ba58SK1XU\" style=\"list-style-type: none;\" class=\" list-paddingleft-2\"><li><p>型号:&nbsp;XKJ7207</p></li><li><p>材质:&nbsp;400系列不锈钢</p></li><li><p>风格:&nbsp;欧式</p></li><li><p>产地:&nbsp;中国大陆</p></li><li><p>件数:&nbsp;6件</p></li><li><p>颜色分类:&nbsp;【玫瑰黑金】4件套&nbsp;【炫酷黑刃】黑刃4件套&nbsp;【黑凤凰】品质黑刃3件套&nbsp;【黑凤凰】品质黑刃5件套&nbsp;【限时特惠】金纹刀具菜板5件套&nbsp;【黑凤凰】6件套（含刀架菜板）&nbsp;【黑凤凰】加厚菜板剪刀6件套&nbsp;【玫瑰黑金】黑刃加厚菜板剪刀6件套&nbsp;【炫酷黑刃】黑刃加厚菜板剪刀6件套&nbsp;【黑飓风】3件套&nbsp;【颜值黑刃】4件套&nbsp;【玫瑰黑金】黑刃6件套&nbsp;【黑飓风】5件套&nbsp;【黑飓风】6件套（含刀架）</p></li><li><p>适用场景:&nbsp;日常送礼</p></li><li><p>适用人群:&nbsp;大众</p></li><li><p>是否开刃:&nbsp;是</p></li><li><p>刀尖角度:&nbsp;60°以上</p></li><li><p>刃长:&nbsp;175mm</p></li></ul><p style=\"margin-top: 1.12em; margin-bottom: 1.12em; padding: 0px; line-height: 1.4;\"><img src=\"/ueditor/php/upload/image/20191024/1571907221480134.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221936014.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221372078.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221118821.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221856656.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221256097.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221650578.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221212298.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907221426321.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222309974.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222313897.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222177791.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222569434.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222843115.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222530955.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222539469.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907222346229.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907223232381.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/></p><p><span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span></p><p><br/></p>', null, '2019-10-24 16:54:30', '0', '1,2,3,4', '600', '0', '', '9', '0', '0', '', '0', '2', '0', '0', '0', 'a:5:{s:3:\"cbj\";s:3:\"100\";s:2:\"yj\";s:4:\"1000\";s:2:\"sj\";s:3:\"499\";s:4:\"unit\";s:3:\"组\";s:5:\"kucun\";s:3:\"300\";}', '0', '0.00', '0.00', '0.00', '0.00', '0.00', '1', '0.00');
+INSERT INTO `lkt_product_list` VALUES ('4', null, '【3期免息|享保护套】华为平板M6 10.8英寸 影音游戏WiFi/4G可通话 平板电脑二合一m5升级款新pad 苏宁旗舰店', '【3期免息|享保护套】华为平板M6 10.8英寸 影音游戏WiFi/4G可通话 平板电脑二合一m5升级款新pad 苏宁旗舰店', '-2-21-', '1571907933323.png', '<p style=\"margin-top: 1.12em; margin-bottom: 1.12em; padding: 0px; line-height: 1.4;\"><img src=\"/ueditor/php/upload/image/20191024/1571907808688359.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" data-spm-anchor-id=\"a220o.1000855.0.i1.ca5924b7ZwamfV\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/></p><p style=\"margin-top: 1.12em; margin-bottom: 1.12em; padding: 0px; line-height: 1.4;\"><img src=\"/ueditor/php/upload/image/20191024/1571907809756982.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907809874285.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907812997808.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907812286767.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907812871091.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907812774244.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907812146457.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907813997029.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907813696510.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907813740500.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907813247758.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907813234389.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907813353957.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/><img src=\"/ueditor/php/upload/image/20191024/1571907813970594.jpg\" align=\"absmiddle\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: 350ms linear 0ms 1 normal both running ks-fadeIn; opacity: 1; vertical-align: top; max-width: 100%; float: none;\"/></p>', null, '2019-10-24 17:04:08', '0', '1,2,3,4', '2400', '0', '', '9', '0', '0', '', '0', '2', '0', '0', '0', 'a:5:{s:3:\"cbj\";s:4:\"2599\";s:2:\"yj\";s:4:\"4100\";s:2:\"sj\";s:4:\"3999\";s:4:\"unit\";s:3:\"组\";s:5:\"kucun\";s:3:\"300\";}', '0', '0.00', '0.00', '0.00', '0.00', '0.00', '1', '0.00');
+
 /*!40000 ALTER TABLE `lkt_product_list` ENABLE KEYS */;
 UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `lkt_detailed_commission`;
+CREATE TABLE `lkt_detailed_commission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `userid` varchar(50) DEFAULT NULL,
+  `sNo` varchar(255) DEFAULT NULL COMMENT '订单号',
+  `money` float(10,2) DEFAULT '0.00' COMMENT '应发佣金',
+  `s_money` float(10,2) DEFAULT '0.00' COMMENT '实发佣金',
+  `status` int(2) DEFAULT '1' COMMENT '1.未发放，2.已发放',
+  `addtime` datetime DEFAULT NULL COMMENT '添加时间',
+  `type` int(2) DEFAULT NULL COMMENT '类型',
+  `Referee` varchar(50) DEFAULT NULL COMMENT '上级',
+  `recycle` int(2) DEFAULT '0' COMMENT '0 不回收  1.回收',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='分销佣金明细表';
 
 --
 -- Table structure for table `lkt_record`
@@ -1633,6 +1662,7 @@ CREATE TABLE `lkt_return_goods` (
   `oid` varchar(32) NOT NULL DEFAULT '0' COMMENT '订单id',
   `add_data` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '填写时间',
   `user_id` char(20) NOT NULL DEFAULT '' COMMENT '用户id',
+  `address` varchar(255) DEFAULT '' COMMENT '买家地址',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户退货表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1898,6 +1928,35 @@ INSERT INTO `lkt_software_jifen` VALUES (1,30,0,'<p>“积分”通过哪种方�
 /*!40000 ALTER TABLE `lkt_software_jifen` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+CREATE TABLE `lkt_stock` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `product_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品id',
+  `attribute_id` int(11) NOT NULL DEFAULT '0' COMMENT '属性id',
+  `flowing_num` int(11) NOT NULL DEFAULT '0' COMMENT '入库/出库',
+  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '类型 0.入库 1.出库 2.预警',
+  `add_date` timestamp NULL DEFAULT NULL COMMENT '添加时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='库存记录表';
+
+-- INSERT INTO `lkt_stock` (`id`, `product_id`, `attribute_id`, `flowing_num`, `type`, `add_date`) VALUES ('1', '1', '1', '64', '0', '2018-06-21 23:50:03');
+INSERT INTO `lkt_stock` VALUES ('1', '1', '1', '64', '0', '2018-06-22 07:50:03');
+INSERT INTO `lkt_stock` VALUES ('2', '2', '2', '100', '0', '2019-10-24 16:50:25');
+INSERT INTO `lkt_stock` VALUES ('3', '2', '3', '100', '0', '2019-10-24 16:50:25');
+INSERT INTO `lkt_stock` VALUES ('4', '2', '4', '100', '0', '2019-10-24 16:50:25');
+INSERT INTO `lkt_stock` VALUES ('5', '2', '5', '100', '0', '2019-10-24 16:50:25');
+INSERT INTO `lkt_stock` VALUES ('6', '2', '6', '100', '0', '2019-10-24 16:50:25');
+INSERT INTO `lkt_stock` VALUES ('7', '2', '7', '100', '0', '2019-10-24 16:50:25');
+INSERT INTO `lkt_stock` VALUES ('8', '3', '8', '300', '0', '2019-10-24 16:54:30');
+INSERT INTO `lkt_stock` VALUES ('9', '3', '9', '300', '0', '2019-10-24 16:54:30');
+INSERT INTO `lkt_stock` VALUES ('10', '4', '10', '300', '0', '2019-10-24 17:04:08');
+INSERT INTO `lkt_stock` VALUES ('11', '4', '11', '300', '0', '2019-10-24 17:04:09');
+INSERT INTO `lkt_stock` VALUES ('12', '4', '12', '300', '0', '2019-10-24 17:04:09');
+INSERT INTO `lkt_stock` VALUES ('13', '4', '13', '300', '0', '2019-10-24 17:04:09');
+INSERT INTO `lkt_stock` VALUES ('14', '4', '14', '300', '0', '2019-10-24 17:04:09');
+INSERT INTO `lkt_stock` VALUES ('15', '4', '15', '300', '0', '2019-10-24 17:04:09');
+INSERT INTO `lkt_stock` VALUES ('16', '4', '16', '300', '0', '2019-10-24 17:04:09');
+INSERT INTO `lkt_stock` VALUES ('17', '4', '17', '300', '0', '2019-10-24 17:04:09');
 --
 -- Table structure for table `lkt_subtraction`
 --
@@ -1982,7 +2041,7 @@ CREATE TABLE `lkt_user` (
   `Cardholder` varchar(30) DEFAULT NULL COMMENT '持卡人',
   `Bank_card_number` varchar(30) DEFAULT NULL COMMENT '银行卡号',
   `share_num` int(11) DEFAULT '0' COMMENT '分享次数',
-  `Referee` char(15) DEFAULT NULL COMMENT '推荐人',
+  `Referee` varchar(50) DEFAULT NULL COMMENT '推荐人',
   `access_token` varchar(32) DEFAULT '' COMMENT '访问令牌',
   `consumer_money` decimal(12,2) DEFAULT '0.00' COMMENT '消费金',
   `img_token` varchar(32) DEFAULT NULL COMMENT '分享图片id',
@@ -2034,6 +2093,53 @@ LOCK TABLES `lkt_user_address` WRITE;
 /*!40000 ALTER TABLE `lkt_user_address` DISABLE KEYS */;
 /*!40000 ALTER TABLE `lkt_user_address` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+--
+-- Table structure for table `lkt_user_del`
+--
+
+DROP TABLE IF EXISTS `lkt_user_del`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lkt_user_del` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` char(15) DEFAULT NULL COMMENT '用户id',
+  `user_name` varbinary(100) DEFAULT NULL COMMENT '用户昵称',
+  `access_id` varchar(30) DEFAULT NULL COMMENT '授权id',
+  `access_key` varchar(32) DEFAULT NULL COMMENT '授权密钥',
+  `wx_id` varchar(50) DEFAULT NULL COMMENT '微信id',
+  `wx_name` varbinary(150) DEFAULT NULL COMMENT '微信昵称',
+  `sex` int(11) DEFAULT NULL COMMENT '性别 0:未知 1:男 2:女',
+  `headimgurl` mediumtext COMMENT '微信头像',
+  `province` varchar(50) DEFAULT '' COMMENT '省',
+  `city` varchar(50) DEFAULT '' COMMENT '市',
+  `county` varchar(50) DEFAULT '' COMMENT '县',
+  `detailed_address` varchar(100) DEFAULT NULL COMMENT '详细地址',
+  `money` decimal(12,2) DEFAULT '0.00' COMMENT '金额',
+  `score` int(11) DEFAULT '0' COMMENT '积分',
+  `password` char(32) DEFAULT NULL COMMENT '支付密码',
+  `Register_data` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `e_mail` varchar(30) DEFAULT NULL COMMENT '邮箱',
+  `real_name` varchar(100) DEFAULT NULL COMMENT '真实姓名',
+  `mobile` varchar(20) DEFAULT '' COMMENT '手机',
+  `birthday` varchar(32) DEFAULT '' COMMENT '生日',
+  `wechat_id` varchar(50) DEFAULT '' COMMENT '微信号',
+  `address` varchar(300) DEFAULT NULL COMMENT '地址',
+  `Bank_name` varchar(30) DEFAULT NULL COMMENT '银行名称',
+  `Cardholder` varchar(30) DEFAULT NULL COMMENT '持卡人',
+  `Bank_card_number` varchar(30) DEFAULT NULL COMMENT '银行卡号',
+  `share_num` int(11) DEFAULT '0' COMMENT '分享次数',
+  `Referee` char(15) DEFAULT NULL COMMENT '推荐人',
+  `access_token` varchar(32) DEFAULT '' COMMENT '访问令牌',
+  `consumer_money` decimal(12,2) DEFAULT '0.00' COMMENT '消费金',
+  `img_token` varchar(32) DEFAULT NULL COMMENT '分享图片id',
+  `zhanghao` varchar(32) DEFAULT NULL COMMENT '账号',
+  `mima` varchar(32) DEFAULT NULL COMMENT '密码',
+  `source` tinyint(4) NOT NULL DEFAULT '1' COMMENT '来源 1.小程序 2.app',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='删除会员储存列表';
+
 
 --
 -- Table structure for table `lkt_user_bank_card`
@@ -2173,6 +2279,38 @@ LOCK TABLES `lkt_withdraw` WRITE;
 /*!40000 ALTER TABLE `lkt_withdraw` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Table structure for table `lkt_detailed_pro`
+--
+DROP TABLE IF EXISTS `lkt_detailed_pro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lkt_detailed_pro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `pro_id` int(11) NOT NULL COMMENT '商品ID',
+  `leve` int(2) DEFAULT NULL COMMENT '向上返几级',
+  `leve1` float(4,2) DEFAULT '0.00' COMMENT '一级佣金比例',
+  `leve2` float(4,2) DEFAULT '0.00' COMMENT '二级佣金比例',
+  `leve3` float(4,2) DEFAULT '0.00' COMMENT '三级佣金比例',
+  `leve4` float(4,2) DEFAULT '0.00' COMMENT '四级佣金比例',
+  `leve5` float(4,2) DEFAULT '0.00' COMMENT '五级佣金比例',
+  `type` int(2) DEFAULT '2' COMMENT '佣金发放类型，1 支付成功 2.确认收货',
+  `commissions` float(4,2) DEFAULT '0.00' COMMENT '分销佣金所需手续费',
+  `is_show` varchar(11) NOT NULL DEFAULT '0' COMMENT '是否显示（0不显示，1热销单品，2.购物车，3.个人中心）',
+  `status` int(4) NOT NULL DEFAULT '0' COMMENT '商品状态状态（0：待上架，1已上架，2下架）',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分销商品参数设置';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lkt_detailed_pro`
+--
+
+LOCK TABLES `lkt_detailed_pro` WRITE;
+/*!40000 ALTER TABLE `lkt_detailed_pro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lkt_detailed_pro` ENABLE KEYS */;
+UNLOCK TABLES;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

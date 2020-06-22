@@ -19,7 +19,7 @@ class IndexAction extends Action {
         $uploadImg = $this->getContext()->getStorage()->read('uploadImg');
 
         $cid = $request->getParameter("cid"); // 分类id
-        $array = ['顶级','一级','二级','三级','四级','五级'];
+        $array = ['顶级','一级','二级','三级','四级','五级','六级','七级','八级','九级','十级','十一级','十二级'];
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:'10';
         $page = $request->getParameter('page'); // 页码
@@ -27,24 +27,30 @@ class IndexAction extends Action {
             $start = ($page-1)*$pagesize;
         }else{
             $start = 0;
+            $page=1;
         }
 
         $con = '';
         foreach ($_GET as $key => $value001) {
             $con .= "&$key=$value001";
         }
-        
+    
         if($cid){ // 上级id
             // 根据分类id,查询所有下级
-            $sql = "select * from lkt_product_class where recycle = 0 and sid = '$cid' order by sort desc limit $start,$pagesize";
+            $sql = "select * from lkt_product_class where recycle = 0 and sid = '$cid' order by sort asc limit $start,$pagesize";
             $rr = $db->select($sql);
             if($rr){
                 // 有数据
                 $level = $rr[0]->level;
+                $level001 = $rr[0]->sid;
+                
+                $rr01 = $db->select("select sid from lkt_product_class where recycle = 0 and cid = '$level001'");
+                // print_r($rr01);die;
+                $level01 = $rr01[0]->sid;
                 // 循环查询该分类是否有商品
                 foreach ($rr as $k => $v){
                     $product_class = '-' . $v->cid . '-';
-                    $sql = "select id from lkt_product_list where product_class like '%$product_class%' order by sort desc";
+                    $sql = "select id from lkt_product_list where product_class like '%$product_class%' and recycle = 0  order by sort desc";
                     $rr1 = $db->select($sql);
                     if($rr1){
                         $v->status = 1; // 有商品，隐藏删除按钮
@@ -53,20 +59,22 @@ class IndexAction extends Action {
                     }
                 }
             }else{ // 没数据，查询当前分类级别
-                $sql = "select level from lkt_product_class where recycle = 0 and cid = '$cid' order by sort desc limit $start,$pagesize";
+                $sql = "select level,sid from lkt_product_class where recycle = 0 and cid = '$cid' order by sort asc limit $start,$pagesize";
                 $rrr = $db->select($sql);
                 $level = $rrr[0]->level+1;
+                $level01 = $rrr[0]->sid;
             }
             $sid_1 = $cid;
             $request->setAttribute("cid",$sid_1);
         }else{
             // 查询分类表，根据sort顺序排列
-            $sql = "select * from lkt_product_class where recycle = 0 and sid = 0 order by sort desc limit $start,$pagesize";
+            $sql = "select * from lkt_product_class where recycle = 0 and sid = 0 order by sort asc limit $start,$pagesize";
             $rr = $db->select($sql);
             $level = 0;
+            $level01 = 0;
             foreach ($rr as $k => $v){
                 $product_class = '-' . $v->cid . '-';
-                $sql = "select id from lkt_product_list where product_class like '%$product_class%' order by sort desc";
+                $sql = "select id from lkt_product_list where recycle = 0 and product_class like '%$product_class%' order by sort desc";
                 $rr1 = $db->select($sql);
                 if($rr1){
                     $v->status = 1;
@@ -84,12 +92,13 @@ class IndexAction extends Action {
 
 
         $level= $level ? $level:0;
+        // print_r($array);die;
         $newlerevl = $array[$level];
-
+// print_r($newlerevl);die;
         $request->setAttribute("level_xs",$newlerevl);
         $request->setAttribute("level",$level);
         $request->setAttribute("list",$rr);
-
+        $request->setAttribute("level01",$level01);
         $request->setAttribute("pages_show",$pages_show);
         $request->setAttribute("uploadImg",$uploadImg);
         return View :: INPUT;

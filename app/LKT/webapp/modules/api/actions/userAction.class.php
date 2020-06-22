@@ -1,134 +1,65 @@
 <?php
-
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
+require_once('BaseAction.class.php');
 
-class userAction extends Action {
+class userAction extends BaseAction {
 
-    public function getDefaultView() {
-
-        return ;
-    }
-
-    public function execute(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $m = addslashes(trim($request->getParameter('m')));
-        if($m == 'index'){
-            $this->index();
-        }else if($m == 'material'){
-            $this->material();
-        }else if($m == 'details'){
-            $this->details();
-        }else if($m == 'secret_key'){
-            $this->secret_key();
-        }else if($m == 'withdrawals'){
-            $this->withdrawals();
-        }else if($m == 'share'){
-            $this->share();
-        }else if($m == 'recharge'){
-            $this->recharge();
-        }else if($m == 'withdrawals_list'){
-            $this->withdrawals_list();
-        }else if($m == 'AddressManagement'){
-            $this->AddressManagement();
-        }else if($m == 'getCityArr'){
-            $this->getCityArr();
-        }else if($m == 'getCountyInfo'){
-            $this->getCountyInfo();
-        }else if($m == 'Preservation'){
-            $this->Preservation();
-        }else if($m == 'SaveAddress'){
-            $this->SaveAddress();
-        }else if($m == 'verify_bank'){
-            $this->verify_bank();
-        }else if($m == 'selectuser'){//查询好友信息
-            $this->selectuser();
-        }else if($m == 'transfer'){//转账
-            $this->transfer();
-        }else if($m == 'perfect'){//更新电话号码
-            $this->perfect();
-        }else if($m == 'perfect_index'){//更新电话号码
-            $this->perfect_index();
-        }
-        return;
-    }
-
-    public function getRequestMethods(){
-        return Request :: POST;
-    }
     // 请求我的数据
     public function index(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        // 获取信息
-        $openid = $_POST['openid']; // 微信id
-        // 查询系统参数
-        $sql = "select * from lkt_config where id = 1";
-        $r_1 = $db->select($sql);
-        if($r_1){
-            $company = $r_1['0'] ->company;
-            $logo = $r_1['0'] ->logo;
-            $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
-            $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
-        }else{
-            $company = '';
-            $logo = '';
-            $uploadImg_domain = '';
-            $uploadImg = '';
-        }
-        if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
-            $img = $uploadImg_domain . $uploadImg; // 图片路径
-        }else{ // 不存在
-            $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
-        }
-        $logo = $img.$logo;
-        
+        $openid = addslashes($_POST['openid']); // 微信id
+
+        $appConfig = $this->getAppInfo();
+        $img = $appConfig['imageRootUrl'];
+        $company = $appConfig['appName'];
+        $logo = $appConfig['logo'];
+
+
         // 获取文章信息
         $sql_2 = "select Article_id,Article_prompt,Article_title from lkt_article";
         $r_2 = $db->select($sql_2);
-   
+
         // 查询会员信息
-        $sql = "select * from lkt_user where wx_id = '$openid'";
+        $sql = "select * from lkt_user where wx_id = '$openid' ";
         $r = $db -> select($sql);
+        $user = array();
+        $user['headimgurl'] = '';
+        $user['wx_name'] = '';
+        $user['user_id'] = '';
+        $user_id = '';
         if($r){
             $user['headimgurl'] = $r[0]->headimgurl;
             $user['wx_name'] = $r[0]->wx_name;
             $user['user_id'] = $r[0]->user_id;
-            $wx_name = $r[0]->user_id;
-        }else{
-            $user['headimgurl'] = '';
-            $user['wx_name'] = '';
-            $user['user_id'] = '';
-            $wx_name = '';
+            $user_id = $r[0]->user_id;
         }
 
         // 查询会员信息
-        $sqlu = "select u.user_name from lkt_user_distribution as d LEFT JOIN lkt_user as u  ON d.pid = u.user_id where d.user_id = '$wx_name' ";
+        $sqlu = "select u.user_name from lkt_user_distribution as d LEFT JOIN lkt_user as u  ON d.pid = u.user_id where d.user_id = '$user_id' ";
         $ru = $db -> select($sqlu);
         if($ru){
             $tjr = '经纪人:'.$ru[0]->user_name;
         }else{
             $tjr = false;
         }
-        
+
         //个人中心小红点
         $num_arr =[0,1,2,3,4];
         $res_order= [];
         foreach ($num_arr as $key => $value) {
             if($value == '4'){
-                $sql_order = "select num from lkt_order_details where r_status = '$value' and  user_id = '$wx_name'" ;
+                $sql_order = "select num from lkt_order_details where r_status = '$value' and  user_id = '$user_id'" ;
                 $order_num = $db -> selectrow($sql_order);
                 $res_order[$key] =  $order_num;
             }else{
                 if($value==1){
-                    $sql_order01 = "select drawid from lkt_order where status = '$value' and  user_id = '$wx_name'" ;
+                    $sql_order01 = "select drawid from lkt_order where status = '$value' and  user_id = '$user_id'" ;
                     $re = $db->select($sql_order01);
                     if(!empty($re)){//未发货
                         foreach ($re as $key001 => $value001) {
@@ -148,45 +79,39 @@ class userAction extends Action {
                     }
                     $res_order[$key] =  sizeof($re);
                 }else{
-                    $sql_order = "select num from lkt_order where status = '$value' and  user_id = '$wx_name'" ;
+                    $sql_order = "select num from lkt_order where status = '$value' and  user_id = '$user_id'" ;
                     $order_num = $db -> selectrow($sql_order);
-                    $res_order[$key] =  $order_num; 
+                    $res_order[$key] =  $order_num;
                 }
             }
         }
-        //控制红包显示
-        $sqlfhb = "select user_id from lkt_red_packet_users where user_id = '$wx_name'";
-        $rfhb = $db->select($sqlfhb);
+
         // 查询插件表里,状态为启用的插件
-        $sql = "select id,subtitle_name,subtitle_image,subtitle_url from lkt_plug_ins where status = 1 and type = 0 and software_id = 3 order by sort";
+        $sql = "select id,subtitle_name,subtitle_image,subtitle_url,code from lkt_plug_ins where status = 1 and type = 0 and software_id = 3 order by sort";
         $r_c = $db->select($sql);
         if($r_c){
             foreach ($r_c as $k => $v) {
                 $v->subtitle_image = $img . $v->subtitle_image;
-                if(strpos($v->subtitle_name,'红包') !== false){ 
-                    if(!$rfhb){
-                        unset($r_c[$k]);
-                    }
-                }
             }
+
         }
         $support = '来客电商提供技术支持';
         // 状态 0：未付款 1：未发货 2：待收货 3：待评论 4：退货 5:已完成 6 订单关闭 9拼团中 10 拼团失败-未退款 11 拼团失败-已退款
-        // 抽奖状态（0.参团中 1.待抽奖 2.参团失败 3.抽奖失败 4.抽奖成功）
         echo json_encode(array('status'=>1,'support'=>$support,'tjr'=>$tjr,'user'=>$user,'th'=>$res_order['4'],'dfk_num'=>$res_order['0'],'dfh_num'=>$res_order['1'],'dsh_num'=>$res_order['2'],'dpj_num'=>$res_order['3'],'company'=>$company,'logo'=>$logo,'article'=>$r_2,'plug_ins'=>$r_c));
         exit();
         return;
     }
+
     // 同步资料
     public function material(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 获取信息
         $db->query("set names 'utf8'");
-        $openid = $_POST['openid']; // 微信id
-        $nickName = $_POST['nickName']; // 微信昵称
-        $avatarUrl = $_POST['avatarUrl']; // 微信头像
-        $gender = $_POST['gender']; // 性别
+        $openid = addslashes($_POST['openid']); // 微信id
+        $nickName = addslashes($_POST['nickName']); // 微信昵称
+        $avatarUrl = addslashes($_POST['avatarUrl']); // 微信头像
+        $gender = addslashes($_POST['gender']); // 性别
         // 根据微信id,修改用户昵称、微信昵称、微信头像、性别
         $sql = "update lkt_user set user_name='$nickName',wx_name='$nickName',sex='$gender',headimgurl='$avatarUrl' where wx_id = '$openid'";
         $r = $db->update($sql);
@@ -194,13 +119,13 @@ class userAction extends Action {
         exit();
         return;
     }
-    
+
     // 验证用户密码
     public function verify_paw(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $openid = $request->getParameter('openid');
-        $ypwd = $request->getParameter('password');
+        $openid = addslashes($request->getParameter('openid'));
+        $ypwd = addslashes($request->getParameter('password'));
         $and = '';
         if($ypwd){
             $ypwd = md5($ypwd);
@@ -224,12 +149,11 @@ class userAction extends Action {
         }
     }
 
-    // 请求我的详细数据
+    // 请求我的钱包
     public function details(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         // 接收信息
-        $openid = $_POST['openid']; // 微信id
+        $openid = addslashes($_POST['openid']); // 微信id
         // 查询单位
         $sql = "select * from lkt_finance_config where id = 1";
         $r_1 = $db->select($sql);
@@ -266,50 +190,73 @@ class userAction extends Action {
                 $user['Cardholder'] = ''; // 持卡人
                 $user['Bank_card_number'] = ''; // 银行卡号
             }
-        }
 
-        // 根据推荐人等于会员编号,查询推荐人总数
-        $sql = "select count(Referee) as a from lkt_user where Referee = '$user_id'";
-        $r_3 = $db -> select($sql);
-        $user['invitation_num'] = $r_3[0]->a;
-        // 根据微信id,查询分享列表里的礼券总和
-        $sql = "select sum(coupon) as a from lkt_share where wx_id = '$openid'";
-        $r_4 = $db->select($sql);
-        if($r_4[0]->a == ''){
-            $user['coupon'] = 0;
-        }else{
-            $user['coupon'] = $r_4[0]->a;
-        }
-        // 根据用户id、类型为充值,查询操作列表-----消费记录
-        $sql = "select money,add_date,type from lkt_record where user_id = '$user_id' order by add_date desc";
-        $r_5 = $db->select($sql);
-        $list_1 = [];
-        if($r_5){
-            foreach ($r_5 as $k => $v) {
-                if($v->type == 1 ||$v->type == 4 ||$v->type == 5 || $v->type == 6 ||$v->type == 12||$v->type == 13||$v->type == 14){
-                    $v->time = substr($v->add_date,0,strrpos($v->add_date,':'));
-                    $list_1[$k]=$v;
+
+            // 根据推荐人等于会员编号,查询推荐人总数
+            $sql = "select count(Referee) as a from lkt_user where Referee = '$user_id'";
+            $r_3 = $db -> select($sql);
+            $user['invitation_num'] = $r_3[0]->a;
+            // 根据微信id,查询分享列表里的礼券总和
+            $sql = "select sum(coupon) as a from lkt_share where wx_id = '$openid'";
+            $r_4 = $db->select($sql);
+            if($r_4[0]->a == ''){
+                $user['coupon'] = 0;
+            }else{
+                $user['coupon'] = $r_4[0]->a;
+            }
+            // 根据用户id、类型为充值,查询操作列表-----消费记录
+            $sql = "select money,add_date,type from lkt_record where user_id = '$user_id' order by add_date desc";
+            $r_5 = $db->select($sql);
+            $list_1 = [];
+            $list_3 = [];
+            if($r_5){
+                foreach ($r_5 as $k => $v) {
+                    if($v->type == 4 || $v->type == 6||$v->type == 12||$v->type == 11){
+                        $v->time = substr($v->add_date,0,strrpos($v->add_date,':'));
+                        $list_1[$k]=$v;
+                    }
+                    if($v->type == 1  ||$v->type == 5 || $v->type == 7 ||$v->type == 13||$v->type == 14||$v->type == 22||$v->type == 23||$v->type == 24){
+                        $v->time = substr($v->add_date,0,strrpos($v->add_date,':'));
+                        $list_3[$k]=$v;
+                    }
                 }
             }
-        }
-        $sql = "select money,add_date from lkt_record where user_id = '$user_id' and type = 21 order by add_date desc";
-        $r_6 = $db->select($sql);
-        if($r_6){
-            foreach ($r_6 as $k => $v) {
-               $v->time = substr($v->add_date,0,strrpos($v->add_date,':'));
+            $sql = "select money,add_date,type from lkt_record where user_id = '$user_id' and type in (2,21,22) order by add_date desc";
+            $r_6 = $db->select($sql);
+            if($r_6){
+                foreach ($r_6 as $k => $v) {
+                   $v->time = substr($v->add_date,0,strrpos($v->add_date,':'));
+                }
+                $list_2 = $r_6;
+            }else{
+                $list_2 = '';
             }
-            $list_2 = $r_6;
-        }else{
-            $list_2 = '';
+
+         $detailed_commission = $db -> select("select sum(s_money) as s_money from lkt_detailed_commission where Referee = '$user_id' and status =1 and recycle =0");
+         $detailed_commission1 = $db -> select("select sum(s_money) as s_money from lkt_detailed_commission where Referee = '$user_id' and status =3");
+            if($detailed_commission && $detailed_commission[0]->s_money !='null'){
+
+               if($detailed_commission1 && $detailed_commission1[0]->s_money !='null'){
+                    $detailed_commission =$detailed_commission[0]->s_money - $detailed_commission1[0]->s_money;
+                    if($detailed_commission <0){
+                         $detailed_commission='0';
+                    }
+               }else{
+                    $detailed_commission =$detailed_commission[0]->s_money;
+               }
+
+            }else{
+                $detailed_commission='0';
+            }
+            echo json_encode(array('status'=>1,'user'=>$user,'list_1'=>$list_1,'list_2'=>$list_2,'list_3'=>$list_3,'detailed_commission'=>$detailed_commission));
+            exit();
+
+            return;
         }
-        echo json_encode(array('status'=>1,'user'=>$user,'list_1'=>$list_1,'list_2'=>$list_2));
-        exit();
-    
-        return;
     }
+
     // 获取用户手机号
     public function secret_key(){
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
         $encryptedData = $request->getParameter('encryptedData'); // 加密数据
@@ -319,15 +266,10 @@ class userAction extends Action {
             echo json_encode(array('status'=>0,'info'=>'手机号码没获取!'));
             exit();
         }else{
-            // 查询小程序配置
-            $sql = "select * from lkt_config where id=1";
-            $r = $db->select($sql);
-            if($r){
-                $appid = $r[0]->appid; // 小程序唯一标识
-            }else{
-                $appid = '';
-            }
 
+            $appConfig = $this->getAppInfo();
+
+            $appid = $appConfig['appid'];
             include_once "wxBizDataCrypt.php";
             $data = '';
             $pc = new WXBizDataCrypt($appid, $sessionKey);
@@ -349,15 +291,15 @@ class userAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
-        $money = $_POST['money']; // 金额
-        $min_amount = $_POST['min_amount']; // 最少提现金额
-        $max_amount = $_POST['max_amount']; // 最大提现金额
-        $amoney = $_POST['amoney']; // 提现金额
-        $Bank_name = $_POST['Bank_name']; // 银行名称
-        $Cardholder = $_POST['Cardholder']; // 持卡人
-        $Bank_card_number = $_POST['Bank_card_number']; // 银行卡号
-        $openid = $_POST['openid']; // 微信id
-        $mobile = $_POST['mobile']; // 联系电话
+        $money = addslashes($_POST['money']); // 金额
+        $min_amount = addslashes($_POST['min_amount']); // 最少提现金额
+        $max_amount = addslashes($_POST['max_amount']); // 最大提现金额
+        $amoney = addslashes($_POST['amoney']); // 提现金额
+        $Bank_name = addslashes($_POST['Bank_name']); // 银行名称
+        $Cardholder = addslashes($_POST['Cardholder']); // 持卡人
+        $Bank_card_number = addslashes($_POST['Bank_card_number']); // 银行卡号
+        $openid = addslashes($_POST['openid']); // 微信id
+        $mobile = addslashes($_POST['mobile']); // 联系电话
         // 提现金额不为数字
         if(is_numeric($amoney) == false){
             echo json_encode(array('status'=>0,'info'=>'请输入数字!'));
@@ -410,9 +352,7 @@ class userAction extends Action {
             $jine = $amoney; // 提现金额
             //开启整数倍提现
             if($multiple){
-                if($amoney%$multiple == 0){
-
-                }else{
+                if($amoney%$multiple != 0){
                     echo json_encode(array('status'=>0,'info'=>'提现金额需要是'.$multiple.'的倍数'));
                     exit();
                 }
@@ -447,7 +387,7 @@ class userAction extends Action {
                     $bank_id = $db->insert($sql,'affectedrows');
                 }
                 $sql = "update lkt_user set money = money - '$jine' where wx_id = '$openid'";
-                $res = $db->update($sql);
+                $db->update($sql);
                 // 在提现列表里添加一条数据
                 $sql = "insert into lkt_withdraw (name,user_id,wx_id,mobile,bank_id,money,s_charge,status,add_date) values ('$user_name','$user_id','$openid','$mobile','$bank_id','$amoney','$cost',0,CURRENT_TIMESTAMP)";
                 $res = $db->insert($sql);
@@ -471,12 +411,13 @@ class userAction extends Action {
 
         return;
     }
+
     public function verify_bank()
     {
         $request = $this->getContext()->getRequest();
         $Bank_card_number = $request->getParameter('Bank_card_number');
         // 根据卡号,查询银行名称
-        require_once('bankList.php'); 
+        require_once('bankList.php');
         $r = $this->bankInfo($Bank_card_number,$bankList);
         if($r == ''){
             echo json_encode(array('status'=>0,'err'=>'卡号不正确!'));
@@ -487,35 +428,37 @@ class userAction extends Action {
             exit();
         }
     }
+
     // 验证卡号是否跟银行匹配
-    function bankInfo($card,$bankList) { 
-      $card_8 = substr($card, 0, 8); 
-      if (isset($bankList[$card_8])) { 
-        return $bankList[$card_8]; 
-      } 
-      $card_6 = substr($card, 0, 6); 
-      if (isset($bankList[$card_6])) { 
-        return $bankList[$card_6]; 
-      } 
-      $card_5 = substr($card, 0, 5); 
-      if (isset($bankList[$card_5])) { 
-        return $bankList[$card_5]; 
-      } 
-      $card_4 = substr($card, 0, 4); 
-      if (isset($bankList[$card_4])) { 
-        return $bankList[$card_4]; 
-      } 
-      return ''; 
-    } 
+    function bankInfo($card,$bankList) {
+      $card_8 = substr($card, 0, 8);
+      if (isset($bankList[$card_8])) {
+        return $bankList[$card_8];
+      }
+      $card_6 = substr($card, 0, 6);
+      if (isset($bankList[$card_6])) {
+        return $bankList[$card_6];
+      }
+      $card_5 = substr($card, 0, 5);
+      if (isset($bankList[$card_5])) {
+        return $bankList[$card_5];
+      }
+      $card_4 = substr($card, 0, 4);
+      if (isset($bankList[$card_4])) {
+        return $bankList[$card_4];
+      }
+      return '';
+    }
+
     // 打开红包
     public function share(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
-        $n = $_POST['n']; // 参数
-        $id = $_POST['id']; // 新闻id
-        $openid = $_POST['openid']; // 微信id
-        
+        $n = addslashes($_POST['n']); // 参数
+        $id = addslashes($_POST['id']); // 新闻id
+        $openid = addslashes($_POST['openid']); // 微信id
+
         if($n == 0){
             // 根据新闻id,查询新闻信息
             $sql = "select * from lkt_news_list where id = '$id'";
@@ -622,19 +565,11 @@ class userAction extends Action {
 
     public function AddressManagement(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         // 接收信息
-        $openid = $_POST['openid']; // 微信id
+        $openid = addslashes($_POST['openid']); // 微信id
         $sql = "select * from lkt_user where wx_id = '$openid'";
         $r = $db->select($sql);
         if($r){
-            $user_id = $r[0]->user_id;
-            $user_name = $r[0]->user_name;
-            $mobile = $r[0]->mobile;
-            $detailed_address = $r[0]->detailed_address;
-            $province = $r[0]->province;
-            $city = $r[0]->city;
-            $county = $r[0]->county;
             $sheng = [];
             $shi = [];
             $xian = [];
@@ -687,12 +622,12 @@ class userAction extends Action {
             exit();
         }
         return;
+
     }
     // 根据省查询市
     public function getCityArr(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();   
-        $count = $_POST['count']; // 接收前台传过来省的行数
+        $count = addslashes($_POST['count']); // 接收前台传过来省的行数
         if($count == ''){
             $count = 0;
         }else{
@@ -729,8 +664,8 @@ class userAction extends Action {
     public function getCountyInfo(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $count = $_POST['count']; // 接收前台传过来省的行数
-        $column = $_POST['column']; // 接收前台传过来市的行数
+        $count = addslashes($_POST['count']); // 接收前台传过来省的行数
+        $column = addslashes($_POST['column']); // 接收前台传过来市的行数
         // 查询省的编号
         $sql = "select * from admin_cg_group a where a.G_ParentID=0";
         $r = $db->select($sql);
@@ -770,9 +705,9 @@ class userAction extends Action {
     public function Preservation(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();   
-        $sheng = $_POST['sheng'];
-        $shi = $_POST['shi'];
-        $xuan = $_POST['xuan'];
+        $sheng = addslashes($_POST['sheng']);
+        $shi = addslashes($_POST['shi']);
+        $xuan = addslashes($_POST['xuan']);
 
         // 查询省的编号
         $sql = "select * from admin_cg_group a where a.G_ParentID=0";
@@ -800,10 +735,8 @@ class userAction extends Action {
         $sql = "select * from admin_cg_group a where a.G_ParentID='$GroupID'";
         $r = $db->select($sql);
         if($r){
-            $GroupID = $r[$xuan]->GroupID;
             $county = $r[$xuan]->G_CName;
         }else{
-            $GroupID = 0;
             $county = '';
         }
 
@@ -815,15 +748,14 @@ class userAction extends Action {
     // 点击保存
     public function SaveAddress(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         // 获取小程序传过来的值
-        $openid = $_POST['openid'];
-        $user_name = $_POST['user_name']; // 联系人
-        $mobile = $_POST['mobile']; // 联系电话
-        $province = $_POST['province']; // 省
-        $city = $_POST['city']; // 市
-        $county = $_POST['county']; // 县 
-        $address = $_POST['address']; // 详细地址
+        $openid = addslashes($_POST['openid']);
+        $user_name = addslashes($_POST['user_name']); // 联系人
+        $mobile = addslashes($_POST['mobile']); // 联系电话
+        $province = addslashes($_POST['province']); // 省
+        $city = addslashes($_POST['city']); // 市
+        $county = addslashes($_POST['county']); // 县 
+        $address = addslashes($_POST['address']); // 详细地址
         // 查询省的编号
         $sql ="select GroupID from admin_cg_group where G_CName='$province'";
         $r = $db->select($sql);
@@ -848,7 +780,8 @@ class userAction extends Action {
         }else{
             $xian = 0;
         }
-        if(preg_match("/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$/", $mobile)){
+        
+        if(preg_match("/^\d{11}$/", $mobile)){
             // 根据微信id,查询会员id
             $sql = "select * from lkt_user where wx_id = '$openid'";
             $r = $db->select($sql);
@@ -883,10 +816,9 @@ class userAction extends Action {
     }
 
     public function selectuser(){
-         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $user_id = $_POST['user_id'];
-        $openid = $_POST['openid'];
+        $db = DBAction::getInstance();
+        $user_id = addslashes($_POST['user_id']);
+        $openid = addslashes($_POST['openid']);
         $sql = "select * from lkt_user where user_id = '$user_id'";
         $r = $db->select($sql);
         if($r){
@@ -915,17 +847,10 @@ class userAction extends Action {
             $transfer_multiple = $r0001[0]->transfer_multiple;
             $user['transfer_multiple'] = $transfer_multiple;
         }else{
-            $transfer_multiple = 0;
             $user['transfer_multiple'] = '';
         }
 
         if(!empty($r)){
-//            $user['wx_name'] = $r[0]->wx_name;
-//            $user['headimgurl'] = $r[0]->headimgurl;
-//            $user['user_id'] = $r[0]->user_id;
-//            $user['money'] = $r001[0]->money;
-//            $user['score'] = $r001[0]->score;
-//            $user['transfer_multiple'] = $transfer_multiple;
             echo json_encode(array('status'=>1,'user'=>$user));
             exit();
         }else{
@@ -939,9 +864,9 @@ class userAction extends Action {
         $request = $this->getContext()->getRequest();
         //开启事务
         $db->begin();
-        $user_id = $_POST['user_id'];
-        $openid = $_POST['openid'];
-        $money = $_POST['money'];
+        $user_id = addslashes($_POST['user_id']);
+        $openid = addslashes($_POST['openid']);
+        $money = addslashes($_POST['money']);
         $date_time = date('Y-m-d H:i:s',time());
         if($money <= 0 || $money == ''){
             echo json_encode(array('status'=>1,'err'=>'正确填写转账金额'));
@@ -1004,7 +929,7 @@ class userAction extends Action {
     {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $user_id = trim($request->getParameter('user_id')); // 微信id
+        $user_id = addslashes(trim($request->getParameter('user_id'))); // 微信id
         $sql002 = "select real_name as name,mobile,sex,province,city,county,wechat_id,birthday from lkt_user where user_id = '$user_id'";
         $r002 = $db->select($sql002);//好友
         if($r002){
@@ -1024,15 +949,15 @@ class userAction extends Action {
 
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $user_id = trim($request->getParameter('user_id')); // 微信id
-        $name = trim($request->getParameter('name')); // 姓名
-        $mobile = trim($request->getParameter('mobile')); // mobile
-        $province = trim($request->getParameter('province')); // province
-        $city = trim($request->getParameter('city')); // city
-        $county = trim($request->getParameter('county')); // county
-        $wx_id = trim($request->getParameter('wx_id')); // wx_id
-        $sex = trim($request->getParameter('sex')); // sex
-        $date = trim($request->getParameter('date')); // date
+        $user_id = addslashes(trim($request->getParameter('user_id'))); // 微信id
+        $name = addslashes(trim($request->getParameter('name'))); // 姓名
+        $mobile = addslashes(trim($request->getParameter('mobile'))); // mobile
+        $province = addslashes(trim($request->getParameter('province'))); // province
+        $city = addslashes(trim($request->getParameter('city'))); // city
+        $county = addslashes(trim($request->getParameter('county'))); // county
+        $wx_id = addslashes(trim($request->getParameter('wx_id'))); // wx_id
+        $sex = addslashes(trim($request->getParameter('sex'))); // sex
+        $date = addslashes(trim($request->getParameter('date'))); // date
 
         $name = base64_encode($name);
         $name = base64_decode($name);

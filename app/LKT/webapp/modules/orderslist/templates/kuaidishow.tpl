@@ -10,14 +10,9 @@
 <link rel="Bookmark" href="/favicon.ico" >
 <link rel="Shortcut Icon" href="/favicon.ico" />
 
-<link rel="stylesheet" type="text/css" href="style/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="style/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css" href="style/lib/Hui-iconfont/1.0.7/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="style/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="style/css/style.css" />
-<link href="style/ssd1.css" rel="stylesheet" type="text/css" />
-<script src="style/jquery-1.11.3.js"></script>
-<script language="javascript"  src="style/ssd1.js"> </script>
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
+
+<script language="javascript"  src="style/js/ssd1.js"> </script>
 
 
 <title>快递信息</title>

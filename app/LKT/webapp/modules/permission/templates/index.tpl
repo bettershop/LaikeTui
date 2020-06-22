@@ -1,65 +1,33 @@
+
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="modpub/css/base.css" />
-    <link rel="stylesheet" type="text/css" href="style/css/sanming.css" />
-    <link rel="stylesheet" type="text/css" href="style/css/Popup.css" />
-    <link rel="stylesheet" type="text/css" href="style/css/skin.css" />
-</head>
-<body scroll="yes">
-<div style="background-color: #ffffff; margin-right: 2px" id="Div_right">
-    <table style="width: 99%" border="0" cellspacing="0" cellpadding="0">
-        <tbody>
-            <tr>
-                <td class="line_leftright_borderclor">
-                    <div style="margin-top: -1px; height: 30px;  overflow: hidden" id="ctl00_Div_right_top" class="YFTmainright_r1_c2_gj">
-                        <div style="position: relative; line-height: 30px; width: 100%">
-                            &nbsp;<span class="Font_red Font_addbold">[系统首页]</span> 
-                        </div>
-                    </div>
-                    <div style="min-height: 446px; width: 100%; height: auto !important; overflow: visible;" id="Div_Content">     
-                        <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td colspan="2" valign="top">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td valign="top">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" valign="top">
-                                    <span class="left_txt">
-                                        <div style="padding:20px;text-align:left;line-height:22px;">
-        				                    <font style="font-size:14px;"><b>错误：你无权操作! <a style="color:red" href="javascript:history.go(-1)">返回上一页</a></b></font><br />
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-                                        </div>
-                                    </span>
-                                </td>
-                                <td width="7%">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td height="40" colspan="4">
-                                    <table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
-                                        <tr>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="YFTmainright_r3_c2_gj" height="1">
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<script language="javascript" src="style/css/webjs.js"> </script>
+<title></title>
+
+</head>
+<body>
+
+
+
+
+<article class="page-404 minWP text-c">
+    <p class="error-title">
+        <span class="va-m"> 无权限</span>
+    </p>
+    <p class="error-description">不好意思，您不能访问该页面~</p>
+    <p class="error-info">您可以：
+        <a href="javascript:;" onclick="history.go(-1)" class="c-primary">&lt; 返回上一页</a>
+        <span class="ml-20">|</span>
+        <a href="index.php?module=index" class="c-primary ml-20">去首页 &gt;</a>
+    </p>
+</article>
+
 </body>
 </html>

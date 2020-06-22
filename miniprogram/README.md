@@ -15,18 +15,7 @@
 本项目需要配合来客电商服务端使用
 
 ### 项目截图
-
-![首页](https://xiaochengxu.laiketui.com/duan/LKT/images/auto-orient/20180716172029.jpg)
-
-![分类](https://xiaochengxu.laiketui.com/duan/LKT/images/auto-orient/20180716172012.jpg)
-
-![商品列表](https://xiaochengxu.laiketui.com/duan/LKT/images/auto-orient/20180716172020.jpg)
-
-![商品详情](https://xiaochengxu.laiketui.com/duan/LKT/images/auto-orient/20180716171938.jpg)
-
-![购物车](https://xiaochengxu.laiketui.com/duan/LKT/images/auto-orient/20180716172005.jpg)
-
-![订单中心](https://xiaochengxu.laiketui.com/duan/LKT/images/auto-orient/20180716171957.jpg)
+![稳定版皮肤](https://images.gitee.com/uploads/images/2019/0514/100638_e7f9fbc9_2029865.png "在这里输入图片标题")
 
 
 
@@ -119,10 +108,6 @@ pages
 └─utils
 ```
 
-### 服务端api
-项目地址：https://xiaochengxu.laiketui.com/duan/LKT/index.php?module=api
-
-
 
 ### 最后
 
@@ -136,4 +121,4 @@ pages
 
 + 热线：
 
-+ 0731-86453408
++ 13237476750

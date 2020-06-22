@@ -31,22 +31,24 @@
     "pages/footprint/footprint",
     "pages/logistics/logistics",
     "pages/sign_in/sign_in",
-    "pages/draw/draw",
-    "pages/draw/cantuan",
     "pages/group_buy/group",
     "pages/group_buy/detail",
     "pages/group_buy/payfor",
     "pages/group_buy/cantuan",
     "pages/group_buy/comment",
-    "pages/red_packet/red_packet",
-    "pages/red_packet/red_record",
-    "pages/red_packet/red_envelopes",
     "pages/user/transfer",
     "pages/user/transfer1",
     "pages/login/login",
-    "pages/bangding/bangding"
+    "pages/bangding/bangding",
+    "pages/notice/notice",
+    "pages/notice/index",
+    "pages/logins/logins.wx",
+    "pages/logins/logins",
+    "pages/live/index",
+    "pages/distribution/list",
+    "pages/distribution/user",
+    "pages/distribution/detail"
   ],
-  
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
@@ -91,5 +93,6 @@
         "text": "个人中心"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

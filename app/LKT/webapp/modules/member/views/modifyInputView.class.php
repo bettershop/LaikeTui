@@ -4,6 +4,7 @@ class modifyInputView extends SmartyView {
 		$request = $this->getContext()->getRequest();
         $this->setAttribute('id',$request->getAttribute('id'));
         $this->setAttribute('name',$request->getAttribute('name'));
+        $this->setAttribute('y_password',$request->getAttribute('y_password'));
         $this->setAttribute('admin_type',$request->getAttribute('admin_type'));
         $this->setAttribute('list',$request->getAttribute('list'));
 

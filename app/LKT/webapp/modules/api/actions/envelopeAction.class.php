@@ -2,53 +2,23 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
-require_once(MO_LIB_DIR . '/ShowPager.class.php');
-require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once('BaseAction.class.php');
 
-class envelopeAction extends Action {
-
-    public function getDefaultView() {
-
-        return;
-    }
-
-    public function execute(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $m = addslashes(trim($request->getParameter('m')));
-        if($m == 'index'){
-            $this->index();
-        }else if($m == 'share'){
-            $this->share();
-        }
-        return;
-    }
-
-    public function getRequestMethods(){
-        return Request :: POST;
-    }
+class envelopeAction extends BaseAction {
+    
     // 获取新闻详情
     public function index(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 获取新闻id
-        $id = $_POST['id'];
-        // 查询系统参数
-        $sql = "select * from lkt_config where id = 1";
-        $r_1 = $db->select($sql);
-        $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
-        $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
-        if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
-            $img = $uploadImg_domain . $uploadImg; // 图片路径
-        }else{ // 不存在
-            $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
-        }
+        $id = addslashes($_POST['id']);
+        $appConfig = $this->getAppInfo();
+        $img = $appConfig['imageRootUrl'];
 
         // 根据新闻id,查询新闻数据
         $sql = "select * from lkt_article where Article_id=".$id;
@@ -73,8 +43,8 @@ class envelopeAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 获取信息
-        $id = $_POST['id']; // 文章id
-        $openid = $_POST['openid']; // 微信id
+        $id = addslashes($_POST['id']); // 文章id
+        $openid = addslashes($_POST['openid']); // 微信id
         /* ----- 分享成功 -----*/
         // 根据文章id,修改文章分享次数
         $sql = "update lkt_article set share_num = share_num+1 where Article_id = '$id'";
@@ -83,7 +53,7 @@ class envelopeAction extends Action {
         $sql = "update lkt_user set share_num = share_num+1 where wx_id = '$openid'";
         $r = $db->update($sql);
         // 根据wx_id查询会员id
-        $sql = "select * from lkt_user where wx_id = '$openid'";
+        $sql = "select * from lkt_user where wx_id = '$openid' ";
         $r = $db->select($sql);
         $user_id = $r[0]->user_id;
         $event = $user_id . '分享了文章' . $id ;

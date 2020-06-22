@@ -8,10 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>优惠券列表</title>
 {literal}
@@ -39,20 +36,29 @@
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe6ca;</i> 插件管理 <span class="c-gray en">&gt;</span> 优惠券列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    插件管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=coupon">列表</a> <span class="c-gray en">&gt;</span>
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
+
 <div class="pd-20">
     <div class="text-c"> 
         <form name="form1" action="index.php" method="get">
             <input type="hidden" name="module" value="coupon" />
+            <input type="hidden" name="action" value="coupon" />
             <input type="hidden" name="ok" value="1" />
             <input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize" />
 
-            <input type="text" name="name" size='8' value="{$name}" id="" placeholder="用户id" style="width:200px" class="input-text">
+            <input type="text" name="name" size='8' value="{$name}" id="name" placeholder="用户ID" style="width:200px" class="input-text">
             <input name="" id="" class="btn btn-success" type="submit" value="查询">
+            <input type="button" value="重 置" id="btn8" style="border: 1px solid #D5DBE8; color: #6a7076;" class="reset" onclick="resetButton()"  />
         </form>
         <div class="swivch">
         	<a href="index.php?module=coupon" class="btn1" style="color: #6a7076;" >活动</a>
-            <a href="index.php?module=coupon&action=coupon" style="background-color: #62b3ff;color: #fff;" class="btn1">优惠券列表</a>
+            <a href="index.php?module=coupon&action=coupon" style="background-color: #62b3ff;color: #fff;" class="btn1">列表</a>
 			<div class="clearfix"></div>
         </div>
     </div>
@@ -97,14 +103,14 @@
     <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
 
-<script type="text/javascript" src="style/js/jquery.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
-
+{literal}
+<script type="text/javascript">
+function resetButton(){
+    $("#name").val("");
+}
+</script>
+{/literal}
 </body>
 </html>

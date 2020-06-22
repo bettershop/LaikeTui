@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -24,7 +24,6 @@ class modifyAction extends Action {
             $data = json_decode($r[0]->data); // 推广图
             $res = $r[0];
         }
-        // $data = json_decode($data);
         // 查询配置表信息
         $sql = "select * from lkt_config where id = 1";
         $r_1 = $db->select($sql);

@@ -13,12 +13,9 @@ Page({
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      // complete
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
     this.search();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   search: function (e) {
     var that = this;
@@ -38,6 +35,9 @@ Page({
           curNav: res.data.List[0].cate_id
         });
         that.onReady();
+        that.setData({
+          remind: ''
+        });
       },
       fail: function () {
         wx.showToast({
@@ -48,16 +48,7 @@ Page({
     });
   },
   onShow: function () {
-    // app.userlogin(true);
-    var cont = this.data.cont;
-    var that = this;
-    // if (cont > 1) {
-    //   that.onLoad();
-    // } else {
-    //   that.setData({
-    //     cont: cont + 1
-    //   })
-    // }
+    
   },
   onLoad: function (options) {
     var that = this;
@@ -73,6 +64,7 @@ Page({
       }
     }),
     this.search();
+    
   },
   //事件处理函数  
   switchRightTab: function (e) {
@@ -86,12 +78,10 @@ Page({
     })
   },
   search_confirmType: function (e) {
-    console.log('-----');
     var that = this, value = e.detail.value;
     this.setData({
       value: e.detail.value,
     });
-
     if (value != '') {
       WxSearch.wxSearchAddHisKey(that);
       wx.navigateTo({
@@ -103,14 +93,12 @@ Page({
     console.log(e)
     var that = this
     WxSearch.wxSearchAddHisKey(that);
-    setTimeout(function () {
-      var value = that.data.wxSearchData.value;
-      if (value){
+    var value = that.data.wxSearchData.value;
+    if (value){
         wx.navigateTo({
           url: "../listdetail/listdetail?keyword=" + value
         })
-      }
-    }, 500);
+    }
   },
   wxSearchInput: function (e) {
     console.log(e)
@@ -148,11 +136,7 @@ Page({
   // 生命周期函数--监听页面初次渲染完成
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    
     //初始化的时候渲染wxSearchdata
     WxSearch.init(that, 43, this.data.hotwords);
     WxSearch.initMindKeys(['laiketui.com', '微信小程序开发', '微信开发', '微信小程序']);

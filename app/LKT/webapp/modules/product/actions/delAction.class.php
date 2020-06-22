@@ -1,6 +1,6 @@
 <?php
 /**
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
@@ -18,8 +18,11 @@ class delAction extends Action {
         $num = 0;
         $id = rtrim($id, ','); // 去掉最后一个逗号
         $id = explode(',',$id); // 变成数组
-
+        $db->begin();
+		$r0=0;
+		$k0=0;
         foreach ($id as $k => $v){
+
             $sql = "delete from lkt_cart where Goods_id = '$v'";
             $db->delete($sql);
 
@@ -29,9 +32,12 @@ class delAction extends Action {
             $sql = "delete from lkt_user_collection where Goods_id = '$v'";
             $db->delete($sql);
             // 根据产品id，删除产品信息
-            $sql = "update lkt_product_list set recycle = 1,status = 1 where id = '$v'";
-            $db->update($sql);
-
+            $sql01 = "update lkt_product_list set recycle = 1,status = 1 where id = '$v'";
+            $re0=$db->update($sql01);
+			if($re0 ==1){
+				$r0++;
+			}
+			$k0++;	
             $sql = "update lkt_configure set recycle = 1 where pid = '$v'";
             $db->update($sql);
 
@@ -41,9 +47,13 @@ class delAction extends Action {
             $db->admin_record($admin_id,' 删除商品id为 '.$v.' 的信息',3);
 
         }
-
-        $res = array('status' => '1','info'=>'成功！');
-        echo json_encode($res);
+		if($k0==$r0){
+			$res = array('status' => '1','info'=>'成功！');
+			$db-> commit();
+			echo json_encode($res);
+		}else{
+            $db-> rollback();
+        }
         return;
     }
 

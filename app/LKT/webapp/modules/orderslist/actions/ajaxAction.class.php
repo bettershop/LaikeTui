@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -15,25 +15,18 @@ class ajaxAction extends Action {
 		$db = DBAction::getInstance();
 		$request = $this->getContext()->getRequest();
 		$GroupID = addslashes(trim($request->getParameter('GroupID')));
-
-
-	      $strID="";
-	      $sql = "select  *  from admin_cg_group a  where a.G_ParentID='$GroupID'";
+	    $strID="";
+	    $sql = "select  *  from admin_cg_group a  where a.G_ParentID='$GroupID'";
 	
-		  $r = $db->select($sql);
-		  	 
-		  if($r)
-		  {
-          
-		 
-			  foreach($r as $list)
-			  {
-				 
-				 $strID.=$list->G_CName.",".$list->GroupID."|";
-				 
-			  }
-		  }
-          echo  $strID;
+		$r = $db->select($sql);
+		if($r)
+		{
+          foreach($r as $list)
+			{
+				$strID.=$list->G_CName.",".$list->GroupID."|"; 
+			}
+		}
+        echo  $strID;
 		return;
 	}
 

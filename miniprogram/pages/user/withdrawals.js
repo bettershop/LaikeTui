@@ -15,11 +15,9 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   /**
    * 生命周期函数--监听页面加载
@@ -35,9 +33,6 @@ Page({
     })
     wx.checkSession({
       success: function (e) {
-        console.log(e)
-        console.log('session_key 未过期' + app.globalData.userInfo.session_key)
-        //session_key 未过期，并且在本生命周期一直有效
         app.globalData.userInfo['session_key'] = app.globalData.userInfo.session_key;
       },
       fail: function () {
@@ -104,8 +99,6 @@ Page({
     var encryptedData = e.detail.encryptedData;
     var that = this;
     if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-      console.log(111)
-      
       wx.showModal({
         title: '提示',
         showCancel: false,
@@ -113,8 +106,6 @@ Page({
         success: function (res) { }
       })
     } else {
-      console.log(222)
-      
       wx.showModal({
         title: '提示',
         showCancel: false,
@@ -161,36 +152,28 @@ Page({
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast();
     } else if (res.detail.value.Bank_name.length == 0){
       wx.showToast({
         title: '银行名不得为空!',
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast();
     } else if (res.detail.value.Cardholder.length == 0) {
       wx.showToast({
         title: '持卡人不得为空!',
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast();
     } else if (res.detail.value.Bank_card_number.length == 0) {
       wx.showToast({
         title: '卡号不得为空!',
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast();
     }else{
       var that = this;
       wx.request({
@@ -218,11 +201,9 @@ Page({
               icon: 'success',
               duration: 3000
             })
-            setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
-              })
-            }, 2500);
+            wx.navigateBack({
+              delta: 1
+            });
           } else {
             wx.showToast({
               title: res.data.info,

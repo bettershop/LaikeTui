@@ -1,14 +1,6 @@
 <?php
 
 /**
-
- * [Laike System] Copyright (c) 2018 laiketui.com
-
- * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
- */
-
-/**
  * error code 说明.
  * <ul>
 
@@ -21,11 +13,11 @@
  */
 class ErrorCode
 {
-	public static $OK = 0;
-	public static $IllegalAesKey = -41001;
-	public static $IllegalIv = -41002;
-	public static $IllegalBuffer = -41003;
-	public static $DecodeBase64Error = -41004;
+    public static $OK = 0;
+    public static $IllegalAesKey = -41001;
+    public static $IllegalIv = -41002;
+    public static $IllegalBuffer = -41003;
+    public static $DecodeBase64Error = -41004;
 }
 
 ?>

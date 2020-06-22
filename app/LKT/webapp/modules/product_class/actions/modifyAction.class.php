@@ -67,7 +67,20 @@ class modifyAction extends Action {
             $str_option[0] = $resc;
         }
 
-        $array = ['顶级','一级','二级','三级','四级','五级'];
+        $array = ['顶级','一级','二级','三级','四级','五级','六级','七级','八级','九级','十级','十一级','十二级'];
+
+      //获取网页地址   xiaochengxu.laiketui.com/open/LKT/index.php
+        $dd = $_SERVER['PHP_SELF'];
+        $ddd =explode('/', $dd);//打散成数组
+        $dddd =array_pop($ddd);//去除数组最后一个元素
+        if($ddd){
+            $pic = implode('/', $ddd);
+
+        }else{
+             $pic = "/LKT";
+        }
+        $pic =str_replace('..', '', $pic);
+        $request->setAttribute('pic', $pic.'/images');
 
         $request->setAttribute('cid', $sid ? $sid:0);
         $request->setAttribute("level",$level);
@@ -77,6 +90,7 @@ class modifyAction extends Action {
         $request->setAttribute('cid_r', $cid);
         $request->setAttribute('uploadImg', $uploadImg);
         $request->setAttribute('pname', isset($pname) ? $pname : '');
+
         // $request->setAttribute('rname', isset($rname) ? $rname : '');
         $request->setAttribute('img', isset($img) ? $img : '');
         $request->setAttribute('sort', isset($sort) ? $sort : '');
@@ -147,7 +161,7 @@ class modifyAction extends Action {
         }
 
 
-        $level = $level+1;
+        $level = $level;
 		//更新分类列表
 		$sql = "update lkt_product_class " .
 			"set pname = '$pname',img = '$image',sid = '$sid',level='$level', sort = '$sort',bg='$bg'"
@@ -155,7 +169,7 @@ class modifyAction extends Action {
         // var_dump($sql);exit;
 		$r = $db->update($sql);
 
-		if($r < 1) {
+		if($r < 0) {
     		echo "<script type='text/javascript'>" .
 				"alert('未知原因，修改产品分类失败！');" .
 				"location.href='index.php?module=product_class';</script>";
@@ -164,7 +178,7 @@ class modifyAction extends Action {
 			header("Content-type:text/html;charset=utf-8");
 			echo "<script type='text/javascript'>" .
 				"alert('修改产品分类成功！');" .
-				"location.href='index.php?module=product_class';</script>";
+				"location.href='index.php?module=product_class&action=Index&cid=$sid';</script>";
 		}
 		return;
 	}

@@ -7,10 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>系统管理</title>
 {literal}
@@ -24,7 +21,12 @@
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe646;</i> 系统管理 <span class="c-gray en">&gt;</span> 热门关键词 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    系统管理 <span class="c-gray en">&gt;</span>
+    <a href="index.php?module=keyword">热门关键词</a>
+</nav>
+
 <div class="pd-20">
     <div style="clear:both;">
         <a href="index.php?module=keyword&action=Add"><input type="button" class="btn btn-primary radius" value="添加关键词" /></a>
@@ -51,7 +53,7 @@
                             	</div>
             				</div>
                         </a>
-                        <a style="text-decoration:none" class="ml-5" href="index.php?module=keyword&action=Del&id={$res.id}">
+                        <a style="text-decoration:none" class="ml-5" href="index.php?module=keyword&action=Del&id={$res.id}" onclick="return confirm('确定删除吗？')">
                         	<div style="align-items: center;font-size: 12px;display: flex;">
                             	<div style="margin:0 auto;;display: flex;align-items: center;"> 
                                 <img src="images/icon1/del.png"/>&nbsp;删除
@@ -66,14 +68,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="style/js/jquery.js"></script>
-
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<!-- <script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>  -->
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
 
 </body>

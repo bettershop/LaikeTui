@@ -121,3 +121,99 @@ text{
   width: 10px;
   height: 10px;
 }
+
+@keyframes slideContentUp {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 480rpx;
+  }
+}
+
+@keyframes slideContentDown {
+  from {
+    height: 480rpx;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.open {
+  animation: slideContentUp 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closes {
+  animation: slideContentDown 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+@keyframes slideBGtUp {
+  from {
+    background: transparent;
+  }
+
+  to {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes slideBGDown {
+  from {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  to {
+    background: transparent;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.openBG {
+  animation: slideBGtUp 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closeBG {
+  animation: slideBGDown 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+@keyframes slideContentUppuls {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 326rpx;
+  }
+}
+
+@keyframes slideContentDownpuls {
+  from {
+    height: 326rpx;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+/* 显示或关闭内容时动画 */
+
+.openpuls {
+  animation: slideContentUppuls 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}
+
+.closepuls {
+  animation: slideContentDownpuls 0.3s ease-in both;
+  /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
+}

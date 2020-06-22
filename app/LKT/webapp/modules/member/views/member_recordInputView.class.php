@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class member_recordInputView extends SmartyView {
     public function execute() {
 		$request = $this->getContext()->getRequest();

@@ -2,55 +2,23 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
-require_once(MO_LIB_DIR . '/ShowPager.class.php');
-require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once('BaseAction.class.php');
 
-class addFavoritesAction extends Action {
-    /*
-    时间2018年03月13日
-    修改内容：修改首页商品及分类请求数据
-    修改人：苏涛
-    主要功能：处理小程序首页请求结果
-    公司：湖南壹拾捌号网络技术有限公司
-     */
-    public function getDefaultView() {
-        return ;
-    }
-
-    public function execute(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $m = addslashes(trim($request->getParameter('m')));
-        if($m == 'index'){
-            $this->index();
-        }else if($m == 'collection'){
-            $this->collection();
-        }else if($m == 'removeFavorites'){
-            $this->removeFavorites();
-        }else if($m == 'alldel'){
-            $this->alldel();
-        }
-        return;
-    }
-
-    public function getRequestMethods(){
-        return Request :: POST;
-        // return Request :: GET;
-    }
+class addFavoritesAction extends BaseAction {
+    
     // 点击收藏
     public function index(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $openid = $_POST['openid']; // 微信id
-        $pid = $_POST['pid']; // 产品id
+        $openid = addslashes($_POST['openid']); // 微信id
+        $pid = addslashes($_POST['pid']); // 产品id
         // 根据微信id,查询用户id
-        $sql = "select user_id from lkt_user where wx_id = '$openid'";
+        $sql = "select user_id from lkt_user where wx_id = '$openid' ";
         $r = $db->select($sql);
         $user_id = $r[0]->user_id;
         // 根据用户id,产品id,查询收藏表
@@ -74,30 +42,27 @@ class addFavoritesAction extends Action {
         
         return;
     }
+    
     // 查看收藏
     public function collection(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
-        $openid = $_POST['openid']; // 微信id
-        // 查询系统参数
-        $sql = "select * from lkt_config where id = 1";
-        $r_1 = $db->select($sql);
-        $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
-        $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
-        if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
-            $img = $uploadImg_domain . $uploadImg; // 图片路径
-        }else{ // 不存在
-            $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
-        }
+        $openid = addslashes($_POST['openid']); // 微信id
+        
+        $appConfig = $this->getAppInfo();
+        $img = $appConfig['imageRootUrl'];
         
         // 根据微信id,查询用户id
         $sql = "select user_id from lkt_user where wx_id = '$openid'";
         $r = $db->select($sql);
         $user_id = $r[0]->user_id;
-
-        $sql ="select l.id,a.id as pid,a.product_title,a.imgurl as img,min(c.price) as price from lkt_user_collection as l left join lkt_product_list AS a on l.p_id = a.id RIGHT JOIN lkt_configure AS c ON a.id = c.pid where l.user_id = '$user_id' and a.num >0 group by c.pid order by l.add_time desc";
-
+        $sql ="
+select l.id,a.id as pid,a.product_title,a.imgurl as img,c.price 
+    from lkt_user_collection as l, lkt_product_list AS a,(select min(price) price,pid from lkt_configure group by pid) AS c
+    where
+    l.p_id = a.id and a.id = c.pid and l.user_id = '$user_id' and a.num >0  order by l.add_time desc
+";
         $r = $db->select($sql);
         $arr = [];
         if($r){
@@ -123,7 +88,7 @@ class addFavoritesAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
-        $id = $_POST['id']; // 收藏id
+        $id = addslashes($_POST['id']); // 收藏id
         // 根据收藏id,删除收藏表信息
         $sql = "delete from lkt_user_collection where id = '$id'";
         $r = $db->delete($sql);
@@ -136,11 +101,12 @@ class addFavoritesAction extends Action {
         }
         return;
     }
+
     public function alldel()
     {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $openid = trim($request->getParameter('openid')); // 微信id
+        $openid = addslashes(trim($request->getParameter('openid'))); // 微信id
         $sql_user = 'select user_id from lkt_user where wx_id=\''.$openid.'\'';
         $r_user = $db->select($sql_user);
         $userid = $r_user['0']->user_id;

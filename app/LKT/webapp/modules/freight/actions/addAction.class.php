@@ -2,14 +2,13 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
 
 require_once(MO_LIB_DIR . '/DBAction.class.php');
-
 
 
 class addAction extends Action {
@@ -35,8 +34,13 @@ class addAction extends Action {
             $freight_list = json_decode($hidden_freight,true);
             $freight = serialize($freight_list);
         }else{
-            $freight = '';
+            // $freight = '';
+             echo "<script type='text/javascript'>" .
+                "alert('运费规则不能为空！');" .
+                "location.href='index.php?module=freight&action=add';</script>";
+            return $this->getDefaultView();
         }
+
 
 		if($name == ''){
             echo "<script type='text/javascript'>" .

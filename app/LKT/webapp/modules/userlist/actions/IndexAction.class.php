@@ -39,7 +39,7 @@ class IndexAction extends Action {
         }
 		$condition = '';
 		if($name != ''){
-			$condition .= " and user_name like '%$name%' ";
+			$condition .= " and (user_name like '%$name%' or user_id = '$name') ";
 		}
 		
 		if($tel != ''){
@@ -90,7 +90,6 @@ class IndexAction extends Action {
 		}
 
         $url = "index.php?module=userlist&action=Index&name=".urlencode($name)."&tel=".urlencode($tel)."&source=".urlencode($source)."&startdate=".urlencode($startdate)."&enddate=".urlencode($enddate);
-        // $pages_show = $pager->multipage($url,ceil($total/$pagesize),$page, $para = '');
         $pages_show = $pager->multipage($url,$total,$page,$pagesize,$start,$para = '');
 
 		$request -> setAttribute('pageto', $pageto);

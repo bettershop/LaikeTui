@@ -12,9 +12,6 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    // setTimeout(function () {
-      
-    // }, 1000);
   },
   onLoad: function (options) {
     that = this;
@@ -93,11 +90,9 @@ Page({
             title: '已经评论过了哦，亲!',
             duration: 2000
           });
-          setTimeout(function () {
-            wx.navigateBack({
-              delta: 2
-            })
-          }, 2000);
+          wx.navigateBack({
+            delta: 2
+          });
         }
       },
       fail: function () {
@@ -159,13 +154,8 @@ Page({
     var commentList = that.data.commentList;
     var images = commentList[id].images;
     images.splice(index, 1);
-    // 循环设置数据
-    //for (var i = 0, len = commentList.length; i < len; i++) {
-     // if (i == id) {
-        commentList[id].images = images;
-        commentList[id].addHide = images.length;
-     // }
-    //}
+    commentList[id].images = images;
+    commentList[id].addHide = images.length;
     that.setData({
       commentList: commentList,
     });
@@ -246,16 +236,9 @@ Page({
             title: res.data.succ,
             duration: 2000
           });
-          setTimeout(function () {
-            // wx.navigateTo({
-            //   url: '../order/order?currentTab=4&order_type1=evaluate&otype=pay'
-            // })
-
-            wx.navigateBack({
-              delta: 1
-            })
-
-          }, 2000);
+          wx.navigateBack({
+            delta: 1
+          });
         } else {
           wx.showToast({
             title: res.data.err,
@@ -286,7 +269,6 @@ Page({
           },
           fail: function (res) {
             console.log(res);
-            // typeof fail == "function" && fail(res); 回调
           }
         })
   },

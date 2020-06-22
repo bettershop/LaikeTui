@@ -2,6 +2,7 @@
 class modifyInputView extends SmartyView {
     public function execute() {
 		$request = $this->getContext()->getRequest();
+        $this->setAttribute('pic', $request->getAttribute('pic'));
 		$this->setAttribute('id',$request->getAttribute('id'));
 		$this->setAttribute('uploadImg',$request->getAttribute('uploadImg'));
         $this->setAttribute('name',$request->getAttribute('name'));
@@ -14,6 +15,7 @@ class modifyInputView extends SmartyView {
         $this->setAttribute('sort',$request->getAttribute('sort'));
         $this->setAttribute('http',$request->getAttribute('http'));
         $this->setAttribute('list',$request->getAttribute('list'));
+        $this->setAttribute('code',$request->getAttribute('code'));
 			 
 		$this->setTemplate("modify.tpl");
     }

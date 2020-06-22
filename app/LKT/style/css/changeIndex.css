@@ -61,7 +61,7 @@ aside{
 	color: #fff;
 }
 .asideImg{
-	position: absolute;
+	/*position: absolute;*/
 }
 .asideImgWrap .asideImg:nth-child(even){
 	display: none;
@@ -74,7 +74,7 @@ aside{
 }
 .asideImgRight{
 	width: 10px;
-	position: absolute;
+	/*position: absolute;*/
 }
 .asideImgWrap{
 	height: 100%;

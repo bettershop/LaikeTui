@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -147,8 +147,8 @@ class modifyAction extends Action {
         $money = addslashes(trim($request->getParameter('money'))); // 金额
         $z_money = addslashes(trim($request->getParameter('z_money'))); // 总金额
         $num = addslashes(trim($request->getParameter('num'))); // 数量
-        $start_time = $request->getParameter('start_time'); // 活动开始时间
-        $end_time = $request->getParameter('end_time'); // 活动结束时间
+        $start_time = $request->getParameter('starttime'); // 活动开始时间
+        $end_time = $request->getParameter('group_end_time'); // 活动结束时间
 
         if($name == ''){
             header('Content-type: text/html;charset=utf-8');

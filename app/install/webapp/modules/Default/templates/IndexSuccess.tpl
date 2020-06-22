@@ -1,140 +1,65 @@
 <!DOCTYPE html>
-
-
-
 <html>
-
-
-
 	<head>
-
-
-
 		<meta charset="utf-8" />
-
-
-
 		<title>安装协议-来客电商系统安装</title>
-
-
-
-	<link type="text/css" href="style/install/css/index.css" rel="stylesheet">
-
-
-
+		<link type="text/css" href="style/install/css/index.css" rel="stylesheet">
 	</head>
 
-
-
 	<body>
-
-
-
 		<div class="border">
-
-
-
 			<div class="header">
-
-
-
 				<span class="logo"></span>
-
-
-
 				<span class="intro">安装向导</span>
-
-
-
 			</div>
-
-
 
 			<div class="install_steps">
-
-
-
-				<div class="steps  active"><span class="num">1</span>安装协议
-
-
-
+				<div class="steps  active">
+					<span class="num">1</span>
+					安装协议
 					<span class="arrow"></span>
-
-
-
 				</div>
 
 
 
-				<div class="steps"><span class="num">2</span>环境检测
-
-
-
+				<div class="steps">
+					<span class="num">2</span>
+					环境检测
 					<span class="arrow"></span>
+				</div>
 
 
+				<div class="steps">
+					<span class="num">3</span>
+					创建数据库
+					<span class="arrow"></span>
+				</div>
 
+
+				<div class="steps">
+					<span class="num">4</span>
+					安装
+					<span class="arrow"></span>
 				</div>
 
 
 
-				<div class="steps"><span class="num">3</span>创建数据库
-
-
-
+				<div class="steps">
+					<span class="num">5</span>
+					完成
 					<span class="arrow"></span>
-
-
-
 				</div>
-
-
-
-				<div class="steps"><span class="num">4</span>安装
-
-
-
-					<span class="arrow"></span>
-
-
-
-				</div>
-
-
-
-				<div class="steps"><span class="num">5</span>完成
-
-
-
-					<span class="arrow"></span>
-
-
-
-				</div>
-
-
 
 			</div>
 
-
-
 			<div class="rule_title">来客电商 V2.0<span>安装协议</span></div>
-
-
-
 			<div class="rules">
-
-
-
 				<br/>
+				<div>版权所有 (c) 2019，来客电商保留所有权利。</div>
 
 
 
-				<div>版权所有 (c) 2018，来客电商保留所有权利。</div>
-
-
-
-				<div>感谢您选择来客电商，来客电商诞生于2018年2月，是一款商城系统，希望我们的努力能为您提供一个简单、强大的站点解决方案。</div>
+				<div>感谢您选择来客电商，来客电商诞生于2017年9月，是一款商城系统，希望我们的努力能为您提供一个简单、强大的站点解决方案。</div>
 
 
 
@@ -211,30 +136,13 @@
 
 
 		    <div class="btn_group">	
-
-
-
-				<div class="not_agree agree"><a href="/" target="_blank">不同意</a></div>
-
-
-
-		    	<div class="not_agree agree" style="background:#7CCD7C;"><a href="index.php?action=step1">下一步</a></div>	
-
-
+				<a href="/" target="_blank"><div class="not_agree agree">不同意</div></a>
+		    	<a href="index.php?action=step1"><div class="not_agree agree" style="background:#7CCD7C;">下一步</div></a>	
 
 		    </div>
 
-
-
 		</div>
-
-
 
 	</body>
 
-
-
 </html>
-
-
-

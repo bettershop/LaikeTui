@@ -63,8 +63,9 @@
         </view> 
     </view>  
     <view class='btn_sign' style="color:{{bgcolor}}">已连续签到{{num}}天</view> 
-    <view class='btn_qd' bindtap="submit" style="background:{{bgcolor}};" wx:if="{{sign_status == 1}}">签到</view>
-    <view class='btn_qd' style="background:#C0C0C0;" wx:if="{{sign_status == 0}}">今天已签</view>
+    <view class='btn_qd' bindtap="submit" style="background:{{bgcolor}};" wx:if="{{sign_status==1}}">签到</view>
+    <view class='btn_qd' style="background:#C0C0C0;" wx:if="{{sign_status==0}}">今天已签</view>
+    
     <view class='qd_text'>
     <view style='padding-bottom:10px;font-size:32rpx;color:#666;'>签到规则</view>
 

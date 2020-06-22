@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,16 +7,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<script type="text/javascript" src="modpub/js/check.js" > </script>
-<script type="text/javascript" src="modpub/js/ajax.js"> </script>
-
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
 
 {literal}
 <style>
@@ -37,7 +28,15 @@
   }
   input{
     margin-right: 5px;
-  }  
+  }
+  .button-conter {
+    display: flex;
+    justify-content: center;
+  }
+
+  #btn1 {
+      margin-right: 5px;
+  }
 </style>
 <script type="text/javascript">
 function check(f){
@@ -51,7 +50,15 @@ function check(f){
 <title>修改角色</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe62d;</i> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <span class="c-gray en">&gt;</span> 修改角色 </nav>
+
+<nav class="breadcrumb">
+    配置管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=role">角色列表</a> <span class="c-gray en">&gt;</span> 
+    修改角色 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
+
 <div class="pd-20">
   <form name="form1" action="index.php?module=role&action=modify" class="form form-horizontal" method="post" onsubmit="return check(this);"  enctype="multipart/form-data" >
     <input type="hidden" name="id" value="{$id}" />
@@ -105,15 +112,15 @@ function check(f){
       </div> 
     </div>
     <div class="row cl">
-      <div class="col-10 col-offset-5">
-        <button class="btn btn-primary radius" type="submit" name="Submit"><i class="Hui-iconfont">&#xe632;</i> 提 交</button>
-        <button class="btn btn-secondary radius" type="reset" name="reset"><i class="Hui-iconfont">&#xe632;</i> 重 写</button>
+      <label class="form-label col-xs-4 col-sm-2"></label>
+      <div class="col-xs-8 col-sm-8">
+        <button id="btn1" class="btn btn-primary radius" type="submit" name="Submit">提 交</button>
+        
       </div>
     </div>
   </form>
 </div>
 
-<script type="text/javascript" src="modpub/js/check.js" > </script>
 <script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="style/js/checktree.js"></script>
 {literal}

@@ -7,17 +7,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>系统参数设置</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe616;</i> 新闻管理 <span class="c-gray en">&gt;</span> 新闻列表管理 <span class="c-gray en">&gt;</span> 分享红包设置 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=Article';" title="关闭" ><i class="Hui-iconfont">&#xe6a6;</i></a></nav>
+<nav class="breadcrumb">
+    系统管理 <span class="c-gray en">&gt;</span>
+    <a href="index.php?module=Article">文章列表</a> <span class="c-gray en">&gt;</span>
+    分享红包设置 <span class="c-gray en">&gt;</span>
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
 <div class="pd-20">
     <form name="form1" action="index.php?module=Article&action=amount" class="form form-horizontal" method="post" enctype="multipart/form-data" style="text-align: center;">
         <input type="hidden" name="id" value="{$id}" />
@@ -44,7 +44,8 @@
             <label class="form-label col-2" style="text-align:left;">如：恭喜发财</label>
         </div>
         <div class="row cl">
-            <div class="col-10">
+            <label class="form-label col-5"></label>
+            <div class="formControls col-2">
                 <button class="btn btn-primary radius" type="submit" name="Submit"> 提 交 </button>
                 <button class="btn btn-secondary radius" type="reset" name="reset"> 重 写 </button>
             </div>

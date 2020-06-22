@@ -20,11 +20,11 @@ class DetailInputView extends SmartyView {
 		$this->setAttribute("data",$request->getAttribute("data"));
 		$this->setAttribute("express",$request->getAttribute("express"));
         $this->setAttribute("fenxiaoshang",$request->getAttribute("fenxiaoshang"));
-        $this->setAttribute("express",$request->getAttribute("express"));
         $this->setAttribute("reduce_price",$request->getAttribute("reduce_price"));
         $this->setAttribute("coupon_price",$request->getAttribute("coupon_price"));
         $this->setAttribute("allow",$request->getAttribute("allow"));
         $this->setAttribute("num",$request->getAttribute("num"));
+        $this->setAttribute("da",$request->getAttribute("da"));
 
         $this->setTemplate("detail.tpl");
 

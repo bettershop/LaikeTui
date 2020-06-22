@@ -1,6 +1,6 @@
 <?php
 /**
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
@@ -88,6 +88,25 @@ class operationAction extends Action {
                         }
                         $s_type3 = implode(',',$s_type);
                         $sql = "update lkt_product_list set s_type = '$s_type3' where id = '$v'";
+                    }
+                } else if ($type ==9) {
+                    $del_type = 4; // 取消首页设置
+                    if(in_array($del_type,$s_type)){ // 存在
+                        foreach ($s_type as $key=>$value){
+                            if ($value == $del_type){
+                                unset($s_type[$key]);
+                            }
+                        }
+                        $s_type3 = implode(',',$s_type);
+                        $sql = "update lkt_product_list set s_type = '$s_type3' where id = '$v'";
+                    }
+                } else if ($type ==10) {
+                     $add_type = 4; // 热销
+                    if(in_array($add_type,$s_type)){ // 存在
+                        $sql = "update lkt_product_list set s_type = '$s_type1' where id = '$v'";
+                    }else{ // 不存在
+                        $s_type2 = implode(',',array_merge($s_type, (array)$add_type));
+                        $sql = "update lkt_product_list set s_type = '$s_type2' where id = '$v'";
                     }
                 }
                 $db->admin_record($admin_id,' 修改商品id为 '.$v.' 的类型 ',2);

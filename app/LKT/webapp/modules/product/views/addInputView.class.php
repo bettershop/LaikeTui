@@ -15,8 +15,10 @@ class addInputView extends SmartyView {
         $this->setAttribute("uploadImg",$request->getAttribute("uploadImg"));
         $this->setAttribute("ctype",$request->getAttribute("ctype"));
         $this->setAttribute("brand",$request->getAttribute("brand"));
+        
         $this->setAttribute("freight",$request->getAttribute("freight"));
-
+        $this->setAttribute('checked_attr_list',$request->getAttribute('checked_attr_list'));
+        $this->setAttribute('attr_group_list',$request->getAttribute('attr_group_list'));
         $this->setAttribute("attribute",$request->getAttribute("attribute"));
         $this->setAttribute("attribute_num",$request->getAttribute("attribute_num"));
         $this->setAttribute("attribute_key",$request->getAttribute("attribute_key"));
@@ -25,8 +27,8 @@ class addInputView extends SmartyView {
         $this->setAttribute("product_number",$request->getAttribute("product_number"));
         $this->setAttribute("product_title",$request->getAttribute("product_title"));
         $this->setAttribute("subtitle",$request->getAttribute("subtitle"));
-        $this->setAttribute("scan",$request->getAttribute("scan"));
-        $this->setAttribute("keyword",$request->getAttribute("keyword"));
+        // $this->setAttribute("scan",$request->getAttribute("scan"));
+        // $this->setAttribute("keyword",$request->getAttribute("keyword"));
         $this->setAttribute("weight",$request->getAttribute("weight"));
         $this->setAttribute("s_type",$request->getAttribute("s_type"));
         $this->setAttribute("is_distribution",$request->getAttribute("is_distribution"));
@@ -36,6 +38,7 @@ class addInputView extends SmartyView {
         $this->setAttribute("freight",$request->getAttribute("freight"));
         $this->setAttribute("content",$request->getAttribute("content"));
         $this->setAttribute("volume",$request->getAttribute("volume"));
+          $this->setAttribute('initial',$request->getAttribute('initial'));
         $this->setTemplate("add.tpl");
     }
 }

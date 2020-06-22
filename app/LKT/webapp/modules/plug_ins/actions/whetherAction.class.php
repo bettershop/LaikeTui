@@ -19,22 +19,12 @@ class whetherAction extends Action {
             $res = $db->update($sql);
             $db->admin_record($admin_id,' 禁用插件id为 '.$id,5);
 			echo $res; exit;
-            // header("Content-type:text/html;charset=utf-8");
-            // echo "<script type='text/javascript'>" .
-            //     "alert('禁用成功！');" .
-            //     "location.href='index.php?module=plug_ins';</script>";
-            // return;
         }else{
             $sql = "update lkt_plug_ins set status = 1 where id = '$id'";
             $res = $db->update($sql);
 
             $db->admin_record($admin_id,' 启用插件id为 '.$id,5);
 			echo $res; exit;
-            // header("Content-type:text/html;charset=utf-8");
-            // echo "<script type='text/javascript'>" .
-            //     "alert('启用成功！');" .
-            //     "location.href='index.php?module=plug_ins';</script>";
-            // return;
         }
     }
 

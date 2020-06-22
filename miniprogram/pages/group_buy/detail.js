@@ -24,9 +24,20 @@ Page({
     gprice: '',
     control: {},
     show_share: false,
+    pop:null
   },
-
+  onReady:function(){
+    this.pop = this.selectComponent("#pop")
+  },
   onLoad: function (options) {
+    
+    if (options.referee_openid != '') {
+      app.globalData.userInfo['referee_openid'] = options.referee_openid;
+    } else {
+      app.globalData.userInfo['referee_openid'] = '';
+    }
+    console.log(app.globalData.userInfo['referee_openid'])
+    
     var scene = decodeURIComponent(options.scene);
 
     if (scene != 'undefined' && scene.length > 1 && scene != '') {
@@ -51,13 +62,13 @@ Page({
       console.log('监听成功')
     }
     app.request.wxRequest({
-      url:'&action=groupbuy&m=getgoodsdetail',
+      url:'&action=pi&p=pintuan&c=groupbuy&m=getgoodsdetail',
       data: { gid: gid, group_id: group_id, userid:app.globalData.userInfo.openid},
       method:'post',
       success:function(res){
         console.log(res);
-        WxParse.wxParse('content', 'html', res.detail.content, self, 5);
-        
+        WxParse.wxParse('content', 'html', res.detail.content, self, 5);//处理商品规则的富文本框
+        WxParse.wxParse('rule', 'html', res.detail.rule, self, 5);//处理规则的富文本框
         if (res.isplug === '0'){
           wx.showModal({
             title: '温馨提示!',
@@ -108,6 +119,8 @@ Page({
         })
         
         var timestamp = Date.parse(new Date())/1000;
+        // console.log(timestamp);
+        // console.log('1111111111111111111111111111111111111111');
         if (timestamp > parseInt(res.control.endtime)) {
            self.setData({
              is_over: true
@@ -160,6 +173,10 @@ Page({
   },
   //分享朋友圈 查看保存图片
   user_share: function () {
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
     var that = this;
     wx.showToast({
       title: '图片生成中',
@@ -173,7 +190,7 @@ Page({
         product_title: that.data.itemData.pro_name,
         price: that.data.itemData.member_price,
         yprice: that.data.itemData.market_price,
-        scene: that.data.fdata + '&userid=' + app.globalData.userInfo.user_id,
+        scene: that.data.fdata + '&referee_openid=' + app.globalData.userInfo.user_id,
         path: 'pages/group_buy/detail',
         id: app.globalData.userInfo.user_id,
         pid: that.data.itemData.product_id,
@@ -211,7 +228,6 @@ Page({
   //倒计时
   countDown: function (endtime) {
     var that = this
-    //var endTime = new Date(endtime.replace(/-/g, '/')).getTime();
     var nowTime = new Date().getTime();
     var total_second = endtime - nowTime;
      that.dateformat(total_second)
@@ -235,27 +251,19 @@ Page({
     var second = Math.floor(micro_second / 1000);
     // 天数
     var day = Math.floor(second / 3600 / 24);
-
     // 小时
     var hr = Math.floor(second / 3600 % 24);
     var hrStr = hr.toString();
     if (hrStr.length == 1) hrStr = '0' + hrStr;
-
     // 分钟
     var min = Math.floor(second / 60 % 60);
     var minStr = min.toString();
     if (minStr.length == 1) minStr = '0' + minStr;
-
     // 秒
     var sec = Math.floor(second % 60);
     var secStr = sec.toString();
     if (secStr.length == 1) secStr = '0' + secStr;
 
-    /*if (day < 1) {
-      return "剩 " + hrStr + ":" + minStr + ":" + secStr;
-    } else {
-      return "剩 " + day + " 天 " + hrStr + ":" + minStr + ":" + secStr;
-    }*/
     this.setData({
       day: day,
       hour: hrStr,
@@ -288,9 +296,10 @@ Page({
     this.setData({
       show_share: false
     });
+    console.log("/pages/group_buy/detail?gid=" + this.gid + '&sum=' + this.data.sum + '&group_id=' + this.data.groupid + '&pagefrom=share&referee_openid=' + app.globalData.userInfo.user_id,1111)
     return {
       title: this.data.itemData.pro_name,
-      path: "/pages/group_buy/detail?gid=" + this.gid + '&sum=' + this.data.sum + '&group_id=' + this.data.groupid + '&pagefrom=share&userid=' + app.globalData.userInfo.user_id,
+      path: "/pages/group_buy/detail?gid=" + this.gid + '&sum=' + this.data.sum + '&group_id=' + this.data.groupid + '&pagefrom=share&referee_openid=' + app.globalData.userInfo.user_id,
       imageUrl: this.data.itemData.images[0],
       success:function(res){
         console.log(res)
@@ -322,6 +331,10 @@ Page({
     }, 1000)
   },
   joinGroup:function(e){
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
     var id = e.currentTarget.dataset.id;
     app.redirect('group_buy/cantuan', 'id=' + id + '&groupid=' + this.data.groupid + '&man_num=' + this.data.itemData.man_num + '&pro_id=' + this.gid + '&sum=' + this.data.sum);
   },
@@ -332,6 +345,10 @@ Page({
   },
   
   goToBuy:function(){
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
     var that = this;
     var obj = '';
     var value = [];
@@ -369,7 +386,9 @@ Page({
         that.setData({
           showModalStatus: false
         });
-        obj += '&pro_name=' + that.goodsInfo.detail.pro_name + '&num=' + that.data.num + '&pro_id=' + that.goodsInfo.detail.product_id + '&sizeid=' + sizeid + '&groupid=' + that.data.groupid + '&pagefrom=kaituan&oid=321';
+
+        obj += '&pro_name=' + that.goodsInfo.detail.pro_name + '&num=' + that.data.num + '&pro_id=' + that.goodsInfo.detail.product_id + '&sizeid=' + sizeid + '&groupid=' + that.data.groupid + '&pagefrom=kaituan&oid=321&referee_openid=' + app.globalData.userInfo['referee_openid'];
+
         app.redirect('group_buy/payfor', obj);
       }
     }
@@ -388,7 +407,12 @@ Page({
       num : num
     })
   },
-  getUserformid: function(e){  
+  getUserformid: function(e){
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
+
     var formid = e.detail.formId;
     this.sendFormid(formid,'kt1')
     this.setModalStatus(e);
@@ -421,6 +445,10 @@ Page({
   },
 
   addShopCart: function () {
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
     //添加到购物车
     var that = this;
     if (that.data.pro_status == 1) {
@@ -451,7 +479,7 @@ Page({
           
           if (data.status == 1) {      
               wx.redirectTo({
-                url: '../order/pay?cartId=' + data.cart_id + '&pid=' + that.data.productId,
+                url: '../order/pay?cartId=' + data.cart_id + '&pid=' + that.data.productId + '&num=' + that.data.num + '&type=1',
               });  
               that.setData({
                 showModalStatus: false
@@ -469,6 +497,12 @@ Page({
     
   // 弹窗
   setModalStatus: function (e) {
+
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
+
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
@@ -479,34 +513,40 @@ Page({
     var paytype = e.currentTarget.dataset.type;
     this.animation = animation
     animation.translateY(300).step();
+
     this.setData({
       paytype: paytype,
       animationData: animation.export()
     })
     
     if (e.currentTarget.dataset.status == 1) {
+
       this.setData({
         showModalStatus: true
       });
+      
     }
     
     setTimeout(function () {
       animation.translateY(0).step()
+
       this.setData({
         animationData: animation
       })
+
       if (e.currentTarget.dataset.status == 0) {
         this.setData({
           showModalStatus: false
         });
       }
+
     }.bind(this), 200)
   },
 
   sendFormid:function(fromid,page){
       var that = this
       app.request.wxRequest({
-        url: '&action=groupbuy&m=getFormid',
+        url: '&action=pi&p=pintuan&c=groupbuy&m=getFormid',
         data: { from_id: fromid, userid: app.globalData.userInfo.openid, page: page},
         method: 'post',
         success:function(){
@@ -696,6 +736,11 @@ Page({
 
   // 弹窗
   set_share: function (e) {
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
+
     var taht = this;
     var show_share = taht.data.show_share;
     var animation = wx.createAnimation({
@@ -779,8 +824,9 @@ Page({
     })
 
   },
-
+  // 分享到朋友圈
   close_share: function (e) {
+
     var that = this;
     that.setData({
       maskHidden: false

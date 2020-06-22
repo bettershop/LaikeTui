@@ -2,58 +2,24 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
+require_once('BaseAction.class.php');
 
-class searchAction extends Action {
-
-	public function getDefaultView() {
-    return;
-  }
-
-  public function execute(){
-    $db = DBAction::getInstance();
-    $request = $this->getContext()->getRequest();
-
-    $m = addslashes(trim($request->getParameter('m')));
-    if($m == 'index'){
-      $this->index();
-    }else if($m == 'search'){
-      $this->search();
-    }else if($m == 'listdetail'){
-      $this->listdetail();
-    }
-    return;
-  }
-
-	public function getRequestMethods(){
-		return Request :: POST;
-	}
+class searchAction extends BaseAction {
 
   public function index(){
     $db = DBAction::getInstance();
     $request = $this->getContext()->getRequest();
-    // 查询系统参数
-    $sql = "select * from lkt_config where id = 1";
-    $r_1 = $db->select($sql);
-    if($r_1){
-        $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
-        $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
-        if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
-            $img = $uploadImg_domain . $uploadImg; // 图片路径
-        }else{ // 不存在
-            $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
-        }
-    }else{
-        $img = '';
-    }
+
+    $appConfig = $this->getAppInfo();
+    $img = $appConfig['imageRootUrl'];
 
     //查询商品并分类显示返回JSON至小程序
-    $sql_c = "select cid,pname,img,bg from lkt_product_class where sid=0 and recycle != 1 order by sort desc";
+    $sql_c = "select cid,pname,img,bg from lkt_product_class where sid=0 and recycle != 1 order by sort asc";
     $r_c = $db->select($sql_c);
    
     $twoList = [];
@@ -62,7 +28,7 @@ class searchAction extends Action {
     $icons=[];
     if($r_c){
         foreach ($r_c as $key => $value) {
-            $sql_e = 'select cid,pname,img from lkt_product_class where sid=\''.$value->cid.'\' and recycle != 1 order by sort ';
+            $sql_e = 'select cid,pname,img from lkt_product_class where sid=\''.$value->cid.'\' and recycle != 1 order by sort asc';
             $r_e = $db->select($sql_e);
             $son=[];
             if($r_e){
@@ -100,24 +66,13 @@ class searchAction extends Action {
   public function search(){
     $db = DBAction::getInstance();
     $request = $this->getContext()->getRequest();
-    $keyword = trim($request -> getParameter('keyword')); // 关键词
-    $num = trim($request->getParameter('num')); //  '次数'
-    $select = trim($request->getParameter('select')); //  选中的方式 0 默认  1 销量   2价格
-    $sort = trim($request->getParameter('sort')); // 排序方式  1 asc 升序   0 desc 降序
-    // 查询系统参数
-    $sql = "select * from lkt_config where id = 1";
-    $r_1 = $db->select($sql);
-    if($r_1){
-        $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
-        $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
-        if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
-            $img = $uploadImg_domain . $uploadImg; // 图片路径
-        }else{ // 不存在
-            $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
-        }
-    }else{
-        $img = '';
-    }
+    $keyword = addslashes(trim($request -> getParameter('keyword'))); // 关键词
+    $num = addslashes(trim($request->getParameter('num'))); //  '次数'
+    $select = addslashes(trim($request->getParameter('select'))); //  选中的方式 0 默认  1 销量   2价格
+    $sort = addslashes(trim($request->getParameter('sort'))); // 排序方式  1 asc 升序   0 desc 降序
+
+    $appConfig = $this->getAppInfo();
+    $img = $appConfig['imageRootUrl'];
 
     if($select == 0){
       $select = 'a.add_date'; 
@@ -152,30 +107,38 @@ class searchAction extends Action {
       }
       $start = 10*($num-1);
       $end = 10;
-      $sqlb = "select a.id,product_title,a.volume,a.s_type,c.id as cid,c.yprice,c.img,c.name,c.color,min(c.price) as price from lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid where a.product_class like '%$cid%' and a.status = 0 group by c.pid order by $select $sort  LIMIT $start,$end";
+      $sqlb = "select a.id,a.product_title,a.product_class,a.volume,a.s_type,
+a.imgurl as img ,c.price 
+from lkt_product_list AS a RIGHT JOIN (select min(price) price,pid from lkt_configure group by pid) AS c
+ON a.id = c.pid 
+where a.product_class like '%$cid%' and a.status = 0  
+order by $select $sort LIMIT $start,$end
+";
       $data = $db -> select($sqlb);
       
     }else{   //如果不是商品分类名称，则直接搜产品
       $type = 1;
       $keyword = addslashes($keyword);
-      $sqlb = "select a.id,a.product_title,a.product_class,a.volume,a.s_type,c.id as cid,c.yprice,c.img,c.name,c.color,min(c.price) as price from lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid where a.product_title like '%$keyword%' and a.status = 0 group by c.pid order by $select $sort";
-
+      $sqlb = "select a.id,a.product_title,a.product_class,a.volume,a.s_type,
+a.imgurl as img ,c.price 
+from lkt_product_list AS a RIGHT JOIN (select min(price) price,pid from lkt_configure group by pid) AS c
+ON a.id = c.pid 
+where a.product_title like '%$keyword%' and a.status = 0  
+order by $select $sort 
+";
       $data = $db -> select($sqlb);
     }
     if(!empty($data)){
       $product = array();
       foreach ($data as $k => $v) {
         $imgurl = $img.$v->img;/* end 保存*/
-        $names = ' '.$v->name . $v->color ;
         if($type == 1){
           $cid = $v->product_class;
         }else{
           $cid = $cid;
         }
-        if($v->name == $v->color || $v->name == '默认'){
-            $names = '';
-        }
-        $product[$k] = array('id' => $v->id,'name' => $v->product_title . $names,'price' => $v->yprice,'price_yh' => $v->price,'imgurl' => $imgurl,'size'=>$v->cid,'volume' => $v->volume,'s_type' => $v->s_type);
+        $names = '';
+        $product[$k] = array('id' => $v->id,'name' => $v->product_title . $names,'price' => $v->price,'price_yh' => $v->price,'imgurl' => $imgurl,'size'=>0,'volume' => $v->volume,'s_type' => $v->s_type);
       }
       echo json_encode(array('list'=>$product,'cid'=>$cid,'code'=>1,'type'=>$type));exit();
     }else{
@@ -186,9 +149,11 @@ class searchAction extends Action {
   public function listdetail(){
     $db = DBAction::getInstance();
     $request = $this->getContext()->getRequest();
-    $id = trim($request->getParameter('cid')); //  '分类ID'
-    $paegr = trim($request->getParameter('page')); //  '页面'
-    $select = trim($request->getParameter('select')); //  选中的方式 0 默认  1 销量   2价格
+    $id = addslashes(trim($request->getParameter('cid'))); //  '分类ID'
+    $paegr = addslashes(trim($request->getParameter('page'))); //  '页面'
+    $select = addslashes(trim($request->getParameter('select'))); //  选中的方式 0 默认  1 销量   2价格
+    $status111 =addslashes($request->getParameter('status'));//分销才传status
+   
     if($select == 0){
       $select = 'a.add_date'; 
     }elseif ($select == 1) {
@@ -197,26 +162,15 @@ class searchAction extends Action {
       $select = 'price'; 
     }
 
-    $sort = trim($request->getParameter('sort')); // 排序方式  1 asc 升序   0 desc 降序
+    $sort = addslashes(trim($request->getParameter('sort'))); // 排序方式  1 asc 升序   0 desc 降序
     if($sort){
       $sort = ' asc '; 
     }else{
       $sort = ' desc '; 
     }
-    // 查询系统参数
-    $sql = "select * from lkt_config where id = 1";
-    $r_1 = $db->select($sql);
-    if($r_1){
-        $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
-        $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
-        if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
-            $img = $uploadImg_domain . $uploadImg; // 图片路径
-        }else{ // 不存在
-            $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
-        }
-    }else{
-        $img = '';
-    }
+
+    $appConfig = $this->getAppInfo();
+    $img = $appConfig['imageRootUrl'];
 
     if(!$paegr){
       $paegr = 1;
@@ -230,27 +184,85 @@ class searchAction extends Action {
       $bg = $img.$r_c[0]->bg;
     }
 
-    $sql = "select a.id,a.product_title,volume,min(c.price) as price,c.yprice,c.img,c.name,c.color,c.size,a.s_type,c.id AS sizeid from lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid where a.product_class like '%$id%' and c.num >0 and a.status = 0 group by c.pid  order by $select $sort LIMIT $start,$end ";
+      
+        $sql = "select * from lkt_product_list as a where a.recycle = 0 and a.num >0 and a.status = 0 and  a.product_class like '%-$id-' order by sort asc,status asc,a.add_date desc,a.sort desc limit $start,$end ";
+        $r = $db->select($sql);
+        $status_num = 0;
+        if($r){
+        foreach ($r as $key => $value) {
+            $pid =  $value ->id;//id
+            $prrr =0;//初始售价
+            $yprrr =0;//初始原价
+            if($value->initial != ''){
+                $initial = unserialize($value->initial);
+                $prrr =$initial['sj'];
+                $yprrr =$initial['yj'];
+            }
+            $imgurl = $img.$value->imgurl;/* end 保存*/
+            $sql = "select id,num,unit,price,yprice from lkt_configure where pid = '$pid'";//根据商品ID去查询商品对应的规格
+            $r_s = $db->select($sql);
+            if($r_s){
+                $price = [];
+                $yprice = [];
+                $unit = $r_s[0]->unit;
+                 foreach ($r_s as $k1 => $v1){
+                    $price[$k1] = $v1->price;
+                    $yprice[$k1] = $v1->yprice;
+                }
+                $min = min($price);
+                $ymin = min($yprice);
+                $present_price = $min;//最低价格
+            }else{
+                $unit = '';
+                $present_price = $prrr;
+                $ymin =$yprrr;
+            }
 
-    $r = $db->select($sql);
 
-    if($r){
-      $product = [];
-      foreach ($r as $k => $v) {
-        $imgurl = $img.$v->img;/* end 保存*/
-        $names = ' '.$v->name . $v->color ;
-        if($v->name == $v->color || $v->name == '默认'){
-          $names = '';
+            $value->unit = $unit;
+            $value->price = $present_price;
+            $product[$key] = array('id' => $pid,'name' => $value->product_title,'price' =>$ymin ,'price_yh' => $value->price,'imgurl' => $imgurl,'volume' => $value->volume,'s_type' => $value->s_type);
         }
-        $product[$k] = array('id' => $v->id,'name' => $v->product_title . $names,'price' => $v->yprice,'price_yh' => $v->price,'imgurl' => $imgurl,'size'=>$v->sizeid,'volume' => $v->volume,'s_type' => $v->s_type);
-      }
-      echo json_encode(array('status'=>1,'pro'=>$product,'bg'=>$bg));
-      exit;
-    }else{
+         echo json_encode(array('status'=>1,'pro'=>$product,'bg'=>$bg));
+        }else{
       echo json_encode(array('status'=>0,'err'=>'没有了！'));
       exit;
     }
   }
+
+
+    public function class_sort($product_class)//根据类别查询下一级
+    {
+          $db = DBAction::getInstance();
+          $typestr=trim($product_class,'-');
+          $typeArr=explode('-',$typestr);
+          //  取数组最后一个元素 并查询分类名称
+          $cid = end($typeArr);//找到本级ID
+          $k[] = '-'.$product_class.'-';
+           
+          if(!empty($cid)){//循环下一级
+                $sql_e = "select cid,pname from lkt_product_class where recycle = 0 and sid = $cid";
+                $r_e = $db->select($sql_e);
+                if($r_e){
+                    foreach ($r_e as $k01 => $v01) {//循环第三级
+                        $k[] = '-'.$product_class.'-'.$v01->cid.'-';
+                        $sql_e01 = "select cid,pname from lkt_product_class where recycle = 0 and sid = $v01->cid";
+                        $r_e01 = $db->select($sql_e01); 
+
+                        if($r_e01){
+                            foreach ($r_e01 as $k02 => $v02) {
+                                
+                               $k[] = '-'.$product_class.'-'.$v01->cid.'-'.$v02->cid.'-';
+                            }
+                        } 
+                    }  
+                }
+            }
+            
+          return $k;
+    }
+     
+
 }
 
 ?>

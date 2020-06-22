@@ -3,7 +3,7 @@
           <view wx:if="{{!flag}}" bindtap="upflag" class='top-ql-1' style='color:#333;'>地址管理</view>
           <view wx:else class='top-ql-1' bindtap="uptrue" style='color:#f60;'>完成</view>
       </view>
-<radio-group class="radio-group" wx:for="{{address}}">
+<radio-group class="radio-group" wx:for="{{address}}" wx:key="key">
   <view hidden="{{hiddenAddress}}" class="address">
     <view class="address-detail">
     <view class='address_div'>

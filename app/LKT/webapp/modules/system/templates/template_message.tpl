@@ -1,17 +1,24 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
 <title>模板消息设置</title>
-<link rel="stylesheet" href="style/tgt/bootstrap.min.css" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
+
 </head>
 <body>
-<nav class="breadcrumb" style="line-height: 2.6rem"><i class="Hui-iconfont">&#xe616;</i> 系统管理 <span class="c-gray en">&gt;</span> 模板消息设置 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px;float: right;" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+
+<nav class="breadcrumb">
+    小程序 <span class="c-gray en">&gt;</span> 
+    消息管理
+</nav>
+
 
 <div class="page-container">
 
@@ -20,10 +27,10 @@
               <div class="panel-body">
                   <div class="form-group">  
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <label class="col-xs-12 col-sm-4 col-md-4 control-label">购买成功通知</label> 
+                        <label class="col-xs-12 col-sm-4 col-md-4 control-label">支付成功通知</label> 
                         <div class="col-sm-8 col-xs-12">    
                                 
-                            <input type="text" name="notice[pay_success]" class="form-control" value="{$notice->pay_success}">   
+                            <input type="text" name="notice[order_success]" class="form-control" value="{$notice->order_success}">   
                             <div class="help-block">小程序模板消息编号示例: m1FFBWiae7r4Sx3cMZ7dyt0 </div>    
                                 
                         </div>    
@@ -37,14 +44,7 @@
                                 
                         </div>    
                     </div>            
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <label class="col-xs-12 col-sm-4 col-md-4 control-label">订单支付成功通知</label>   
-                        <div class="col-sm-8 col-xs-12">    
-                                
-                            <input type="text" name="notice[order_success]" class="form-control" value="{$notice->order_success}">   
-                            <div class="help-block">小程序模板消息编号示例: m1FFBWiae7r4Sx3cMZ7dyt0 </div>    
-                                
-                        </div>            </div>            
+                       
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <label class="col-xs-12 col-sm-4 col-md-4 control-label">开团成功提醒</label> 
                         <div class="col-sm-8 col-xs-12">    
@@ -110,11 +110,11 @@
                     
                   <div class="form-group"></div>  
                 <div class="form-group">  
-                      <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label> 
-                      <div class="col-sm-9 col-xs-12">  
+                      <label class="col-xs-12 col-sm-4 col-md-4 control-label"></label> 
+                      <div class="col-sm-8 col-xs-12">  
                               
                               <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" data-original-title="" title=""> 
-                              <input type="hidden" name="token" value="41f48483"> 
+                              
                               
                        </div> 
                 </div>

@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -102,7 +102,6 @@ class addsignAction extends Action {
 				$form_id = $froms['fromid'];
 				$page = 'pages/order/detail?orderId=' . $order_id;
 				//消息模板id
-
 				$sql = "select * from lkt_notice where id = '1'";
 				$r = $db -> select($sql);
 				$template_id = $r[0] -> order_delivery;

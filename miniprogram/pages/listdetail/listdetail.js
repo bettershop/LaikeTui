@@ -115,11 +115,6 @@ Page({
             })
           }
         } else {
-          // wx.showToast({
-          //   title: '没有更多数据！',
-          //   icon: 'none',
-          //   duration: 2000
-          // });
           that.setData({
             period: true
           });
@@ -379,10 +374,8 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
 })

@@ -8186,7 +8186,7 @@ a.badge:focus {
 }
 
 .docs-example:after {
-	content: "Example";
+	content: "列表";
 	position: absolute;
 	top: -1px;
 	left: -1px;

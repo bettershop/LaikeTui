@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,13 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 {literal}
+<style>
+    .button-conter {
+        display: flex;
+        justify-content: center;
+    }
+    
+    #btn1 {
+        margin-right: 5px;
+    }
+</style>
 <script type="text/javascript">
 function check(f){
     if(Trim(f.name.value) == "" ){
@@ -34,7 +39,15 @@ function check(f){
 <title>添加管理员</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe62d;</i> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <span class="c-gray en">&gt;</span> 添加管理员 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="#" onclick="location.href='index.php?module=member';" title="关闭" ><i class="Hui-iconfont">&#xe6a6;</i></a></nav>
+
+<nav class="breadcrumb">
+    用户管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=member">管理员列表</a> <span class="c-gray en">&gt;</span>  
+    添加管理员 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
+
 <div class="pd-20">
     <form name="form1" action="index.php?module=member&action=add" class="form form-horizontal" method="post" onsubmit="return check(this);"  enctype="multipart/form-data" >
         <div class="row cl">
@@ -64,20 +77,18 @@ function check(f){
 			</span> </div>
         </div>
         <div class="row cl">
-            <div class="col-10 col-offset-5">
-                <button class="btn btn-primary radius" id="btn1" type="submit" name="Submit">
-                	<i class="Hui-iconfont">&#xe632;</i> 提 交
-                </button>
-                <button class="btn btn-secondary radius" id="btn2" type="reset" name="reset">
-                	<i class="Hui-iconfont">&#xe632;</i> 重 置
+            <label class="form-label col-4 "></label>
+            <div class="formControls col-8">
+                <button class="btn btn-primary radius" id="btn1" type="submit" name="Submit" >
+                	提 交
                 </button>
             </div>
         </div>
     </form>
 </div>
 
-<script type="text/javascript" src="modpub/js/check.js" > </script>
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 {literal}
 <script type="text/javascript">
 function appendMask(content,src){

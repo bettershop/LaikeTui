@@ -11,14 +11,13 @@ define('APP_PATH', __DIR__ . '/LKT/');
 define('REAL_PATH', realpath('./') . '/');
 //设置目录权限
 chmod(REAL_PATH, 0777);
-session_start();
 $_SESSION["APP_PATH"]=APP_PATH;
 $_SESSION["INSTALL_PATH"]=INSTALL_PATH;
 clearstatcache();
 $path ='../'.basename(dirname(__FILE__)).'/';
 if(!is_file('./data/install.lock')){
-  header('Location: ./install');
+  header('Location: ./install/index.php');
 }else{
-  header("Location: ./LKT");
+  header("Location: ./LKT/index.php");
 }
 ?>

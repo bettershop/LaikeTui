@@ -19,7 +19,6 @@ class IndexAction extends Action {
         $sql = "select * from lkt_config where id = '1'";
         $r = $db->select($sql);
         $uploadImg = $r[0]->uploadImg; // 图片上传位置
-        
         $sql = 'select * from lkt_article order by sort ';
         $r = $db->select($sql);
         $request->setAttribute("list",$r);

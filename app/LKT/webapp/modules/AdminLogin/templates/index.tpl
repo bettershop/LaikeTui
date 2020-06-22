@@ -9,6 +9,7 @@
 
 	<LINK rel="Bookmark" href="/favicon.ico" >
 	<LINK rel="Shortcut Icon" href="/favicon.ico" />
+	
 	<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 	<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 	<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
@@ -19,7 +20,7 @@
 	<link rel="stylesheet" href="style/css/message.css">
 	<link rel="stylesheet" href="style/css/changeIndex.css" />
 
-	<title>来客电商管理系统</title>
+	<title>LaiKeTui商城系统 · 专注用户体验</title>
 	{literal}
 		<style type="text/css">
 			.bk_2{
@@ -94,19 +95,6 @@
 				top: 200px;
 				background: #fff;
 				border-radius: 10px;
-			}
-			.closeMask{
-				width: 100px;
-				height: 50px;
-				border: 1px solid #eee;
-				border-radius: 5px;
-				background: #008DEF;
-				color: #fff;
-				font-size: 16px;
-				line-height: 50px;
-				position: absolute;
-				bottom: 30px;
-				left: 200px;
 			}
 			#jbxx,#changePassword{
 				position: absolute;
@@ -393,7 +381,29 @@
 			#changeInf{
 				cursor: pointer;
 			}
-		    
+		  
+			.footers {
+				height: 40px;
+				width: 98%;
+				background-color: #222;
+				color: #ddd;
+				z-index: 5000;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				padding: 0px 20px;
+				display: flex;
+				justify-content:space-between;
+				align-items: center;
+			}
+			
+			.ba {
+				color: #ddd;
+			}
+
+			.ba:hover {
+				color: #06c;
+			}
 		</style>
 	{/literal}
 </head>
@@ -410,22 +420,20 @@
 	<ul class="bigUl">
 		<li {if $type == 0}class="active"{/if}><a href="index.php?module=AdminLogin">平台</a></li>
 		<li {if $type == 1}class="active"{/if}><a href="index.php?module=AdminLogin&type=1">小程序</a></li>
-		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">公众号</a></li>
-		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">生活号</a></li>
 		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">APP</a></li>
-		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">报表</a></li>
+		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">数据报表</a></li>
 	</ul>
 
 	<ul class="Hui-userbar">
 		<li class="dropDown dropDown_hover headerLi">
 			<a href="#" class="dropDown_A">
 				<img class="userIdImg" src="images/iIcon/tx.png" alt="" />
-				{$admin_id}
+				{$nickname}
 				<i class="Hui-iconfont">&#xe6d5;</i>
 			</a>
 			<ul class=" sp1 dropDown-menu radius box-shadow sysBtn">
 				<li>
-					<a _href="index.php?module=product_class" href="javascript:void(0)" title="修改密码">
+					<a  href="javascript:void(0)" title="修改密码">
 						<i><img src="images/iIcon/xg.png"/>
 							<img src="images/iIcon/xgmm_h.png" style="display: none;"/>
 						</i>
@@ -434,7 +442,7 @@
 				</li>
 
 				<li>
-					<a _href="index.php?module=product_class" title="基本信息">
+					<a title="基本信息">
 						<i><img src="images/iIcon/xinxi.png"/>
 							<img src="images/iIcon/jbxx_h.png" style="display: none;"/>
 						</i>
@@ -535,21 +543,22 @@
 		<div class="show_iframe">
 			<div  class="loading"></div>
 			{if $type == 0}
-			<iframe scrolling="yes" frameborder="0" src="index.php?module=index"></iframe>
+			<iframe id="childframe" scrolling="yes" frameborder="0" src="index.php?module=index"></iframe>
 			{else}
-			<iframe scrolling="yes" frameborder="0" src="index.php?module=system"></iframe>
+			<iframe id="childframe" scrolling="yes" frameborder="0" src="index.php?module=system"></iframe>
 			{/if}
 		</div>
 	</div>
+	
 </section>
 <div class="mask1">
 	<div class="mask1Content">
 		<div style="height: 100px;position: relative;top: 20%;font-size: 22px;text-align: center;">
 			更多功能查看商业V3版<br/>
-			APP+小程序+H5+多店铺+完美的二开神器+已经打通微信+支付宝APP支付<br/>
+			【微信+支付宝+百度+抖音】小程序+Saas+APP+会员制+H5+多店铺<br/>完美的二开神器+打通微信支付宝APP支付<br/>
 			<a target="_blank" style="color:red" href="http://www.laiketui.com/action/">【点击查看】</a>
 		</div>
-		<button class="closeMask">确认</button>
+		<button class="closeMask" style="bottom: 5px;position: absolute;left: 38%;">确认</button>
 	</div>
 </div>
 <div id="changePassword">
@@ -604,13 +613,13 @@
 			<a class="closeA clsCPW chang_click"><img src="images/icon1/gb.png"/></a>
 			<div class="maskTitle">个人信息</div>
 			<form  action="javascript:void(0);" method="post">
-			<!-- 	<input type="hidden" name="module" value="AdminLogin" />
-				<input type="hidden" name="action" value="maskContent" /> -->
+				<input type="hidden" name="module" value="AdminLogin" />
+				<input type="hidden" name="action" value="maskContent" /> 
 				<div class="mezl_div">
 					<div class="mezl_img">
 						<img style="border-radius: 50%;" src="images/iIcon/tx.png" alt="" />
-						<div class="mezl_name">Admin</div>
-						<div class="mezl_zhz">平台管理员</div>
+						<div class="mezl_name">{$r[0]->name}</div>
+						<div class="mezl_zhz">{$r[0]->role1}</div>
 					</div>
 				</div>
 				
@@ -620,7 +629,7 @@
 						昵称：
 					</div>
 					<div class="iptRight">
-						<input type="text" placeholder="请填写您的昵称" name="name" value="" />
+						<input type="text" placeholder="请填写您的昵称" name="name" id="nameId" value="{$r[0]->nickname}" />
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -642,10 +651,19 @@
 						性别：
 					</div>
 					<div class="iptRight mezl_radio ">
+						{if $r[0]->sex == 1}
 						<input class="magic-radio" type="radio" name="sex" id="r1" value="1" checked>  
-                		<label for="r1" class="radio1">男</label>  
-		                <input class="magic-radio" type="radio" name="sex" id="r2" value="2" >  
+                		<label for="r1" class="radio1">男</label> 
+                		 <input class="magic-radio" type="radio" name="sex" id="r2" value="2" >  
 		                <label for="r2" class="radio2">女</label>  
+                		{else}
+                		<input class="magic-radio" type="radio" name="sex" id="r1" value="1" >  
+                		<label for="r1" class="radio1">男</label> 
+                		 <input class="magic-radio" type="radio" name="sex" id="r2" value="2" checked>  
+		                <label for="r2" class="radio2">女</label>  
+                		{/if}
+						 
+		               
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -654,7 +672,7 @@
 						手机号码：
 					</div>
 					<div class="iptRight">
-						<input type="number" placeholder="请填写您的手机号" name="tel" value="" />
+						<input type="number" placeholder="请填写您的手机号" name="tel" id="telId" value="{$r[0]->tel}" />
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -667,6 +685,19 @@
 				</div>
 			</form>
 		</div>
+	</div>
+</div>
+<div class="footers">
+	<div>
+			<span>联系地址：长沙市岳麓区绿地中央广场5栋3408</span>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<span><a style="color: red" href="http://www.laiketui.com/question/" target="_blank">BUG提交</a></span>
+	</div>
+
+	<div>
+			<span>
+				<a class="ba" href="http://www.laiketui.com">Copyright&nbsp;©&nbsp;2020&nbsp;壹拾捌号网络版权所有[官方网站]&nbsp;&nbsp;</a>
+			</span>
 	</div>
 </div>
 <script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script>
@@ -693,7 +724,7 @@
 			}
 			getDays(selects[1].value,selects[0].value,selects);
 		}
-		let data1;
+		var data1;
 		$.ajax({
 			type:"post",
 			url:"index.php?module=AdminLogin&action=maskContent",
@@ -701,14 +732,14 @@
 			dataType:"json",
 			success:function(data){
 				data1=data.re[0];
+				console.log(data1)
 				
 			}
 		});
-		
 		$("#changePsw").click(function(){
-			let oldPW=$("[name=oldPW]").val();
-			let newPW=$("[name=newPW]").val();
-			let curPW=$("[name=curNewPW]").val();
+			var oldPW=$("[name=oldPW]").val();
+			var newPW=$("[name=newPW]").val();
+			var curPW=$("[name=curNewPW]").val();
 			console.log(newPW.length,curPW);
 			if(newPW==curPW && newPW.length>5){
 				$.ajax({
@@ -717,11 +748,12 @@
 					async:true,
 					dataType:"json",
 					data:{
-						oldPW,
-						newPW,
-						curPW,
+						oldPW:oldPW,
+						newPW:newPW,
+						curPW:curPW,
 					},
 					success:function(res){
+						console.log(res)
 						if(res.status==3){
 							appendMask(res.info,"cg");
 							$("#changePassword").hide();
@@ -732,13 +764,17 @@
 						}
 					}
 				});
+			}else if(oldPW&&newPW&&curPW&&newPW!=curPW){
+				appendMask("密码输入不一致！","ts");
+			}else{
+				appendMask("请输入完整信息！","ts");
 			}	
 		})
 		$("#changeInf").click(function(){
-			let sex=$("[name=sex]:checked").val();
-			let birthday=$("#select1").val()+"-"+$("#select2").val()+"-"+$("#select3").val()
-			let nickname=$("[name=name]").val();
-			let tel=$("[name=tel]").val();
+			var sex=$("[name=sex]:checked").val();
+			var birthday=$("#select1").val()+"-"+$("#select2").val()+"-"+$("#select3").val()
+			var nickname=$("[name=name]").val();
+			var tel=$("[name=tel]").val();
 			if(sex.length>0 && birthday.length>0 && tel.length>0 && nickname.length>0){
 				$.ajax({
 					type:"post",
@@ -746,10 +782,10 @@
 					async:true,
 					dataType:"json",
 					data:{
-						nickname,
-						tel,
-						birthday,
-						sex,
+						nickname:nickname,
+						tel:tel,
+						birthday:birthday,
+						sex:sex,
 					},
 					success:function(res){
 						if(res.status==3){
@@ -919,82 +955,14 @@
                     return node;
                 }
             });
-            $(".menu-system").each(function(){
-                $(this).mouseover(function(){
-                    $(this).find(".asideImg").eq(0).hide();
-                    $(this).find(".asideImg").eq(1).show();
-                    $(this).addClass("active");
-                    $(this).find(".t2").css("color","#148cf1");
-                    $(".selected .t2").css("color","#148cf1");
-                })
-                $(this).mouseout(function(){
-                    $(this).find(".asideImg").eq(1).hide();
-                    $(this).find(".asideImg").eq(0).show();
-                    $(this).removeClass("active");
-                    $(".selected .t2").css("color","#333");
-                    $(".sp5").find(".asideImgWrap img").eq(0).hide();
-                    $(".sp5").find(".asideImgWrap img").eq(1).show();
-                    $(".t2").css("color","#333");
-                    $(".sp5").find(".t2").css("color","#148cf1");
-                })
-
-                $(this).click(function(){
-                    if(!$(".changeAside").hasClass("changed")){
-                        $(".menu-system dt").each(function(){
-                            if($(this).hasClass("selected")){
-                                $(this).find(".asideImgRight").eq(0).hide();
-                                $(this).find(".asideImgRight").eq(1).show();
-                            }
-                            else{
-                                $(this).find(".asideImgRight").eq(1).hide();
-                                $(this).find(".asideImgRight").eq(0).show();
-                            }
-                        });
-                    }
-                })
-            });
-            $(".changeAside").click(function(){
-                if($(this).hasClass("changed")){
-                    $(this).removeClass("changed");
-                    $("aside").animate({width:"200"});//200
-                    $(".Hui-article-box").animate({left:"200"});//200
-                    $(".Hui-aside .menu_dropdown dl dt").animate({paddingLeft:"30"})
-                    setTimeout(function(){
-                        $(".t2,.asideImgWrapRight").show();
-                    },500);
-                    $(".asideImg").css("left","0px");
-                    $("#menu-article a").css({
-                        width:"50px",
-                        height:"50px",
-                        position:"static"
-                    })
-                }
-                else{
-                    $(this).addClass("changed");
-                    $("aside").animate({width:"50"});//200
-                    $(".Hui-article-box").animate({left:"50"});//200
-                    $(".t2,.asideImgWrapRight").hide();
-                    $(".Hui-aside .menu_dropdown dl dt").animate({paddingLeft:"0"});//30
-                    $(".asideImg").css("left","15px");
-                    $(".menu-system dd ").hide();
-                    $(".asideImgRight:odd").hide();
-                    $(".asideImgRight:even").show();
-                    $("#menu-article a").css({
-                        position:"absolute",
-                        width:"50px",
-                        height:"50px",
-                        left:"0px",
-                    })
-
-                }
-            });
+            
             $(".menu-system").each(function(){
                 $(this).mouseover(function(){
                     $(this).removeClass("active");
 
                 })
                 $(this).mouseover(function(){
-                    if($(".changeAside").hasClass("changed")){
+                	if($(".changeAside").hasClass("changed")){
                         $(".menu-system dt").addClass("selected");
                         $(this).css({
                             paddingRight:"190px",
@@ -1096,21 +1064,36 @@
             
             $(".sysBtn li a").eq(1).click(function(){
                 $("#jbxx").show();
-                if($("[name=name]").val().length=!0){
-					$("[name=name]").val(data1.nickname)
-				}
-				if($("[name=tel]").val().length=!0){
-					$("[name=tel]").val(data1.tel)
-				}
-				$("[name=sex]").eq(data1.sex).attr("selected");
-				let birthday1=data1.birthday.split("-");
-				console.log(birthday1)
-				if($("#select1").val()=="1918" && $("#select2").val()=='1' && $("#select3").val()=="1"){
-					$("#select1").val(birthday1[0]);
-					$("#select2").val(birthday1[1]);
-					$("#select3").val(birthday1[2]);
-				}
-                
+                if(data1){
+                	if($("[name=name]").val().length=!0){
+						$("[name=name]").val(data1.nickname)
+					}
+					if($("[name=tel]").val().length=!0){
+						$("[name=tel]").val(data1.tel)
+					}
+					$("[name=sex]").eq(data1.sex).attr("selected");
+					var birthday1=data1.birthday.split("-");
+					console.log(birthday1)
+                }
+				$.ajax({
+					type:"get",
+					url:"index.php?module=AdminLogin&action=maskContent",
+					dataType:"json",
+					success:function(res){
+						var _data = res.re[0];
+						if(res&&res.re&&res.re[0]){
+							console.log(_data.nickname)
+							$('#nameId').attr('value', _data.nickname)
+							$('#telId').attr('value', _data.tel)
+							$('#r'+_data.sex).attr('checked', 'checked')
+							var _date = _data.birthday.split("-")
+							console.log(_date);
+							$("#select1").val(_date[0]);
+							$("#select2").val(_date[1]);
+							$("#select3").val(_date[2]);
+						}
+					}
+				});
             })
             $(".closeA").on("mouseover",function(){
             	$(this).find("img").attr("src","images/icon1/gb_h.png");
@@ -1120,52 +1103,58 @@
             })
         });
         function appendMask(content,src){
-			$("body").append(`
-					<div class="maskNew">
-						<div class="maskNewContent">
-							<a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
-							<div class="maskTitle">删除订单</div>	
-							<div style="text-align:center;margin-top:30px"><img src="images/icon1/${src}.png"></div>
-							<div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
-								${content}
-							</div>
-							<div style="text-align:center;margin-top:30px">
-								<button class="closeMask" onclick=closeMask1() >确认</button>
-							</div>
-							
-						</div>
-					</div>	
-				`)
-		}
+						$("body").append(`
+								<div class="maskNew">
+									<div class="maskNewContent">
+										<a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
+										<div class="maskTitle">基本信息</div>	
+										<div style="text-align:center;margin-top:30px"><img src="images/icon1/${src}.png"></div>
+										<div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
+											${content}
+										</div>
+										<div style="text-align:center;margin-top:30px">
+											<button class="closeMask" onclick=closeMask1() >确认</button>
+										</div>
+										
+									</div>
+								</div>	
+							`)
+					}
         function closeMask1(){
-			$(".maskNew").remove();
-		}
+					$(".maskNew").remove();
+				}
 
-	//循环执行，每隔1秒钟执行一次 1000   ---------------------------验证登入----------------------------------------------
-	    // var t1=window.setInterval(refreshCount, 30000);
-	    // function refreshCount() {
-     //        $.ajax({
-     //            url: location.href,
-     //            type: "post",
-     //            data: {
-     //            	'm':'check'
-     //            },
-     //            success: function(res) {
-     //            	var data = JSON.parse(res);
-     //            	console.log(data);
-     //                if(data.code == 1) {
-     //                	 window.clearInterval(t1);
-     //                	parent.location.href='index.php?module=Login&action=logout';
-     //                }else if(data.code == 2){
-     //                	 window.clearInterval(t1);
-     //                	alert('您的账户在其他地方登入，您被迫下线！'); parent.location.href='index.php?module=Login&action=logout';
-     //                }else{
+				function appendMask2(content){
 
-     //                }
-     //            },
-     //        });
-	    //   console.log("定时检查登入----");
-	    // }
+					$("body").append(`
+						<div class="maskNew">
+							<div class="maskNewContent">
+								<a href="javascript:void(0);" class="closeA" onclick=closeMask12() ><img src="images/icon1/gb.png"/></a>
+								<div class="maskTitle">提示</div>	
+								<div style="text-align:center;margin-top:30px"><img src="images/icon1/ts.png"></div>
+								<div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
+									${content}
+								</div>
+								<div style="text-align:center;margin-top:30px">
+									<button class="closeMask" onclick=closeMask12() >确认</button>
+									<button class="closeMask" onclick=closeMask10() >取消</button>
+								</div>
+								
+							</div>
+						</div>	
+					`)
+				}
+				
+				function closeMask12(){
+					$(".maskNew").remove();
+					$('iframe')[1].contentWindow.deletes()
+				}
+				
+				function closeMask10() {
+					$(".maskNew").remove();
+				}
+
+
 	</script>
 {/literal}
 </body>

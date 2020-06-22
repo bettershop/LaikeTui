@@ -6,10 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
+
 <title>积分列表</title>
 {literal}
 <style>
@@ -40,7 +38,13 @@ td a{
 </head>
 
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe627;</i> 财务管理 <span class="c-gray en">&gt;</span> 积分列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    财务管理 <span class="c-gray en">&gt;</span> 
+    积分列表 
+</nav>
+
+
 <div class="pd-20">
 	<div class="text-c">
 		<form name="form1" action="index.php?module=finance&action=jifen" method="get">
@@ -59,8 +63,8 @@ td a{
 					<option value="6" {if $type =='6' } selected{/if}>系统充值</option>
 					<option value="7" {if $type =='7' } selected{/if}>抽奖</option>
 				</select>
-				<input type="text" class="input-text" style="width:250px" placeholder="用户名" name="user_name" value="{$user_name}">
-				<input type="text" class="input-text" style="width:250px" placeholder="手机号" name="mobile" value="{$mobile}">
+				<input type="text" class="input-text" style="width:250px" placeholder="用户名/用户ID" autocomplete="off" name="user_name" value="{$user_name}">
+				<input type="text" class="input-text" style="width:250px" placeholder="手机号" autocomplete="off" name="mobile" value="{$mobile}">
 
 				{*<div style="position: relative;display: inline-block;">*}
 				{*<input name="startdate" value="{$startdate}" size="8" readonly class="scinput_s iptRl" style="" />*}
@@ -82,8 +86,6 @@ td a{
 				<tr class="text-c">
 					<th width="150" aria-valuetext="user_id">用户ID</th>
 					<th width="130" aria-valuetext="user_name">用户名</th>
-					<th width="150" aria-valuetext="mobile">手机号码</th>
-					<th width="150" aria-valuetext="typename">会员等级</th>
 					<th width="150" aria-valuetext="sign_score">充值积分</th>
 					<th width="130" aria-valuetext="source">来源</th>
 					<th width="150" aria-valuetext="sign_time">时间</th>
@@ -96,15 +98,12 @@ td a{
 	                <tr class="text-c">
 	                    <td>{$item->user_id}</td>
 	                    <td>{$item->user_name}</td>
-	         			<td>
-	         				{$item->mobile}
-	         			</td>
-	                    <td>{$item->typename}</td>
+	         			
 	                    <td>
 							{if $item->type ==0 ||$item->type ==2|| $item->type ==4 || $item->type ==6 || $item->type ==7}+{$item->sign_score}{/if}
 							{if $item->type ==1 ||$item->type ==3 ||$item->type ==5}-{$item->sign_score}{/if}
 	         			</td>
-						<td>{if $item->source == 1}小程序{elseif $item->source == 2}app{/if}</td>
+						<td>{if $item->source == 1}小程序{elseif $item->source == 2}APP{/if}</td>
 						<td>{$item->sign_time}</td>
 	                    <td>
 	                    	{if $item->type == 0 }签到领积分{/if}
@@ -133,15 +132,9 @@ td a{
 	<div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
 
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<script type='text/javascript' src='modpub/js/calendar.js'></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="style/js/H-ui.js"></script>
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+
 {literal}
 <script type="text/javascript">
 function excel(pageto) {

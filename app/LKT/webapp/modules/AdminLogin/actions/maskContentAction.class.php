@@ -1,4 +1,11 @@
 <?php
+/**
+
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
+
+ * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
+
+ */
 require_once(MO_LIB_DIR . '/version.php');
 class maskContentAction extends Action {
 
@@ -21,6 +28,7 @@ class maskContentAction extends Action {
                 echo json_encode($res);
                 exit();
             }
+            
         if(!empty($nickname) || !empty($birthday)  || !empty($sex)|| !empty($tel)){
              $sql01 = "update lkt_admin set nickname = '$nickname',birthday = '$birthday',sex = '$sex',tel = '$tel' where name ='$admin_name'";
 

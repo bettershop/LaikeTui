@@ -1,19 +1,14 @@
 var app = getApp()
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     remind: '加载中',
   },
   //下拉刷新
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
     this.footprint();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   /**
    * 生命周期函数--监听页面加载
@@ -35,11 +30,9 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   alldel: function () {
     var that = this;

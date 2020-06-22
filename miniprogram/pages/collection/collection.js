@@ -17,20 +17,13 @@ Page({
   //下拉刷新
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
     this.collection();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    // setTimeout(function () {
-    //   that.setData({
-        
-    //   });
-    // }, 1000);
   },
   onShow: function () {
     // 页面显示

@@ -145,19 +145,19 @@
 </view>
 <!-- 属性选择 -->
 
-          <view class="shu">
-            <text class="cun">购买数量</text>
-            <view class="dian">
-              <view class="stepper" catchtouchmove="preventTouchMove">
+          <!-- <view class="shu">
+            <text class="cun">购买数量</text> -->
+            <!-- <view class="dian"> -->
+              <!-- <view class="stepper" catchtouchmove="preventTouchMove"> -->
                 <!-- 减号 -->
-                <text class="{{minusStatuses[index]}}" data-alpha-beta="0" bindtap="minus">-</text>
+                <!-- <text class="{{minusStatuses[index]}}" data-alpha-beta="0" bindtap="minus">-</text> -->
                 <!-- 数值 -->
-                <view class="nownum">{{num}}</view>
+                <!-- <view class="nownum">{{num}}</view> -->
                 <!-- 加号 -->
-                <text class="normal" data-alpha-beta="1" bindtap="plus">+</text>
-              </view>
-            </view>
-          </view>
+                <!-- <text class="normal" data-alpha-beta="1" bindtap="plus">+</text> -->
+              <!-- </view> -->
+            <!-- </view> -->
+          <!-- </view> -->
         </scroll-view>
       </view>
   <view class="footc" style='border-radius:15rpx;'>
@@ -183,3 +183,4 @@
     </view>  
   </view> 
 <!-- 自定义弹框结束 --> 
+<pop id="pop"></pop>

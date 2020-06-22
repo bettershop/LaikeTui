@@ -15,18 +15,14 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options),
-      console.log(11111111)
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,//
       backgroundColor: app.d.bgcolor, //页面标题为路由参数
@@ -102,11 +98,9 @@ Page({
             icon: 'loading',
             duration: 1500
           });
-          setTimeout(function () {
-            wx.redirectTo({
-              url: "../user/transfer",
-            })
-          }, 2000);
+          wx.redirectTo({
+            url: "../user/transfer",
+          })
         }
       },
       error: function (e) {
@@ -160,11 +154,9 @@ Page({
               duration: 1500
             });
 
-            setTimeout(function () {
-              wx.redirectTo({
-                url: "../user/wallet",
-              })
-            }, 2000);
+            wx.redirectTo({
+              url: "../user/wallet",
+            });
 
           } else {
             wx.showToast({

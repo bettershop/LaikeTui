@@ -1,2 +1,2 @@
 <?php
-define('LKT_VERSION','1.03');
+define('LKT_VERSION','2.0');

@@ -23,11 +23,8 @@ Page({
     sort: 0,// 1 asc 升序   0 desc 降序
   },
   onPullDownRefresh: function () {
+    
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
     var that = this;
     var objectId = that.data.objectId;
     var select = that.data.select;
@@ -51,6 +48,8 @@ Page({
           page:2,
           period: false
         })
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       error: function (e) {
         wx.showToast({
@@ -177,18 +176,10 @@ Page({
   //上拉事件
   onReachBottom: function () {
     var that = this;
-    setTimeout(function () {
-      that.getMore();
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-      that.setData({
-        loading: false,
-      });
-    }, 1500);
     that.setData({
       loading: true,
     });
-
+    that.getMore();
   },
   //排序
   sort:function (){
@@ -213,7 +204,8 @@ Page({
       success: function (res) {
         var shoplist = res.data.pro;
         that.setData({
-          shopList: shoplist
+          shopList: shoplist,
+          page: page+1
         })
       },
       error: function (e) {
@@ -227,7 +219,6 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    app.userlogin(1);
   },
   // 点击加载更多
   getMore: function (e) {
@@ -236,6 +227,9 @@ Page({
     var objectId = that.data.objectId;
     var select = that.data.select;
     var sort = that.data.sort;
+    that.setData({
+      page: page+1
+    });
     wx.request({
       url: app.d.ceshiUrl + '&action=product&m=new_product',
       method: 'post',
@@ -251,13 +245,9 @@ Page({
       success: function (res) {
         var prolist = res.data.pro;
         if (prolist == '' || res.data.status == 0) {
-          // wx.showToast({
-          //   title: '没有更多数据！',
-          //   icon: 'warn',
-          //   duration: 2000
-          // });
           that.setData({
-            period: true
+            period: true,
+            loading:false
           });
           return false;
         }
@@ -265,7 +255,7 @@ Page({
         //成功返回设置数据
         that.setData({
           remind: '',
-          page: page+1,
+          loading:false,
           shopList: that.data.shopList.concat(prolist)
         });
 

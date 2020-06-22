@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -20,6 +20,15 @@ class addAction extends Action {
 	public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
+        $name = addslashes(trim($request->getParameter('name'))); // 活动名称
+        $activity_type = addslashes(trim($request->getParameter('activity_type'))); // 活动类型
+        $product_class_id = addslashes(trim($request->getParameter('product_class_id'))); // 活动指定商品类型
+        $product_id = addslashes(trim($request->getParameter('product_id'))); // 活动指定商品
+        $money = addslashes(trim($request->getParameter('money'))); // 金额
+        $z_money = addslashes(trim($request->getParameter('z_money'))); // 总金额
+        $num = addslashes(trim($request->getParameter('num'))); // 数量
+        $start_time = $request->getParameter('start_time'); // 活动开始时间
+        $end_time = $request->getParameter('end_time'); // 活动结束时间
 
         $sql = "select cid,pname from lkt_product_class where sid = 0 and recycle != 1 ";
         $r = $db->select($sql);
@@ -27,7 +36,12 @@ class addAction extends Action {
         $res = '<option value="0" >全部</option>';
         foreach ($r as $key => $value) {
             $c = '-'.$value->cid.'-';
-            $res .= '<option  value="-'.$value->cid.'-">'.$value->pname.'</option>';
+            if($product_class_id == $c){
+                $res .= '<option  value="-'.$value->cid.'-" selected>'.$value->pname.'</option>';
+            }else{
+                $res .= '<option  value="-'.$value->cid.'-">'.$value->pname.'</option>';
+            }
+            
             //循环第一层
             $sql_e = "select cid,pname from lkt_product_class where sid = $value->cid";
             $r_e = $db->select($sql_e);
@@ -35,7 +49,12 @@ class addAction extends Action {
                 $hx = '-----';
                 foreach ($r_e as $ke => $ve){
                    $cone = $c . $ve->cid.'-';
-                   $res .= '<option  value="'.$cone.'">'.$hx.$ve->pname.'</option>';
+                    if($product_class_id == $cone){
+                         $res .= '<option  value="'.$cone.'" selected>'.$hx.$ve->pname.'</option>';
+                    }else{
+                         $res .= '<option  value="'.$cone.'">'.$hx.$ve->pname.'</option>';
+                    }
+                  
                    //循环第二层
                    $sql_t = "select cid,pname from lkt_product_class where sid = $ve->cid";
                    $r_t = $db->select($sql_t);
@@ -43,14 +62,30 @@ class addAction extends Action {
                         $hxe = $hx.'-----';
                         foreach ($r_t as $k => $v){
                            $ctow = $cone . $v->cid.'-';
-                           $res .= '<option  value="'.$ctow.'">'.$hxe.$v->pname.'</option>';
+                           if($product_class_id == $ctow){ 
+                                $res .= '<option  value="'.$ctow.'" selected>'.$hxe.$v->pname.'</option>';
+                            }else{
+                                 $res .= '<option  value="'.$ctow.'">'.$hxe.$v->pname.'</option>';
+                            }
+                          
                         }
                     }
                 }
             }
         }
+        // print_r($product_class_id);
 
         $request->setAttribute("list",$res);
+        $request->setAttribute("name",$name);
+        $request->setAttribute("activity_type",$activity_type?$activity_type:1);
+        $request->setAttribute("product_class_id",$product_class_id);
+        $request->setAttribute("product_id",$product_id);
+        $request->setAttribute("money",$money);
+        $request->setAttribute("z_money",$z_money);
+        $request->setAttribute("num",$num?$num:0);
+        $request->setAttribute("start_time",$start_time);
+        $request->setAttribute("end_time",$end_time);
+
 		return View :: INPUT;
 	}
 
@@ -67,8 +102,8 @@ class addAction extends Action {
         $money = addslashes(trim($request->getParameter('money'))); // 金额
         $z_money = addslashes(trim($request->getParameter('z_money'))); // 总金额
         $num = addslashes(trim($request->getParameter('num'))); // 数量
-        $start_time = $request->getParameter('start_time'); // 活动开始时间
-        $end_time = $request->getParameter('end_time'); // 活动结束时间
+        $start_time = $request->getParameter('starttime'); // 活动开始时间
+        $end_time = $request->getParameter('group_end_time'); // 活动结束时间
         $image=$request->getParameter('image');
         if($name == ''){
             header('Content-type: text/html;charset=utf-8');
@@ -175,7 +210,6 @@ class addAction extends Action {
         }
         if($rr == -1 ){
             $db->admin_record($admin_id,' 添加活动失败 ',1);
-            // echo $sql;exit;
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('未知原因，活动添加失败！');" .

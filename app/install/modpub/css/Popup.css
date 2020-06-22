@@ -1,294 +1,0 @@
-.IndexPopupWindow {
-	Z-INDEX: 200; BORDER-BOTTOM: #4f586a 1px solid; POSITION: absolute; FILTER: alpha(opacity=90); BORDER-LEFT: #4f586a 1px solid; PADDING-BOTTOM: 30px; BACKGROUND-COLOR: #e6eff8; PADDING-LEFT: 10px; WIDTH: 200px; PADDING-RIGHT: 10px; HEIGHT: auto; VISIBILITY: hidden; BORDER-TOP: #4f586a 1px solid; TOP: 0px; BORDER-RIGHT: #4f586a 1px solid; PADDING-TOP: 5px; LEFT: 0px; opacity: 0.9
-}
-.AddModuleTitle {
-	HEIGHT: 31px
-}
-.AddModuleTitleClose {
-	TEXT-ALIGN: right; MARGIN-BOTTOM: 15px
-}
-.AddModuleTitleClose A {
-	COLOR: #c80000
-}
-.AddModuleTitleClose A:hover {
-	TEXT-DECORATION: underline
-}
-.AddModuleSubTitle {
-	MARGIN: 0px 0px 6px; PADDING-LEFT: 2px; COLOR: #000000; VERTICAL-ALIGN: middle; FONT-WEIGHT: bold
-}
-.AddModuleSubTitle LI {
-	TEXT-ALIGN: left; COLOR: #3c465a; VERTICAL-ALIGN: middle
-}
-.AddModuleSubTitle IMG {
-	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; VERTICAL-ALIGN: middle; BORDER-TOP: 0px; BORDER-RIGHT: 0px
-}
-.AddModuleContent {
-	LINE-HEIGHT: 18px; PADDING-LEFT: 10px; MARGIN-BOTTOM: 7px; HEIGHT: 18px; VERTICAL-ALIGN: middle; CURSOR: hand
-}
-.AddModuleContent LI {
-	COLOR: #646464
-}
-.MovingDiv {
-	BORDER-BOTTOM: #8ca0a0 1px solid; POSITION: absolute; TEXT-ALIGN: center; BORDER-LEFT: #8ca0a0 1px solid; LINE-HEIGHT: 24px; BACKGROUND-COLOR: #e6eff8; WIDTH: 200px; HEIGHT: 24px; VERTICAL-ALIGN: middle; BORDER-TOP: #8ca0a0 1px solid; BORDER-RIGHT: #8ca0a0 1px solid
-}
-.MarkRead {
-	Z-INDEX: 2833; BORDER-BOTTOM: #000000 1px solid; POSITION: relative; FILTER: alpha(opacity=80); BORDER-LEFT: #000000 1px solid; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: white; PADDING-LEFT: 10px; WIDTH: 600px; PADDING-RIGHT: 10px; DISPLAY: none; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid; PADDING-TOP: 10px; opacity: 0.8
-}
-.popupBack {
-	Z-INDEX: 50; POSITION: absolute; FILTER: alpha(opacity=70); BACKGROUND-COLOR: #3c465a; WIDTH: auto; VISIBILITY: hidden; TOP: 0px; LEFT: 0px; opacity: 0.7
-}
-.popupWindow {
-	Z-INDEX: 200; BORDER-BOTTOM: #4f586a 1px solid; POSITION: absolute; BORDER-LEFT: #4f586a 1px solid; BACKGROUND-COLOR: #e6eff8; VISIBILITY: hidden; BORDER-TOP: #4f586a 1px solid; TOP: 0px; BORDER-RIGHT: #4f586a 1px solid
-}
-.popupWindowtwo {
-	Z-INDEX: 200; BORDER-BOTTOM: #656f7a 1px solid; POSITION: absolute; BORDER-LEFT: #656f7a 1px solid; BACKGROUND-COLOR: #ffffff; VISIBILITY: hidden; BORDER-TOP: #656f7a 1px solid; TOP: 0px; BORDER-RIGHT: #656f7a 1px solid
-}
-.popupWindow500 {
-	WIDTH: 500px; LEFT: -150px
-}
-.popupWindow600 {
-	WIDTH: 600px; LEFT: -200px
-}
-.popupWindow400 {
-	WIDTH: 400px; LEFT: -100px
-}
-.popupWindow800 {
-	WIDTH: 800px; LEFT: -400px
-}
-.popupTitleLabel {
-	WIDTH: 400px; FLOAT: left; COLOR: #646464; CLEAR: left
-}
-.redTitle {
-	COLOR: red
-}
-.popupTitleClose {
-	TEXT-ALIGN: right; WIDTH: 100px; FLOAT: right; CLEAR: right
-}
-.popupTitleClose A {
-	COLOR: #c80000
-}
-.popupTitleClose A:hover {
-	TEXT-DECORATION: underline
-}
-.popupClose {
-	WIDTH: 20px; DISPLAY: inline; BACKGROUND: url(../Images/del.gif) no-repeat right 50%; FLOAT: right; CURSOR: pointer
-}
-.popupTitle {
-	BORDER-BOTTOM: #d6d3c5 1px solid; LINE-HEIGHT: 25px; MARGIN: 0px 10px; COLOR: red; FONT-WEIGHT: bold
-}
-.popupButtonRight {
-	TEXT-ALIGN: right; LINE-HEIGHT: 23px; HEIGHT: 23px; CLEAR: both; VERTICAL-ALIGN: middle; MARGIN-RIGHT: 20px
-}
-.popupContent {
-	COLOR: #3c465a
-}
-.popupSubContentTitle {
-	MARGIN-LEFT: 20px; FONT-WEIGHT: bold
-}
-.popupSubContent {
-	MARGIN-LEFT: 30px
-}
-.ColorPick {
-	BORDER-BOTTOM: #969696 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #969696 1px solid; PADDING-BOTTOM: 1px; BACKGROUND-COLOR: #ffffff; PADDING-LEFT: 1px; WIDTH: 18px; PADDING-RIGHT: 1px; HEIGHT: 18px; BORDER-TOP: #969696 1px solid; BORDER-RIGHT: #969696 1px solid; PADDING-TOP: 1px
-}
-.ColorPickInner {
-	BACKGROUND-COLOR: #007cc2; WIDTH: 100%; HEIGHT: 100%
-}
-.ColorPickText {
-	FLOAT: left; MARGIN-RIGHT: 40px
-}
-.UserList {
-	OVERFLOW-Y: scroll; HEIGHT: 260px
-}
-.popupContent .titleBold {
-	FONT-SIZE: 12px; FONT-WEIGHT: bold
-}
-.popupContent TABLE .auto {
-	WIDTH: auto
-}
-.popupContent TD.top {
-	VERTICAL-ALIGN: top
-}
-.popupContent INPUT {
-	PADDING-BOTTOM: 0px; MARGIN: 0px 2px 0px 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
-}
-.popupContent INPUT.whiteBg {
-	BACKGROUND-COLOR: #fff
-}
-TABLE.checkboxList {
-	MARGIN: 20px 0px
-}
-.checkboxListWindow {
-	BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #999999 1px solid; OVERFLOW-Y: scroll; MARGIN-TOP: 2px; WIDTH: 170px; HEIGHT: 114px; BORDER-TOP: #999999 1px solid; BORDER-RIGHT: #999999 1px solid
-}
-.checkboxListWindow INPUT {
-	MARGIN-LEFT: 2px
-}
-.buttonsRight INPUT {
-	MARGIN-LEFT: 20px
-}
-INPUT.short {
-	WIDTH: 60px
-}
-INPUT.medium {
-	WIDTH: 100px
-}
-INPUT.long {
-	WIDTH: 140px
-}
-TEXTAREA.index_calendar_month_setting {
-	WIDTH: 450px; HEIGHT: 90px; FONT-SIZE: 12px
-}
-SELECT.short {
-	WIDTH: 64px
-}
-SELECT.medium {
-	WIDTH: 104px
-}
-SELECT.long {
-	WIDTH: 144px
-}
-.PopupDataList {
-	OVERFLOW-Y: scroll; WIDTH: inherit; HEIGHT: 265px
-}
-.PetitionTextBox {
-	WIDTH: 365px
-}
-.PetitionSearch {
-	WIDTH: 150px
-}
-.AddFile {
-	WIDTH: 180px
-}
-TEXTAREA.index_student_homework_more_view_comment {
-	OVERFLOW-Y: scroll; WIDTH: 550px; HEIGHT: 250px
-}
-.buttonsRight {
-	TEXT-ALIGN: right; MARGIN: 10px; WIDTH: auto; CLEAR: both
-}
-TEXTAREA.index_message_addto_calendar {
-	WIDTH: 400px; HEIGHT: 90px
-}
-SELECT.short {
-	WIDTH: 64px
-}
-SELECT.medium {
-	WIDTH: 104px
-}
-SELECT.long {
-	WIDTH: 144px
-}
-SELECT.verylong {
-	WIDTH: 184px
-}
-TABLE.index_teacher_mydocu_trash_recover {
-	MARGIN: 20px 0px; WIDTH: auto
-}
-TABLE.index_teacher_mydocu_trash_recover IMG {
-	MARGIN: 0px 30px; DISPLAY: block
-}
-TEXTAREA.index_student_homework_more_view_comment {
-	OVERFLOW-Y: scroll; WIDTH: 550px; HEIGHT: 250px
-}
-TABLE.index_teacher_forum_1_search {
-	MARGIN: 20px auto 20px 30px
-}
-.buttonsRight .index_teacher_forum_1_operation {
-	WIDTH: auto; FLOAT: left
-}
-.buttonsRight .index_teacher_forum_1_operation P {
-	LINE-HEIGHT: 24px; MARGIN: 0px
-}
-.index_message_reply_list_ListTitle {
-	BORDER-BOTTOM: #333 1px solid; PADDING-BOTTOM: 3px !important; BACKGROUND-COLOR: #fff; MARGIN-TOP: 10px; PADDING-LEFT: 0px !important; PADDING-RIGHT: 0px !important; HEIGHT: 14px; CLEAR: both; BORDER-TOP: #333 1px solid; PADDING-TOP: 3px !important
-}
-.index_message_reply_list {
-	FLOAT: left; HEIGHT: 12px; MARGIN-LEFT: 5px
-}
-.col1 {
-	WIDTH: 20px
-}
-.col2 {
-	WIDTH: 70px
-}
-.col3 {
-	WIDTH: 50px
-}
-.col4 {
-	WIDTH: 140px
-}
-.col5 {
-	WIDTH: 110px
-}
-.col6 {
-	WIDTH: 70px
-}
-.col7 {
-	WIDTH: 24px
-}
-.index_message_reply_list_OuterList {
-	OVERFLOW-Y: scroll; HEIGHT: 200px
-}
-.index_message_reply_list_InnerList {
-	BORDER-BOTTOM: #333 1px dashed; PADDING-BOTTOM: 5px; PADDING-LEFT: 0px; WIDTH: auto; PADDING-RIGHT: 0px; HEIGHT: 14px; CLEAR: both; PADDING-TOP: 5px
-}
-.index_message_reply_list_Delete {
-	MARGIN-TOP: 10px
-}
-.index_student_homework_more_view_order {
-	FLOAT: left; HEIGHT: 12px; MARGIN-LEFT: 6px
-}
-.index_student_homework_more_view_order_col1 {
-	TEXT-ALIGN: center; WIDTH: 30px
-}
-.index_student_homework_more_view_order_col2 {
-	WIDTH: 70px
-}
-.index_student_homework_more_view_order_col3 {
-	WIDTH: 60px
-}
-.index_student_homework_more_view_order_col4 {
-	WIDTH: 130px
-}
-.index_student_homework_more_view_order_col5 {
-	WIDTH: 150px
-}
-.index_student_homework_more_view_order_col6 {
-	TEXT-ALIGN: center; WIDTH: 30px
-}
-.index_teacher_faq_1_search_Line {
-	MARGIN-BOTTOM: 10px; HEIGHT: 20px; CLEAR: both
-}
-.index_teacher_faq_1_search_Line .col {
-	MARGIN-LEFT: 10px
-}
-.index_teacher_faq_1_search_Line .col1 {
-	TEXT-ALIGN: right; MARGIN-TOP: 4px; WIDTH: 50px; FLOAT: left
-}
-.index_teacher_faq_1_search_Line .col2 {
-	WIDTH: 200px; FLOAT: left
-}
-.index_teacher_faq_1_search_Line .col3 {
-	WIDTH: 200px; FLOAT: left
-}
-.index_teacher_faq_1_search_Line .col0 {
-	WIDTH: 100px; FLOAT: left
-}
-INPUT.index_teacher_faq_more_collection {
-	WIDTH: 450px
-}
-.scrollTxt {
-	BORDER-BOTTOM: #969696 1px solid; BORDER-LEFT: #969696 1px solid; PADDING-BOTTOM: 10px; OVERFLOW-Y: scroll; BACKGROUND-COLOR: white; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; HEIGHT: 230px; BORDER-TOP: #969696 1px solid; BORDER-RIGHT: #969696 1px solid; PADDING-TOP: 10px
-}
-.txtBox {
-	BORDER-BOTTOM: #969696 1px solid; BORDER-LEFT: #969696 1px solid; LINE-HEIGHT: 20px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; HEIGHT: inherit; BORDER-TOP: #969696 1px solid; BORDER-RIGHT: #969696 1px solid
-}
-.scrollDiv {
-	OVERFLOW-Y: scroll; HEIGHT: 99%
-}
-.DivTabContentSmall1 {
-	BORDER-BOTTOM: #7797b8 1px solid; FILTER: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=85); BORDER-LEFT: 0px; PADDING-BOTTOM: 10px; LINE-HEIGHT: 24px; PADDING-LEFT: 10px; WIDTH: 600px; PADDING-RIGHT: 10px; BACKGROUND: #dbe3e8; COLOR: #3c465a; VERTICAL-ALIGN: middle; BORDER-TOP: #7797b8 1px solid; TOP: 5px; BORDER-RIGHT: #7797b8 1px solid; PADDING-TOP: 10px; LEFT: 5px
-}
-.PopupUl {
-	PADDING-BOTTOM: 10px; BACKGROUND-COLOR: white; MARGIN: 0px 0px 0px 15px; PADDING-LEFT: 10px; WIDTH: 550px; PADDING-RIGHT: 10px; HEIGHT: 200px; PADDING-TOP: 10px
-}

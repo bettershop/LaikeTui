@@ -73,11 +73,12 @@ page{
     float: left;
 }
 .sp_text{
-    display:flex;
-    line-height: 20px;
-    width: 100%;
-    text-align: left;
-    }
+  display:flex;
+  line-height: 20px;
+  width: 100%;
+  text-align: left;
+  flex-wrap: wrap;
+}
 .sp_tit{
     width: 100%;
     overflow: hidden;
@@ -97,7 +98,6 @@ page{
 }
 .sp_jg{
     width: 30%;
-    overflow: hidden;
     font-size: 13px;
     color: #fc0628;
     height:120rpx;
@@ -502,7 +502,7 @@ width:100%;
 }
 
 .fright{
-  float:right;
+  /* float:right; */
   color: #808080;
 }
 
@@ -512,6 +512,8 @@ width:100%;
 }
 .ddlb_v{
   color: #000;
+  display: flex;
+  justify-content: space-between;
 }
 
 .anniu{
@@ -552,4 +554,8 @@ button{
 
 .font_12{
   font-size: 10px;
+}
+.ddlb_v-lift {
+  width: 130rpx;
+  text-align: end;
 }

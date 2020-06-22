@@ -74,66 +74,7 @@ class Plugin {
 
         return $wp_plugins;
     }
-    /**
-     * 解析插件内容来检索插件的元数据。
-     * Parses the plugin contents to retrieve plugin's metadata.
-     *
-     * The metadata of the plugin's data searches for the following in the plugin's
-     * header. All plugin data must be on its own line. For plugin description, it
-     * must not have any newlines or only parts of the description will be displayed
-     * and the same goes for the plugin data. The below is formatted for printing.
-     *
-     *     /*
-     *     Plugin Name: Name of Plugin
-     *     Plugin URI: Link to plugin information
-     *     Description: Plugin Description
-     *     Author: Plugin author's name
-     *     Author URI: Link to the author's web site
-     *     Version: Must be set in the plugin for WordPress 2.3+
-     *     Text Domain: Optional. Unique identifier, should be same as the one used in
-     *    		load_plugin_textdomain()
-     *     Domain Path: Optional. Only useful if the translations are located in a
-     *    		folder above the plugin's base path. For example, if .mo files are
-     *    		located in the locale folder then Domain Path will be "/locale/" and
-     *    		must have the first slash. Defaults to the base folder the plugin is
-     *    		located in.
-     *     Network: Optional. Specify "Network: true" to require that a plugin is activated
-     *    		across all sites in an installation. This will prevent a plugin from being
-     *    		activated on a single site when Multisite is enabled.
-     *      * / # Remove the space to close comment
-     *
-     * Some users have issues with opening large files and manipulating the contents
-     * for want is usually the first 1kiB or 2kiB. This function stops pulling in
-     * the plugin contents when it has all of the required plugin data.
-     *
-     * The first 8kiB of the file will be pulled in and if the plugin data is not
-     * within that first 8kiB, then the plugin author should correct their plugin
-     * and move the plugin data headers to the top.
-     *
-     * The plugin file is assumed to have permissions to allow for scripts to read
-     * the file. This is not checked however and the file is only opened for
-     * reading.
-     *
-     * @since 1.5.0
-     *
-     * @param string $plugin_file Path to the main plugin file.
-     * @param bool   $markup      Optional. If the returned data should have HTML markup applied.
-     *                            Default true.
-     * @param bool   $translate   Optional. If the returned data should be translated. Default true.
-     * @return array {
-     *     Plugin data. Values will be empty if not supplied by the plugin.
-     *
-     *     @type string $Name        Name of the plugin. Should be unique.
-     *     @type string $Title       Title of the plugin and link to the plugin's site (if set).
-     *     @type string $Description Plugin description.
-     *     @type string $Author      Author's name.
-     *     @type string $AuthorURI   Author's website address (if set).
-     *     @type string $Version     Plugin version.
-     *     @type string $TextDomain  Plugin textdomain.
-     *     @type string $DomainPath  Plugins relative directory path to .mo files.
-     *     @type bool   $Network     Whether the plugin can only be activated network-wide.
-     * }
-     */
+    
     function get_plugin_data( $plugin_file, $markup = true, $translate = true ) {
 
         $default_headers = array(
@@ -146,36 +87,13 @@ class Plugin {
             'TextDomain' => 'Text Domain', // 文本域
             'DomainPath' => 'Domain Path', // 域名路径
             'Network' => 'Network', // 网络
-            // Site Wide Only is deprecated in favor of Network. 站点范围仅限于网络。
             '_sitewide' => 'Site Wide Only', // 站点
         );
         $plugin_data = $this->get_file_data( $plugin_file, $default_headers, 'plugin' );
-//        print_r($plugin_data);
-//        echo "<br>";
-
         return $plugin_data;
     }
-    /**
-     * 从队列检索元数据。
-     * Retrieve metadata from a file.
-     *
-     * Searches for metadata in the first 8kiB of a file, such as a plugin or theme.
-     * Each piece of metadata must be on its own line. Fields can not span multiple
-     * lines, the value will get cut at the end of the first line.
-     *
-     * If the file data is not within that first 8kiB, then the author should correct
-     * their plugin file and move the data headers to the top.
-     *
-     * @link https://codex.wordpress.org/File_Header
-     *
-     * @since 2.9.0
-     *
-     * @param string $file            Path to the file.
-     * @param array  $default_headers List of headers, in the format array('HeaderKey' => 'Header Name').
-     * @param string $context         Optional. If specified adds filter hook {@see 'extra_$context_headers'}.
-     *                                Default empty.
-     * @return array Array of file headers in `HeaderKey => Header Value` format.
-     */
+    
+    
     function get_file_data( $file, $default_headers, $context = '' ) {
         // 我们不需要对文件进行写入，所以只需打开即可阅读。
         // We don't need to write to the file, so just open for reading.
@@ -191,17 +109,7 @@ class Plugin {
         // 确保我们只赶上CR线结束。
         // Make sure we catch CR-only line endings.
         $file_data = str_replace( "\r", "\n", $file_data );
-        /**
-         * 通过上下文过滤额外的文件头。
-         * Filters extra file headers by context.
-         *
-         * The dynamic portion of the hook name, `$context`, refers to
-         * the context where extra headers might be loaded.
-         *
-         * @since 2.9.0
-         *
-         * @param array $extra_context_headers Empty array by default.
-         */
+
 
         if ( $context && $extra_headers = apply_filters( "extra_{$context}_headers", array() ) ) {
             // 通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值

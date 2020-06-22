@@ -5,14 +5,11 @@ require_once(MO_LIB_DIR . '/Tools.class.php');
 class uploadImgAction extends Action {
 
     public function getDefaultView() {
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         return View :: INPUT;
     }
 
     public function execute(){
 
-        $request = $this->getContext()->getRequest();
         $db = DBAction::getInstance();
         
         // 查询配置表信息
@@ -37,7 +34,6 @@ class uploadImgAction extends Action {
             default: $msg = '上传失败'; break;
         }
 
-        $upload_max_filesize = ini_get('upload_max_filesize');
         $imgURL=($_FILES['imgFile']['tmp_name']);
         $type = str_replace('image/', '.', $_FILES['imgFile']['type']);
         $imgURL_name=time().mt_rand(1,1000).$type;

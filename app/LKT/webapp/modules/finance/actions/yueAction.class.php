@@ -38,7 +38,7 @@ class yueAction extends Action {
             $start = 0;
         }
 
-        $condition = 'a.type !=0 and a.type !=6 and a.type !=7 and a.type !=8 and a.type !=9 and a.type !=10 and a.type !=15 and a.type !=16 and a.type !=17 and a.type !=18 ';
+        $condition = 'a.type !=0 and a.type !=6  and a.type !=8 and a.type !=9 and a.type !=10 and a.type !=15 and a.type !=16 and a.type !=17 and a.type !=18 and a.type !=24';
         if($name){
             $condition .= " and a.user_id = '$name' ";
         }
@@ -54,6 +54,7 @@ class yueAction extends Action {
         $list = array();
 
         $sql = "select a.user_id from lkt_record as a left join lkt_user as b on a.user_id = b.user_id where $condition group by a.user_id ";
+        // print_r($sql);die;
         $r = $db->select($sql);
         $total = 0;
         if($r){
@@ -71,13 +72,16 @@ class yueAction extends Action {
             }
             foreach ($b1 as $k => $v){
                 $user_id = $v->user_id;
-                $sql = "select a.*,b.user_name,b.mobile,b.source from lkt_record as a left join lkt_user as b on a.user_id = b.user_id where $condition and a.user_id = '$user_id' order by a.add_date desc limit 1";
+                $sql = "select a.*,b.user_name,b.mobile,b.money as money1,b.source from lkt_record as a left join lkt_user as b on a.user_id = b.user_id where $condition and a.user_id = '$user_id' order by a.add_date desc limit 1";
+
                 $rr = $db->select($sql);
+
                 if($rr){
                     $list[] = $rr[0];
                 }
             }
         }
+
         $pager = new ShowPager($total,$pagesize,$page);
 
         $url = "index.php?module=finance&action=yue&name=".urlencode($name)."&otype=".urlencode($type)."&starttime=".urlencode($starttime)."&group_end_time=".urlencode($group_end_time)."&pagesize=".urlencode($pagesize);

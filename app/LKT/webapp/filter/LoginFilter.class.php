@@ -30,22 +30,19 @@ class LoginFilter extends Filter {
             if($this->getContext()->getUser()->isAuthenticated()){
 				// 获取管理员id
 				$name = $this->getContext()->getStorage()->read('admin_id');
-                $login_time = $this->getContext()->getStorage()->read('login_time');
-                $caozuo_time = $login_time + 60*5;
-                $time = time();
-
                 $db = DBAction::getInstance();
 
 				$sql = "select * from lkt_admin where name ='$name'";
 				$r = $db->select($sql);
                 $role = $r[0]->role;
-                $status = $r[0]->status;
                 $sql = "select * from lkt_role where id = '$role'";
                 $rr = $db->select($sql);
                 if($rr[0]->permission != ''){
                     $permission_1 = unserialize($rr[0]->permission);
+                  
                     foreach ($permission_1 as $ke => $va){
                         $rew = explode('/',$va);
+
                         if($rew[0] != 1){
                             $permission[] = $rew[2] . '&action=' . $rew[3];
                         }else{
@@ -55,22 +52,26 @@ class LoginFilter extends Filter {
                 }else{
                     $permission = unserialize($rr[0]->permission);
                 }
+
                 $permission[]="AdminLogin&action=index";
                 $permission[]="index&action=index";
                 $permission[]="end&action=index";
                 $permission[]="permission&action=index";
+                $permission[]="AdminLogin&action=changePassword";//修改自身密码
+                $permission[]="AdminLogin&action=maskContent";//修改自身信息
+                
                 $rew = $this->getContext()->getModuleName();
 
                 $res =$request ->parameters; // 获取参数
                 if($res){ // 存在
-                    $module = $res['module']; // 获取module值
                     if(!empty($res['action'])){
                         $rew .= '&action=' . $res['action'];
                     }else{
                         $rew .= '&action=index';
                     }
                 }
-                if($r[0]->admin_type!=1 && !in_array($rew,$permission)){
+
+                if($r[0]->admin_type!=1 && !in_array(strtolower($rew),array_map('strtolower',$permission)) ){
                     header("Location: index.php?module=permission");
                     return;
                 }else{

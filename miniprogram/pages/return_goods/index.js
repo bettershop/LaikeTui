@@ -40,11 +40,9 @@ Page({
   //页面加载完成函数 remind: '加载中',
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   //拒绝提示
   jujue: function (e) {

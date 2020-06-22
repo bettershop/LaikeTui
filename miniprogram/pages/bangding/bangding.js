@@ -1,4 +1,4 @@
-﻿var app = getApp();
+var app = getApp();
 function getNowFormatDate() {
   var date = new Date();
   var seperator1 = "-";
@@ -15,7 +15,9 @@ function getNowFormatDate() {
   return currentdate;
 };
 Page({
-
+  /**
+   * 页面的初始数据
+   */
   data: {
     inp_money: 0,
     iv: '',
@@ -37,10 +39,7 @@ Page({
   },
   //页面加载完成函数
   onReady: function () {
-    // var that = this;
-    // setTimeout(function () {
-      
-    // }, 1000);
+    
   },
   radioChange: function (e) {
     var items = this.data.items;
@@ -102,13 +101,9 @@ Page({
     })
     wx.checkSession({
       success: function (e) {
-        console.log(e)
-        console.log('session_key 未过期' + app.globalData.userInfo.session_key)
-        //session_key 未过期，并且在本生命周期一直有效
         app.globalData.userInfo['session_key'] = app.globalData.userInfo.session_key;
       },
       fail: function () {
-        // session_key 已经失效，需要重新执行登录流程
         wx.login({
           success: function (res) {
             var code = res.code;
@@ -260,11 +255,6 @@ Page({
       }
     }
     var sex = that.data.sex;
-    // for (var i = 0; i < that.data.items.length; i++) {
-    //   if (that.data.items[i].checked == 'true'){
-    //     sex = that.data.items[i].name;
-    //   }
-    // }
     var province = region[0], city = region[1], county = region[2];
     if (res.detail.value.name.length == 0) {
       wx.showToast({
@@ -272,9 +262,7 @@ Page({
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast()
     }else {
      
       wx.request({
@@ -303,11 +291,6 @@ Page({
               duration: 3000
             })
             
-            // setTimeout(function () {
-            //   wx.navigateBack({
-            //     delta: 1
-            //   })
-            // }, 2500);
           } else {
             wx.showToast({
               title: res.data.err ? res.data.err : '非法操作！',
@@ -315,11 +298,9 @@ Page({
               duration: 1500
             });
           }
-            setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
-              })
-            }, 2000);
+          wx.navigateBack({
+            delta: 1
+          });
         },
         error: function (e) {
           wx.showToast({

@@ -6,22 +6,19 @@ Page({
     currentTab: 0,
     angle: 0,
     remind: '加载中',
+    detailed_commission:0
   },
   //页面加载完成函数 
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   onLoad: function (options) {
     wx.setNavigationBarColor({
@@ -79,6 +76,8 @@ Page({
             user: user,
             list_1: res.data.list_1,
             list_2: res.data.list_2,
+            list_3: res.data.list_3,
+            detailed_commission: res.data.detailed_commission ? res.data.detailed_commission:0
           });
         } else {
           wx.showToast({

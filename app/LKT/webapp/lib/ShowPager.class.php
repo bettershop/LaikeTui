@@ -1,4 +1,5 @@
 <?php
+//分页类
 class showPager {
     public $total_record; //记录总数
     public $pagesize; //每一页显示的记录数
@@ -45,7 +46,7 @@ class showPager {
         $text[] = '共有 ' . $this->total_record . '条记录 | 当前' .$this->cur_page."/". $this->total_pages . '页';
         if($this->total_pages > $this->_pernum){
             if( $this->cur_page != 1){
-                $text[] = "[<a class='page' href='index.php?{$url}&page=1'>首页</a>]";
+                $text[] = "[<a class='page'  href='index.php?{$url}&page=1'>首页</a>]";
             } else {
                 $text[] = '[<a>首页</a>]';
             }
@@ -121,26 +122,13 @@ class showPager {
 
             $multipage .= ($page - $offset > 1 && $maxpage >= $page ? "<li><a href='$url&page=1".$para."' >首页</a></li>" : '').
                 ($page > 1 ? "<li><a style='width:80px' href='$url&page=".($page - 1).$para.'\' >上一页</a></li>' : '');
-
             for($i = $from; $i <= $to; $i++) {
-                $multipage .= $i == $page ? "<li class='active'><a href='$url&page=".$i.$para.'\' >'.$i.'</a></li>' : "<li><a href='$url&page=".$i.$para.'\' >'.$i.'</a></li>';
+                $multipage .= ($i == $page|| ($i == 1 && !$page)) ? "<li class='active'><a href='$url&page=".$i.$para.'\' >'.$i.'</a></li>' : "<li ><a href='$url&page=".$i.$para.'\' >'.$i. '</a></li>';
             }
-
+            $page = $page==0?1:$page;
             $multipage .= ($page < $maxpage ? "<li><a style='width:80px' href='$url&page=".($page + 1).$para.'\' >下一页</a></li>' : '').
                 ($to < $maxpage ? "<li><a href='$url&page=".$maxpage.$para.'\' class="last" >尾页</a></li>' : '');
-            $array = [10,25,50,100];
-            $select = '';
-            foreach ($array as $k => $v) {
-                if($pagesize == $v){
-                    $select .= "<option selected value='$v'>$v</option>";
-                }else{
-                    $select .= "<option value='$v'>$v</option>";
-                }
-            }
-
-            $multipage = $multipage ? '<div class="paginationDiv"> <div class="changePaginationNum">显示
-            	<select id="ajaxSe">'.$select.'</select>
-            	条</div> <div class="showDataNum">显示'.$start.'到'.$end.'，共'.$total.'条</div><ul class="pagination"><li class=""></li>'.$multipage.'<li></li></ul><div class="clearfix"></div></div>' : '';
+                $multipage = $multipage ? '<div class="paginationDiv"> <div class="showDataNum">显示'.$start.'到'.$end.'，共'.$total.'条</div><ul class="pagination"><li class=""></li>'.$multipage.'<li></li></ul><div class="clearfix"></div></div>' : '';
         }
 
         return $multipage;

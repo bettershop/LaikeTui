@@ -725,3 +725,14 @@ button{
   border-radius: 25px;
   margin-right: 5px;
 }
+.main{
+  position: relative;
+}
+.menu-width{
+   display:block;
+   width:6em;
+   word-break:keep-all;
+   white-space:nowrap;
+   overflow:hidden;
+   text-overflow:ellipsis;
+}

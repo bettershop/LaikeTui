@@ -38,7 +38,7 @@ class rechargeAction extends Action {
 
 		$condition = '(a.type = 1 or a.type = 14)';
 		if($zhanghao != ''){
-			$condition .= " and b.zhanghao = '$zhanghao' ";
+			$condition .= " and b.user_id = '$zhanghao' ";
 		}
         if($mobile != ''){
             $condition .= " and b.mobile = '$mobile' ";

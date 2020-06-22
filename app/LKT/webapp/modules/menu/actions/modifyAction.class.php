@@ -1,6 +1,6 @@
 <?php
 require_once(MO_LIB_DIR . '/DBAction.class.php');
-
+require_once(MO_LIB_DIR . '/Tools.class.php');
 class modifyAction extends Action {
 
 	public function getDefaultView() {
@@ -8,7 +8,7 @@ class modifyAction extends Action {
         $request = $this->getContext()->getRequest();
         // 接收信息
         $id = $request->getParameter("id");
-
+        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
         // 根据id，查询菜单
         $sql = "select * from lkt_core_menu where id = '$id'";
         $r_1 = $db->select($sql);
@@ -16,7 +16,6 @@ class modifyAction extends Action {
             $space = "---";
             $s_id = $r_1[0]->s_id; // 上级id
             $title = $r_1[0]->title; // 菜单名称
-//            $name = $r_1[0]->name; // 菜单标识
             $image = $r_1[0]->image; // 图片
             $image1 = $r_1[0]->image1; // 图片
             $url = $r_1[0]->url; // 路径
@@ -170,14 +169,12 @@ class modifyAction extends Action {
         }
         $request->setAttribute('id', $id);
         $request->setAttribute('title', $title );
-//        $request->setAttribute('name', $name );
         $request->setAttribute('url', $url );
         $request->setAttribute('sort', $sort );
         $request->setAttribute('type', $type );
         $request->setAttribute('level', $level );
         $request->setAttribute('image', $image );
         $request->setAttribute('image1', $image1 );
-//        $request->setAttribute('type', $type );
         $request->setAttribute('cid', $cid);
         $request->setAttribute("level",$level-1);
         $request->setAttribute("list",$list);
@@ -191,11 +188,9 @@ class modifyAction extends Action {
 		$db = DBAction::getInstance();
 		$request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
         // 接收数据 
         $id = $request->getParameter("id");
         $title = addslashes(trim($request->getParameter('title'))); // 菜单名称
-//        $s_id = addslashes(trim($request->getParameter('s_id'))); // 上级id
         $image = addslashes(trim($request->getParameter('image'))); // 图标
         $oldpic = addslashes(trim($request->getParameter('oldpic'))); // 产品图片
         $image1 = addslashes(trim($request->getParameter('image1'))); // 图标
@@ -208,14 +203,7 @@ class modifyAction extends Action {
         $s_id = $request->getParameter('val'); // 产品类别
         $level = $request->getParameter('level') + 1; // 级别
 
-//        if(!empty($s_id)){
-//            // 根据传过来的菜单id，查询菜单信息
-//            $sql = "select * from lkt_core_menu where id = '$s_id'";
-//            $r_1 = $db->select($sql);
-//            $name = $r_1[0]->name; // 菜单标识
-//        }else{
-//            $name = addslashes(trim($request->getParameter('name'))); // 菜单标识
-//        }
+
         if($title == ''){
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
@@ -233,29 +221,7 @@ class modifyAction extends Action {
                 return $this->getDefaultView();
             }
         }
-//        if($name == ''){
-//            header("Content-type:text/html;charset=utf-8");
-//            echo "<script type='text/javascript'>" .
-//                "alert('菜单标识不能为空！');" .
-//                "</script>";
-//            return $this->getDefaultView();
-//        }else{
-//            $sql = "select id,name,level from lkt_core_menu where id = '$id'";
-//            $r_3 = $db->select($sql);
-//            $yid = $r_3[0]->id;
-//            $yname = $r_3[0]->name;
-//            $ylevel = $r_3[0]->level;
-//            if($name != $yname){
-//                $sql = "update lkt_core_menu set name = '$name' where name = '$yname' and id = '$id' ";
-//                $db->update($sql);
-//                $sql = "update lkt_core_menu set name = '$name' where name = '$yname' and s_id = '$id' ";
-//                $db->update($sql);
-//
-//                $num = $level - $ylevel;
-//                $sql = "update lkt_core_menu set level = level+'$num' where s_id = '$yid'";
-//                $db->update($sql);
-//            }
-//        }
+
 
         if(is_numeric($sort)){
             if($sort <= 0){
@@ -319,18 +285,14 @@ class modifyAction extends Action {
         $r = $db->update($sql);
         if($r == -1) {
             $db->admin_record($admin_id,' 修改菜单id为 '.$id.' 失败 ',2);
-
-            echo "<script type='text/javascript'>" .
-                "alert('未知原因，修改失败！');" .
-                "location.href='index.php?module=menu';</script>";
-            return $this->getDefaultView();
+            //跳转
+            jump($_SESSION['url'],'未知原因，修改失败！');
+            
         } else {
             $db->admin_record($admin_id,' 修改菜单id为 '.$id.' 的信息',2);
+            //跳转
+            jump($_SESSION['url'],'修改成功！');
 
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('修改成功！');" .
-                "location.href='index.php?module=menu';</script>";
         }
 		return;
 	}

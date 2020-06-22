@@ -15,17 +15,14 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,//
       backgroundColor: app.d.bgcolor, //页面标题为路由参数
@@ -37,8 +34,6 @@ Page({
 
     wx.checkSession({
       success: function (e) {
-        console.log(e)
-        console.log('session_key 未过期' + app.globalData.userInfo.session_key)
         //session_key 未过期，并且在本生命周期一直有效
         app.globalData.userInfo['session_key'] = app.globalData.userInfo.session_key;
 
@@ -63,15 +58,10 @@ Page({
   },
   //获取好友ID
   withdrawals: function (e) {
-    // console.log(e);
-    var that = this;
-    // console.log(6666)
     var user_id = e.detail.value.user_id;
-
     wx.redirectTo({//跳转
       url: "../user/transfer_jifen1?user_id=" + user_id,
     })
-
   }
 
 

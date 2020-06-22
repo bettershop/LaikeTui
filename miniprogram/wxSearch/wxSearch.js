@@ -85,10 +85,7 @@ function wxSearchFocus( that, callBack) {
     that.setData({
         wxSearchData: temData
     });
-    //回调
-    // if (typeof (callBack) == "function") {
-    //     callBack();
-    // }
+    
 }
 function wxSearchBlur(e, that, callBack) {
     var temData = that.data.wxSearchData;

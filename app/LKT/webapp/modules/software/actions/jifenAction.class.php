@@ -9,11 +9,7 @@
  */
 
 require_once(MO_LIB_DIR . '/DBAction.class.php');
-
-
-
 class jifenAction extends Action {
-
 
 
 public function getDefaultView() {

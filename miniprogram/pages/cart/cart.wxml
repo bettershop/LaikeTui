@@ -31,7 +31,7 @@
           <view  wx:else bindtap="ok" class='top-ql-1' style='color:#f60;'>完成</view>
           <view  wx:if="{{upstatus}}" bindtap="delall" class='top-ql-1 iconfont icon-icon-test' style='color:#f60;'>快速清理</view>
       </view>
-      <view class="shop df" wx:for="{{productData}}">
+      <view class="shop df" wx:for="{{productData}}" wx:key="key">
             <image class="sh_slt" src="{{item.imgurl}}"></image>
             <view class="df_1">            
                 <view class="sp_text">
@@ -55,7 +55,7 @@
       </view>
       <view class="container carts-list">
       <!--勾-->
-          <view wx:for="{{carts}}" class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}">
+          <view wx:for="{{carts}}"  wx:key="key" class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}">
               <icon wx:if="{{item.selected}}" type="success_circle"    size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
               <icon wx:else type="circle" size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
           <!--img-->
@@ -67,7 +67,7 @@
            <view class="carts-text">
            <navigator style='width:100%;height:120rpx;overflow: hidden;'  url="../product/detail?productId={{item.pid}}&size={{item.sizeid}}">
             <text class="carts-title">{{item.pro_name}}</text>
-              <text class="carts-title" style='font-size:28rpx;color:#CCCCCC;margin:0;'>[{{item.size}}]</text>
+              <text class="carts-title" style='font-size:28rpx;color:#CCCCCC;margin:0;' wx:if="{{item.size}}">[{{item.size}}]</text>
            </navigator>
               
        <view class="title">

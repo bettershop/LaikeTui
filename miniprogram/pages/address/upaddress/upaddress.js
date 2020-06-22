@@ -22,12 +22,10 @@ Page({
   // 下拉刷新
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      // complete
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
+    
     this.AddressManagement();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   /**
    * 生命周期函数--监听页面加载
@@ -126,15 +124,17 @@ Page({
       show = true;
       t = 0;
     }
+    
     animationEvents(this, moveY, show);
     this.AddressManagement1();
   },
   //隐藏弹窗浮层
   hiddenFloatView(e) {
     moveY = 200;
-    show = true;
-    t = 0;
-    animationEvents(this, moveY, show);
+    this.setData({
+      show: false
+    });
+    t = 1;
   },
   //滑动事件
   bindChange: function (e) {
@@ -250,27 +250,21 @@ Page({
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast()
     } else if (e.detail.value.mobile.length == 0) {
       wx.showToast({
         title: '电话不得为空!',
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast()
     } else if (e.detail.value.province.length == 0) {
       wx.showToast({
         title: '城市不得为空!',
         icon: 'loading',
         duration: 1500
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
+      wx.hideToast()
     } else {
       wx.request({
         url: app.d.ceshiUrl + '&action=address&m=up_adds',

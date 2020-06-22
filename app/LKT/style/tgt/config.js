@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: 'resource/js/app',
+	baseUrl: 'style/tgt/resource/js/app',
 	paths: {
 		'jquery': '../lib/jquery-1.11.1.min',
 		'jquery.ui': '../lib/jquery-ui-1.10.3.min',

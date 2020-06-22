@@ -2,6 +2,7 @@
 var app = getApp()
 Page({
 	data: {
+    pop: null,
 		list: [
       {
         icon: 'icon-user-bangding.png',
@@ -22,6 +23,11 @@ Page({
 				text: '地址管理',
 				url: 'address/index'
 			},
+      {
+        icon: 'gg.png',
+        text: '公告管理',
+        url: 'notice/notice'
+      },
 			{
 				icon: 'sz.png',
 				text: '设置',
@@ -35,11 +41,9 @@ Page({
 	//下拉刷新
 	onPullDownRefresh: function() {
 		wx.showNavigationBarLoading() //在标题栏中显示加载
-		setTimeout(function() {
-			wx.hideNavigationBarLoading() //完成停止加载
-			wx.stopPullDownRefresh() //停止下拉刷新
-		}, 1500);
 		this.requestMyData();
+		wx.hideNavigationBarLoading() //完成停止加载
+		wx.stopPullDownRefresh() //停止下拉刷新
 	},
   copyText: function (t) { 
     var a = t.currentTarget.dataset.text; 
@@ -74,11 +78,10 @@ Page({
 	//页面加载完成函数
 	onReady: function() {
 		var that = this;
-		setTimeout(function() {
-			that.setData({
-				remind: ''
-			});
-		}, 1000);
+    this.pop = this.selectComponent("#pop")
+    that.setData({
+      remind: ''
+    });
 	},
 	onShow: function() {
 		var cont = this.data.cont;
@@ -93,17 +96,19 @@ Page({
 	},
 
 	requestMyData: function() {
-		var that = this;
+    var that = this;
 		wx.request({
 			url: app.d.ceshiUrl + '&action=user&m=index',
 			method: 'post',
 			data: {
-				openid: app.globalData.userInfo.openid
+				openid: app.globalData.userInfo.openid || ''
+        // openid:''
 			},
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
 			success: function(res) {
+        console.log(res,1111)
 				var status = res.data.status;
 				if(status == 1) {
 					var user = res.data.user;
@@ -134,7 +139,6 @@ Page({
 						duration: 2000
 					});
 				}
-        app.userlogin(1);
 			},
 			error: function(e) {
 				wx.showToast({
@@ -151,4 +155,21 @@ Page({
       url: url
     })
   },
+  logins:function(){
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      this.requestMyData();
+      return
+    }
+  },
+  jumpgo:function(event){
+    if (app.userlogin(1)) {
+      this.pop.clickPup(this)
+      return
+    }
+    let url = event.currentTarget.dataset.id
+    wx.navigateTo({
+      url: url
+    })
+  }
 })

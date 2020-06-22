@@ -22,7 +22,6 @@ class delAction extends Action {
 
             $sql = "update lkt_core_menu set recycle = 1 where id = '$id'";
             $db->update($sql);
-
             $res = array('status' => '1','info'=>'删除成功！');
             echo json_encode($res);
             return;

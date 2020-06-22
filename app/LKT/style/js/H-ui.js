@@ -793,7 +793,7 @@ $("table td a").each(function(){
             color:"#2890ff",
         })
         if($(this).find("img").length>0){
-            let src=$(this).find("img").attr("src").replace(/.png$/,"");
+            var src=$(this).find("img").attr("src").replace(/.png$/,"");
             $(this).find("img").attr("src",src+"_h.png")
         }
 
@@ -805,7 +805,7 @@ $("table td a").each(function(){
             color:"#888f9e",
         })
         if($(this).find("img").length>0){
-            let src=$(this).find("img").attr("src").replace(/_h.png$/,"");
+            var src=$(this).find("img").attr("src").replace(/_h.png$/,"");
             $(this).find("img").attr("src",src+".png")
         }
 

@@ -7,11 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
 <title>公告详情</title>
 {literal}
@@ -22,12 +18,8 @@
         float: left;
     }
     
-    /*标题*/
-   .breadcrumb{
-   	margin-top: 20px;
-   	margin-left: 20px;
-   }
-    .gg_div{padding:20px;background-color: #fff;margin: 10px 20px;}
+  
+    .gg_div{padding:10px;background-color: #fff;margin: 10px 20px;}
     .gg_title{font-size: 28px;color: #414658;line-height: 40px;}
     .gg_time{padding-top: 10px;border-bottom: 1px solid #E9ECEF;padding-bottom: 0px;}
     .gg_time span{font-size: 14px;color:#97a0b4;}
@@ -44,7 +36,14 @@
 {/literal}
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe62f;</i> 系统首页 <span class="c-gray en">&gt;</span>公告详情 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+
+<nav class="breadcrumb">
+    系统首页 <span class="c-gray en">&gt;</span> 
+    公告详情 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
+
 
 	<!--内容-->
 	<div class="gg_div">

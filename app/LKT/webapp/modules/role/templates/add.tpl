@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -10,9 +9,6 @@
 
 <link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
 {literal}
 <style>
 div{
@@ -31,7 +27,15 @@ p{
 }
 input{
      margin-right: 5px;
-}  
+}
+.button-conter {
+    display: flex;
+    justify-content: center;
+}
+
+#btn1 {
+    margin-right: 5px;
+}
 </style>
 <script type="text/javascript">
 function check(f){
@@ -45,7 +49,12 @@ function check(f){
 <title>添加角色</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe62d;</i> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <span class="c-gray en">&gt;</span> 添加角色 </nav>
+<nav class="breadcrumb">
+    配置管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=role">角色列表</a> <span class="c-gray en">&gt;</span> 
+    添加角色 <span class="c-gray en">&gt;</span> 
+    <a href="javascript:history.go(-1)">返回</a>
+</nav>
 <div class="pd-20">
 <form name="form1" action="index.php?module=role&action=add" class="form form-horizontal" method="post" onsubmit="return check(this);"  enctype="multipart/form-data" >
     <div class="row cl">
@@ -58,33 +67,33 @@ function check(f){
         <label class="form-label col-xs-4 col-sm-2">角色权限：</label>
         <div class="J_CheckWrap col-xs-8 col-sm-8" style="border: solid 1px #eee;">
             {foreach from=$list item=item key=key}
-            <p class="permission-list" style="background-color: #efefef;">
+            <p class="permission-list" style="background-color: #efefef;display: flex;">
                 <input type="checkbox" class="inputC" id="user-{$key}" value="{$item->level}/{$item->name}" name="permission[]" {if $item->status == 1}checked="checked"{/if}/>
                 <label for="user-{$key}"></label>
-                {$item->title}
+                <span style="padding-left: 10px;">{$item->title}</span>
             </p>
             <div class="checks">
                 {foreach from=$item->res item=item1 key=key1}
-                <p class="cl permission-list2">
+                <p class="cl permission-list2" style="display: flex;">
                     <input type="checkbox" class="inputC" value="{$item1->level}/{$item1->name}/{$item1->module}/{$item1->action}" name="permission[]" {if $item1->status == 1}checked="checked"{/if} id="user-{$key}-{$key1}"/>
                     <label for="user-{$key}-{$key1}"></label>
-                    {$item1->title}
+                    <span style="padding-left: 10px;">{$item1->title}</span>
                 </p>
                 {if $item1->res}
                 <div class="checks" style="border-bottom: solid 1px #eee;">
                     {foreach from=$item1->res item=item2 key=key2}
-                    <p>
+                    <p style="display: flex;">
                         <input type="checkbox" class="inputC" value="{$item2->level}/{$item2->name}/{$item2->module}/{$item2->action}" name="permission[]" {if $item2->status == 1}checked="checked"{/if} id="user-{$key}-{$key1}-{$key2}"/>
                         <label for="user-{$key}-{$key1}-{$key2}"></label>
-                        {$item2->title}
+                        <span style="padding-left: 10px;">{$item2->title}</span>
                     </p>
                     {if $item2->res}
                     <div class="checks" style="border-bottom: solid 1px #eee;">
                         {foreach from=$item2->res item=item3 key=key3}
-                        <p style="display: inline-block;">
+                        <p style="display: inline-block;display: flex;">
                             <input class="inputC" type="checkbox" value="{$item3->level}/{$item3->name}/{$item3->module}/{$item3->action}" name="permission[]" {if $item3->status == 1}checked="checked"{/if} id="user-{$key}-{$key1}-{$key2}-{$key3}"/>
                             <label for="user-{$key}-{$key1}-{$key2}-{$key3}"></label>
-                            {$item3->title}
+                            <span style="padding-left: 10px;">{$item3->title}</span>
                         </p>
                         {/foreach} 
                     </div>
@@ -98,10 +107,11 @@ function check(f){
         </div>  
     </div>
     <div class="row cl">
-        <div class="col-10 col-offset-5">
-            <button class="btn btn-primary radius" type="submit" name="Submit"><i class="Hui-iconfont">&#xe632;</i> 提 交</button>
-            <button class="btn btn-secondary radius" type="reset" name="reset"><i class="Hui-iconfont">&#xe632;</i> 重 写</button>
-        </div>
+        <label class="form-label col-xs-4 col-sm-2"></label>
+      <div class="col-xs-8 col-sm-8">
+        <button id="btn1" class="btn btn-primary radius" type="submit" name="Submit">提 交</button>
+        
+      </div>
     </div>
 </form>
 </div>

@@ -6,8 +6,8 @@ class WxPayConf_pub
 	const KEY = '';
 	const APPSECRET = '';
 	const JS_API_CALL_URL = '';
-	const SSLCERT_PATH = '';
-	const SSLKEY_PATH = '';
+	const SSLCERT_PATH = '/wechat/webapp/lib/cert/apiclient_cert.pem';
+	const SSLKEY_PATH = '/wechat/webapp/lib/cert/apiclient_key.pem';
 	const NOTIFY_URL = '';
 	const CURL_TIMEOUT = 30;
 }

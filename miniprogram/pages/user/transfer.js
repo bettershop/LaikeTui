@@ -15,11 +15,9 @@ Page({
   //页面加载完成函数
   onReady: function () {
     var that = this;
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   /**
    * 生命周期函数--监听页面加载
@@ -63,9 +61,7 @@ Page({
   },
 //获取好友ID
   withdrawals: function (e) {
-    // console.log(e);
     var that = this;
-    // console.log(6666)
     var user_id = e.detail.value.user_id;
 
     wx.redirectTo({//跳转

@@ -7,11 +7,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+{php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="style/css/style.css" rel="stylesheet" type="text/css" />
-<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
 {literal}
 <style>
 td a{
@@ -41,7 +38,13 @@ td a{
 <title>财务管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe63a;</i> 财务管理 <span class="c-gray en">&gt;</span> 提现列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<nav class="breadcrumb">
+    财务管理 <span class="c-gray en">&gt;</span> 
+    提现列表 
+</nav>
+
+
 <div class="pd-20">
 	<div>
 		<a href="index.php?module=finance" class="btn1" style="background-color: #62b3ff;color: #fff;">待审核</a> 
@@ -54,9 +57,9 @@ td a{
 			<input type="hidden" name="module" value="finance" />
 			<input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize" />
 
-			<input type="text" class="input-text" style="width:250px" placeholder="用户名" name="name" value="{$name}">
-			<input type="text" class="input-text" style="width:250px" placeholder="卡号" name="Bank_card_number" value="{$Bank_card_number}">
-			<input type="text" class="input-text" style="width:250px" placeholder="持卡人姓名" name="Cardholder" value="{$Cardholder}">
+			<input type="text" class="input-text" style="width:250px" autocomplete="off" placeholder="用户ID" name="name" value="{$name}">
+			<input type="text" class="input-text" style="width:250px" autocomplete="off" placeholder="卡号" name="Bank_card_number" value="{$Bank_card_number}">
+			<input type="text" class="input-text" style="width:250px" autocomplete="off" placeholder="持卡人姓名" name="Cardholder" value="{$Cardholder}">
 	        <input type="submit" class="btn btn-success" value="查 询">
 			<!--<input type="button" value="导出本页" class="btn btn-success" onclick="excel('ne')">-->
 			<input type="button" value="导出" class="btn btn-success" onclick="excel('all')">
@@ -68,7 +71,7 @@ td a{
             <thead>
                 <tr class="text-c">
                 	<th width="40">序</th>
-		            <th width="150" aria-valuetext="name">用户名</th>
+		            <th width="150" aria-valuetext="name">用户ID</th>
 					<th width="130" aria-valuetext="source">来源</th>
 					<th width="130" aria-valuetext="add_date">提交时间</th>
 		            <th width="150" aria-valuetext="money">提现金额</th>
@@ -85,7 +88,7 @@ td a{
 	            {foreach from=$list item=item name=f1}
 	                <tr class="text-c">
 	                    <td>{$smarty.foreach.f1.iteration}</td>
-						<td>{$item->name}</td>
+						<td>{$item->user_id}</td>
 						<td>{if $item->source == 1}小程序{elseif $item->source == 2}app{/if}</td>
 	                    <td>{$item->add_date}</td>
 	                    <td>{$item->money}元</td>
@@ -96,14 +99,7 @@ td a{
 	                    <td>{$item->mobile}</td>
 	                    <td>{if $item->status == 0}<span style="color: #ff2a1f;">待审核</span>{elseif $item->status == 1}<span style="color: #30c02d;">审核通过</span>{else}<span style="color: #7A7A7A;">已拒绝</span>{/if}</td>
 	                    <td style="min-width: 180px">
-							<a style="text-decoration:none" class="ml-5" href="index.php?module=finance&action=see&user_id={$item->user_id}" title="查看">
-								<div style="align-items: center;font-size: 12px;display: flex;">
-	                            	<div style="margin:0 auto;;display: flex;align-items: center;"> 
-	                                <img src="images/icon1/ck.png"/>&nbsp;查看
-	                            	</div>
-                        		</div>
-							</a>
-
+							
 							{if $item->status == 0}
 	                        <a style="text-decoration:none" class="ml-5" onclick="examine(this,1,'{$item->id}','{$item->user_id}','{$item->money}','{$item->s_charge}')" >
 		                        <div style="align-items: center;font-size: 12px;display: flex;">
@@ -128,14 +124,9 @@ td a{
     </div>
 	<div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
 </div>
-<script type="text/javascript" src="style/js/jquery.js"></script>
 
-<script type="text/javascript" src="style/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script> 
-<script type="text/javascript" src="style/lib/My97DatePicker/WdatePicker.js"></script> 
-<script type="text/javascript" src="style/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.js"></script> 
-<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+
 
 {literal}
 <script type="text/javascript">

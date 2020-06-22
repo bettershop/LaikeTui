@@ -2,7 +2,7 @@
 
 /**
 
- * [Laike System] Copyright (c) 2018 laiketui.com
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
 
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
@@ -12,12 +12,12 @@ require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
 
 class couponAction extends Action {
+
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $sql = "select * from lkt_coupon_config where id = '1'";
         $r_1 = $db->select($sql);
-        $activity_overdue = $r_1[0]->activity_overdue; // 活动过期删除时间
 
         $name = addslashes(trim($request->getParameter('name'))); // 用户id
 
@@ -35,7 +35,7 @@ class couponAction extends Action {
 
         $condition = '1 = 1';
         if($name != ''){   
-            $condition .= " and b.name like '%$name%'";
+            $condition .= " and a.user_id like '%$name%'";
         }
 
         $time = date('Y-m-d H:i:s'); // 当前时间
@@ -49,7 +49,6 @@ class couponAction extends Action {
         if($r){
             foreach ($r as $k => $v) {
                 $id = $v->id; // 优惠券id
-                $hid = $v->hid; // 活动id
                 $expiry_time = $v->expiry_time; // 到期时间
 
                 $sql = "select * from lkt_coupon_config where id = 1";
@@ -79,7 +78,7 @@ class couponAction extends Action {
                 }
             }
         }
-        $url = "index.php?module=finance&action=Index&name=".urlencode($name)."&pagesize=".urlencode($pagesize);
+        $url = "index.php?module=coupon&action=coupon&name=".urlencode($name)."&pagesize=".urlencode($pagesize);
         $pages_show = $pager->multipage($url,$total,$page,$pagesize,$start,$para = '');
 
         $request->setAttribute("list",$r);
