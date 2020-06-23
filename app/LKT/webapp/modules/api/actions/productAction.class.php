@@ -323,6 +323,8 @@ class productAction extends BaseAction
         $Goods_num = addslashes(trim($request->getParameter('num'))); //  '数量',
         $size_id = addslashes(trim($request->getParameter('sizeid'))); //  '商品属性id',
         $pro_type = addslashes(trim($request->getParameter('pro_type'))); //  '点击类型',
+        $plugin = addslashes(trim($request->getParameter('plugin'))); //  '插件类型',
+
         if (empty($Uid) || empty($Goods_id) || empty($Goods_id) || empty($size_id)) {
             echo json_encode(array('status' => 0, 'info' => '添加失败请重新提交!!'));
         } else {
@@ -352,7 +354,7 @@ class productAction extends BaseAction
                     $r2 = $db->select($sql);
                     $r = $r2[0]->id;
                 } else {
-                    $sql = "insert into lkt_cart (user_id,Uid,Goods_id,Goods_num,Create_time,Size_id) values('$user_id','$Uid','$Goods_id','$Goods_num',CURRENT_TIMESTAMP,$size_id) ";
+                    $sql = "insert into lkt_cart (user_id,Uid,Goods_id,Goods_num,Create_time,Size_id,plugin) values('$user_id','$Uid','$Goods_id','$Goods_num',CURRENT_TIMESTAMP,$size_id,'$plugin') ";
                     $r = $db->insert($sql, 'last_insert_id');
                 }
                 if ($r) {
