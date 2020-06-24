@@ -1288,17 +1288,6 @@ class productAction extends BaseAction
 
             $r_o = $db->insert($sql_o, "last_insert_id");
             if ($r_o > 0) {
-                if ($allow) {
-
-                    $sql = "update lkt_user set consumer_money = consumer_money - '$allow' where user_id = '$userid'";
-                    $db->update($sql);
-
-                    $event = $userid . '抵用' . $allow . '元消费金';
-                    //类型 1:转入(收入) 2:提现 3:管理佣金 4:使用消费金 5收入消费金 6 系统扣款
-                    $sqlldr = "insert into lkt_distribution_record (user_id,from_id,money,sNo,level,event,type,add_date) values ('$userid','$userid','$allow','$sNo','0','$event','4',CURRENT_TIMESTAMP)";
-                    $db->insert($sqlldr);
-                }
-                //返回
                 $db->commit();
                 $arr = array('pay_type' => $type, 'sNo' => $sNo, 'coupon_money' => $z_price, 'coupon_id' => $coupon_id, 'order_id' => $r_o);
                 echo json_encode(array('status' => 1, 'arr' => $arr));
