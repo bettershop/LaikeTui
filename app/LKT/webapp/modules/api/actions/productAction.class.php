@@ -1068,6 +1068,7 @@ class productAction extends BaseAction
         $typee = addslashes(trim($request->getParameter('typee'))); // 1直接购买类型0购物车购买
         $num = addslashes(trim($request->getParameter('num'))); // 直接购买数量
         $total = addslashes($_POST['total']); // 付款金额
+        $plugin = addslashes(trim($request->getParameter('plugin'))); //  '插件类型'
 
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
