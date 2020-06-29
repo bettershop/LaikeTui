@@ -549,6 +549,7 @@ Page({
           num: that.data.buynum,
           sizeid: sizeid,
           pro_type: pro_type,
+          plugin:'distribution'
         },
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'

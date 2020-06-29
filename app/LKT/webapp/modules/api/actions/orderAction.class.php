@@ -277,25 +277,28 @@ class orderAction extends BaseAction {
         // 获取信息
         $sNo = addslashes(trim($request->getParameter('sNo'))); // 订单号
         $time = date('Y-m-d H:i:s');
-        //查询订单是不是抽奖订单，要是抽奖订单确认收货就直接关闭订单
-        $sql01 = "select drawid,otype from lkt_order where sNo='$sNo'";
+        $sql01 = "select * from lkt_order where sNo='$sNo'";
         $rew = $db->select($sql01);
+        $pluginName = $rew[0]->plugin; //插件订单
         if($rew){
-            if($rew[0]->drawid >0){
-                $sql_1 = "update lkt_order_details set r_status = 6, arrive_time = '$time' where r_sNo = '$sNo' ";
-                $r_1 = $db->update($sql_1);
-                $sql_2 = "update lkt_order set status = 6 where sNo = '$sNo'";
-                $r_2 = $db->update($sql_2);
-            }else{
 
-                $sql_1 = "update lkt_order_details set r_status = 3, arrive_time = '$time' where r_sNo = '$sNo' and r_status = '2'";
-                $r_1 = $db->update($sql_1);
+            $sql_1 = "update lkt_order_details set r_status = 3, arrive_time = '$time' where r_sNo = '$sNo' and r_status = '2'";
+            $r_1 = $db->update($sql_1);
 
 
-                if($rew[0]->otype == 'pt') $r_1 = 1;
-                $sql_2 = "update lkt_order set status = 3 where sNo = '$sNo'";
-                $r_2 = $db->update($sql_2);
+            if($rew[0]->otype == 'pt') $r_1 = 1;
+            $sql_2 = "update lkt_order set status = 3 where sNo = '$sNo'";
+            $r_2 = $db->update($sql_2);
+
+
+            if($pluginName){ //动态调用插件类的确认收货的重写方法
+                $className = $pluginName;//强制要求插件名称与接口类名称一致
+                require_once(MO_WEBAPP_DIR."/plugins/".$pluginName."/front/".$className."Action.class.php");
+                $className = $className.'Action';
+                $plugin = new $className($this->getContext());
+                $plugin->okOrder($rew[0]);
             }
+
             if($r_1 >0 && $r_2 > 0){
                 echo json_encode(array('status'=>1,'err'=>'操作成功!'));
                 exit();
@@ -303,6 +306,7 @@ class orderAction extends BaseAction {
                 echo json_encode(array('status'=>0,'err'=>'操作失败!'));
                 exit();
             }
+
         }else{
             echo json_encode(array('status'=>0,'err'=>'网络繁忙!'));
             exit();

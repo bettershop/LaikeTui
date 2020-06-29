@@ -2028,7 +2028,7 @@ CREATE TABLE `lkt_user` (
   `county` varchar(50) DEFAULT '' COMMENT '县',
   `detailed_address` varchar(100) DEFAULT NULL COMMENT '详细地址',
   `money` decimal(12,2) DEFAULT '0.00' COMMENT '金额',
-  `score` int(11) DEFAULT '0' COMMENT '积分',
+  `score` decimal(12,2) DEFAULT '0.00' COMMENT '积分',
   `password` char(32) DEFAULT NULL COMMENT '支付密码',
   `Register_data` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   `e_mail` varchar(30) DEFAULT NULL COMMENT '邮箱',

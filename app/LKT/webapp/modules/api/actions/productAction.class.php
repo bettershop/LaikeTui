@@ -322,7 +322,6 @@ class productAction extends BaseAction
         $Goods_id = addslashes(trim($request->getParameter('pid'))); //  '产品id',
         $Goods_num = addslashes(trim($request->getParameter('num'))); //  '数量',
         $size_id = addslashes(trim($request->getParameter('sizeid'))); //  '商品属性id',
-        $pro_type = addslashes(trim($request->getParameter('pro_type'))); //  '点击类型',
         $plugin = addslashes(trim($request->getParameter('plugin'))); //  '插件类型',
 
         if (empty($Uid) || empty($Goods_id) || empty($Goods_id) || empty($size_id)) {
@@ -437,7 +436,7 @@ class productAction extends BaseAction
             $product = [];
             foreach ($r as $k => $v) {
                 $imgurl = $img . $v->img;/* end 保存*/
-                $product[$k] = array('id' => $v->id, 'name' => $v->product_title . $names, 'price' => $v->yprice, 'size' => $v->sizeid, 'price_yh' => $v->price, 'imgurl' => $imgurl, 'volume' => $v->volume);
+                $product[$k] = array('id' => $v->id, 'name' => $v->product_title, 'price' => $v->yprice, 'size' => $v->sizeid, 'price_yh' => $v->price, 'imgurl' => $imgurl, 'volume' => $v->volume);
             }
             echo json_encode(array('status' => 1, 'pro' => $product));
             exit;
@@ -566,7 +565,6 @@ class productAction extends BaseAction
         $usort = 0;
 
         foreach ($typeArr as $key => $value) {
-            //echo "select m.status,c.num  from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id  where  a.id = '$value'";
             $r_c01 = $db->select("select m.status,c.num  from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id  where  a.id = '$value'");
             if ($r_c01 && $r_c01[0]->status && $r_c01[0]->status != 0) {
                 $db->delete('delete from lkt_cart where id="' . $value . '"');
@@ -1070,6 +1068,10 @@ class productAction extends BaseAction
         $total = addslashes($_POST['total']); // 付款金额
         $plugin = addslashes(trim($request->getParameter('plugin'))); //  '插件类型'
 
+        $sql = "select * from lkt_cart where id = $cart_id  ";
+        $cart = $db->selectOne($sql);
+        $plugin = $cart->plugin;
+
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
 
@@ -1216,7 +1218,7 @@ class productAction extends BaseAction
                     }
 
                     // 循环插入订单附表
-                    $sql_d = 'insert into lkt_order_details(user_id,p_id,p_name,p_price,num,unit,r_sNo,add_time,r_status,size,sid,freight) VALUES ' . "('$userid','$pid','$product_title','$price','$num','$unit','$sNo',CURRENT_TIMESTAMP,0,'$size','$size_id','$freight')";
+                    $sql_d = 'insert into lkt_order_details(user_id,p_id,p_name,p_price,num,unit,r_sNo,add_time,r_status,size,sid,freight,plugin) VALUES ' . "('$userid','$pid','$product_title','$price','$num','$unit','$sNo',CURRENT_TIMESTAMP,0,'$size','$size_id','$freight','$plugin')";
 
                     $beres = $db->insert($sql_d);
 
@@ -1283,8 +1285,8 @@ class productAction extends BaseAction
             $z_price = $z_price + $z_freight; // 订单总价
 
             // 在订单表里添加一条数据
-            $sql_o = 'insert into lkt_order(user_id,name,mobile,num,z_price,sNo,sheng,shi,xian,address,remark,pay,add_time,status,coupon_id,consumer_money,coupon_activity_name,spz_price,reduce_price,coupon_price,red_packet,source) VALUES ' .
-                "('$userid','$name','$mobile','$z_num','$z_price','$sNo','$sheng','$shi','$xian','$address',' ','$type',CURRENT_TIMESTAMP,0,'$coupon_id','$allow','$coupon_activity_name','$spz_price','$reduce_money','$c_money','$red_packet',1)";
+            $sql_o = 'insert into lkt_order(user_id,name,mobile,num,z_price,sNo,sheng,shi,xian,address,remark,pay,add_time,status,coupon_id,consumer_money,coupon_activity_name,spz_price,reduce_price,coupon_price,red_packet,source,plugin) VALUES ' .
+                "('$userid','$name','$mobile','$z_num','$z_price','$sNo','$sheng','$shi','$xian','$address',' ','$type',CURRENT_TIMESTAMP,0,'$coupon_id','$allow','$coupon_activity_name','$spz_price','$reduce_money','$c_money','$red_packet',1,'$plugin')";
 
             $r_o = $db->insert($sql_o, "last_insert_id");
             if ($r_o > 0) {

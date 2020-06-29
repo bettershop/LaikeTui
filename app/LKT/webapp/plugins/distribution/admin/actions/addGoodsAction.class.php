@@ -106,6 +106,7 @@ class addGoodsAction extends PluginAction
 
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
+        $products = [];
 
         foreach ($res as $k => $v) {
 
@@ -117,11 +118,18 @@ class addGoodsAction extends PluginAction
             $res[$k]->image = $img . $v->imgurl;
             $res[$k]->attr =  implode(',', $attr);
 
+            //判断该商品ID是否已经在分销商品里面了
+            $sql = "select * from lkt_detailed_pro where pro_id=".$v->id;
+            $rs = $db->select($sql);
+            if(!$rs){
+                $products[]=$res[$k];
+            }
+
 
         }
         $total = count($res);
-        $res = array_slice($res, $start, $pagesize);
-        echo json_encode(array('res' => $res, 'product_class' => $product_class, 'brand' => $brand, 'total' => $total, 'page' => $page));
+        $products = array_slice($products, $start, $pagesize);
+        echo json_encode(array('res' => $products, 'product_class' => $product_class, 'brand' => $brand, 'total' => $total, 'page' => $page));
         exit;
     }
 

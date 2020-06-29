@@ -41,7 +41,7 @@ class distributionAction extends PluginAction
         $start = ($paegr - 1) * 10;
         $end = 10;
 
-        $sql = "select a.*,b.leve1  from lkt_product_list AS a,lkt_detailed_pro AS b where a.id = b.pro_id   AND a.num > 0  order by $select $sort LIMIT $start,$end   ";
+        $sql = "select a.*,b.leve1  from lkt_product_list AS a,lkt_detailed_pro AS b where a.id = b.pro_id   AND a.num > 0 AND b.status=1 order by $select $sort LIMIT $start,$end   ";
         $r = $db->select($sql);
 
         if ($r) {
@@ -59,7 +59,6 @@ class distributionAction extends PluginAction
                 if ($attr) {
                     if (gettype($attr[0]) != 'string') unset($attr[0]);
                 }
-
                 $product[$k] = array('id' => $v->id, 'name' => $v->product_title, 'price' => $price, 'price_yh' => $price_yh, 'imgurl' => $imgurl, 'volume' => $v->volume, 's_type' => $v->s_type, 'fan' => $price*$v->leve1/100);
             }
             echo json_encode(array('status' => 1, 'pro' => $product));
@@ -131,8 +130,8 @@ class distributionAction extends PluginAction
                 $i=0;
                 $uid = $user_id;
                 while ($leve>0 && $i<$leve){
-                    $money = $total*$bili[$i];
-                    $s_money = $money - $money*$commissions;
+                    $money = $total*$bili[$i]/100;
+                    $s_money = $money - $money*$commissions/100;
                     if ($money>0){
                         $sql = "select * from lkt_user where user_id='$uid' ";
                         $user = $db->selectOne($sql);

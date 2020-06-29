@@ -45,7 +45,6 @@ class piAction extends Action {
     //获取系统配置信息
     public function getAppInfo(){
         $db = DBAction::getInstance();
-        $img = "";
         $sql = "select * from lkt_config where id = 1";
         $r_1 = $db->select($sql);
         $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名

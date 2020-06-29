@@ -810,10 +810,8 @@ Page({
                 var openid = app.globalData.userInfo.openid
                 that.promiss(that.refereeopenid, referee_openid, openid).then(res => {
                   that.up_order(order);
-                  console.log(1, '分销')
                 })
               } else {
-                console.log(2, '非分销')
                 that.up_order(order);
               }
 
