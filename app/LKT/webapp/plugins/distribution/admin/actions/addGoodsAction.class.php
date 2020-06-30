@@ -148,6 +148,7 @@ class addGoodsAction extends PluginAction
         $r_num = 0;
         if ($data) {
             foreach ($data as $key => $value) {
+                $dd = array();
                 $dd[] =  $value['id'];
                 $dd[] =  $value['leve'] ? $value['leve'] : '0';
                 $dd[] =  $value['leve1'] ? $value['leve1'] : '0';

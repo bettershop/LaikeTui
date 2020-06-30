@@ -229,7 +229,7 @@ display:-webkit-box;
 }
 .gmxx {
   /* padding-left:20rpx;  */
-  width:74%;
+  width:88%;
 }
 
 .gmx {

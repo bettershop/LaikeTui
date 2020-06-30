@@ -15,7 +15,6 @@ Page({
   //页面加载完成函数
   onReady: function () {
     this.pop = this.selectComponent("#pop")
-    var that = this;
   },
   onLoad: function (options) {
     wx.setNavigationBarColor({
