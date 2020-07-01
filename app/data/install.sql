@@ -1408,6 +1408,7 @@ INSERT INTO `lkt_plug_ins` VALUES ('2', '3', '钱包', '我的钱包', '0', '157
 INSERT INTO `lkt_plug_ins` VALUES ('3', '3', '签到', '我的积分', '0', '1541641221938.png', '1541641238944.png', '../sign_in/sign_in', '../user/score', '2018-11-08 17:40:39', '4', '1', '', 'QD');
 INSERT INTO `lkt_plug_ins` VALUES ('5', '3', '拼团', '我的拼团', '0', '1541641254824.png', '1571904730253.png', '../group_buy/group', '../order/order?currentTab=0&otype=pay6', '2019-10-25 00:12:12', '5', '1', '', 'PT');
 INSERT INTO `lkt_plug_ins` (`id`, `software_id`, `name`, `subtitle_name`, `type`, `image`, `subtitle_image`, `url`, `subtitle_url`, `add_time`, `sort`, `status`, `Customer_id`, `code`) VALUES (NULL, '3', '直播间', '进入直播间', '0', '1571905532198.png', '1571904730253.png', 'plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=直播房间id', 'plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=直播房间id', '2019-10-25 08:12:12', '5', '1', '', 'LIVE');
+INSERT INTO `lkt_plug_ins` (`id`, `software_id`, `name`, `subtitle_name`, `type`, `image`, `subtitle_image`, `url`, `subtitle_url`, `add_time`, `sort`, `status`, `Customer_id`, `code`) VALUES (NULL, '3', '分销', '我的分销', '0', '153667229722.png', '1571904730253.png', '../distribution/list', '../distribution/user', '2020-06-08 22:54:35', '5', '1', '', 'distribution');
 /*!40000 ALTER TABLE `lkt_plug_ins` ENABLE KEYS */;
 UNLOCK TABLES;
 

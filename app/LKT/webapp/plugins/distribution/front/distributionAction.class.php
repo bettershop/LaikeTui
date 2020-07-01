@@ -85,7 +85,7 @@ class distributionAction extends PluginAction
             $sql = "select sum(s_money) ss from lkt_detailed_commission where userid='$user_id' ";
             $rs = $db->selectOne($sql);
             $ljyj = $rs->ss;
-            $user->ljyj = $ljyj;
+            $user->ljyj = $ljyj?$ljyj:0;
 
             $sql = "select * from lkt_user  where Referee='$user_id'  order by id desc  ";
             $list_1 = $db->select($sql);
