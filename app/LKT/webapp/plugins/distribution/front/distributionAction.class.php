@@ -40,10 +40,8 @@ class distributionAction extends PluginAction
         }
         $start = ($paegr - 1) * 10;
         $end = 10;
-
         $sql = "select a.*,b.leve1  from lkt_product_list AS a,lkt_detailed_pro AS b where a.id = b.pro_id   AND a.num > 0 AND b.status=1 order by $select $sort LIMIT $start,$end   ";
         $r = $db->select($sql);
-
         if ($r) {
             $product = [];
             foreach ($r as $k => $v) {
@@ -86,7 +84,6 @@ class distributionAction extends PluginAction
             $rs = $db->selectOne($sql);
             $ljyj = $rs->ss;
             $user->ljyj = $ljyj?$ljyj:0;
-
             $sql = "select * from lkt_user  where Referee='$user_id'  order by id desc  ";
             $list_1 = $db->select($sql);
 

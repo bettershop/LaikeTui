@@ -86,7 +86,7 @@
                             <td style="text-align: center;">
                                 {$item->addtime}
                             </td>
-                            <td>{if $item->status==1} 已发放 {elseif $item->status==2}退货{else}未发放{/if}</td>
+                            <td>{if $item->status==2} 已发放 {else}未发放{/if}</td>
 
                         <td class="tab_editor">
                             <a style="text-decoration:none" class="ml-5" href="index.php?module=pi&p=distribution&c=Home&m=del&id={$item->id}" onclick="return confirm('确定要删除该记录吗?')">

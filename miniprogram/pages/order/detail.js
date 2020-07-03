@@ -7,7 +7,7 @@ function countdown(that) {
   // 渲染倒计时时钟
   var _this = that;
   let total_micro_second = that.data.total_micro_second;
-  if(that.data.rstatus!=0) return;
+  if (that.data.rstatus != 0) return;
   that.setData({
     clock: dateformat(total_micro_second) //格式化时间  
   });
@@ -35,11 +35,11 @@ function countdown(that) {
               title: "订单自动取消！",
               success: 2000
             });
-            setTimeout(function(){
+            setTimeout(function () {
               wx.navigateBack({
                 delta: 2
               })
-            },2000)
+            }, 2000)
           }
         },
         fail: function () {
@@ -49,16 +49,16 @@ function countdown(that) {
           });
         }
       });
-      wx.hideLoading();
+    wx.hideLoading();
     // timeout则跳出递归  
     return;
   }
-	//settimeout实现倒计时效果  
-	var i = setTimeout(function() {
-		// 放在最后--  
-		_this.data.total_micro_second -= 1000;
-		countdown(that);
-	}, 1000)
+  //settimeout实现倒计时效果  
+  var i = setTimeout(function () {
+    // 放在最后--  
+    _this.data.total_micro_second -= 1000;
+    countdown(that);
+  }, 1000)
   //记录定时器id
   _this.setData({
     timeout: i
@@ -67,37 +67,37 @@ function countdown(that) {
 
 // 时间格式化输出，如1天天23时时12分分12秒秒12 。每10ms都会调用一次  
 function dateformat(micro_second) {
-	// 总秒数  
-	var second = Math.floor(micro_second / 1000);
-	// 天数  
-	var day = Math.floor(second / 3600 / 24);
-	// 总小时  
-	var hr = Math.floor(second / 3600);
-	// 小时位  
-	var hr2 = hr % 24;
-	// 分钟位  
-	var min = Math.floor((second - hr * 3600) / 60);
-	// 秒位  
-	var sec = (second - hr * 3600 - min * 60); // equal to => var sec = second % 60;  
-	// 毫秒位，保留2位  
-	var micro_sec = Math.floor((micro_second % 1000) / 10);
-	return day + "天" + hr2 + "时" + min + "分" + sec + "秒";
+  // 总秒数  
+  var second = Math.floor(micro_second / 1000);
+  // 天数  
+  var day = Math.floor(second / 3600 / 24);
+  // 总小时  
+  var hr = Math.floor(second / 3600);
+  // 小时位  
+  var hr2 = hr % 24;
+  // 分钟位  
+  var min = Math.floor((second - hr * 3600) / 60);
+  // 秒位  
+  var sec = (second - hr * 3600 - min * 60); // equal to => var sec = second % 60;  
+  // 毫秒位，保留2位  
+  var micro_sec = Math.floor((micro_second % 1000) / 10);
+  return day + "天" + hr2 + "时" + min + "分" + sec + "秒";
 }
 Page({
-	data: {
-    ispayOrder:false,
-		clock: '',
-		orderId: 0,
-		orderData: {},
-		proData: [],
-		pass_num: 4,
-		remind: '加载中',
-		paytype: 'wxPay',
-		showModalStatus: false,
-		pays: [],
-		yuan: 0, //临时储存先前的总价格
-		d_yuan: 0, //抵扣余额显示
-	},
+  data: {
+    ispayOrder: false,
+    clock: '',
+    orderId: 0,
+    orderData: {},
+    proData: [],
+    pass_num: 4,
+    remind: '加载中',
+    paytype: 'wxPay',
+    showModalStatus: false,
+    pays: [],
+    yuan: 0, //临时储存先前的总价格
+    d_yuan: 0, //抵扣余额显示
+  },
   return_goods: function (e) {
     var that = this, id = e.target.dataset.orderId;
     var sNo = that.data.sNo;
@@ -110,7 +110,7 @@ Page({
     // 生命周期函数--监听页面卸载
     //离开界面时清除定时器
     clearInterval(this.data.timeout);
-    
+
     util.getUesrBgplus(this, app, false)
     util.getUesrBgplus(this, app, true)
   },
@@ -295,29 +295,29 @@ Page({
     }
   },
 
-	onLoad: function(options) {
+  onLoad: function (options) {
     console.log(options)
     this.get_plug();
-		wx.setNavigationBarColor({
-			frontColor: app.d.frontColor,
-			backgroundColor: app.d.bgcolor, //页面标题为路由参数
-			animation: {
-				duration: 400,
-				timingFunc: 'easeIn'
-			}
-		})
-		this.setData({
-			orderId: options.orderId,
+    wx.setNavigationBarColor({
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
+    this.setData({
+      orderId: options.orderId,
       bgcolor: '#FF6347',
-		})
-		this.loadProductDetail();
-	},
-	onReady: function() {
-		var that = this;
-		that.setData({
+    })
+    this.loadProductDetail();
+  },
+  onReady: function () {
+    var that = this;
+    that.setData({
       remind: ''
     });
-	},
+  },
   //获取插件
   get_plug: function (e) {
     var that = this;
@@ -341,9 +341,9 @@ Page({
       }
     })
   },
-  
-  
-  
+
+
+
   getUserformid: function (e) {
     //储存id 并跳转
     var formid = e.detail.formId;
@@ -363,10 +363,10 @@ Page({
       }
     })
   },
-	// 订单详情
-	loadProductDetail: function() {
-		var that = this;
-		var type1 = that.data.type1;
+  // 订单详情
+  loadProductDetail: function () {
+    var that = this;
+    var type1 = that.data.type1;
     const promise = new Promise((resolve) => {
       wx.request({
         url: app.d.ceshiUrl + '&action=order&m=order_details',
@@ -406,7 +406,7 @@ Page({
             var two_day = failure * 60 * 60 * 1000;
             var djs = two_day - t_res;
             //倒计时结束
-            
+
             that.setData({
               pro_price: pro_price,
               freight: freight,
@@ -450,102 +450,102 @@ Page({
       });
     });
     promise.then(() => countdown(this));
-	},
-	// 取消订单
-	removeOrder: function(e) {
-		var that = this;
-		var orderId = e.currentTarget.dataset.orderId;
-		wx.showModal({
-			title: '提示',
-			content: '你确定要取消订单吗？',
-			success: function(res) {
-				res.confirm && wx.request({
-					url: app.d.ceshiUrl + '&action=order&m=removeOrder',
-					method: 'post',
-					data: {
+  },
+  // 取消订单
+  removeOrder: function (e) {
+    var that = this;
+    var orderId = e.currentTarget.dataset.orderId;
+    wx.showModal({
+      title: '提示',
+      content: '你确定要取消订单吗？',
+      success: function (res) {
+        res.confirm && wx.request({
+          url: app.d.ceshiUrl + '&action=order&m=removeOrder',
+          method: 'post',
+          data: {
             openid: app.globalData.userInfo.openid,
-						id: orderId,
-					},
-					header: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					},
-					success: function(res) {
-						var status = res.data.status;
-						if(status == 1) {
-							wx.showToast({
-								title: res.data.err,
-								success: 2000
-							});
-							wx.navigateBack({
-								delta: 2
-							})
-						} else {
-							wx.showToast({
-								title: res.data.err,
-								duration: 2000
-							});
-						}
-					},
-					fail: function() {
-						wx.showToast({
-							title: '网络异常！',
-							duration: 2000
-						});
-					}
-				});
-			}
-		});
-	},
-	// 确认收货
-	recOrder: function(e) {
-		var that = this;
-		var orderId = e.currentTarget.dataset.orderId;
-		wx.showModal({
-			title: '提示',
-			content: '你确定已收到宝贝吗？',
-			success: function(res) {
-				res.confirm && wx.request({
-					url: app.d.ceshiUrl + '&action=order&m=recOrder',
-					method: 'post',
-					data: {
-						id: orderId,
-					},
-					header: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					},
-					success: function(res) {
-						//--init data
-						var status = res.data.status;
-						if(status == 1) {
-							wx.showToast({
-								title: '操作成功！',
-								duration: 2000
-							});
-							that.loadProductDetail();
-						} else {
-							wx.showToast({
-								title: res.data.err,
-								duration: 2000
-							});
-						}
-					},
-					fail: function() {
-						// fail
-						wx.showToast({
-							title: '网络异常！',
-							duration: 2000
-						});
-					}
-				});
-			}
-		});
-	},
+            id: orderId,
+          },
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            var status = res.data.status;
+            if (status == 1) {
+              wx.showToast({
+                title: res.data.err,
+                success: 2000
+              });
+              wx.navigateBack({
+                delta: 2
+              })
+            } else {
+              wx.showToast({
+                title: res.data.err,
+                duration: 2000
+              });
+            }
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常！',
+              duration: 2000
+            });
+          }
+        });
+      }
+    });
+  },
+  // 确认收货
+  recOrder: function (e) {
+    var that = this;
+    var orderId = e.currentTarget.dataset.orderId;
+    wx.showModal({
+      title: '提示',
+      content: '你确定已收到宝贝吗？',
+      success: function (res) {
+        res.confirm && wx.request({
+          url: app.d.ceshiUrl + '&action=order&m=recOrder',
+          method: 'post',
+          data: {
+            id: orderId,
+          },
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            //--init data
+            var status = res.data.status;
+            if (status == 1) {
+              wx.showToast({
+                title: '操作成功！',
+                duration: 2000
+              });
+              that.loadProductDetail();
+            } else {
+              wx.showToast({
+                title: res.data.err,
+                duration: 2000
+              });
+            }
+          },
+          fail: function () {
+            // fail
+            wx.showToast({
+              title: '网络异常！',
+              duration: 2000
+            });
+          }
+        });
+      }
+    });
+  },
 
-	//触发支付
-	payOrder: function(e) {
+  //触发支付
+  payOrder: function (e) {
 
-    if (this.data.ispayOrder){
-      return 
+    if (this.data.ispayOrder) {
+      return
     }
 
     this.setData({
@@ -553,96 +553,89 @@ Page({
     })
 
 
-		var that = this;
-		var order_id = e.detail.target.dataset.orderid; //订单ID
-		var order_sn = e.detail.target.dataset.ordersn; //订单号
-		var price = e.detail.target.dataset.price; //支付价格
-		var pay = e.detail.target.dataset.pay; //支付方式
-		var user_id = app.globalData.userInfo.openid; //openid
-		var form_id = e.detail.formId; //消息ID
+    var that = this;
+    var order_id = e.detail.target.dataset.orderid; //订单ID
+    var order_sn = e.detail.target.dataset.ordersn; //订单号
+    var price = e.detail.target.dataset.price; //支付价格
+    var pay = e.detail.target.dataset.pay; //支付方式
+    var user_id = app.globalData.userInfo.openid; //openid
+    var form_id = e.detail.formId; //消息ID
 
-		if(pay) {
-
-
-			if(pay == "wxPay") {
-				that.payOrderByWechat(order_id, order_sn, price);
+    if (pay) {
+      if (pay == "wxPay") {
+        that.payOrderByWechat(order_id, order_sn, price);
         wx.showLoading({
           title: '加载中',
         })
-			} else {
-				wx.showModal({
-					title: '余额支付',
-					content: '是否使用余额支付？',
-					success: function(res) {
-						if(res.confirm) {
-							//组合支付 替换数据
-							that.wallet_pay(order_id, order_sn, price);
-							console.log('用户点击确定');
-						} else if(res.cancel) {
+      } else {
+        wx.showModal({
+          title: '余额支付',
+          content: '是否使用余额支付？',
+          success: function (res) {
+            if (res.confirm) {
+              //组合支付 替换数据
+              that.wallet_pay(order_id, order_sn, price);
+              console.log('用户点击确定');
+            } else if (res.cancel) {
               that.setData({
                 ispayOrder: false
               })
-							console.log('用户点击取消')
-						}
-					}
-				})
-			}
-		} else {
-			wx.showToast({
-				title: '已为您选择默认支付方式',
-				icon: 'none',
-				duration: 2000,
-			});
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    } else {
+      wx.showToast({
+        title: '已为您选择默认支付方式',
+        icon: 'none',
+        duration: 2000,
+      });
 
-			//当都没有选中时 循环找到默认的支付方式 在设置支付方式数据
-			var pays = that.data.pays,
-				j = 0;
-			for(j = 0; j < pays.length; j++) {
-				if(pays[j].value == 'wxPay') {
-					pays[j].checked = true;
-				} else {
-					pays[j].checked = false;
-				}
-			}
+      //当都没有选中时 循环找到默认的支付方式 在设置支付方式数据
+      var pays = that.data.pays,
+        j = 0;
+      for (j = 0; j < pays.length; j++) {
+        if (pays[j].value == 'wxPay') {
+          pays[j].checked = true;
+        } else {
+          pays[j].checked = false;
+        }
+      }
 
-			that.setData({
-				pays: pays,
-				paytype: 'wxPay'
-			});
+      that.setData({
+        pays: pays,
+        paytype: 'wxPay'
+      });
 
-			that.payOrderByWechat(order_id, order_sn, price);
-		}
+      that.payOrderByWechat(order_id, order_sn, price);
+    }
 
-	},
+  },
 
-	// 微信支付
-	payOrderByWechat: function(order_id, order_sn, price) {
+  // 微信支付
+  payOrderByWechat: function (order_id, order_sn, price) {
 
     var that = this;
-		var user_id = app.globalData.userInfo.openid;
-		//调起微信支付
-    
-		wx.request({
-			url: app.d.ceshiUrl + '&action=pay&m=pay',
-			data: {
-				order_id: order_sn,
+    var user_id = app.globalData.userInfo.openid;
+    //调起微信支付    
+    wx.request({
+      url: app.d.ceshiUrl + '&action=pay&m=pay',
+      data: {
+        order_id: order_sn,
         cmoney: price,
-				openid: user_id,
-				type: 1
-			},
-			method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-			header: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			}, // 设置请求的 header
-			success: function(res) {
+        openid: user_id,
+        type: 1
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }, // 设置请求的 header
+      success: function (res) {
         wx.hideLoading()
-
-
-				if(res.data) {
+        if (res.data) {
           var dingdanhao = res.data.out_trade_no;
-
           that.up_out_trade_no(dingdanhao);
-
           if (res.data.RETURN_MSG === "mch_id参数格式错误") {
             wx.showModal({
               content: "请设置商户号！",
@@ -666,17 +659,15 @@ Page({
             })
             return
           }
-
-
-					wx.requestPayment({
-						timeStamp: res.data.timeStamp,
-						nonceStr: res.data.nonceStr,
-						package: res.data.package,
-						signType: 'MD5',
-						paySign: res.data.paySign,
-						success: function(res) {
+          wx.requestPayment({
+            timeStamp: res.data.timeStamp,
+            nonceStr: res.data.nonceStr,
+            package: res.data.package,
+            signType: 'MD5',
+            paySign: res.data.paySign,
+            success: function (res) {
               if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
-                
+
                 var referee_openid = app.globalData.userInfo.referee_openid;
                 var openid = app.globalData.userInfo.openid
                 that.promiss(that.refereeopenid, referee_openid, openid).then(res => {
@@ -690,109 +681,109 @@ Page({
               wx.redirectTo({
                 url: '../order/detail?orderId=' + that.data.orderId
               });
-						},
-						fail: function(res) {
+            },
+            fail: function (res) {
               that.setData({
                 ispayOrder: false
               })
               wx.hideLoading()
-							wx.showModal({
-								content: "取消支付！",
-								showCancel: false,
-								confirmText: "确定",
-							})
-						}
-					})
-				}
+              wx.showModal({
+                content: "取消支付！",
+                showCancel: false,
+                confirmText: "确定",
+              })
+            }
+          })
+        }
 
-			},
-			fail: function() {
+      },
+      fail: function () {
         that.setData({
           ispayOrder: false
         })
         wx.hideLoading()
-				wx.showToast({
-					title: '网络异常！err:wxpay',
-					duration: 2000
-				});
-			}
-		})
-	},
-	powerDrawer: function(e) {
-		var currentStatu = e.currentTarget.dataset.statu;
-		this.util(currentStatu);
-	},
-	util: function(currentStatu) {
-		//创建动画
-		var animation = wx.createAnimation({
-			duration: 200, //时长  
-			timingFunction: "linear", //线性  
-			delay: 0 //不延迟  
-		});
+        wx.showToast({
+          title: '网络异常！err:wxpay',
+          duration: 2000
+        });
+      }
+    })
+  },
+  powerDrawer: function (e) {
+    var currentStatu = e.currentTarget.dataset.statu;
+    this.util(currentStatu);
+  },
+  util: function (currentStatu) {
+    //创建动画
+    var animation = wx.createAnimation({
+      duration: 200, //时长  
+      timingFunction: "linear", //线性  
+      delay: 0 //不延迟  
+    });
 
-		// 这个赋给当前的动画  
-		this.animation = animation;
+    // 这个赋给当前的动画  
+    this.animation = animation;
 
-		// 执行第一组动画：Y轴偏移150px
-		animation.translateY(150).step();
+    // 执行第一组动画：Y轴偏移150px
+    animation.translateY(150).step();
 
-		// 导出动画对象赋给数据对象储存  
-		this.setData({
-			animationData: animation.export()
-		})
+    // 导出动画对象赋给数据对象储存  
+    this.setData({
+      animationData: animation.export()
+    })
 
-		// 设置定时器到指定时候后，执行第二组动画  
-		setTimeout(function() {
-			// 执行第二动画：Y轴不偏移  
-			animation.translateY(0).step()
-			// 给数据对象储存的第一动画，替为执行完第二动画的动画对象  
-			this.setData({
-				animationData: animation
-			})
+    // 设置定时器到指定时候后，执行第二组动画  
+    setTimeout(function () {
+      // 执行第二动画：Y轴不偏移  
+      animation.translateY(0).step()
+      // 给数据对象储存的第一动画，替为执行完第二动画的动画对象  
+      this.setData({
+        animationData: animation
+      })
 
-			//关闭
-			if(currentStatu == "close") {
-				this.setData({
-					showModalStatus: false
-				});
-			}
-		}.bind(this), 200)
+      //关闭
+      if (currentStatu == "close") {
+        this.setData({
+          showModalStatus: false
+        });
+      }
+    }.bind(this), 200)
 
-		// 显示
-		if(currentStatu == "open") {
-			this.setData({
-				showModalStatus: true
-			});
-		}
-	},
+    // 显示
+    if (currentStatu == "open") {
+      this.setData({
+        showModalStatus: true
+      });
+    }
+  },
   promiss: function (callback, referee_openid, openid) {
     return new Promise((s, l) => {
       callback(referee_openid, openid)
       s()
     })
   },
-	// 发起钱包支付
-	wallet_pay: function() {
-		var that = this;
-		var total = that.data.z_price; // 付款金额
+  // 发起钱包支付
+  wallet_pay: function () {
+    var that = this;
+    var total = that.data.z_price; // 付款金额
 		/*
 		1.支付成功
 		2.支付失败：提示；清空密码；自动聚焦isFocus:true，拉起键盘再次输入
 		*/
-		wx.request({
-			url: app.d.ceshiUrl + '&action=product&m=wallet_pay',
-			method: 'post',
-			data: {
-				uid: app.globalData.userInfo.openid,
-				total: total
-			},
-			header: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			success: function(res) {
-				var status = res.data.status;
-				var order_id = that.data.id;
-				if(status) {
+    wx.request({
+      url: app.d.ceshiUrl + '&action=product&m=wallet_pay',
+      method: 'post',
+      data: {
+        uid: app.globalData.userInfo.openid,
+        total: total
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        var status = res.data.status;
+        var order_id = that.data.id;
+        if (status) {
           if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
             // console.log(66411)
             var referee_openid = app.globalData.userInfo.referee_openid;
@@ -806,100 +797,100 @@ Page({
             })
             that.up_order(that.data.order_sn);
           }
-					//支付成功  修改订单
-					
-				} else {
+          //支付成功  修改订单
+
+        } else {
           that.setData({
             ispayOrder: false
           })
-					wx.showToast({
-						title: '余额不足，请更换支付方式！',
-						icon: 'none',
-						duration: 2000,
-					});
-				}
-			},
-			fail: function() {
+          wx.showToast({
+            title: '余额不足，请更换支付方式！',
+            icon: 'none',
+            duration: 2000,
+          });
+        }
+      },
+      fail: function () {
         that.setData({
           ispayOrder: false
         })
-				wx.showToast({
-					title: '网络异常！',
-					duration: 2000
-				});
-			}
-		});
-	},
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
+  },
 
-	//修改订单
-	up_order: function(coupon_money) {
-		var that = this;
-		wx.request({
-			url: app.d.ceshiUrl + '&action=product&m=up_order',
-			method: 'post',
-			data: {
-        coupon_id: that.data.coupon_id ? that.data.coupon_id:'', // 优惠券id
+  //修改订单
+  up_order: function (coupon_money) {
+    var that = this;
+    wx.request({
+      url: app.d.ceshiUrl + '&action=product&m=up_order',
+      method: 'post',
+      data: {
+        coupon_id: that.data.coupon_id ? that.data.coupon_id : '', // 优惠券id
         consumer_money: that.data.consumer_money, // 使用积分
-				coupon_money: that.data.z_price, // 付款金额
-				order_id: that.data.sNo, // 订单号
-				user_id: app.globalData.userInfo.openid, // 微信id
+        coupon_money: that.data.z_price, // 付款金额
+        order_id: that.data.sNo, // 订单号
+        user_id: app.globalData.userInfo.openid, // 微信id
         pay: that.data.paytype
-			},
-			header: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			success: function(res) {
-				var orderId = res.data.sNo; // 订单号
-				var oid = res.data.id; // 订单id
-				var f_pname = res.data.pname; // 拼接的商品名称
-				var f_coupon_money = res.data.coupon_money; // 订单价格
-				var time = res.data.time; // 当前时间
-				var form_id = that.data.form_id;
-				var user_id = app.globalData.userInfo.openid; // 微信id
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        var orderId = res.data.sNo; // 订单号
+        var oid = res.data.id; // 订单id
+        var f_pname = res.data.pname; // 拼接的商品名称
+        var f_coupon_money = res.data.coupon_money; // 订单价格
+        var time = res.data.time; // 当前时间
+        var form_id = that.data.form_id;
+        var user_id = app.globalData.userInfo.openid; // 微信id
 
-				// 调用信息发送
-				that.notice(orderId, oid, f_coupon_money, user_id, form_id, f_pname);
-				wx.showModal({
-					content: "支付成功！",
-					showCancel: false,
-					confirmText: "确定",
-					success: function(res) {
+        // 调用信息发送
+        that.notice(orderId, oid, f_coupon_money, user_id, form_id, f_pname);
+        wx.showModal({
+          content: "支付成功！",
+          showCancel: false,
+          confirmText: "确定",
+          success: function (res) {
 
-						wx.redirectTo({
-							url: '../order/detail?orderId=' + oid,
-              success:function(){
+            wx.redirectTo({
+              url: '../order/detail?orderId=' + oid,
+              success: function () {
                 that.setData({
                   ispayOrder: false
                 })
               }
-						})
-					}
-				});
-			}
-		})
-    that.detailed(that.data.sNo);//分销
-	},
-	//发送数据到客户微信上
-	notice: function(order_id, order_sn, price, user_id, form_id, f_pname) {
-		wx.request({
-			url: app.d.ceshiUrl + '&action=getcode&m=Send_Prompt',
-			method: 'post',
-			data: {
-				page: 'pages/order/detail?orderId=' + order_sn,
-				order_sn: order_id,
-				price: price,
-				user_id: user_id,
-				form_id: form_id,
-				f_pname: f_pname
-			},
-			header: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			success: function(res) {
-				console.log(form_id)
-			}
-		})
-	},
+            })
+          }
+        });
+      }
+    })
+    
+  },
+  //发送数据到客户微信上
+  notice: function (order_id, order_sn, price, user_id, form_id, f_pname) {
+    wx.request({
+      url: app.d.ceshiUrl + '&action=getcode&m=Send_Prompt',
+      method: 'post',
+      data: {
+        page: 'pages/order/detail?orderId=' + order_sn,
+        order_sn: order_id,
+        price: price,
+        user_id: user_id,
+        form_id: form_id,
+        f_pname: f_pname
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(form_id)
+      }
+    })
+  },
   add_fromid: function (e) {
     var that = this;
     var formId = e.detail.formId;
@@ -948,7 +939,7 @@ Page({
       }
     })
   },
- 
+
   //储存推荐人
   refereeopenid: function (referee_openid, openid) {
     wx.request({
@@ -971,17 +962,5 @@ Page({
       },
     });
   },
-  detailed: function (sNo) {//分销
-    wx.request({
-      url: app.d.ceshiUrl + '&action=distribution&m=detailed_commission',
-      method: 'post',
-      data: {
-        userid: app.globalData.userInfo.openid,
-        order_id: sNo,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-    })
-  },
+  
 })

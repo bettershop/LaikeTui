@@ -101,8 +101,8 @@ Page({
 			url: app.d.ceshiUrl + '&action=user&m=index',
 			method: 'post',
 			data: {
-				openid: app.globalData.userInfo.openid || ''
-        // openid:''
+				openid: app.globalData.userInfo.openid || '',
+        referee_openid:app.globalData.userInfo.referee_openid || ''
 			},
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded'

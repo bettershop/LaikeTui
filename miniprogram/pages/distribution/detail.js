@@ -52,7 +52,7 @@ Page({
         price: that.data.itemData.price_yh,
         yprice: that.data.itemData.price,
         scene: 'productId=' + that.data.productId + '&referee_openid=' + app.globalData.userInfo.user_id,
-        path: 'pages/product/detail',
+        path: 'pages/distribution/detail',
         id: app.globalData.userInfo.user_id,
         pid: that.data.productId,
         head: app.globalData.userInfo.avatarUrl,
@@ -632,11 +632,11 @@ Page({
       if (res.from === 'button') {
         // 来自页面内转发按钮
       }
-    console.log('pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid)
+    console.log('pages/distribution/detail?productId=' + id + '&referee_openid=' + referee_openid)
       return {
         title: title,
         imageUrl: that.data.bannerItem[0],
-        path: 'pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid,
+        path: 'pages/distribution/detail?productId=' + id + '&referee_openid=' + referee_openid,
         success: function (res) {
           console.log('转发成功');
           var animation = wx.createAnimation({
@@ -821,7 +821,7 @@ Page({
       }
     }.bind(this), 200);
     if (formId != 'the formId is a mock one') {
-      var page = 'pages/product/detail'
+      var page = 'pages/distribution/detail'
       app.request.wxRequest({
         url: '&action=product&m=save_formid',
         data: { from_id: formId, userid: app.globalData.userInfo.openid },
