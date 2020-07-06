@@ -99,34 +99,6 @@
             <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">1</view>
     <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> 
     <view class="clear mt10" wx:if="{{period}}" style='border:0;color#666' >-我是有底线的-</view>
-    <block wx:else>
-    <!-- 显示加载 -->
-          <view style="display: flex;" wx:if="{{loading}}">
-                          <view class="spinner" style='margin:20px auto;' >
-                                  <view class="spinner-container container1">
-                                      <view class="circle1"></view>
-                                      <view class="circle2"></view>
-                                      <view class="circle3"></view>
-                                      <view class="circle4"></view>
-                                  </view>
-                                  <view class="spinner-container container2">
-                                      <view class="circle1"></view>
-                                      <view class="circle2"></view>
-                                      <view class="circle3"></view>
-                                      <view class="circle4"></view>
-                                  </view>
-                                  <view class="spinner-container container3">
-                                      <view class="circle1"></view>
-                                      <view class="circle2"></view>
-                                      <view class="circle3"></view>
-                                      <view class="circle4"></view>
-                                  </view>
-                        </view>
-          </view>
-          <!-- <view class="clear mt10" wx:else bindtap="getMore">点击查看更多{{loading}}-</view> -->
-          <view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
-          <image src='../../images/fanhui.png' style='width:20px;height:20px;margin:10px;'></image>  
-          </view>  
-    </block>
+    
     </view>
 </block>

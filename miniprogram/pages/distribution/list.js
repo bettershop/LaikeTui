@@ -10,20 +10,20 @@ Page({
     cont: 1,
     remind: '加载中',//进来加载
     brandId: 0,
-    heng:'xs',//控制显示方式
-    shu:'bxs',
-    xianshi:'icon-yduipaibanleixingliebiao',
+    heng: 'xs',//控制显示方式
+    shu: 'bxs',
+    xianshi: 'icon-yduipaibanleixingliebiao',
     imageurl1: "../../images/mo.png",//默认排序图
     daindex1: 0,
     imageurl2: "../../images/mo.png",
     daindex2: 0,
     loading: false,//显示加载
     period: false,//显示无数据
-    select:0,//选中
+    select: 0,//选中
     sort: 0,// 1 asc 升序   0 desc 降序
   },
   onPullDownRefresh: function () {
-    
+
     wx.showNavigationBarLoading() //在标题栏中显示加载
     var that = this;
     var objectId = that.data.objectId;
@@ -45,8 +45,9 @@ Page({
         var shoplist = res.data.pro;
         that.setData({
           shopList: shoplist,
-          page:2,
-          period: false
+          page: 2,
+          period: false,
+          remind: false
         })
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
@@ -61,7 +62,7 @@ Page({
   },
   /*  tab   */
   choosesort1: function (e) {
-    var that =this;
+    var that = this;
     if (this.data.daindex1 == 0) {
       this.setData({
         imageurl1: "../../images/shang.png",
@@ -119,13 +120,13 @@ Page({
     that.sort();
   },
   tabchage: function () {
-    if (this.data.heng == 'xs'){
+    if (this.data.heng == 'xs') {
       this.setData({
         heng: 'bxs',
         shu: 'xs',
-        xianshi: 'icon-yduipaibanleixingduicheng' 
+        xianshi: 'icon-yduipaibanleixingduicheng'
       })
-    }else{
+    } else {
       this.setData({
         heng: 'xs',
         shu: 'bxs',
@@ -182,7 +183,7 @@ Page({
     that.getMore();
   },
   //排序
-  sort:function (){
+  sort: function () {
     //页面初始化 options为页面跳转所带来的参数
     var that = this;
     var select = that.data.select;
@@ -205,7 +206,8 @@ Page({
         var shoplist = res.data.pro;
         that.setData({
           shopList: shoplist,
-          page: page+1
+          page: page + 1,
+          remind: false
         })
       },
       error: function (e) {
@@ -218,7 +220,9 @@ Page({
   },
   //页面加载完成函数
   onReady: function () {
-    
+    that.setData({
+      remind: ''
+    });
   },
   // 点击加载更多
   getMore: function (e) {
@@ -228,7 +232,7 @@ Page({
     var select = that.data.select;
     var sort = that.data.sort;
     that.setData({
-      page: page+1
+      page: page + 1
     });
     wx.request({
       url: app.d.ceshiUrl + '&action=pi&p=distribution&c=distribution&m=home',
@@ -238,6 +242,7 @@ Page({
         cid: 1,
         select: select,
         sort: sort,
+        remind: false
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -246,8 +251,9 @@ Page({
         var prolist = res.data.pro;
         if (prolist == '' || res.data.status == 0) {
           that.setData({
+            remind: '',
             period: true,
-            loading:false
+            loading: false
           });
           return false;
         }
@@ -255,7 +261,7 @@ Page({
         //成功返回设置数据
         that.setData({
           remind: '',
-          loading:false,
+          loading: false,
           shopList: that.data.shopList.concat(prolist)
         });
 
@@ -278,7 +284,7 @@ Page({
         cont: cont + 1
       })
     }
-    
+
   },
   onLoad: function (options) {
     this.setData({
@@ -290,7 +296,9 @@ Page({
     })
     //页面初始化 options为页面跳转所带来的参数
     this.getMore();
-
+    that.setData({
+      remind: '',
+    });
 
   },
   //详情页跳转

@@ -3,13 +3,13 @@ Page({
   data: {
     current: 0,
     shopList: [],
-    ptype:'',
-    title:'',
+    ptype: '',
+    title: '',
     page: 1,
-    catId:0,
+    catId: 0,
     brandId: 0,
-    keyword:null,
-    pagefrom:'index',  //判断页面来源
+    keyword: null,
+    pagefrom: 'index',  //判断页面来源
     goodslist: [], //全部商品
     remind: '加载中',
     heng: 'xs',//控制显示方式
@@ -24,7 +24,7 @@ Page({
     select: 0,//选中
     sort: 0,// 1 asc 升序   0 desc 降序
     types: '刷新', // 点击更多、下拉上啦刷新
-    bg:''
+    bg: ''
   },
   onPullDownRefresh: function () {
     console.log(111)
@@ -37,15 +37,15 @@ Page({
   //上拉
   onReachBottom: function () {
     var that = this;
-    if (that.data.keyword){
-      if(that.data.type != 1){
+    if (that.data.keyword) {
+      if (that.data.type != 1) {
         that.getkeywordgood(that.data.keyword, that.data.types);
-      }else{
+      } else {
         that.setData({
           period: true
         });
       }
-    }else{
+    } else {
       that.getMore();
     }
   },
@@ -78,13 +78,13 @@ Page({
       this.getkeywordgood(keyword); //如果存在关键词，则调用getkeywordgood方法
     }
   },
-  listdetail: function (objectId,types = 0){
+  listdetail: function (objectId, types = 0) {
     var that = this;
     var select = that.data.select;
     var sort = that.data.sort;
-    if (types == 0){
+    if (types == 0) {
       var page = that.data.page
-    }else{
+    } else {
       var page = that.data.page + 1;
     }
     //ajax请求数据
@@ -134,7 +134,7 @@ Page({
   getMore: function (e) {
     var that = this;
     var objectId = that.data.objectId;
-    that.listdetail(objectId,1);
+    that.listdetail(objectId, 1);
   },
   //详情页跳转
   lookdetail: function (e) {
@@ -159,11 +159,11 @@ Page({
     that.getkeywordgood(that.data.keyword, that.data.types);
   },
   // 根据关键词进入列表
-  getkeywordgood: function (keyword, types) {  
+  getkeywordgood: function (keyword, types) {
     var that = this;
-    if (types == '刷新'){
+    if (types == '刷新') {
       that.data.page = that.data.page + 1;
-    }else{
+    } else {
       that.data.page = that.data.page;
     }
     that.setData({
@@ -196,7 +196,7 @@ Page({
         if (res.data.code == 1) {
           var goods = res.data.list;
           var type = res.data.type;
-          if(type == 0){
+          if (type == 0) {
             that.data.objectId = res.data.cid;
             var page = that.data.page;
             var shoplist = [];
@@ -206,19 +206,19 @@ Page({
               }
               shoplist[i] = goods[i];
             }
-            if (types){
+            if (types) {
               that.setData({
                 type: type,
                 goodslist: goods,
                 shopList: that.data.shopList.concat(shoplist)
               });
-            }else{
+            } else {
               that.setData({
                 type: type,
                 shopList: goods
               });
             }
-          }else{
+          } else {
             that.setData({
               type: type,
               shopList: goods
@@ -241,7 +241,7 @@ Page({
   onShow: function () {
     // 页面显示
   },
-  
+
   // 最新
   default: function (e) {
     var that = this;
@@ -303,15 +303,15 @@ Page({
     });
     that.sort();
   },
-  
+
   //排序
   sort: function () {
     //页面初始化 options为页面跳转所带来的参数
     var that = this;
     var objectId = that.data.objectId;
-    if (that.data.type == 1 || that.data.type == 0){
+    if (that.data.type == 1 || that.data.type == 0) {
       that.getkeywordgood(that.data.keyword);
-    }else{
+    } else {
       that.listdetail(objectId);
     }
   },
@@ -353,21 +353,21 @@ Page({
   hideModal: function () {
     // 隐藏遮罩层
     var animation = wx.createAnimation({
-    duration: 200,
-    timingFunction: "linear",
-    delay: 0
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
     })
     this.animation = animation
     animation.translateY(300).step()
     this.setData({
-    animationData: animation.export(),
+      animationData: animation.export(),
     })
     setTimeout(function () {
-    animation.translateY(0).step()
-    this.setData({
-      animationData: animation.export(),
-      showModalStatus: false
-    })
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
     }.bind(this), 200)
   },
 

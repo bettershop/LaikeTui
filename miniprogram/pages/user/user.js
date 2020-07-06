@@ -2,13 +2,13 @@
 var app = getApp()
 Page({
 	data: {
-    pop: null,
+		pop: null,
 		list: [
-      {
-        icon: 'icon-user-bangding.png',
-        text: '完善资料',
-        url: 'bangding/bangding'
-      },{
+			{
+				icon: 'icon-user-bangding.png',
+				text: '完善资料',
+				url: 'bangding/bangding'
+			}, {
 				icon: 'wdsc.png',
 				text: '我的收藏',
 				url: 'collection/collection'
@@ -23,11 +23,11 @@ Page({
 				text: '地址管理',
 				url: 'address/index'
 			},
-      {
-        icon: 'gg.png',
-        text: '公告管理',
-        url: 'notice/notice'
-      },
+			{
+				icon: 'gg.png',
+				text: '公告管理',
+				url: 'notice/notice'
+			},
 			{
 				icon: 'sz.png',
 				text: '设置',
@@ -36,33 +36,33 @@ Page({
 		],
 		cont: 1,
 		remind: '加载中',
-    tjr:false,
+		tjr: false,
 	},
 	//下拉刷新
-	onPullDownRefresh: function() {
+	onPullDownRefresh: function () {
 		wx.showNavigationBarLoading() //在标题栏中显示加载
 		this.requestMyData();
 		wx.hideNavigationBarLoading() //完成停止加载
 		wx.stopPullDownRefresh() //停止下拉刷新
 	},
-  copyText: function (t) { 
-    var a = t.currentTarget.dataset.text; 
-    wx.setClipboardData({ 
-      data: a, 
-      success: function () { 
-          wx.showToast({ 
-            title: "已复制" 
-            })
-          }
-        }) 
-    },
+	copyText: function (t) {
+		var a = t.currentTarget.dataset.text;
+		wx.setClipboardData({
+			data: a,
+			success: function () {
+				wx.showToast({
+					title: "已复制"
+				})
+			}
+		})
+	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function(options) {
+	onLoad: function (options) {
 		wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数7a896c app.d.bgcolor
+			frontColor: app.d.frontColor,
+			backgroundColor: app.d.bgcolor, //页面标题为路由参数7a896c app.d.bgcolor
 			animation: {
 				duration: 400,
 				timingFunc: 'easeIn'
@@ -70,23 +70,23 @@ Page({
 		});
 		var plug_ins = app.globalData.userInfo.plug_ins; // 插件
 		this.setData({
-      bgcolor: app.d.bgcolor, // 背景颜色
+			bgcolor: app.d.bgcolor, // 背景颜色
 			plug_ins: plug_ins, // 插件
 		});
 		this.requestMyData();
 	},
 	//页面加载完成函数
-	onReady: function() {
+	onReady: function () {
 		var that = this;
-    this.pop = this.selectComponent("#pop")
-    that.setData({
-      remind: ''
-    });
+		this.pop = this.selectComponent("#pop")
+		that.setData({
+			remind: ''
+		});
 	},
-	onShow: function() {
+	onShow: function () {
 		var cont = this.data.cont;
 		var that = this;
-		if(cont > 1) {
+		if (cont > 1) {
 			that.requestMyData();
 		} else {
 			that.setData({
@@ -95,24 +95,24 @@ Page({
 		}
 	},
 
-	requestMyData: function() {
-    var that = this;
+	requestMyData: function () {
+		var that = this;
 		wx.request({
 			url: app.d.ceshiUrl + '&action=user&m=index',
 			method: 'post',
 			data: {
 				openid: app.globalData.userInfo.openid || '',
-        referee_openid:app.globalData.userInfo.referee_openid || ''
+				referee_openid: app.globalData.userInfo.referee_openid || ''
 			},
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
-			success: function(res) {
-        console.log(res,1111)
+			success: function (res) {
+				console.log(res, 1111)
 				var status = res.data.status;
-				if(status == 1) {
+				if (status == 1) {
 					var user = res.data.user;
-					if(user.wx_name == 'undefined') {
+					if (user.wx_name == 'undefined') {
 						that.setData({
 							userlogin: true
 						});
@@ -129,8 +129,8 @@ Page({
 							dpj_num: res.data.dpj_num,
 							dsh_num: res.data.dsh_num,
 							plug_ins: res.data.plug_ins,
-              tjr: res.data.tjr,
-              support: res.data.support
+							tjr: res.data.tjr,
+							support: res.data.support
 						});
 					}
 				} else {
@@ -140,7 +140,7 @@ Page({
 					});
 				}
 			},
-			error: function(e) {
+			error: function (e) {
 				wx.showToast({
 					title: '网络异常！',
 					duration: 2000
@@ -148,28 +148,28 @@ Page({
 			}
 		});
 	},
-  go: function (e) {
-    console.log(e)
-    var url = e.currentTarget.dataset.url
-    wx.navigateTo({
-      url: url
-    })
-  },
-  logins:function(){
-    if (app.userlogin(1)) {
-      this.pop.clickPup(this)
-      this.requestMyData();
-      return
-    }
-  },
-  jumpgo:function(event){
-    if (app.userlogin(1)) {
-      this.pop.clickPup(this)
-      return
-    }
-    let url = event.currentTarget.dataset.id
-    wx.navigateTo({
-      url: url
-    })
-  }
+	go: function (e) {
+		console.log(e)
+		var url = e.currentTarget.dataset.url
+		wx.navigateTo({
+			url: url
+		})
+	},
+	logins: function () {
+		if (app.userlogin(1)) {
+			this.pop.clickPup(this)
+			this.requestMyData();
+			return
+		}
+	},
+	jumpgo: function (event) {
+		if (app.userlogin(1)) {
+			this.pop.clickPup(this)
+			return
+		}
+		let url = event.currentTarget.dataset.id
+		wx.navigateTo({
+			url: url
+		})
+	}
 })

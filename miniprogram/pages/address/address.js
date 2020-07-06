@@ -13,8 +13,8 @@ Page({
     xian: xian,
     value: [0, 0, 0],
     cartId: 0,
-    arr:[],
-    show:false
+    arr: [],
+    show: false
   },
 
   /**
@@ -92,13 +92,13 @@ Page({
   },
   // 点击选择城市
   translate: function (e) {
-      moveY = 200;
-      this.data.show = true;
-      t = 0;
-    var province = this.data.province ? this.data.province : this.data.sheng[0].G_CName, 
-      city = this.data.city ? this.data.city : this.data.shi[0].G_CName, 
+    moveY = 200;
+    this.data.show = true;
+    t = 0;
+    var province = this.data.province ? this.data.province : this.data.sheng[0].G_CName,
+      city = this.data.city ? this.data.city : this.data.shi[0].G_CName,
       county = this.data.county ? this.data.county : this.data.xian[0].G_CName;
-    console.log(province ,city ,county);
+    console.log(province, city, county);
     this.setData({
       province: province,
       city: city,
@@ -249,53 +249,53 @@ Page({
       wx.hideToast()
     } else {
       var cartId = this.data.cartId,
-      mobile = e.detail.value.mobile;
+        mobile = e.detail.value.mobile;
       //预处理验证手机号码
-      if (mobile.match(/^\d{11}$/)){
-          wx.request({
-            url: app.d.ceshiUrl + '&action=user&m=SaveAddress',
-            data: {
-              openid: app.globalData.userInfo.openid,
-              user_name: e.detail.value.user_name,
-              mobile: e.detail.value.mobile,
-              province: e.detail.value.province,
-              city: e.detail.value.city,
-              county: e.detail.value.county,
-              address: e.detail.value.address
-            },
-            method: "POST",
-            header: {
-              'content-type': 'application/x-www-form-urlencoded' // 默认值
-            },
-            success: function (res) {
-              if (res.data.status == 0) {
-                wx.showToast({
-                  title: res.data.info,
-                  icon: 'loading',
-                  duration: 1500
-                })
-              } else {
-                app.d.islogin = true;
-                wx.showToast({
-                  title: res.data.info,
-                  icon: 'success',
-                  duration: 1000
-                });
-                //成功后返回上一页面
-                wx.navigateBack({
-                  delta: 1
-                });
-              } 
-            },
-            fail: function () {
-              // fail
+      if (mobile.match(/^\d{11}$/)) {
+        wx.request({
+          url: app.d.ceshiUrl + '&action=user&m=SaveAddress',
+          data: {
+            openid: app.globalData.userInfo.openid,
+            user_name: e.detail.value.user_name,
+            mobile: e.detail.value.mobile,
+            province: e.detail.value.province,
+            city: e.detail.value.city,
+            county: e.detail.value.county,
+            address: e.detail.value.address
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function (res) {
+            if (res.data.status == 0) {
               wx.showToast({
-                title: '网络异常！',
-                duration: 2000
+                title: res.data.info,
+                icon: 'loading',
+                duration: 1500
+              })
+            } else {
+              app.d.islogin = true;
+              wx.showToast({
+                title: res.data.info,
+                icon: 'success',
+                duration: 1000
+              });
+              //成功后返回上一页面
+              wx.navigateBack({
+                delta: 1
               });
             }
-          })
-      }else{
+          },
+          fail: function () {
+            // fail
+            wx.showToast({
+              title: '网络异常！',
+              duration: 2000
+            });
+          }
+        })
+      } else {
         wx.showToast({
           title: '手机号码格式错误,请重新输入!',
           icon: 'none',
@@ -309,7 +309,7 @@ Page({
 
 //动画事件
 function animationEvents(that, moveY, show) {
-  
+
   that.animation = wx.createAnimation({
     transformOrigin: "50% 50%",
     duration: 400,

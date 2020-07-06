@@ -32,16 +32,16 @@ Page({
     // mainHeight: 0,
   },
   //下拉事件
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     var that = this;
     that.getMore();
   },
-  current1Change: function(e) {
+  current1Change: function (e) {
     this.setData({
       current1: e.detail.current,
     })
   },
-  imgW: function(e) {
+  imgW: function (e) {
     var $width = e.detail.width, //获取图片真实宽度
       $height = e.detail.height,
       ratio = $width / $height; //图片的真实宽高比例
@@ -57,7 +57,7 @@ Page({
       images: image
     })
   },
-  getMore: function(e) {
+  getMore: function (e) {
     var that = this;
     var page = that.data.page;
     var index = that.data.tabid;
@@ -75,7 +75,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         var prolist = res.data.prolist;
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
@@ -95,7 +95,7 @@ Page({
           });
         }
       },
-      fail: function(e) {
+      fail: function (e) {
         wx.showToast({
           title: '网络异常！',
           duration: 2000
@@ -103,7 +103,7 @@ Page({
       }
     })
   },
-  inputConfirm: function(e) {
+  inputConfirm: function (e) {
     var that = this,
       value = e.detail.value;
     this.setData({
@@ -116,19 +116,19 @@ Page({
       })
     }
   },
-  searchView: function(e) {
+  searchView: function (e) {
     console.log(e);
     this.setData({
       searchView: !this.data.searchView,
     });
   },
-  inputBlur: function(e) {
+  inputBlur: function (e) {
     this.setData({
       value: e.detail.value,
     });
     this.searchView();
   },
-  search_cancel: function(e) {
+  search_cancel: function (e) {
     var formId = e.detail.formId;
     var value = e.detail.value.search_value;
     console.log(this.data.value, e);
@@ -152,13 +152,13 @@ Page({
           userid: app.globalData.userInfo.openid
         },
         method: 'post',
-        success: function(res) {
+        success: function (res) {
 
         }
       })
     }
   },
-  search: function() {
+  search: function () {
     var that = this,
       value = this.data.value;
     if (value != '') {
@@ -168,7 +168,7 @@ Page({
     }
   },
 
-  loadProductDetail: function() {
+  loadProductDetail: function () {
     var that = this;
     var userinfo = wx.getStorageSync('userInfo');
     if (userinfo.nickName) {
@@ -186,7 +186,7 @@ Page({
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        success: function(res) {
+        success: function (res) {
           var banner = res.data.banner; // 轮播图
           var twoList = res.data.twoList; //产品显示
           var bgcolor = res.data.bgcolor; //产品显示
@@ -221,16 +221,16 @@ Page({
           });
           wx.setNavigationBarTitle({
             title: title,
-            success: function() {},
+            success: function () { },
           });
-          that.setData({remind: ''});
+          that.setData({ remind: '' });
           console.log(res.data.list.length)
           if (res.data.list.length) {
             that.listnsg();
           }
 
         },
-        fail: function(e) {
+        fail: function (e) {
           wx.showToast({
             title: '网络异常！',
             duration: 2000
@@ -245,7 +245,7 @@ Page({
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        success: function(res) {
+        success: function (res) {
           var banner = res.data.banner; // 轮播图
           var twoList = res.data.twoList; //产品显示
           var bgcolor = res.data.bgcolor; //产品显示
@@ -280,15 +280,15 @@ Page({
           });
           wx.setNavigationBarTitle({
             title: title,
-            success: function() {},
+            success: function () { },
           });
-          that.setData({remind: ''});
+          that.setData({ remind: '' });
           if (res.data.list.length) {
             that.listnsg();
           }
 
         },
-        fail: function(e) {
+        fail: function (e) {
           wx.showToast({
             title: '网络异常！',
             duration: 2000
@@ -297,10 +297,10 @@ Page({
       })
     }
   },
-  onHide: function() {
+  onHide: function () {
     clearTimeout();
   },
-  listnsg: function() {
+  listnsg: function () {
     var zjList = this.data.zjList;
     var that = this;
     var time = 1500;
@@ -325,11 +325,11 @@ Page({
     }
   },
   //上拉事件
-  onReachBottom: function() {
+  onReachBottom: function () {
     var that = this;
     that.getMore();
   },
-  obm: function() {
+  obm: function () {
     var that = this;
     var timestamp = Date.parse(new Date());
     console.log(timestamp, that.data.timestamp)
@@ -348,7 +348,7 @@ Page({
   /**
    * Tab的点击切换事件
    */
-  tabItemClick: function(e) {
+  tabItemClick: function (e) {
     //防止点击过快带来的闪屏问题
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000;
@@ -367,14 +367,14 @@ Page({
     }
     that.checkCor(e);
   },
-  nextpic: function(data) {
+  nextpic: function (data) {
     this.setData({
       current: data.pos,
       tabid: data.tabid
     });
   },
   //设置点击tab大于第七个是自动跳到后面
-  checkCor: function(e) {
+  checkCor: function (e) {
     if (this.data.current > 4) {
       this.setData({
         scrollLeft: 800
@@ -388,7 +388,7 @@ Page({
   /**
    * 内容区域swiper的切换事件
    */
-  contentChange: function(e) {
+  contentChange: function (e) {
     var that = this;
     var id = e.detail.current;
     var tabid = that.data.twoList[id].id;
@@ -399,7 +399,7 @@ Page({
     })
     this.checkCor();
   },
-  onShow: function() {
+  onShow: function () {
     console.log(app)
     var indexchase = app.d.indexchase;
     var that = this;
@@ -409,32 +409,32 @@ Page({
     }
     util.getUesrBgplus(that, app, false)
   },
-  onReady: function() {
+  onReady: function () {
     this.pop = this.selectComponent("#pop")
   },
-  onLoad: function(e) {
+  onLoad: function (e) {
     var that = this;
     that.loadProductDetail();
 
   },
 
-  preventTouchMove: function() {
+  preventTouchMove: function () {
 
   },
 
-  go: function() {
+  go: function () {
     this.setData({
       showModal: false
     })
   },
-  navigate_sign: function() {
+  navigate_sign: function () {
     wx.navigateTo({
       url: '../sign_in/sign_in',
     })
   },
-  material: function(res) {
+  material: function (res) {
     wx.getUserInfo({
-      success: function(res) {
+      success: function (res) {
         var userInfo = res.userInfo;
         var nickName = userInfo.nickName;
         var avatarUrl = userInfo.avatarUrl;
@@ -451,7 +451,7 @@ Page({
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          success: function(res) {
+          success: function (res) {
             wx.showToast({
               title: res.data.info,
               success: 2000
@@ -462,7 +462,7 @@ Page({
     })
   },
   //获取用户信息新接口
-  agreeGetUser: function(e) {
+  agreeGetUser: function (e) {
     let that = this
     if (e.detail.errMsg == 'getUserInfo:ok') {
       //获取成功设置状态
@@ -488,7 +488,7 @@ Page({
       that.getOP(e.detail.userInfo)
     }
   },
-  login: function() {
+  login: function () {
     var that = this;
     //取出本地存储用户信息，解决需要每次进入小程序弹框获取用户信息
     var userInfo = wx.getStorageSync('userInfo');
@@ -497,7 +497,7 @@ Page({
         app.globalData.code = res.code
         wx.setStorageSync('code', res.code)
       },
-      fail: function() {
+      fail: function () {
         wx.showToast({
           title: '系统提示:网络错误！',
           icon: 'warn',
@@ -528,7 +528,7 @@ Page({
           }
         }
       },
-      fail: function() {
+      fail: function () {
         wx.showToast({
           title: '系统提示:网络错误！',
           icon: 'warn',
@@ -537,7 +537,7 @@ Page({
       }
     })
   },
-  getOP: function(res) {
+  getOP: function (res) {
     //提交用户信息 获取用户id
     let that = this
     let userInfo = res;
@@ -562,7 +562,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         wx.showToast({
           title: '授权成功!',
           success: 2000
@@ -585,7 +585,7 @@ Page({
       url: event.currentTarget.dataset.path,
     })
   },
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function (res) {
     var that = this;
     var id = that.data.productId;
     var type1 = that.data.type1;
@@ -599,10 +599,10 @@ Page({
       title: title,
       imageUrl: that.data.logo,
       path: 'pages/index/index?userid=' + user_id,
-      success: function(res) {
+      success: function (res) {
         console.log('转发成功');
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log('转发失败')
       }
     }

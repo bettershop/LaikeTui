@@ -6,11 +6,11 @@ Page({
     currentTab: 0,
     remind: '加载中',
     rtype: true,
-    pop:null
+    pop: null
   },
   //下拉刷新
   onPullDownRefresh: function () {
-    
+
   },
   //页面加载完成函数
   onReady: function () {
@@ -26,13 +26,13 @@ Page({
       }
     })
     var rtype = options.type;
-    if (rtype == 'receive'){
+    if (rtype == 'receive') {
       this.requestaward();
       this.setData({
         rtype: true,
         bgcolor: app.d.bgcolor
       });
-    }else{
+    } else {
       this.setData({
         rtype: false,
         currentTab: parseInt(options.currentTab),
@@ -46,9 +46,9 @@ Page({
   bindChange: function (e) {
     var cur = e.detail.current;
     var that = this;
-    that.setData({ 
+    that.setData({
       currentTab: cur,
-     });
+    });
   },
   // 跳转页面
   swichNav: function (e) {
@@ -85,14 +85,14 @@ Page({
           wx.navigateBack({
             delta: 1
           });
-        }else{
+        } else {
           var list = res.data.list;
           that.setData({
             list: list,
             remind: ''
           });
         }
-        
+
       },
       error: function (e) {
         wx.showToast({
@@ -130,12 +130,12 @@ Page({
   },
   // 点击领取
   receive: function (e) {
-    if(app.userlogin(1)){
+    if (app.userlogin(1)) {
       this.pop.clickPup(this)
       return
     }
-    
-    if (e.currentTarget.dataset.point == '领取'){
+
+    if (e.currentTarget.dataset.point == '领取') {
       var that = this;
       wx.request({
         url: app.d.ceshiUrl + '&action=Coupon&m=receive',
@@ -173,34 +173,34 @@ Page({
   },
   // 点击使用
   getvou: function (e) {
-      var that = this;
-      wx.request({
-        url: app.d.ceshiUrl + '&action=Coupon&m=immediate_use',
-        method: 'post',
-        data: {
-          id: e.target.dataset.id,
-          openid: app.globalData.userInfo.openid,
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: function (res) {
-          if(res.data.status == 1){
-            wx.switchTab({
-              url: '../index/index'
-            })
-          }else{
-            wx.redirectTo({
-              url: '../coupon/index?currentTab=1'
-            })
-          }
-        },
-        error: function (e) {
-          wx.showToast({
-            title: '网络异常！',
-            duration: 2000
-          });
+    var that = this;
+    wx.request({
+      url: app.d.ceshiUrl + '&action=Coupon&m=immediate_use',
+      method: 'post',
+      data: {
+        id: e.target.dataset.id,
+        openid: app.globalData.userInfo.openid,
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.status == 1) {
+          wx.switchTab({
+            url: '../index/index'
+          })
+        } else {
+          wx.redirectTo({
+            url: '../coupon/index?currentTab=1'
+          })
         }
-      });
+      },
+      error: function (e) {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
   }
 })

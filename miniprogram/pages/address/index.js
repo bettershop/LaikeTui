@@ -5,9 +5,9 @@ Page({
     radioindex: '',
     pro_id: 0,
     num: 0,
-    flag:false,
+    flag: false,
     cartId: 0,
-    numbers:""
+    numbers: ""
   },
   // 下拉刷新
   onPullDownRefresh: function () {
@@ -52,7 +52,7 @@ Page({
                   flag: false,
                 });
                 that.DataonLoad();
-               
+
               } else {
                 wx.showToast({
                   title: res.data.err,
@@ -61,7 +61,7 @@ Page({
               }
             },
           });
-        }else{
+        } else {
           that.DataonLoad();
           that.setData({
             flag: false,
@@ -78,7 +78,7 @@ Page({
     });
   },
 
-  
+
 
   onLoad: function (options) {
     wx.setNavigationBarColor({
@@ -94,12 +94,12 @@ Page({
     });
     var that = this;
     // 页面初始化 options为页面跳转所带来的参数
-    if (options.cartId){
+    if (options.cartId) {
       var cartId = options.cartId;
-    }else{
+    } else {
       var cartId = 0;
     }
-    
+
     wx.request({
       url: app.d.ceshiUrl + '&action=address&m=index',
       data: {
@@ -215,11 +215,11 @@ Page({
   upflag: function () {
     var that = this;
     that.setData({
-      flag:true
+      flag: true
     });
   },
 
-  uptrue:function(){
+  uptrue: function () {
     var that = this;
     that.setData({
       flag: false
@@ -233,56 +233,56 @@ Page({
     var addrId = e.currentTarget.dataset.id;
     console.log(that.data.flag)
 
-      wx.showModal({
-        content: "确认修改地址",
-        success: function (t_res) {
-          console.log(t_res.confirm)
-          if (t_res.confirm) {
-            wx.request({
-              url: app.d.ceshiUrl + '&action=address&m=set_default',
-              data: {
-                openid: app.globalData.userInfo.openid,
-                addr_id: addrId
-              },
-              method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-              header: {// 设置请求的 header
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              success: function (res) {
-                var status = res.data.status;
-                var cartId = that.data.cartId;
-                if (status == 1) {
-                  if (cartId != '0' || cartId == 'group') {
-                    wx.navigateBack({
-                      delta: 1
-                    })
-                    return false;
-                  }
-                  wx.showToast({
-                    title: res.data.err,
-                    duration: 2000
-                  });
-                  that.DataonLoad();
-                } else {
-                  wx.showToast({
-                    title: res.data.err,
-                    duration: 2000
-                  });
+    wx.showModal({
+      content: "确认修改地址",
+      success: function (t_res) {
+        console.log(t_res.confirm)
+        if (t_res.confirm) {
+          wx.request({
+            url: app.d.ceshiUrl + '&action=address&m=set_default',
+            data: {
+              openid: app.globalData.userInfo.openid,
+              addr_id: addrId
+            },
+            method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+            header: {// 设置请求的 header
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              var status = res.data.status;
+              var cartId = that.data.cartId;
+              if (status == 1) {
+                if (cartId != '0' || cartId == 'group') {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                  return false;
                 }
-              },
-              fail: function () {
-                // fail
                 wx.showToast({
-                  title: '网络异常！',
+                  title: res.data.err,
+                  duration: 2000
+                });
+                that.DataonLoad();
+              } else {
+                wx.showToast({
+                  title: res.data.err,
                   duration: 2000
                 });
               }
-            });
-          } else {
-            that.DataonLoad();
-          }
-        },
-      });
+            },
+            fail: function () {
+              // fail
+              wx.showToast({
+                title: '网络异常！',
+                duration: 2000
+              });
+            }
+          });
+        } else {
+          that.DataonLoad();
+        }
+      },
+    });
   },
   // 删除地址
   delAddress: function (e) {
@@ -341,7 +341,7 @@ Page({
       },
       success: function (res) {
         var address = res.data.adds;
-        that.numbers=res.data.adds;
+        that.numbers = res.data.adds;
         if (address == '') {
           var address = []
         }
@@ -362,7 +362,7 @@ Page({
   upaddress: function (e) {
     var addrId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../address/upaddress/upaddress?addr_id='+addrId,
+      url: '../address/upaddress/upaddress?addr_id=' + addrId,
     })
   },
 })
