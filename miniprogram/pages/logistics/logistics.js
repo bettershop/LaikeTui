@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    wuliu: ['已接收', '抵达深圳', '抵达广州'], 
+    wuliu: ['已接收', '抵达深圳', '抵达广州'],
     remind: '加载中'
   },
 
@@ -27,7 +27,7 @@ Page({
     });
 
     var orderId = options.orderId;
-    var details = options.details ? options.details:'';
+    var details = options.details ? options.details : '';
     var type = options.type ? options.type : '';
     var courier_num = options.courier_num;//kuaididanhao
     var express_id = options.express_id;//快递编号
@@ -47,12 +47,12 @@ Page({
       success: function (res) {
         var status = res.data.status;
         if (status == 1) {
-          if (res.data.res_1.message == 'ok'){
+          if (res.data.res_1.message == 'ok') {
             that.setData({
               wuliu: res.data.res_1.data,
               res: res.data
             });
-          }else{
+          } else {
             that.setData({
               wuliu: res.data.res_1.data,
               res: res.data
@@ -100,35 +100,35 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
 

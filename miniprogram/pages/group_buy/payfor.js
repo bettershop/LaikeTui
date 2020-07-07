@@ -35,7 +35,7 @@ Page({
 
   },
   //获取插件
-  get_plug: function(e) {
+  get_plug: function (e) {
     var that = this;
     wx.request({
       url: app.d.ceshiUrl + '&action=app&m=get_plug',
@@ -46,7 +46,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         var plug_ins = res.data;
         that.setData({
           plug_coupon: plug_ins.coupon,
@@ -58,18 +58,18 @@ Page({
     })
   },
   //下拉刷新
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
 
   },
-  onShow: function() {
+  onShow: function () {
     // 页面显示
     var vm = this;
     vm.onLoad(vm.data.options);
   },
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (options.referee_openid != '') {
       app.globalData.userInfo['referee_openid'] = options.referee_openid;
     } else {
@@ -101,7 +101,7 @@ Page({
         num: options.num
       },
       method: 'post',
-      success: function(res) {
+      success: function (res) {
         that.user_name = res.user_name,
           that.setData({
             freight: res.yunfei
@@ -112,7 +112,7 @@ Page({
             title: '温馨提示!',
             content: '您已加入了该团',
             showCancel: false,
-            success: function(res) {
+            success: function (res) {
               wx.navigateBack({
                 delta: 1
               })
@@ -148,7 +148,7 @@ Page({
   },
 
   //页面加载完成函数
-  onReady: function() {
+  onReady: function () {
     var that = this;
     that.setData({
       remind: ''
@@ -156,7 +156,7 @@ Page({
   },
 
   // 选择支付方式
-  switchChange: function(e) {
+  switchChange: function (e) {
     var that = this;
     var check = e.currentTarget.dataset.check;
     var index = e.currentTarget.dataset.index;
@@ -180,7 +180,7 @@ Page({
     }
 
 
-    console.log(one_pay,'one_pay111111')
+    console.log(one_pay, 'one_pay111111')
     if (i == 0) {
       that.setData({
         paytype: false,
@@ -245,7 +245,7 @@ Page({
         wx.showModal({
           title: '组合支付',
           content: '是否使用余额抵用？',
-          success: function(res) {
+          success: function (res) {
             if (res.confirm) {
               //组合支付 替换数据
               var price = Number(coupon_money) - Number(user_money); //防止出现小数点后多余2位以上  .toFixed(2)
@@ -283,14 +283,14 @@ Page({
   },
 
   // 备注
-  remarkInput: function(e) {
+  remarkInput: function (e) {
     this.setData({
       remark: e.detail.value,
     })
   },
 
   // 提交订单支付
-  createProductOrderByWX: function(e) {
+  createProductOrderByWX: function (e) {
     var that = this;
 
     if (that.data.isbtn) {
@@ -378,7 +378,7 @@ Page({
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          success: function(res) {
+          success: function (res) {
 
             if (Number(res.data.hasnum) >= Number(that.data.groupres.man_num)) {
 
@@ -386,7 +386,7 @@ Page({
                 content: "此团已满，请选择其他团或重新开团!",
                 showCancel: false,
                 confirmText: "确定",
-                success: function() {
+                success: function () {
                   wx.redirectTo({
                     url: "../group_buy/detail?gid=" + that.data.pro_id + "&sum=1&group_id=" + that.data.groupres.status
                   })
@@ -400,11 +400,11 @@ Page({
                 wx.showModal({
                   title: '余额支付',
                   content: '是否使用余额支付？',
-                  success: function(res) {
+                  success: function (res) {
                     if (res.confirm) {
                       //组合支付 替换数据
                       that.wallet_pay()
-                    } else if (res.cancel){
+                    } else if (res.cancel) {
                       // 关闭按钮点击限制
                       that.setData({
                         isbtn: false
@@ -437,7 +437,7 @@ Page({
     }
   },
 
-  isgroupfull: function() {
+  isgroupfull: function () {
     var that = this
     wx.request({
       url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=isgrouppacked',
@@ -448,13 +448,13 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         that.setData({
           hasnum: res.data.hasnum
         })
 
       },
-      fail: function() {
+      fail: function () {
         wx.showToast({
           title: '网络异常！',
           duration: 2000
@@ -463,7 +463,7 @@ Page({
     });
   },
   // 发起钱包支付
-  wallet_pay: function() {
+  wallet_pay: function () {
 
     var that = this;
     var coupon_money = that.data.coupon_money;
@@ -483,7 +483,7 @@ Page({
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        success: function(res) {
+        success: function (res) {
 
           if (that.data.pagefrom == 'kaituan') {
             that.createGroupOrder(1, '')
@@ -492,7 +492,7 @@ Page({
           }
 
         },
-        fail: function() {
+        fail: function () {
           wx.showToast({
             title: '网络异常！',
             duration: 2000
@@ -508,7 +508,7 @@ Page({
     }
   },
 
-  createGroupOrder: function(status, trade_no) {
+  createGroupOrder: function (status, trade_no) {
     var that = this
     // console.log(that,'8989859552')
     var coupon_money = that.coupon_money;
@@ -541,7 +541,7 @@ Page({
         trade_no: trade_no //微信交易单号
       },
       method: 'post',
-      success: function(res) {
+      success: function (res) {
         if (res.code == 1 && status == 1) {
           if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
             var referee_openid = app.globalData.userInfo.referee_openid;
@@ -553,7 +553,7 @@ Page({
             content: "成功开团！",
             showCancel: false,
             confirmText: "确定",
-            success: function() {
+            success: function () {
 
               wx.redirectTo({
                 url: '../group_buy/cantuan?id=' + res.gcode + '&groupid=' + that.data.groupres.status + '&pro_id=' +
@@ -572,13 +572,13 @@ Page({
       }
     })
   },
-  promiss: function(callback, referee_openid, openid) {
+  promiss: function (callback, referee_openid, openid) {
     return new Promise((s, l) => {
       callback(referee_openid, openid)
       s()
     })
   },
-  canGroupOrder: function(status, trade_no) {
+  canGroupOrder: function (status, trade_no) {
     var that = this
     var coupon_money = that.coupon_money;
     var num = that.options.num;
@@ -610,7 +610,7 @@ Page({
         trade_no: trade_no //微信交易单号
       },
       method: 'post',
-      success: function(res) {
+      success: function (res) {
         if (status == 1) {
           if (res.code == 1) {
             if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
@@ -622,7 +622,7 @@ Page({
               content: "成功入团！",
               showCancel: false,
               confirmText: "确定",
-              success: function() {
+              success: function () {
                 wx.redirectTo({
                   url: '../group_buy/cantuan?id=' + res.gcode + '&groupid=' + that.data.groupres.status + '&pro_id=' +
                     that.data.pro_id + '&man_num=' + that.data.groupres.man_num
@@ -650,7 +650,7 @@ Page({
               content: "恭喜您,拼团成功！",
               showCancel: false,
               confirmText: "确定",
-              success: function() {
+              success: function () {
                 wx.redirectTo({
                   url: '../group_buy/cantuan?id=' + res.gcode + '&groupid=' + that.data.groupres.status + '&pro_id=' +
                     that.data.pro_id + '&man_num=' + that.data.groupres.man_num
@@ -677,7 +677,7 @@ Page({
 
   },
   // 调起微信支付
-  wxpay: function() {
+  wxpay: function () {
 
 
     var that = this;
@@ -695,7 +695,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }, // 设置请求的 header
-      success: function(res) {
+      success: function (res) {
 
         if (res.data) {
 
@@ -705,7 +705,7 @@ Page({
             package: res.data.package,
             signType: 'MD5',
             paySign: res.data.paySign,
-            success: function(res) {
+            success: function (res) {
               if (that.data.pagefrom == 'kaituan') {
                 that.createGroupOrder(1, '')
               } else if (that.data.pagefrom == 'cantuan') {
@@ -713,7 +713,7 @@ Page({
               }
 
             },
-            fail: function(res) {
+            fail: function (res) {
 
               wx.showModal({
                 content: "取消支付！",
@@ -734,7 +734,7 @@ Page({
           })
         }
       },
-      fail: function() {
+      fail: function () {
         // 失败后
         wx.showToast({
           title: '网络异常！err:wxpay',
@@ -746,7 +746,7 @@ Page({
   },
 
   //发送数据到客户微信上
-  openGroupNotice: function(order_sn, member, endtime, price, sum, user_id, form_id, f_pname, path) {
+  openGroupNotice: function (order_sn, member, endtime, price, sum, user_id, form_id, f_pname, path) {
     app.request.wxRequest({
       url: '&action=pi&p=pintuan&c=groupbuy&m=Send_open',
       method: 'post',
@@ -764,13 +764,13 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         console.log('信息发送成功')
       }
     })
   },
 
-  canGroupNotice: function(order_sn, endtime, price, sum, user_id, form_id, man_num, f_pname, path) {
+  canGroupNotice: function (order_sn, endtime, price, sum, user_id, form_id, man_num, f_pname, path) {
 
     app.request.wxRequest({
       url: '&action=pi&p=pintuan&c=groupbuy&m=Send_can',
@@ -789,12 +789,12 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         console.log('信息发送成功')
       }
     })
   },
-  up_out_trade_no: function(status, trade_no) {
+  up_out_trade_no: function (status, trade_no) {
     var that = this;
     wx.request({
       url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=up_out_trade_no',
@@ -827,12 +827,12 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res)
       }
     })
   },
-  verification: function(trade_no) {
+  verification: function (trade_no) {
     var that = this;
 
     wx.request({
@@ -844,7 +844,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         // debugger;
         if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
           var referee_openid = app.globalData.userInfo.referee_openid;
@@ -860,7 +860,7 @@ Page({
             content: "恭喜您,拼团成功！",
             showCancel: false,
             confirmText: "确定",
-            success: function() {
+            success: function () {
 
               wx.redirectTo({
                 url: '../group_buy/cantuan?id=' + res.data.data.ptcode + '&groupid=' + that.data.groupres.status + '&pro_id=' +
@@ -886,7 +886,7 @@ Page({
     })
   },
   //储存推荐人
-  refereeopenid: function(referee_openid, openid) {
+  refereeopenid: function (referee_openid, openid) {
     wx.request({
       url: app.d.ceshiUrl + '&action=app&m=referee_openid',
       method: 'post',
@@ -897,8 +897,8 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {},
-      error: function(e) {
+      success: function (res) { },
+      error: function (e) {
         wx.showToast({
           title: '网络异常！',
           duration: 2000,

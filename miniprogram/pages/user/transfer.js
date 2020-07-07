@@ -23,7 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,//
       backgroundColor: app.d.bgcolor, //页面标题为路由参数
@@ -32,14 +32,14 @@ Page({
         timingFunc: 'easeIn'
       }
     })
-    
+
     wx.checkSession({
       success: function (e) {
         console.log(e)
         console.log('session_key 未过期' + app.globalData.userInfo.session_key)
         //session_key 未过期，并且在本生命周期一直有效
         app.globalData.userInfo['session_key'] = app.globalData.userInfo.session_key;
-       
+
       },
       fail: function () {
         // session_key 已经失效，需要重新执行登录流程
@@ -59,7 +59,7 @@ Page({
       bgcolor: app.d.bf_color
     });
   },
-//获取好友ID
+  //获取好友ID
   withdrawals: function (e) {
     var that = this;
     var user_id = e.detail.value.user_id;
@@ -69,7 +69,7 @@ Page({
     })
 
   }
-  
-  
+
+
 
 })

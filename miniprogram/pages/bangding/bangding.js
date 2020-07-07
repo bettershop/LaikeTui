@@ -25,7 +25,7 @@ Page({
     islogin: false,
     remind: '加载中',
     bank_name: '',
-    binding:false,
+    binding: false,
     multiIndex: [0, 0, 0],
     date: '2020-07-01',
     time: '12:01',
@@ -35,18 +35,18 @@ Page({
       { name: '1', value: '男', checked: true },
       { name: '2', value: '女', checked: false },
     ],
-    sex:1
+    sex: 1
   },
   //页面加载完成函数
   onReady: function () {
-    
+
   },
   radioChange: function (e) {
     var items = this.data.items;
     for (var i = 0; i < items.length; i++) {
       if (items[i].name == e.detail.value) {
         items[i].checked = true;
-      }else{
+      } else {
         items[i].checked = false;
       }
     }
@@ -146,17 +146,17 @@ Page({
               items[i].checked = false;
             }
           }
-          if (data.province){
-            var region = [data.province, data.city, data.county]; 
-          }else{
+          if (data.province) {
+            var region = [data.province, data.city, data.county];
+          } else {
             var region = that.data.region;
           }
-          if (data.birthday){
+          if (data.birthday) {
             var date = data.birthday
-          }else{
+          } else {
             var date = that.data.date;
           }
-          
+
 
           that.setData({
             name: data.name,
@@ -169,7 +169,7 @@ Page({
             sex: data.sex,
             remind: ''
           });
-        } 
+        }
       },
       error: function (e) {
         wx.showToast({
@@ -242,9 +242,9 @@ Page({
     console.log(res)
     var that = this;
     var region = this.data.region;
-  
+
     for (var i = 0; i < region.length; i++) {
-      if (region[i] == '全部'){
+      if (region[i] == '全部') {
         wx.showToast({
           title: '请完善地址!',
           icon: 'none',
@@ -263,8 +263,8 @@ Page({
         duration: 1500
       })
       wx.hideToast()
-    }else {
-     
+    } else {
+
       wx.request({
         url: app.d.ceshiUrl + '&action=user&m=perfect',
         method: 'post',
@@ -277,7 +277,7 @@ Page({
           county: county,
           wx_id: res.detail.value.wx_id,
           sex: sex,
-          date:that.data.date,
+          date: that.data.date,
         },
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -290,7 +290,7 @@ Page({
               icon: 'success',
               duration: 3000
             })
-            
+
           } else {
             wx.showToast({
               title: res.data.err ? res.data.err : '非法操作！',

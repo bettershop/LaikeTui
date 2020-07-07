@@ -2,11 +2,11 @@ var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp();
 Page({
   data: {
-    scrollTop:0,
+    scrollTop: 0,
     maskHidden: false,
-    num:1,
+    num: 1,
     sizeid: '',
-    productId:'',
+    productId: '',
     commodityAttr: [],
     attrValueList: [],
     groupid: null,
@@ -24,52 +24,52 @@ Page({
     gprice: '',
     control: {},
     show_share: false,
-    pop:null
+    pop: null
   },
-  onReady:function(){
+  onReady: function () {
     this.pop = this.selectComponent("#pop")
   },
   onLoad: function (options) {
-    
+
     if (options.referee_openid != '') {
       app.globalData.userInfo['referee_openid'] = options.referee_openid;
     } else {
       app.globalData.userInfo['referee_openid'] = '';
     }
     console.log(app.globalData.userInfo['referee_openid'])
-    
+
     var scene = decodeURIComponent(options.scene);
 
     if (scene != 'undefined' && scene.length > 1 && scene != '') {
       options = scene;
     }
     var self = this;
-    var gid = this.gid = options.gid; 
-    var group_id = options.group_id;   
+    var gid = this.gid = options.gid;
+    var group_id = options.group_id;
     self.setData({
       groupid: group_id, //所属拼团
       sum: options.sum,
       bgcolor: app.d.bgcolor,
       fdata: 'gid=' + gid + '&sum=' + options.sum + '&group_id=' + group_id
     })
-    
+
     var systemInfo = wx.getSystemInfoSync()
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,//
       backgroundColor: app.d.bgcolor //页面标题为路由参数
     });
-    if (options.pagefrom){
+    if (options.pagefrom) {
       console.log('监听成功')
     }
     app.request.wxRequest({
-      url:'&action=pi&p=pintuan&c=groupbuy&m=getgoodsdetail',
-      data: { gid: gid, group_id: group_id, userid:app.globalData.userInfo.openid},
-      method:'post',
-      success:function(res){
+      url: '&action=pi&p=pintuan&c=groupbuy&m=getgoodsdetail',
+      data: { gid: gid, group_id: group_id, userid: app.globalData.userInfo.openid },
+      method: 'post',
+      success: function (res) {
         console.log(res);
         WxParse.wxParse('content', 'html', res.detail.content, self, 5);//处理商品规则的富文本框
         WxParse.wxParse('rule', 'html', res.detail.rule, self, 5);//处理规则的富文本框
-        if (res.isplug === '0'){
+        if (res.isplug === '0') {
           wx.showModal({
             title: '温馨提示!',
             content: '拼团功能未开启',
@@ -81,31 +81,31 @@ Page({
             },
           })
           return false;
-        }         
+        }
         var endtime = parseInt(res.control.endtime + '000')
         self.countDown(endtime)
         self.goodsInfo = res;
         var groupList = res.groupList;
-        if(groupList.length>0){  
+        if (groupList.length > 0) {
           for (var i = 0; i < groupList.length; i++) {
             var t = --groupList[i].leftTime;
-            var h =  Math.floor(t/60/60);
-            var m = Math.floor((t-h*60*60)/60);
-            var s = t%60;
-            if(h<10) h = "0"+h;
-            if(m<10) m = "0"+m;
-            if(s<10) s = "0"+s;
-            groupList[i].leftTimeStr = h+':'+m+':'+s
-            if (groupList[i].leftTime <= 0){
+            var h = Math.floor(t / 60 / 60);
+            var m = Math.floor((t - h * 60 * 60) / 60);
+            var s = t % 60;
+            if (h < 10) h = "0" + h;
+            if (m < 10) m = "0" + m;
+            if (s < 10) s = "0" + s;
+            groupList[i].leftTimeStr = h + ':' + m + ':' + s
+            if (groupList[i].leftTime <= 0) {
               groupList[i].leftTimeStr = '00:00:00'
             }
           }
           self.setTimeData(groupList);
         }
-        
+
         self.setData({
-          windowHeight:systemInfo.windowHeight,
-          itemData:res.detail,
+          windowHeight: systemInfo.windowHeight,
+          itemData: res.detail,
           gprice: res.detail.group_price,
           productId: gid,
           attrList: res.attrList,
@@ -117,19 +117,19 @@ Page({
           share: res.share,
           pro_status: res.detail.status
         })
-        
-        var timestamp = Date.parse(new Date())/1000;
+
+        var timestamp = Date.parse(new Date()) / 1000;
         // console.log(timestamp);
         // console.log('1111111111111111111111111111111111111111');
         if (timestamp > parseInt(res.control.endtime)) {
-           self.setData({
-             is_over: true
-           })
+          self.setData({
+            is_over: true
+          })
         }
         self.one();
       }
     })
-    
+
   },
   //首次进去选中
   one: function () {
@@ -230,8 +230,8 @@ Page({
     var that = this
     var nowTime = new Date().getTime();
     var total_second = endtime - nowTime;
-     that.dateformat(total_second)
-     
+    that.dateformat(total_second)
+
     var stop = setTimeout(function () {
       that.countDown(endtime);
     }, 1000)
@@ -284,10 +284,10 @@ Page({
   },
 
   powerDrawer: function () {
-      var that = this
-      app.redirect('group_buy/comment', 'pid=' + that.data.productId + '&good=' + that.data.comnum.good + '&notbad=' + that.data.comnum.notbad + '&bad=' + that.data.comnum.bad);
+    var that = this
+    app.redirect('group_buy/comment', 'pid=' + that.data.productId + '&good=' + that.data.comnum.good + '&notbad=' + that.data.comnum.notbad + '&bad=' + that.data.comnum.bad);
   },
-  
+
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -296,41 +296,41 @@ Page({
     this.setData({
       show_share: false
     });
-    console.log("/pages/group_buy/detail?gid=" + this.gid + '&sum=' + this.data.sum + '&group_id=' + this.data.groupid + '&pagefrom=share&referee_openid=' + app.globalData.userInfo.user_id,1111)
+    console.log("/pages/group_buy/detail?gid=" + this.gid + '&sum=' + this.data.sum + '&group_id=' + this.data.groupid + '&pagefrom=share&referee_openid=' + app.globalData.userInfo.user_id, 1111)
     return {
       title: this.data.itemData.pro_name,
       path: "/pages/group_buy/detail?gid=" + this.gid + '&sum=' + this.data.sum + '&group_id=' + this.data.groupid + '&pagefrom=share&referee_openid=' + app.globalData.userInfo.user_id,
       imageUrl: this.data.itemData.images[0],
-      success:function(res){
+      success: function (res) {
         console.log(res)
       }
     }
   },
 
 
-  setTimeData:function(data){
+  setTimeData: function (data) {
     var self = this;
     var groupList = data
-    setInterval(function(){
+    setInterval(function () {
       for (var i = 0; i < groupList.length; i++) {
         var t = --groupList[i].leftTime;
-        var h =  Math.floor(t/60/60);
-        var m = Math.floor((t-h*60*60)/60);
-        var s = t%60;
-        if(h<10) h = "0"+h;
-        if(m<10) m = "0"+m;
-        if(s<10) s = "0"+s;
-        groupList[i].leftTimeStr = h+':'+m+':'+s
+        var h = Math.floor(t / 60 / 60);
+        var m = Math.floor((t - h * 60 * 60) / 60);
+        var s = t % 60;
+        if (h < 10) h = "0" + h;
+        if (m < 10) m = "0" + m;
+        if (s < 10) s = "0" + s;
+        groupList[i].leftTimeStr = h + ':' + m + ':' + s
         if (groupList[i].leftTime <= 0) {
           groupList[i].leftTimeStr = '00:00:00';
         }
       }
       self.setData({
-        groupList:groupList
+        groupList: groupList
       })
     }, 1000)
   },
-  joinGroup:function(e){
+  joinGroup: function (e) {
     if (app.userlogin(1)) {
       this.pop.clickPup(this)
       return
@@ -338,13 +338,13 @@ Page({
     var id = e.currentTarget.dataset.id;
     app.redirect('group_buy/cantuan', 'id=' + id + '&groupid=' + this.data.groupid + '&man_num=' + this.data.itemData.man_num + '&pro_id=' + this.gid + '&sum=' + this.data.sum);
   },
-  goHome:function(){
+  goHome: function () {
     wx.switchTab({
-      url:'/pages/index/index'
+      url: '/pages/index/index'
     })
   },
-  
-  goToBuy:function(){
+
+  goToBuy: function () {
     if (app.userlogin(1)) {
       this.pop.clickPup(this)
       return
@@ -360,72 +360,72 @@ Page({
       })
       return false;
     }
-  if (that.data.num > that.data.itemData.num){
-    wx.showToast({
-      title: '抱歉,此属性的产品库存不足!',
-      icon: 'none',
-      duration: 2000
-    })
-  }else{
-    if(that.data.num > that.data.control.productnum){
+    if (that.data.num > that.data.itemData.num) {
       wx.showToast({
-        title: '抱歉，一次最多只能购买' + that.data.control.productnum + '件产品！',
+        title: '抱歉,此属性的产品库存不足!',
         icon: 'none',
         duration: 2000
       })
-    }else{
-      console.log(that.data.sizeid)
-      if (that.data.sizeid.length < 1) {
+    } else {
+      if (that.data.num > that.data.control.productnum) {
         wx.showToast({
-          title: '请完善属性！',
-          icon: 'loading',
-          duration: 1000
+          title: '抱歉，一次最多只能购买' + that.data.control.productnum + '件产品！',
+          icon: 'none',
+          duration: 2000
         })
       } else {
-        var sizeid = that.data.sizeid;
-        that.setData({
-          showModalStatus: false
-        });
+        console.log(that.data.sizeid)
+        if (that.data.sizeid.length < 1) {
+          wx.showToast({
+            title: '请完善属性！',
+            icon: 'loading',
+            duration: 1000
+          })
+        } else {
+          var sizeid = that.data.sizeid;
+          that.setData({
+            showModalStatus: false
+          });
 
-        obj += '&pro_name=' + that.goodsInfo.detail.pro_name + '&num=' + that.data.num + '&pro_id=' + that.goodsInfo.detail.product_id + '&sizeid=' + sizeid + '&groupid=' + that.data.groupid + '&pagefrom=kaituan&oid=321&referee_openid=' + app.globalData.userInfo['referee_openid'];
+          obj += '&pro_name=' + that.goodsInfo.detail.pro_name + '&num=' + that.data.num + '&pro_id=' + that.goodsInfo.detail.product_id + '&sizeid=' + sizeid + '&groupid=' + that.data.groupid + '&pagefrom=kaituan&oid=321&referee_openid=' + app.globalData.userInfo['referee_openid'];
 
-        app.redirect('group_buy/payfor', obj);
+          app.redirect('group_buy/payfor', obj);
+        }
       }
     }
-   }
   },
-  
-  minus:function(){
+
+  minus: function () {
     var num = this.data.num > 1 ? --this.data.num : 1
     this.setData({
-      num : num
+      num: num
     })
   },
-  plus:function(){
+  plus: function () {
     var num = ++this.data.num
     this.setData({
-      num : num
+      num: num
     })
   },
-  getUserformid: function(e){
+  getUserformid: function (e) {
     if (app.userlogin(1)) {
       this.pop.clickPup(this)
       return
     }
 
     var formid = e.detail.formId;
-    this.sendFormid(formid,'kt1')
+    this.sendFormid(formid, 'kt1')
     this.setModalStatus(e);
   },
   getformidToo: function (e) {
     var that = this
     var formid = e.detail.formId;
-    var paytype = e.currentTarget.dataset.type; 
-    
-  if (paytype == 'group') {
-    that.sendFormid(formid, 'kt2')
-    that.goToBuy()
-    }else{
+    var paytype = e.currentTarget.dataset.type;
+
+    if (paytype == 'group') {
+      that.sendFormid(formid, 'kt2')
+      that.goToBuy()
+    } else {
       if (that.data.sizeid.length < 1) {
         wx.showToast({
           title: '请完善属性！',
@@ -459,42 +459,42 @@ Page({
       })
       return false;
     }
-      wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=add_cart',
-        method: 'post',
-        data: {
-          uid: app.globalData.userInfo.openid,
-          pid: that.goodsInfo.detail.product_id,
-          num: that.data.num,
-          sizeid: that.data.sizeid,
-          pro_type: 'buynow',
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: function (res) {
-          //设置购物车刷新
-          app.d.purchase = 1;
-          var data = res.data;
-          
-          if (data.status == 1) {      
-              wx.redirectTo({
-                url: '../order/pay?cartId=' + data.cart_id + '&pid=' + that.data.productId + '&num=' + that.data.num + '&type=1',
-              });  
-              that.setData({
-                showModalStatus: false
-              });
-            }
-        },
-        fail: function () {
-          wx.showToast({
-            title: '网络异常！',
-            duration: 2000
+    wx.request({
+      url: app.d.ceshiUrl + '&action=product&m=add_cart',
+      method: 'post',
+      data: {
+        uid: app.globalData.userInfo.openid,
+        pid: that.goodsInfo.detail.product_id,
+        num: that.data.num,
+        sizeid: that.data.sizeid,
+        pro_type: 'buynow',
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        //设置购物车刷新
+        app.d.purchase = 1;
+        var data = res.data;
+
+        if (data.status == 1) {
+          wx.redirectTo({
+            url: '../order/pay?cartId=' + data.cart_id + '&pid=' + that.data.productId + '&num=' + that.data.num + '&type=1',
+          });
+          that.setData({
+            showModalStatus: false
           });
         }
-      })
       },
-    
+      fail: function () {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    })
+  },
+
   // 弹窗
   setModalStatus: function (e) {
 
@@ -518,15 +518,15 @@ Page({
       paytype: paytype,
       animationData: animation.export()
     })
-    
+
     if (e.currentTarget.dataset.status == 1) {
 
       this.setData({
         showModalStatus: true
       });
-      
+
     }
-    
+
     setTimeout(function () {
       animation.translateY(0).step()
 
@@ -543,25 +543,25 @@ Page({
     }.bind(this), 200)
   },
 
-  sendFormid:function(fromid,page){
-      var that = this
-      app.request.wxRequest({
-        url: '&action=pi&p=pintuan&c=groupbuy&m=getFormid',
-        data: { from_id: fromid, userid: app.globalData.userInfo.openid, page: page},
-        method: 'post',
-        success:function(){
-           
-        }
-      })
+  sendFormid: function (fromid, page) {
+    var that = this
+    app.request.wxRequest({
+      url: '&action=pi&p=pintuan&c=groupbuy&m=getFormid',
+      data: { from_id: fromid, userid: app.globalData.userInfo.openid, page: page },
+      method: 'post',
+      success: function () {
+
+      }
+    })
   },
-  scrolltolower:function(){
+  scrolltolower: function () {
 
   },
-  
+
 
   // 属性选择
   onShow: function () {
-    
+
   },
 
 
@@ -699,9 +699,9 @@ Page({
       var itemData = that.data.itemData;
       itemData.image = haveSkuBean[0].imgurl;
       console.log(that.data.paytype, haveSkuBean[0].member_price);
-      if (that.data.paytype == 'group'){
+      if (that.data.paytype == 'group') {
         itemData.member_price = haveSkuBean[0].member_price;
-      }else{
+      } else {
         itemData.market_price = haveSkuBean[0].price;
       }
       // itemData.member_price = haveSkuBean[0].price;
@@ -832,5 +832,5 @@ Page({
       maskHidden: false
     })
   }
-  
+
 })

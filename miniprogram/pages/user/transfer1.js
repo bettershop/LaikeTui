@@ -63,12 +63,12 @@ Page({
     var num = colo.substring(4)
     var cor = num.replace(/\b(0+)/gi, "")
     if (num == 0) {
-      user_id="user" + 0
+      user_id = "user" + 0
     } else {
       user_id = "user" + cor
     }
 
-   
+
     wx.request({
       url: app.d.ceshiUrl + '&action=user&m=selectuser',
       method: 'post',
@@ -121,19 +121,19 @@ Page({
     var mon = Number(that.data.money);//账户余额
     console.log(mon);
     console.log(money);
-    if(money>mon){
-        wx.showToast({
-          title: '余额不足',
-          duration: 2000
-        });
+    if (money > mon) {
+      wx.showToast({
+        title: '余额不足',
+        duration: 2000
+      });
     }
-    if(money < 0 || money == ''){
+    if (money < 0 || money == '') {
       wx.showToast({
         title: '正确填写转账金额',
         duration: 2000
       });
     }
-    if(mon>=money && money>0){
+    if (mon >= money && money > 0) {
       wx.request({
         url: app.d.ceshiUrl + '&action=user&m=transfer',
         method: 'post',

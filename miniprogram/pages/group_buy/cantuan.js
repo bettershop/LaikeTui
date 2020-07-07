@@ -1,11 +1,11 @@
 var app = getApp();
 Page({
-  data:{
+  data: {
     pop: null,
-    num:1,
+    num: 1,
     commodityAttr: [],
     attrValueList: [],
-    sum: null, 
+    sum: null,
     hour: '',
     minute: '',
     miao: '',
@@ -14,14 +14,14 @@ Page({
     bgcolor: '',
     price: '',
     image: '',
-    man_num:null //团满人数
+    man_num: null //团满人数
   },
-  onLoad:function(options){
+  onLoad: function (options) {
     var self = this
     self.id = options.id;
     self.groupid = options.groupid;
     self.pro_id = options.pro_id;
-    
+
     self.setData({
       man_num: options.man_num,
       options: options
@@ -34,66 +34,66 @@ Page({
     self.onLoad(self.data.options);
   },
   loadProductDetail: function () {
-    var self = this, 
-    options = this.data.options;
-      app.request.wxRequest({
-        url: '&action=pi&p=pintuan&c=groupbuy&m=cangroup',
-        data: { oid: options.id, groupid: options.groupid, gid: options.pro_id, userid: app.globalData.userInfo.openid },
-        method: 'post',
-        success: function (res) {          
-          if (res.isplug == 0) {
-            wx.showModal({
-              title: '温馨提示!',
-              content: '拼团活动已结束',
-              showCancel: false,
-              success: function (res) {
-                wx.switchTab({
-                  url: '../index/index',
-                })
-              },
-            })
-            return false;
-          }
-
-          self.setData({
-            remind: false
-          });
-          if (res.intro) {
-            WxParse.wxParse('goodsIntro', 'html', res.intro, self, 5);
-          }
-          self.goodsInfo = res.groupmsg;
-          self.setTimeData(res.groupmsg.leftTime)
-          var groupMember = [];
-          for (var i = options.man_num - 1; i >= 0; i--) {
-            if (res.groupMember[i]) {
-              groupMember[i] = res.groupMember[i]
-            } else {
-              groupMember[i] = {}
-            }
-          }
-          console.log(self.goodsInfo)
-          console.log('self.goodsInfo')
-          self.setData({
-            groupMember, groupMember,
-            groupInfo: self.goodsInfo,
-            image: self.goodsInfo.img,
-            price: self.goodsInfo.p_price,
-            yprice: self.goodsInfo.yprice,
-            skuBeanList: res.skuBeanList,
-            attrList: res.attrList,
-            prostatus: res.prostatus
+    var self = this,
+      options = this.data.options;
+    app.request.wxRequest({
+      url: '&action=pi&p=pintuan&c=groupbuy&m=cangroup',
+      data: { oid: options.id, groupid: options.groupid, gid: options.pro_id, userid: app.globalData.userInfo.openid },
+      method: 'post',
+      success: function (res) {
+        if (res.isplug == 0) {
+          wx.showModal({
+            title: '温馨提示!',
+            content: '拼团活动已结束',
+            showCancel: false,
+            success: function (res) {
+              wx.switchTab({
+                url: '../index/index',
+              })
+            },
           })
-          
-          self.one();
+          return false;
         }
-      });
-      self.setData({
-         bgcolor: app.d.bgcolor,
-      })
-      wx.setNavigationBarColor({
-        frontColor: app.d.frontColor,//
-        backgroundColor: app.d.bgcolor //页面标题为路由参数
-      });
+
+        self.setData({
+          remind: false
+        });
+        if (res.intro) {
+          WxParse.wxParse('goodsIntro', 'html', res.intro, self, 5);
+        }
+        self.goodsInfo = res.groupmsg;
+        self.setTimeData(res.groupmsg.leftTime)
+        var groupMember = [];
+        for (var i = options.man_num - 1; i >= 0; i--) {
+          if (res.groupMember[i]) {
+            groupMember[i] = res.groupMember[i]
+          } else {
+            groupMember[i] = {}
+          }
+        }
+        console.log(self.goodsInfo)
+        console.log('self.goodsInfo')
+        self.setData({
+          groupMember, groupMember,
+          groupInfo: self.goodsInfo,
+          image: self.goodsInfo.img,
+          price: self.goodsInfo.p_price,
+          yprice: self.goodsInfo.yprice,
+          skuBeanList: res.skuBeanList,
+          attrList: res.attrList,
+          prostatus: res.prostatus
+        })
+
+        self.one();
+      }
+    });
+    self.setData({
+      bgcolor: app.d.bgcolor,
+    })
+    wx.setNavigationBarColor({
+      frontColor: app.d.frontColor,//
+      backgroundColor: app.d.bgcolor //页面标题为路由参数
+    });
   },
   //首次进去选中
   one: function () {
@@ -126,25 +126,25 @@ Page({
   },
   //下拉事件
   onPullDownRefresh: function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
 
   onReady: function () {
     this.pop = this.selectComponent("#pop")
   },
 
-  setTimeData:function(time){
+  setTimeData: function (time) {
     var self = this;
-    var inter = setInterval(function(){
-        var t = --time;
-        var h =  Math.floor(t/60/60);
-        var m = Math.floor((t-h*60*60)/60);
-        var s = t%60;
-        if(h<10) h = "0"+h;
-        if(m<10) m = "0"+m;
-        if(s<10) s = "0"+s;
-        var timeStr = h+':'+m+':'+s    
+    var inter = setInterval(function () {
+      var t = --time;
+      var h = Math.floor(t / 60 / 60);
+      var m = Math.floor((t - h * 60 * 60) / 60);
+      var s = t % 60;
+      if (h < 10) h = "0" + h;
+      if (m < 10) m = "0" + m;
+      if (s < 10) s = "0" + s;
+      var timeStr = h + ':' + m + ':' + s
       self.setData({
         hour: h,
         minute: m,
@@ -160,30 +160,30 @@ Page({
       })
     }
   },
-  onShareAppMessage:function(options){
+  onShareAppMessage: function (options) {
     var self = this;
     var referee_openid = app.globalData.userInfo.user_id;
     var path = '/pages/group_buy/cantuan?id=' + self.id + '&groupid=' + self.groupid + '&man_num=' + this.data.man_num + '&pro_id=' + self.goodsInfo.ptgoods_id + '&referee_openid=' + referee_openid;
     console.log(path)
     return {
-      title: '【快来拼】' + self.data.price + '元就能拼到 ' +self.goodsInfo.p_name,
-        path: path,
-        success:function(res){
-          console.log(path)
-          console.log(res)
-        }
+      title: '【快来拼】' + self.data.price + '元就能拼到 ' + self.goodsInfo.p_name,
+      path: path,
+      success: function (res) {
+        console.log(path)
+        console.log(res)
       }
+    }
   },
-  goToHome:function(){
+  goToHome: function () {
     wx.switchTab({
-      url:'/pages/index/index'
+      url: '/pages/index/index'
     })
   },
-  showGoodsDetail:function(e){
+  showGoodsDetail: function (e) {
     var id = e.currentTarget.dataset.id;
     app.redirect('group_buy/detail', 'gid=' + id + '&sum=' + this.data.groupInfo.sum + '&group_id=' + this.groupid)
   },
-  goToBuy:function(){
+  goToBuy: function () {
     var that = this;
     var obj = '';
     var value = [];
@@ -201,19 +201,19 @@ Page({
         icon: 'none',
         duration: 2000
       })
-  } else {
-    if (that.data.sizeid.length < 1) {
-      wx.showToast({
-        title: '请完善属性！',
-        icon: 'loading',
-        duration: 1000
-      })
     } else {
-      var sizeid = that.data.sizeid;    
-      obj += '&pro_name=' + that.goodsInfo.ptgoods_name + '&num=' + that.data.num + '&pro_id=' + that.goodsInfo.ptgoods_id + '&sizeid=' + sizeid + '&groupid=' + that.groupid + '&oid=' + that.id + '&pagefrom=cantuan&referee_openid=' + that.options.referee_openid;
-      app.redirect('group_buy/payfor', obj);
+      if (that.data.sizeid.length < 1) {
+        wx.showToast({
+          title: '请完善属性！',
+          icon: 'loading',
+          duration: 1000
+        })
+      } else {
+        var sizeid = that.data.sizeid;
+        obj += '&pro_name=' + that.goodsInfo.ptgoods_name + '&num=' + that.data.num + '&pro_id=' + that.goodsInfo.ptgoods_id + '&sizeid=' + sizeid + '&groupid=' + that.groupid + '&oid=' + that.id + '&pagefrom=cantuan&referee_openid=' + that.options.referee_openid;
+        app.redirect('group_buy/payfor', obj);
+      }
     }
-  }
   },
 
   /**
@@ -384,16 +384,16 @@ Page({
     // 重新sku运算
     this.onData();
   },
-  minus:function(){
+  minus: function () {
     var num = this.data.num > 1 ? --this.data.num : 1
     this.setData({
-      num : num
+      num: num
     })
   },
-  plus:function(){
+  plus: function () {
     var num = ++this.data.num
     this.setData({
-      num : num
+      num: num
     })
   },
   getUserformid: function (e) {
@@ -450,7 +450,7 @@ Page({
       }
     }.bind(this), 200)
   },
-  
+
   //获取用户信息新接口
   agreeGetUser: function (e) {
     let that = this
@@ -494,7 +494,7 @@ Page({
     var userInfo = wx.getStorageSync('userInfo');
     wx.login({
       success: res => {
-        if (app.globalData.code){
+        if (app.globalData.code) {
           app.globalData.code = res.code
         }
 

@@ -868,7 +868,7 @@ Page({
         });
       }
     })
-    
+
   },
   //发送数据到客户微信上
   notice: function (order_id, order_sn, price, user_id, form_id, f_pname) {
@@ -962,5 +962,5 @@ Page({
       },
     });
   },
-  
+
 })

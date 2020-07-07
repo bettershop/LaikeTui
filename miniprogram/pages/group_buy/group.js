@@ -11,20 +11,20 @@ Page({
     cont: 1,
     remind: '加载中',//进来加载
     brandId: 0,
-    heng:'xs',//控制显示方式
-    shu:'bxs',
-    xianshi:'icon-yduipaibanleixingliebiao',
+    heng: 'xs',//控制显示方式
+    shu: 'bxs',
+    xianshi: 'icon-yduipaibanleixingliebiao',
     imageurl1: "../../images/mo.png",//默认排序图
     daindex1: 0,
     imageurl2: "../../images/mo.png",
     daindex2: 0,
     loading: false,//显示加载
     period: false,//显示无数据
-    select:0,//选中
+    select: 0,//选中
     sort: 0,// 1 asc 升序   0 desc 降序
     // groupman: '',
     // groupid: '',
-     titlee: '',
+    titlee: '',
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -44,11 +44,11 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        if (res.data.code == 1){
+        if (res.data.code == 1) {
           that.setData({
             list: res.data.list,
             remind: false
-          })          
+          })
         }
       },
       error: function (e) {
@@ -63,7 +63,7 @@ Page({
   },
   /*  tab   */
   choosesort1: function (e) {
-    var that =this;
+    var that = this;
     if (this.data.daindex1 == 0) {
       this.setData({
         imageurl1: "../../images/shang.png",
@@ -121,13 +121,13 @@ Page({
     that.sort();
   },
   tabchage: function () {
-    if (this.data.heng == 'xs'){
+    if (this.data.heng == 'xs') {
       this.setData({
         heng: 'bxs',
         shu: 'xs',
-        xianshi: 'icon-yduipaibanleixingduicheng' 
+        xianshi: 'icon-yduipaibanleixingduicheng'
       })
-    }else{
+    } else {
       this.setData({
         heng: 'xs',
         shu: 'bxs',
@@ -179,16 +179,16 @@ Page({
   onReachBottom: function () {
     var that = this;
     if (that.data.list.length > 0) {
-        that.getMore();    
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-        that.setData({
-          loading: true,
-        });
+      that.getMore();
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      that.setData({
+        loading: true,
+      });
     }
   },
   //排序
-  sort:function (){
+  sort: function () {
     //页面初始化 options为页面跳转所带来的参数
     var that = this;
     var select = that.data.select;
@@ -208,7 +208,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        if (res.data.code == 1){
+        if (res.data.code == 1) {
           that.setData({
             list: res.data.list,
           })
@@ -253,13 +253,13 @@ Page({
           return false;
         }
         if (res.data.code == 1) {
-        //成功返回设置数据
-        that.setData({
-          page: page,
-          list: that.data.list.concat(prolist),
-          remind: false
-        });
-        }else{
+          //成功返回设置数据
+          that.setData({
+            page: page,
+            list: that.data.list.concat(prolist),
+            remind: false
+          });
+        } else {
           that.setData({
             period: true
           });
@@ -283,7 +283,7 @@ Page({
         cont: cont + 1
       })
     }
-    
+
   },
   onLoad: function (options) {
     this.setData({
@@ -312,25 +312,25 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-      if(res.data.code == 1){
-        var list = res.data.list;
-        var prolist = that.data.list;
-        if (prolist.length > 1){
-          that.setData({
-            page: page,
-            list: list,
-            remind: false
-          });
-          
-        }else{
-          that.setData({
-            list: list,
-            remind: false
-          })
-         
+        if (res.data.code == 1) {
+          var list = res.data.list;
+          var prolist = that.data.list;
+          if (prolist.length > 1) {
+            that.setData({
+              page: page,
+              list: list,
+              remind: false
+            });
+
+          } else {
+            that.setData({
+              list: list,
+              remind: false
+            })
+
+          }
         }
-      }
-      
+
       },
       error: function (e) {
         wx.showToast({

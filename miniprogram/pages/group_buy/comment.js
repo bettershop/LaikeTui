@@ -10,7 +10,7 @@ Page({
     remind: true,
     comments: [],
     comnum: {},
-    quan:'',
+    quan: '',
     good: '',
     notbad: '',
     bad: '',
@@ -71,16 +71,16 @@ Page({
       data: { pid: that.pid, page: that.data.page, checked: that.data.checked },
       method: 'post',
       success: function (res) {
-       if (res.comment === false){
-         that.setData({
-           more: false
-         })
-       }else{
-        that.setData({
-          comments: that.data.comments.concat(res.comment),
-          loading: false
-        })
-       }
+        if (res.comment === false) {
+          that.setData({
+            more: false
+          })
+        } else {
+          that.setData({
+            comments: that.data.comments.concat(res.comment),
+            loading: false
+          })
+        }
       }
     })
   },
@@ -99,7 +99,7 @@ Page({
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
   },
-  
+
   //下拉事件
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载    
@@ -112,38 +112,38 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
-  checkBtn:function (e) {
+  checkBtn: function (e) {
     var that = this
     var checked = e.currentTarget.dataset.key
-       that.setData({
-         checked: checked,
-         remind: true,
-         page: 0,
-         comments: [],
-         more:true,
-         loading:false
-       })
-      app.request.wxRequest({
-        url: '&action=pi&p=pintuan&c=groupbuy&m=getcomment',
-         data: { pid: that.pid, page: that.data.page, checked: that.data.checked },
-         method: 'post',
-         success: function (res) {
-           that.setData({
-             comments: res.comment,
-             remind: false,
-           })
-         }
-       })
+    that.setData({
+      checked: checked,
+      remind: true,
+      page: 0,
+      comments: [],
+      more: true,
+      loading: false
+    })
+    app.request.wxRequest({
+      url: '&action=pi&p=pintuan&c=groupbuy&m=getcomment',
+      data: { pid: that.pid, page: that.data.page, checked: that.data.checked },
+      method: 'post',
+      success: function (res) {
+        that.setData({
+          comments: res.comment,
+          remind: false,
+        })
+      }
+    })
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
 })

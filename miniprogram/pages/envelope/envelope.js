@@ -6,14 +6,14 @@ Page({
     images: {}
   },
   imageLoad: function (e) {
-      var $width = e.detail.width,    //获取图片真实宽度
+    var $width = e.detail.width,    //获取图片真实宽度
       $height = e.detail.height,
       ratio = $width / $height;    //图片的真实宽高比例
-      var viewWidth = 718,           //设置图片显示宽度，左右留有16rpx边距
+    var viewWidth = 718,           //设置图片显示宽度，左右留有16rpx边距
       viewHeight = 718 / ratio;    //计算的高度值
-      var image = this.data.images;
-      //将图片的datadata-index作为image对象的key,然后存储图片的宽高值
-      image[e.target.dataset.index] = {
+    var image = this.data.images;
+    //将图片的datadata-index作为image对象的key,然后存储图片的宽高值
+    image[e.target.dataset.index] = {
       width: viewWidth,
       height: viewHeight
     }
@@ -40,7 +40,7 @@ Page({
     that.storage();
   },
   onShow: function () {
-   
+
   },
   // 获取文章详情
   y_detail: function (id) {
@@ -49,7 +49,7 @@ Page({
       url: app.d.ceshiUrl + '&action=envelope&m=index',
       method: 'post',
       data: {
-        id:id,
+        id: id,
       },
       header: { //请求头
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -59,7 +59,7 @@ Page({
         if (status == 1) {
           var article = res.data.article;
           var content = article['0'].content;
-           //绑定页面数据，使用插件
+          //绑定页面数据，使用插件
           WxParse.wxParse('content', 'html', content, that, 3);
           that.setData({
             article: article['0'],

@@ -297,7 +297,9 @@ class modifyAction extends Action
                 $attributes[] = $value;
             }
         }
+
         $db->begin();
+
         if (count($s_type) == 0) {
             $type = 0;
         } else {
@@ -342,15 +344,33 @@ class modifyAction extends Action
         }
         // 根据产品id，查询原来的数据
         $sql = "select * from lkt_product_list where id = '$id'";
-        $r_arr = $db->select($sql);
-        // 根据产品id,修改产品信息
-        $sql_1 = "update lkt_product_list set product_title='$product_title',product_class='$product_class',brand_id ='$brand_id',weight='$weight',s_type='$type',num='$z_num',content='$content',imgurl='$image',subtitle='$subtitle',volume='$volume',freight='$freight',initial='$initial',sort='$sort' where id = '$id'";
-        $r_update = $db->update($sql_1);
+        $db->select($sql);
 
-        if ($r_update == -1) {
-            $rew1 = 0; // 修改失败
-        } else {
+        // 根据产品id,修改产品信息
+        $sql_1 = "update lkt_product_list set product_title=?,product_class=?,brand_id =?,weight=?,s_type=?,num=?,content=?,imgurl=?,subtitle=?,volume=?,freight=?,initial=?,sort=? where id = ? ";
+        $data = array();
+        $data[] = $product_title;
+        $data[] = $product_class;
+        $data[] = $brand_id;
+        $data[] = $weight;
+        $data[] = $type;
+        $data[] = $z_num;
+        $data[] = $content;
+        $data[] = $image;
+        $data[] = $subtitle;
+        $data[] = $volume;
+        $data[] = $freight;
+        $data[] = $initial;
+        $data[] = $sort;
+        $data[] = $id;
+        $r_update = $db->preUpdate($sql_1,$data);
+
+
+
+        if ($r_update > 0) {
             $rew1 = 1; // 修改成功
+        } else {
+            $rew1 = 0; // 修改失败
         }
 
         $cids = [];

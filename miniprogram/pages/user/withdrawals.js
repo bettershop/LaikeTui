@@ -4,13 +4,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inp_money:0,
-    iv:'',
-    encryptedData:'',
+    inp_money: 0,
+    iv: '',
+    encryptedData: '',
     islogin: false,
-    lai:'lai',
+    lai: 'lai',
     remind: '加载中',
-    bank_name:''
+    bank_name: ''
   },
   //页面加载完成函数
   onReady: function () {
@@ -62,7 +62,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {  
+      success: function (res) {
         var status = res.data.status;
         if (status == 1) {
           var user = res.data.user;
@@ -79,7 +79,7 @@ Page({
         } else {
           wx.showToast({
             title: '非法操作！',
-            icon: 'none',  
+            icon: 'none',
             duration: 2000,
           });
         }
@@ -143,7 +143,7 @@ Page({
         }
       })
     }
-  },  
+  },
   // 申请提现
   withdrawals: function (res) {
     if (res.detail.value.amoney.length == 0) {
@@ -153,7 +153,7 @@ Page({
         duration: 1500
       })
       wx.hideToast();
-    } else if (res.detail.value.Bank_name.length == 0){
+    } else if (res.detail.value.Bank_name.length == 0) {
       wx.showToast({
         title: '银行名不得为空!',
         icon: 'loading',
@@ -174,7 +174,7 @@ Page({
         duration: 1500
       })
       wx.hideToast();
-    }else{
+    } else {
       var that = this;
       wx.request({
         url: app.d.ceshiUrl + '&action=user&m=withdrawals',
@@ -221,7 +221,7 @@ Page({
       });
     }
   },
-  verify_bank:function (e) {
+  verify_bank: function (e) {
     console.log(e);
     var that = this;
     var bnak_card_num = e.detail.value;

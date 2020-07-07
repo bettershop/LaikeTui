@@ -26,7 +26,7 @@ Page({
         });
       }
     });
-     // 设备信息结束
+    // 设备信息结束
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
       backgroundColor: app.d.bgcolor, //页面标题为路由参数
@@ -35,15 +35,15 @@ Page({
         timingFunc: 'easeIn'
       }
     })
-    var orderId= options.ordersn; // 订单号
+    var orderId = options.ordersn; // 订单号
     var user_id = app.globalData.userInfo.openid; // 微信id
     var pid = options.pid; // 商品id
     var attribute_id = options.attribute_id; // 属性id
-    if (pid){
+    if (pid) {
       pid = pid;
-    }else{
+    } else {
       pid = '';
-    } 
+    }
     if (attribute_id) {
       attribute_id = attribute_id;
     } else {
@@ -65,7 +65,7 @@ Page({
         var status = res.data.status;
         if (status == 1) {
           var commentList = res.data.commentList;
-          if (commentList.length > 1){
+          if (commentList.length > 1) {
             // 初始化评论选项为好评
             for (var i = 0, len = commentList.length; i < len; i++) {
               commentList[i].commentType = 'GOOD';
@@ -73,7 +73,7 @@ Page({
               commentList[i].id = i;
               commentList[i].addHide = commentList[i].images.length;
             }
-          }else{
+          } else {
             commentList[0].commentType = 'GOOD';
             commentList[0].images = '';
             commentList[0].id = 0;
@@ -119,13 +119,13 @@ Page({
         var tempFilePaths = res.tempFilePaths;
         var commentList = that.data.commentList;
         var images = commentList[id].images;
-        if (images.length > 2){
+        if (images.length > 2) {
           wx.showToast({
             title: '亲！最多上传3张哦！',
-            icon:'none',
+            icon: 'none',
             duration: 2000
           });
-        }else{
+        } else {
           if (images) {
             images = images.concat(tempFilePaths);
           } else {
@@ -138,7 +138,7 @@ Page({
               commentList[id].addHide = commentList[id].images.length;
             }
           }
-          
+
           that.setData({
             commentList: commentList,
             addHide: commentList[id].images.length
@@ -149,7 +149,7 @@ Page({
   },
   //删除图片
   delete: function (e) {
-    var id = e.currentTarget.id; 
+    var id = e.currentTarget.id;
     var index = e.currentTarget.dataset.index;
     var commentList = that.data.commentList;
     var images = commentList[id].images;
@@ -164,7 +164,7 @@ Page({
     //数组的id
     var id = e.currentTarget.id;
     //整个数据
-    var commentList = that.data.commentList; 
+    var commentList = that.data.commentList;
     //取单个数据
     var images = commentList[id].images
     // 预览图集
@@ -190,11 +190,11 @@ Page({
     });
   },
   //保存图片
-  saveimg: function (id,key) {
+  saveimg: function (id, key) {
     var commentList = that.data.commentList;
     var images = commentList[key].images;
     // 提交图片，事先遍历图集数组
-    var formData ={'id': id};
+    var formData = { 'id': id };
     for (var i = 0, len = images.length; i < len; i++) {
       that.upload_file('&action=product&m=t_comment&type=file', images[i], 'imgFile', formData);
     }
@@ -230,7 +230,7 @@ Page({
           var arrid = res.data.arrid;
           //获取ID后转至上传图片
           for (var i = 0, len = arrid.length; i < len; i++) {
-            that.saveimg(arrid[i],i);
+            that.saveimg(arrid[i], i);
           }
           wx.showToast({
             title: res.data.succ,
@@ -255,21 +255,21 @@ Page({
     });
   },
   //上传文件
-  upload_file: function(url, filePath, name, formData, success, fail) {
+  upload_file: function (url, filePath, name, formData, success, fail) {
     wx.uploadFile({
-          url: app.d.ceshiUrl + url,
-          filePath: filePath,
-          name: name,
-          header: {
-            'content-type': 'multipart/form-data'
-          }, // 设置请求的 header
-          formData: formData, // HTTP 请求中其他额外的 form data
-          success: function (res) {
-            console.log(res);
-          },
-          fail: function (res) {
-            console.log(res);
-          }
-        })
+      url: app.d.ceshiUrl + url,
+      filePath: filePath,
+      name: name,
+      header: {
+        'content-type': 'multipart/form-data'
+      }, // 设置请求的 header
+      formData: formData, // HTTP 请求中其他额外的 form data
+      success: function (res) {
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
   },
 })

@@ -154,104 +154,104 @@ Page({
     var openid = app.globalData.userInfo.openid;
     console.log(app.globalData.userInfo, 'openid')
     // if (openid) {
-      var bgcolor = app.d.bgcolor;
-      wx.setNavigationBarColor({
-        frontColor: app.d.frontColor,
-        backgroundColor: bgcolor, // 页面标题为路由参数
-        animation: {
-          duration: 400,
-          timingFunc: 'easeIn'
-        }
-      });
-      console.log(that.data.userid)
-      wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=index',
-        method: 'post',
-        data: {
-          pro_id: that.data.productId,
-          openid: openid,
-          type1: that.data.type1,//判断是抽奖还是其他活动
-          choujiangid: that.data.choujiangid,
-          role: that.options.role ? that.options.role : '',
-          size: that.data.size,
-          userid: that.data.userid
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: function (res) {
-          var status = res.data.status;
-          var is_shou = res.data.type;
-          if (status == 1) {
-            var pro = res.data.pro;
-            var content = pro.content;
-            WxParse.wxParse('content', 'html', content, that, 5);
-            that.setData({
-              bgcolor: bgcolor,
-              itemData: pro,
-              kucun: pro.num,
-              bannerItem: pro.img_arr,
-              share: res.data.share,
-              title: pro.name,
-              is_zhekou: pro.is_zhekou,
-              comments: res.data.comments,
-              is_shou: res.data.type,
-              collection_id: res.data.collection_id,
-              choujiangid: that.data.choujiangid,
-              role: that.data.role ? that.data.role : '',
-              qj_price: res.data.qj_price,
-              qj_yprice: res.data.qj_yprice,
-              attrList: res.data.attrList,
-              skuBeanList: res.data.skuBeanList,
-              zhekou: res.data.zhekou != '' ? res.data.zhekou : false,
-            });
-            util.getUesrBgplus(that,app,true)
-            that.setData({
-              remind: false
-            });
-            //默认选中
-            that.one();
+    var bgcolor = app.d.bgcolor;
+    wx.setNavigationBarColor({
+      frontColor: app.d.frontColor,
+      backgroundColor: bgcolor, // 页面标题为路由参数
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    });
+    console.log(that.data.userid)
+    wx.request({
+      url: app.d.ceshiUrl + '&action=product&m=index',
+      method: 'post',
+      data: {
+        pro_id: that.data.productId,
+        openid: openid,
+        type1: that.data.type1,//判断是抽奖还是其他活动
+        choujiangid: that.data.choujiangid,
+        role: that.options.role ? that.options.role : '',
+        size: that.data.size,
+        userid: that.data.userid
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        var status = res.data.status;
+        var is_shou = res.data.type;
+        if (status == 1) {
+          var pro = res.data.pro;
+          var content = pro.content;
+          WxParse.wxParse('content', 'html', content, that, 5);
+          that.setData({
+            bgcolor: bgcolor,
+            itemData: pro,
+            kucun: pro.num,
+            bannerItem: pro.img_arr,
+            share: res.data.share,
+            title: pro.name,
+            is_zhekou: pro.is_zhekou,
+            comments: res.data.comments,
+            is_shou: res.data.type,
+            collection_id: res.data.collection_id,
+            choujiangid: that.data.choujiangid,
+            role: that.data.role ? that.data.role : '',
+            qj_price: res.data.qj_price,
+            qj_yprice: res.data.qj_yprice,
+            attrList: res.data.attrList,
+            skuBeanList: res.data.skuBeanList,
+            zhekou: res.data.zhekou != '' ? res.data.zhekou : false,
+          });
+          util.getUesrBgplus(that, app, true)
+          that.setData({
+            remind: false
+          });
+          //默认选中
+          that.one();
 
-          } else if (status == 3) {
-            wx.showToast({
-              title: res.data.err,
-              duration: 2000,
-            });
-            wx.redirectTo({
-              url: '../../pages/draw/draw'
-            });
-          } else {
-            util.getUesrBgplus(that, app, true)
-            util.getUesrBgplus(that, app, false)
-            wx.switchTab({
-                url: '../index/index'
-            })
-            wx.showToast({
-              title: res.data.err,
-              duration: 2000,
-            });
-          }
-          //判断是否收藏
-          if (is_shou) {
-            that.setData({
-              wsc: 'bxs',
-              sc: 'xs',
-            })
-          } else {
-            that.setData({
-              wsc: 'xs',
-              sc: 'bxs',
-            })
-          }
-        },
-        error: function (e) {
+        } else if (status == 3) {
           wx.showToast({
-            title: '网络异常！',
+            title: res.data.err,
             duration: 2000,
           });
-        },
-      });
-    
+          wx.redirectTo({
+            url: '../../pages/draw/draw'
+          });
+        } else {
+          util.getUesrBgplus(that, app, true)
+          util.getUesrBgplus(that, app, false)
+          wx.switchTab({
+            url: '../index/index'
+          })
+          wx.showToast({
+            title: res.data.err,
+            duration: 2000,
+          });
+        }
+        //判断是否收藏
+        if (is_shou) {
+          that.setData({
+            wsc: 'bxs',
+            sc: 'xs',
+          })
+        } else {
+          that.setData({
+            wsc: 'xs',
+            sc: 'bxs',
+          })
+        }
+      },
+      error: function (e) {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000,
+        });
+      },
+    });
+
 
   },
   // 弹窗
@@ -555,7 +555,7 @@ Page({
     }
   },
   //购物车直接结算
-  Settlement:function(){
+  Settlement: function () {
     console.log('-Settlement-')
     wx.switchTab({
       url: '../cart/cart'
@@ -568,56 +568,56 @@ Page({
     var pro_type = e.target.dataset.type;
     var ptype = e.currentTarget.dataset.type;
     // console.log(ptype, '--jnkmjkl')
-      wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=add_cart',
-        method: 'post',
-        data: {
-          uid: app.globalData.userInfo.openid,
-          pid: that.data.productId,
-          num: that.data.buynum,
-          sizeid: sizeid,
-          pro_type: pro_type,
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: function (res) {
-          //设置购物车刷新
-          app.d.purchase = 1;
-          var data = res.data;
-          if (data.status == 1) {
-            var ptype = e.currentTarget.dataset.type;
-            if (ptype == 'buynow') {
-              wx.redirectTo({
-                url: '../order/pay?cartId=' + data.cart_id + '&pid=' + that.data.productId + '&num=' + that.data.buynum + '&type=1',
-              });
-              return;
-            } else {
-              wx.showToast({
-                title: '加入购物车成功',
-                icon: 'success',
-                duration: 2000
-              });
-              util.getUesrBgplus(that, app,true)
-              that.setData({
-                showModalStatus: false
-              });
-            }
+    wx.request({
+      url: app.d.ceshiUrl + '&action=product&m=add_cart',
+      method: 'post',
+      data: {
+        uid: app.globalData.userInfo.openid,
+        pid: that.data.productId,
+        num: that.data.buynum,
+        sizeid: sizeid,
+        pro_type: pro_type,
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        //设置购物车刷新
+        app.d.purchase = 1;
+        var data = res.data;
+        if (data.status == 1) {
+          var ptype = e.currentTarget.dataset.type;
+          if (ptype == 'buynow') {
+            wx.redirectTo({
+              url: '../order/pay?cartId=' + data.cart_id + '&pid=' + that.data.productId + '&num=' + that.data.buynum + '&type=1',
+            });
+            return;
           } else {
             wx.showToast({
-              icon: 'loading',
-              title: data.err,
+              title: '加入购物车成功',
+              icon: 'success',
               duration: 2000
             });
+            util.getUesrBgplus(that, app, true)
+            that.setData({
+              showModalStatus: false
+            });
           }
-        },
-        fail: function () {
+        } else {
           wx.showToast({
-            title: '网络异常！',
+            icon: 'loading',
+            title: data.err,
             duration: 2000
           });
         }
-      });
+      },
+      fail: function () {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
   },
   bindChange: function (e) {//滑动切换tab 
     var that = this;
@@ -658,38 +658,38 @@ Page({
     var uname = app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName + '超值推荐 ' : '我发现一个好的东西 推荐给你们 ';
     var title = uname + that.data.title;
     var referee_openid = app.globalData.userInfo.user_id;
-      if (res.from === 'button') {
-        // 来自页面内转发按钮
-      }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+    }
     console.log('pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid)
-      return {
-        title: title,
-        imageUrl: that.data.bannerItem[0],
-        path: 'pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid,
-        success: function (res) {
-          console.log('转发成功');
-          var animation = wx.createAnimation({
-            duration: 200,
-            timingFunction: "linear",
-            delay: 0
-          });
-          that.animation = animation;
-          animation.translateY(300).step();
+    return {
+      title: title,
+      imageUrl: that.data.bannerItem[0],
+      path: 'pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid,
+      success: function (res) {
+        console.log('转发成功');
+        var animation = wx.createAnimation({
+          duration: 200,
+          timingFunction: "linear",
+          delay: 0
+        });
+        that.animation = animation;
+        animation.translateY(300).step();
+        that.setData({
+          animationData: animation.export()
+        })
+        setTimeout(function () {
+          animation.translateY(0).step()
           that.setData({
-            animationData: animation.export()
+            animationData: animation,
+            show_share: false
           })
-          setTimeout(function () {
-            animation.translateY(0).step()
-            that.setData({
-              animationData: animation,
-              show_share: false
-            })
-          }.bind(that), 200)
-        },
-        fail: function (res) {
-          console.log('转发失败')
-        }
+        }.bind(that), 200)
+      },
+      fail: function (res) {
+        console.log('转发失败')
       }
+    }
   },
   // 添加到收藏
   addFavorites: function (e) {
@@ -802,9 +802,9 @@ Page({
 
   },
   add_fromid: function (e) {
-    if (app.userlogin(1)){
+    if (app.userlogin(1)) {
       this.pop.clickPup(this)
-      return 
+      return
     }
 
     var that = this;
@@ -864,7 +864,7 @@ Page({
   },
   // 弹窗
   set_share: function (e) {
-    if (app.userlogin(1)){
+    if (app.userlogin(1)) {
       this.pop.clickPup(this)
       return
     }

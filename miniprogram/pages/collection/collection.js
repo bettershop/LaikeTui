@@ -88,13 +88,13 @@ Page({
       },
       success: function (res) {
         var status = res.data.status
-        if (status == 1){
+        if (status == 1) {
           that.setData({
             list: res.data.list,
             bgcolor: app.d.bf_color,
             remind: ''
           });
-        }else{
+        } else {
           wx.showToast({
             title: '暂时还没有收藏!',
             duration: 2000,
@@ -137,7 +137,7 @@ Page({
                 duration: 2000
               });
               that.collection();
-            }else{
+            } else {
               wx.showToast({
                 title: res.data.err,
                 duration: 2000
