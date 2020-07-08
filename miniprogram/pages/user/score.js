@@ -74,36 +74,36 @@ Page({
   },
   // 进入我的积分
   getRequest: function () {
-     var that = this
-     wx.request({
-       url: app.d.ceshiUrl + '&index.php?module=api&action=pi&p=sign&c=Home&m=integral',
-       method: 'post',
-       data: {
-         openid: app.globalData.userInfo.openid,
-       },
-       header: { //请求头
-         'Content-Type': 'application/x-www-form-urlencoded'
-       },
-       success: function (res) {
-         var content = res.data.rule;
-         WxParse.wxParse('content', 'html', content, that, 5);
-          that.setData({
-            score: res.data.score, // 积分
-            logo: res.data.logo, 
-            sign: res.data.sign, // 获取记录
-            consumption: res.data.consumption, // 使用记录
-            switch: res.data.switch//转账按钮（0 关闭  1.开启）
-          })
-         console.log(res.data.sign);
-         
-       },
-       
-       error: function (e) {
-         wx.showToast({
-           title: '网络异常！',
-           duration: 2000,
-         });
-       },
-     });
+    var that = this
+    wx.request({
+      url: app.d.ceshiUrl + '&index.php?module=api&action=pi&p=sign&c=Home&m=integral',
+      method: 'post',
+      data: {
+        openid: app.globalData.userInfo.openid,
+      },
+      header: { //请求头
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        var content = res.data.rule;
+        WxParse.wxParse('content', 'html', content, that, 5);
+        that.setData({
+          score: res.data.score, // 积分
+          logo: res.data.logo,
+          sign: res.data.sign, // 获取记录
+          consumption: res.data.consumption, // 使用记录
+          switch: res.data.switch//转账按钮（0 关闭  1.开启）
+        })
+        console.log(res.data.sign);
+
+      },
+
+      error: function (e) {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000,
+        });
+      },
+    });
   }
 })

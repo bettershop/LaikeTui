@@ -32,12 +32,12 @@ Page({
       },
       success: function (res) {
         var status = res.data.status
-        if(status == 1){
+        if (status == 1) {
           that.setData({
             text: res.data.text,
             wishing: res.data.wishing
           })
-        }else{
+        } else {
           that.setData({
             text: res.data.text,
             wishing: res.data.wishing
@@ -53,7 +53,7 @@ Page({
     });
   },
   // 点击关闭
-  close: function(){
+  close: function () {
     wx.navigateBack({
       delta: 2
     })

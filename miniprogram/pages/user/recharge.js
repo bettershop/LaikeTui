@@ -7,16 +7,16 @@ Page({
   },
   //页面加载完成函数 remind: '加载中',
   onReady: function () {
-    
+
   },
   bindblur: function (e) {
     var money = e.detail.value;
-    if (money < 0 || isNaN(money)){
+    if (money < 0 || isNaN(money)) {
       wx.showToast({
         title: '输入金额非法！',
         duration: 2000
       });
-    }else{
+    } else {
       this.setData({
         fmoney: money
       });
@@ -77,7 +77,7 @@ Page({
       }
     });
   },
-  recharge: function(e) {
+  recharge: function (e) {
     var money = e.detail.value.money;
     var min_cz = e.detail.value.min_cz;
     var re = money - min_cz;
@@ -89,7 +89,7 @@ Page({
         duration: 1000
       })
       wx.hideToast();
-    }else{
+    } else {
       var that = this;
       wx.request({
         url: app.d.ceshiUrl + '&action=recharge&m=recharge',
@@ -101,8 +101,8 @@ Page({
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        success: function (res) {  
-          if (res.data.state){
+        success: function (res) {
+          if (res.data.state) {
             var dingdanhao = res.data.out_trade_no;
             wx.requestPayment({
               timeStamp: res.data.timeStamp,
@@ -110,7 +110,7 @@ Page({
               package: res.data.package,
               signType: 'MD5',
               paySign: res.data.paySign,
-              success: function(res){
+              success: function (res) {
                 wx.request({
                   url: app.d.ceshiUrl + '&action=recharge&m=cz',
                   method: 'post',
@@ -135,7 +135,7 @@ Page({
                   }
                 });
               },
-              fail: function(res){
+              fail: function (res) {
                 wx.showModal({
                   content: "取消充值！",
                   showCancel: false,
@@ -143,7 +143,7 @@ Page({
                 })
               }
             })
-          }else{
+          } else {
             wx.showModal({
               content: res.data.text,
               showCancel: false,
@@ -151,7 +151,7 @@ Page({
             })
           }
         },
-        fail: function(){
+        fail: function () {
           wx.showModal({
             content: "充值失败！",
             showCancel: false,

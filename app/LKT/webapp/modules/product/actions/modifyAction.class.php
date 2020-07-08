@@ -342,9 +342,7 @@ class modifyAction extends Action
                 }
             }
         }
-        // 根据产品id，查询原来的数据
-        $sql = "select * from lkt_product_list where id = '$id'";
-        $db->select($sql);
+
 
         // 根据产品id,修改产品信息
         $sql_1 = "update lkt_product_list set product_title=?,product_class=?,brand_id =?,weight=?,s_type=?,num=?,content=?,imgurl=?,subtitle=?,volume=?,freight=?,initial=?,sort=? where id = ? ";
@@ -364,7 +362,6 @@ class modifyAction extends Action
         $data[] = $sort;
         $data[] = $id;
         $r_update = $db->preUpdate($sql_1,$data);
-
 
 
         if ($r_update > 0) {
@@ -476,9 +473,10 @@ class modifyAction extends Action
 
         } else {
             $db->rollback();
+            $url = $_SESSION['url'];
             echo "<script type='text/javascript'>" .
                 "alert('未知原因，产品修改失败！');" .
-                "location.href='index.php?module=product';</script>";
+                "location.href='$url';</script>";
 
         }
         return;

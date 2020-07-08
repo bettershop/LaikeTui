@@ -65,14 +65,14 @@ function doWechatPay(prepayId, successCallback, failCallback, completeCallback) 
     var currentTimeStamp = getCurrentTimeStamp();
     var packageName = "prepay_id=" + prepayId;
     var dataMap = {
-        timeStamp : currentTimeStamp,
-        nonceStr : nonceString,
-        package : packageName,
-        signType : "MD5",
-        paySign : getWechatPaySign(nonceString, packageName, currentTimeStamp),
-        success : successCallback,
-        fail : failCallback,
-        complete : completeCallback
+        timeStamp: currentTimeStamp,
+        nonceStr: nonceString,
+        package: packageName,
+        signType: "MD5",
+        paySign: getWechatPaySign(nonceString, packageName, currentTimeStamp),
+        success: successCallback,
+        fail: failCallback,
+        complete: completeCallback
     }
     console.log(dataMap);
     wx.requestPayment(dataMap);
@@ -81,7 +81,7 @@ function doWechatPay(prepayId, successCallback, failCallback, completeCallback) 
 /**
  * 获取微信支付签名字符串
  */
-function getWechatPaySign(nonceStr, packageName, timeStamp){
+function getWechatPaySign(nonceStr, packageName, timeStamp) {
     var beforMD5 = "appid=" + app.d.appId + "&nonceStr=" + nonceStr + "&package=" + packageName + "&signType=MD5" + "&timeStamp=" + timeStamp + "&key=" + app.d.appKey;
     return doMD5Encode(beforMD5).toUpperCase();
 }
@@ -104,7 +104,7 @@ function getRandomString() {
 /**
  * MD5加密
  */
-function doMD5Encode(toEncode){
+function doMD5Encode(toEncode) {
     return MD5Encode.hexMD5(toEncode);
 }
 

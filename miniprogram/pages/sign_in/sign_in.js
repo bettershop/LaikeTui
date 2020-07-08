@@ -11,7 +11,7 @@ Page({
     isTodayWeek: false,
     todayIndex: 0,
     remind: '加载中',
-    bgcolor:'',
+    bgcolor: '',
   },
   onReady: function () {
     var that = this;
@@ -41,7 +41,7 @@ Page({
       month: month,
       isToday: '' + year + month + now.getDate()
     })
-    
+
   },
   // 日期信息
   dateInit: function (setYear, setMonth) {
@@ -121,7 +121,7 @@ Page({
     this.dateInit(year, month);
   },
   // 进入签到页面
-  sign: function (year, month){
+  sign: function (year, month) {
     var that = this;
     wx.request({
       url: app.d.ceshiUrl + '&action=pi&p=sign&c=Home&m=sign',
@@ -140,17 +140,17 @@ Page({
           WxParse.wxParse('content', 'html', res.data.details, that, 5);
           var sign_time = res.data.sign_time;
           var dateArr = that.data.dateArr;
-          for (var i = 0; i < dateArr.length;i++){
+          for (var i = 0; i < dateArr.length; i++) {
             dateArr[i]['sign_status'] = false; // 定义都没签到
-            for (var j = 0; j < sign_time.length; j++){
-              if (dateArr[i]['isToday'] === sign_time[j]){
+            for (var j = 0; j < sign_time.length; j++) {
+              if (dateArr[i]['isToday'] === sign_time[j]) {
                 dateArr[i]['sign_status'] = true; // 已签到
               }
             }
           }
           var num = res.data.num;
-          console.log(app.globalData.userInfo.sign_status+"00----")
-          if (res.data.sign_status == 0){
+          console.log(app.globalData.userInfo.sign_status + "00----")
+          if (res.data.sign_status == 0) {
             num = num + 1;
           }
           that.setData({
@@ -177,7 +177,7 @@ Page({
           });
           wx.showToast({
             title: res.data.err,
-            icon:'none',
+            icon: 'none',
             duration: 2000
           });
         }
@@ -203,7 +203,7 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        if (res.data.status == 1){
+        if (res.data.status == 1) {
           var sign_time = res.data.sign_time;
           var dateArr = that.data.dateArr;
           for (var i = 0; i < dateArr.length; i++) {
@@ -222,18 +222,18 @@ Page({
             showModal: true,
           });
           app.globalData.userInfo.sign_status = 0; // 修改签到状态(签到)
-          
-        } else if (res.data.status == 2){
-            wx.navigateBack({
-              delta: 1
-            });
+
+        } else if (res.data.status == 2) {
+          wx.navigateBack({
+            delta: 1
+          });
           wx.showToast({
             title: res.data.err,
             icon: 'none',
             duration: 2000
-            
-          });    
-        }else{ 
+
+          });
+        } else {
           wx.showToast({
             title: res.data.err,
             icon: 'none',

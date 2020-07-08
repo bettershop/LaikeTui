@@ -13,7 +13,7 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
-function getUesrBg(that){
+function getUesrBg(that) {
   wx.request({
     url: that.d.ceshiUrl + '&action=app&m=cart',
     method: 'post',
@@ -26,13 +26,13 @@ function getUesrBg(that){
     },
     success: function (res) {
       var num = res.data.cart.toString()
-      if(num >0){
+      if (num > 0) {
         wx.setTabBarBadge({
           index: 3,
           text: num,
         })
       }
-      
+
 
 
     },
@@ -42,49 +42,49 @@ function getUesrBg(that){
   });
 }
 
-function getUesrBgplus(that,app,is) {
-    wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=cart',
-      method: 'post',
-      data: {
-        openid: app.globalData.userInfo.openid,
+function getUesrBgplus(that, app, is) {
+  wx.request({
+    url: app.d.ceshiUrl + '&action=app&m=cart',
+    method: 'post',
+    data: {
+      openid: app.globalData.userInfo.openid,
 
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        if(is){
-          that.setData({
-            cart: res.data.cart
-          })
-          return null
-        }
-        
-        if (res.data.cart){
-          wx.setTabBarBadge({
-            index: 3,
-            text: res.data.cart,
-          })
-        } else {
-          wx.removeTabBarBadge({
-            index: 3
-          })
-        }
+    },
+    header: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      if (is) {
+        that.setData({
+          cart: res.data.cart
+        })
+        return null
+      }
+
+      if (res.data.cart) {
+        wx.setTabBarBadge({
+          index: 3,
+          text: res.data.cart,
+        })
+      } else {
+        wx.removeTabBarBadge({
+          index: 3
+        })
+      }
 
 
-      },
-      fail: function (e) {
+    },
+    fail: function (e) {
 
-      },
-    });
+    },
+  });
 }
 
 /*
 * 假设你访问的后台登录路径是：https://www.baidu.com/LKT/index.php?module=Login
 * 那么你在这里填的路径应该是：https://www.baidu.com/LKT/index.php?module=api&software_name=3&edition=1.0
 */
-function getUri(){
+function getUri() {
   //如果不想安装后台服务，请使用注释这一行做简单数据体验
   //return 'http://xiaochengxu.houjiemeishi.com/zhibo/LKT/index.php?module=api&software_name=3&edition=1.0'
   return 'http://localhost/open/app/LKT/index.php?module=api&software_name=3&edition=1.0'
@@ -94,11 +94,11 @@ module.exports = {
   formatTime: formatTime,
   getUesrBg: getUesrBg,
   getUesrBgplus: getUesrBgplus,
-  getUri:getUri
+  getUri: getUri
 }
 
-function checkStringEmpty(data){
-  if(null == data || "" == data){
+function checkStringEmpty(data) {
+  if (null == data || "" == data) {
     return false;
   }
   return true;
