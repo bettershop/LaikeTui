@@ -35,6 +35,23 @@
                 </div>
 	            <label style="line-height: 30px;height: 30px;" class="col-xs-4 col-sm-0">小时</label>
             </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4">快递100公司编号：</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <input type="text" name="customer" value="{$customer}" class="input-text">
+                </div>
+                <label style="line-height: 30px;height: 30px;" class="col-xs-4 col-sm-0"><a href="https://www.kuaidi100.com/" target="_blank">[申请点这里]</a></label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-4">客户授权key：</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <input type="text" name="kdkey" value="{$kdkey}" class="input-text">
+                    <text style="color: red;"></text>
+                </div>
+                <label style="line-height: 30px;height: 30px;" class="col-xs-4 col-sm-0"></label>
+            </div>
+
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-4"></label>

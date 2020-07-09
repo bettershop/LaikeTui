@@ -14,7 +14,6 @@ class CouponAction extends BaseAction
     public function index()
     {
         $db = DBAction::getInstance();
-
         // 根据活动为开启状态,查询活动列表,根据开始时间降序排列
         $sql = "select * from lkt_coupon_activity where status = 1 and recycle = 0 order by start_time desc";
         $r_1 = $db->select($sql);
@@ -175,14 +174,12 @@ class CouponAction extends BaseAction
         $company = $r_c[0]->company; // 公司名称
 
         $list = array();
-
         // 查询优惠券插件配置
         $sql = "select * from lkt_coupon_config where id = 1";
         $r = $db->select($sql);
         if ($r) {
             $coupon_overdue = $r[0]->coupon_overdue; // 优惠券过期删除时间
         }
-
         // 根据用户id,查询优惠券表
         $sql = "select * from lkt_coupon where user_id = '$user_id' order by type,add_time";
         $rr = $db->select($sql);
@@ -191,13 +188,10 @@ class CouponAction extends BaseAction
 
                 $id = $v->id; // 优惠券id
                 $hid = $v->hid; // 活动id
-
                 $expiry_time = $v->expiry_time; // 优惠券到期时间
                 $time = date('Y-m-d H:i:s', time()); // 当前时间
-
                 $v->add_time = substr($v->add_time, 0, 10);//pdd
                 $v->expiry_time = substr($v->expiry_time, 0, 10);//pdd
-
                 if ($v->type == 0) {
                     $v->point = '立即使用';
                 } else if ($v->type == 1) {
@@ -394,7 +388,6 @@ class CouponAction extends BaseAction
                 foreach ($attribute as $ka => $va) {
                     $size .= ' ' . $va;
                 }
-                $Goods_id = $product['Goods_id'];
                 $num = $product['Goods_num']; // 产品数量
                 $price = $product['price']; // 产品价格
                 $product['size'] = $size; // 产品价格

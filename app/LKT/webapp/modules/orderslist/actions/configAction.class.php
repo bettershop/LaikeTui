@@ -30,6 +30,8 @@ class configAction extends Action
             } else {
                 $days = $r[0]->days;
             }
+            $customer = $r[0]->customer;
+            $kdkey = $r[0]->kdkey;
         } else {
             $days = '';
             $content = '';
@@ -49,6 +51,10 @@ class configAction extends Action
         $request->setAttribute("order_overdue", $order_overdue);
         $request->setAttribute("unit", $unit);
 
+        $request->setAttribute("customer", $customer);
+        $request->setAttribute("kdkey", $kdkey);
+
+
         return View :: INPUT;
     }
 
@@ -59,11 +65,15 @@ class configAction extends Action
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
         $back = addslashes(trim($request->getParameter('back'))); // 退货时间
         $order_overdue = trim($request->getParameter('order_failure')); // 订单过期删除时间
+        $customer = trim($request->getParameter('customer'));
+        $kdkey = trim($request->getParameter('kdkey'));
+
+
 
         $sql = "select * from lkt_order_config";
         $r = $db->select($sql);
         if ($r) {
-            $sql = "update lkt_order_config set back = '$back',order_failure = '$order_overdue',modify_date = CURRENT_TIMESTAMP where id = 1";
+            $sql = "update lkt_order_config set back = '$back',customer = '$customer',kdkey = '$kdkey',order_failure = '$order_overdue',modify_date = CURRENT_TIMESTAMP where id = 1";
             $r_1 = $db->update($sql);
             if ($r_1 == -1) {
                 $db->admin_record($admin_id, ' 修改订单设置失败 ', 2);

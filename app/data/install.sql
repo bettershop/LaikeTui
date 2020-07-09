@@ -1296,6 +1296,7 @@ CREATE TABLE `lkt_order_config` (
 LOCK TABLES `lkt_order_config` WRITE;
 /*!40000 ALTER TABLE `lkt_order_config` DISABLE KEYS */;
 INSERT INTO `lkt_order_config` VALUES (1,0,'',2,48,'小时',3,'小时','2018-10-25 05:45:58');
+ALTER TABLE `lkt_order_config` ADD `customer` VARCHAR(255) NULL DEFAULT NULL COMMENT '快递100公司编号' AFTER `unit`, ADD `kdkey` VARCHAR(255) NULL DEFAULT NULL COMMENT '快递100客户授权key' AFTER `customer`;
 /*!40000 ALTER TABLE `lkt_order_config` ENABLE KEYS */;
 UNLOCK TABLES;
 

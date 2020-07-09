@@ -345,9 +345,17 @@ class orderAction extends BaseAction {
      * 默认使用快递100的免费接口，有时候订单信息会有延迟，所以有需要的童鞋最好使用快递100的收费接口
      */
     public static function logistics2($type,$courier_num){
+
+        $db = DBAction::getInstance();
+        $sql = "select * from lkt_order_config where id = 1";
+        $r = $db->select($sql);
+        $customer = $r[0]->customer;
+        $kdkey = $r[0]->kdkey;
+
         $url = 'http://poll.kuaidi100.com/poll/query.do'; //实时查询
-        $key = 'suLyYnWs4118';           //客户授权key
-        $customer = '96EB664A39B315C5C81294793F7EEC19'; //查询公司编号
+        $key = $kdkey;           //客户授权key
+        $customer = $customer; //查询公司编号
+
         $param = array (
             'com' =>$type.'',             //快递公司编码
             'num' => trim($courier_num),      //快递单号
