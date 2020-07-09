@@ -102,10 +102,8 @@ class CouponAction extends BaseAction
         if ($r_1) {
             $activity_type = $r_1[0]->activity_type; // 活动类型
             $money = $r_1[0]->money; // 金额
-            $z_money = $r_1[0]->z_money; // 满减金额
             $num = $r_1[0]->num; // 数量
             $end_time = $r_1[0]->end_time; // 活动结束时间
-            $start_time = $r_1[0]->start_time; // 活动开始时间
 
             // 根据用户id,活动id ,查询优惠券表,该用户是否领取过优惠券
             $sql = "select * from lkt_coupon where user_id = '$user_id' and hid = '$id' ";
