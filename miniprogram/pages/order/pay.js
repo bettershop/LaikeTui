@@ -48,11 +48,9 @@ Page({
   //下拉刷新
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    setTimeout(function () {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1500);
     this.Settlement();
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   //调取分享
   onShareAppMessage: function (res) {
@@ -167,8 +165,6 @@ Page({
   // 进入结算页面
   Settlement: function () {
     var that = this;
-    console.log(that)
-    console.log('99999')
     wx.request({
       url: app.d.ceshiUrl + '&action=product&m=Settlement',
       method: 'post',
@@ -454,11 +450,9 @@ Page({
   // 提交订单支付
   createProductOrderByWX: function (e) {
     var that = this;
-
     if (this.data.ispayOrder) {
       return
     }
-
     this.setData({
       ispayOrder: true
     })
@@ -469,7 +463,6 @@ Page({
         paytype: paytype,
       });
     } else {
-
       wx.showToast({
         title: '已为您选择默认支付方式',
         icon: 'none',
@@ -494,17 +487,14 @@ Page({
       paytype = 'wxPay';
       return;
     }
-
     that.setData({
       form_id: e.detail.formId,
     });
     var address = e.detail.value.address;
-
     if (address) {
       // 收货地址存在
       if (paytype == 'wallet_Pay') {
         if (that.data.pay_xs) {
-
           wx.showModal({
             title: '余额支付',
             content: '是否使用余额支付？',
@@ -513,15 +503,11 @@ Page({
                 //组合支付 替换数据
                 that.createProductOrder();
                 console.log('用户点击确定');
-
               } else if (res.cancel) {
-
                 that.setData({
                   ispayOrder: false
                 })
-
                 wx.hideLoading()
-
                 console.log('用户点击取消')
               }
             }
@@ -561,20 +547,14 @@ Page({
   },
   // 确认订单
   createProductOrder: function () {
-
     var that = this;
-    console.log(that)
-    console.log('***************')
-
     this.setData({
       btnDisabledbtnDisabled: false,
       pages_sx: false
     })
-
     var paytype = that.data.paytype;
     var type1 = that.data.type1;
     app.d.purchase = 1; //设置购物车刷新
-
     wx.request({
       url: app.d.ceshiUrl + '&action=product&m=payment',
       method: 'post',
@@ -601,20 +581,16 @@ Page({
         if (data.status == 1) {
           // 余额支付
           if (data.arr.pay_type == 'wallet_Pay') {
-
             that.wallet_pay(data.arr);
-
           }
           if (data.arr.pay_type == 'wxPay') {
             // 微信支付
             wx.showLoading({
               title: '加载中',
             })
-
             that.wxpay(data.arr);
           }
         } else {
-
           wx.showToast({
             title: res.data.err,
             icon: 'none',
@@ -635,18 +611,14 @@ Page({
 
   // 发起钱包支付
   wallet_pay: function (order) {
-
     wx.hideLoading()
-
     var that = this;
     var type1 = that.data.type1; // 决定是抽奖还是普通支付
-
     if (type1 == 11) {
       var total = that.data.total; // 付款金额
     } else {
       var total = that.data.coupon_money; // 付款金额
     }
-
     if (that.data.coupon_id) {
       var coupon_id = that.data.coupon_id;
     } else {
@@ -672,17 +644,14 @@ Page({
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
-
           var status = res.data.status;
           if (status) {
-
             if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
               var referee_openid = app.globalData.userInfo.referee_openid;
               var openid = app.globalData.userInfo.openid
               that.promiss(that.refereeopenid, referee_openid, openid).then(res => {
                 that.up_order(order);
               })
-
             } else {
               //支付成功  修改订单
               that.up_order(order);
@@ -729,15 +698,12 @@ Page({
   },
   // 调起微信支付
   wxpay: function (order) {
-
     console.log(order)
     var that = this;
     app.d.order = order;
-
     this.setData({
       order: order
     })
-
     var d_yuan = Number(that.data.d_yuan),
       cmoney = Number(order.coupon_money),
       oid = order.order_id
@@ -745,7 +711,6 @@ Page({
       cmoney = Number(cmoney) - Number(d_yuan); //防止出现小数点后多余2位以上  .toFixed(2)
     }
     cmoney = cmoney.toFixed(2);
-
     wx.request({
       url: app.d.ceshiUrl + '&action=pay&m=pay',
       data: {
@@ -758,7 +723,6 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       }, // 设置请求的 header
       success: function (res) {
-
         if (res.data) {
           var dingdanhao = res.data.out_trade_no;
           console.log(order.sNo)
@@ -766,9 +730,7 @@ Page({
           that.setData({
             trade_no: dingdanhao
           })
-
           console.log(res)
-
           if (res.data.RETURN_MSG === "mch_id参数格式错误") {
             wx.showModal({
               content: "请设置商户号！",

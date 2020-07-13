@@ -194,7 +194,7 @@ form[name=form1] input{
                     <div class="formInputSD">
                         <select name="initial[unit]" class="select " style="width: 300px;" id="unit">
                                     <option value="盒" {if $initial->unit =='盒' } selected="selected" {/if}>盒</option>
-                                    <option value="篓"{if $initial->unit =='篓' } selected="selected" {/if}>篓</option>
+                                    <option value="篓" {if $initial->unit =='篓' } selected="selected" {/if}>篓</option>
                                     <option value="箱" {if $initial->unit =='箱' } selected="selected" {/if}>箱</option>
                                     <option value="个" {if $initial->unit =='个' } selected="selected" {/if}>个</option>
                                     <option value="套" {if $initial->unit =='套' } selected="selected" {/if}>套</option>
@@ -211,7 +211,7 @@ form[name=form1] input{
                                     <option value="双" {if $initial->unit =='双' } selected="selected" {/if}>双</option>
                                     <option value="台" {if $initial->unit =='台' } selected="selected" {/if}>台</option>
                                     <option value="件" {if $initial->unit =='件' } selected="selected" {/if}>件</option>
-                    
+                                    <option value="斤" {if $initial->unit =='斤' } selected="selected" {/if}>斤</option>
              
                                    
                         </select>

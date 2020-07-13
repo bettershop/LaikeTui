@@ -179,9 +179,11 @@ return true;
             </div>
         </div>
         <div class="row cl" style="margin: 20px auto;">
-            <div class="col-8 col-offset-4">
-                <button class = "btn btn-primary radius" type = "button" onclick="save_address()" ><i class = "Hui-iconfont" > &#xe632;</i> 提 交</button >
+            <label class="form-label col-xs-4 col-sm-2"></label>
+            <div class="formControls col-xs-8 col-sm-8 skin-minimal" id="province">
+                <button class = "btn btn-primary radius" type = "button" onclick="save_address()" >提 交</button >
             </div>
+
         </div>
     </div>
 </div>
@@ -246,6 +248,7 @@ $("#type").change(function(){
     $('.pop_model').hide();
 });
 
+var chelen = 0
 function choice(){
     var type = $('input:radio:checked').val();
     if(freight_num == 0){
@@ -264,7 +267,7 @@ function choice(){
 
             for (var k in list) {
                 rew += "<div class='radio-box' style='width: 32%;'>" +
-                    "<input name='list' class='inputC readtitle' type='checkbox' id='sex-"+list[k]['GroupID']+"' value='"+list[k]['GroupID']+"'>" +
+                    "<input name='list' class='inputC readtitle Sopen' type='checkbox' id='sex-"+list[k]['GroupID']+"' value='"+list[k]['GroupID']+"'>" +
                     "<label for='sex-"+list[k]['GroupID']+"'>"+list[k]['G_CName']+"</label>" +
                     "</div>"
             }
@@ -283,6 +286,39 @@ function choice(){
         }
     });
 }
+
+var checkcon = 0
+function checkbox(vm){
+    if ( vm.checked == true){
+        checkcon++
+    } else {
+        checkcon--
+    }
+
+    if(checkcon == chelen){
+
+        $('.selectall')[0].checked = true
+    } else {
+        $('.selectall')[0].checked = false
+    }
+}
+
+
+function checkboxOnclick(checkbox){
+    var domList = $('.Sopen')
+    if ( checkbox.checked == true){
+        checkcon = chelen
+        for(var i in domList){
+            domList[i].checked = true
+        }
+    } else {
+        checkcon = 0
+        for(var i in domList){
+            domList[i].checked = false
+        }
+    }
+}
+
 // 关闭
 function select_hid(){
     $('.keep').hide();

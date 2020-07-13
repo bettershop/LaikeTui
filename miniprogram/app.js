@@ -16,7 +16,7 @@ App({
     bgcolor: '',
 
   },
-  onLaunch: function(options) {
+  onLaunch: function (options) {
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -25,7 +25,7 @@ App({
 
   },
   //控制授权登入
-  userlogin: function(page) {
+  userlogin: function (page) {
     if (this.globalData.userInfo.openid == '' || !this.globalData.userInfo.openid) {
 
       if (page) {
@@ -40,16 +40,16 @@ App({
     }
   },
 
-  onShow: function(options) {
+  onShow: function (options) {
     var referee_openid = options.query.userid ? options.query.userid : '';
     this.globalData.referee_openid = referee_openid;
   },
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
   },
-  getUserInfo: function(cb, stype, uesr, callback) {
+  getUserInfo: function (cb, stype, uesr, callback) {
     var that = this;
     if (this.d.one) {
       this.d.one = false;
@@ -58,7 +58,7 @@ App({
       this.d.one = true;
       //调用登录接口  已更新登入接口  
       wx.login({
-        success: function(res) {
+        success: function (res) {
           var code = res.code;
           that.globalData.code = res.code;
           that.getUserSessionKey(code, cb, uesr, callback);
@@ -68,10 +68,10 @@ App({
     }
     //添加控制在同一秒执行同一个方法两次
   },
-  getHomeData: function() {
+  getHomeData: function () {
     var that = this;
     wx.login({
-      success: function(res) {
+      success: function (res) {
         that.globalData.code = res.code;
         var userinfo = wx.getStorageSync('userInfo');
         if (userinfo.nickName) {
@@ -82,7 +82,7 @@ App({
     });
   },
   // 获取用户会话密钥
-  getUserSessionKey: function(code, cb, stype, callback) {
+  getUserSessionKey: function (code, cb, stype, callback) {
     var that = this;
     wx.request({
       url: that.d.ceshiUrl + '&action=app&m=index',
@@ -97,7 +97,7 @@ App({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         var data = res.data;
         if (data.status == 0) {
           wx.showToast({
@@ -129,7 +129,7 @@ App({
         wx.setStorageSync('userInfo', that.globalData.userInfo);
         callback()
       },
-      fail: function(e) {
+      fail: function (e) {
         wx.showToast({
           title: '网络异常！err:getsessionkeys',
           duration: 2000
@@ -138,7 +138,7 @@ App({
     });
   },
 
-  getOrBindTelPhone: function(returnUrl) {
+  getOrBindTelPhone: function (returnUrl) {
     var user = this.globalData.userInfo;
     if (!user.tel) {
       wx.navigateTo({
@@ -150,12 +150,12 @@ App({
     userInfo: {},
     userlogin: wx.getStorageSync('userlogin'),
   },
-  redirect: function(url, param) {
+  redirect: function (url, param) {
     wx.navigateTo({
       url: '/pages/' + url + '?' + param
     })
   },
-  showModal: function(that) {
+  showModal: function (that) {
     var animation = wx.createAnimation({
       duration: 200
     })
@@ -163,14 +163,14 @@ App({
     that.setData({
       animationData: animation.export()
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.opacity(1).rotateX(0).step();
       that.setData({
         animationData: animation
       });
     }.bind(that), 200)
   },
-  showToast: function(that, title) {
+  showToast: function (that, title) {
     var toast = {};
     toast.toastTitle = title;
     that.setData({
@@ -185,7 +185,7 @@ App({
     that.setData({
       toast: toast
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.opacity(1).rotateY(0).step();
       toast.toastAnimationData = animation
       that.setData({
@@ -193,7 +193,7 @@ App({
       });
     }.bind(that), 100)
     // 定时器关闭 
-    setTimeout(function() {
+    setTimeout(function () {
       toast.toastStatus = false
       that.setData({
         toast: toast

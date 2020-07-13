@@ -52,7 +52,7 @@ Page({
         }
         that.setData({
           notice: notice
-          
+
         })
       },
       fail: function () {
@@ -63,7 +63,6 @@ Page({
       }
     })
   },
-
 
   // 数据加载
   DataonLoad: function () {

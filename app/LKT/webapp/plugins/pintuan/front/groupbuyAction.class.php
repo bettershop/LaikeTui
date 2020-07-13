@@ -497,7 +497,7 @@ class groupbuyAction extends PluginAction
         if ($formid != 'the formId is a mock one') {
             if ($fromres < 8) {
                 $addsql = "insert into lkt_user_fromid(open_id,fromid,lifetime) values('$uid','$formid','$lifetime')";
-                $addres = $db->insert($addsql);
+                $db->insert($addsql);
             } else {
                 return false;
             }
@@ -1295,7 +1295,6 @@ class groupbuyAction extends PluginAction
     }
 
 
-
     public function Send_open()
     {
         $db = DBAction::getInstance();
@@ -1408,7 +1407,6 @@ class groupbuyAction extends PluginAction
 
 
     }
-
 
 
     //临时存放微信付款信息
@@ -1601,35 +1599,41 @@ class groupbuyAction extends PluginAction
         }
     }
 
-    function is_overdue($db,$group_id){//查询该拼团活动是否过期 1 过期，0 没有
-        $rrr=$db -> select("select * from lkt_group_product where group_id =$group_id ");
+    function is_overdue($db, $group_id)
+    {//查询该拼团活动是否过期 1 过期，0 没有
+        $rrr = $db->select("select * from lkt_group_product where group_id =$group_id ");
         $cfg = unserialize($rrr[0]->group_data);
         $end_time = $cfg->endtime;
         $data = date('Y-m-d H:i:s', time());
-        if($rrr[0]->recycle ==1){//活动已删除
+        if ($rrr[0]->recycle == 1) {//活动已删除
             return 1;
         }
-        if($end_time<$data){
+        if ($end_time < $data) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
 
     }
 
     //过期修改拼团未成功订单
-    function up_status($db,$id,$ptcode){
-        $db -> update("update lkt_group_open set ptstatus=3 where id='$id'");//时间到了拼团未满
-        $db -> update( "update lkt_order set status=11,ptstatus = 3 where ptcode='$ptcode'");//订单状态
-        $ds =$db -> select("select sNo,z_price,user_id from lkt_order where ptcode='$ptcode'");
-        if($ds){
+    function up_status($db, $id, $ptcode)
+    {
+        $db->update("update lkt_group_open set ptstatus=3 where id='$id'");//时间到了拼团未满
+        $db->update("update lkt_order set status=11,ptstatus = 3 where ptcode='$ptcode'");//订单状态
+        $ds = $db->select("select sNo,z_price,user_id from lkt_order where ptcode='$ptcode'");
+        if ($ds) {
             foreach ($ds as $key => $value) {
-                $r_sNo =$value->sNo;
-                $db -> update("update lkt_order_details set r_status=11 where r_sNo='$r_sNo'");//订单详情
-                $db->update("UPDATE lkt_user SET money =money+$value->z_price WHERE user_id = '".$value->user_id."'");
-                $event = $value->user_id.'退回拼团金额'.$value->z_price.'';
-                $sqlldr = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$value->user_id','$value->z_price','','$event',5)";
-                $db->insert($sqlldr);
+                $r_sNo = $value->sNo;
+                $sql = "select * from lkt_order_details where r_sNo='$r_sNo' ";
+                $rs = $db->select($sql);
+                if ($rs[0]->r_status!=11){
+                    $db->update("update lkt_order_details set r_status=11 where r_sNo='$r_sNo'");//订单详情
+                    $db->update("UPDATE lkt_user SET money =money+$value->z_price WHERE user_id = '" . $value->user_id . "'");
+                    $event = $value->user_id . '退回拼团金额' . $value->z_price . '';
+                    $sqlldr = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$value->user_id','$value->z_price','','$event',5)";
+                    $db->insert($sqlldr);
+                }
             }
         }
 
@@ -1637,21 +1641,23 @@ class groupbuyAction extends PluginAction
     }
 
     //过期修改拼团成功订单
-    function up_su_status($db,$id,$ptcode){
-        $db -> update("update lkt_group_open set ptstatus=2 where id='$id'");//时间到了拼团未满
-        $db -> update( "update lkt_order set status=1,ptstatus = 2 where ptcode='$ptcode'");//订单状态
-        $ds =$db -> select("select sNo from lkt_order where ptcode='$ptcode'");
-        if($ds){
+    function up_su_status($db, $id, $ptcode)
+    {
+        $db->update("update lkt_group_open set ptstatus=2 where id='$id'");//时间到了拼团未满
+        $db->update("update lkt_order set status=1,ptstatus = 2 where ptcode='$ptcode'");//订单状态
+        $ds = $db->select("select sNo from lkt_order where ptcode='$ptcode'");
+        if ($ds) {
             foreach ($ds as $key => $value) {
-                $r_sNo =$value->sNo;
-                $db -> update("update lkt_order_details set r_status=1 where r_sNo='$r_sNo'");//订单详情
+                $r_sNo = $value->sNo;
+                $db->update("update lkt_order_details set r_status=1 where r_sNo='$r_sNo'");//订单详情
             }
         }
         return;
     }
 
     //支付的异步回调函数
-    public function notify($order=null){
+    public function notify($order = null)
+    {
         $db = DBAction::getInstance();
         $trade_no = $order->trade_no;
         $dsql = "select data from lkt_order_data where trade_no = '$trade_no'";
@@ -1666,7 +1672,8 @@ class groupbuyAction extends PluginAction
         return $order;
     }
 
-    private function creatgroup_notify($order){
+    private function creatgroup_notify($order)
+    {
         $db = DBAction::getInstance();
         //开启事务
         $db->begin();

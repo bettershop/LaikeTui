@@ -348,6 +348,7 @@ function check(f) {
                                 <option value="双">双</option>
                                 <option value="台">台</option>
                                 <option value="件">件</option>
+                                <option value="斤">斤</option>
                           {/if}
              
                                    

@@ -334,7 +334,7 @@
                         <option value="双" {if $initial->unit =='双' } selected="selected" {/if}>双</option>
                         <option value="台" {if $initial->unit =='台' } selected="selected" {/if}>台</option>
                         <option value="件" {if $initial->unit =='件' } selected="selected" {/if}>件</option>
-                        
+                        <option value="斤" {if $initial->unit =='斤' } selected="selected" {/if}>斤</option>
                     </select>
                 </div>
             </div>

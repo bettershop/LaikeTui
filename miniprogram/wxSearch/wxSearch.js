@@ -3,11 +3,11 @@ var __keysColor = [];
 
 var __mindKeys = [];
 
-function initColors(colors){
+function initColors(colors) {
     __keysColor = colors;
 }
 
-function initMindKeys(keys){
+function initMindKeys(keys) {
     __mindKeys = keys;
 }
 
@@ -17,47 +17,47 @@ function init(that, barHeight, keys, isShowKey, isShowHis, callBack) {
         barHeight: barHeight,
         isShow: false
     }
-    
-    if(typeof(isShowKey) == 'undefined'){
+
+    if (typeof (isShowKey) == 'undefined') {
         view.isShowSearchKey = true;
-    }else{
+    } else {
         view.isShowSearchKey = isShowKey;
     }
 
-    if(typeof(isShowHis) == 'undefined'){
+    if (typeof (isShowHis) == 'undefined') {
         view.isShowSearchHistory = true;
-    }else{
+    } else {
         view.isShowSearchHistory = isShowHis;
     }
     temData.keys = keys;
     wx.getSystemInfo({
-        success: function(res) {
+        success: function (res) {
             var wHeight = res.windowHeight;
-            view.seachHeight = wHeight-barHeight;
+            view.seachHeight = wHeight - barHeight;
             temData.view = view;
             that.setData({
                 wxSearchData: temData
             });
         }
     })
-    
+
     if (typeof (callBack) == "function") {
         callBack();
     }
-    
+
     getHisKeys(that);
 }
 
-function wxSearchInput(e, that, callBack){
+function wxSearchInput(e, that, callBack) {
     var temData = that.data.wxSearchData;
     var text = e.detail.value;
     var mindKeys = [];
-    if(typeof(text) == "undefined" || text.length == 0){
-        
-    }else{
-        for(var i = 0; i < __mindKeys.length; i++){
+    if (typeof (text) == "undefined" || text.length == 0) {
+
+    } else {
+        for (var i = 0; i < __mindKeys.length; i++) {
             var mindKey = __mindKeys[i];
-            if(mindKey.indexOf(text) > -1){
+            if (mindKey.indexOf(text) > -1) {
                 mindKeys.push(mindKey);
             }
         }
@@ -69,23 +69,23 @@ function wxSearchInput(e, that, callBack){
     });
 }
 
-function wxSearchFocus( that, callBack) {
+function wxSearchFocus(that, callBack) {
     var temData = that.data.wxSearchData;
-    if (temData.his){
-      var his = [];
-      if (temData.his.length > 6) {
-        for (var i = 0; i < 6; i++) {
-          his[i] = temData.his[i];
+    if (temData.his) {
+        var his = [];
+        if (temData.his.length > 6) {
+            for (var i = 0; i < 6; i++) {
+                his[i] = temData.his[i];
+            }
+            temData.his = his;
         }
-        temData.his = his;
-      }
     }
-    
+
     temData.view.isShow = true;
     that.setData({
         wxSearchData: temData
     });
-    
+
 }
 function wxSearchBlur(e, that, callBack) {
     var temData = that.data.wxSearchData;
@@ -98,7 +98,7 @@ function wxSearchBlur(e, that, callBack) {
     }
 }
 
-function wxSearchHiddenPancel(that){
+function wxSearchHiddenPancel(that) {
     var temData = that.data.wxSearchData;
     temData.view.isShow = false;
     that.setData({
@@ -133,61 +133,61 @@ function getHisKeys(that) {
     } catch (e) {
         // Do something when catch error
     }
-    
+
 }
 function wxSearchAddHisKey(that) {
     wxSearchHiddenPancel(that);
     var text = that.data.wxSearchData.value;
-    if(typeof(text) == "undefined" || text.length == 0){return;}
+    if (typeof (text) == "undefined" || text.length == 0) { return; }
     var value = wx.getStorageSync('wxSearchHisKeys');
-    if(value){
-        if(value.indexOf(text) < 0){
+    if (value) {
+        if (value.indexOf(text) < 0) {
             value.unshift(text);
         }
         wx.setStorage({
-            key:"wxSearchHisKeys",
-            data:value,
-            success: function(){
+            key: "wxSearchHisKeys",
+            data: value,
+            success: function () {
                 getHisKeys(that);
             }
         })
-    }else{
+    } else {
         value = [];
         value.push(text);
         wx.setStorage({
-            key:"wxSearchHisKeys",
-            data:value,
-            success: function(){
+            key: "wxSearchHisKeys",
+            data: value,
+            success: function () {
                 getHisKeys(that);
             }
         })
     }
-    
-    
+
+
 }
-function wxSearchDeleteKey(e,that) {
+function wxSearchDeleteKey(e, that) {
     var text = e.target.dataset.key;
     var value = wx.getStorageSync('wxSearchHisKeys');
-    value.splice(value.indexOf(text),1);
+    value.splice(value.indexOf(text), 1);
     wx.setStorage({
-        key:"wxSearchHisKeys",
-        data:value,
-        success: function(){
+        key: "wxSearchHisKeys",
+        data: value,
+        success: function () {
             getHisKeys(that);
         }
     })
 }
-function wxSearchDeleteAll(that){
+function wxSearchDeleteAll(that) {
     wx.removeStorage({
         key: 'wxSearchHisKeys',
-        success: function(res) {
+        success: function (res) {
             var value = [];
             var temData = that.data.wxSearchData;
             temData.his = value;
             that.setData({
                 wxSearchData: temData
             });
-        } 
+        }
     })
 }
 
@@ -201,8 +201,8 @@ module.exports = {
     wxSearchFocus: wxSearchFocus,
     wxSearchBlur: wxSearchBlur,
     wxSearchKeyTap: wxSearchKeyTap,
-    wxSearchAddHisKey:wxSearchAddHisKey,
-    wxSearchDeleteKey:wxSearchDeleteKey,
-    wxSearchDeleteAll:wxSearchDeleteAll,
-    wxSearchHiddenPancel:wxSearchHiddenPancel
+    wxSearchAddHisKey: wxSearchAddHisKey,
+    wxSearchDeleteKey: wxSearchDeleteKey,
+    wxSearchDeleteAll: wxSearchDeleteAll,
+    wxSearchHiddenPancel: wxSearchHiddenPancel
 }
