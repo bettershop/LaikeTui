@@ -63,7 +63,7 @@ Page({
       }
     })
   },
-K。
+
   // 数据加载
   DataonLoad: function () {
     var that = this;

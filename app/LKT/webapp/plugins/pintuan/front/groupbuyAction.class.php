@@ -1448,7 +1448,7 @@ class groupbuyAction extends PluginAction
 
         $data = serialize($array);
         $sql = "insert into lkt_order_data(trade_no,data,addtime) values('$trade_no','$data',CURRENT_TIMESTAMP)";
-        $rid = $db->insert($sql);
+        $db->insert($sql);
 
         $yesterday = date("Y-m-d", strtotime("-1 day"));
         $sql = "delete from lkt_order_data where addtime < '$yesterday'";
@@ -1558,7 +1558,6 @@ class groupbuyAction extends PluginAction
         $sql = "select * from lkt_freight where id = '$freight'";
         $r_1 = $db->select($sql);
         if ($r_1) {
-            $rule = $r_1[0];
             $yunfei = 0;
             if (empty($address)) {
                 return 0;
