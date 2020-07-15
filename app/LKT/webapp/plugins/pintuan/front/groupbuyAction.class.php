@@ -692,8 +692,8 @@ class groupbuyAction extends PluginAction
         $istsql1 = "insert into lkt_group_open(uid,ptgoods_id,ptcode,ptnumber,addtime,endtime,ptstatus,group_id,sNo) values('$uid',$pro_id,'$group_num',1,'$creattime','$time_over',$status,'$groupid','$ordernum')";
         $res1 = $db->insert($istsql1);
 
-        $nu = $db->update("update lkt_product_list set volume=volume+$buy_num,num=num-$buy_num where id='$pro_id'");
-        $nu11 = $db->update("update lkt_configure set num=num-$buy_num where id='$sizeid'");//改变库存和销量
+        $db->update("update lkt_product_list set volume=volume+$buy_num,num=num-$buy_num where id='$pro_id'");
+        $db->update("update lkt_configure set num=num-$buy_num where id='$sizeid'");//改变库存和销量
 
         if ($res1 < 1) {
             $db->rollback();

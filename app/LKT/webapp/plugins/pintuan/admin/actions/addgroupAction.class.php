@@ -5,14 +5,17 @@
  */
 
 
-class addgroupAction extends PluginAction{
+class addgroupAction extends PluginAction
+{
 
-    public function getDefaultView(){
+    public function getDefaultView()
+    {
 
         return View :: INPUT;
     }
 
-    public function execute(){
+    public function execute()
+    {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $gdata = json_decode($request->getParameter('gdata'));
@@ -25,20 +28,20 @@ class addgroupAction extends PluginAction{
                         where c.pid = $goods_id ";
         $attr_res = $db->select($sel_attr_sql);
 
-        if($gdata -> endtime == 'changqi'){
-            $gdata -> endtime = date("Y-m-d H:i:s",strtotime("+1years"));
+        if ($gdata->endtime == 'changqi') {
+            $gdata->endtime = date("Y-m-d H:i:s", strtotime("+1years"));
         }
 
-        if($group_title == ''){
+        if ($group_title == '') {
             $goods_sql = "select product_title from lkt_product_list where id=$goods_id ";
             $goods_res = $db->select($goods_sql);
             $group_title = $goods_res[0]->product_title;
         }
         $nu = $db->select("select max(group_id) as a from lkt_group_product ");
-        if($nu){
-            $group_id=$nu[0]->a+1;
-        }else{
-            $group_id=1;
+        if ($nu) {
+            $group_id = $nu[0]->a + 1;
+        } else {
+            $group_id = 1;
         }
 
         $gdata = serialize($gdata);
@@ -48,18 +51,22 @@ class addgroupAction extends PluginAction{
             $attr_id = $v->id;
             $str .= "($attr_id,$goods_id,'$glevel','$gdata','$group_title','$group_id'),";
         }
-        $str = substr($str, 0,strlen($str)-1);
+        $str = substr($str, 0, strlen($str) - 1);
         $respro = $db->insert($str);
 
-        if($respro < 0){
-            echo json_encode(array('code' => 0));exit;
-        }else{
-            echo json_encode(array('code' => 1));exit;
+        if ($respro < 0) {
+            echo json_encode(array('code' => 0));
+            exit;
+        } else {
+            echo json_encode(array('code' => 1));
+            exit;
         }
     }
 
-    public function getRequestMethods(){
+    public function getRequestMethods()
+    {
         return Request :: POST;
     }
 }
+
 ?>

@@ -5,7 +5,6 @@
  */
 
 
-
 class setproAction extends PluginAction
 {
 
@@ -24,14 +23,14 @@ class setproAction extends PluginAction
 
         } else if (isset($_GET['from']) && $_GET['from'] == 'attr') {
             $str = $this->getContext()->getStorage()->read('susu');
-            $sql = 'select c.*,l.product_title from lkt_configure as c left join lkt_product_list as l on c.pid=l.id where l.store_id = '.$store_id.' and c.pid in (' . $str . ') order by c.pid';
+            $sql = 'select c.*,l.product_title from lkt_configure as c left join lkt_product_list as l on c.pid=l.id where l.store_id = ' . $store_id . ' and c.pid in (' . $str . ') order by c.pid';
             $res = $db->select($sql);
             foreach ($res as $key => $value) {
                 $value->image = $this->getimgpath($value->img);
                 $attr = unserialize($value->attribute);
                 $attr = array_values($attr);
 
-                if($attr){
+                if ($attr) {
                     if (gettype($attr[0]) != 'string') unset($attr[0]);
                 }
 
@@ -39,7 +38,7 @@ class setproAction extends PluginAction
             }
 
             $request->setAttribute("arr", $res);
-            
+
             return View :: INPUT;
 
         }
@@ -56,7 +55,7 @@ class setproAction extends PluginAction
         $this->getContext()->getStorage()->write('goods_id', $goods_id);
         echo json_encode(array('code' => 1));
         exit;
-        
+
     }
 
     public function getRequestMethods()
@@ -64,7 +63,8 @@ class setproAction extends PluginAction
         return Request :: POST;
     }
 
-    public function getimgpath($img){
+    public function getimgpath($img)
+    {
 
         $appConfig = $this->getAppInfo();
         $uploadImg = $appConfig['imageRootUrl'];
@@ -73,6 +73,7 @@ class setproAction extends PluginAction
 
         return $image;
     }
-    
+
 }
+
 ?>
