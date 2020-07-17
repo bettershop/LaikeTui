@@ -42,7 +42,7 @@
                 <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>支付证书文件：</label>
                 <div class="formControls col-xs-8 col-sm-6" >
                     <input style="padding-left: 10px;" type="file" accept=".zip" name="upload_cert">
-                    <span style="color: #333;font-size: 12px;">注:仅可上传zip压缩包</span>
+                    <span style="color: #333;font-size: 12px;">注:仅可上传zip压缩包，需要有open_zip函数支持</span>
                 </div>
             </div>
             <div class="row cl" style="display:none">

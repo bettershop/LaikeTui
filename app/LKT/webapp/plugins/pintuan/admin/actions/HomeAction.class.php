@@ -52,7 +52,6 @@ class HomeAction extends PluginAction
             if ($status == 4) {
                 $type = 'record';
                 $sql = "select a.*,b.user_id,b.user_name,c.product_title as p_name,d.sid as attr_id,c.id as goods_id  from lkt_group_open as a,lkt_user as b ,lkt_product_list as c ,lkt_order_details as d  where a.uid = b.wx_id and a.ptgoods_id = c.id and a.sNo= d.r_sNo" . $whereStr . " order by a.addtime desc limit $start,$pagesize";
-                // print_r($sql);die;
                 $sql1 = "select a.*,b.user_id,b.user_name,c.product_title as p_name,d.sid as attr_id,c.id as goods_id  from lkt_group_open as a,lkt_user as b ,lkt_product_list as c ,lkt_order_details as d  where a.uid = b.wx_id and a.ptgoods_id = c.id and a.sNo= d.r_sNo" . $whereStr . " order by a.addtime desc ";
             } else {
                 $type = 'canrecord';
@@ -75,7 +74,7 @@ class HomeAction extends PluginAction
 
                 foreach ($res as $k => $v) {
 
-                    //                查询商品属性
+                    //查询商品属性
                     $sql = "SELECT price,img from lkt_configure where id = $v->attr_id";
                     $c_res = $db->select($sql);
                     $v->price = $c_res[0]->price;

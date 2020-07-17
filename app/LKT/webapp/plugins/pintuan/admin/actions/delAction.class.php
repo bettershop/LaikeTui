@@ -43,7 +43,7 @@ class delAction extends PluginAction
                         $db->update("UPDATE lkt_user SET money =money+$value02->z_price WHERE user_id = '" . $value02->user_id . "'");
                         $event = $value02->user_id . '退回拼团金额' . $value02->z_price . '';
                         $sqlldr = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$value02->user_id','$value02->z_price','','$event',5)";
-                        $beres1 = $db->insert($sqlldr);
+                        $db->insert($sqlldr);
                     }
                 }
                 $db->update("UPDATE `lkt_order` SET `ptstatus`='3', `status`='11' WHERE ptcode = " . $value01->ptcode);
