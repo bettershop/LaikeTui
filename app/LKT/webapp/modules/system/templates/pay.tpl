@@ -49,7 +49,7 @@
                 <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>证书路径：</label>
                 <div class="formControls col-xs-8 col-sm-6">
                     <input type="text" name="mch_cert" value="{$mch_cert}" class="input-text">
-                    <i style="color: red;padding-right: 5px;margin-top: 5px;vertical-align: -4px;">*</i><text style="color: #333;font-size: 12px;">上传过支付证书后字体自动生成(退款等需要)</text>
+                    <i style="color: red;padding-right: 5px;margin-top: 5px;vertical-align: -4px;">*</i><text style="color: #333;font-size: 12px;">上传过支付证书后字体自动生成(退款需要,如果是支付的话可以不上传)</text>
                 </div>
             </div>
         </div>
