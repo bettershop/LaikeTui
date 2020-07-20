@@ -1,12 +1,15 @@
 <?php
 require_once(MO_LIB_DIR . '/DBAction.class.php');
-class whetherAction extends Action {
 
-    public function getDefaultView() {
+class whetherAction extends Action
+{
+
+    public function getDefaultView()
+    {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $m=$request->getParameter("m");
-        if($m){
+        $m = $request->getParameter("m");
+        if ($m) {
             $this->$m();
         }
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
@@ -17,27 +20,31 @@ class whetherAction extends Action {
         $sql = "select status from lkt_plug_ins where id = '$id'";
         $r = $db->select($sql);
 
-        if($r[0]->status == 1){
+        if ($r[0]->status == 1) {
             $sql = "update lkt_plug_ins set status = 0 where id = '$id'";
             $res = $db->update($sql);
-            $db->admin_record($admin_id,' 禁用插件id为 '.$id,5);
-            echo $res; exit;
-        }else{
+            $db->admin_record($admin_id, ' 禁用插件id为 ' . $id, 5);
+            echo $res;
+            exit;
+        } else {
             $sql = "update lkt_plug_ins set status = 1 where id = '$id'";
             $res = $db->update($sql);
-            $db->admin_record($admin_id,' 启用插件id为 '.$id,5);
-            echo $res; exit;
+            $db->admin_record($admin_id, ' 启用插件id为 ' . $id, 5);
+            echo $res;
+            exit;
         }
     }
 
-public function execute(){
-    return $this->getDefaultView();
-}
+    public function execute()
+    {
+        return $this->getDefaultView();
+    }
 
 
-public function getRequestMethods(){
-    return Request :: NONE;
-}
+    public function getRequestMethods()
+    {
+        return Request :: NONE;
+    }
 
 }
 
