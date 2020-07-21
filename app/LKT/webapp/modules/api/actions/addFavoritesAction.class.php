@@ -14,7 +14,6 @@ class addFavoritesAction extends BaseAction {
     // 点击收藏
     public function index(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         $openid = addslashes($_POST['openid']); // 微信id
         $pid = addslashes($_POST['pid']); // 产品id
         // 根据微信id,查询用户id
@@ -46,8 +45,6 @@ class addFavoritesAction extends BaseAction {
     // 查看收藏
     public function collection(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-
         $openid = addslashes($_POST['openid']); // 微信id
         
         $appConfig = $this->getAppInfo();
@@ -68,8 +65,6 @@ select l.id,a.id as pid,a.product_title,a.imgurl as img,c.price
         if($r){
             foreach ($r as $k => $v) {
                 $array = (array)$v;
-                $pid = $array['pid'];
-
                 $array['price']=$v->price;
                 $array['imgurl']= $img . $v->img;
                 $v = (object)$array;
@@ -86,8 +81,6 @@ select l.id,a.id as pid,a.product_title,a.imgurl as img,c.price
     // 取消收藏
     public function removeFavorites(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-
         $id = addslashes($_POST['id']); // 收藏id
         // 根据收藏id,删除收藏表信息
         $sql = "delete from lkt_user_collection where id = '$id'";
@@ -109,7 +102,7 @@ select l.id,a.id as pid,a.product_title,a.imgurl as img,c.price
         $openid = addslashes(trim($request->getParameter('openid'))); // 微信id
         $sql_user = 'select user_id from lkt_user where wx_id=\''.$openid.'\'';
         $r_user = $db->select($sql_user);
-        $userid = $r_user['0']->user_id;
+        $userid = $r_user[0]->user_id;
         $sql = "delete from lkt_user_collection where user_id = '$userid'";
         $r = $db->delete($sql);
         if ($r){

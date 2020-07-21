@@ -8,10 +8,6 @@ class whetherAction extends Action
     {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $m = $request->getParameter("m");
-        if ($m) {
-            $this->$m();
-        }
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
 
         // 接收信息
