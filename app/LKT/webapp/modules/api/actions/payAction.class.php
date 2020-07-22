@@ -162,7 +162,6 @@ class payAction extends BaseAction {
 
     //获取xml
     private function xml123($xml){
-        // var_dump($xml);exit;
         $p = xml_parser_create();
         xml_parse_into_struct($p, $xml, $vals, $index);
         xml_parser_free($p);
