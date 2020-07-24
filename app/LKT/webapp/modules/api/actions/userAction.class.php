@@ -286,9 +286,7 @@ class userAction extends BaseAction
     public function withdrawals()
     {
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         // 接收信息
-        $money = addslashes($_POST['money']); // 金额
         $min_amount = addslashes($_POST['min_amount']); // 最少提现金额
         $max_amount = addslashes($_POST['max_amount']); // 最大提现金额
         $amoney = addslashes($_POST['amoney']); // 提现金额
