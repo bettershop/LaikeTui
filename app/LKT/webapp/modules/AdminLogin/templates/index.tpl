@@ -453,10 +453,10 @@
 		</li>
 		<li class="headerLi" style="height: 60px;">
 			<div id="message">
-				<!--<a href="#javascript"><img src="images/iIcon/xiaoxi.png"/></a>-->
+
 			</div>
 			
-			{*<div class="news"><span class="newsSpan"></span></div>*}
+
 		</li>
 		<li id="Hui-skin" class="headerLi dropDown right dropDown_hover">
 			<a href="javascript:;" title="换肤">
@@ -567,9 +567,7 @@
 			<a href="javascript:void(0);" class="closeA clsCPW"><img src="images/icon1/gb.png"/></a>
 			<div class="maskTitle">修改密码</div>
 			<form   action="javascript:void(0);" method="post">
-				<!-- <input type="hidden" name="module" value="AdminLogin" /> -->
-
-				<!-- <input type="hidden" name="action" value="changePassword" /> -->
+				
 				<div class="iptDiv">
 					<div class="iptLeft">
 						原密码：

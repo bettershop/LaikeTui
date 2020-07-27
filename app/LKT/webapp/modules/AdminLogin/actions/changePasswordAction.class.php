@@ -48,10 +48,7 @@ class changePasswordAction extends Action {
     }
 
     public function execute(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-    
-        return;
+
     }
 
     public function getRequestMethods(){
