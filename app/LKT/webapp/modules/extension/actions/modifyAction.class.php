@@ -1,17 +1,16 @@
 <?php
 
 /**
-
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 
-class modifyAction extends Action {
+class modifyAction extends Action
+{
 
-	public function getDefaultView() {
+    public function getDefaultView()
+    {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
@@ -20,7 +19,7 @@ class modifyAction extends Action {
         $sql = "select * from lkt_extension where id = '$id'";
         $r = $db->select($sql);
         $res = [];
-        if($r){
+        if ($r) {
             $data = json_decode($r[0]->data); // 推广图
             $res = $r[0];
         }
@@ -29,23 +28,24 @@ class modifyAction extends Action {
         $r_1 = $db->select($sql);
         $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
         $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
-        if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
+        if (strpos($uploadImg, '../') === false) { // 判断字符串是否存在 ../
             $img = $uploadImg_domain . $uploadImg; // 图片路径
-        }else{ // 不存在
-            $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
+        } else { // 不存在
+            $img = $uploadImg_domain . substr($uploadImg, 2); // 图片路径
         }
-        $request->setAttribute("uploadImg",$uploadImg);
-        $request->setAttribute("img",$img);
-        $request->setAttribute("res",$res);
+        $request->setAttribute("uploadImg", $uploadImg);
+        $request->setAttribute("img", $img);
+        $request->setAttribute("res", $res);
         $request->setAttribute('id', $id);
         $request->setAttribute('data', $data);
-        
-        return View :: INPUT;
-	}
 
-	public function execute(){
-		$db = DBAction::getInstance();
-		$request = $this->getContext()->getRequest();
+        return View :: INPUT;
+    }
+
+    public function execute()
+    {
+        $db = DBAction::getInstance();
+        $request = $this->getContext()->getRequest();
         // 接收数据
         $title = trim($request->getParameter('title')); // 名称
         $type = trim($request->getParameter('type')); // 海报类型
@@ -55,45 +55,40 @@ class modifyAction extends Action {
         $waittext = trim($request->getParameter('waittext')); // 等待语
         $data = trim($request->getParameter('data')); // 排序的数据
         $color = trim($request->getParameter('color')); // 颜色
-        $img =$request->getParameter('img');
-        
-        if(empty($title) || empty($keyword) || empty($waittext)){
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('信息未填写完整,请重新添加！');" .
-                "</script>";
-            return $this->getDefaultView();
-        }
+        $img = $request->getParameter('img');
+
+
         // 添加数据
-        if($isdefault){
+        if ($isdefault) {
             $sql = "update lkt_extension set isdefault = 0 where type = '$type'";
-            $r = $db->update($sql);
+            $db->update($sql);
         }
 
         $id = intval($request->getParameter("id")); // 推广图id
-		//更新数据表
+        //更新数据表
 
         $sql = "update lkt_extension set image='$img',name='$title',type='$type',keyword='$keyword',isdefault='$isdefault',bg='$bg',waittext='$waittext',data='$data',color='$color',add_date =CURRENT_TIMESTAMP where id = '$id'";
 
-		$r = $db->update($sql);
-        
-		if($r == -1) {
-		echo "<script type='text/javascript'>" .
-				"alert('未知原因，修改失败！');" .
-				"location.href='index.php?module=extension';</script>";
-			return $this->getDefaultView();
-		}else {
-			header("Content-type:text/html;charset=utf-8");
-			echo "<script type='text/javascript'>" .
-				"alert('修改成功！');" .
-				"location.href='index.php?module=extension';</script>";
-		}
-		return;
-	}
+        $r = $db->update($sql);
 
-	public function getRequestMethods(){
-		return Request :: POST;
-	}
+        if ($r == -1) {
+            echo "<script type='text/javascript'>" .
+                "alert('未知原因，修改失败！');" .
+                "location.href='index.php?module=extension';</script>";
+            return $this->getDefaultView();
+        } else {
+            header("Content-type:text/html;charset=utf-8");
+            echo "<script type='text/javascript'>" .
+                "alert('修改成功！');" .
+                "location.href='index.php?module=extension';</script>";
+        }
+        return;
+    }
+
+    public function getRequestMethods()
+    {
+        return Request :: POST;
+    }
 
 }
 
