@@ -57,7 +57,6 @@ class modifyAction extends Action
         $color = trim($request->getParameter('color')); // 颜色
         $img = $request->getParameter('img');
 
-
         // 添加数据
         if ($isdefault) {
             $sql = "update lkt_extension set isdefault = 0 where type = '$type'";
@@ -65,10 +64,7 @@ class modifyAction extends Action
         }
 
         $id = intval($request->getParameter("id")); // 推广图id
-        //更新数据表
-
         $sql = "update lkt_extension set image='$img',name='$title',type='$type',keyword='$keyword',isdefault='$isdefault',bg='$bg',waittext='$waittext',data='$data',color='$color',add_date =CURRENT_TIMESTAMP where id = '$id'";
-
         $r = $db->update($sql);
 
         if ($r == -1) {

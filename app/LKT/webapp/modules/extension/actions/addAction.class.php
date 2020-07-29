@@ -42,11 +42,10 @@ class addAction extends Action
         $color = trim($request->getParameter('color')); // 颜色
         $img = $request->getParameter('img');
 
-
         // 添加数据
         if ($isdefault) {
             $sql = "update lkt_extension set isdefault = 0 where type = '$type'";
-            $r = $db->update($sql);
+            $db->update($sql);
         }
         $sql = "insert into lkt_extension(image,name,type,keyword,isdefault,bg,waittext,data,color,add_date)values('$img','$title','$type','$keyword','$isdefault','$bg','$waittext','$data','$color',CURRENT_TIMESTAMP)";
         $r = $db->insert($sql);
