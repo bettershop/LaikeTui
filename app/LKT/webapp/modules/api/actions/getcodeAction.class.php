@@ -13,62 +13,6 @@ class getcodeAction extends Action
 
     public function getDefaultView()
     {
-        $db = DBAction::getInstance();
-        //现在时间的前一天
-        $datetime = date('Y-m-d H:i:s', time() - 24 * 60 * 60);
-        //现在时间的前七天
-        $datetime1 = date('Y-m-d H:i:s', time() - 7 * 24 * 60 * 60);
-        //删除超过七天的数据
-        $delsql = "delete from lkt_draw_user_fromid where lifetime < '$datetime1'";
-        $db->delete($delsql);
-        //过去五分钟
-        $oldtime = date('Y-m-d H:i:s', time() - 5 * 60 - 24 * 60 * 60);
-        $sql01 = "select * from lkt_draw where end_time >='$oldtime'and end_time<'$datetime'";//查询符合条件的活动ID
-        $re01 = $db->select($sql01);
-
-        if (!empty($re01)) {
-            foreach ($re01 as $key01 => $value01) {
-                $draw_id = $value01->id;//活动ID
-                $name = $value01->name;//活动名称
-                $draw_brandid = $value01->draw_brandid;//活动名称
-                $sql03 = "select product_title from lkt_product_list where id='$draw_brandid'";//通过活动ID查询活动人员
-                $re03 = $db->select($sql03);
-                $product_title = $re03[0]->product_title;//活动商品
-                $sql02 = "select * from lkt_draw_user where draw_id='$draw_id'";//通过活动ID查询活动人员
-                $re02 = $db->select($sql02);
-
-                if (!empty($re02)) {//存在参加活动的订单
-                    foreach ($re02 as $key02 => $value02) {
-                        $id = $value02->id;//ID
-                        $user_id = $value02->user_id;//用户ID
-
-                        $sql04 = "select wx_id from lkt_user where user_id='$user_id' ";//查询活动人员wx_id
-                        $re04 = $db->select($sql04);
-                        $openid = $re04[0]->wx_id;
-                        $sql05 = "select fromid from lkt_draw_user_fromid where open_id='$openid' order by lifetime asc ";//查询活动人员wx_id
-                        $re05 = $db->select($sql05);
-                        if (!empty($re05)) {//存在符合条件的fromid
-                            $fromid = $re05[0]->fromid;//状态
-                            $lottery_status = $value02->lottery_status;//状态
-                            $time = $value02->time;//中奖时间
-                            if ($lottery_status == 4) {
-                                $rew[$key01][$key02]['lottery_status'] = '抽奖成功';
-                            } elseif ($lottery_status == 2) {
-                                $rew[$key01][$key02]['lottery_status'] = '参团失败';
-                            } else {
-                                $rew[$key01][$key02]['lottery_status'] = '抽奖失败';
-                            }
-                            $rew[$key01][$key02]['product_title'] = $product_title;
-                            $rew[$key01][$key02]['name'] = $name;
-                            $rew[$key01][$key02]['time'] = $time;
-                            $rew[$key01][$key02]['openid'] = $openid;
-                            $rew[$key01][$key02]['fromid'] = $fromid;
-                        }
-                    }
-                    $this->Send_success($rew);
-                }
-            }
-        }
 
        
     }
@@ -94,8 +38,6 @@ class getcodeAction extends Action
     public function code()
     {
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-
         $sql = "select * from lkt_config where id=1";
         $r = $db->select($sql);
         if ($r) {
@@ -406,7 +348,6 @@ class getcodeAction extends Action
         $letter = $arr[0];
         foreach ($letter as $l) {
             $teststr = $content . $l;
-            // var_dump($fontsize, $angle, $fontface, $teststr);
             $testbox = imagettfbbox($fontsize, $angle, $fontface, $teststr);
             if (($testbox[2] > $width) && ($content !== "")) {
                 $content .= PHP_EOL;
@@ -547,54 +488,10 @@ class getcodeAction extends Action
         return $result;
     }
 
-    //抽奖通知
-    public function Send_success($rew)
-    {
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $sql = "select * from lkt_config where id=1";
-        $r = $db->select($sql);
-        if ($r) {
-            $appid = $r[0]->appid; // 小程序唯一标识
-            $appsecret = $r[0]->appsecret; // 小程序的 app secret
-            $AccessToken = $this->getAccessToken($appid, $appsecret);
-            $url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' . $AccessToken;
-        }
-
-        foreach ($rew as $k => $v) {
-
-            foreach ($v as $key => $value) {
-                $lottery_status = $value[''];
-                $product_title = $value['product_title'];
-                $name = $value['name'];
-                $time = $value['time'];
-                $openid = $value['openid'];
-                $fromid = $value['fromid'];
-                $lottery_status = $value['lottery_status'];
-                $data = array();
-                $data['access_token'] = $AccessToken;
-                $data['touser'] = $openid;
-                $sql = "select * from lkt_notice where id = '1'";
-                $r = $db->select($sql);
-                $template_id = $r[0]->lottery_res;
-                $data['template_id'] = $template_id;
-                $data['form_id'] = $fromid;
-                $minidata = array('keyword1' => array('value' => $name, 'color' => "#173177"), 'keyword2' => array('value' => $product_title, 'color' => "#173177"), 'keyword3' => array('value' => $time, 'color' => "#173177"), 'keyword4' => array('value' => $lottery_status, 'color' => "#173177"));
-                $data['data'] = $minidata;
-                $data = json_encode($data);
-
-                $da = $this->httpsRequest($url, $data);
-                $delsql = "delete from lkt_draw_user_fromid where open_id='$openid' and fromid='$fromid'";
-                $db->delete($delsql);
-                var_dump(json_encode($da));
-            }
-        }
-    }
 
     public function getToken()
     {
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         $sql = "select * from lkt_config where id=1";
         $r = $db->select($sql);
         if ($r) {
