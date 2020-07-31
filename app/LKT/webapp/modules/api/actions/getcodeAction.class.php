@@ -5,7 +5,6 @@
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
-require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
 
 class getcodeAction extends Action
@@ -131,11 +130,8 @@ class getcodeAction extends Action
         $head = addslashes($request->getParameter('head'));
         $regenerate = addslashes(trim($request->getParameter('regenerate')));
 
-
-
         $path = addslashes($request->getParameter('path'));
         $id = addslashes($request->getParameter('id'));
-
 
         // 生成密钥
         $utoken = '';
@@ -573,10 +569,6 @@ class getcodeAction extends Action
     function madeCode()
     {
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $id = addslashes(trim($request->getParameter('id')));
-        $wx_id = addslashes($request->getParameter('openid'));
-
         $sql = "select * from lkt_config where id=1";
         $r = $db->select($sql);
         $company = $r[0]->company;
