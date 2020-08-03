@@ -219,8 +219,6 @@ class examineAction extends Action
                         $keyword7 = array('value' => '原支付方式', "color" => "#173177");
                         //拼成规定的格式
                         $o_data = array('keyword1' => $keyword1, 'keyword2' => $keyword2, 'keyword3' => $keyword3, 'keyword4' => $keyword4, 'keyword5' => $keyword5, 'keyword6' => $keyword6, 'keyword7' => $keyword7);
-                        //$this->Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data);
-                        //$this->get_fromid($openid, $form_id);
                         $res = 1;
 
                     } else if ($pay == 'combined_Pay') {
@@ -327,12 +325,6 @@ class examineAction extends Action
                             //拼成规定的格式
                             $o_data = array('keyword1' => $keyword1, 'keyword2' => $keyword2, 'keyword3' => $keyword3, 'keyword4' => $keyword4, 'keyword5' => $keyword5, 'keyword6' => $keyword6, 'keyword7' => $keyword7);
 
-                            /*
-                            $res = $this->Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data);
-                            if ($form_id) {
-                                $this->get_fromid($openid, $form_id);
-                            }
-                            */
                             $res = 1;
 
                             $sql_o = "select id from lkt_order_details where r_sNo = '$sNo' and r_status = '4'";
@@ -424,12 +416,6 @@ class examineAction extends Action
                         //拼成规定的格式
                         $o_data = array('keyword1' => $keyword1, 'keyword2' => $keyword2, 'keyword3' => $keyword3, 'keyword4' => $keyword4, 'keyword5' => $keyword5, 'keyword6' => $keyword6, 'keyword7' => $keyword7);
 
-                        /*
-                        $res = $this->Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data);
-                        if ($form_id) {
-                            $this->get_fromid($openid, $form_id);
-                        }
-                        */
 
                         $res = 1;
                         $sql_o = "select id from lkt_order_details where r_sNo = '$sNo' and r_status = '4'";
@@ -539,13 +525,6 @@ class examineAction extends Action
                             //拼成规定的格式
                             $o_data = array('keyword1' => $keyword1, 'keyword2' => $keyword2, 'keyword3' => $keyword3, 'keyword4' => $keyword4, 'keyword5' => $keyword5, 'keyword6' => $keyword6, 'keyword7' => $keyword7);
 
-                            /*
-                            $res = $this->Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data);
-                            if ($form_id) {
-                                $this->get_fromid($openid, $form_id);
-                            }
-                            */
-
                             $res = 1;
 
                             $sql_o = "select id from lkt_order_details where r_sNo = '$sNo' and r_status = '4'";
@@ -649,10 +628,6 @@ class examineAction extends Action
                 //拼成规定的格式
                 $o_data = array('keyword1' => $keyword1, 'keyword2' => $keyword2, 'keyword3' => $keyword3, 'keyword4' => $keyword4, 'keyword5' => $keyword5, 'keyword6' => $keyword6, 'keyword7' => $keyword7);
 
-                /*
-                $res = $this->Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data);
-                $this->get_fromid($openid, $form_id);
-                */
                 $res = 1;
 
             } else {
@@ -673,12 +648,10 @@ class examineAction extends Action
                 if ($res_d == $res_o) {
                     // 根据订单号、用户id,修改订单状态
                     $sql_u = "update lkt_order set status = '$status' where sNo = '$sNo' ";
-                    // echo "$sql_u";
-                    $res1 = $db->update($sql_u);
+                    $db->update($sql_u);
                 }
                 $text = htmlentities($request->getParameter('text'));
                 $sql = "update lkt_order_details set r_type = '$m',r_content = '$text',r_status ='$status' where id = '$id'";
-                // echo "$sql";
                 $res = $db->update($sql);
                 if ($res < 1) {
                     $db->rollback();
@@ -711,8 +684,6 @@ class examineAction extends Action
 
     public function Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data)
     {
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         $AccessToken = $this->getAccessToken($appid, $appsecret);
         $url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' . $AccessToken;
         $data = json_encode(array('access_token' => $AccessToken, 'touser' => $openid, 'template_id' => $send_id, 'form_id' => $form_id, 'page' => $page, 'data' => $o_data));
@@ -853,10 +824,9 @@ class examineAction extends Action
             if ($urlencode) {
                 $v = urlencode($v);
             }
-            //$buff .= strtolower($k) . "=" . $v . "&";
             $buff .= $k . "=" . $v . "&";
         }
-        $reqPar;
+        $reqPar="";
         if (strlen($buff) > 0) {
             $reqPar = substr($buff, 0, strlen($buff) - 1);
         }

@@ -565,20 +565,6 @@ class getcodeAction extends Action
         return $accessToken;
     }
 
-    //生成红包文字
-    function madeCode()
-    {
-        $db = DBAction::getInstance();
-        $sql = "select * from lkt_config where id=1";
-        $r = $db->select($sql);
-        $company = $r[0]->company;
-        $instring = $company . '给你发红包啦';
-
-        echo json_encode(array('status' => 1, 'text' => $instring));
-        exit();
-        return;
-    }
-
     //生成推广图片
     function getPromotion($name, $ditu, $x, $y, $wx_id, $kuan = 300)
     {
@@ -587,7 +573,6 @@ class getcodeAction extends Action
         $r_w = $db->select($sql_w);
         //信息准备
         $userid = $r_w[0]->user_id;
-        // $dest = imagecreatefromjpeg('../LKT/images/bottom/img01.jpg');  //底图1 http://127.0.0.1:8080/LKT/images/1523861937693.jpeg
         $dest = imagecreatefromjpeg($ditu);  //底图1
         $dirName = '../LKT/images/';
         $headfilename = 'logo.jpg';
@@ -627,30 +612,10 @@ class getcodeAction extends Action
         // /* 图片组合完成 保存图片 */
         $pic = $userid . $name . 'tui.jpg';
         $res = imagejpeg($dest, $dirName . $pic);
-        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/duan/LKT/images/' . $pic;/* end 保存*/
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/LKT/images/' . $pic;/* end 保存*/
         return $url;
     }
 
-    function createPromotion()
-    {
-        $url = [];
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        $wx_id = addslashes($request->getParameter('openid'));
-
-        $sql = "select image,x,y,kuan from lkt_extension ";
-        $r = $db->select($sql);
-        if ($r) {
-            foreach ($r as $key => $value) {
-                $str = $value->image;
-                $img = str_replace("/duan/", "../", $str);
-                $img_url = $this->getPromotion($key + 1, $img, $value->x, $value->y, $wx_id, $value->kuan);
-                $url[$key] = array('hpcontent_id' => $key + 1, 'hp_img_url' => $img_url);
-            }
-        }
-        echo json_encode(array('status' => 1, 'pictures' => $url));
-        exit;
-    }
 
 
     function mkFolder($path)
