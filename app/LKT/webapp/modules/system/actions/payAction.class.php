@@ -51,17 +51,6 @@ class payAction extends Action
         $mch_key = addslashes($request->getParameter('mch_key'));
         $mch_id = addslashes(trim($request->getParameter('mch_id'))); // 商户id
 
-        if ($mch_key == '') {
-            echo "<script type='text/javascript'>" .
-                "alert('信息未填写完整,请完善后在提交！');" .
-                "location.href='index.php?module=system&action=pay';</script>";
-        }
-        if (is_numeric($mch_id) == false) {
-            echo "<script type='text/javascript'>" .
-                "alert('商户id请输入数字！');" .
-                "location.href='index.php?module=system&action=pay';</script>";
-        }
-
         $ufile = $_FILES['upload_cert']['size'];
 
         $mch_cert_url = '';
@@ -69,7 +58,6 @@ class payAction extends Action
             $upload_file = MO_LIB_DIR . '/cert/'; // 文件上传位置
             //将临时文件复制到upload_image目录下
             $upload_cert = ($_FILES['upload_cert']['tmp_name']);
-            $type = str_replace('image/', '.', $_FILES['upload_cert']['type']);
             $edition_url_name = 'apiclient_key_' . time() . '.zip';
             $zip_file = $upload_file . $edition_url_name;
             move_uploaded_file($upload_cert, $zip_file);

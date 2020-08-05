@@ -1,16 +1,15 @@
 <?php
 /**
-
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 
-class modifyAction extends Action {
+class modifyAction extends Action
+{
 
-    public function getDefaultView() {
+    public function getDefaultView()
+    {
 
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
@@ -21,7 +20,7 @@ class modifyAction extends Action {
         // 根据分类id,查询产品分类表
         $sql = "select * from lkt_brand_class where brand_id = '$brand_id'";
         $r = $db->select($sql);
-        if($r){
+        if ($r) {
             $brand_name = $r[0]->brand_name; // 品牌名称
             $brand_y_name = $r[0]->brand_y_name; // 品牌名称
             $brand_pic = $r[0]->brand_pic; // 品牌图片
@@ -29,10 +28,10 @@ class modifyAction extends Action {
             $remarks = $r[0]->remarks; // 备注
             $sort = $r[0]->sort; // 排序
         }
-        $request->setAttribute("brand_id",$brand_id);
-        $request->setAttribute("uploadImg",$uploadImg);
-        $request->setAttribute("brand_name",$brand_name);
-        $request->setAttribute("brand_y_name",$brand_y_name);
+        $request->setAttribute("brand_id", $brand_id);
+        $request->setAttribute("uploadImg", $uploadImg);
+        $request->setAttribute("brand_name", $brand_name);
+        $request->setAttribute("brand_y_name", $brand_y_name);
         $request->setAttribute('brand_pic', $brand_pic);
         $request->setAttribute('producer', $producer);
         $request->setAttribute('remarks', $remarks);
@@ -42,10 +41,11 @@ class modifyAction extends Action {
         return View :: INPUT;
     }
 
-    public function execute(){
-      $db = DBAction::getInstance();
-      $request = $this->getContext()->getRequest();
-      $admin_id = $this->getContext()->getStorage()->read('admin_id');
+    public function execute()
+    {
+        $db = DBAction::getInstance();
+        $request = $this->getContext()->getRequest();
+        $admin_id = $this->getContext()->getStorage()->read('admin_id');
 
         $brand_id = intval($request->getParameter('cid')); // 品牌id
         $uploadImg = addslashes(trim($request->getParameter('uploadImg'))); // 图片上传位置
@@ -55,51 +55,52 @@ class modifyAction extends Action {
         $producer = addslashes(trim($request->getParameter('producer'))); // 产地
         $sort = addslashes(trim($request->getParameter('sort'))); // 排序
         $remarks = addslashes(trim($request->getParameter('remarks'))); // 备注
-        if($image){
-            $image = preg_replace('/.*\//','',$image);
-            if($image != $oldpic){
-                @unlink ($uploadImg.$oldpic);
+        if ($image) {
+            $image = preg_replace('/.*\//', '', $image);
+            if ($image != $oldpic) {
+                @unlink($uploadImg . $oldpic);
             }
-        }else{
-            if($oldpic){
+        } else {
+            if ($oldpic) {
                 $image = $oldpic;
-            }else{
+            } else {
                 header("Content-type:text/html;charset=utf-8");
                 echo "<script type='text/javascript'>" .
-                "alert('品牌logo不能为空！');" .
-                "</script>";
+                    "alert('品牌logo不能为空！');" .
+                    "</script>";
                 return $this->getDefaultView();
             }
-            
+
         }
 
         //更新分类列表
         $sql = "update lkt_brand_class " .
-        "set brand_y_name = '$brand_y_pname',brand_pic = '$image',producer = '$producer',remarks = '$remarks',sort = '$sort'"
-        ." where brand_id = '$brand_id'";
+            "set brand_y_name = '$brand_y_pname',brand_pic = '$image',producer = '$producer',remarks = '$remarks',sort = '$sort'"
+            . " where brand_id = '$brand_id'";
         $r = $db->update($sql);
 
-        if($r == -1) {
-            $db->admin_record($admin_id,' 修改商品品牌id为 '.$brand_id.' 失败',2);
+        if ($r == -1) {
+            $db->admin_record($admin_id, ' 修改商品品牌id为 ' . $brand_id . ' 失败', 2);
 
             echo "<script type='text/javascript'>" .
-            "alert('未知原因，修改产品品牌失败！');" .
-            "location.href='index.php?module=brand_class';</script>";
+                "alert('未知原因，修改产品品牌失败！');" .
+                "location.href='index.php?module=brand_class';</script>";
             return $this->getDefaultView();
         } else {
-            $db->admin_record($admin_id,' 修改商品品牌id为 '.$brand_id.' 的信息',2);
+            $db->admin_record($admin_id, ' 修改商品品牌id为 ' . $brand_id . ' 的信息', 2);
 
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
-            "alert('修改产品品牌成功！');" .
-            "location.href='index.php?module=brand_class';</script>";
+                "alert('修改产品品牌成功！');" .
+                "location.href='index.php?module=brand_class';</script>";
         }
         return;
     }
 
-    public function getRequestMethods(){
-      return Request :: POST;
-  }
+    public function getRequestMethods()
+    {
+        return Request :: POST;
+    }
 
 }
 

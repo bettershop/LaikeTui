@@ -1,18 +1,17 @@
 <?php
 /**
-
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
 
-class statusAction extends Action {
+class statusAction extends Action
+{
 
-    public function getDefaultView() {
+    public function getDefaultView()
+    {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
@@ -21,39 +20,41 @@ class statusAction extends Action {
 
         $sql = "select status from lkt_brand_class where brand_id = '$id'";
         $r = $db->select($sql);
-        if($r){
+        if ($r) {
             $status = $r[0]->status;
-            if($status == 0){
+            if ($status == 0) {
                 $sql = "select id from lkt_product_list where brand_id = '$id'";
                 $r = $db->select($sql);
-                if($r){
-                    $db->admin_record($admin_id,'禁用品牌id为'.$id .' 失败',5);
+                if ($r) {
+                    $db->admin_record($admin_id, '禁用品牌id为' . $id . ' 失败', 5);
                     echo 2;
                     exit;
                 }
                 $sql = "update lkt_brand_class set status = 1 where brand_id = '$id'";
                 $db->update($sql);
 
-                $db->admin_record($admin_id,'禁用品牌id为'.$id,5);
+                $db->admin_record($admin_id, '禁用品牌id为' . $id, 5);
 
                 echo 1;
                 return;
-            }else{
+            } else {
                 $sql = "update lkt_brand_class set status = 0 where brand_id = '$id'";
                 $db->update($sql);
 
-                $db->admin_record($admin_id,'启用品牌id为'.$id,5);
+                $db->admin_record($admin_id, '启用品牌id为' . $id, 5);
                 echo 1;
                 return;
             }
         }
     }
 
-    public function execute() {
+    public function execute()
+    {
 
     }
 
-    public function getRequestMethods(){
+    public function getRequestMethods()
+    {
         return Request :: NONE;
     }
 

@@ -16,8 +16,6 @@ class IndexAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $uploadImg = $this->getContext()->getStorage()->read('uploadImg');
-
-        $pageto = $request -> getParameter('pageto');
         // 导出
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:10;
