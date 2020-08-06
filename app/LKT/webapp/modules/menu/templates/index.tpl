@@ -34,8 +34,7 @@
             <input type="hidden" name="module" value="menu" />
             <input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize" />
 
-            <input type="text" name="cart_id" size='8' value="{$cart_id}" id="" placeholder="菜单id" autocomplete="off" style="width:200px" class="input-text">
-            <input type="text" name="title" size='8' value="{$title}" id="" placeholder="菜单名称" autocomplete="off" style="width:200px" class="input-text">
+           <input type="text" name="title" size='8' value="{$title}" id="" placeholder="菜单名称" autocomplete="off" style="width:200px" class="input-text">
             <input name="" id="btn1" class="btn btn-success" type="submit" value="查询">
             
         </form>

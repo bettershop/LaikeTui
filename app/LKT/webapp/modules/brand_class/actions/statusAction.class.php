@@ -15,9 +15,7 @@ class statusAction extends Action
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
         $id = addslashes(trim($request->getParameter('id')));
-
         $sql = "select status from lkt_brand_class where brand_id = '$id'";
         $r = $db->select($sql);
         if ($r) {
@@ -32,15 +30,12 @@ class statusAction extends Action
                 }
                 $sql = "update lkt_brand_class set status = 1 where brand_id = '$id'";
                 $db->update($sql);
-
                 $db->admin_record($admin_id, '禁用品牌id为' . $id, 5);
-
                 echo 1;
                 return;
             } else {
                 $sql = "update lkt_brand_class set status = 0 where brand_id = '$id'";
                 $db->update($sql);
-
                 $db->admin_record($admin_id, '启用品牌id为' . $id, 5);
                 echo 1;
                 return;
