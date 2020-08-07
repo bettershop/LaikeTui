@@ -1,4 +1,8 @@
 <?php
+/**
+ * [Laike System] Copyright (c) 2017-2020 laiketui.com
+ * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
+ */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
 class modifyAction extends Action {
@@ -203,41 +207,6 @@ class modifyAction extends Action {
         $s_id = $request->getParameter('val'); // 产品类别
         $level = $request->getParameter('level') + 1; // 级别
 
-
-        if($title == ''){
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('菜单名称不能为空！');" .
-                "</script>";
-            return $this->getDefaultView();
-        }else{
-            $sql = "select id from lkt_core_menu where id != '$id' and title = '$title' and s_id = '$s_id'";
-            $r_1 = $db->select($sql);
-            if($r_1){
-                header("Content-type:text/html;charset=utf-8");
-                echo "<script type='text/javascript'>" .
-                    "alert('菜单名称".$title."已存在！');" .
-                    "</script>";
-                return $this->getDefaultView();
-            }
-        }
-
-
-        if(is_numeric($sort)){
-            if($sort <= 0){
-                header("Content-type:text/html;charset=utf-8");
-                echo "<script type='text/javascript'>" .
-                    "alert('排序不能小于等于0！');" .
-                    "</script>";
-                return $this->getDefaultView();
-            }
-        }else{
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('排序请填写数字！');" .
-                "</script>";
-            return $this->getDefaultView();
-        }
         if($level != 1){
             if($url){
                 if(count(explode('?',$url)) < 2){

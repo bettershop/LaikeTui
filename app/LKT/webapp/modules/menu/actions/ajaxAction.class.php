@@ -7,12 +7,9 @@ class ajaxAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $s_id = $request->getParameter("s_id");
-
-        // 根据id，查询菜单
         $sql = "select * from lkt_core_menu where id = '$s_id'";
         $r = $db->select($sql);
         if($r){
-            $level = $r[0]->level;
             $name = $r[0]->name;
             $data = array('status'=>1,'name'=>$name);
             echo json_encode($data);
