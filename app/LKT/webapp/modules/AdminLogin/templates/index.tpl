@@ -13,7 +13,7 @@
 	<link href="style/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 	<link href="style/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 	<link href="style/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
-	<link href="style/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
+	<link href="style/skin/blue/skin.css" rel="stylesheet" type="text/css" id="skin" />
 	<link href="style/css/style.css" rel="stylesheet" type="text/css" />
 	<script src="style/js/message.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/css/font-awesome.min.css">

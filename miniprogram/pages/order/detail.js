@@ -2,7 +2,6 @@ var app = getApp();
 var util = require('../../utils/util.js')
 //获取应用实例  
 var common = require("../../utils/common.js");
-
 function countdown(that) {
   // 渲染倒计时时钟
   var _this = that;

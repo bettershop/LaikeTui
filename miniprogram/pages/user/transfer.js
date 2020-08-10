@@ -63,11 +63,9 @@ Page({
   withdrawals: function (e) {
     var that = this;
     var user_id = e.detail.value.user_id;
-
     wx.redirectTo({//跳转
       url: "../user/transfer1?user_id=" + user_id,
     })
-
   }
 
 

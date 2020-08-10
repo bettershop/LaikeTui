@@ -59,7 +59,6 @@
     <swiper class='out' current='{{current}}' autoplay="{{false}}" bindchange="contentChange">
       <swiper-item wx:for="{{twoList}}" wx:for-item="item" wx:key="{{item.id}}">
         <scroll-view scroll-y="true" bindscrolltolower="obm">
-
           <!-- /首页轮播图/ -->
           <swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" wx:if="{{item.id == 0 && banner.length >0}}">
             <block wx:for="{{banner}}" wx:key="{{item.id}}">

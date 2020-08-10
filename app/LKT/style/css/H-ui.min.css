@@ -2831,7 +2831,7 @@ input[type="checkbox"] {
 	box-sizing: border-box;
 	cursor: pointer;
 	position: relative;
-	padding-left: 30px;
+	/*padding-left: 30px;*/
 	padding-right: 20px
 }
 

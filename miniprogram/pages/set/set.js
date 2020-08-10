@@ -24,8 +24,7 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: function (res) {
-              console.log(res.userInfo)
-              console.log('用户已经授权过');
+              
             }
           })
         } else {
@@ -73,14 +72,10 @@ Page({
   },
 
   onShow: function () {
-
   },
-
 
   onHide: function () {
-
   },
-
 
   clearStorage: function () {
     wx.clearStorageSync();
@@ -92,14 +87,10 @@ Page({
   },
 
   onPullDownRefresh: function () {
-
   },
-
 
   onReachBottom: function () {
-
   },
-
 
   update: function () {
     wx.getUserInfo({
