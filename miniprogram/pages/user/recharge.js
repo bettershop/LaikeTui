@@ -5,9 +5,7 @@ Page({
     fmoney: 0,
     remind: '加载中',
   },
-  //页面加载完成函数 remind: '加载中',
   onReady: function () {
-
   },
   bindblur: function (e) {
     var money = e.detail.value;
@@ -22,9 +20,6 @@ Page({
       });
     }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,//

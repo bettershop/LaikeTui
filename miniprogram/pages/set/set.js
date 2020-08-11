@@ -85,13 +85,10 @@ Page({
       duration: 2000
     });
   },
-
   onPullDownRefresh: function () {
   },
-
   onReachBottom: function () {
   },
-
   update: function () {
     wx.getUserInfo({
       success: function (res) {
