@@ -562,8 +562,6 @@ Page({
     var form_id = e.detail.formId; //消息ID
 
     if (pay) {
-
-
       if (pay == "wxPay") {
         that.payOrderByWechat(order_id, order_sn, price);
         wx.showLoading({
@@ -620,8 +618,7 @@ Page({
 
     var that = this;
     var user_id = app.globalData.userInfo.openid;
-    //调起微信支付
-
+    //调起微信支付    
     wx.request({
       url: app.d.ceshiUrl + '&action=pay&m=pay',
       data: {
@@ -636,13 +633,9 @@ Page({
       }, // 设置请求的 header
       success: function (res) {
         wx.hideLoading()
-
-
         if (res.data) {
           var dingdanhao = res.data.out_trade_no;
-
           that.up_out_trade_no(dingdanhao);
-
           if (res.data.RETURN_MSG === "mch_id参数格式错误") {
             wx.showModal({
               content: "请设置商户号！",
@@ -666,8 +659,6 @@ Page({
             })
             return
           }
-
-
           wx.requestPayment({
             timeStamp: res.data.timeStamp,
             nonceStr: res.data.nonceStr,
@@ -877,7 +868,7 @@ Page({
         });
       }
     })
-    that.detailed(that.data.sNo);//分销
+
   },
   //发送数据到客户微信上
   notice: function (order_id, order_sn, price, user_id, form_id, f_pname) {
@@ -971,17 +962,5 @@ Page({
       },
     });
   },
-  detailed: function (sNo) {//分销
-    wx.request({
-      url: app.d.ceshiUrl + '&action=distribution&m=detailed_commission',
-      method: 'post',
-      data: {
-        userid: app.globalData.userInfo.openid,
-        order_id: sNo,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-    })
-  },
+
 })

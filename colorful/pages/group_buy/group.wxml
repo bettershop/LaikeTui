@@ -1,31 +1,30 @@
-<!-- 加载页面开始 -->
 <view class="body" wx:if="{{remind}}">
-    <view class='zong'>
-          <view class="spinner" >
-                    <view class="spinner-container container1">
-                        <view class="circle1"></view>
-                        <view class="circle2"></view>
-                        <view class="circle3"></view>
-                        <view class="circle4"></view>
-                    </view>
-                    <view class="spinner-container container2">
-                        <view class="circle1"></view>
-                        <view class="circle2"></view>
-                        <view class="circle3"></view>
-                        <view class="circle4"></view>
-                    </view>
-                    <view class="spinner-container container3">
-                        <view class="circle1"></view>
-                        <view class="circle2"></view>
-                        <view class="circle3"></view>
-                        <view class="circle4"></view>
-                    </view>
-          </view>
+    <view class="zong">
+        <view class="spinner">
+            <view class="spinner-container container1">
+                <view class="circle1"></view>
+                <view class="circle2"></view>
+                <view class="circle3"></view>
+                <view class="circle4"></view>
+            </view>
+            <view class="spinner-container container2">
+                <view class="circle1"></view>
+                <view class="circle2"></view>
+                <view class="circle3"></view>
+                <view class="circle4"></view>
+            </view>
+            <view class="spinner-container container3">
+                <view class="circle1"></view>
+                <view class="circle2"></view>
+                <view class="circle3"></view>
+                <view class="circle4"></view>
+            </view>
+        </view>
     </view>
 </view>
-<!-- 加载页面结束 -->
-    <block wx:else>
-      <view class='sort-wrap fd'>
+<block wx:else>
+   <view style="height:90rpx" wx:if="{{bg!=''}}"></view>
+    <view class="sort-wrap fd">
         <view class="sort-btn {{select == 0 ? 'select' : ''}}" bindtap="default">
           拼团
         </view>
@@ -41,7 +40,6 @@
          <view class='iconfont {{xianshi}}' bindtap="tabchage"> </view>
         </view>
       </view>
-
     <view class="list">
         <view class="search_no" wx:if="{{!list.length}}">
 					<view class="font_14">
@@ -49,18 +47,16 @@
 					</view>
 					<text>暂无拼团活动/(ㄒoㄒ)/~~</text>
 				</view>
-
-          <view class="cont" style='padding-top:10px;'>
-            
+          <view class="cont" style='padding-top:5px;'>
               <view  class="{{shu}}">
                 <view class="pr {{shu}}" catchtap="jumpgo" data-id="../group_buy/detail?gid={{item.product_id}}&sum={{item.sum}}&group_id={{item.group_id}}" hover-class="changestyle" wx:for="{{list}}" wx:key="*this">
                     <view class='photo-c'>
                       <image class="photo" src="{{item.imgurl}}"></image>
                     </view>
                     <view class='shu'>
-                        <view class="title">{{item.pro_name}}</view>
-                        <view style="display:flex;line-height:50rpx;;">
-                          <view class="gmxx" style="  color: red;">¥ {{item.group_price}}</view>
+                        <view class="goods-title">{{item.pro_name}}</view>
+                        <view style="display:flex;line-height:60rpx;">
+                          <view class="gmxx">¥ {{item.group_price}}</view>
                           <view class="gmx">¥ {{item.market_price}}</view>
                         </view>
                         <view style="display:flex;line-height:50rpx;color:#999">
@@ -68,24 +64,23 @@
                             <!-- <text wx:if="{{item.s_type==1}}">新品</text> -->                    
                             <text style='color:#666;'>已团{{item.sum}}件</text>
                           </view>
-                          <view class="ku" style="width:30%;height:40rpx;line-height:40rpx;background:#e83737;color:#fff;display:flex;flex-direction: row;justify-content:center;margin-left:30%;">去开团</view>
+                          <view class="ku" style="width:32%;height:40rpx;line-height:40rpx;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);color:#fff;display:flex;flex-direction: row;justify-content:center;margin-left:26%;border-radius: 15px;">去开团</view>
                         </view>
                     </view>
                   </view>
               </view>
+
+
               <view class="{{heng}}">
-
-                  <view class="pr pr_xt" style='display:flex;margin-bottom:0px;width:100%;margin-left:0px;' catchtap="jumpgo" data-id="../group_buy/detail?gid={{item.product_id}}&sum={{item.sum}}&group_id={{item.group_id}}" hover-class="changestyle" wx:for="{{list}}" wx:key="*this" >
-
+                  <view class="pr pr_xt" style="display:flex;margin-bottom:10px;width: 680rpx;padding: 12px 12px;margin: 20rpx auto 30rpx;" catchtap="jumpgo" data-id="../group_buy/detail?gid={{item.product_id}}&sum={{item.sum}}&group_id={{item.group_id}}" hover-class="changestyle" wx:for="{{list}}" wx:key="*this" >
                     <view class='photo-c'>
-                      <image class="photo" style='height:220rpx;width:230rpx;margin-left:20rpx;padding-top:20rpx' src="{{item.imgurl}}"></image>
+                      <image class="photox" style='height:220rpx;width:230rpx' src="{{item.imgurl}}"></image>
                     </view>
-
                     <view class='shu shu_xt' style='width:65%;padding:0 10px;'>
-                        <view class="title">{{item.pro_name}}</view>
+                        <view class="goods-title">{{item.pro_name}}</view>
                         <view style='display:flex;flex-direction:column;justify-content:space-around;height:140rpx;'>
                         <view style="display:flex;line-height:50rpx;padding:10rpx 0;">
-                          <view class="gmxx" style="  color: red;">¥ {{item.group_price}}</view>
+                          <view class="gmxx">¥ {{item.group_price}}</view>
                           <view class="gmx" style='text-align:right;margin-right:17rpx;'>¥ {{item.market_price}}</view>
                         </view>
                         <view style="display:flex;line-height:50rpx;color:#999;margin-bottom:10rpx;">
@@ -93,12 +88,11 @@
                             <!-- <text wx:if="{{item.s_type==1}}">新品</text> -->                          
                             <text style='color:#666;'>已团{{item.sum}}件</text>
                           </view>
-                          <view class="ku" style="width:30%;background:#e83737;color:#fff;text-align:center;margin-left:50%;">去开团</view>
+                          <view class="ku" style="width:32%;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);color:#fff;text-align:center;margin-left:45%;border-radius: 15px;">去开团</view>
                         </view>
                       </view>
                     </view>
-                  </view>
-
+                    </view>
               </view>
             </view>
             <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">1</view>
@@ -128,9 +122,8 @@
                                   </view>
                         </view>
           </view>
-          <!--<view class="clear mt10" wx:else bindtap="getMore">点击查看更多</view>-->
-          <view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
-          <image src='../../images/fanhui.png' style='width:20px;height:20px;margin:10px;'></image>  
+<view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
+<view class="hef-yuan hef-red">顶部</view>
           </view>  
     </block>
     </view>

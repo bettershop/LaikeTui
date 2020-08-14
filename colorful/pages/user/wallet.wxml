@@ -26,23 +26,14 @@
 <!-- 加载页面结束 -->
 <block wx:else>
 <view class="page">
-  <view class="sc mt10" style='background-color: #d62418;'>
-    <view class="df_1 df">     
-      <text class="qb_02">{{user.money}}</text>
-      <text class="qb_01">账户余额({{user.unit}})</text>
-    </view>
-    <navigator url="../distribution/commission">
-      <view class="brokerage">
-        <view class='nav-title'>预计佣金(元)</view>
-        <view class='nav-sum'>
-          <view class='nav-sum-s'>{{ detailed_commission }}</view>
-          <image src='../../images/icons/qbjt.png'></image>
+    <view class="user-resource">
+            <image src="/images/icons/user/xsqb.png"></image>
+            <view class="resource-body">
+                <view class="resource-title">{{user.money}}</view>
+                <view class="resource-titlex">积分余额({{user.unit}})</view>
         </view>
-      </view>
-    </navigator>
-  </view> 
-
-
+</view>
+  
   <view class="use_detail" style="width: 100%;margin: 0 auto;position: relative;height:55%;">
     <view class="swiper-tab">
       <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">入账记录</view>
@@ -58,7 +49,7 @@
         </view>
         <view class='obtain_box'>
           <scroll-view scroll-y="true" style='height:100%;overflow:auto;padding-bottom:45px;'>
-          <view class='jf_obtain' wx:for="{{list_3}}" wx:key="id">
+          <view class='jf_obtain' wx:for="{{list_3}}">
             <view class='obtain_bt_3'>
               <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
             </view>
@@ -92,7 +83,7 @@
         </view>
         <view class='obtain_box'>
           <scroll-view scroll-y="true" style='height:100%;overflow:auto;padding-bottom:45px;'>
-          <view class='jf_obtain' style='color:#777;' wx:for="{{list_1}}"  wx:key="id">
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_1}}">
             <view class='obtain_bt_3'>
               <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
             </view>
@@ -125,7 +116,7 @@
         </view>
         <view class='obtain_box'>
           <scroll-view scroll-y="true" style="height:100%;overflow:auto;padding-bottom:45px;">
-          <view class='jf_obtain' style='color:#777;' wx:for="{{list_2}}"  wx:key="id">
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_2}}">
             <view class='obtain_bt_3'>
                 <!-- <view style='color:#333;'>{{item.user_name}} -->
                 <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
@@ -149,7 +140,7 @@
       </swiper-item>
     </swiper>
   </view>
-  <view class="dibu" style='background-color: #d62418;'>
+  <view class="dibu">
     <navigator class="dibu_1" url="../user/recharge"> 
       <view>                     
         <span class="dibu_t">充值</span>

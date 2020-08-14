@@ -8,7 +8,7 @@ App({
         indexchase: !1,
         frontColor: "#000000",
         one: !1,
-        bf_color: '#ffffff',
+        bf_color: "#ffffff",
         h_color: "#FF63477",
         order: {},
         ceshiUrl: t.getUri(),

@@ -1,38 +1,17 @@
 <view class="body" wx:if="{{remind}}">
   <view class='zong'>
-    <view class="spinner" >
-      <view class="spinner-container container1">
-        <view class="circle1"></view>
-        <view class="circle2"></view>
-        <view class="circle3"></view>
-        <view class="circle4"></view>
-      </view>
-      <view class="spinner-container container2">
-        <view class="circle1"></view>
-        <view class="circle2"></view>
-        <view class="circle3"></view>
-        <view class="circle4"></view>
-      </view>
-      <view class="spinner-container container3">
-        <view class="circle1"></view>
-        <view class="circle2"></view>
-        <view class="circle3"></view>
-        <view class="circle4"></view>
-      </view>
-    </view>
   </view>
 </view>
 <!-- 加载页面结束 -->
 <block wx:else>
-<view class='score' style='display: flex;flex-direction: column;justify-content:center;'>
-  <view class="myscore">
-    <view class='jf_box'><view class="n-title">{{score}}</view>当前积分</view>
-
-    <navigator  class="dibu_2" url="../user/transfer_jifen" wx:if="{{switch == 1}}"> 
-      <view  id="{{paytype}}" type="primary" bindtap="submit" style='background:{{bgcolor}};width:80px;text-align:center;margin:0 auto;line-height:1.4em;margin-top:20px;'>转账 </view>
-    </navigator>
+    <view class="user">
+    <view class="user-resource">
+            <image src="/images/icons/user/xsqb.png"></image>
+            <view class="resource-body">
+                <view class="resource-title">{{score}}</view>
+                <view class="resource-titlex">当前可用积分</view>
+        </view>
   </view>
-   
   <view class="use_detail" style="width:95%;height:800rpx;margin:0 auto;">
     <view class="swiper-tab">
       <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">使用规则</view>

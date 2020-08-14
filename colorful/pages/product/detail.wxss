@@ -72,6 +72,7 @@ page {
   overflow: hidden;
   justify-content: space-between;
   box-sizing: border-box;
+
 }
 
 .ad {
@@ -113,7 +114,11 @@ page {
 .cont {
   width: 100%;
   background: #fff;
-  border-bottom: 15rpx solid #eee
+  border-bottom: 15rpx solid #eee;
+}
+.main-native {
+  background: #fff;
+  padding-bottom: 30rpx;
 }
 
 .tp_image {
@@ -240,7 +245,7 @@ page {
   font-size: 26rpx;
 }
 
-.footfixed {position: fixed; bottom: 0; left: 0; z-index: 100; width: 100%; height: 105rpx;
+.footfixed {position: fixed; bottom: 0; left: 0; z-index: 100; width: 100%; height: 125rpx;
 background-color: #fff;}
 .datail-foot-left {float: left; height: 100%; width: 310rpx;}
 .datail-foot-icon {float: left; height: 100%; width: 100rpx; text-align: center; position: relative;
@@ -251,22 +256,22 @@ box-sizing: border-box; padding-top: 10rpx;}
   display: block;
   position: fixed;
   bottom: 0;
-  left: 0;
-  background: red;
+  left: 20px;
   z-index: 100;
-  width: 100%;
+  width: 90%;
   font-size: 14px;
   border-top: 1px solid #eee;
   line-height: 50px;
   font-weight: 700;
   color: snow;
   text-align: center;
+  top: 530px;
 }
 
 .xgfootc1 {
   display: block;
   position: fixed;
-  bottom: 10px;
+  bottom: 20px;
   left: 5%;
   z-index: 100;
   width: 45%;
@@ -281,7 +286,7 @@ box-sizing: border-box; padding-top: 10rpx;}
 .xgfootc2 {
   display: block;
   position: fixed;
-  bottom: 10px;
+  bottom: 20px;
   right: 5%;
   border-radius: 0 25px 25px 0;
   z-index: 100;
@@ -419,7 +424,7 @@ border-radius:10rpx;
 
 .stepper text {
   background-color: #f2f2f2;
-  border: 1px solid #eee;
+
   width: 26px;
   height: 26px;
   line-height: 26px;
@@ -701,9 +706,9 @@ button::after {
 .dd_details_box { margin: 20rpx 0 26rpx; padding: 1rpx 30rpx; position: relative;}
 
 .dd_details_jj {
-  color: #fff;
+  color: #f3342f;
   position: absolute;
-top: 380px;
+top: 375px;
 left: 10px;
 font-size: 30rpx;
 }
@@ -987,7 +992,7 @@ button[class="baocun"]::after {
 .datails-right-icon {position: absolute; top: 385px; right: 10rpx; width: 200rpx;}
 .datails-icon-box {float: right; width: 100rpx; text-align: center;}
 .datails-icon-image {width: 40rpx; height: 40rpx; margin: 0 auto;}
-.datails-icon-text {font-size: 24rpx; line-height: 32rpx; color: #fff;}
+.datails-icon-text {font-size: 24rpx; line-height: 32rpx; color: #000;}
 
 .datails-size-area {background-color: #fff; padding: 0 30rpx; font-size: 28rpx; color: #000; line-height: 90rpx;
 height: 90rpx; position: relative; text-align: left; margin-bottom: 20rpx;}
@@ -1018,7 +1023,7 @@ font-size: 28rpx; line-height: 60rpx; margin-left: 10rpx; padding: 0; background
   position: fixed;
   bottom: 50rpx;
   top: 1200rpx;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.5);
   border-radius: 50rpx;
   right: 30rpx;
   /*                                                                         */
@@ -1038,6 +1043,36 @@ width: 35%;
 }
 .xstg_box{
    position: relative;
-   background-color: #000;
+   background-color: #ffffff;
    height: 110rpx;
+   top: -1px;
+}
+.main-swiper-dot {
+  width: 66rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  background: rgba(0,0,0,.4);
+  border-radius: 16rpx;
+  color: #FFFFFF;
+  font-size: 20rpx;
+  position: absolute;
+  right: 40rpx;
+  bottom: 370px;
+  text-align: center;
+}
+.hef-yuan {
+  margin-top: 20rpx;
+  color: #fff;
+  text-align: center;
+}
+.goTop{
+  height: 80rpx;
+  width: 80rpx;
+  position: fixed;
+  bottom: 120px;
+  background: rgba(0,0,0,.5);
+  border-radius: 50rpx;
+  right: 20rpx;
+  /*                                                                         */
+  z-index: 9999;
 }

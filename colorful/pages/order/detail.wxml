@@ -58,8 +58,8 @@
 
         </view>
         <view style="width: 100%;">
-            <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}&&courier_num={{item.courier_num}}&&express_id={{item.express_id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;'wx:if="{{item.express_id}}" data-order-id="{{item.id}}">查看物流</navigator>
-            <view wx:if="{{item.r_status > 0 && item.r_status < 4 && item.otype =='' && item.r_status != 3}}" bindtap='return_goods' data-order-id="{{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">申请售后</view>
+            <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}&&courier_num={{item.courier_num}}&&express_id={{item.express_id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.express_id}}" data-order-id="{{item.id}}">查看物流</navigator>
+            <view wx:if="{{item.r_status > 0 && item.r_status < 4 && item.otype =='' && item.r_status != 3}}" bindtap='return_goods' data-order-id="{{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">申请售后</view>
         </view>
       </view>
       <view style='clear:both;'></view>
@@ -127,29 +127,27 @@
       </checkbox-group>   
     </view>
   </view> 
-    <view class='pay_bottom'  wx:if="{{rstatus == 0}}" style='padding-top: 8px'>
-        <view class="font_12 red fl_r mr_5" style='border:0;height: 60px;width:100%;padding:0;' >
-        
-
-        <form bindsubmit="payOrder" report-submit="true" style='width: 90px;height: 50px;float: right;padding-right:12px;'>
-          <button class="pay_foot" style='color:{{bgcolor}};border:1px solid {{bgcolor}};border-radius:30px;margin: 12px 0!important;font-size:14px;padding:0;width:90px;height:32px;line-height:32px;float:right' wx:if="{{rstatus == 0}}" data-pay="{{paytype}}" data-orderId="{{id}}"  data-price="{{payment}}" data-ordersn="{{sNo}}"  formType="submit" wx:if="{{rstatus == 0}}">立即支付</button> 
-        </form>
-
-        <button class="pay_foot" style='color: #808080;height: 50px;border: 1px solid #808080;border-radius: 3px;margin-left: 10px;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;float:left'  bindtap="t_index" data-order-id="{{id}}" >返回首页</button> 
 
 
-        <view style='color:#808080;border-color:#808080;font-size:14px;width:60px;height:30px;line-height:30px;border-radius:30px;margin:12px 10px;float:right' class="font_12 red fl_r mr_5 " bindtap="removeOrder" wx:if="{{rstatus == 0}}" data-order-id="{{id}}">取消订单</view>
 
-
-        </view> 
+    <view class="pay_bottom" style="padding-top: 8px" wx:if="{{rstatus==0}}">
+        <view class="font_12 red fl_r mr_5" style="border:0;height: 60px;width:100%;padding:0;">
+            <form bindsubmit="payOrder" reportSubmit="true" style="width: 90px;height: 50px;float: right;padding-right:12px;">
+                <button class="pay_foot" data-orderId="{{id}}" data-ordersn="{{sNo}}" data-pay="{{paytype}}" data-price="{{payment}}" formType="submit" style="color:#fff;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);border-radius:30px;margin: 12px 0!important;font-size:14px;padding:0;width:90px;height:32px;line-height:32px;box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{rstatus==0}}">立即支付</button>
+            </form>
+            <view bindtap="t_index" class="font_12 red fl_r mr_5 anniu" data-order-id="{{id}}" style="color:#fff;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);font-size:14px;width:60px;height:30px;line-height:30px;border-radius:30px;box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{rstatus==0}}">返回首页</view>
+            <view bindtap="removeOrder" class="font_12 red fl_r mr_5 " data-order-id="{{id}}" style="color:#fff;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);font-size:14px;width:60px;height:30px;line-height:30px;border-radius:30px;margin:12px 0;box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{rstatus==0}}">取消订单</view>
+        </view>
     </view>
+
+
 
     <view class='pay_bottom' wx:if="{{rstatus == 1}}" style='padding-top: 8px'>
       <view class="font_12 red fl_r mr_5" style='border: 0;height: 60px;display: flex;justify-content: flex-end	;width: 100%;padding: 0;'  >   
 		 <form bindsubmit="add_fromid" report-submit="true" > 
-          <button class="pay_foot" style='color: #808080;height: 50px;border: 1px solid #808080;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;'  bindtap="t_index" data-order-id="{{id}}" >返回首页</button> 
+          <button class="pay_foot" style='background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);color: #fff;height: 50px;border-radius: 50px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;box-shadow: 3px 6px 4px rgba(0,0,0,.2);'  bindtap="t_index" data-order-id="{{id}}" >返回首页</button> 
          </form> 
-           <button class="pay_foot" style='color: #fff;background: #FF6347;border-radius: 3px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;' data-orderId="{{id}}" data-ordersn="{{sNo}}" open-type="contact" >联系客服</button> 
+           <button class="pay_foot" style='color: #fff;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);border-radius: 50px;magin: 0;font-size: 13px;padding: 0;width: 90px;height: 30px;line-height: 30px;box-shadow: 3px 6px 4px rgba(0,0,0,.2);' data-orderId="{{id}}" data-ordersn="{{sNo}}" open-type="contact" >联系客服</button> 
   
       </view> 
   </view>

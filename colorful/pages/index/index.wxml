@@ -1,180 +1,174 @@
 <view class="head">
-    <!-- 搜索框 -->
-    <view class="head-search">
-        <view class="search">
-            <image src="/images/icons/indexs/search.png"></image>
-            <view class="search-input">
-                <input catchtap="jumpgo" data-id="../search/lookfor" disabled="true" placeholder="请输入商品名称"></input>
+    <view class="body" wx:if="{{remind}}"></view>
+    <block wx:else>
+        <view class="head-search">
+            <view class="search">
+                <image src="/images/icons/indexs/search.png"></image>
+                <view class="search-input">
+                    <input catchtap="jumpgo" data-id="../search/lookfor" disabled="true" placeholder="请输入商品名称"></input>
+                </view>
             </view>
         </view>
-    </view>
-    <!-- 首页轮播 -->
-    <view class="head-bannc">
-        <swiper autoplay="{{autoplay}}" circular="true" duration="{{duration}}" indicatorActiveColor="#FC3151" indicatorColor="#FFFFFF" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:400rpx;">
-            <view wx:if="{{banner.length>0}}">
-                <swiper-item wx:for="{{banner}}" wx:key="key">
-                    <navigator url="{{item.url}}">
-                        <image mode="aspecFit" src="{{item.image}}" style="width:100%;height:400rpx"></image>
-                    </navigator>
-                </swiper-item>
-            </view>
-            <view wx:else>
+        <view class="main" wx:if="{{index<1}}" wx:for="{{twoList}}" wx:key="id">
+            <view class="main-native {{statusBarHeight>40?'Xtop':statusBarHeight>25?'Xtop2':''}}">
+                <view class="main-native-banner" wx:if="{{banner.length>0}}">
+                    <swiper autoplay="{{autoplay}}" circular="true" class="swiper" bindchange="swiperChange" duration="{{duration}}" indicatorActiveColor="#FC3151" indicatorColor="#FFFFFF" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+            <block wx:for="{{banner}}" wx:key="{{item.id}}">
+              <navigator url='{{item.url}}'>
                 <swiper-item>
+                <image class="slide-image" height="320" mode="aspecFit" src="{{item.image}}" width="702"></image>
                 </swiper-item>
-            </view>
-        </swiper>
-    </view>
-</view>
-<image class="bgimg" src="/images/icons/indexs/bg.png"></image>
-    <!-- 分类栏 -->
-<view class="list">
-      <view class="nav-area">
-        <view class="crbox nav-menu">
-          <navigator class="nav-view" open-type="navigate" url="../listdetail/listdetail?class=5&title=美妆护理" hover-class="none">
-            <image src='/images/icons/indexs/mzhl.png'></image> <view class="n-text">美妆护理</view>
-          </navigator>
-
-          <navigator class="nav-view" open-type="navigate" url="../listdetail/listdetail?class=4&title=家用电器" hover-class="none">
-            <image src='/images/icons/indexs/jydq.png'></image> <view class="n-text">家用电器</view>
-          </navigator>
-
-          <navigator class="nav-view" open-type="navigate" url="../listdetail/listdetail?class=2&title=手机数码" hover-class="none">
-            <image src='/images/icons/indexs/sjsm.png'></image> <view class="n-text">手机数码</view>
-          </navigator>
-
-          <navigator class="nav-view" open-type="navigate" url="../listdetail/listdetail?class=3&title=家居家纺" hover-class="none">
-            <image src='/images/icons/indexs/jjjf.png'></image> <view class="n-text">家居家纺</view>
-          </navigator>
-
-           <navigator class="nav-view" open-type="navigate" url="../listdetail/listdetail?class=1&title=日用百货" hover-class="none">
-            <image src='/images/icons/indexs/rybh.png'></image> <view class="n-text">日用百货</view>
-          </navigator>
-
-          <navigator class="nav-view" open-type="navigate" url="../listdetail/listdetail?class=7&title=精致鞋靴" hover-class="none">
-            <image src='/images/icons/indexs/jzxx.png'></image> <view class="n-text">精致鞋靴</view>
-          </navigator>
-
-          <navigator class="nav-view" open-type="navigate" url="../listdetail/listdetail?class=6&title=服饰箱包" hover-class="none">
-            <image src='/images/icons/indexs/fsxb.png'></image> <view class="n-text">服饰箱包</view>
-          </navigator>
-
-            <view class="nav-views"> 
-            <view catchtap="jumpss" class="navigator">
-                <image src="/images/icons/indexs/gdfl.png"></image><view class="n-text">更多分类</view>
-            </view>
-        </view>
-    </view>
-</view>
-    <!-- 新品区 -->
-        <view class="gdxp" catchtap="jumpssx">
-<image class="bgimgx" src="/images/icons/indexs/newClient.png"></image>
-        </view>
-    <!-- 公告栏 -->
-      <view class="news">
-        <image src='/images/icons/indexs/news.png' class='in_img'></image>
-        <swiper class="news-swiper" vertical="true" autoplay="true" circular="true" interval="5000">
-          <block wx:for="{{inforList}}"wx:key="key">
-            <navigator url="../notice/index?Id={{item.url}}" open-type="navigate">
-              <swiper-item>
-                <view class="news-title">{{item.title}}</view>
-              </swiper-item>
-            </navigator>
-          </block>
-        </swiper>
-      </view>
-    <!-- 插件区 -->
-    <view class="list-card">
-        <view class="list-card-lj">
-           <navigator class="item" open-type="navigate" url="../coupon/index?currentTab=0&type=receive" hover-class="none">
-            <image src='/images/icons/indexs/lj.png'></image>
-            <view class="item-body">
-             <view class="hd-title">领劵中心</view>
-             <view class="hef-title">抢无门槛卷</view>
-             <view class="hef-yuan hef-red">GO</view>
-              </view>
-          </navigator>
-
-           <navigator class="item" open-type="navigate" url="../group_buy/group" hover-class="none">
-            <image src='/images/icons/indexs/pt.png'></image>
-            <view class="item-body">
-            <view class="hd-title">马上拼团</view>
-             <view class="hef-title">拼最大优惠</view>
-             <view class="hef-yuan hef-zs">GO</view>
-              </view>
-          </navigator>
-                </view>
-      </view>
-    <!-- 分类栏 -->
-    <view class="sellwell">
-        <image src="/images/icons/indexs/ptlogo.png"></image>
-        <view class="sellwell-title">精挑细选</view>
-    </view>
-          <view class="list-cardx">
-        <view class="list-cardx-lj">
-           <navigator class="item" open-type="navigate" url="../listdetail/listdetail?class=34&title=爆款专区" hover-class="none">
-            <image src='/images/icons/indexs/bkzq.jpg'></image>
-            <view class="item-body">
-             <view class="hd-title">爆款专区</view>
-             <view class="hef-title">好物降价促销</view>
-              </view>
-          </navigator>
-
-           <navigator class="item" open-type="navigate" url="../listdetail/listdetail?class=35&title=应季必备" hover-class="none">
-            <image src='/images/icons/indexs/yjbb.jpg'></image>
-            <view class="item-body">
-            <view class="hd-title">应季必备</view>
-             <view class="hef-title">专享好货在此</view>
-              </view>
-          </navigator>
-                </view>
-      </view>
-          <view class="list-cardx">
-        <view class="list-cardx-ljx">
-           <navigator class="item" open-type="navigate" url="../listdetail/listdetail?class=33&title=超级大牌" hover-class="none">
-            <image src='/images/icons/indexs/cjdp.jpg'></image>
-            <view class="item-body">
-            <view class="hd-title">超级大牌</view>
-             <view class="hef-title">全场让利底价</view>
-              </view>
-          </navigator>
-                </view>
-      </view>
-    <!-- 商品显示区 -->
-    <view class="sellwell">
-        <image src="/images/icons/indexs/rx.png"></image>
-        <view class="sellwell-title">热销单品</view>
-    </view>
-        <view class="sellwellx" catchtap="jumpssx">
-          <view class="n-link">更多新品 <image src='/images/x_right.png'></image></view>
-        </view>
-      <view class="goods-block">
-          <view class="goods-area">
-            <block wx:for="{{indexTwoData}}" wx:for-item="twos" wx:key="id">
-              <navigator class="goods-box" url="../product/detail?productId={{twos.id}}" hover-class="changestyle">
-                <image class="goods-photo" src="{{twos.imgurl}}"></image>
-                <view class="goods-info">
-                  <view class="goods-title">{{twos.product_title}}</view>
-                  <view class="p-sale">爆卖 <span style="color: #f00;">{{twos.volume}}</span>件</view>
-                  <view class="goods-text">
-                    <view class="p-price">¥ {{twos.price}}</view>
-                    <view class="p-price-y">¥ {{twos.price_yh}}</view>
-                  </view>
-                  <image src='/images/icons/indexs/gwc.png' class='icon-cart'></image>
-                </view>
               </navigator>
             </block>
-          </view>
-        <view class="prompt" wx:if="{{isopens==false}}">加载中...</view>
-        <view class="prompt" wx:if="{{isopens}}">没有更多商品了</view>
-        <view class="tishi" wx:if="{{twoList==''}}">
-            <view>
-                <image class="scimg" src="/images/search_no.png" style="margin-top: 25%;"></image>
+          </swiper>
+                      <view class="main-swiper-dot">{{imgIndex+1}}/{{banner.length}}</view>
+                    <image class="main-whiteBg" src="/images/icons/indexs/white-bg.png"></image>
+                </view>
             </view>
-            <view style="font-size:13px;color:#666;">没有更多商品了</view>
+            <view class="card">
+                <view class="card-grid">
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=1&title=个人护理">
+                            <image src="/images/icons/indexs/theme1.png"></image>
+                            <view class="title">个人护理</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=2&title=国际轻奢">
+                            <image src="/images/icons/indexs/theme2.png"></image>
+                            <view class="title">国际轻奢</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=3&title=居家百货">
+                            <image src="/images/icons/indexs/theme3.png"></image>
+                            <view class="title">居家百货</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=4&title=美妆护肤">
+                            <image src="/images/icons/indexs/theme4.png"></image>
+                            <view class="title">美妆护肤</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=5&title=母婴儿童">
+                            <image src="/images/icons/indexs/theme5.png"></image>
+                            <view class="title">母婴儿童</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=6&title=数码家电">
+                            <image src="/images/icons/indexs/theme8.png"></image>
+                            <view class="title">数码家电</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=7&title=服饰箱包">
+                            <image src="/images/icons/indexs/theme9.png"></image>
+                            <view class="title">服饰箱包</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=29&title=精致鞋靴">
+                            <image src="/images/icons/indexs/theme6.png"></image>
+                            <view class="title">精致鞋靴</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <navigator class="navigator" hoverClass="none" openType="navigate" url="../listdetail/listdetail?class=30&title=手机数码">
+                            <image src="/images/icons/indexs/theme7.png"></image>
+                            <view class="title">手机数码</view>
+                        </navigator>
+                    </view>
+                    <view class="card-grid-item">
+                        <view catchtap="jumpss" class="navigator">
+                            <image src="/images/icons/indexs/allCategory.png"></image>
+                            <view class="title">更多分类</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="news">
+                    <image src="/images/icons/indexs/news.png"></image>
+                    <swiper autoplay="true" circular="true" class="news-swiper" duration="500" interval="5000" vertical="true">
+                        <navigator url="../notice/index?Id={{item.url}}" wx:for="{{inforList}}" wx:key="key">
+                            <swiper-item class="news-swiper-item">
+                                <view class="news-title">{{item.title}}</view>
+                            </swiper-item>
+                        </navigator>
+                    </swiper>
+                </view>
+            </view>
+            <view class="line" wx:if="{{plug.type==1}}"></view>
+            <view class="list">
+            </view>
+    <view class="main-box">
+
+        <view class="main-better-left">
+            <image catchtap="cjdp" src="/images/icons/indexs/cjdp.jpg"></image>
+        </view>
+        <view class="main-better-right">
+            <image catchtap="yjbb" src="/images/icons/indexs/yjbb.jpg"></image>
+            <image catchtap="bkzq" src="/images/icons/indexs/bkzq.jpg"></image>
         </view>
     </view>
+            <view class="group-head">
+                <view class="group-title">
+                    <image class="group-titlex" src="/images/icons/indexs/rx.png"></image>
+                    <view class="title">热销单品</view>
+                </view>
+                <view class="group-gengduo">
+                    <view catchtap="jumpssx" class="title">♥新品区♥</view>
+                    <image src="/images/icons/indexs/gengduo.png"></image>
+                </view>
+            </view>
+            <block wx:for="{{item.twodata}}" wx:for-item="twodata" wx:key="id">
+                <navigator class="img-box" hoverClass="changestyle" url="{{twodata.url}}" wx:if="{{twodata.url}}">
+                    <image bindload="imgW" class="mphoto" data-index="{{index}}" src="{{twodata.imgurl}}" style="width:{{images[index].width}}rpx; height:{{images[index].height}}rpx;"></image>
+                </navigator>
+                <view class="goods-block" wx:elif="{{index==0}}">
+                    <view class="goods-area">
+                        <navigator class="goods-box" hoverClass="changestyle" url="../product/detail?productId={{twos.id}}" wx:for="{{indexTwoData}}" wx:for-item="twos" wx:key="id">
+                            <image class="goods-photo" src="{{twos.imgurl}}"></image>
+                            <view class="goods-info">
+                                <view class="goods-title">{{twos.product_title}}</view>
+                                <view class="p-sale">爆卖 <span style="color: #f00;">{{twos.volume}}</span>件</view>
+                                 <view class="p-price-y">¥ {{twos.price_yh}}</view>
+                                <view class="goods-text">
+                                    <view class="p-price">
+                                        <em>¥</em>{{twos.price}}</view>
+
+                                </view>
+                                <image class="icon-cart" src="/images/icon-cart.png"></image>
+                            </view>
+                        </navigator>
+                    </view>
+                </view>
+            </block>
+            <view class="prompt" wx:if="{{isopens==false}}">加载中...</view>
+            <view class="prompt" wx:if="{{isopens}}">没有更多商品了!!!</view>
+            <view class="tishi" wx:if="{{twoList==''}}">
+                <view>
+                    <image class="scimg" src="/images/search_no.png" style="margin-top: 25%;"></image>
+                </view>
+                <view style="font-size:13px;color:#666;">没有更多商品了！！</view>
+            </view>
+        </view>
+        <view class="zjList_box" wx:if="{{zjList_box}}">
+            <view class="zjList">
+                <view class="swiper_item">
+                    <image class="zjList_img" src="{{headimgurl}}"></image>
+          恭喜{{user_name}}获得{{pname}}</view>
+            </view>
+        </view>
+    </block>
 </view>
- <view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
- <image src='../../images/fanhui.png' style='width:20px;height:20px;margin:10px;'></image>  
- </view>  
+<view catchtouchmove="preventTouchMove" class="mask" wx:if="{{showModal}}"></view>
+<view class="modalDlg" wx:if="{{showModal&&sign_status==1}}">
+    <image bindtap="navigate_sign" mode="aspectFit" src="{{sign_image}}" style="width:700rpx;"></image>
+    <icon catchtap="go" class="close" color="orange" size="35" type="cancel"></icon>
+</view>
+<view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
+<view class="hef-yuan hef-red">顶部</view>
+</view>
 <pop id="pop"></pop>

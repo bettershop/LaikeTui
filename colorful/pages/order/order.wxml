@@ -48,7 +48,7 @@
       <scroll-view scroll-y="true" style="height:100%;background:#fafafa;">
         <view class="search_no" wx:if="{{!ordert0.length}}">
           <view class="font_14">
-            <image class="scimg" src="/images/order.png"></image>
+            <image class="scimg" src="/images/kdd.png"></image>
           </view>
           <text>没有可用订单/(ㄒoㄒ)/~~</text>
         </view>
@@ -107,17 +107,17 @@
           </view>
           <view class="bottom">
             <!--状态 0：未付款 1：未发货 2：待收货 3：待评论 4：退货 5:已完成 6 订单关闭 9拼团中 10 拼团失败-未退款 11 拼团失败-已退款 12:已完成(已追加评论) -->
-            <navigator wx:if="{{item.status != 1 && item.status != 4}}" url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
-            <navigator wx:if="{{item.status == 1 && item.pid >0}}" url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
-            <navigator wx:if="{{item.status == 1&& item.pid ==''}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">订单详情</navigator>
-            <navigator wx:if="{{item.status == 4}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">订单详情</navigator>
-            <!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
-            <view class="font_12 red fl_r mr_5" wx:if="{{item.status == 5 && item.pid ==''}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' data-order-id="{{item.id}}">订单完成</view>
-            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 2&& item.pid ==''}}" data-sNo="{{item.sNo}}">确认收货</view>
-            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 &&item.pid > 0}}" data-sNo="{{item.sNo}}">确认收货</view>
-            <navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 3}}" data-order-id="{{item.id}}">立即评价</navigator>
-            <navigator wx:if="{{item.status == 0}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">立即支付</navigator>
-            <navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+            <navigator wx:if="{{item.status != 1 && item.status != 4}}" url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">订单详情</navigator>
+            <navigator wx:if="{{item.status == 1 && item.pid >0}}" url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">订单详情</navigator>
+            <navigator wx:if="{{item.status == 1&& item.pid ==''}}" url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">订单详情</navigator>
+            <navigator wx:if="{{item.status == 4}}" url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">订单详情</navigator>
+            <!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
+            <view class="font_12 red fl_r mr_5" wx:if="{{item.status == 5 && item.pid ==''}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" data-order-id="{{item.id}}">订单完成</view>
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 2&& item.pid ==''}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 2 &&item.pid > 0}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 3}}" data-order-id="{{item.id}}">立即评价</navigator>
+            <navigator wx:if="{{item.status == 0}}" url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">立即支付</navigator>
+            <navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">分享好友</navigator>
           </view>
 
         </view>
@@ -128,7 +128,7 @@
       <scroll-view scroll-y="true" style="height:100%;">
         <view class="search_no" wx:if="{{!ordert1.length}}">
           <view class="font_14">
-            <image class="scimg" src="/images/order.png"></image>
+            <image class="scimg" src="/images/kdd.png"></image>
           </view>
           <text>没有可用订单/(ㄒoㄒ)/~~</text>
         </view>
@@ -172,7 +172,7 @@
             </view>
           </view>
           <view class="bottom">
-            <navigator wx:if="{{item.status == 0}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">立即支付</navigator>
+            <navigator wx:if="{{item.status == 0}}" url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">立即支付</navigator>
           </view>
         </view>
       </scroll-view>
@@ -182,7 +182,7 @@
       <scroll-view scroll-y="true" style="height:100%;">
         <view class="search_no" wx:if="{{!ordert2.length}}">
           <view class="font_14">
-            <image class="scimg" src="/images/order.png"></image>
+            <image class="scimg" src="/images/kdd.png"></image>
           </view>
           <text>没有可用订单/(ㄒoㄒ)/~~</text>
         </view>
@@ -225,10 +225,10 @@
             </view>
           </view>
           <view class="bottom">
-            <navigator url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
-            <view class="font_12 red fl_r mr_5" bindtap="add_fix" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 1&&item.pid >0}}">提醒发货</view>
-            <view class="font_12 red fl_r mr_5" bindtap="add_fix" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 1&&item.pid ==''}}">提醒发货</view>
-            <navigator wx:if="{{item.pid > 0 && item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+            <navigator url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">订单详情</navigator>
+            <view class="font_12 red fl_r mr_5" bindtap="add_fix" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 1&&item.pid >0}}">提醒发货</view>
+            <view class="font_12 red fl_r mr_5" bindtap="add_fix" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 1&&item.pid ==''}}">提醒发货</view>
+            <navigator wx:if="{{item.pid > 0 && item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">分享好友</navigator>
           </view>
         </view>
       </scroll-view>
@@ -238,7 +238,7 @@
       <scroll-view scroll-y="true" style="height:100%;">
         <view class="search_no" wx:if="{{!ordert3.length}}">
           <view class="font_14">
-            <image class="scimg" src="/images/order.png"></image>
+            <image class="scimg" src="/images/kdd.png"></image>
           </view>
           <text>没有可用订单/(ㄒoㄒ)/~~</text>
         </view>
@@ -281,13 +281,13 @@
             </view>
           </view>
           <view class="bottom" >
-           <navigator url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
+           <navigator url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">订单详情</navigator>
             
-            <!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
-            <!-- <view class="font_12 red fl_r mr_5" bindtap="escOrder" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 1}}" data-order-id="{{item.id}}" data-sno="{{item.sNo}}">取消订单</view> -->
-            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 2&&item.pid==''}}" data-sNo="{{item.sNo}}">确认收货</view>
-            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 && item.pid > 0}}" data-sNo="{{item.sNo}}">确认收货</view>
-            <navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+            <!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
+            <!-- <view class="font_12 red fl_r mr_5" bindtap="escOrder" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 1}}" data-order-id="{{item.id}}" data-sno="{{item.sNo}}">取消订单</view> -->
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 2&&item.pid==''}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" wx:if="{{item.status == 2 && item.pid > 0}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">分享好友</navigator>
           </view>
         </view>
       </scroll-view>
@@ -297,7 +297,7 @@
 			<scroll-view scroll-y="true" style="height:100%;">
 				<view class="search_no" wx:if="{{!ordert4.length}}">
 					<view class="font_14">
-						<image class="scimg" src="/images/order.png"></image>
+						<image class="scimg" src="/images/kdd.png"></image>
 					</view>
 					<text>没有可用订单/(ㄒoㄒ)/~~</text>
 				</view>
@@ -340,15 +340,15 @@
 						</view>
 					</view>
 					<view class="bottom" >
-						<navigator wx:if="{{item.status != 1}}" url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;'
+						<navigator wx:if="{{item.status != 1}}" url="../order/detail?orderId={{item.id}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);"
 						 class="font_12 red fl_r mr_5">订单详情</navigator>
-						<!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style='border:1px solid #8a8a8a;color:#8a8a8a;'wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
-						<navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};'
+						<!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);"wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
+						<navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);"
 						 wx:if="{{item.status == 3&&item.pid ==''}}" data-order-id="{{item.id}}">立即评价</navigator>
-             	<navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}"style='border:1px solid #8a8a8a;color:#8a8a8a;'
+             	<navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}"style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);"
 						 wx:if="{{item.status == 3&&item.pid > 0}}" data-order-id="{{item.id}}">立即评价</navigator>
 						<navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}"
-						 style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+						 style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);" class="font_12 red fl_r mr_5">分享好友</navigator>
 					</view>
 				</view>
 			</scroll-view>

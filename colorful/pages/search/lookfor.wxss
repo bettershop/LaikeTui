@@ -1,9 +1,11 @@
 @import "../../wxSearch/wxSearch.wxss";
 
 page {
+    background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    height: 100%;
 }
 
 .t_container {

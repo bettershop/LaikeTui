@@ -1,3 +1,7 @@
+page{
+  width: 100%;
+  height: 100%;
+}
 .myyhq{
   width:100%;
   height:29px;

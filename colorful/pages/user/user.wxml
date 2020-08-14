@@ -1,70 +1,38 @@
-<view class="head" style="margin-top:{{headheight1+headheight2}}px;">
-    <view></view>
-    <view style="position:relative;top: 50px; right: -130px; width: 100px; height: 0rpx;">
-        <image class="image-fight" src="/images/icons/user/kf.png"></image>
-        <contact-button class="image-fight ke" sessionFrom="productId_{{itemData.id}}" type="default-light"></contact-button>
-        <image catchtap="jumpgo" data-id="../set/set" src="/images/icons/user/sz.png"></image>
+    <!-- 我的 -->
+<view class="main">
+    <view class="titleBar" style="margin-top:104px;">
+    <view style="height:44px;background: linear-gradient(-90deg,rgba(255,111,48,1) 0%,rgba(255,154,68,1) 100%);position: fixed;width: 100%;z-index:99;top:0;"></view>
+        <view class="titleBar_text" style="height:80px;top:24px;">个人中心</view>
     </view>
-</view>
-        <view class="headtopx">
-<view class="head-top">个人中心</view>
-</view>
-<image catchtap="logins" class="bgimg" src="/images/icons/user/bg.png"></image>
-<view class="user">
-    <view class="user-avatar">
-        <image catchtap="jumpgo" class="user_top_image" src="{{user.headimgurl?user.headimgurl:'../../images/heads.png'}}" style="display:block;"></image>
-    </view>
-    <view catchtap="jumpgo" class="user-avatarx">{{user.wx_name?user.wx_name:'YOUMI'}}</view>
-    <view class="user-box">
-        <view catchtap="jumpgo" class="user-box-item" data-id="../sign_in/sign_in">
-            <image src="/images/icons/user/qd.png"></image>
-            <view class="item-title">签到有礼</view>
-        </view>
-        <view catchtap="jumpgo" class="user-box-item" data-id="../order/order?currentTab=0&otype=pay6">
-            <image src="/images/icons/user/pt.png"></image>
-            <view class="item-title">我的拼团</view>
-        </view>
-        <view catchtap="jumpgo" class="user-box-item" data-id="../footprint/footprint">
-            <image src="/images/icons/user/zj.png"></image>
-            <view class="item-title">我的足迹</view>
-        </view>
-        <view catchtap="jumpgo" class="user-box-item" data-id="../collection/collection">
-            <image src="/images/icons/user/sc.png"></image>
-            <view class="item-title">我的收藏</view>
-        </view>
-        <view catchtap="jumpgo" class="user-box-item" data-id="../address/index">
-            <image src="/images/icons/user/shdz.png"></image>
-            <view class="item-title">收货地址</view>
-        </view>
-    </view>
-        <view class="list-card-lj">
-           <navigator class="item" catchtap="jumpgo" data-id="../user/wallet">
-            <image src='/images/icons/user/qb.png'></image>
-            <view class="item-body">
-             <view class="hd-title">¥{{money}}</view>
-             <view class="hef-title">余额</view>
-              </view>
-          </navigator>
-
-          <navigator class="item" catchtap="jumpgo" data-id="../user/score">
-            <image src='/images/icons/user/jf.png'></image>
-            <view class="item-body">
-            <view class="hd-titlejf">{{score}}</view>
-             <view class="hef-titlejf">积分</view>
-              </view>
-          </navigator>
-
-          <navigator class="item" catchtap="jumpgo" data-id="../coupon/index?currentTab=1">
-            <image src='/images/icons/user/yhj.png'></image>
-            <view class="item-body">
-            <view class="hd-titleyhj">{{couponNum}}</view> 
-             <view class="hef-titleyhj">优惠券</view>
-              </view>
-          </navigator>
+    <view class="header">
+        <image class="bgImg" src="/images/icons/user/minebg.png"></image>
+    <!-- 用户登录 -->
+        <view class="header_Img">
+            <view wx:if="{{id}}">
+        <image  catchtap="jumpgo" class="headImg" src="{{user.headimgurl?user.headimgurl:'../../images/heads.png'}}" style="display:block;"></image>">
+            </view>
+            <view wx:else>
+            <view  bindgetuserinfo="toLogin" class="headImg_text_btn" openType="getUserInfo">
+        <image  catchtap="jumpgo" class="headImg" src="{{user.headimgurl?user.headimgurl:'../../images/heads.png'}}" style="display:block;"></image>
+                 </view>
+            </view>
+            <view wx:if="{{id}}">
+                <view class="headImg_text words1">{{user.wx_name?user.wx_name:'请点击登录/注册'}}</view>
+            </view>
+            <view wx:else>
+                <view class="headImg_text_btn">
+                    <view catchtap="jumpgo" class="headImg_text_btn">{{user.wx_name?user.wx_name:'请点击登录/注册'}}</view>
                 </view>
+            </view>
+        </view>
+      <view class="datails-right-icon">
+        <view bindtap="delFavorites" class='xs datails-icon-box'>
+          <image catchtap="jumpgo" class="datails-icon-image" data-id="../set/set" src="/images/icons/user/sz.png"></image>
       </view>
-<view class="line"></view>
-<view class="order">
+ </view>
+    <!-- 我的订单功能表 -->                     
+        <view class="orderx">
+     <view class="order">
     <view catchtap="jumpgo" class="order-head" data-id="../order/order?currentTab=0&otype=pay">
         <view class="left">
       我的订单
@@ -99,31 +67,74 @@
         </view>
         <view catchtap="jumpgo" class="item" data-id="../order/order?currentTab=0&otype=pay">
             <image src="/images/icons/user/qbdd.png"></image>
-            <view class="item-title">全部订单</view>
-        </view>
-    </view>
+                <view class="item-title">全部订单</view>
+               </view>
+            </view>
+         </view>
+     </view>
 </view>
-<view class="line"></view>
-      <view class="user-area">
-        <view class="user-title" style="border-bottom: 1px solid #eee;">
-          <text>推荐阅读</text>
+    <view class="invite"></view>
+<!-- 我的工具功能表 -->  
+    <view class="tool">
+        <view class="toolMess">
+            <view class="toolMess_top ">我的工具</view>
+            <view class="user-box">
+        <view catchtap="jumpgo" class="user-box-item" data-id="../sign_in/sign_in">
+            <image src="/images/icons/user/qd.png"></image>
+            <view class="item-title">签到有礼</view>
         </view>
-    <view class="recommend-list">
-        <view catchtap="jumpgor" class="list-itemxs">
-            <view class="list-item-image">
+        <view catchtap="jumpgo" class="user-box-item" data-id="../order/order?currentTab=0&otype=pay6">
+            <image src="/images/icons/user/pt.png"></image>
+            <view class="item-title">我的拼团</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../footprint/footprint">
+            <image src="/images/icons/user/zj.png"></image>
+            <view class="item-title">我的足迹</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../distribution/user">
+            <image src="/images/icons/user/fx.png"></image>
+            <view class="item-title">我的分销</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../collection/collection">
+            <image src="/images/icons/user/sc.png"></image>
+            <view class="item-title">我的收藏</view>
+        </view>
+        <view catchtap="jumpgo" class="user-box-item" data-id="../address/index">
+            <image src="/images/icons/user/shdz.png"></image>
+            <view class="item-title">收货地址</view>
             </view>
-            <view class="list-item-brand">
-                <view>
-                </view>
+        </view>
+    <view class="user-resource">
+        <view catchtap="jumpgo" data-id="../user/wallet">
+            <image src="/images/icons/user/qb.png"></image>
+            <view class="resource-body">
+             <view class="hd-title">¥{{money}}</view>
+                <view class="resource-title">积分额</view>
             </view>
-            <view class="list-item-title">
+        </view>
+        <view catchtap="jumpgo" data-id="../user/score">
+            <image src="/images/icons/user/jf.png"></image>
+            <view class="resource-body">
+            <view class="hd-title">{{score}}</view>
+                <view class="resource-title">积分</view>
+            </view>
+        </view>
+        <view catchtap="jumpgo" data-id="../coupon/index?currentTab=1">
+            <image src="/images/icons/user/yhj.png"></image>
+            <view class="resource-body">
+            <view class="hd-title">{{couponNum}}</view> 
+                <view class="resource-title">优惠卷</view>
+            </view>
+          </view>
+        </view>
       </view>
-            <view class="list-item-num">
-            </view>
-        </view>
     </view>
 </view>
-          <view class="hh" >
+<!-- 我的工具功能表 -->  
+    <view class="tool">
+        <view class="toolMess">
+            <view class="toolMess_topx ">推荐阅读</view>
+        <view class="user-article-area">
             <navigator url="../article/article?id={{item.Article_id}}" wx:for="{{article}}" wx:key="{{item.Article_id}}">
               <view class="qbdd mt10 jiantou">
                 <view class="font_14 c3">{{item.Article_title}}</view>
@@ -132,5 +143,7 @@
                 <image src="../../images/x_right.png" style="border: 0;border-radius: 0;margin: auto;margin-right: 5px;top:10px;"></image>
               </view>
             </navigator>
-          </view>
+        </view>
+    </view>
+ </view>
 <pop id="pop"></pop>

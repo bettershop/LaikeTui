@@ -1,59 +1,53 @@
 <view class="content">
-  <form bindsubmit="SaveAddress">
-    <view class="section">
-      <view class="section_title" style='float:left;'>联系人：</view>
-      <input name="user_name" type="text" value="{{address[0]['name']}}" placeholder="联系人"/>
-    </view>
-    <view class="section">
-      <view class="section_title" style='float:left;'>联系电话：</view>
-      <input name="mobile" type="number" maxlength="11" value="{{address[0]['tel']}}" placeholder="联系人电话"/>
-    </view>
-    <view class="section">
-      <view class="section_title" style='float:left;'>所在地区：</view>
-      <input type="text" value="{{province}}--{{city}}--{{county}}" disabled bindtap="translate"/> 
-      <input class='xzdq' disabled="false" name="province" value="{{province}}" />
-      <input class='xzdq' disabled="false" name="city" value="{{city}}" />
-      <input class='xzdq' disabled="false" name="county" value="{{county}}" /> 
-      <view class="section_right" bindtap="translate">
-        <image src="../../../images/x_right.png"></image>
-      </view>
-
-      <view class="animation-element-wrapper {{ show?'openBG':'closeBG' }}" style="visibility:{{show ? 'visible':'hidden'}}" bindtap="hiddenFloatView" data-id="444">
-        <view class="animation-element {{ show?'open':'closes' }}" catchtap="nono">
-          <text class="left-bt" catchtap="hiddenFloatView" data-id="555">取消</text>
-          <text class="right-bt" catchtap="hiddenFloatView" data-id="666">确定</text>
-            <view class="line"></view> 
-            <picker-view class="{{ show?'openpuls':'closepuls' }}" indicator-style = "height: 50rpx;" value="{{value}}" bindchange="bindChange" catchtap="nono">
-              <!--省-->
-              <picker-view-column>
-                <view wx:for="{{sheng}}" wx:for-item="sheng" wx:key="">
+    <form bindsubmit="SaveAddress">
+        <view class="section">
+            <view class="section_title" style="float:left;">联系人：</view>
+            <input name="user_name" placeholder="联系人" type="text" value="{{address[0]['name']}}"></input>
+        </view>
+        <view class="section">
+            <view class="section_title" style="float:left;">联系电话：</view>
+            <input maxlength="11" name="mobile" placeholder="联系人电话" type="number" value="{{address[0]['tel']}}"></input>
+        </view>
+        <view class="section">
+            <view class="section_title" style="float:left;">所在地区：</view>
+            <input disabled bindtap="translate" type="text" value="{{province}}--{{city}}--{{county}}"></input>
+            <input class="xzdq" disabled="false" name="province" value="{{province}}"></input>
+            <input class="xzdq" disabled="false" name="city" value="{{city}}"></input>
+            <input class="xzdq" disabled="false" name="county" value="{{county}}"></input>
+            <view bindtap="translate" class="section_right">
+                <image src="../../../images/x_right.png"></image>
+            </view>
+            <view bindtap="hiddenFloatView" class="animation-element-wrapper {{show?'openBG':'closeBG'}}" data-id="444" style="visibility:{{show?'visible':'hidden'}}">
+                <view catchtap="nono" class="animation-element {{show?'open':'closes'}}">
+                    <text catchtap="hiddenFloatView" class="left-bt" data-id="555">取消</text>
+                    <text catchtap="hiddenFloatView" class="right-bt" data-id="666">确定</text>
+                    <view class="line"></view>
+                    <picker-view bindchange="bindChange" catchtap="nono" class="{{show?'openpuls':'closepuls'}}" indicatorStyle="height: 50rpx;" value="{{value}}">
+                        <picker-view-column>
+                            <view wx:for="{{sheng}}" wx:for-item="sheng">
                   {{sheng.G_CName}}
                 </view>
-              </picker-view-column>
-              <!--地级市-->
-              <picker-view-column>
-                <view wx:for="{{shi}}" wx:key="">
+                        </picker-view-column>
+                        <picker-view-column>
+                            <view wx:for="{{shi}}">
                   {{item.G_CName}}
                 </view>
-              </picker-view-column>
-              <!--区县-->
-              <picker-view-column>
-                <view wx:for="{{xian}}" wx:key="">
+                        </picker-view-column>
+                        <picker-view-column>
+                            <view wx:for="{{xian}}">
                   {{item.G_CName}}
                 </view>
-              </picker-view-column>
-            </picker-view>
+                        </picker-view-column>
+                    </picker-view>
+                </view>
+            </view>
         </view>
-      </view>
-
-    </view>
-
-    <view class="section">
-      <view class="section_title">详细地址：</view>
-      <input name="address" type="text" value="{{address[0]['address']}}" placeholder="详细地址"/>
-    </view>
-     <view class="btn-area"> 
-      <button formType="submit" style='background-color:#FE6347;'>保存</button>
-     </view> 
-  </form>
+        <view class="section">
+            <view class="section_title">详细地址：</view>
+            <input name="address" placeholder="详细地址" type="text" value="{{address[0]['address']}}"></input>
+        </view>
+        <view class="btn-area">
+            <button formType="submit" style="background-color:#FE6347;">保存</button>
+        </view>
+    </form>
 </view>

@@ -12,7 +12,6 @@ Page({
         itemData: {},
         wsc: "bxs",
         sc: "bxs",
-        indicatorDots: true,
         paytype: "buynow",
         sizeid: "",
         remind: !0,
@@ -27,7 +26,9 @@ Page({
         firstIndex: -1,
         commodityAttr: [],
         attrValueList: [],
-        show_share: !1
+        show_share: !1,
+        swiperIndex: 1,
+        imgIndex: 0,
     },
     user_share: function() {
         var a = this;
@@ -628,7 +629,6 @@ Page({
       });
     }
   },
-
   //回到顶部
   goTop: function (e) {  // 一键回到顶部
     if (wx.pageScrollTo) {
@@ -641,6 +641,16 @@ Page({
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
+  },
+swiperChange: function(e) {
+    this.setData({
+        swiperIndex: e.detail.current
+    });
+},
+swiperChange: function(a) {
+    this.setData({
+        imgIndex: a.detail.current
+    });
   },
     close_share: function(t) {
         this.setData({

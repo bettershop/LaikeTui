@@ -1,4 +1,3 @@
-// pages/notice/index.js
 var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
 Page({
@@ -10,7 +9,7 @@ Page({
     flag: false,
     cartId: 0,
     numbers: "",
-    bindData:{},
+    bindData: {},
   },
   // 下拉刷新
   onPullDownRefresh: function () {
@@ -19,11 +18,11 @@ Page({
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
   },
-  
-   onLoad: function (options) {
-     wx.setNavigationBarTitle({
-       title: '公告详情', //修改页面标题
-     });
+
+  onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: '公告详情', //修改页面标题
+    });
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
       backgroundColor: app.d.bgcolor, //页面标题为路由参数
@@ -55,7 +54,6 @@ Page({
         }
         that.setData({
           notice: notice
-
         })
       },
       fail: function () {

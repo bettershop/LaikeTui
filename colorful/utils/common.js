@@ -1,117 +1,62 @@
-var app = getApp();
-var MD5Encode = require("MD5Encode.js");
-
-/**
- * 对字符串判空
- */
-function isStringEmpty(data) {
-    if (null == data || "" == data) {
-        return true;
-    }
-    return false;
+function e(e, t, n) {
+    return r("appid=" + o.d.appId + "&nonceStr=" + e + "&package=" + t + "&signType=MD5&timeStamp=" + n + "&key=" + o.d.appKey).toUpperCase();
 }
 
-/**
- * 封装网络请求
- */
-function sentHttpRequestToServer(uri, data, method, successCallback, failCallback, completeCallback) {
-    wx.request({
-        url: app.d.hostUrl + uri,
-        data: data,
-        method: method,
-        header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: successCallback,
-        fail: failCallback,
-        complete: completeCallback
-    })
+function t() {
+    return Date.parse(new Date()) + "";
 }
 
-/**
- * 将map对象转换为json字符串
- */
-function mapToJson(map) {
-    if (null == map) {
-        return null;
-    }
-    var jsonString = "{";
-    for (var key in map) {
-        jsonString = jsonString + key + ":" + map[key] + ",";
-    }
-    if ("," == jsonString.charAt(jsonString.length - 1)) {
-        jsonString = jsonString.substring(0, jsonString.length - 1);
-    }
-    jsonString += "}";
-    return jsonString;
-}
-
-/**
- * 弹窗提示成功
- */
-function toastSuccess() {
-    wx.showToast({
-        title: '成功',
-        icon: 'success',
-        duration: 2000
-    })
-}
-
-/**
- * 调用微信支付
- */
-function doWechatPay(prepayId, successCallback, failCallback, completeCallback) {
-    var nonceString = getRandomString();
-    var currentTimeStamp = getCurrentTimeStamp();
-    var packageName = "prepay_id=" + prepayId;
-    var dataMap = {
-        timeStamp : currentTimeStamp,
-        nonceStr : nonceString,
-        package : packageName,
-        signType : "MD5",
-        paySign : getWechatPaySign(nonceString, packageName, currentTimeStamp),
-        success : successCallback,
-        fail : failCallback,
-        complete : completeCallback
-    }
-    console.log(dataMap);
-    wx.requestPayment(dataMap);
-}
-
-/**
- * 获取微信支付签名字符串
- */
-function getWechatPaySign(nonceStr, packageName, timeStamp){
-    var beforMD5 = "appid=" + app.d.appId + "&nonceStr=" + nonceStr + "&package=" + packageName + "&signType=MD5" + "&timeStamp=" + timeStamp + "&key=" + app.d.appKey;
-    return doMD5Encode(beforMD5).toUpperCase();
-}
-
-/**
- * 获取当前时间戳
- */
-function getCurrentTimeStamp() {
-    var timestamp = Date.parse(new Date());
-    return timestamp + "";
-}
-
-/**
- * 获取随机字符串，32位以下
- */
-function getRandomString() {
+function n() {
     return Math.random().toString(36).substring(3, 8);
 }
 
-/**
- * MD5加密
- */
-function doMD5Encode(toEncode){
-    return MD5Encode.hexMD5(toEncode);
+function r(e) {
+    return a.hexMD5(e);
 }
 
+var o = getApp(), a = require("MD5Encode.js");
+
 module.exports = {
-    isStringEmpty: isStringEmpty,
-    sentHttpRequestToServer: sentHttpRequestToServer,
-    mapToJson: mapToJson,
-    toastSuccess: toastSuccess,
-    doWechatPay: doWechatPay
-}
+    isStringEmpty: function(e) {
+        return null == e || "" == e;
+    },
+    sentHttpRequestToServer: function(e, t, n, r, a, s) {
+        wx.request({
+            url: o.d.hostUrl + e,
+            data: t,
+            method: n,
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: r,
+            fail: a,
+            complete: s
+        });
+    },
+    mapToJson: function(e) {
+        if (null == e) return null;
+        var t = "{";
+        for (var n in e) t = t + n + ":" + e[n] + ",";
+        return "," == t.charAt(t.length - 1) && (t = t.substring(0, t.length - 1)), t += "}";
+    },
+    toastSuccess: function() {
+        wx.showToast({
+            title: "成功",
+            icon: "success",
+            duration: 2e3
+        });
+    },
+    doWechatPay: function(r, o, a, s) {
+        var u = n(), i = t(), c = "prepay_id=" + r, p = {
+            timeStamp: i,
+            nonceStr: u,
+            package: c,
+            signType: "MD5",
+            paySign: e(u, c, i),
+            success: o,
+            fail: a,
+            complete: s
+        };
+        console.log(p), wx.requestPayment(p);
+    }
+};

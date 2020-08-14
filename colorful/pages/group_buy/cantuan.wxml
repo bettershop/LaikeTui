@@ -40,7 +40,7 @@
         <text style="font-size: 25px;">￥{{price}}</text>
 
       </view>
-      <view style='color: #e83737;margin-top:10px;border: 1px solid #e83737;text-align: center;width: 60px;font-size: 12px;padding: 2px;border-radius:3px;'>限时抢购  </view>
+      <view style='color: #fff;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);margin-top:10px;border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);box-shadow: 3px 6px 4px rgba(0,0,0,.2);text-align: center;width: 60px;font-size: 12px;padding: 2px;border-radius:3px;'>限时抢购  </view>
     </view>
 
   </view>
@@ -106,8 +106,8 @@
   </view>
 
   <view class='goTop' bindtap="goIndex" style='margin:0 auto;display:flex;flex-direction:column;'>
-          <image src="../../images/icons/homeopen.png" style='width:60rpx;height:60rpx;margin:0 auto;'></image>
-          <view style='color:#666;font-size:30rpx;margin:0 auto;'>进入首页</view>  
+          <image src="../../images/icons/home.png" style='width:60rpx;height:60rpx;margin:0 auto;'></image>
+                    <view style='color:#666;font-size:30rpx;margin:0 auto;'>进入首页</view>  
   </view>
 </view>
 

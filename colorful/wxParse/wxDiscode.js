@@ -1,206 +1,74 @@
-// HTML 支持的数学符号
-function strNumDiscode(str){
-    str = str.replace(/&forall;/g, '∀');
-    str = str.replace(/&part;/g, '∂');
-    str = str.replace(/&exists;/g, '∃');
-    str = str.replace(/&empty;/g, '∅');
-    str = str.replace(/&nabla;/g, '∇');
-    str = str.replace(/&isin;/g, '∈');
-    str = str.replace(/&notin;/g, '∉');
-    str = str.replace(/&ni;/g, '∋');
-    str = str.replace(/&prod;/g, '∏');
-    str = str.replace(/&sum;/g, '∑');
-    str = str.replace(/&minus;/g, '−');
-    str = str.replace(/&lowast;/g, '∗');
-    str = str.replace(/&radic;/g, '√');
-    str = str.replace(/&prop;/g, '∝');
-    str = str.replace(/&infin;/g, '∞');
-    str = str.replace(/&ang;/g, '∠');
-    str = str.replace(/&and;/g, '∧');
-    str = str.replace(/&or;/g, '∨');
-    str = str.replace(/&cap;/g, '∩');
-    str = str.replace(/&cap;/g, '∪');
-    str = str.replace(/&int;/g, '∫');
-    str = str.replace(/&there4;/g, '∴');
-    str = str.replace(/&sim;/g, '∼');
-    str = str.replace(/&cong;/g, '≅');
-    str = str.replace(/&asymp;/g, '≈');
-    str = str.replace(/&ne;/g, '≠');
-    str = str.replace(/&le;/g, '≤');
-    str = str.replace(/&ge;/g, '≥');
-    str = str.replace(/&sub;/g, '⊂');
-    str = str.replace(/&sup;/g, '⊃');
-    str = str.replace(/&nsub;/g, '⊄');
-    str = str.replace(/&sube;/g, '⊆');
-    str = str.replace(/&supe;/g, '⊇');
-    str = str.replace(/&oplus;/g, '⊕');
-    str = str.replace(/&otimes;/g, '⊗');
-    str = str.replace(/&perp;/g, '⊥');
-    str = str.replace(/&sdot;/g, '⋅');
-    return str;
+function e(e) {
+    return e = e.replace(/&forall;/g, "∀"), e = e.replace(/&part;/g, "∂"), e = e.replace(/&exists;/g, "∃"), 
+    e = e.replace(/&empty;/g, "∅"), e = e.replace(/&nabla;/g, "∇"), e = e.replace(/&isin;/g, "∈"), 
+    e = e.replace(/&notin;/g, "∉"), e = e.replace(/&ni;/g, "∋"), e = e.replace(/&prod;/g, "∏"), 
+    e = e.replace(/&sum;/g, "∑"), e = e.replace(/&minus;/g, "−"), e = e.replace(/&lowast;/g, "∗"), 
+    e = e.replace(/&radic;/g, "√"), e = e.replace(/&prop;/g, "∝"), e = e.replace(/&infin;/g, "∞"), 
+    e = e.replace(/&ang;/g, "∠"), e = e.replace(/&and;/g, "∧"), e = e.replace(/&or;/g, "∨"), 
+    e = e.replace(/&cap;/g, "∩"), e = e.replace(/&cap;/g, "∪"), e = e.replace(/&int;/g, "∫"), 
+    e = e.replace(/&there4;/g, "∴"), e = e.replace(/&sim;/g, "∼"), e = e.replace(/&cong;/g, "≅"), 
+    e = e.replace(/&asymp;/g, "≈"), e = e.replace(/&ne;/g, "≠"), e = e.replace(/&le;/g, "≤"), 
+    e = e.replace(/&ge;/g, "≥"), e = e.replace(/&sub;/g, "⊂"), e = e.replace(/&sup;/g, "⊃"), 
+    e = e.replace(/&nsub;/g, "⊄"), e = e.replace(/&sube;/g, "⊆"), e = e.replace(/&supe;/g, "⊇"), 
+    e = e.replace(/&oplus;/g, "⊕"), e = e.replace(/&otimes;/g, "⊗"), e = e.replace(/&perp;/g, "⊥"), 
+    e = e.replace(/&sdot;/g, "⋅");
 }
 
-//HTML 支持的希腊字母
-function strGreeceDiscode(str){
-    str = str.replace(/&Alpha;/g, 'Α');
-    str = str.replace(/&Beta;/g, 'Β');
-    str = str.replace(/&Gamma;/g, 'Γ');
-    str = str.replace(/&Delta;/g, 'Δ');
-    str = str.replace(/&Epsilon;/g, 'Ε');
-    str = str.replace(/&Zeta;/g, 'Ζ');
-    str = str.replace(/&Eta;/g, 'Η');
-    str = str.replace(/&Theta;/g, 'Θ');
-    str = str.replace(/&Iota;/g, 'Ι');
-    str = str.replace(/&Kappa;/g, 'Κ');
-    str = str.replace(/&Lambda;/g, 'Λ');
-    str = str.replace(/&Mu;/g, 'Μ');
-    str = str.replace(/&Nu;/g, 'Ν');
-    str = str.replace(/&Xi;/g, 'Ν');
-    str = str.replace(/&Omicron;/g, 'Ο');
-    str = str.replace(/&Pi;/g, 'Π');
-    str = str.replace(/&Rho;/g, 'Ρ');
-    str = str.replace(/&Sigma;/g, 'Σ');
-    str = str.replace(/&Tau;/g, 'Τ');
-    str = str.replace(/&Upsilon;/g, 'Υ');
-    str = str.replace(/&Phi;/g, 'Φ');
-    str = str.replace(/&Chi;/g, 'Χ');
-    str = str.replace(/&Psi;/g, 'Ψ');
-    str = str.replace(/&Omega;/g, 'Ω');
-
-    str = str.replace(/&alpha;/g, 'α');
-    str = str.replace(/&beta;/g, 'β');
-    str = str.replace(/&gamma;/g, 'γ');
-    str = str.replace(/&delta;/g, 'δ');
-    str = str.replace(/&epsilon;/g, 'ε');
-    str = str.replace(/&zeta;/g, 'ζ');
-    str = str.replace(/&eta;/g, 'η');
-    str = str.replace(/&theta;/g, 'θ');
-    str = str.replace(/&iota;/g, 'ι');
-    str = str.replace(/&kappa;/g, 'κ');
-    str = str.replace(/&lambda;/g, 'λ');
-    str = str.replace(/&mu;/g, 'μ');
-    str = str.replace(/&nu;/g, 'ν');
-    str = str.replace(/&xi;/g, 'ξ');
-    str = str.replace(/&omicron;/g, 'ο');
-    str = str.replace(/&pi;/g, 'π');
-    str = str.replace(/&rho;/g, 'ρ');
-    str = str.replace(/&sigmaf;/g, 'ς');
-    str = str.replace(/&sigma;/g, 'σ');
-    str = str.replace(/&tau;/g, 'τ');
-    str = str.replace(/&upsilon;/g, 'υ');
-    str = str.replace(/&phi;/g, 'φ');
-    str = str.replace(/&chi;/g, 'χ');
-    str = str.replace(/&psi;/g, 'ψ');
-    str = str.replace(/&omega;/g, 'ω');
-    str = str.replace(/&thetasym;/g, 'ϑ');
-    str = str.replace(/&upsih;/g, 'ϒ');
-    str = str.replace(/&piv;/g, 'ϖ');
-    str = str.replace(/&middot;/g, '·');
-    return str;
+function a(e) {
+    return e = e.replace(/&Alpha;/g, "Α"), e = e.replace(/&Beta;/g, "Β"), e = e.replace(/&Gamma;/g, "Γ"), 
+    e = e.replace(/&Delta;/g, "Δ"), e = e.replace(/&Epsilon;/g, "Ε"), e = e.replace(/&Zeta;/g, "Ζ"), 
+    e = e.replace(/&Eta;/g, "Η"), e = e.replace(/&Theta;/g, "Θ"), e = e.replace(/&Iota;/g, "Ι"), 
+    e = e.replace(/&Kappa;/g, "Κ"), e = e.replace(/&Lambda;/g, "Λ"), e = e.replace(/&Mu;/g, "Μ"), 
+    e = e.replace(/&Nu;/g, "Ν"), e = e.replace(/&Xi;/g, "Ν"), e = e.replace(/&Omicron;/g, "Ο"), 
+    e = e.replace(/&Pi;/g, "Π"), e = e.replace(/&Rho;/g, "Ρ"), e = e.replace(/&Sigma;/g, "Σ"), 
+    e = e.replace(/&Tau;/g, "Τ"), e = e.replace(/&Upsilon;/g, "Υ"), e = e.replace(/&Phi;/g, "Φ"), 
+    e = e.replace(/&Chi;/g, "Χ"), e = e.replace(/&Psi;/g, "Ψ"), e = e.replace(/&Omega;/g, "Ω"), 
+    e = e.replace(/&alpha;/g, "α"), e = e.replace(/&beta;/g, "β"), e = e.replace(/&gamma;/g, "γ"), 
+    e = e.replace(/&delta;/g, "δ"), e = e.replace(/&epsilon;/g, "ε"), e = e.replace(/&zeta;/g, "ζ"), 
+    e = e.replace(/&eta;/g, "η"), e = e.replace(/&theta;/g, "θ"), e = e.replace(/&iota;/g, "ι"), 
+    e = e.replace(/&kappa;/g, "κ"), e = e.replace(/&lambda;/g, "λ"), e = e.replace(/&mu;/g, "μ"), 
+    e = e.replace(/&nu;/g, "ν"), e = e.replace(/&xi;/g, "ξ"), e = e.replace(/&omicron;/g, "ο"), 
+    e = e.replace(/&pi;/g, "π"), e = e.replace(/&rho;/g, "ρ"), e = e.replace(/&sigmaf;/g, "ς"), 
+    e = e.replace(/&sigma;/g, "σ"), e = e.replace(/&tau;/g, "τ"), e = e.replace(/&upsilon;/g, "υ"), 
+    e = e.replace(/&phi;/g, "φ"), e = e.replace(/&chi;/g, "χ"), e = e.replace(/&psi;/g, "ψ"), 
+    e = e.replace(/&omega;/g, "ω"), e = e.replace(/&thetasym;/g, "ϑ"), e = e.replace(/&upsih;/g, "ϒ"), 
+    e = e.replace(/&piv;/g, "ϖ"), e = e.replace(/&middot;/g, "·");
 }
 
-// 
-
-function strcharacterDiscode(str){
-    // 加入常用解析
-    str = str.replace(/&nbsp;/g, ' ');
-    str = str.replace(/&quot;/g, "'");
-    str = str.replace(/&amp;/g, '&');
-    // str = str.replace(/&lt;/g, '‹');
-    // str = str.replace(/&gt;/g, '›');
-
-    str = str.replace(/&lt;/g, '<');
-    str = str.replace(/&gt;/g, '>');
-
-    return str;
+function r(e) {
+    return e = e.replace(/&nbsp;/g, " "), e = e.replace(/&quot;/g, "'"), e = e.replace(/&amp;/g, "&"), 
+    e = e.replace(/&lt;/g, "<"), e = e.replace(/&gt;/g, ">");
 }
 
-// HTML 支持的其他实体
-function strOtherDiscode(str){
-    str = str.replace(/&OElig;/g, 'Œ');
-    str = str.replace(/&oelig;/g, 'œ');
-    str = str.replace(/&Scaron;/g, 'Š');
-    str = str.replace(/&scaron;/g, 'š');
-    str = str.replace(/&Yuml;/g, 'Ÿ');
-    str = str.replace(/&fnof;/g, 'ƒ');
-    str = str.replace(/&circ;/g, 'ˆ');
-    str = str.replace(/&tilde;/g, '˜');
-    str = str.replace(/&ensp;/g, '');
-    str = str.replace(/&emsp;/g, '');
-    str = str.replace(/&thinsp;/g, '');
-    str = str.replace(/&zwnj;/g, '');
-    str = str.replace(/&zwj;/g, '');
-    str = str.replace(/&lrm;/g, '');
-    str = str.replace(/&rlm;/g, '');
-    str = str.replace(/&ndash;/g, '–');
-    str = str.replace(/&mdash;/g, '—');
-    str = str.replace(/&lsquo;/g, '‘');
-    str = str.replace(/&rsquo;/g, '’');
-    str = str.replace(/&sbquo;/g, '‚');
-    str = str.replace(/&ldquo;/g, '“');
-    str = str.replace(/&rdquo;/g, '”');
-    str = str.replace(/&bdquo;/g, '„');
-    str = str.replace(/&dagger;/g, '†');
-    str = str.replace(/&Dagger;/g, '‡');
-    str = str.replace(/&bull;/g, '•');
-    str = str.replace(/&hellip;/g, '…');
-    str = str.replace(/&permil;/g, '‰');
-    str = str.replace(/&prime;/g, '′');
-    str = str.replace(/&Prime;/g, '″');
-    str = str.replace(/&lsaquo;/g, '‹');
-    str = str.replace(/&rsaquo;/g, '›');
-    str = str.replace(/&oline;/g, '‾');
-    str = str.replace(/&euro;/g, '€');
-    str = str.replace(/&trade;/g, '™');
-
-    str = str.replace(/&larr;/g, '←');
-    str = str.replace(/&uarr;/g, '↑');
-    str = str.replace(/&rarr;/g, '→');
-    str = str.replace(/&darr;/g, '↓');
-    str = str.replace(/&harr;/g, '↔');
-    str = str.replace(/&crarr;/g, '↵');
-    str = str.replace(/&lceil;/g, '⌈');
-    str = str.replace(/&rceil;/g, '⌉');
-
-    str = str.replace(/&lfloor;/g, '⌊');
-    str = str.replace(/&rfloor;/g, '⌋');
-    str = str.replace(/&loz;/g, '◊');
-    str = str.replace(/&spades;/g, '♠');
-    str = str.replace(/&clubs;/g, '♣');
-    str = str.replace(/&hearts;/g, '♥');
-
-    str = str.replace(/&diams;/g, '♦');
-
-    return str;
+function l(e) {
+    return e = e.replace(/&OElig;/g, "Œ"), e = e.replace(/&oelig;/g, "œ"), e = e.replace(/&Scaron;/g, "Š"), 
+    e = e.replace(/&scaron;/g, "š"), e = e.replace(/&Yuml;/g, "Ÿ"), e = e.replace(/&fnof;/g, "ƒ"), 
+    e = e.replace(/&circ;/g, "ˆ"), e = e.replace(/&tilde;/g, "˜"), e = e.replace(/&ensp;/g, ""), 
+    e = e.replace(/&emsp;/g, ""), e = e.replace(/&thinsp;/g, ""), e = e.replace(/&zwnj;/g, ""), 
+    e = e.replace(/&zwj;/g, ""), e = e.replace(/&lrm;/g, ""), e = e.replace(/&rlm;/g, ""), 
+    e = e.replace(/&ndash;/g, "–"), e = e.replace(/&mdash;/g, "—"), e = e.replace(/&lsquo;/g, "‘"), 
+    e = e.replace(/&rsquo;/g, "’"), e = e.replace(/&sbquo;/g, "‚"), e = e.replace(/&ldquo;/g, "“"), 
+    e = e.replace(/&rdquo;/g, "”"), e = e.replace(/&bdquo;/g, "„"), e = e.replace(/&dagger;/g, "†"), 
+    e = e.replace(/&Dagger;/g, "‡"), e = e.replace(/&bull;/g, "•"), e = e.replace(/&hellip;/g, "…"), 
+    e = e.replace(/&permil;/g, "‰"), e = e.replace(/&prime;/g, "′"), e = e.replace(/&Prime;/g, "″"), 
+    e = e.replace(/&lsaquo;/g, "‹"), e = e.replace(/&rsaquo;/g, "›"), e = e.replace(/&oline;/g, "‾"), 
+    e = e.replace(/&euro;/g, "€"), e = e.replace(/&trade;/g, "™"), e = e.replace(/&larr;/g, "←"), 
+    e = e.replace(/&uarr;/g, "↑"), e = e.replace(/&rarr;/g, "→"), e = e.replace(/&darr;/g, "↓"), 
+    e = e.replace(/&harr;/g, "↔"), e = e.replace(/&crarr;/g, "↵"), e = e.replace(/&lceil;/g, "⌈"), 
+    e = e.replace(/&rceil;/g, "⌉"), e = e.replace(/&lfloor;/g, "⌊"), e = e.replace(/&rfloor;/g, "⌋"), 
+    e = e.replace(/&loz;/g, "◊"), e = e.replace(/&spades;/g, "♠"), e = e.replace(/&clubs;/g, "♣"), 
+    e = e.replace(/&hearts;/g, "♥"), e = e.replace(/&diams;/g, "♦");
 }
 
-function strMoreDiscode(str){
-    str = str.replace(/\r\n/g,"");  
-    str = str.replace(/\n/g,"");
-
-    str = str.replace(/code/g,"wxxxcode-style");
-    return str;
-}
-
-function strDiscode(str){
-    str = strNumDiscode(str);
-    str = strGreeceDiscode(str);
-    str = strcharacterDiscode(str);
-    str = strOtherDiscode(str);
-    str = strMoreDiscode(str);
-    return str;
-}
-function urlToHttpUrl(url,rep){
-    
-    var patt1 = new RegExp("^//");
-    var result = patt1.test(url);
-    if(result){
-        url = rep+":"+url;
-    }
-    return  url;
+function p(e) {
+    return e = e.replace(/\r\n/g, ""), e = e.replace(/\n/g, ""), e = e.replace(/code/g, "wxxxcode-style");
 }
 
 module.exports = {
-    strDiscode:strDiscode,
-    urlToHttpUrl:urlToHttpUrl
-}
+    strDiscode: function(c) {
+        return c = e(c), c = a(c), c = r(c), c = l(c), c = p(c);
+    },
+    urlToHttpUrl: function(e, a) {
+        return new RegExp("^//").test(e) && (e = a + ":" + e), e;
+    }
+};

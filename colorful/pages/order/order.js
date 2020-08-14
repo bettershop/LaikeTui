@@ -26,19 +26,19 @@ Page({
     districtChioceIcon: "/images/icon-go-black.png",
     sortingChioceIcon: "icon-xiangyou",
     sortingList: [{
-        key: 1,
-        value: "全部订单",
-        otype: 'pay'
-      },
-      {
-        key: 3,
-        value: "拼团",
-        otype: 'pay6'
-      }
+      key: 1,
+      value: "全部订单",
+      otype: 'pay'
+    },
+    {
+      key: 3,
+      value: "拼团",
+      otype: 'pay6'
+    }
     ],
   },
   //提醒发货
-  add_fix: function(e) {
+  add_fix: function (e) {
     console.log(1)
     wx.showToast({
       title: '已为您通知卖家提醒发货',
@@ -46,7 +46,7 @@ Page({
       duration: 2000,
     });
   },
-  selectSorting: function(e) {
+  selectSorting: function (e) {
     var index = e.currentTarget.dataset.index;
     var otype = e.currentTarget.dataset.otype;
     this.setData({
@@ -63,7 +63,7 @@ Page({
     this.loadOrderList();
   },
   //点击选择类型
-  clickPerson: function() {
+  clickPerson: function () {
     if (this.data.chioceSorting) {
       this.setData({
         sortingChioceIcon: "icon-xiangyou",
@@ -82,20 +82,20 @@ Page({
 
   },
   //下拉刷新
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.loadOrderList();
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
   },
   //页面加载完成函数
-  onReady: function() {
+  onReady: function () {
     var that = this;
     that.setData({
       remind: ''
     });
   },
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (options.otype) {
       var otype = options.otype;
       this.setData({
@@ -131,11 +131,11 @@ Page({
     });
     this.loadOrderList();
   },
-  onShow: function() {
+  onShow: function () {
     this.loadOrderList();
   },
   // 获取订单
-  loadOrderList: function() {
+  loadOrderList: function () {
     var that = this;
     var isStatus1 = that.options.order_type1
     wx.request({
@@ -149,7 +149,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         var status = res.data.status;
         var order = res.data.order;
         switch (that.data.currentTab) {
@@ -191,7 +191,7 @@ Page({
         }
         //console.log(that.data.ordert0)
       },
-      fail: function() {
+      fail: function () {
         // fail
         wx.showToast({
           title: '网络异常！',
@@ -201,13 +201,13 @@ Page({
     });
   },
   // 确认收货
-  recOrder: function(e) {
+  recOrder: function (e) {
     var that = this;
     var sNo = e.currentTarget.dataset.sno;
     wx.showModal({
       title: '提示',
       content: '你确定已收到宝贝吗？',
-      success: function(res) {
+      success: function (res) {
         res.confirm && wx.request({
           url: app.d.ceshiUrl + '&action=order&m=ok_Order',
           method: 'post',
@@ -217,7 +217,7 @@ Page({
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          success: function(res) {
+          success: function (res) {
             var status = res.data.status;
             if (status == 1) {
               wx.showToast({
@@ -232,7 +232,7 @@ Page({
               });
             }
           },
-          fail: function() {
+          fail: function () {
             // fail
             wx.showToast({
               title: '网络异常！',
@@ -244,13 +244,13 @@ Page({
     });
   },
   // 取消订单
-  removeOrder: function(e) {
+  removeOrder: function (e) {
     var that = this;
     var orderId = e.currentTarget.dataset.orderId;
     wx.showModal({
       title: '提示',
       content: '你确定要取消订单吗？',
-      success: function(res) {
+      success: function (res) {
         res.confirm && wx.request({
           url: app.d.ceshiUrl + '&action=order&m=removeOrder',
           method: 'post',
@@ -261,7 +261,7 @@ Page({
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          success: function(res) {
+          success: function (res) {
             var status = res.data.status;
             if (status == 1) {
               wx.showToast({
@@ -276,7 +276,7 @@ Page({
               });
             }
           },
-          fail: function() {
+          fail: function () {
             wx.showToast({
               title: '网络异常！',
               duration: 2000
@@ -286,10 +286,10 @@ Page({
       }
     });
   },
-  initSystemInfo: function() {
+  initSystemInfo: function () {
     var that = this;
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
@@ -298,7 +298,7 @@ Page({
     });
   },
 
-  bindChange: function(e) {
+  bindChange: function (e) {
     console.log('1111')
     var that = this;
     //设置移动请求  防止空数据出现
@@ -340,7 +340,7 @@ Page({
     });
   },
   // 跳转页面
-  swichNav: function(e) {
+  swichNav: function (e) {
     var that = this;
     if (that.data.currentTab === e.target.dataset.current) {
       return false;
@@ -354,7 +354,7 @@ Page({
     };
   },
   // 微信支付
-  payOrderByWechat: function(e) {
+  payOrderByWechat: function (e) {
     var that = this;
     var order_id = e.detail.target.dataset.orderId; // 订单id
     var order_sn = e.detail.target.dataset.ordersn; // 订单号
@@ -375,7 +375,7 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
           // console.log(66411)
           var referee_openid = app.globalData.userInfo.referee_openid;
@@ -391,7 +391,7 @@ Page({
             package: res.data.package,
             signType: 'MD5',
             paySign: res.data.paySign,
-            success: function(res) {
+            success: function (res) {
               //成功后修改订单状态
               wx.request({
                 url: app.d.ceshiUrl + '&action=product&m=up_order',
@@ -405,7 +405,7 @@ Page({
                 header: {
                   'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                success: function(res) {
+                success: function (res) {
                   var orderId = res.data.sNo; // 订单号
                   var oid = res.data.id; // 订单id
                   //发送信息到客户
@@ -414,7 +414,7 @@ Page({
                     content: "支付成功！",
                     showCancel: false,
                     confirmText: "确定",
-                    success: function(res) {
+                    success: function (res) {
                       wx.redirectTo({
                         url: '../order/detail?orderId=' + oid
                       });
@@ -425,7 +425,7 @@ Page({
                 }
               })
             },
-            fail: function(res) {
+            fail: function (res) {
               wx.showModal({
                 content: "取消支付！",
                 showCancel: false,
@@ -436,7 +436,7 @@ Page({
         }
 
       },
-      fail: function() {
+      fail: function () {
         wx.showToast({
           title: '网络异常！err:wxpay',
           duration: 2000
@@ -445,7 +445,7 @@ Page({
     })
   },
   //发送数据到客户微信上
-  notice: function(order_id, order_sn, price, user_id, form_id, f_pname) {
+  notice: function (order_id, order_sn, price, user_id, form_id, f_pname) {
     wx.request({
       url: app.d.ceshiUrl + '&action=getcode&m=Send_Prompt',
       method: 'post',
@@ -460,19 +460,19 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res)
       }
     })
   },
-  escOrder: function(e) {
+  escOrder: function (e) {
     var that = this,
       id = e.target.dataset.orderId;
     var sNo = e.target.dataset.sno;
     wx.showModal({
       title: '提示',
       content: '小二正在努力为您发货,确定要取消吗？',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定' + "../return_goods/return_goods?id=" + id + "&type=1&oid=" + sNo);
           wx.redirectTo({
@@ -486,7 +486,7 @@ Page({
     });
   },
   //储存推荐人
-  refereeopenid: function(referee_openid, openid) {
+  refereeopenid: function (referee_openid, openid) {
     wx.request({
       url: app.d.ceshiUrl + '&action=app&m=referee_openid',
       method: 'post',
@@ -497,8 +497,8 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {},
-      error: function(e) {
+      success: function (res) { },
+      error: function (e) {
         wx.showToast({
           title: '网络异常！',
           duration: 2000,
@@ -506,7 +506,7 @@ Page({
       },
     });
   },
-  detailed: function(sNo, openid) { //分销
+  detailed: function (sNo, openid) { //分销
     wx.request({
       url: app.d.ceshiUrl + '&action=distribution&m=detailed_commission',
       method: 'post',
@@ -519,7 +519,7 @@ Page({
       },
     })
   },
-  commission: function(sNo) { //分销返佣
+  commission: function (sNo) { //分销返佣
     wx.request({
       url: app.d.ceshiUrl + '&action=distribution&m=commission',
       method: 'post',

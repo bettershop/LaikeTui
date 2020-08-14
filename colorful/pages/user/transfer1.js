@@ -1,183 +1,129 @@
-// pages/user/transfer1.js
-var app = getApp()
+var e = getApp();
+
 Page({
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    inp_money: 0,
-    iv: '',
-    encryptedData: '',
-    islogin: false,
-    remind: '加载中',
-    bank_name: ''
-  },
-  //页面加载完成函数
-  onReady: function () {
-    var that = this;
-    that.setData({
-      remind: ''
-    });
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    })
-
-    wx.checkSession({
-      success: function (e) {
-        console.log(e)
-        console.log('session_key 未过期' + app.globalData.userInfo.session_key)
-        //session_key 未过期，并且在本生命周期一直有效
-        app.globalData.userInfo['session_key'] = app.globalData.userInfo.session_key;
-
-      },
-      fail: function () {
-        // session_key 已经失效，需要重新执行登录流程
-        wx.login({
-          success: function (res) {
-            var code = res.code;
-            that.globalData.code = res.code;
-            //取出本地存储用户信息，解决需要每次进入小程序弹框获取用户信息
-            var userinfo = wx.getStorageSync('userInfo');
-            that.globalData.userInfo = userinfo;
-            app.getUserSessionKey(code, cb);
-          }
-        }); //重新登录
-      }
-    });
-    this.setData({
-      bgcolor: app.d.bf_color
-    });
-    var that = this;
-    var user_id = options.user_id;
-    var colo = options.user_id;
-    var num = colo.substring(4)
-    var cor = num.replace(/\b(0+)/gi, "")
-    if (num == 0) {
-      user_id="user" + 0
-    } else {
-      user_id = "user" + cor
-    }
-
-   
-    wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=selectuser',
-      method: 'post',
-      data: {
-        user_id: user_id,
-        openid: app.globalData.userInfo.openid
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var status = res.data.status;
-        if (status == 1) {
-          var wx_name = res.data.user.wx_name;
-          var headimgurl = res.data.user.headimgurl;
-          var money = res.data.user.money;
-          that.setData({
-            wx_name: wx_name,
-            headimgurl: headimgurl,
-            money: money,
-            transfer_multiple: res.data.user.transfer_multiple,
-          });
-
-        } else {
-          wx.showToast({
-            title: res.data.err,
-            icon: 'loading',
-            duration: 1500
-          });
-          wx.redirectTo({
-            url: "../user/transfer",
-          })
-        }
-      },
-      error: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
+    data: {
+        inp_money: 0,
+        iv: "",
+        encryptedData: "",
+        islogin: !1,
+        remind: "加载中",
+        bank_name: ""
+    },
+    onReady: function() {
+        var e = this;
+        setTimeout(function() {
+            e.setData({
+                remind: ""
+            });
+        }, 1e3);
+    },
+    onLoad: function(o) {
+        console.log(o), console.log(11111111), wx.setNavigationBarColor({
+            frontColor: e.d.frontColor,
+            backgroundColor: e.d.bgcolor,
+            animation: {
+                duration: 400,
+                timingFunc: "easeIn"
+            }
+        }), wx.checkSession({
+            success: function(o) {
+                console.log(o), console.log("session_key 未过期" + e.globalData.userInfo.session_key), 
+                e.globalData.userInfo.session_key = e.globalData.userInfo.session_key;
+            },
+            fail: function() {
+                wx.login({
+                    success: function(o) {
+                        var a = o.code;
+                        t.globalData.code = o.code;
+                        var n = wx.getStorageSync("userInfo");
+                        t.globalData.userInfo = n, e.getUserSessionKey(a, cb);
+                    }
+                });
+            }
+        }), this.setData({
+            bgcolor: e.d.bf_color
         });
-      }
-    });
-  },
-  //转账给好友
-  withdrawals1: function (e) {
-    console.log(this);
-    var that = this;
-    console.log(6666)
-    var money = Number(e.detail.value.money);
-    var user_id = that.options.user_id;
-    var mon = Number(that.data.money);//账户余额
-    console.log(mon);
-    console.log(money);
-    if(money>mon){
-        wx.showToast({
-          title: '余额不足',
-          duration: 2000
+        var t = this, a = o.user_id, n = o.user_id.substring(4), s = n.replace(/\b(0+)/gi, "");
+        a = 0 == n ? "user0" : "user" + s, wx.request({
+            url: e.d.ceshiUrl + "&action=user&m=selectuser",
+            method: "post",
+            data: {
+                user_id: a,
+                openid: e.globalData.userInfo.openid
+            },
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function(e) {
+                if (1 == e.data.status) {
+                    var o = e.data.user.wx_name, a = e.data.user.headimgurl, n = e.data.user.money;
+                    t.setData({
+                        wx_name: o,
+                        headimgurl: a,
+                        money: n,
+                        transfer_multiple: e.data.user.transfer_multiple
+                    });
+                } else wx.showToast({
+                    title: e.data.err,
+                    icon: "loading",
+                    duration: 1500
+                }), setTimeout(function() {
+                    wx.redirectTo({
+                        url: "../user/transfer"
+                    });
+                }, 2e3);
+            },
+            error: function(e) {
+                wx.showToast({
+                    title: "网络异常！",
+                    duration: 2e3
+                });
+            }
+        });
+    },
+    withdrawals1: function(o) {
+        console.log(this);
+        var t = this;
+        console.log(6666);
+        var a = Number(o.detail.value.money), n = t.options.user_id, s = Number(t.data.money);
+        console.log(s), console.log(a), a > s && wx.showToast({
+            title: "余额不足",
+            duration: 2e3
+        }), (a < 0 || "" == a) && wx.showToast({
+            title: "正确填写转账金额",
+            duration: 2e3
+        }), s >= a && a > 0 && wx.request({
+            url: e.d.ceshiUrl + "&action=user&m=transfer",
+            method: "post",
+            data: {
+                user_id: n,
+                openid: e.globalData.userInfo.openid,
+                money: a
+            },
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function(e) {
+                1 == e.data.status ? (wx.showToast({
+                    title: e.data.err,
+                    icon: "loading",
+                    duration: 1500
+                }), setTimeout(function() {
+                    wx.redirectTo({
+                        url: "../user/wallet"
+                    });
+                }, 2e3)) : wx.showToast({
+                    title: e.data.err,
+                    icon: "none",
+                    duration: 1500
+                });
+            },
+            error: function(e) {
+                wx.showToast({
+                    title: "网络异常！",
+                    duration: 2e3
+                });
+            }
         });
     }
-    if(money < 0 || money == ''){
-      wx.showToast({
-        title: '正确填写转账金额',
-        duration: 2000
-      });
-    }
-    if(mon>=money && money>0){
-      wx.request({
-        url: app.d.ceshiUrl + '&action=user&m=transfer',
-        method: 'post',
-        data: {
-          user_id: user_id,
-          openid: app.globalData.userInfo.openid,
-          money: money
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: function (res) {
-          var status = res.data.status;
-          if (status == 1) {
-            wx.showToast({
-              title: res.data.err,
-              icon: 'loading',
-              duration: 1500
-            });
-
-            wx.redirectTo({
-              url: "../user/wallet",
-            });
-
-          } else {
-            wx.showToast({
-              title: res.data.err,
-              icon: 'none',
-              duration: 1500
-            });
-          }
-
-        },
-        error: function (e) {
-          wx.showToast({
-            title: '网络异常！',
-            duration: 2000
-          });
-        }
-      });
-    }
-
-  }
-
-
-
-})
+});

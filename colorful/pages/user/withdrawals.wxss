@@ -1,96 +1,95 @@
-page{
-  background-color: rgb(240, 239, 245); 
-}
-.page{
-  width:95%;
-margin:20px auto;
-background-color:#fff;
-border-radius:25rpx;
-
+page {
+    background-color: rgb(240,239,245);
 }
 
-.balance{
-  text-align: center;
-  padding:10px 20px;
-  font-size: 18px;
-}
-.bb{
-  text-align: center;
-  font-size: 12px;
-}
-.Withdraw{
-  padding: 10px 20px;
+.page {
+    width: 95%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 25rpx;
 }
 
-.cash{
-  border: 1px solid #ddd;
-  flex: 1;
-  margin-left: -1px;
-  font-size: 12px;
-  padding: 0 10px;
-  line-height: 30px;
-  height: 30px;
+.balance {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 18px;
 }
 
-.tx{
-  /* background-color: #836FFF;   */
-  background-color: #48474c;  
-  color: #fff; 
-  text-align: center;
-  height: 45px;
-  line-height: 45px;
-  bottom: 0;
-  width: 100%;
-  position: fixed;
-}
-.Phone{
-  /* border: 1px solid #ddd;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  border-radius:5px; */
-  font-size: 28rpx;
-  width: 30%;
-  padding-left:2%;
-  margin-top:5px;
-
+.bb {
+    text-align: center;
+    font-size: 12px;
 }
 
-.section{
- padding: 12px 0;
-  width: 100%;
-  display:flex;
-  flex-direction:row;
-  font-size: 16px;
-  /* justify-content: center; */
+.Withdraw {
+    padding: 10px 20px;
 }
-.inp{
-  display:flex;
-  align-items:center;
-  width: 70%;
-  margin-top:2px;
 
+.cash {
+    border: 1px solid #ddd;
+    flex: 1;
+    margin-left: -1px;
+    font-size: 12px;
+    padding: 0 10px;
+    line-height: 30px;
+    height: 30px;
 }
-.t_3{
-  margin-left: 15px;
-  font-size:13px;
-}
-.text{
-  width: 27%;
-  text-align:center;
-}
-.xt{
-  height:1px;
-width:87%;
-background:#eee;
-margin:auto;
 
+.tx {
+    background-color: #48474c;
+    color: #fff;
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
 }
-.sj_btn{
-  background:#09bb07;
-color:#fff;
 
-font-size:26rpx;
-margin-left:250rpx;
+.Phone {
+    font-size: 28rpx;
+    width: 30%;
+    padding-left: 2%;
+    margin-top: 5px;
+}
 
+.section {
+    padding: 12px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+
+.inp {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin-top: 2px;
+}
+
+.t_3 {
+    margin-left: 15px;
+    font-size: 13px;
+}
+
+.text {
+    width: 27%;
+    text-align: center;
+}
+
+.xt {
+    height: 1px;
+    width: 87%;
+    background: #eee;
+    margin: auto;
+}
+
+.sj_btn {
+    background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);
+    border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);
+    box-shadow: 3px 6px 4px rgba(0,0,0,.2);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 26rpx;
+    margin-left: 250rpx;
 }

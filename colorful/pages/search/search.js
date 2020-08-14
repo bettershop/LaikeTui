@@ -95,19 +95,15 @@ Page({
     console.log(e)
     var that = this
     WxSearch.wxSearchAddHisKey(that);
-    setTimeout(function () {
-      var value = that.data.wxSearchData.value;
-      if (value){
-        wx.navigateTo({
-          url: "../listdetail/listdetail?keyword=" + value
-        })
-      }
-    }, 500);
+    var value = that.data.wxSearchData.value;
+    if (value){
+      wx.navigateTo({
+        url: "../listdetail/listdetail?keyword=" + value
+      })
+    }
   },
   wxSearchInput: function (e) {
-    console.log(e)
     var that = this
-    console.log(that)
     WxSearch.wxSearchInput(e, that);
   },
   wxSerchFocus: function (e) {
@@ -167,6 +163,12 @@ Page({
         })
       }
     })
+  },
+  jumpgo: function (t) {
+    var a = t.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: a
+    });
   },
 })
   

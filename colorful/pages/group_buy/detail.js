@@ -4,7 +4,7 @@ Page({
   data: {
     itemData: {},
     scrollTop:0,
-    maskHidden: false,
+    maskHidden: !1,
     num:1,
     sizeid: '',
     currentTab: 0, //tab切换  
@@ -203,7 +203,7 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          maskHidden: true,
+          maskHidden: !0,
           imagePath: res.url,
         });
       }
@@ -834,7 +834,7 @@ Page({
                   console.log('用户点击确定');
                   /* 该隐藏的隐藏 */
                   that.setData({
-                    maskHidden: false
+                    maskHidden: !1
                   })
                 }
               }, fail: function (res) {
@@ -848,12 +848,38 @@ Page({
     })
 
   },
+  // 获取滚动条当前位置
+  onPageScroll: function (e) {
+    if (e.scrollTop > 300) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
+
+  //回到顶部
+  goTop: function (e) {  // 一键回到顶部
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
+  },
   // 分享到朋友圈
   close_share: function (e) {
 
     var that = this;
     that.setData({
-      maskHidden: false
+      maskHidden: !1
     })
   }
 

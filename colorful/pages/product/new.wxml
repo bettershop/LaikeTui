@@ -20,12 +20,14 @@
               <image class="goods-photo" src="{{item.imgurl}}"></image>
               <view class="goods-info">
                 <view class="goods-title">{{item.name}}</view>
-                <view class="p-sale">爆卖 <span style="color: #f00;">{{item.volume}}</span>件</view>
+                    <view style="display:flex;line-height:50rpx;">
+                          <view class="gmxx">爆卖 <span style="color: #f00;">{{item.volume}}</span>件</view>
+                          <view class="gmx" style='text-align:right;margin-right:18px;'>¥ {{item.price}}</view>
+                        </view>
                 <view class="goods-text">
-                  <view class="p-price">¥ {{item.price_yh}}</view>
-                  <view class="p-price-y">¥ {{item.price}}</view>
+                  <view class="p-price-y">¥ {{item.price_yh}}</view>
                 </view>
-                <image src='/images/icons/indexs/gwc.png' class='icon-cart'></image>
+                <view class="icon-cart" style="width:40%;height:40rpx;line-height:40rpx;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);color:#fff;display:flex;flex-direction: row;justify-content:center;margin-left:26%;border-radius: 15px;">立即购买</view>
               </view>
             </navigator>
         </view>
@@ -40,7 +42,7 @@
           </view>
           <!-- <view class="clear mt10" wx:else bindtap="getMore">点击查看更多{{loading}}-</view> -->
           <view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
-          <image src='../../images/fanhui.png' style='width:20px;height:20px;margin:10px;'></image>  
+          <view class="hef-yuan hef-red">顶部</view>
           </view>  
     </block>
     </view>

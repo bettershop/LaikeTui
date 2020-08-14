@@ -22,7 +22,7 @@ page{
   display: inline-block;  
   width: 25%;
   position: fixed;
-  top: 46px;
+  top: 47px;
   bottom: 0;
   left: 0;
   /*主盒子设置背景色为灰色*/  
@@ -32,8 +32,7 @@ page{
 /*左侧栏list的item*/  
 .nav_left .nav_left_items{  
   /*每个高30px*/  
-  height: 40px;
-  width: 100px;  
+  height: 40px;  
   /*垂直居中*/  
   line-height: 40px;  
   /*再设上下padding增加高度，总高42px*/  
@@ -54,7 +53,7 @@ page{
 .nav_right{  
   /*右侧盒子使用了绝对定位*/  
   position: absolute;  
-  top: 55px;  
+  top: 47px;  
   right: 0;  
   flex: 1;  
   /*宽度75%，高度占满，并使用百分比布局*/  
@@ -448,12 +447,67 @@ word-break: break-all;
   width:100%;
 
 }
-.actives {
-  width: 10rpx;
-  height: 50rpx;
-  background-color: #FF0230;
-  }
-  .items {
-    display: flex;
-    align-items: center;
-  }
+.head-search {
+  padding: 0rpx 20rpx;
+  height: 90rpx;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  top: 0;
+  z-index: 99;
+  position: fixed;
+  background-color: #ffffff;
+}
+.search-input {
+  width: 100%;
+}
+
+.search-input input {
+  width: 100%;
+}
+
+.search {
+  height: 68rpx;
+  width: 670rpx;
+  background-color: #ffffff;
+  opacity: 0.8;
+  border-radius: 50rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 20rpx;
+  border: 1px solid #eee;
+}
+
+.search image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 12rpx;
+}
+
+.search-message {
+  height: 68rpx;
+  width: 68rpx;
+  border-radius: 50%;
+  opacity: 0.8;
+  background-color: #f6f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 22rpx;
+  position: relative;
+}
+
+.search-message image {
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.search-message .ke {
+  text-align: center;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 30px;
+}

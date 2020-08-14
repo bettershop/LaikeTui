@@ -42,13 +42,6 @@
             </view>
         </view>
     </view>
-    <view class="container carts-list" wx:if="{{carts==''}}">
-        <view class="pp">
-            <image class="kong" mode="aspectFill" src="../../images/cart.png"></image>
-
-            <view bindtap="go_index" class="cla" style="padding:5px;background:#ff0000;border-radius:5px;margin:6px;color:#fff;">去逛逛</view>
-        </view>
-    </view>
     <view class="container carts-list">
         <view class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}" wx:for="{{carts}}" wx:key="key">
             <icon bindtap="bindCheckbox" data-index="{{index}}" size="20" type="success_circle" wx:if="{{item.selected}}"></icon>
@@ -82,9 +75,15 @@
             <text class="reds" wx:if="{{!upstatus}}">{{total}}</text>
         </view>
         <view class="bottom_1" wx:if="{{upstatus}}">
-            <view bindtap="shouc" class="button_1_1">移至收藏</view>
-            <view bindtap="delarr" class="button_1_2" style="background:#FF002E;border:1px solid #f60;">删除</view>
+            <view bindtap="shouc" class="button_1_1" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);">移至收藏</view>
+            <view bindtap="delarr" class="button_1_2" style="background: linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);">删除</view>
         </view>
-        <view bindtap="bindCheckout" class="button" style="background:#FF002E;" wx:else>立即结算 </view>
+        <view bindtap="bindCheckout" class="button"  wx:else>立即结算 </view>
     </view>
 </view>
+        <view class="main-nodata-bg" wx:if="{{carts==''}}">
+        <view class="main-nodata">
+            <image class="nodata" src="../../images/cart.png"></image>
+            <view bindtap="go_index" class="btn-index">逛逛首页</view>
+        </view>
+    </view>

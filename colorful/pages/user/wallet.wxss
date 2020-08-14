@@ -95,9 +95,7 @@ contact-button{
   display:flex;
   flex-direction:column;
 }
-.hh{
-  /* margin-top: 15px; */
-}
+
 .dibu{
   background-color: #48474c;
   width: 100%;
@@ -117,7 +115,7 @@ contact-button{
   height: 100%;
 }
 .dibu_3{
-  color: #b20000;
+  color: #fff;
 }
 .dibu_1{
   width: 50%;
@@ -145,9 +143,9 @@ contact-button{
   text-align: center;  
   line-height: 80rpx;
   left:0;
-  background-color: #FFFFFF;
   border-bottom:2rpx solid #EAE9EC;
-}  
+  background:rgba(0,0,0,.9);
+}
 .swiper-tab-list{  
   font-size: 30rpx;  
   display: inline-block;  
@@ -180,15 +178,15 @@ contact-button{
 }
 
 .on{
-  color:#020202;
+  color:#9b8250;
   font-weight:bold;
-  border-bottom:5rpx solid #020202;
+  border-bottom:5rpx solid #9b8250;
 } 
 .obtain_bt_1{
   width: 0;
 }
 .obtain_bt_2{
-  width: 40%;
+  width: 60%;
   text-align: end;
   overflow: hidden;
   text-overflow:ellipsis;
@@ -197,10 +195,6 @@ contact-button{
   font-size:28rpx;
   font-weight:bold;
 }
-.obtain_bt_3{
-}
-
-
 
 @keyframes rise{
   0% {opacity: 0;transform: translate3d(0,100%,0);}
@@ -365,4 +359,37 @@ contact-button{
   font-size:40rpx;
   font-weight:400;
   color: #FEFEFE;
+}
+.user-resource {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.user-resource image {
+  width: 100%;
+  height: 349rpx;
+}
+
+.user-resource .resource-body {
+  width: 750rpx;
+  height: 380rpx;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user-resource .resource-body .resource-title {
+  font-size: 100rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+.user-resource .resource-body .resource-titlex {
+  font-size: 34rpx;
+  color: #FFFFFF;
+  font-weight: 500;
 }

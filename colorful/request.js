@@ -1,16 +1,15 @@
-var util = require('./utils/util.js')
-var request = new Object();
+var e = require("./utils/util.js"), t = new Object();
 
-request.wxRequest = function(obj){
-  
-  wx.request({
-    url: util.getUri() + obj.url,
-    data:obj.data,
-    method:obj.method,
-    header:{"Content-Type": "application/x-www-form-urlencoded"},
-    success:function(res){
-        typeof(obj.success)=='function' && obj.success(res.data);    
-    }
-  })
-}
-module.exports = request
+t.wxRequest = function(t) {
+    wx.request({
+        url: e.getUri() + t.url,
+        data: t.data,
+        method: t.method,
+        header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        success: function(e) {
+            "function" == typeof t.success && t.success(e.data);
+        }
+    });
+}, module.exports = t;

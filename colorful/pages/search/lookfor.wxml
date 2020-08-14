@@ -27,7 +27,8 @@
     <form bindsubmit="wxSearchFn" reportSubmit="true">
         <view class="wxSearch-section">
             <view class="wxSearch-pancel">
-                <input bindconfirm="search_confirmType" bindinput="wxSearchInput" bindtap="wxSerchFocus" class="wxSearch-input" confirmType="search" placeholder="搜索您想要的礼品..." value="{{wxSearchData.value}}"></input>
+                <input bindconfirm="search_confirmType" bindinput="wxSearchInput" bindtap="wxSerchFocus" class="wxSearch-input" confirmType="search" placeholder="搜索你想要的商品" value="{{wxSearchData.value}}"></input>
+                <button class="wxSearch-button" style="color: #fff;icon-cart" style="background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%); box-shadow: 3px 6px 4px rgba(0,0,0,.2);color:#fff;display:flex;flex-direction: row;justify-content:center;border-radius: 15px;left: 10px;" formType="submit" plain="true" size="mini" type="primary">搜索</button>
             </view>
         </view>
     </form>

@@ -1,155 +1,115 @@
-// pages/return_goods/return_goods.js
-var app = getApp()
+var t = getApp();
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    itemList: [],
-    itemList_text:'退货退款',
-    tapIndex:1
-  },
-  actionSheetTap: function () {
-    var that = this;
-    wx.showActionSheet({
-      itemList: that.data.itemList,
-      success: function (e) {
-
-        var arrayType = that.data.arrayType, itemList = that.data.itemList;
-
-        for (var i = 0; i < arrayType.length; i++) {
-          if (itemList[e.tapIndex] == arrayType[i].text){
-            that.setData({
-              tapIndex: arrayType[i].id,
-            })
-         }
-        }
-        that.setData({
-          itemList_text: itemList[e.tapIndex]
-        })
-
-      }
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    })
-    var otype = options.type ? options.type:false;
-    console.log(options)
-    this.setData({
-      bgcolor: app.d.bf_color,
-      id: options.id,
-      oid:options.oid,
-      otype: otype
-    });
-    this.loadate();
-  },
-  loadate: function (e) {
-    var that = this;
-    wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=return_type',
-      method: 'post',
-      data: {
-        id: that.data.id,
-        oid: that.data.oid,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var status = res.data.status;
-        if (status == 1) {
-          var arrayType = res.data.arrayType, itemList = [];
-          for (var i = 0; i < arrayType.length; i++) {
-            itemList.push(arrayType[i].text);
-          }
-
-          that.setData({
-            itemList: itemList,
-            arrayType: res.data.arrayType,
-            itemList_text: res.data.itemList_text,
-            tapIndex: res.data.tapIndex
-          });
-        } else {
-          wx.showToast({
-            title: res.data.err,
-            duration: 2000
-          });
-        }
-      },
-    });
-  },
-  remarkInput: function (e) {
-    this.setData({
-      remark: e.detail.value,
-    });
-  },
-  submitReturnData: function(e){
-    var remark = e.detail.value.remark;
-    var that = this;
-    var formId = e.detail.formId;
-
-    if (remark.length < 1) {
-      wx.showToast({
-        title: '退款原因不能为空!',
-        icon: 'none',
-        duration: 2000
-      });
-      return;
+    data: {
+        itemList: [],
+        itemList_text: "退货退款",
+        tapIndex: 1
+    },
+    actionSheetTap: function() {
+        var t = this;
+        wx.showActionSheet({
+            itemList: t.data.itemList,
+            success: function(a) {
+                for (var e = t.data.arrayType, o = t.data.itemList, i = 0; i < e.length; i++) o[a.tapIndex] == e[i].text && t.setData({
+                    tapIndex: e[i].id
+                });
+                t.setData({
+                    itemList_text: o[a.tapIndex]
+                });
+            }
+        });
+    },
+    onLoad: function(a) {
+        wx.setNavigationBarColor({
+            frontColor: t.d.frontColor,
+            backgroundColor: t.d.bgcolor,
+            animation: {
+                duration: 400,
+                timingFunc: "easeIn"
+            }
+        });
+        var e = !!a.type && a.type;
+        console.log(a), this.setData({
+            bgcolor: t.d.bf_color,
+            id: a.id,
+            oid: a.oid,
+            otype: e
+        }), this.loadate();
+    },
+    loadate: function(a) {
+        var e = this;
+        wx.request({
+            url: t.d.ceshiUrl + "&action=order&m=return_type",
+            method: "post",
+            data: {
+                id: e.data.id,
+                oid: e.data.oid
+            },
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function(t) {
+                if (1 == t.data.status) {
+                    for (var a = t.data.arrayType, o = [], i = 0; i < a.length; i++) o.push(a[i].text);
+                    e.setData({
+                        itemList: o,
+                        arrayType: t.data.arrayType,
+                        itemList_text: t.data.itemList_text,
+                        tapIndex: t.data.tapIndex
+                    });
+                } else wx.showToast({
+                    title: t.data.err,
+                    duration: 2e3
+                });
+            }
+        });
+    },
+    remarkInput: function(t) {
+        this.setData({
+            remark: t.detail.value
+        });
+    },
+    submitReturnData: function(a) {
+        var e = a.detail.value.remark, o = this, i = a.detail.formId;
+        e.length < 1 ? wx.showToast({
+            title: "退款原因不能为空!",
+            icon: "none",
+            duration: 2e3
+        }) : ("the formId is a mock one" != i && t.request.wxRequest({
+            url: "&action=product&m=save_formid",
+            data: {
+                from_id: i,
+                userid: t.globalData.userInfo.openid
+            },
+            method: "post",
+            success: function(t) {
+                console.log(t);
+            }
+        }), wx.request({
+            url: t.d.ceshiUrl + "&action=order&m=ReturnData",
+            method: "post",
+            data: {
+                id: o.data.id,
+                oid: o.data.oid,
+                otype: o.data.otype,
+                re_type: o.data.tapIndex,
+                back_remark: e
+            },
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function(t) {
+                1 == t.data.status ? (wx.showToast({
+                    title: t.data.succ,
+                    success: 2e3
+                }), wx.redirectTo({
+                    url: "/pages/return_goods/index?currentTab=0&otype=whole"
+                })) : wx.showToast({
+                    title: t.data.err,
+                    duration: 2e3
+                });
+            }
+        }));
     }
-    
-
-    if (formId != 'the formId is a mock one') {
-      app.request.wxRequest({
-        url: '&action=product&m=save_formid',
-        data: { from_id: formId, userid: app.globalData.userInfo.openid },
-        method: 'post',
-        success: function (res) {
-          console.log(res)
-        }
-      })
-    }
-
-    wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=ReturnData',
-      method: 'post',
-      data: {
-        id: that.data.id,
-        oid: that.data.oid,
-        otype: that.data.otype,
-        re_type: that.data.tapIndex,
-        back_remark: remark,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {       
-        var status = res.data.status;
-        if (status == 1) {
-          wx.showToast({
-            title: res.data.succ,
-            success: 2000
-          });
-          wx.redirectTo({
-            url: '/pages/return_goods/index?currentTab=0&otype=whole',
-          });
-        } else {
-          wx.showToast({
-            title: res.data.err,
-            duration: 2000
-          });
-        }
-      },
-    });
-  }
-})
+});

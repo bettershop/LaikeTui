@@ -107,7 +107,7 @@ overflow: hidden;
 .list{
   background: #ff2a36;
   width: 100%;
-  margin-top: 300rpx;
+  margin-top: 230rpx;
 }
 .ban{
   width: 46%;
@@ -387,7 +387,7 @@ margin-top:5px !important;
   width: 80rpx;
   position: fixed;
   bottom: 50rpx;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.5);
   border-radius: 50rpx;
   right: 30rpx;
   /*                                                                         */
@@ -399,9 +399,9 @@ margin-top:5px !important;
 font-size: 32rpx; font-weight: 700; color: #000;}
 .goods-block-tit image {width: 30rpx; height: 30rpx; float: left; margin: 30rpx 20rpx 0 30rpx;}
 
-.goods-area {padding: 0 30rpx;}
+.goods-area {padding: 0 20rpx;}
 .goods-box {position: relative; display: flex; flex-direction: row;padding: 30rpx 10px;background-color: #fff;border-bottom: 2px solid #ea4341; border-radius: 20rpx;}
-.goods-photo {width: 220rpx; height: 220rpx; border-radius: 15rpx;}
+.goods-photo {width: 220rpx; height: 220rpx;}
 .goods-info {width: 470rpx; box-sizing: border-box; padding-left: 30rpx; position: relative; 
 font-size: 24rpx; line-height: 48rpx;}
 .goods-title {font-size: 30rpx; font-weight: 700; color: #000; height: 84rpx; overflow: hidden; line-height: 42rpx;
@@ -409,7 +409,15 @@ margin-bottom: 5rpx;}
 .p-sale {color: #999;}
 .goods-text {font-family: Arial; padding-top: 42rpx; line-height: 60rpx; height: 60rpx;}
 .p-price {color: #f00; font-weight: 600; padding-right: 20rpx; float: left; font-size: 32rpx; line-height: 56rpx;}
-.p-price-y {color: #999; text-decoration: line-through;}
+
+.p-price-y {color: #f00;
+  font-weight: 600;
+  padding-right: 20rpx;
+  float: left;
+  font-size: 32rpx;
+  line-height: 56rpx;
+}
+
 .icon-cart, .goods-button {width: 65rpx; height: 65rpx; position: absolute; right: 10rpx; bottom: 5rpx;}
 .goods-button {width: 150rpx; background-color: #d62418; color: #fff; font-size: 26rpx; box-sizing: border-box;
 padding: 15rpx 15rpx 0 25rpx; line-height: 30rpx; border-radius: 5rpx;}
@@ -434,3 +442,8 @@ font-size: 28rpx; line-height: 90rpx; color: #000;}
 .products-kefu contact-button {top: 0; left: 0; opacity: 0;}
 .products-kefu image {width: 36rpx; height: 36rpx; float: left; margin: 27rpx 10rpx 0 0;}
 .shot-line {position: absolute; top: 30rpx; right: 0; width: 1px; height: 30rpx; background-color: #eee;}
+.hef-yuan {
+  margin-top: 20rpx;
+  color: #fff;
+  text-align: center;
+}

@@ -61,7 +61,7 @@
   height: 60rpx;
   color: #fff;
   border-radius: 4px;
-  background: #e83737;
+  background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);
   line-height: 60rpx;
   text-align: center;
   font-size: 36rpx;
@@ -88,7 +88,9 @@
   border-radius: 10rpx;
   color: #fff;
   font-size: 36rpx;
-  background: #e83737;
+  background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);
+  border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);
+  box-shadow: 3px 6px 4px rgba(0,0,0,.2);
   line-height: 80rpx;
   text-align: center;
   margin: 5px auto;

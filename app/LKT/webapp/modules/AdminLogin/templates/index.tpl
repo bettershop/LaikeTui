@@ -873,7 +873,6 @@
             $(this).click(function(){
                 $(this).parent().parent().parent().parent().siblings().removeClass("sp5");
                 $(this).parent().parent().parent().parent().addClass("sp5");
-//		$(this).parent().parent().siblings().find(".asideImgWrap");
                 $(this).parent().parent().parent().parent().siblings().each(function(){
                     $(this).find(".t2").css("color","#333");
                     $(this).find(".asideImgWrap img").eq(1).hide();

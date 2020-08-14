@@ -1,208 +1,122 @@
-// 定义数据格式
-var __keysColor = [];
-
-var __mindKeys = [];
-
-function initColors(colors){
-    __keysColor = colors;
-}
-
-function initMindKeys(keys){
-    __mindKeys = keys;
-}
-
-function init(that, barHeight, keys, isShowKey, isShowHis, callBack) {
-    var temData = {};
-    var view = {
-        barHeight: barHeight,
-        isShow: false
-    }
-    
-    if(typeof(isShowKey) == 'undefined'){
-        view.isShowSearchKey = true;
-    }else{
-        view.isShowSearchKey = isShowKey;
-    }
-
-    if(typeof(isShowHis) == 'undefined'){
-        view.isShowSearchHistory = true;
-    }else{
-        view.isShowSearchHistory = isShowHis;
-    }
-    temData.keys = keys;
-    wx.getSystemInfo({
-        success: function(res) {
-            var wHeight = res.windowHeight;
-            view.seachHeight = wHeight-barHeight;
-            temData.view = view;
-            that.setData({
-                wxSearchData: temData
-            });
-        }
-    })
-    
-    if (typeof (callBack) == "function") {
-        callBack();
-    }
-    
-    getHisKeys(that);
-}
-
-function wxSearchInput(e, that, callBack){
-    var temData = that.data.wxSearchData;
-    var text = e.detail.value;
-    var mindKeys = [];
-    if(typeof(text) == "undefined" || text.length == 0){
-        
-    }else{
-        for(var i = 0; i < __mindKeys.length; i++){
-            var mindKey = __mindKeys[i];
-            if(mindKey.indexOf(text) > -1){
-                mindKeys.push(mindKey);
-            }
-        }
-    }
-    temData.value = text;
-    temData.mindKeys = mindKeys;
-    that.setData({
-        wxSearchData: temData
+function a(a) {
+    var e = a.data.wxSearchData;
+    e.view.isShow = !1, a.setData({
+        wxSearchData: e
     });
 }
 
-function wxSearchFocus( that, callBack) {
-    var temData = that.data.wxSearchData;
-    if (temData.his){
-      var his = [];
-      if (temData.his.length > 6) {
-        for (var i = 0; i < 6; i++) {
-          his[i] = temData.his[i];
-        }
-        temData.his = his;
-      }
-    }
-    
-    temData.view.isShow = true;
-    that.setData({
-        wxSearchData: temData
-    });
-    
-}
-function wxSearchBlur(e, that, callBack) {
-    var temData = that.data.wxSearchData;
-    temData.value = e.detail.value;
-    that.setData({
-        wxSearchData: temData
-    });
-    if (typeof (callBack) == "function") {
-        callBack();
-    }
-}
-
-function wxSearchHiddenPancel(that){
-    var temData = that.data.wxSearchData;
-    temData.view.isShow = false;
-    that.setData({
-        wxSearchData: temData
-    });
-}
-
-function wxSearchKeyTap(e, that, callBack) {
-    //回调
-    var temData = that.data.wxSearchData;
-    temData.value = e.target.dataset.key;
-    that.setData({
-        wxSearchData: temData,
-        isFocus: false
-    });
-    if (typeof (callBack) == "function") {
-        callBack();
-    }
-}
-function getHisKeys(that) {
-    var value = [];
+function e(a) {
+    var e = [];
     try {
-        value = wx.getStorageSync('wxSearchHisKeys')
-        if (value) {
-            // Do something with return value
-            var temData = that.data.wxSearchData;
-            temData.his = value;
-            that.setData({
-                wxSearchData: temData
+        if (e = wx.getStorageSync("wxSearchHisKeys")) {
+            var t = a.data.wxSearchData;
+            t.his = e, a.setData({
+                wxSearchData: t
             });
         }
-    } catch (e) {
-        // Do something when catch error
-    }
-    
-}
-function wxSearchAddHisKey(that) {
-    wxSearchHiddenPancel(that);
-    var text = that.data.wxSearchData.value;
-    if(typeof(text) == "undefined" || text.length == 0){return;}
-    var value = wx.getStorageSync('wxSearchHisKeys');
-    if(value){
-        if(value.indexOf(text) < 0){
-            value.unshift(text);
-        }
-        wx.setStorage({
-            key:"wxSearchHisKeys",
-            data:value,
-            success: function(){
-                getHisKeys(that);
-            }
-        })
-    }else{
-        value = [];
-        value.push(text);
-        wx.setStorage({
-            key:"wxSearchHisKeys",
-            data:value,
-            success: function(){
-                getHisKeys(that);
-            }
-        })
-    }
-    
-    
-}
-function wxSearchDeleteKey(e,that) {
-    var text = e.target.dataset.key;
-    var value = wx.getStorageSync('wxSearchHisKeys');
-    value.splice(value.indexOf(text),1);
-    wx.setStorage({
-        key:"wxSearchHisKeys",
-        data:value,
-        success: function(){
-            getHisKeys(that);
-        }
-    })
-}
-function wxSearchDeleteAll(that){
-    wx.removeStorage({
-        key: 'wxSearchHisKeys',
-        success: function(res) {
-            var value = [];
-            var temData = that.data.wxSearchData;
-            temData.his = value;
-            that.setData({
-                wxSearchData: temData
-            });
-        } 
-    })
+    } catch (a) {}
 }
 
-
+var t = [], c = [];
 
 module.exports = {
-    init: init,
-    initColor: initColors,
-    initMindKeys: initMindKeys,
-    wxSearchInput: wxSearchInput,
-    wxSearchFocus: wxSearchFocus,
-    wxSearchBlur: wxSearchBlur,
-    wxSearchKeyTap: wxSearchKeyTap,
-    wxSearchAddHisKey:wxSearchAddHisKey,
-    wxSearchDeleteKey:wxSearchDeleteKey,
-    wxSearchDeleteAll:wxSearchDeleteAll,
-    wxSearchHiddenPancel:wxSearchHiddenPancel
-}
+    init: function(a, t, c, i, s, r) {
+        var n = {}, h = {
+            barHeight: t,
+            isShow: !1
+        };
+        h.isShowSearchKey = void 0 === i || i, h.isShowSearchHistory = void 0 === s || s, 
+        n.keys = c, wx.getSystemInfo({
+            success: function(e) {
+                var c = e.windowHeight;
+                h.seachHeight = c - t, n.view = h, a.setData({
+                    wxSearchData: n
+                });
+            }
+        }), "function" == typeof r && r(), e(a);
+    },
+    initColor: function(a) {
+        t = a;
+    },
+    initMindKeys: function(a) {
+        c = a;
+    },
+    wxSearchInput: function(a, e, t) {
+        var i = e.data.wxSearchData, s = a.detail.value, r = [];
+        if (void 0 === s || 0 == s.length) ; else for (var n = 0; n < c.length; n++) {
+            var h = c[n];
+            h.indexOf(s) > -1 && r.push(h);
+        }
+        i.value = s, i.mindKeys = r, e.setData({
+            wxSearchData: i
+        });
+    },
+    wxSearchFocus: function(a, e) {
+        var t = a.data.wxSearchData;
+        if (t.his) {
+            var c = [];
+            if (t.his.length > 6) {
+                for (var i = 0; i < 6; i++) c[i] = t.his[i];
+                t.his = c;
+            }
+        }
+        t.view.isShow = !0, a.setData({
+            wxSearchData: t
+        });
+    },
+    wxSearchBlur: function(a, e, t) {
+        var c = e.data.wxSearchData;
+        c.value = a.detail.value, e.setData({
+            wxSearchData: c
+        }), "function" == typeof t && t();
+    },
+    wxSearchKeyTap: function(a, e, t) {
+        var c = e.data.wxSearchData;
+        c.value = a.target.dataset.key, e.setData({
+            wxSearchData: c,
+            isFocus: !1
+        }), "function" == typeof t && t();
+    },
+    wxSearchAddHisKey: function(t) {
+        a(t);
+        var c = t.data.wxSearchData.value;
+        if (void 0 !== c && 0 != c.length) {
+            var i = wx.getStorageSync("wxSearchHisKeys");
+            i ? (i.indexOf(c) < 0 && i.unshift(c), wx.setStorage({
+                key: "wxSearchHisKeys",
+                data: i,
+                success: function() {
+                    e(t);
+                }
+            })) : ((i = []).push(c), wx.setStorage({
+                key: "wxSearchHisKeys",
+                data: i,
+                success: function() {
+                    e(t);
+                }
+            }));
+        }
+    },
+    wxSearchDeleteKey: function(a, t) {
+        var c = a.target.dataset.key, i = wx.getStorageSync("wxSearchHisKeys");
+        i.splice(i.indexOf(c), 1), wx.setStorage({
+            key: "wxSearchHisKeys",
+            data: i,
+            success: function() {
+                e(t);
+            }
+        });
+    },
+    wxSearchDeleteAll: function(a) {
+        wx.removeStorage({
+            key: "wxSearchHisKeys",
+            success: function(e) {
+                var t = [], c = a.data.wxSearchData;
+                c.his = t, a.setData({
+                    wxSearchData: c
+                });
+            }
+        });
+    },
+    wxSearchHiddenPancel: a
+};

@@ -23,12 +23,13 @@
     </view>
 </view>
 <block wx:else>
-    <view class="cont">
-        <swiper autoplay="{{autoplay}}" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:375px;border-bottom: 1rpx solid #eee;">
+    <view class="cont" wx:if="{{bannerItem.length>0}}">
+        <swiper autoplay="{{autoplay}}" bindchange="swiperChange" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" style="height:375px;border-bottom: 1rpx solid #eee;">
             <swiper-item wx:for="{{bannerItem}}" wx:key="{{item.id}}">
                 <image class="slide-image" src="{{item}}"></image>
             </swiper-item>
         </swiper>
+         <view class="main-swiper-dot">{{imgIndex+1}}/{{bannerItem.length}}</view>
     <view class='xstg_box'>
                     </view>
             <view class="dd_details_jj">
@@ -138,10 +139,10 @@
           </view>
         </scroll-view>
       </view>
-      <view wx:if="{{!xefl}}" class="footc" data-type="{{paytype}}" id="{{paytype}}" type="primary" bindtap="submit" style='background:#d62418'> 确定 </view>
+      <view wx:if="{{!xefl}}" class="footc" data-type="{{paytype}}" id="{{paytype}}" type="primary" bindtap="submit" style='color: #fff;background: linear-gradient(-90deg,rgba(255,70,31,1) 0%,rgba(251,141,48,1) 100%);border:1px solid linear-gradient(-90deg,rgb(243, 43, 2) 0%,rgba(251,141,48,1) 100%);box-shadow: 3px 6px 4px rgba(0,0,0,.2);border-radius:50px;height:46px;display:flex;justify-content:center;align-items: center;'> 确定 </view>
             <block wx:else>
-                <view bindtap="submit" class="xgfootc1" data-type="addcart" id="addcart" style="background:#f7c747;" type="primary"> 加入购物车 </view>
-                <view bindtap="submit" class="xgfootc2" data-type="buynow" id="buynow" style="background:#FF002E;" type="primary"> 立即购买 </view>
+                <view bindtap="submit" class="xgfootc1" data-type="addcart" id="addcart" style="background:#f7c747;box-shadow: 3px 6px 4px rgba(0,0,0,.2);" type="primary"> 加入购物车 </view>
+                <view bindtap="submit" class="xgfootc2" data-type="buynow" id="buynow" style="background:#FF002E;box-shadow: 3px 6px 4px rgba(0,0,0,.2);" type="primary"> 立即购买 </view>
             </block>
         </view>
     </view>
@@ -220,40 +221,27 @@
                         </view>
                         <view class="tag" wx:if="{{item.reply.length>1}}">
                             <view class="noe"></view>掌柜回复：{{item.reply}}
-            </view>
+                       </view>
                     </view>
                 </block>
             </view>
         </view>
     </view>
-    <view class="footfixed tc">
+  <!---底部开始-->
+
+   <view class="footfixed tc">
         <view wx:if="{{type1==1}}">
-            <view class="fl_l w60" style="width:100%">
-                <view class="df_1  pt5 bre fl_l" style="width:19%;line-height:15px;">
-                    <view bindtap="t_index">
-                        <image class="icon_kf" src="/images/icons/home.png" style="width:25px;height:25px;"></image>
-                        <view class="dbtext">首页</view>
-                    </view>
-                </view>
-                <view bindtap="setModalStatus" class=" w40 fl_l" data-status="1" data-type="buynow" style="background:#f7c747;">单独买 ¥ {{itemData.price_yh}}</view>
-                <form bindsubmit="getUserformid" data-status="1" data-type="canjiapintuan" reportSubmit="true" style="width:40%;">
-                    <button formType="submit" style="width:40.6%;height:50px;background: #ec612a;color:#fff !important;display:flex;flex-direction:column;justify-content:center;border-radius:0;margin:0;float:left;" type="primary">
-                        <view bindtap="setModalStatus" class=" fl_l" data-status="1" data-type="canjiapintuan" style="font-size:14px;">
-              参加拼团 ¥{{itemData.price11}}
-            </view>
-                    </button>
-                </form>
-            </view>
         </view>
         <block wx:else>
+      <view class="fl_l font_12 hui03 df" style="width: 37%;">
             <view class="fl_l w40 font_12 hui03 df">
-                <view class="df_1 l_h15 pt5">
-                    <view class="go_cart">
-                        <image class="icon_kf" src="/images/kefu1.png" style="width:25px;height:25px;"></image>
-                        <view class="dbtext">客服</view>
-                <contact-button class="image-fight ke" sessionFrom="productId_{{itemData.id}}" type="default-light"></contact-button>
-                    </view>
-                </view>
+        <view class="df_1 l_h15 pt5 bre" st>
+          <view bindtap="t_index">
+            <image class="icon_kf" style='width:25px;height:25px;' src="/images/icons/home.png"></image>
+            <view class="dbtext">首页</view>
+          </view>
+        </view>
+        </view>
                 <view class="df_1 l_h15 pt5">
                     <view bindtap="go_cart" class="go_cart">
                         <image class="icon_kf" src="/images/icons/cart.png" style="width:28px;height:25px;"></image>
@@ -261,11 +249,18 @@
                         <view class="bg" wx:if="{{cart>0}}">{{cart}}</view>
                     </view>
                  </view>
+                <view class="df_1 l_h15 pt5">
+                    <view class="go_cart">
+                        <image class="icon_kf" src="/images/kefu1.png" style="width:25px;height:25px;"></image>
+                        <view class="dbtext">客服</view>
+                <contact-button class="image-fight ke" sessionFrom="productId_{{itemData.id}}" type="default-light"></contact-button>
+                    </view>
+                </view>
              </view>
             <view class="datail-foot-right">
                 <form bindsubmit="add_fromid" reportSubmit="true">
-                    <button class="w50 fl_l white" data-status="1" data-type="addcart" formType="submit" style="background: #FF7400;font-size: 15px;color: #fff;padding:0;border-radius: 25px 0 0 25px;" type="default">加入购物车</button>
-                    <button class="w50 fl_l white" data-status="1" data-type="buynow" formType="submit" style="background: #FF4D4C;padding:0;font-size: 15px;color: #fff;border-radius: 0 25px 25px 0;" type="default">立刻购买</button>
+                    <button class="w50 fl_l white" data-status="1" data-type="addcart" formType="submit" style="background: #FF7400;font-size: 15px;color: #fff;padding:0;border-radius: 25px 0 0 25px;box-shadow: 3px 6px 4px rgba(0,0,0,.2);" type="default">加入购物车</button>
+                    <button class="w50 fl_l white" data-status="1" data-type="buynow" formType="submit" style="background: #FF4D4C;padding:0;font-size: 15px;color: #fff;border-radius: 0 25px 25px 0;box-shadow: 3px 6px 4px rgba(0,0,0,.2);" type="default">立刻购买</button>
                 </form>
             </view>
         </block>
@@ -306,5 +301,8 @@
         </view>
     </view>
     <view class="mask" hidden="{{maskHidden==false}}"></view>
+    <view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
+<view class="hef-yuan hef-red">顶部</view>
+</view>
 </block> 
 <pop id="pop"></pop>

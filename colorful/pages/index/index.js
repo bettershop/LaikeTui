@@ -1,19 +1,19 @@
 var app = getApp();
 var zi = 0;
-var cont_time = 0;//首页tab点击
+var cont_time = 0; //首页tab点击
 var util = require('../../utils/util.js')
 Page({
   data: {
     pop: null,
-    inforList: [],//公告
+    inforList: [], //公告
     banner: [],
-    indicatorDots: true, // 是否显示面板指示点
+    indicatorDots: false, // 是否显示面板指示点
     autoplay: true, // 是否自动切换
     interval: 5000, // 自动切换时间间隔
     duration: 1000, // 滑动动画时长
     circular: true, // 是否采用衔接滑动
     scrollLeft: 0, //tab标题的滚动条位置
-    current: 0,//当前选中的Tab项
+    current: 0, //当前选中的Tab项
     current1: 0,
     page: 1,
     index: 1,
@@ -28,8 +28,10 @@ Page({
     images: {},
     zjList: {},
     zjList_box: false,
-    cart: 0,//购物车数量
+    cart: 0, //购物车数量
     // mainHeight: 0,
+    isopens: !1,
+    imgIndex: 0,
   },
   //下拉事件
   onPullDownRefresh: function () {
@@ -42,11 +44,11 @@ Page({
     })
   },
   imgW: function (e) {
-    var $width = e.detail.width,    //获取图片真实宽度
+    var $width = e.detail.width, //获取图片真实宽度
       $height = e.detail.height,
-      ratio = $width / $height;    //图片的真实宽高比例
-    var viewWidth = 718,           //设置图片显示宽度，左右留有16rpx边距
-      viewHeight = 718 / ratio;    //计算的高度值
+      ratio = $width / $height; //图片的真实宽高比例
+    var viewWidth = 718, //设置图片显示宽度，左右留有16rpx边距
+      viewHeight = 718 / ratio; //计算的高度值
     var image = this.data.images;
     //将图片的datadata-index作为image对象的key,然后存储图片的宽高值
     image[e.target.dataset.index] = {
@@ -58,7 +60,6 @@ Page({
     })
   },
   getMore: function (e) {
-
     var that = this;
     var page = that.data.page;
     var index = that.data.tabid;
@@ -82,7 +83,9 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
         that.setData({
           loading: false,
+          isopens: !0,
         });
+
         if (prolist == '' || res.data.status == 0) {
           return false;
         } else {
@@ -104,7 +107,8 @@ Page({
     })
   },
   inputConfirm: function (e) {
-    var that = this, value = e.detail.value;
+    var that = this,
+      value = e.detail.value;
     this.setData({
       value: e.detail.value,
     });
@@ -146,7 +150,10 @@ Page({
       var page = 'pages/index/index'
       app.request.wxRequest({
         url: '&action=product&m=save_formid',
-        data: { from_id: formId, userid: app.globalData.userInfo.openid },
+        data: {
+          from_id: formId,
+          userid: app.globalData.userInfo.openid
+        },
         method: 'post',
         success: function (res) {
 
@@ -155,7 +162,8 @@ Page({
     }
   },
   search: function () {
-    var that = this, value = this.data.value;
+    var that = this,
+      value = this.data.value;
     if (value != '') {
       wx.navigateTo({
         url: "../listdetail/listdetail?keyword=" + value
@@ -165,7 +173,6 @@ Page({
 
   loadProductDetail: function () {
     var that = this;
-
     var userinfo = wx.getStorageSync('userInfo');
     if (userinfo.nickName) {
       app.globalData.userInfo = userinfo;
@@ -184,15 +191,15 @@ Page({
         },
         success: function (res) {
           var banner = res.data.banner; // 轮播图
-          var twoList = res.data.twoList;     //产品显示
-          var bgcolor = res.data.bgcolor;     //产品显示
+          var twoList = res.data.twoList; //产品显示
+          var bgcolor = res.data.bgcolor; //产品显示
           var plug = res.data.plug;
           var title = res.data.title;
           app.d.bgcolor = bgcolor;
           var arr = Object.keys(twoList[0].distributor);
           var banner_num = Object.keys(banner); // 轮播图
           var notice = res.data.notice;
-          var indexTwoData = twoList[0].twodata// 获取首页的数据对象
+          var indexTwoData = twoList[0].twodata // 获取首页的数据对象
 
           app.globalData.logoimg = res.data.logo
           app.globalData.title = res.data.title
@@ -217,14 +224,9 @@ Page({
           });
           wx.setNavigationBarTitle({
             title: title,
-            success: function () {
-            },
+            success: function () { },
           });
-
-          that.setData({
-            remind: ''
-          });
-
+          that.setData({ remind: '' });
           console.log(res.data.list.length)
           if (res.data.list.length) {
             that.listnsg();
@@ -248,15 +250,15 @@ Page({
         },
         success: function (res) {
           var banner = res.data.banner; // 轮播图
-          var twoList = res.data.twoList;     //产品显示
-          var bgcolor = res.data.bgcolor;     //产品显示
-          var plug = res.data.plug;     //抽奖产品
+          var twoList = res.data.twoList; //产品显示
+          var bgcolor = res.data.bgcolor; //产品显示
+          var plug = res.data.plug; //抽奖产品
           var title = res.data.title;
           app.d.bgcolor = bgcolor;
-          var arr = [];//Object.keys(twoList[0].distributor);
+          var arr = []; //Object.keys(twoList[0].distributor);
           var banner_num = Object.keys(banner); // 轮播图
           var notice = res.data.notice;
-          var indexTwoData = twoList[0].twodata// 获取首页的数据对象
+          var indexTwoData = twoList[0].twodata // 获取首页的数据对象
 
           app.globalData.logoimg = res.data.logo
           app.globalData.title = res.data.title
@@ -281,15 +283,9 @@ Page({
           });
           wx.setNavigationBarTitle({
             title: title,
-            success: function () {
-            },
+            success: function () { },
           });
-
-          that.setData({
-            remind: ''
-          });
-
-          console.log(res.data.list.length)
+          that.setData({ remind: '' });
           if (res.data.list.length) {
             that.listnsg();
           }
@@ -310,21 +306,16 @@ Page({
   listnsg: function () {
     var zjList = this.data.zjList;
     var that = this;
-
     var time = 1500;
     if (zjList[zi].type == 2) {
       time = 6000;
     } else {
       time = 1500;
     }
-
-    setTimeout(function () {
-      that.setData({
-        zjList_box: false
-      })
-      that.listnsg();
-    }, time);
-
+    that.setData({
+      zjList_box: false
+    });
+    that.listnsg();
     that.setData({
       headimgurl: zjList[zi].headimgurl,
       user_name: zjList[zi].user_name,
@@ -339,20 +330,23 @@ Page({
   //上拉事件
   onReachBottom: function () {
     var that = this;
-    that.setData({
-      loading: true,
-    });
+    console.log("我触底了？"),
     that.getMore();
-
   },
   obm: function () {
     var that = this;
     var timestamp = Date.parse(new Date());
+    console.log(timestamp, that.data.timestamp)
     if (timestamp - that.data.timestamp > 2000) {
       that.setData({
         timestamp: timestamp,
       });
     }
+    that.setData({
+      loading: true,
+      remind: ''
+    });
+    that.getMore();
 
   },
   /**
@@ -410,6 +404,7 @@ Page({
     this.checkCor();
   },
   onShow: function () {
+    console.log(app)
     var indexchase = app.d.indexchase;
     var that = this;
     if (indexchase) {
@@ -424,6 +419,7 @@ Page({
   onLoad: function (e) {
     var that = this;
     that.loadProductDetail();
+
   },
 
   preventTouchMove: function () {
@@ -497,11 +493,9 @@ Page({
     }
   },
   login: function () {
-
     var that = this;
     //取出本地存储用户信息，解决需要每次进入小程序弹框获取用户信息
     var userInfo = wx.getStorageSync('userInfo');
-    console.log(userInfo)
     wx.login({
       success: res => {
         app.globalData.code = res.code
@@ -555,7 +549,6 @@ Page({
     app.globalData.userInfo['avatarUrl'] = userInfo.avatarUrl; // 头像
     app.globalData.userInfo['nickName'] = userInfo.nickName; // 昵称
     app.globalData.userInfo['gender'] = userInfo.gender; //  性别
-
     wx.setStorageSync('userInfo', app.globalData.userInfo);
     //写入缓存
     var nickName = userInfo.nickName;
@@ -585,7 +578,7 @@ Page({
   getqx(event) {
     let name = event.currentTarget.dataset.name
 
-    if (name === "签到" || name === "订单" || name === "优惠券") {
+    if (name === "签到" || name === "钱包") {
       if (app.userlogin(1)) {
         this.pop.clickPup(this)
         return
@@ -618,9 +611,10 @@ Page({
       }
     }
   },
+
   // 获取滚动条当前位置
   onPageScroll: function (e) {
-    if (e.scrollTop > 300) {
+    if (e.scrollTop > 100) {
       this.setData({
         floorstatus: true
       });
@@ -630,7 +624,6 @@ Page({
       });
     }
   },
-
   //回到顶部
   goTop: function (e) {  // 一键回到顶部
     if (wx.pageScrollTo) {
@@ -644,21 +637,45 @@ Page({
       })
     }
   },
-  jumpgo: function (t) {
-    var a = t.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: a
-    });
-  },
-  jumpss: function () {
-    wx.switchTab({
-      url: "../search/search"
-    });
-  },
-  jumpssx: function (t) {
-    var b = t.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: "../product/new"
-    });
-  },
+
+jumpgo: function (t) {
+  var a = t.currentTarget.dataset.id;
+  wx.navigateTo({
+    url: a
+  });
+},
+jumpss: function () {
+  wx.switchTab({
+    url: "../search/search"
+  });
+},
+jumpssx: function (t) {
+  var b = t.currentTarget.dataset.id;
+  wx.navigateTo({
+    url: "../product/new"
+  });
+},
+yjbb: function (t) {
+  var b = t.currentTarget.dataset.id;
+  wx.navigateTo({
+    url: "../coupon/index?currentTab=0&type=receive"
+  });
+},
+cjdp: function (t) {
+  var b = t.currentTarget.dataset.id;
+  wx.navigateTo({
+    url: "../distribution/list"
+  });
+},
+bkzq: function (t) {
+  var b = t.currentTarget.dataset.id;
+  wx.navigateTo({
+    url: "../group_buy/group"
+  });
+},
+swiperChange: function(a) {
+  this.setData({
+      imgIndex: a.detail.current
+  });
+},
 });

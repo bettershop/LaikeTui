@@ -28,6 +28,8 @@ Page({
         timingFunc: 'easeIn'
       }
     });
+    console.log(app)
+    console.log('app' + app.globalData.userInfo.sign_status)
     let now = new Date();
     let year = now.getFullYear(); // 获得年
     let month = now.getMonth() + 1; // 获得月份
@@ -133,7 +135,7 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        
+        console.log(8888888)
         if (res.data.status == 1) {
           WxParse.wxParse('content', 'html', res.data.details, that, 5);
           var sign_time = res.data.sign_time;

@@ -3,8 +3,8 @@ page{
  width: 100%;
 }
 .scimg {
-  width:377rpx;
-  height:302rpx;
+  width:246rpx;
+  height:246rpx;
 }
 .swiper-tab{  
     width: 100%;  

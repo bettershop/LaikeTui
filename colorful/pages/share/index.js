@@ -1,53 +1,41 @@
-// pages/share/index.js
-var app = getApp();
+var a = getApp();
+
 Page({
-  data: {
-    flag: false
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var id = options.id
-    var n = options.n
-    var that = this;
-    console.log(app.globalData.userInfo)
-    that.setData({
-      n: n,
-      id: id,
-      headimgurl: app.globalData.userInfo.avatarUrl
-    })
-    wx.request({
-      url: app.d.ceshiUrl + '&action=getcode&m=madeCode',
-      method: 'post',
-      data: {
-        openid: app.globalData.userInfo.openid
-      },
-      header: { //请求头
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            text: res.data.text
-          })
-        }
-      },
-      error: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000,
+    data: {
+        flag: !1
+    },
+    onLoad: function(t) {
+        var e = t.id, o = t.n, n = this;
+        console.log(a.globalData.userInfo), n.setData({
+            n: o,
+            id: e,
+            headimgurl: a.globalData.userInfo.avatarUrl
+        }), wx.request({
+            url: a.d.ceshiUrl + "&action=getcode&m=madeCode",
+            method: "post",
+            data: {
+                openid: a.globalData.userInfo.openid
+            },
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function(a) {
+                1 == a.data.status && n.setData({
+                    text: a.data.text
+                });
+            },
+            error: function(a) {
+                wx.showToast({
+                    title: "网络异常！",
+                    duration: 2e3
+                });
+            }
         });
-      },
-    });
-  },
-  open: function (e) {
-    var that = this;
-    var id = that.data.id
-    var n = that.data.n
-    wx.navigateTo({
-      url: '../share/share?id=' + id + '&n=' + n,
-    });
-  }
-})
+    },
+    open: function(a) {
+        var t = this, e = t.data.id, o = t.data.n;
+        wx.navigateTo({
+            url: "../share/share?id=" + e + "&n=" + o
+        });
+    }
+});

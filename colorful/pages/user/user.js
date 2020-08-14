@@ -2,6 +2,14 @@ var app = getApp();
 Page({
   data: {
     pop: null,
+    headheight1: 0,
+    headheight2: 0,
+    cont: 1,
+    remind: '加载中',
+    tjr: false,
+    score: 0,
+    money: 0,
+    couponNum: 0,
     list: [
       {
         icon: 'icon-user-bangding.png',
@@ -33,12 +41,6 @@ Page({
         url: 'set/set'
       }
     ],
-    cont: 1,
-    remind: '加载中',
-    tjr: false,
-    score: 0,
-    money: 0,
-    couponNum: 0,
   },
 
   //下拉刷新
@@ -88,11 +90,9 @@ Page({
   onReady: function () {
     var that = this;
     this.pop = this.selectComponent("#pop")
-    setTimeout(function () {
-      that.setData({
-        remind: ''
-      });
-    }, 1000);
+    that.setData({
+      remind: ''
+    });
   },
   onShow: function () {
     var cont = this.data.cont;
@@ -113,7 +113,6 @@ Page({
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid || ''
-        // openid:''
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -183,7 +182,7 @@ Page({
     let url = event.currentTarget.dataset.id
     wx.navigateTo({
       url: url
-    })
+    }).catch((e) => {});
   },
 
   //获取积分
@@ -191,7 +190,7 @@ Page({
     var that = this;
     var score;
     wx.request({
-      url: app.d.ceshiUrl + '&index.php?module=api&action=pi&p=sign&c=Home&m=integral',
+      url: app.d.ceshiUrl + '&action=pi&p=sign&c=Home&m=integral',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -216,6 +215,7 @@ Page({
   //请求余额
   moneyData: function () {
     var that = this;
+    var money;
     wx.request({
       url: app.d.ceshiUrl + '&action=user&m=details',
       method: 'post',
@@ -227,20 +227,22 @@ Page({
       },
       success: function (res) {
         that.setData({
-          money: res.data.user.money
-        });
-      },
-      error: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-      }
-    });
-  },
+          money: res.data.user.money // 余额
+        })
+    },
+    error: function (e) {
+      wx.showToast({
+        title: '网络异常！',
+        duration: 2000,
+      });
+    },
+  });
+},
+
   // 我的优惠券
   couponData: function () {
     var that = this;
+    var couponNum;
     wx.request({
       url: app.d.ceshiUrl + '&action=Coupon&m=mycoupon',
       method: 'post',
@@ -252,16 +254,15 @@ Page({
       },
       success: function (res) {
         that.setData({
-          couponNum: res.data.list.length
-        });
-      },
-      error: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-      }
-    });
-  },
-
+        couponNum: res.data.list.length // 优惠券
+        })
+    },
+    error: function (e) {
+      wx.showToast({
+        title: '网络异常！',
+        duration: 2000,
+      });
+    },
+  });
+},
 })
