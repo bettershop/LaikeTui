@@ -11,8 +11,7 @@ class delAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-        // 接收信息
-        $id = $request->getParameter('id'); // 产品id
+        $id = $request->getParameter('id');
         $sql = "delete from lkt_freight where id = '$id' ";
         $db->delete($sql);
         $db->admin_record($admin_id,' 删除规则id为 '.$id.' 的信息',3);

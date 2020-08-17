@@ -58,7 +58,6 @@ class modifyAction extends Action {
             $freight_list = json_decode($hidden_freight,true);
             $freight = serialize($freight_list);
         }else{
-            // $freight = '';
             echo "<script type='text/javascript'>" .
                 "alert('运费规则不能为空！');" .
                 "location.href='index.php?module=freight&action=modify&id=$id ';</script>";
@@ -69,33 +68,18 @@ class modifyAction extends Action {
                 "alert('规则名称不能为空！');" .
                 "location.href='index.php?module=freight&action=modify&id=$id';</script>";
             return $this->getDefaultView();
-        }else{
-            $sql = "select * from lkt_freight where id != '$id'";
-            $r = $db->select($sql);
-            if($r){
-                foreach ($r as $k => $v){
-                    if($name == $v->name){
-                        echo "<script type='text/javascript'>" .
-                            "alert('规则名称 {$name} 已经存在，请选用其他名称！');" .
-                            "location.href='index.php?module=freight&action=modify&id=$id';</script>";
-                        return $this->getDefaultView();
-                    }
-                }
-            }
         }
 
         $sql = "update lkt_freight set name = '$name',type = '$type',freight = '$freight' where id = '$id'";
         $rr = $db->update($sql);
         if($rr > 0){
             $db->admin_record($admin_id,' 修改规则id为 '.$id.' 的信息 ',2);
-
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('规则修改成功！');" .
                 "location.href='index.php?module=freight';</script>";
         }else{
             $db->admin_record($admin_id,' 修改规则id为 '.$id.' 失败 ',2);
-
             echo "<script type='text/javascript'>" .
                 "alert('未知原因，规则修改失败！');" .
                 "location.href='index.php?module=freight';</script>";

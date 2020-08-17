@@ -11,12 +11,7 @@
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 
 class addAction extends Action {
-    /*
-    时间2018年03月27日
-    修改人：段宏波
-    主要功能：处理后台活动添加
-    公司：湖南壹拾捌号网络技术有限公司
-     */
+
 	public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();

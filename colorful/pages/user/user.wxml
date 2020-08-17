@@ -109,7 +109,7 @@
             <image src="/images/icons/user/qb.png"></image>
             <view class="resource-body">
              <view class="hd-title">¥{{money}}</view>
-                <view class="resource-title">积分额</view>
+                <view class="resource-title">余额</view>
             </view>
         </view>
         <view catchtap="jumpgo" data-id="../user/score">
