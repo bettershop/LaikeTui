@@ -48,7 +48,6 @@ function getUesrBgplus(that, app, is) {
     method: 'post',
     data: {
       openid: app.globalData.userInfo.openid,
-
     },
     header: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -71,11 +70,8 @@ function getUesrBgplus(that, app, is) {
           index: 3
         })
       }
-
-
     },
     fail: function (e) {
-
     },
   });
 }

@@ -68,7 +68,6 @@ Page({
   // 数据加载
   DataonLoad: function () {
     var that = this;
-    // 页面初始化 options为页面跳转所带来的参数
     wx.request({
       url: app.d.ceshiUrl + '&action=notice&m=index',
       data: {
@@ -79,7 +78,6 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        // success
         var notice = res.data.notice;
         var detail = res.data.notice[0].detail;
         WxParse.wxParse('detail', 'html', detail, that, 5);//处理规则的富文本框
@@ -88,7 +86,6 @@ Page({
         }
         that.setData({
           notice: notice
-
         })
       },
       fail: function () {
@@ -99,5 +96,4 @@ Page({
       }
     })
   },
-
 })

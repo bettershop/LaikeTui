@@ -27,7 +27,6 @@ App({
   //控制授权登入
   userlogin: function (page) {
     if (this.globalData.userInfo.openid == '' || !this.globalData.userInfo.openid) {
-
       if (page) {
         return true
       } else {
@@ -44,11 +43,13 @@ App({
     var referee_openid = options.query.userid ? options.query.userid : '';
     this.globalData.referee_openid = referee_openid;
   },
+
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
   },
+
   getUserInfo: function (cb, stype, uesr, callback) {
     var that = this;
     if (this.d.one) {
@@ -68,6 +69,7 @@ App({
     }
     //添加控制在同一秒执行同一个方法两次
   },
+
   getHomeData: function () {
     var that = this;
     wx.login({
@@ -77,7 +79,6 @@ App({
         if (userinfo.nickName) {
           that.globalData.userInfo = userinfo;
         }
-
       }
     });
   },
