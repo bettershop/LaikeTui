@@ -1,7 +1,6 @@
 //获取应用实例  
 var app = getApp();
 var util = require('../../utils/util.js')
-
 //引入这个插件，使html内容自动转换成wxml内容
 var WxParse = require('../../wxParse/wxParse.js');
 Page({
@@ -901,33 +900,27 @@ Page({
   //点击保存到相册
   baocun: function () {
     var that = this;
-
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.writePhotosAlbum']) {
-
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
             success() {
               console.log('授权成功')
             },
             fail: function (res) {
-
               wx.openSetting({
                 success: (res) => {
-
                   res.authSetting = {
                     "scope.userInfo": true,
                     "scope.userLocation": true,
                     "scope.writePhotosAlbum": true
                   }
-
                 }
               })
             }
           })
         } else {
-
         }
       }
     })
@@ -936,7 +929,6 @@ Page({
       url: that.data.imagePath,
       success: function (res) {
         var tempFilePath = res.tempFilePath;
-
         wx.saveImageToPhotosAlbum({
           filePath: tempFilePath,
           success(res) {

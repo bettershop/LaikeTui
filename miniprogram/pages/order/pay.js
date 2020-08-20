@@ -71,8 +71,6 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(app.globalData)
-    console.log('options')
     var that = this;
     that.get_plug();
     wx.setNavigationBarColor({
@@ -95,12 +93,9 @@ Page({
       wallet: wallet, // 钱包状态
     });
     this.Settlement();
-
-
   },
   //页面加载完成函数
   onReady: function () {
-
   },
   onUnload() { //onUnload监听页面卸载
     var that = this;
@@ -144,7 +139,6 @@ Page({
 
   onShow: function () {
     var that = this;
-    console.log(that.data.dz_stu)
     if (that.data.dz_stu) {
       that.setData({
         dz_stu: false,

@@ -542,16 +542,12 @@ Page({
 
   //触发支付
   payOrder: function (e) {
-
     if (this.data.ispayOrder) {
       return
     }
-
     this.setData({
       ispayOrder: true
     })
-
-
     var that = this;
     var order_id = e.detail.target.dataset.orderid; //订单ID
     var order_sn = e.detail.target.dataset.ordersn; //订单号
@@ -559,7 +555,6 @@ Page({
     var pay = e.detail.target.dataset.pay; //支付方式
     var user_id = app.globalData.userInfo.openid; //openid
     var form_id = e.detail.formId; //消息ID
-
     if (pay) {
       if (pay == "wxPay") {
         that.payOrderByWechat(order_id, order_sn, price);
@@ -614,7 +609,6 @@ Page({
 
   // 微信支付
   payOrderByWechat: function (order_id, order_sn, price) {
-
     var that = this;
     var user_id = app.globalData.userInfo.openid;
     //调起微信支付    

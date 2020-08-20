@@ -1068,6 +1068,7 @@ class productAction extends BaseAction
         $total = addslashes($_POST['total']); // 付款金额
         $plugin = addslashes(trim($request->getParameter('plugin'))); //  '插件类型'
 
+        $cart_id = trim($cart_id, ','); // 移除两侧的逗号
         $sql = "select * from lkt_cart where id = $cart_id  ";
         $cart = $db->selectOne($sql);
         $plugin = $cart->plugin;
