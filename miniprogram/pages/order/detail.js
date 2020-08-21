@@ -106,10 +106,7 @@ Page({
   },
 
   onUnload: function () {
-    // 生命周期函数--监听页面卸载
-    //离开界面时清除定时器
     clearInterval(this.data.timeout);
-
     util.getUesrBgplus(this, app, false)
     util.getUesrBgplus(this, app, true)
   },
@@ -341,8 +338,6 @@ Page({
     })
   },
 
-
-
   getUserformid: function (e) {
     //储存id 并跳转
     var formid = e.detail.formId;
@@ -513,7 +508,6 @@ Page({
             'Content-Type': 'application/x-www-form-urlencoded'
           },
           success: function (res) {
-            //--init data
             var status = res.data.status;
             if (status == 1) {
               wx.showToast({
@@ -529,7 +523,6 @@ Page({
             }
           },
           fail: function () {
-            // fail
             wx.showToast({
               title: '网络异常！',
               duration: 2000
@@ -539,7 +532,6 @@ Page({
       }
     });
   },
-
   //触发支付
   payOrder: function (e) {
     if (this.data.ispayOrder) {
@@ -596,15 +588,12 @@ Page({
           pays[j].checked = false;
         }
       }
-
       that.setData({
         pays: pays,
         paytype: 'wxPay'
       });
-
       that.payOrderByWechat(order_id, order_sn, price);
     }
-
   },
 
   // 微信支付

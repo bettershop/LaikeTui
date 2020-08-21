@@ -5,7 +5,6 @@ Page({
   data: {
     winWidth: 0,
     winHeight: 0,
-    // tab切换  
     currentTab: 0,
     isStatus: 'payment', //10待付款，20待发货，30待收货 40、50已完成
     page: 0,
@@ -233,7 +232,6 @@ Page({
             }
           },
           fail: function () {
-            // fail
             wx.showToast({
               title: '网络异常！',
               duration: 2000
@@ -299,9 +297,7 @@ Page({
   },
 
   bindChange: function (e) {
-    console.log('1111')
     var that = this;
-    //设置移动请求  防止空数据出现
     var currentTab = e.detail.current;
     if (currentTab == 0) {
       console.log('全部');
