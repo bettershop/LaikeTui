@@ -220,7 +220,7 @@ Page({
   },
   //页面加载完成函数
   onReady: function () {
-    that.setData({
+    this.setData({
       remind: ''
     });
   },
@@ -296,7 +296,7 @@ Page({
     })
     //页面初始化 options为页面跳转所带来的参数
     this.getMore();
-    that.setData({
+    this.setData({
       remind: '',
     });
 

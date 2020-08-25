@@ -47,6 +47,9 @@ class crontabAction extends Action
     public function Send_fail($uid, $fromid, $sNo, $p_name, $price, $template_id, $page)
     {
         $db = DBAction::getInstance();
+        $delsql = "delete from lkt_user_fromid where open_id='$uid' and fromid='$fromid'";
+        $db->delete($delsql);
+
         $sql = "select * from lkt_config where id=1";
         $r = $db->select($sql);
         if ($r) {
@@ -66,12 +69,9 @@ class crontabAction extends Action
         $price = $price . '元';
         $minidata = array('keyword1' => array('value' => $sNo, 'color' => "#173177"), 'keyword2' => array('value' => $p_name, 'color' => "#173177"), 'keyword3' => array('value' => $price, 'color' => "#173177"), 'keyword4' => array('value' => '退回到钱包', 'color' => "#FF4500"), 'keyword5' => array('value' => '拼团失败--退款', 'color' => "#FF4500"));
         $data['data'] = $minidata;
-
         $data = json_encode($data);
+        $this->httpsRequest($url, $data);
 
-        $da = $this->httpsRequest($url, $data);
-        $delsql = "delete from lkt_user_fromid where open_id='$uid' and fromid='$fromid'";
-        $db->delete($delsql);
     }
 
     /*
@@ -187,8 +187,6 @@ class crontabAction extends Action
         //超时时间
         curl_setopt($ch, CURLOPT_TIMEOUT, $second);
         //这里设置代理，如果有的话
-        //curl_setopt($ch,CURLOPT_PROXY, '8.8.8.8');
-        //curl_setopt($ch,CURLOPT_PROXYPORT, 8080);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<title>欢迎登录后台管理系统</title>
+<title>LaiKeTui商城系统 · 专注用户体验</title>
 <link href="style/css/login.css" rel="stylesheet" type="text/css" />
 </head>
 <body>

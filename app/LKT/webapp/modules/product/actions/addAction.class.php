@@ -51,7 +51,6 @@ class addAction extends Action
         $res = $this->product_class($product_class);//产品类别
         $brand = $this->brand($brand_id1);//品牌
         $distributors = [];
-        $distributors_num = 0;
 
         // 运费
         $sql = "select id,name,is_default from lkt_freight order by is_default desc, add_time desc";
@@ -97,7 +96,7 @@ class addAction extends Action
 
     public function attr($attribute)
     {//属性
-        $checked_attr_list = $attribute ? $attribute : '';
+
         $attr_group_list = array();
         $attr_group_list1 = [];
         foreach ($attribute as $key => $value) {
