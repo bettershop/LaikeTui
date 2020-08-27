@@ -68,8 +68,8 @@
     </div>
 </div>
 <footer>
-<p><a href="http://www.laiketui.com/" style="color: #000" target="_blank">来客电商</a> <i> © </i> 专注用户体验的全场景商城系统 - 可免费商用</p>
-<p>湖南壹拾捌号网络技术有限公司&nbsp;版权所有</p>
+<p><a href="http://www.laiketui.com/" style="color: #000" target="_blank">来客电商</a>  专注用户体验的全场景商城系统 - 可免费商用</p>
+<p>湖南壹拾捌号网络技术有限公司&nbsp;版权所有<i> © </i>2017-2020</p>
 </footer>
 
 </body>

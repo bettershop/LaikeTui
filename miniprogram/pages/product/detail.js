@@ -98,11 +98,12 @@ Page({
   },
   // 传值
   onLoad: function (option) {
-    console.log(option)
-    var scene = decodeURIComponent(option.scene);
     var that = this;
-    if (scene != 'undefined' && scene.length > 1 && scene != '') {
-      option = scene;
+    if(scene in option){
+      var scene = decodeURIComponent(option.scene);
+      if (scene != 'undefined' && scene.length > 1 && scene != '') {
+        option = scene;
+      }
     }
     that.initNavHeight();
     if (option.referee_openid != '') {
@@ -114,11 +115,10 @@ Page({
       productId: option.productId,
       userid: option.userid ? option.userid : false,
       choujiangid: option.choujiangid ? option.choujiangid : '',
-      type1: option.type1 ? option.type1 : '',//判断是抽奖还是其他活动
+      type1: option.type1 ? option.type1 : '',
       role: option.role ? option.role : '',
       size: option.size ? option.size : '',
       earn: option.earn ? option.earn : false,
-      // cart: app.globalData.userInfo.cart ? app.globalData.userInfo.cart:0//购物车数量
     });
     //显示数据
     that.loadProductDetail();
@@ -151,8 +151,6 @@ Page({
     var that = this;
     var choujiangid = that.data.choujiangid;
     var openid = app.globalData.userInfo.openid;
-    console.log(app.globalData.userInfo, 'openid')
-    // if (openid) {
     var bgcolor = app.d.bgcolor;
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
@@ -162,14 +160,13 @@ Page({
         timingFunc: 'easeIn'
       }
     });
-    console.log(that.data.userid)
     wx.request({
       url: app.d.ceshiUrl + '&action=product&m=index',
       method: 'post',
       data: {
         pro_id: that.data.productId,
         openid: openid,
-        type1: that.data.type1,//判断是抽奖还是其他活动
+        type1: that.data.type1,
         choujiangid: that.data.choujiangid,
         role: that.options.role ? that.options.role : '',
         size: that.data.size,
