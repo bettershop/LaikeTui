@@ -36,7 +36,7 @@ class IndexAction extends Action {
             $sql = "SELECT o.p_name ,p.product_number
                     from lkt_order_details as o
                     LEFT JOIN lkt_product_list as p on o.p_id = p.id
-                    where o.store_id = $store_id and o.r_sNo = '$sNo'";
+                    where  o.r_sNo = '$sNo'";
             $cr_res = $db->select($sql);
             if($cr_res){
                 $product_title = $cr_res[0]->p_name;

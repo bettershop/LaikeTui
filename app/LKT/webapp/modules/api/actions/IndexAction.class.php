@@ -182,9 +182,10 @@ where a.status = 0 and a.num >0 and s_type like '%4%'
 
         } else {
             //查询商品并分类显示返回JSON至小程序
+            //修改搜索条件  商品分类ID错误
             $sql_t = "select a.initial,a.id,a.product_title,a.volume,a.imgurl,c.price,a.sort  
 from lkt_product_list AS a RIGHT JOIN (select min(price) price,pid from lkt_configure group by pid) AS c ON a.id = c.pid 
-where a.status = 0 and a.num >0 and s_type like '%-$index-%' 
+where a.status = 0 and a.num >0 and product_class like '%-$index-%' 
  order by a.sort asc,a.volume desc limit  $start,$end";
             $r_s = $db->select($sql_t);
             $product = [];

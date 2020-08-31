@@ -97,26 +97,29 @@ Page({
   // 传值
   onLoad: function (option) {
     var that = this;
-    if(scene in option){
-      var scene = decodeURIComponent(option.scene);
-      if (scene != 'undefined' && scene.length > 1 && scene != '') {
-        option = scene;
+    if(option){
+      if(scene in option){
+        var scene = decodeURIComponent(option.scene);
+        if (scene != 'undefined' && scene.length > 1 && scene != '') {
+          option = scene;
+        }
       }
     }
+    
     that.initNavHeight();
-    if (option.referee_openid != '') {
+    if (option && option.referee_openid && option.referee_openid != '') {
       app.globalData.userInfo['referee_openid'] = option.referee_openid;
     } else {
       app.globalData.userInfo['referee_openid'] = '';
     }
     that.setData({
-      productId: option.productId,
-      userid: option.userid ? option.userid : false,
-      choujiangid: option.choujiangid ? option.choujiangid : '',
-      type1: option.type1 ? option.type1 : '',
-      role: option.role ? option.role : '',
-      size: option.size ? option.size : '',
-      earn: option.earn ? option.earn : false,
+      productId: option?option.productId:'',
+      userid: option ? option.userid : false,
+      choujiangid: option ? option.choujiangid : '',
+      type1: option ? option.type1 : '',
+      role: option ? option.role : '',
+      size: option ? option.size : '',
+      earn: option ? option.earn : false,
     });
     //显示数据
     that.loadProductDetail();

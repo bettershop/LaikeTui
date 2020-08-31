@@ -1069,9 +1069,8 @@ class productAction extends BaseAction
         $plugin = addslashes(trim($request->getParameter('plugin'))); //  '插件类型'
 
         $cart_id = trim($cart_id, ','); // 移除两侧的逗号
-        $sql = "select * from lkt_cart where id = $cart_id  ";
-        $cart = $db->selectOne($sql);
-        $plugin = $cart->plugin;
+        $sql = "select * from lkt_cart where id in ( $cart_id ) ";
+
 
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
@@ -1137,13 +1136,15 @@ class productAction extends BaseAction
                 // 联合查询返回购物信息
 
                 if ($typee == 1) {//直接购买
-                    $sql_c = "select a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= $num ";
+                    $sql_c = "select a.plugin,a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= $num ";
                 } else {
-                    $sql_c = "select a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= a.Goods_num ";
+                    $sql_c = "select a.plugin,a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= a.Goods_num ";
                 }
 
                 $r_c = $db->select($sql_c);
+
                 if (!empty($r_c)) {
+                    $plugin = $r_c[0]->plugin;
                     $product = (array)$r_c['0']; // 转数组
                     if ($typee == 1) {//直接购买
                         $product['Goods_num'] = $num; // 商品价格

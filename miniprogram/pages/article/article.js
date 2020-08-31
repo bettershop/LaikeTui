@@ -178,7 +178,6 @@ Page({
       },
       method: 'post',
       success: function (res) {
-        console.log(res)
         that.setData({
           maskHidden: true,
           imagePath: res.url,
@@ -213,7 +212,6 @@ Page({
   //点击保存到相册
   baocun: function () {
     var that = this;
-    console.log('用户点击保存');
     wx.getSetting({
       success(res) {
         console.log(res)
@@ -225,7 +223,7 @@ Page({
             }
           })
         } else {
-          console.log('qqqqq')
+          console.log('error')
         }
       }
     })

@@ -13,8 +13,6 @@ class rechargeAction extends BaseAction {
 
     public function index(){
         $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        // 接收信息
         $openid = addslashes($_POST['openid']); // 微信id
         
         // 查询会员信息
@@ -68,9 +66,7 @@ class rechargeAction extends BaseAction {
     //充值
     public function recharge(){  
         $db = DBAction::getInstance ();
-        $request = $this->getContext ()->getRequest ();
 
-        // 接收信息
         $openid = addslashes($_POST['openid']); // 微信id
         $cmoney = addslashes($_POST['cmoney']); // 充值金额
 
@@ -145,7 +141,7 @@ class rechargeAction extends BaseAction {
         $url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
         $xml = $this->http_request($url,$post_xml);
         $array = $this->xml($xml);//全要大写
-                    //print_r($array) ;exit;
+        
         if($array['RETURN_CODE'] == 'SUCCESS' && $array['RESULT_CODE'] == 'SUCCESS'){
             $time = time();
             $tmp=array();//临时数组用于签名

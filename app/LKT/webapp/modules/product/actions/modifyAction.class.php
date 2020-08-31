@@ -364,12 +364,6 @@ class modifyAction extends Action
         $r_update = $db->preUpdate($sql_1,$data);
 
 
-        if ($r_update > 0) {
-            $rew1 = 1; // 修改成功
-        } else {
-            $rew1 = 0; // 修改失败
-        }
-
         $cids = [];
         if ($attributes) {
             $sql = "select id from lkt_configure where pid = '$id'";
@@ -437,7 +431,7 @@ class modifyAction extends Action
 
                     $sql = "insert into lkt_stock(product_id,attribute_id,flowing_num,type,add_date) values('$id','$r_attribute','$num',0,CURRENT_TIMESTAMP)";
                     $db->insert($sql);
-                    $db->commit();
+
 
                 }
             }
@@ -451,11 +445,11 @@ class modifyAction extends Action
         }
 
 
-        if ($rew1 == 1) {
 
-            if ($z_num < 1) {
+
+        if ($z_num < 1) {
                 $sql_1 = "update lkt_product_list set status='1' where id = '$id'";
-            } else {
+        } else {
                 $rr = $db->select("select status from lkt_product_list where id = '$id'");
                 $status = $rr[0]->status ? $rr[0]->status : 0;
                 if ($status == 2) {
@@ -464,22 +458,11 @@ class modifyAction extends Action
                     $sql_1 = "update lkt_product_list set status='0' where id = '$id'";
                 }
 
-            }
-            $db->update($sql_1);
-            $db->commit();
-            //跳转
-            jump($_SESSION['url'], '产品修改成功！');
-            exit;
-
-        } else {
-            $db->rollback();
-            $url = $_SESSION['url'];
-            echo "<script type='text/javascript'>" .
-                "alert('未知原因，产品修改失败！');" .
-                "location.href='$url';</script>";
-
         }
-        return;
+        $db->update($sql_1);
+        $db->commit();
+        jump($_SESSION['url'], '产品修改成功！');
+        exit;
     }
 
     public static function array_key_remove($arr, $key)
