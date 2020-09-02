@@ -138,9 +138,6 @@
             <navigator url="../article/article?id={{item.Article_id}}" wx:for="{{article}}" wx:key="{{item.Article_id}}">
               <view class="qbdd mt10 jiantou">
                 <view class="font_14 c3">{{item.Article_title}}</view>
-                <view class="fl_r c9 font_12 l_h20 text-length" hover-class="none" style="margin-right: 5px;height: 100%;">
-                  {{item.Article_prompt}}
-                </view>
                 <image src="../../images/x_right.png" style="border: 0;border-radius: 0;margin: auto;margin-right: 5px;"></image>
               </view>
             </navigator>
