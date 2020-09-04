@@ -64,9 +64,8 @@ class IndexAction extends Action {
         // 查询插件表
         $sql1 = "select * from lkt_order_details where $condition";
         $total = $db->selectrow($sql1);
-        // 导出
         $pagesize = $request -> getParameter('pagesize');
-        $pagesize = $pagesize ? $pagesize:10;
+        $pagesize = $pagesize?$pagesize:10;
         // 页码
         $page = $request -> getParameter('page');
         if($page){

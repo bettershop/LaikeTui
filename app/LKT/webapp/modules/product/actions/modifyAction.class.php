@@ -361,7 +361,7 @@ class modifyAction extends Action
         $data[] = $initial;
         $data[] = $sort;
         $data[] = $id;
-        $r_update = $db->preUpdate($sql_1,$data);
+        $db->preUpdate($sql_1,$data);
 
 
         $cids = [];

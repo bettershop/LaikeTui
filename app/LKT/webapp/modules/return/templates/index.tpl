@@ -688,17 +688,10 @@ laydate.render({
 
 
 function excel(pageto) {
-    var pagesize = $("[name='DataTables_Table_0_length'] option:selected").val();
-    var page = $(".current").text();
-    var type_asc = $(".sorting_asc").attr('aria-valuetext');
-    var type_desc = $(".sorting_desc").attr('aria-valuetext');
-    if(type_asc && !type_desc){
-        var sort = 'asc';
-        var sort_name = type_asc;
-    }else{
-        var sort = 'desc';
-        var sort_name = type_desc;
-    }
+    var pagesize = 1000;
+    var page = 1;
+    var sort_name = 'id';
+    var sort = 'desc';
     location.href=location.href+'&pageto='+pageto+'&pagesize='+pagesize+'&page='+page+'&sort='+sort+'&sort_name='+sort_name;
 }
 

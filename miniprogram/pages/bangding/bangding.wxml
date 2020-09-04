@@ -104,11 +104,11 @@
             <text class='t_3'>所在城市： </text>
           </view>
           <view class='inp'>
-            <!-- <input name="name" maxlength='10' style='font-size:13px;width:100%;' value='{{name}}' placeholder="姓名" type='text' /> -->
+            
 <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
     <view class="picker">
     <text class='dpxzq'>{{region[0]}}</text><text class='dpxzq'>{{region[1]}}</text><text class='dpxzq'>{{region[2]}}</text>
-      <!-- {{region[0]}}，{{region[1]}}，{{region[2]}} -->
+     
     </view>
   </picker>
 

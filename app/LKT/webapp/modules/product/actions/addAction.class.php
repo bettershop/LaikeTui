@@ -6,6 +6,7 @@
  */
 
 require_once(MO_LIB_DIR . '/DBAction.class.php');
+require_once(MO_LIB_DIR . '/Tools.class.php');
 
 class addAction extends Action
 {
@@ -381,10 +382,7 @@ class addAction extends Action
                     $db->update($sql_1);
                 }
                 $db->commit();
-                header("Content-type:text/html;charset=utf-8");
-                echo "<script type='text/javascript'>" .
-                    "alert('产品发布成功！');" .
-                    "location.href='index.php?module=product';</script>";
+                jump('index.php?module=product', '产品发布成功！');
                 exit;
 
 
@@ -396,20 +394,14 @@ class addAction extends Action
                 $sql = "delete from lkt_product_attribute where pid = '$id1'";
                 $db->delete($sql);
                 $db->rollback();
-                header("Content-type:text/html;charset=utf-8");
-                echo "<script type='text/javascript'>" .
-                    "alert('未知原因，产品发布失败！');" .
-                    "location.href='index.php?module=product';</script>";
+                jump('index.php?module=product', '未知原因，产品发布失败！');
                 exit;
 
             }
 
         } else {
             $db->rollback();
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('未知原因，产品发布失败！');" .
-                "location.href='index.php?module=product';</script>";
+            jump('index.php?module=product', '未知原因，产品发布失败！');
 
         }
         return;

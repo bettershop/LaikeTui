@@ -90,8 +90,7 @@ Page({
     var id = that.data.article.Article_id;
     var Article_title = that.data.article.Article_title;
     if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
+      
     }
     return {
       title: Article_title,

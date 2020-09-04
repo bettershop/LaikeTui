@@ -21,7 +21,7 @@ class IndexInputView extends SmartyView {
 		if($pageto != ''){
 			$r = rand();
 			header("Content-type: application/msexcel;charset=utf-8");
-			header("Content-Disposition: attachment;filename=userlist-$r.xls");
+			header("Content-Disposition: attachment;filename=back-$r.xls");
 			$this->setTemplate("excel.tpl");
 		} else {
 			$this->setTemplate('index.tpl');

@@ -8,7 +8,7 @@ Page({
     userId: 0,
     paytype: 'wxPay', //支付方式
     cartId: 0,
-    addrId: 0, //收货地址//测试--
+    addrId: 0, 
     btnDisabled: false,
     productData: [],
     address: {},
@@ -47,10 +47,10 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
     this.Settlement();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh() 
   },
   //调取分享
   onShareAppMessage: function (res) {
