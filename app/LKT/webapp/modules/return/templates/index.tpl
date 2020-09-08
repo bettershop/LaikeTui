@@ -762,7 +762,6 @@ function is_add(obj,id,type,content) {
         $.ajax({
             type: "GET",
             url: "index.php?module=return&action=examine",
-            // data: "id="+id+'&f=check'+'&m='+type,、
             success: function(res){
                 if(res){
                     $(".price").val(res);
@@ -770,7 +769,6 @@ function is_add(obj,id,type,content) {
                         title:'提示',
                         content:content,
                         yestext:'去添加',
-                        // url:"index.php?module=return&action=set",
                         id:id,
                         notext:'取消',
                         obj:obj,
@@ -815,10 +813,7 @@ function is_add(obj,id,type,content) {
 		    $(".maskNew").remove();
 		}
 		function closeMask2(strId){
-			console.log(strId);
-//			let strId1=strId.split(",");
-//			console.log(strId);
-             $.get("index.php?module=product&action=del",{'id':strId},function(res){
+			$.get("index.php?module=product&action=del",{'id':strId},function(res){
                 if(res.status=="1"){
                     appendMask("删除成功","cg")
                 }else{

@@ -63,7 +63,6 @@
       </div>
       
     </form>
-    <!-- <input type="hidden" id="pic" value="{$pic}"> -->
   </div>
 {php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
 

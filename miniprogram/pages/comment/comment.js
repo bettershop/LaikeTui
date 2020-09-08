@@ -161,13 +161,9 @@ Page({
     });
   },
   previewImage: function (e) {
-    //数组的id
     var id = e.currentTarget.id;
-    //整个数据
     var commentList = that.data.commentList;
-    //取单个数据
     var images = commentList[id].images
-    // 预览图集
     wx.previewImage({
       urls: images
     });
@@ -193,7 +189,6 @@ Page({
   saveimg: function (id, key) {
     var commentList = that.data.commentList;
     var images = commentList[key].images;
-    // 提交图片，事先遍历图集数组
     var formData = { 'id': id };
     for (var i = 0, len = images.length; i < len; i++) {
       that.upload_file('&action=product&m=t_comment&type=file', images[i], 'imgFile', formData);

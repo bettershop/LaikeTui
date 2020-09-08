@@ -1,7 +1,6 @@
 //获取应用实例  
 var app = getApp();
 var util = require('../../utils/util.js')
-
 //引入这个插件，使html内容自动转换成wxml内容
 var WxParse = require('../../wxParse/wxParse.js');
 Page({

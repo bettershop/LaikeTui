@@ -84,7 +84,7 @@ Page({
     } else {
       var page = that.data.page + 1;
     }
-    //ajax请求数据
+
     wx.request({
       url: app.d.ceshiUrl + '&action=search&m=listdetail',
       method: 'post',

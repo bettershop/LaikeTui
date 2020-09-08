@@ -5,9 +5,6 @@ function initSubMenuDisplay() {
 }
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     isStatus: 'whole',
     currentTab: 0,  
@@ -18,9 +15,6 @@ Page({
     address: [],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     console.log(options)
     wx.setNavigationBarColor({
@@ -155,10 +149,6 @@ Page({
       success: function (res) {
         var status = res.data.status;
         var list = res.data.list;
-        // var h = res.data.h;
-        // that.setData({
-        //   h: h,
-        // });
         switch (that.data.currentTab) {
           case 0:
             that.setData({

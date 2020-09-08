@@ -14,8 +14,7 @@ class delAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 接收信息
-        $id = intval($request->getParameter('id')); 
+        $id = intval($request->getParameter('id'));
         $sql = "delete from lkt_extension where id = '$id'";
         $db->delete($sql);
         echo 1;

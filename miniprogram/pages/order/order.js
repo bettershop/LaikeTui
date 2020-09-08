@@ -373,7 +373,6 @@ Page({
       },
       success: function (res) {
         if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
-          // console.log(66411)
           var referee_openid = app.globalData.userInfo.referee_openid;
           var openid = app.globalData.userInfo.openid
           that.refereeopenid(referee_openid, openid); //储存推荐人

@@ -183,12 +183,10 @@ Page({
   },
   //排序
   sort:function (){
-    //页面初始化 options为页面跳转所带来的参数
     var that = this;
     var select = that.data.select;
     var sort = that.data.sort;
     var page = that.data.page;
-    //ajax请求数据
     wx.request({
       url: app.d.ceshiUrl + '&action=product&m=new_product',
       method: 'post',
@@ -218,7 +216,7 @@ Page({
   },
   //页面加载完成函数
   onReady: function () {
-    var that = this;
+    
   },
   // 点击加载更多
   getMore: function (e) {

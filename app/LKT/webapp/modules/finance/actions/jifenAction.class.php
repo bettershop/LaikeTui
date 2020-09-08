@@ -60,7 +60,7 @@ class jifenAction extends Action {
         $total = count($r);
         $pager = new ShowPager($total,$pagesize,$page);
         if($r){
-            $b = array_unique($r,SORT_REGULAR);
+            array_unique($r,SORT_REGULAR);
             $sql = "select a.user_id,max(sign_time) as t from lkt_sign_record as a left join lkt_user as b on a.user_id = b.user_id where $condition group by a.user_id order by t desc limit $start,$pagesize";
             $r1 = $db->select($sql);
             $b1 = array_unique($r1,SORT_REGULAR);

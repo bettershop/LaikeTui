@@ -767,7 +767,6 @@ Page({
         var order_id = that.data.id;
         if (status) {
           if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
-            // console.log(66411)
             var referee_openid = app.globalData.userInfo.referee_openid;
             var openid = app.globalData.userInfo.openid
             that.promiss(that.refereeopenid, referee_openid, openid).then(res => {

@@ -90,7 +90,6 @@ Page({
     }
   },
   wxSearchFn: function (e) {
-    console.log(e)
     var that = this
     WxSearch.wxSearchAddHisKey(that);
     var value = that.data.wxSearchData.value;
@@ -101,9 +100,7 @@ Page({
     }
   },
   wxSearchInput: function (e) {
-    console.log(e)
     var that = this
-    console.log(that)
     WxSearch.wxSearchInput(e, that);
   },
   wxSerchFocus: function (e) {
