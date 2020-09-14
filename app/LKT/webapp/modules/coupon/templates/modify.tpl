@@ -140,6 +140,16 @@
 
         <div class="row cl" id="time" style="display:{if $activity_type == 1}none{/if};">
             <label class="form-label col-4"><span class="c-red">*</span>活动时间：</label>
+<<<<<<< HEAD
+=======
+            <!-- <div class="formControls col-6">
+                <input name="start_time" value="{$start_time}" size="8" readonly class="scinput_s" style="width: 200px;height:26px;font-size: 14px;vertical-align: middle;" />
+                <img src="modpub/images/datetime.gif" style="cursor:pointer;" onclick="new Calendar().show(document.form1.start_time);" />
+                -
+                <input name="end_time" value="{$end_time}" size="8" readonly  class="scinput_s" style="width: 200px;height:26px;font-size: 14px;vertical-align: middle;"/>
+                <img src="modpub/images/datetime.gif" style="cursor:pointer;" onclick="new Calendar().show(document.form1.end_time);" />
+            </div> -->
+>>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
             <div class="formControls col-xs-8 col-sm-9">
                 <input type="text" class="input-text" value="{$start_time}" autocomplete="off" placeholder=""
                        id="group_start_time" name="starttime" style="width:150px;">

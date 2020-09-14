@@ -37,6 +37,17 @@
                 </div>
                 <label class="form-label col-xs-4 col-sm-0">天</label>
             </div>
+<<<<<<< HEAD
+=======
+            {*<div class="row cl">*}
+                {*<label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>优惠券有效期：</label>*}
+                {*<div class="formControls col-xs-8 col-sm-4">*}
+                    {*<input type="text" name="coupon_validity" value="{$coupon_validity}" class="input-text">*}
+                    {*<text>如：优惠券领取,7天以后失效</text>*}
+                {*</div>*}
+                {*<label class="form-label col-xs-4 col-sm-0">天</label>*}
+            {*</div>*}
+>>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>优惠券过期时间：</label>
                 <div class="formControls col-xs-8 col-sm-4">

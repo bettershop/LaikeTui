@@ -1,6 +1,7 @@
 var app = getApp();
 Page({
 	data: {},
+<<<<<<< HEAD
 	onLoad: function(e) {	
 	},
 	onReady: function() {
@@ -10,6 +11,22 @@ Page({
 	onHide: function() {
 	},
 	onUnload: function() {
+=======
+	onLoad: function(e) {
+	
+	},
+	onReady: function() {
+	
+	},
+	onShow: function() {
+		
+	},
+	onHide: function() {
+	
+	},
+	onUnload: function() {
+    
+>>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
 	},
   getUserInfo: function (t) {
     wx.showLoading({
@@ -55,8 +72,15 @@ Page({
     });
     console.log(e.detail.userInfo)
     if (e.detail.errMsg == 'getUserInfo:ok') {
+<<<<<<< HEAD
       app.globalData.userlogin = true;
       wx.setStorageSync('userlogin', true);
+=======
+      //获取成功设置状态
+      app.globalData.userlogin = true;
+      wx.setStorageSync('userlogin', true);
+      //设置用户信息本地存储
+>>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
       try {
         wx.setStorageSync('userInfo', e.detail.userInfo);
       } catch (e) {
@@ -171,4 +195,9 @@ Page({
       }
     })
   }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
 });
