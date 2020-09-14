@@ -1,0 +1,113 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner">
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+  <form bindsubmit="createProductOrderByWX" report-submit="true">
+    <view class="w100" style='padding-bottom:100px;'>
+      <!-- 收货地址 -->
+      <view class="p_all bg_white mt10 font_14 top_xt" wx:if="{{buymsg != ''}}">
+        <navigator url="../address/index?cartId={{cartId}}" hover-class="none">
+          <view class="df">
+            <view class='iconfont icon-dizhi' style='margin:auto 0;'></view>
+            <view class="df_1 c6">
+              <view class="l_h20 pay_xt" style='color:#333333;font-size:16px;'>
+                <text style='color:#333333;font-size:18px;'>{{buymsg.name}}</text>　{{buymsg.tel}}</view>
+              <view class="l_h20 mt5 pay_xt" style='color:#333333;padding:0 4px;'>地址：{{buymsg.address_xq}}</view>
+              <input type="text" style='display:none;' name="address" value="{{buymsg.address_xq}}" />
+            </view>
+            <image class="x_right mt15" src="/images/x_right.png"></image>
+          </view>
+        </navigator>
+      </view>
+      <view class="p_all bg_white mt10 font_14" wx:else>
+        <navigator url="../address/index?cartId={{cartId}}" hover-class="none">
+          <view class="df">添加收货地址</view>
+        </navigator>
+      </view>
+
+      <view class="p_all bg_white df item">
+        <view class="cp_photo">
+          <image src="{{proattr.image}}"></image>
+        </view>
+        <view class="df_1">
+          <block wx:if="{{pagefrom=='kaituan'}}">
+            <view class="font_14 mt5 ovh1" style='margin:0;font-size:16px'>{{proattr.pro_name}}</view>
+            <text class="gm_ovh_1h pt10" style='color:#ccc;'>[{{proattr.size}}] <text style='float:right;'>x{{pro_num}}</text></text>
+            <text class="gm_ovh_1h red pt10">开团价 ¥{{proattr.member_price}}</text>
+          </block>
+          <block wx:else if="{{pagefrom=='cantuan'}}">
+            <view class="font_14 mt5 ovh1" style='margin:0;font-size:16px'>{{proattr.pro_name}}</view>
+            <text class="gm_ovh_1h pt10" style='color:#ccc;'>[{{proattr.size}}]<text style='float:right;'>x{{pro_num}}</text></text>
+            <text class="gm_ovh_1h red pt10">¥{{proattr.group_price}}</text>
+          </block>
+        </view>
+      </view>
+      <view style='height:10px;widht:100%;background:#eee;'></view>
+      <view style='background:#fff;'>
+        <view wx:if="{{plug_wallet}}" class="pay_qb pd" style='border-bottom:1px solid #eee;'>
+          <text class="left">钱包余额</text>
+          <text wx:if="{{d_yuan}}" class="right">余额抵扣{{d_yuan}}</text>
+          <text wx:else class="right">{{user_money}}元</text>
+        </view>
+        <view class="pay_qb pd" style='border-bottom:1px solid #eee;'>
+          <text class="left">运费</text>
+          <text wx:if="{{freight == 0}}" class="right">包邮</text>
+          <text wx:else class="right">{{freight}}元</text>
+        </view>
+        <view style='height:10px;widht:100%;background:#eee;'></view>
+        <view class="pay_zf pd">
+          <text class="left">选择支付方式</text>
+        </view>
+        <view class="pay_zf pd" style='border-bottom:none;padding-right:3px;'>
+          <checkbox-group class="radio-group left">
+            <label class="radio" wx:for-items="{{pays}}" wx:key="key" style='border-bottom:1px solid #eee;'>
+              <view style='width:100%;padding:13px 0;'>
+                <image class='img' src='{{item.icon}}' style='width:20px;height:20px;vertical-align:-5px;'></image>
+                {{item.name}}
+                <switch bindchange="switchChange" checked="{{item.checked}}" data-index="{{index}}" data-check="{{item.value}}" class="right" style='vertical-align:2px;float:right;margin-bottom:20px;' />
+              </view>
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+
+      <view class='pay_foot'>
+        <view class="pay_fk">
+          <block wx:if="{{pagefrom=='kaituan'}}">
+            <view class="zhifu mt10 ">应共支付：
+              <span class="font_20 red">¥ {{proattr.member_price*pro_num + freight}}</span>
+            </view>
+          </block>
+          <block wx:else if="{{pagefrom=='cantuan'}}">
+            <view class="zhifu mt10 ">应共支付：
+              <span class="font_20 red">¥ {{proattr.group_price*pro_num +freight}}</span>
+            </view>
+          </block>
+          <button class="right btn_zf" type="primary" id="{{paytype}}" style='background:#ff6347;border-radius:0;' disabled="{{btnDisabled}}" formType="submit">立即支付</button>
+        </view>
+      </view>
+    </view>
+  </form>
+</block>

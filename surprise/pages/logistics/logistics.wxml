@@ -1,0 +1,62 @@
+  <view class="body" wx:if="{{remind}}">
+    <view class='zong'>
+          <view class="spinner" >
+                    <view class="spinner-container container1">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container2">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container3">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+          </view>
+    </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+        <view wx:if="{{res}}" class='body_1'>
+
+        <view class='logInf'>
+          <view class='view1'>
+            <text class='text1'>物流公司:</text>
+            <text class='text2'>{{res.name}}</text>
+          </view>
+          <view class='view1'>
+            <text class='text1'>物流单号:</text>
+            <text class='text2'>{{res.courier_num}}</text>
+          </view>
+          <text bindtap="copyText" data-text="{{res.courier_num}}" class='copy'>复制</text>
+        </view>
+        
+        <view class='br'></view> 
+        <scroll-view scroll-y="true" style="height: 80%;width: 95%;"> 
+        <block wx:for="{{wuliu}}" wx:key="index">  
+          <view class='order'>  
+            <view class='icon {{0==index?"in":"no_in"}}'></view>  
+            <view class='logistics_centent page_clu' >  
+              <text style='line-height: 30rpx;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2; '>{{item.context}}</text>  
+              <text>{{item.time}}</text>  
+            </view>  
+            <view class='on'></view>  
+          </view>  
+        </block>  
+        <view class='icon no_in'></view>
+        </scroll-view>
+        </view>
+        <block wx:else>
+        <view class='body_1' style='text-align:center;'>
+        <view style='margin-top:25%;' class='iconfont icon-xiaoxiwuliufill'></view>
+        <text style='color:#515151;'>没有查询到物流信息</text>
+        </view>
+        </block>
+</block>

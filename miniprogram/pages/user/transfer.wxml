@@ -1,0 +1,44 @@
+<!--pages/user/transfer.wxml-->
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<form bindsubmit="withdrawals">
+  <view class="page">
+    <view class="section">
+      <view class="text" >
+        <text class='t_3' >对方ID： </text>
+      </view>
+      <view class='inp'>
+        <input  name="user_id" style='font-size:13px;width:100%;' name='user_id' placeholder="请输入要转账的好友ID" type='text' />
+      </view>
+    </view>
+  </view>
+  <view>
+    <button form-type='submit' class="tx" style='background-color:{{bgcolor}};border-radius:0px;'> 下一步 </button>
+  </view>
+</form>
+</block>
+

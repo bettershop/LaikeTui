@@ -1,0 +1,3 @@
+
+-- 拼团设置表添加一条初始数据
+INSERT INTO `lkt_group_config` (`id`, `refunmoney`, `group_time`, `open_num`, `can_num`, `can_again`, `open_discount`, `rule`) VALUES ('1', '1', '1', '10', '10', '1', '1', '<p style=\"text-align: left;\"><span style=\"font-size: 18px;\">拼团规则：</span></p><p style=\"text-align: left;\"><span style=\"font-size: 14px;\">1、卖家点击商品详情查看活动，下单支付成功算开团，成为团长</span></p><p style=\"text-align: left;\"><span style=\"font-size: 14px;\">2、开团后进入团详情，分享给好友，好友拍下支付成功则开团成功</span></p><p style=\"text-align: left;\"><span style=\"font-size: 10px;\">温馨提示：开团后有效期以拼团时限；有效期内凑成人数算成团；等待商家发货，若有效期内没成团，原路退回。最终解释权归本商城所有。</span></p><p><br/></p>');

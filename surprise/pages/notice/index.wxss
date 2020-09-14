@@ -1,0 +1,6 @@
+/* pages/notice/index.wxss */
+.wxParse-img{
+  margin:0 auto;
+  display:block;
+  width:95%;
+}

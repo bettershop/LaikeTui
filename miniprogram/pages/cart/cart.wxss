@@ -1,0 +1,365 @@
+/* pages/cart/cart.wxss */
+.clearbutton{
+    background: #fff; 
+    display: inline-block;
+    margin:3% 3% 2% 3%; 
+    color: #FF8247;
+    font-size: 14px;
+    width: 94%;
+}
+page{
+  width: 100%;
+  height: 100%;
+}
+.shop{
+    background: #fff;
+    padding: 4%;
+    margin-bottom: 10px;
+}
+.shop checkbox{ 
+    margin-top: 27px;
+    }
+.sh_slt{
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-right: 4%;
+    margin-left: 3%;
+    float: left;
+}
+.sp_text{
+    float: left;
+    line-height: 20px;
+    width: 100%;
+    }
+.sp_tit{
+    width: 100%;
+    overflow: hidden;
+    font-size: 14px;
+}
+.sp_neb{
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    color: #999;
+}
+.sp_jg{
+    width: 100%;
+    overflow: hidden;
+    font-size: 14px;
+    color: #FF8247;
+}
+.dle{
+    color: #999;
+    font-size: 12px;
+    float: right;
+    margin-left: 10px;
+}
+.dle image{
+    width: 18px;
+    height: 18px;
+    vertical-align: sub;
+}
+.jk_bottom{
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 100%; 
+    display: inline-flex;
+    border-bottom: 1px solid #eee; 
+    font-size: 14px;
+    color: #999;       
+}
+.jk_bottom checkbox{
+    margin: 4% 0 4% 4%;    
+}
+.jk_bottom .heji{
+    margin-top: 5.5%;
+    width: 30%; 
+    text-align: right;   
+}
+.jk_bottom .all{
+    margin-top: 5.5%;
+    padding-left: 2%;  
+}
+.jk_bottom .js_button{
+    background: #FF8247;
+    float: right;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    width: 40%;
+    position: absolute;
+    right: 0;
+    line-height: 50px;
+}
+.bottom_clear{
+    clear: clear;
+    height: 1px;
+    margin-top: 60px;
+}
+
+
+
+/*外部容器*/
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+ /*复选框样式*/
+.carts-list icon {
+  margin-top: 60rpx;
+  margin-right: 20rpx;
+}
+/*整体列表*/
+.carts-list {
+  display: flex;
+  flex-direction: column;
+  padding:0 40rpx 20rpx 40rpx;
+   background: #fff;
+}
+ 
+/*每行单元格*/
+.carts-item {
+  display: flex;
+  flex-direction: row;
+  height:180rpx;
+  /*width属性解决标题文字太短而缩略图偏移*/
+  width:100%;
+  border-bottom: 1px solid #eee;
+  padding: 30rpx 0;
+}
+ 
+/*左部图片*/
+.carts-image {
+  width:160rpx;
+  height:160rpx;
+  border: 1px solid #eee;
+}
+ .kong{
+     width:200rpx;
+  height:200rpx;
+ }
+ 
+/*右部描述*/
+.carts-text {
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  position:relative;
+  padding-left:10px;
+}
+
+.title{
+  clear: both;
+  width: 100%;
+  height:40rpx;
+}
+
+ 
+/*右上部分标题*/
+.carts-title {
+  margin-top: 1px;
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+  line-height:34rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+   width: 100%; 
+} 
+/*右下部分价格与数量*/
+.carts-subtitle {
+  font-size: 25rpx;
+  color:darkgray;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+ 
+/*价格*/
+.carts-price {
+  color: #f60;
+}
+/*底部按钮*/
+.carts-footer {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+   position: fixed;
+    bottom: 0;
+    background: #ffffff;
+    z-index:999;
+}
+/*复选框*/
+.carts-footer icon {
+  margin-left: 20rpx;
+  color: #fff;
+}
+ 
+/*全选字样*/
+.carts-footer text {
+  font-size: 32rpx;
+  margin-left: 8rpx;
+  line-height: 10rpx;
+
+}
+ 
+/*立即结算按钮*/
+.carts-footer .button {
+  line-height: 80rpx;
+  text-align: center;
+  width:220rpx;
+  height: 80rpx;
+  background-color: #FF8247;
+  color: white;
+  font-size: 36rpx;
+  border-radius: 0;
+  border: 0;
+}
+.stepper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width:48%;
+  float:right;
+}
+.stepper text {
+  background-color: #f2f2f2;
+  margin: 0;
+  width: 23px;
+  height: 23px;
+  line-height: 23px;
+  text-align: center;
+  font-weight: 900;
+  color: #939393;
+  border-radius:6rpx;
+  border: 0
+}
+.stepper input {
+  width: 43px;
+  /* height: 25px; */
+  text-align: center;
+  border-radius:6rpx; 
+  border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2
+}
+
+.cart_number{
+  height: 21px!important;
+  font-size: 28rpx;
+  line-height: 20px;
+  min-height: 21px!important;
+  color: #666
+}
+
+.modal-close{
+    float:right;
+    position:absolute;
+    top:3px;
+    right:5px;
+    color: #939393;
+}
+.page{
+  
+    padding-bottom: 60rpx;
+}
+.reds{
+    color: red;
+
+}
+
+
+.pp{
+  text-align: center;
+  margin-top:264rpx; 
+}
+.cla{
+      font-family: '微软雅黑';
+      color: #ccc;
+}
+.heji{
+  display:flex;
+  align-items:center;
+  width: 71%;
+   border-top: 1px solid #eee;
+}
+
+
+/* 顶部编辑 */
+.top-ql{
+  width: 100%;
+  height: 30px;
+  border-bottom: 1px solid #eee;
+}
+.top-ql-1{
+float:right;
+font-size:15px;
+line-height:30px;
+padding-right:16px;
+}
+
+
+
+
+
+/* 闪电图标 */
+
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1525616251211'); /* IE9*/
+  src: url('iconfont.eot?t=1525616251211#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAUoAAsAAAAAB4AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kgBY21hcAAAAYAAAABeAAABhpmUBr5nbHlmAAAB4AAAAVgAAAFok+eKTGhlYWQAAAM4AAAALwAAADYRSaL1aGhlYQAAA2gAAAAcAAAAJAfeA4RobXR4AAADhAAAAAwAAAAMC+kAAGxvY2EAAAOQAAAACAAAAAgAdgC0bWF4cAAAA5gAAAAfAAAAIAESAF1uYW1lAAADuAAAAUUAAAJtPlT+fXBvc3QAAAUAAAAAJgAAADcL607weJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2Bk/sE4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVDwTZ27438AQw9zA0AAUZgTJAQAlEQyDeJzFkMENgDAMAy9t6QPx7wo8GIgXc3TirlFMKA8mqCXHimMpUYAFiOIhJrAL48Ep19yPrO4nz2SpEait9K7+U0U0y65BJTMNNm/1H5vXfXT6CnVQJ7byknADiGcL6wAAeJwVj71OwlAcxe//Xnpb+kl7+w0V2grVoETKh4MRjHHROJA4OfoAurI44EB0cGB2NBhfQDcGX8HR6GJw8Cmq5eTkDL/lnIM4hP6+yYK4iKEN1EZHaIQQ0CZEKg4gTLot3AQr5CzHVEkSJyEfRy2yD05ETTvtdxsO5akGKqxBJ0z7SQsn0OsO8B6kdgDglf0zo14xyAxEN1mbZif4EaxqXNEG29nx1tBMa0wYy4bhGca9QDlOwLigqXDp2EWuKNJszmm+tahu4irIXuKfniu1snFx170K6k4RYDIBVq6pz0Pd13Nf+zYzPL6kCK6vxOsmjH8kl8lBY4ly4fzrG/4gh8hBMUJclLSgx+KoscsG+X6edFZBSSe1LX7FhwC/hIiyNNN0uiwwU4L2k1bi3oXbG0nnpw+Kjv0DIJoII1+FT1GgupS9gKdm9RLMdfkLdpjymlf/A6A+OCt4nGNgZGBgAGLBgyrR8fw2Xxm4WRhA4LqofjWC/n+AhYHZCcjlYGACiQIA6zsIQAB4nGNgZGBgbvjfwBDDwgACQJKRARUwAwBHCQJsBAAAAAPpAAAEAAAAAAAAAAB2ALR4nGNgZGBgYGYIZGBlAAEmIOYCQgaG/2A+AwAQ9wFwAHicZY9NTsMwEIVf+gekEqqoYIfkBWIBKP0Rq25YVGr3XXTfpk6bKokjx63UA3AejsAJOALcgDvwSCebNpbH37x5Y08A3OAHHo7fLfeRPVwyO3INF7gXrlN/EG6QX4SbaONVuEX9TdjHM6bCbXRheYPXuGL2hHdhDx18CNdwjU/hOvUv4Qb5W7iJO/wKt9Dx6sI+5l5XuI1HL/bHVi+cXqnlQcWhySKTOb+CmV7vkoWt0uqca1vEJlODoF9JU51pW91T7NdD5yIVWZOqCas6SYzKrdnq0AUb5/JRrxeJHoQm5Vhj/rbGAo5xBYUlDowxQhhkiMro6DtVZvSvsUPCXntWPc3ndFsU1P9zhQEC9M9cU7qy0nk6T4E9XxtSdXQrbsuelDSRXs1JErJCXta2VELqATZlV44RelzRiT8oZ0j/AAlabsgAAAB4nGNgYoAALgbsgJmRiZGZkYWBsYIzMzk/T7cktbiEgQEAIuYENAAA') format('woff'),
+  url('iconfont.ttf?t=1525616251211') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1525616251211#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon-test:before { content: "\e617"; }
+
+
+
+/* 底部 */
+.bottom_1{
+  width:61%;
+  display:flex;
+  align-items:center;
+  border-top:1px solid #eee;
+  justify-content:flex-end;
+  padding-right:40rpx;
+}
+.button_1_1{
+  background:#fff;
+  font-size:13px;
+  height:50rpx;
+  line-height:50rpx;
+  margin-right: 5px;
+  color:#333333;
+  border:1px solid #333333;
+  padding:0 5px;
+}
+.button_1_2{
+  font-size:13px;
+  height:50rpx;
+  line-height:50rpx;
+  margin-left: 5px;
+  color:#fff;
+  padding:0 18px;
+}

@@ -1,0 +1,186 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<view class='group'>
+  <view class='group_sp_box' bindtap='toproDetail'>
+    <view class='group_sp_z'>
+      <view class='fdxs'>拼团</view>
+      <image class='img' src="{{image}}" mode="aspectFill"></image>
+    </view>
+
+    <view class='group_sp_y'>
+      <block wx:if="{{groupInfo.groupStatus!='拼团成功'}}">
+        <view class='group_xz'>还差<text style='color:#e83737;'>{{man_num-groupInfo.ptnumber}}</text>人成团</view> 
+      </block>
+      <view wx:else class='group_xz'>{{groupInfo.groupStatus}}</view> 
+      <view style='font-size:31rpx;color:#999;font-family:SimHei;text-decoration:line-through;'>￥{{yprice}}</view>
+      <view style='color:#e83737;'>
+        <text style="font-size: 25px;">￥{{price}}</text>
+
+      </view>
+      <view style='color: #e83737;margin-top:10px;border: 1px solid #e83737;text-align: center;width: 60px;font-size: 12px;padding: 2px;border-radius:3px;'>限时抢购  </view>
+    </view>
+
+  </view>
+  <view class='group_name_box'>
+  <scroll-view scroll-x="true" style='width:100%;height:150rpx;' class="tab-h">
+   <view class='{{man_num>4?"tablist":"tablist1"}}' style='margin-top:20rpx;'> 
+			<view wx:for="{{groupMember}}" wx:for-index="idx" wx:key="unique" class='item' scroll-x style='margin:0 20rpx;width:150rpx;position:relative;'>
+      <text class="group-header" wx:if="{{idx==0}}" style='height:37rpx;position: absolute;top: -5px;left: -5px;background-color: orange;color: #fff;padding: 10rpx;border-radius: 15rpx;font-size: 25rpx;width:50rpx;'>团长</text>
+        <image src="{{item.headimgurl}}" mode="aspectFill" style="{{idx < 1 ? 'border:1px solid orange':'border:1px dashed #666'}};margin:10rpx;"></image>
+     </view>
+   </view>
+  </scroll-view>
+  <block wx:if="{{groupInfo.groupStatus!='拼团成功'}}">
+  <view class='group_num'>还差 <text> {{man_num-groupInfo.ptnumber}} </text> 人组团成功快启动您的朋友圈吧！</view>
+  </block>
+  </view>
+  <view class='group_sj_box'>
+  <view class='group_sj'>
+  <view style='width:130rpx;height:1rpx;background:#e83737;margin-top:15px;'></view>
+  <block wx:if="{{groupInfo.groupStatus=='拼团中'}}">
+  <view class='sj_text'>剩余</view>
+  <view class='sj_num'>{{hour}}</view>
+  <view class='sj_bd'>:</view>
+  <view class='sj_num'>{{minute}}</view>
+  <view class='sj_bd'>:</view>
+  <view class='sj_num'>{{miao}}</view>
+  <view class='sj_text_fr'>结束</view>
+  </block>
+  <block wx:elif="{{groupInfo.groupStatus=='拼团成功'}}">
+  <view class='sj_num'>拼</view>
+  <view class='sj_num'>团</view>
+  <view class='sj_num'>成</view>
+  <view class='sj_num'>功</view>
+  </block>
+  <block wx:elif="{{groupInfo.groupStatus=='拼团失败'}}">
+  <view class='sj_num'>拼</view>
+  <view class='sj_num'>团</view>
+  <view class='sj_num'>失</view>
+  <view class='sj_num'>败</view>
+  </block>
+  <view style='width:130rpx;height:1rpx;background:#e83737;margin-top:15px;'></view>
+  </view>
+  <block wx:if="{{groupInfo.groupStatus=='拼团中'}}">
+  <block wx:if="{{groupInfo.isSelf}}">
+  <button class='yq_btn' open-type="share">邀请好友</button>
+  </block>
+  <block wx:else>
+    <form bindsubmit="getUserformid" report-submit="true" data-status="1">
+     <button class='yq_btn' formType="submit">一键参团</button>
+    </form>
+  </block>
+  </block>
+  <block wx:else>
+    <button class='yq_btn' bindtap="showGoodsDetail" data-id="{{groupInfo.ptgoods_id}}">再次开团</button>
+  </block>
+  
+  </view>
+  <view class='collage_fs_box'>
+    <view class='collage_fs_text'>拼团玩法：</view>
+    <view class='collage_fs_tg_bt_box'>
+    <view class='collage_fs_tg {{groupInfo.isSelf==false?"ys":""}}' style='line-height:150%;'>支 付 开 团 或 参 团</view><text class='jiantou'>></text>
+    <view class='collage_fs_tg {{groupInfo.isSelf==true&&groupInfo.groupStatus=="拼团中"?"ys":""}}' style='line-height:150%;'>邀 请 好 友 参 团</view><text class='jiantou'>></text>
+    <view class='collage_fs_tg' style='line-height:150%;'>达 到 拼 团 人 数</view><text class='jiantou'>></text>
+    <view class='collage_fs_tg {{groupInfo.isSelf==true&&groupInfo.groupStatus=="拼团成功"?"ys":""}}' style='line-height:150%;'>组 团 成 功 等 待 发 货</view>
+    </view>
+  </view>
+
+  <view class='goTop' bindtap="goIndex" style='margin:0 auto;display:flex;flex-direction:column;'>
+          <image src="../../images/icons/homeopen.png" style='width:60rpx;height:60rpx;margin:0 auto;'></image>
+          <view style='color:#666;font-size:30rpx;margin:0 auto;'>进入首页</view>  
+  </view>
+</view>
+
+
+<!--弹窗-->
+  <view class="drawer_screen" catchtouchmove="preventTouchMove" bindtap="setModalStatus" data-status="0" wx:if="{{showModalStatus}}"></view>
+  <view animation="{{animationData}}" class="drawer_attr_box" catchtouchmove="preventTouchMove" wx:if="{{showModalStatus}}">
+    <view class="close_icon" bindtap="setModalStatus" data-status="0">×</view>
+    <view class="drawer_attr_content">
+      <view class="text_center">
+        <image class="drawer_image" src="{{groupInfo.img}}"></image>
+      </view>
+      <view class="mingcheng">
+        <view style="font-size:38rpx;color:red">¥{{groupInfo.p_price}}</view>
+        <view style="font-size:26rpx;color:#ccc">库存：{{groupInfo.p_num}}</view>
+      </view>
+      <view style='clear:both;'></view>
+      <view class="commodity_attr_list" catchtouchmove="preventTouchMove">
+        <!--每组属性-->
+        <scroll-view scroll-y="true" style="height:100%;">     
+
+<!-- 属性选择 -->
+<view wx:for="{{attrList}}" wx:for-index="idx" wx:key="userInfoListId" class="outStyle">
+  <view class='outStyleText textStyle buttonPaddingStyle'>{{item.attrName}}</view>
+  <view class='typeStyle textStyle'>
+    <view wx:for="{{item.attr}}" data-item='{{item.attr[index]}}' data-index='{{index}}' data-idx='{{idx}}' wx:key="userInfoListId" bindtap="onChangeShowState" wx:for-item="items">
+      <view class="{{items.enable == true ?(items.select==true?'orange':'back') : 'bai'}} textStyle buttonPaddingStyle">
+        {{items.attributeValue}}
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 属性选择 -->
+
+          <!-- <view class="shu">
+            <text class="cun">购买数量</text> -->
+            <!-- <view class="dian"> -->
+              <!-- <view class="stepper" catchtouchmove="preventTouchMove"> -->
+                <!-- 减号 -->
+                <!-- <text class="{{minusStatuses[index]}}" data-alpha-beta="0" bindtap="minus">-</text> -->
+                <!-- 数值 -->
+                <!-- <view class="nownum">{{num}}</view> -->
+                <!-- 加号 -->
+                <!-- <text class="normal" data-alpha-beta="1" bindtap="plus">+</text> -->
+              <!-- </view> -->
+            <!-- </view> -->
+          <!-- </view> -->
+        </scroll-view>
+      </view>
+  <view class="footc" style='border-radius:15rpx;'>
+    <form bindsubmit="getformidToo" report-submit="true">
+		 <button class="" type="primary" formType="submit" data-type="{{paytype}}" style='width:100%;height:90rpx;background:#FF6347;color:#fff !important;line-height:90rpx;'>确定</button>
+    </form>
+	</view>
+      <!--<view class="footc" data-type="{{paytype}}" id="{{paytype}}" type="primary" bindtap="submit" style='background:{{bgcolor}}'> 确定 </view>-->
+    </view>
+  </view>
+  <!--弹框结尾  -->
+
+
+  <!-- 自定义弹框开始 -->
+  <view wx:if="{{userlogin}}" class="mask"></view>
+  <view wx:if="{{userlogin}}" class="model">
+    <view class="modelTitle">
+    获取微信授权信息
+    </view>
+    <view class="modelBody">微信登录需要获取您的用户信息，请前往设置</view>
+    <view class="btns" style='border-radius:10px;'>
+      <button open-type="getUserInfo" style="color:#00CD00;background-color: #fff;border-radius:0 0 10px 10px;" class="agree" bindgetuserinfo="agreeGetUser" lang="zh_CN">去设置</button>
+    </view>  
+  </view> 
+<!-- 自定义弹框结束 --> 
+<pop id="pop"></pop>

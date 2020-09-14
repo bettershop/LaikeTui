@@ -1,0 +1,20 @@
+<view class="w100">
+  <view class="p_all">请填写售后信息</view>
+  <form bindsubmit="submitReturnData" report-submit="true" > 
+    <view class="p_all01 mt10 bg" bindtap="actionSheetTap">
+          <view class="text">
+            <text class='t_3'>选择售后类型： </text>{{itemList_text}}
+          </view>
+    </view>
+    <view class="p_all01 mt10 bg">
+      <view >
+        <textarea class="min_60 inputStyle" auto-height name="remark" placeholder="请填写原因" value="{{remark}}"/> 
+      </view>
+    </view>
+    <view class="p_all01 mtt0">
+      <view class="btnGreen">
+        <button style='background:{{bgcolor}};color:#fff;border-radius:5px;' id="btnPay" formType="submit">确定</button>
+      </view>
+    </view>
+  </form> 
+</view>

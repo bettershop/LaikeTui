@@ -1,0 +1,10 @@
+.img_box{
+  padding-bottom:100%;  
+}
+
+.img_box image { 
+    position:absolute;  
+    width:100%;  
+    height: 230%;
+    margin:auto;
+}

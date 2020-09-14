@@ -1,0 +1,163 @@
+<!--pages/user/dingdan.wxml-->
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner">
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" data-otype="whole" bindtap="swichNav">全部</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-otype="stay" bindtap="swichNav">待处理</view>
+  </view>
+  <view class="c_t60"></view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange">
+    <!-- 全部 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:100%;">
+        <view class="search_no" wx:if="{{orderList0.length < 1}}">
+          <view class="font_14">
+            <image class="scimg" src="/images/search_no.png"></image>
+          </view>
+          <text>没有可用订单/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class="list" wx:for="{{orderList0}}" wx:key="key" >
+         
+            <view class="top">
+              <view>订单号：{{item.r_sNo}}
+                <view class="tab_statu" style='color:#dd2727;' wx:if="{{item.r_type == 0}}">核审中</view>
+                <view class="tab_statu sbutt" data-id='{{item.id}}' bindtap='setModalStatus' data-status="1" wx:if="{{item.r_type == 1 || item.r_type == 6}}">待回寄></view>
+                <view class="tab_statu sbutt" bindtap='jujue' data-index='{{index}}' wx:if="{{item.r_type == 2 || item.r_type == 5}}">已拒绝></view>
+                <view class="tab_statu" style='color:#dd2727;' wx:if="{{item.r_type == 3}}">待卖家收货</view>
+                <view class="tab_statu" style='color:#dd2727;' wx:if="{{item.r_type == 4}}">已退款</view>
+              </view>
+            </view>
+             <navigator url="../order/detail?orderId={{item.id}}">
+            <view class="shop df">
+              <navigator url="../product/detail?productId={{item.p_id}}&size={{item.sid}}" hover-class="changestyle">
+                <image class="sh_slt" src="{{item.imgurl}}"></image>
+              </navigator>
+              <view class="sp_text">
+                <!-- <navigator style='width:70%;' url="../product/detail?productId={{item.p_id}}&size={{item.sid}}" hover-class="changestyle"> -->
+                  <view class="sp_tit ovh1" style="color: #000;">{{item.p_name}}</view>
+                  <view class="sp_tit ovh1" style='color:#808080'>{{item.size}}</view>
+                <!-- </navigator> -->
+                <view class="sp_jg">
+                  <view class='guige'>¥ {{item.p_price}} </view>
+                  <view class='guige'>x{{item.num}}</view>
+                </view>
+              </view>
+            </view>
+
+          </navigator>
+        </view>
+      </scroll-view>
+
+    </swiper-item>
+
+    <!-- 待处理 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:100%;">
+        <view class="search_no" wx:if="{{orderList1.length < 1}}">
+          <view class="font_14">
+            <image class="scimg" src="/images/search_no.png"></image>
+          </view>
+          <text>没有可用订单/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class="list" wx:for="{{orderList1}}"  wx:key="key" >
+          
+          <view class="top">
+            <view>订单号：{{item.r_sNo}}
+              <view class="tab_statu" style='color:#dd2727;' wx:if="{{item.r_type == 0}}">核审中</view>
+              <view class="tab_statu sbutt" data-id='{{item.id}}' bindtap='setModalStatus' data-status="1" wx:if="{{item.r_type == 1}}">待回寄></view>
+              <view class="tab_statu sbutt" bindtap='jujue' data-index='{{index}}' wx:if="{{item.r_type == 2 || item.r_type == 5}}">已拒绝></view>
+              <view class="tab_statu" style='color:#dd2727;' wx:if="{{item.r_type == 3}}">待卖家收货</view>
+              <view class="tab_statu" style='color:#dd2727;' wx:if="{{item.r_type == 4}}">已退款</view>
+            </view>
+          </view>
+<navigator url="../order/detail?orderId={{item.id}}">
+          <view class="shop df">
+            <navigator url="../product/detail?productId={{item.p_id}}&size={{item.sid}}" hover-class="changestyle">
+              <image class="sh_slt" src="{{item.imgurl}}"></image>
+            </navigator>
+
+            <view class="sp_text">
+              <!-- <navigator style='width:70%;' url="../product/detail?productId={{item.p_id}}&size={{item.sid}}" hover-class="changestyle"> -->
+                <view class="sp_tit ovh1" style="color: #000;">{{item.p_name}}</view>
+                <view class="sp_tit ovh1" style='color:#808080'>颜色规格: [{{item.size}}]</view>
+              <!-- </navigator> -->
+              <view class="sp_jg">
+                <view class='guige'>¥ {{item.p_price}} </view>
+                <view class='guige'>x{{item.num}}</view>
+              </view>
+            </view>
+          </view>
+           </navigator>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+
+</block>
+
+<!-- 弹窗 -->
+<view class="drawer_screen" bindtap="setModalStatus" data-status="0" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="drawer_attr_box" catchtouchmove="preventTouchMove" wx:if="{{showModalStatus}}">
+  <view style="margin-top: 10%;">
+    <view class='thxq'>退货地址：
+      <text>{{address}}</text>
+    </view>
+    <view class='thxq'>退货联系人：{{name}}</view>
+    <view class='thxq'>退货联系电话：{{phone}}</view>
+    <view class='thxq' style='padding-top:0;'>
+      <form bindsubmit="kdtj" report-submit="true">
+        <view class='Withdraw'>
+          <view class="section" style="width: 100%;">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{exp}}">
+              <view class="picker">
+                快递名称:
+                <view style='display:inline-block;float:right;margin-top:3px;'>
+                  <image style='width:40rpx;height:40rpx;' src='../../images/xjt.png'></image>
+                </view>
+                <text style='margin-left: 10px;'>{{express[index].kuaidi_name}}</text>
+                <input style='display:none' name='kdname' value='{{express[index].kuaidi_name}}' type='text'></input>
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class='Withdraw'>
+          <view>快递单号:</view>
+          <input class='cash' name='kdcode' maxlength='20' value='' placeholder="" type='number'></input>
+        </view>
+        <view class='Withdraw'>
+          <view>联 系 人:　</view>
+          <input class='cash' name='lxr' maxlength='20' value='' placeholder="" type='text'></input>
+        </view>
+        <view class='Withdraw'>
+          <view>联系电话:</view>
+          <input class='cash' name='lxdh' maxlength='11' value='' placeholder="" type='number'></input>
+        </view>
+        <button class="pay_foot" style='color:#fff;background:{{bgcolor}};border:1px solid {{bgcolor}};border-radius:30px;magin:0;font-size:14px;padding:0;width:90px;height:33px;line-height:32px;' formType="submit">提交</button>
+      </form>
+    </view>
+  </view>
+</view>

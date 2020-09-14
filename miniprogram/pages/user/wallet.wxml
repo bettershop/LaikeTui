@@ -1,0 +1,166 @@
+<!--pages/wallet/wallet.wxml-->
+<view class="body" wx:if="{{remind}}">
+    <view class='zong'>
+          <view class="spinner" >
+                    <view class="spinner-container container1">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container2">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container3">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+          </view>
+    </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<view class="page">
+  <view class="sc mt10" style='background-color:{{ bgcolor }};'>
+    <view class="df_1 df">     
+      <text class="qb_02">{{user.money}}</text>
+      <text class="qb_01">账户余额({{user.unit}})</text>
+    </view>
+  </view> 
+  
+  <view class="use_detail" style="width: 100%;margin: 0 auto;position: relative;height:55%;">
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">入账记录</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">消费记录</view>
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">提现记录</view>
+    </view>
+    <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="position:relative;" bindchange="bindChange">
+      <swiper-item >
+      
+        <view class="search_no" style='padding-top:60px' wx:if="{{list_3.length < 1}}">
+          <view class="font_14"  style='padding-bottom:2%;'><image class="scimg" src="/images/search_no.png"></image></view>
+          <text>暂时还没入账记录/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='obtain_box'>
+          <scroll-view scroll-y="true" style='height:100%;overflow:auto;padding-bottom:45px;'>
+          <view class='jf_obtain' wx:for="{{list_3}}">
+            <view class='obtain_bt_3'>
+              <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
+            </view>
+            <view class='obtain_bt_2' wx:if="{{item.type == 2 || item.type == 4 || item.type == 6 || item.type == 11 || item.type == 12 || item.type == 21 }}">
+              -{{item.money}}
+              <text class='my_money' wx:if="{{item.type == 4}}">(消费)</text>
+              <text class='my_money' wx:if="{{item.type == 6}}">(红包)</text>
+              <text class='my_money' wx:if="{{item.type == 11}}">(系统扣款)</text>
+              <text class='my_money' wx:if="{{item.type == 12}}">(转好友)</text>
+              <text class='my_money' wx:if="{{item.type == 21}}">(提现成功)</text>
+            </view>
+            <view class='obtain_bt_2' wx:if="{{item.type == 1 || item.type == 5 || item.type == 13 || item.type == 7|| item.type == 14 || item.type == 22 || item.type == 23 || item.type == 24}}">
+              +{{item.money}}  
+              <text class='my_money' wx:if="{{item.type == 1}}">(充值)</text>
+              <text class='my_money' wx:if="{{item.type == 5}}">(退款)</text>
+              <text class='my_money' wx:if="{{item.type == 7}}">(返佣)</text>
+              <text class='my_money' wx:if="{{item.type == 13}}">(转入)</text>
+              <text class='my_money' wx:if="{{item.type == 14}}">(系统充值)</text>
+              <text class='my_money' wx:if="{{item.type == 22}}">(提现失败)</text>
+              <text class='my_money' wx:if="{{item.type == 23}}">(取消订单)</text>
+               <text class='my_money' wx:if="{{item.type == 24}}">(分享)</text>
+            </view>
+          </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+      <swiper-item >
+        <view class="search_no" style='padding-top:60px' wx:if="{{list_1.length < 1}}">
+          <view class="font_14"  style='padding-bottom:2%;'><image class="scimg" src="/images/search_no.png"></image></view>
+          <text>暂时还没消费记录/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='obtain_box'>
+          <scroll-view scroll-y="true" style='height:100%;overflow:auto;padding-bottom:45px;'>
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_1}}">
+            <view class='obtain_bt_3'>
+              <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
+            </view>
+            <view class='obtain_bt_2' wx:if="{{item.type == 2 || item.type == 4 || item.type == 6 || item.type == 11 || item.type == 12 || item.type == 21 }}">
+              -{{item.money}}
+              <text class='my_money' wx:if="{{item.type == 4}}">(消费)</text>
+              <text class='my_money' wx:if="{{item.type == 6}}">(红包)</text>
+              <text class='my_money' wx:if="{{item.type == 11}}">(系统扣款)</text>
+              <text class='my_money' wx:if="{{item.type == 12}}">(转好友)</text>
+              
+            </view>
+            <view class='obtain_bt_2' wx:if="{{item.type == 1 || item.type == 5 || item.type == 13 || item.type == 7|| item.type == 14 || item.type == 22 || item.type == 23 || item.type == 24}}">
+              +{{item.money}}  
+              <text class='my_money' wx:if="{{item.type == 1}}">(充值)</text>
+              <text class='my_money' wx:if="{{item.type == 5}}">(退款)</text>
+              <text class='my_money' wx:if="{{item.type == 7}}">(返佣)</text>
+              <text class='my_money' wx:if="{{item.type == 13}}">(转入)</text>
+              <text class='my_money' wx:if="{{item.type == 14}}">(系统充值)</text>
+              <text class='my_money' wx:if="{{item.type == 23}}">(取消订单)</text>
+               <text class='my_money' wx:if="{{item.type == 24}}">(分享)</text>
+            </view>
+          </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="search_no" style='padding-top:50px;' wx:if="{{list_2.length < 1}}">
+          <view class="font_14" style='padding-bottom:2%;'><image class="scimg" src="/images/search_no.png"></image></view>
+          <text>暂时还没提现记录/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='obtain_box'>
+          <scroll-view scroll-y="true" style="height:100%;overflow:auto;padding-bottom:45px;">
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_2}}">
+            <view class='obtain_bt_3'>
+                <!-- <view style='color:#333;'>{{item.user_name}} -->
+                <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
+                <!-- </view> -->
+            </view>
+            <view class='obtain_bt_2' wx:if="{{item.type == 21}}">
+              -{{item.money}}
+              <text class='my_money' >(成功)</text>
+            </view>
+            <view class='obtain_bt_2' wx:if="{{item.type == 22}}">
+              +{{item.money}}
+              <text class='my_money' >(失败)</text>
+            </view>
+            <view class='obtain_bt_2' wx:if="{{item.type == 2}}">
+              -{{item.money}}
+              <text class='my_money' >(申请)</text>
+            </view>
+          </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="dibu" style='background-color:{{bgcolor}};'>
+    <navigator class="dibu_1" url="../user/recharge"> 
+      <view>                     
+        <span class="dibu_t">充值</span>
+      </view>
+    </navigator> 
+    <view>
+      <text class="dibu_3">|</text>
+    </view>
+    <navigator  class="dibu_2" url="../user/withdrawals"> 
+      <view>
+        <span class="dibu_t">提现</span>
+      </view>
+    </navigator>
+     <view>
+      <text class="dibu_3">|</text>
+    </view>
+    <navigator  class="dibu_2" url="../user/transfer"> 
+      <view>
+        <span class="dibu_t">转账</span>
+      </view>
+    </navigator>  
+  </view>
+</view>
+</block>

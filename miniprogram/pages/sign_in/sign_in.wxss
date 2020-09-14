@@ -1,0 +1,199 @@
+page{
+  background: #f8f8f8;
+}
+.wrap{
+  height: 100%;
+  width: 100%;
+}
+.date-show{  
+    position: relative;  
+    width: 350rpx;  
+    font-size: 40rpx;  
+    text-align: center; 
+    margin: auto; 
+}  
+.lt-arrow,.rt-arrow{  
+    position: absolute;  
+    top: 10rpx;  
+    width: 60rpx;  
+    height: 60rpx;  
+}  
+.lt-arrow image,.rt-arrow image{  
+    width: 50rpx;  
+    height: 50rpx;  
+}  
+.lt-arrow{  
+    left: -110rpx;  
+}  
+.rt-arrow{  
+    right: -100rpx;  
+}  
+.header{  
+    font-size: 0;  
+    width:80%;
+  margin:auto;
+ background: #fff;
+}  
+.header>view{  
+    display: inline-block;  
+    width: 14.285%;  
+    color: #333;  
+    font-size: 30rpx;  
+    text-align: center;   
+    padding: 35rpx 0;  
+}  
+.weekMark{  
+    position: relative;  
+}  
+.weekMark view{  
+    position: absolute;  
+    bottom: 0;  
+    left: 0;  
+    width: 100%;  
+}  
+.date-box{  
+  font-size: 0;  
+  width:80%;
+  margin:auto;
+  background: #fff;
+  border-radius:0 0 30px 30px;
+  padding-bottom:40px;
+
+}  
+.date-box>view{  
+    position: relative;  
+    display: inline-block;  
+    width: 14.285%;  
+    color: #020202;  
+    font-size: 40rpx;  
+    text-align: center;  
+    vertical-align: middle;  
+    margin: 10rpx 0;  
+}  
+.date-head{  
+    height: 60rpx;  
+    line-height: 60rpx;  
+    font-size: 32rpx;  
+    color: #333;
+}  
+.nowDay .date-head{  
+    width: 60rpx;  
+    border-radius: 50%;  
+    text-align: center;  
+    color: #fff;  
+    margin: 0 auto;  
+}  
+.date-weight{  
+    font-size: 22rpx;  
+    padding: 15rpx 0;  
+}  
+.nowDay .date-weight{  
+    color: #22A7F6;  
+}  
+.one{  
+    position: absolute;  
+    bottom: 0;  
+    right: 5rpx;  
+    width: 20rpx;  
+    height: 20rpx;  
+    border-radius: 50%;  
+    background-color: red;  
+}  
+.two{  
+    position: absolute;  
+    bottom: 30rpx;  
+    right: 5rpx;  
+    width: 20rpx;  
+    height: 20rpx;  
+    border-radius: 50%;  
+    background-color: blue;  
+}  
+.date-show-box{
+  height: 80px;
+  line-height: 80px;
+  background: #e93737;
+  color: #fff;
+  width:80%;
+  margin: 20px auto;
+  margin-bottom: 0;
+  border-radius: 30px 30px 0 0;
+  position: relative;
+}
+.date-dw{
+  background: #dfdfdf;
+  width: 20rpx;
+  height: 60rpx;
+  position: absolute;
+  left:100rpx;
+  top: 65px;
+  border-radius:5px;
+}
+.date-dw-two{
+  background: #dfdfdf;
+  width: 20rpx;
+  height: 60rpx;
+  position: absolute;
+  right:100rpx;
+  top: 65px;
+  border-radius:5px;
+}
+.btn_qd{
+  width: 50%;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin:50rpx auto;
+  background: #e93737;
+  color: #fff;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.qd_text{
+  width: 95%;
+  margin: auto;
+}
+.qd_text text{
+ display:block;
+font-size:25rpx;
+color:#666;
+line-height:18px;
+}
+
+/* 弹窗 */
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: 9000;
+    opacity: 0.7;
+}
+
+.modalDlg{
+    width: 580rpx;
+    height: 700rpx;
+    position: fixed;
+    top: 15%;
+    left: 11.3%;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn_gb image{
+    width: 60rpx;
+    height: 60prx;
+}
+.modalDlg_text{
+  position: absolute;
+  top:43%;
+  left:31%;
+  text-align:center;
+}
+.btn_sign{
+  width:50%;
+  margin:-66rpx auto 0rpx;
+  text-align:center;
+  font-size:16px;
+}

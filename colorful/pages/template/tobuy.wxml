@@ -1,0 +1,28 @@
+<template name="tobuy">
+    <view bindtap="showModal" class="drawer_screen" data-statu="close" wx:if="{{showModalStatus}}"></view>
+    <view animation="{{animationData}}" class="modal" wx:if="{{showModalStatus}}">
+        <text bindtap="showModal" class="modal-close pull-right" data-statu="close">x</text>
+        <view class="clearfix"></view>
+        <view class="modal-title">
+            <view class="goods-img">
+                <image mode="aspectFit" src="{{goodsDetail.img}}"></image>
+            </view>
+            <view class="goods-price">¥{{goodsPrice}}</view>
+        </view>
+        <view class="modal-body">
+            <view class="prop" wx:for="{{goodsDetail.property}}" wx:key="unique">
+                <view>{{item.name}}</view>
+                <text bindtap="selectProp" class="{{propValue[index].pname==item.name&&propValue[index].name==prop?'selected':''}}" data-name="{{prop}}" data-pid="{{index}}" data-pname="{{item.name}}" wx:for="{{item.value}}" wx:for-index="ind" wx:for-item="prop" wx:key="unique">{{prop}}</text>
+            </view>
+        </view>
+        <view class="number pull-left">
+            <text class="pull-left" style="padding:10rpx 20rpx;">数量</text>
+            <text bindtap="plus" class="plus pull-right">十</text>
+            <text class="buy-value pull-right">{{num}}</text>
+            <text bindtap="minus" class="minus pull-right">一</text>
+        </view>
+        <view class="modal-footer">
+            <view bindtap="goToBuy" class="btn">确定</view>
+        </view>
+    </view>
+</template>

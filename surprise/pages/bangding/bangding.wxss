@@ -1,0 +1,118 @@
+page{
+  background-color: rgb(240, 239, 245); 
+}
+.page{
+  background-color:#fff;
+  margin-bottom:30px;
+}
+
+radio .wx-radio-input.wx-radio-input-checked{
+  border: none;
+   background-color: #FF6347; 
+}
+radio .wx-checkbox-input.wx-checkbox-input-checked{
+    background-color: #FF6347
+}
+
+
+.dpxzq{
+  color:#666;
+  background-color:rgb(240, 239, 245);
+  padding:3px;
+  border-radius:10rpx;
+  margin-right:10px;
+}
+.balance{
+  text-align: center;
+  padding:10px 20px;
+  font-size: 18px;
+}
+.bb{
+  text-align: center;
+  font-size: 12px;
+}
+.Withdraw{
+  padding: 10px 20px;
+}
+
+.cash{
+  border: 1px solid #ddd;
+  flex: 1;
+  margin-left: -1px;
+  font-size: 12px;
+  padding: 0 10px;
+  line-height: 30px;
+  height: 30px;
+}
+
+.tx{
+  background-color: #48474c;  
+  color: #fff; 
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  width: 345px;
+  border-radius:30px;
+}
+.Phone{
+  font-size:28rpx;
+  width:70%;
+  padding-left:2%;
+  display:flex;
+  align-items:center;
+}
+
+.section{
+ padding: 12px 0;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  font-size: 16px;
+  /* justify-content: center; */
+}
+.inp{
+  display:flex;
+  align-items:center;
+  width: 70%;
+  margin-top:2px;
+
+}
+.t_3{
+  margin-left: 15px;
+  font-size:13px;
+}
+.text{
+  width: 27%;
+  text-align:center;
+    display:flex;
+  align-items:center;
+}
+.xt{
+  height:1px;
+  width:87%;
+  background:#eee;
+  margin:auto;
+
+}
+.sj_btn{
+  background:#FF6347;
+  color:#fff;
+  font-size:26rpx;
+}
+
+.binding-header{ height:88rpx; background: #ffffff; }
+.empower{ color:#353535; font-size:13px; width:50%; height:100%; display: flex; justify-content: center; align-items: center; }
+.binding-phone{ height:100%; width:38%; display: flex; justify-content: center; align-items: center; }
+.binding-main{ height:100rpx; background: #ffffff; margin-bottom: 80rpx; }
+.binding-main2{ height:200rpx; background: #ffffff; margin-bottom: 80rpx; }
+.binding-btn{ height:56rpx; margin:20rpx 40rpx 0rpx 40rpx; font-size: 13px; border-radius: 0rpx; background: #ffffff; display: flex; justify-content: center; align-items: center; }
+wx-button[class="binding-btn"]::after { border: 0; }
+.input-placeholder{ color:#c9c9c9; }
+.binding-btn.active{ color:#353535; }
+.binding-footer{ height:88rpx; background: #ff4544; border-radius: 44rpx; margin:0rpx 24rpx; display: flex; justify-content: center; align-items: center; color:#ffffff; font-size: 15px; }
+.binding-phone.gainPhone{ border-bottom:4rpx solid #ff4544; }
+.binding-phone.handPhone{ border-bottom:4rpx solid #ff4544; }
+.binding_pic{ height:288rpx; margin: 64rpx 0rpx 56rpx 0rpx; display: flex; justify-content: center; }
+.binding_num{ margin-bottom: 64rpx; }
+
+

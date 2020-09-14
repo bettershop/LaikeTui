@@ -1,0 +1,46 @@
+<template name="ordersList">
+    <view class="t" wx:if="{{ordersList.length>0}}">
+        <view class="order-group mt-10" wx:for="{{ordersList}}" wx:key="unique">
+            <view class="group-msg bg-fff pull-left">
+                <text class="order-num pull-left">订单编号：{{item.orderNum}}</text>
+                <text class="pull-right order-status">{{item.orderStatus}}</text>
+            </view>
+            <view bindtap="showOrderDetail" class="order-goods pull-left" data-id="{{item.oid}}">
+                <view class="goods-img pull-left">
+                    <image mode="aspectFill" src="{{item.img}}"></image>
+                </view>
+                <view class="goods-info pull-right">
+                    <view class="goods-title pull-left">{{item.name}}</view>
+                    <view class="goods-price pull-right">￥{{item.gprice}}</view>
+                    <view class="goods-prop pull-left">
+                        <view class="prop-item pull-left" wx:for="{{item.goodsProp}}" wx:for-item="prop" wx:key="unique">
+                            <view>
+                                <text>{{prop.pname}}</text>:<text>{{prop.name}}</text>
+                            </view>
+                        </view>
+                        <view class="goods-num pull-right">x{{item.goodsNum}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="clearfix"></view>
+            <view class="order-price bg-fff pull-left">
+			实付：<text>¥{{item.totalPrice}}</text>
+            </view>
+            <view class="user-option bg-fff clearfix">
+                <view style="padding-right: 24rpx;">
+                    <view bindtap="toPay" class="btn btn-danger" data-id="{{item.oid}}" wx:if="{{item.orderStatus=='待付款'}}">去支付</view>
+                    <view bindtap="toGroupDetail" class="btn btn-danger" data-id="{{item.oid}}" wx:if="{{item.orderStatus=='待成团'}}">邀请好友开团</view>
+                    <view bindtap="confirmReceipt" class="btn btn-danger" data-id="{{item.oid}}" wx:if="{{item.orderStatus=='待收货'}}">确认收货</view>
+                </view>
+            </view>
+        </view>
+        <template is="loading" data="{{loading:loading}}"></template>
+    </view>
+    <view class="no-orders" wx:else>
+        <view class="text-center">
+            <image src="/resource/no-orders.png"></image>
+            <view class="mt-20">您没有相关订单</view>
+        </view>
+    </view>
+</template>
+<import src="/pages/template/loading.wxml"></import>

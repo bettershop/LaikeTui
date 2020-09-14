@@ -1,0 +1,332 @@
+.swiper-tab{  
+    width: 100%;  
+    border-bottom: 1px solid #eee;  
+    text-align: center;  
+    line-height: 80rpx;
+    background: #fff;  
+    position: fixed;
+    top: 0;  
+    z-index: 999;
+    }  
+.swiper-tab-list{  
+  font-size: 12px;  
+  display: inline-block;  
+  width: 50%;  
+  color: #666;  
+  }  
+.on{ 
+  color: #dd2727;  
+  border-bottom: 5rpx solid #dd2727;
+  }  
+  .tab_statu{
+  float: right;
+  font-size: 13px;
+  color: #FF6347;
+}
+.swiper-box{ 
+  display: block; 
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden; 
+  }  
+
+.clearbutton{
+    background: #fff; 
+    display: inline-block;
+    margin:3% 3% 2% 3%; 
+    color: #dd2727;
+    font-size: 14px;
+    width: 94%;
+}
+.shop{
+    background: #fafafa;
+    padding: 4%;
+    border-bottom:1px solid #eee;
+}
+.shop checkbox{ 
+    margin-top: 27px;
+    }
+.sh_slt{
+    width: 65px;
+    height: 65px;
+    overflow: hidden;
+    margin-right: 4%;
+    float: left;
+}
+.sp_text{
+    display:flex;
+    line-height: 20px;
+    width: 100%;
+    text-align: left;
+    padding-left:8px;
+}
+.sp_tit{
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    -webkit-line-clamp:2;
+}
+.sp_neb{
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    color: #999;
+}
+.sp_jg{
+    width: 30%;
+    overflow: hidden;
+    font-size: 13px;
+    color: #fc0628;
+}
+.guige{
+    font-size:12px;
+    color:#808080;
+    text-align:right;
+}
+.dle{
+    color: #999;
+    font-size: 12px;
+    float: right;
+}
+.dle image{
+    width: 18px;
+    height: 18px;
+    vertical-align: sub;
+}
+.jk_bottom{
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 100%; 
+    display: inline-flex;
+    border-bottom: 1px solid #eee; 
+    font-size: 14px;
+    color: #999;       
+}
+.jk_bottom checkbox{
+    margin: 4% 0 4% 4%;    
+}
+.jk_bottom .heji{
+    margin-top: 5.5%;
+    width: 30%; 
+    text-align: right;   
+}
+.jk_bottom .all{
+    margin-top: 5.5%;
+    padding-left: 2%;  
+}
+.jk_bottom .js_button{
+    background: #dd2727;
+    float: right;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    width: 40%;
+    position: absolute;
+    right: 0;
+    line-height: 50px;
+}
+.c_t60{
+    clear: both;
+    height: 1px;
+    padding-top: 48px;
+}
+.blue{
+  color: #42b1ff;
+}
+.mr_5{
+    margin-right: 5px;
+}
+.list{
+  border-bottom: 4px solid #eee;  
+}
+.top{
+  padding: 2% 4%;
+  font-size:12px;
+}
+.sbut{
+  background:#EE7600;
+  border-radius: 10px;
+  text-align:center;
+  color:#fff;
+  height:20px;
+  margin-top:8px;
+}
+
+.sbutt{
+  background:#EE7600;
+  border-radius:10px;
+  text-align:center;
+  color:#fff;
+  height:17px;
+  margin:0;
+  width:25%;
+  font-size:12px;
+}
+
+/*优惠券 */
+.orderDetails {
+  border-bottom: 10px solid #f3f3f3;
+  background: #fff;
+}
+.orderListTitle {
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.orderListTitle .userImg {
+  float: left;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  margin: 15rpx;
+}
+.orderListTitle .userImg image {
+  border-radius: 35rpx;
+  width: 100%;
+  height: 100%;
+}
+.orderListTitle .userName {
+  padding-right: 50rpx;
+  background: url(../../../images/member_list_arrow.png) no-repeat 90% center;
+  background-size: 35rpx 35rpx;
+}
+.orderListTitle .orderStatus {
+  float: right;
+  margin-right: 20rpx;
+  color: #2f7b27;
+  font-size: 34rpx;
+}
+.orderListDetails {
+  margin: 10px;
+  display: flex;
+  height: 200rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+  border:2px solid #ff4081;
+  border-radius: 20rpx;
+}
+.orderListDetails .productImg {
+  flex: 1.3;
+  height: 217rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+.orderListDetails .productImg image {
+  width: 100%;
+  height: 100%;
+}
+.orderListDetails .productInfo {
+  flex: 1.5;
+  padding: 20rpx 10rpx;
+  text-align: center;
+}
+.productInfo image{
+  width: 82px;
+  height: 82px;
+}
+.pr {
+  flex: 2.6;
+  padding: 0 10rpx;
+  line-height: 44rpx;
+}
+.classname {
+  font-size: 25rpx;
+  color: #ccc;
+}
+.coupon_box{
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+align-items:center;
+margin-top:5px;
+width:90%;
+margin:10px auto;
+}
+.coupon_left{
+  width: 78%;
+  position:relative;
+  background: #fff;
+  border-radius:5px;
+  height:120px;
+  line-height:120px;
+}
+.coupon_right{
+  width:22%;
+background:#ff6347;
+position:relative;
+height:120px;
+text-align:center;
+color:#fff;
+border-radius:5px;
+font-size:20px;
+
+}
+.right_y{
+position:absolute;
+width:25px;
+height:25px;
+border-radius:50%;
+background:#eee;
+top:48px;
+right:-13px;
+
+}
+.right_z{
+position:absolute;
+width:25px;
+height:25px;
+border-radius:50%;
+background:#eee;
+top:48px;
+left:-13px;
+}
+.gs{
+  display:inline-block;
+  font-size:14px;
+  color:#666;
+  margin-left:10px;
+}
+
+.p_all {
+  border-bottom:1px solid #eee;
+}
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+
+.drawer_attr_box {
+  width: 100%;
+  height: 80%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+}
+.thxq{
+  padding: 10px;
+  font-size: 13px;
+}
+.Withdraw{
+  padding: 10px 0;
+  font-size: 13px;
+  display:flex;
+  height:25px;
+}
+.cash{
+  border-bottom:1px solid #eee;
+  width:80%;
+  margin:auto;
+}
+.Withdraw view{
+  line-height:25px;
+}

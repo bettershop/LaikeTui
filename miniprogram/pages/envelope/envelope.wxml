@@ -1,0 +1,29 @@
+<!--pages/order/downline.wxml-->
+<view class="page">
+  <view class="top_1">
+    <image class="img_1" src="{{article.Article_imgurl}}"  mode="widthFix"></image>
+  </view> 
+  <view class="h3">
+    <import src="../../wxParse/wxParse.wxml"/> 
+    <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+  </view>
+  <view class="dibu">
+    <button class="dibu_2" open-type="share">
+      <view  class="dibu_4">     
+        <view> <image class='img_2' src='../../images/icons/h.png'></image></view>
+        <view class="dibu_t">分享给朋友</view>
+      </view>
+    </button>
+    <view>
+      <text class="dibu_3">|</text>
+    </view>
+    <view class="dibu_2">
+      <navigator url="../code/code?id={{id}}">
+          <view class="dibu_4">
+            <view><image class='img_2' src='../../images/icons/p.png'></image></view>
+            <view class="dibu_t">分享到朋友圈</view>
+          </view>
+       </navigator>
+    </view>
+  </view>
+</view>

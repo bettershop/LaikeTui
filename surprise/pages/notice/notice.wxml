@@ -1,0 +1,17 @@
+<!--pages/notice.wxml-->
+<view class="function" style='background:#fff'>
+  <view class='tab_tab' wx:for="{{notice}}" wx:key="key">
+    <navigator url="../notice/index?Id={{item.id}}">
+      <button open-type="getUserInfo" class="function_list" lang="zh_CN">
+        <view class='function_left'>
+          <view class='function_text'>{{item.name}} </view>
+          <!-- <view class='function_text'>{{item.time}} </view> -->
+        </view>
+        <view class='function_right'>
+          <image class="jiantou" src="../../images/x_right.png"></image>
+        </view>
+      </button>
+
+    </navigator>
+  </view>
+</view>

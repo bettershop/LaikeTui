@@ -1,0 +1,140 @@
+/* pages/group_buy/comment.wxss */
+.comment_text_bq{
+  float: left;
+  width: 155rpx;
+  height: 43rpx;
+  background: #ffe4e4;
+  border-radius: 30rpx;
+  color: #333;
+  font-size: 26rpx;
+  text-align: center;
+  vertical-align: center;
+  line-height: 40rpx;
+  margin:20rpx 10rpx;
+}
+.yes{
+  background: red;
+  color: white;
+}
+
+/*evaluate评价*/
+.evaluate-container {
+	padding-bottom: 50px;
+}
+
+.evaluate {
+	background: white;
+	display: flex;
+	border-bottom:1px solid #eee;
+	padding: 10px 0;
+}
+
+/*头像*/
+.evaluate .avatar {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.evaluate .avatar image {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin: 10px;
+  border:1px solid #eee;
+}
+
+/*评价图片*/
+.evaluate .main {
+	flex: 3;
+	font-size: 12px;
+	color: gray;
+}
+
+.evaluate .main .gallery {
+	display: flex;
+	flex-direction: row;
+  margin-top:10px;
+}
+.image-container{
+  padding-right: 10px;
+}
+.evaluate .main .gallery image {
+	display: block;
+	width: 80px;
+	height: 80px;
+}
+.evaluate .main .content {
+	margin: 10px 0;
+	color: black;
+}
+.comments{
+  float:right;
+  padding-right:10px;
+}
+.comments_icon{
+  /* float:right; */
+  padding-right:10px;
+  width:10px;
+  height:10px;
+}
+
+.comment_box{
+  border-bottom:1px solid #eee;
+  padding-bottom:10px;
+}
+.comment{
+  display: flex;  
+  flex-direction: row;  
+  align-items:center;
+  width: 90%;
+  padding: 10px 5% 0px 5%;
+}
+.comment_text{
+  font-size:14px;
+  width:100%;
+  margin:auto;
+}
+.comment_content{
+  /* background:#eee; */
+  font-size:14px;
+  width:90%;
+  /* height:100px; */
+  margin:10px auto;
+}
+.comment_img{
+  width:90%;
+  margin:10px auto;
+}
+.comment_img image{
+  width:31%;
+  height: 85px;
+  background: #eee;
+}
+.comment_img image:nth-child(2){
+  margin-left: 10px;
+}
+.comment_img image:nth-child(3){
+  margin-left: 10px;
+}
+.comment_pj{
+  text-align:right;
+  width:90%;
+  margin:auto;
+  font-size:24rpx;
+  color:red;
+
+}
+
+.mt10{
+  margin: 0 auto;
+  text-align: center;
+  height: 70rpx;
+  width: 450rpx;
+  line-height: 70rpx;
+  border-radius:10rpx; 
+  border: 1px solid #999;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+}

@@ -1,0 +1,47 @@
+/* pages/distribution/brokeragedatails.wxss */
+.num {
+  height: 220rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
+}
+
+.num-number {
+  color: #242424;
+  font-size: 50rpx;
+  font-weight:500;
+}
+
+.num-title {
+  color: #999999;
+  font-size: 24rpx;
+  font-weight:500;
+}
+
+.list{
+  height: 90rpx;
+  display: flex;
+  justify-content: space-between;
+  margin: 0rpx 30rpx;
+  border-bottom: 2rpx solid #EEEEEE;
+  align-items: center;
+}
+
+.list-title {
+  color: #999999;
+  font-size: 28rpx;
+  font-weight:500;
+}
+
+.list-datails {
+  color: #020202;
+  font-weight:500;
+}
+
+.p-name {
+  width: 523rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

@@ -1,0 +1,43 @@
+<!--pages/distribution/commission.wxml-->
+<view>
+  <view class="search_no" style='padding-top:60px' wx:if="{{list_3== 1}}">
+    <view class="font_14" style='padding-bottom:2%;'>
+      <image class="scimg" src="/images/search_no.png"></image>
+    </view>
+    <text>请购买商业权限/(ㄒoㄒ)/~~</text>
+  </view>
+  <view class="search_no" style='padding-top:60px' wx:if="{{list_3.length < 1}}">
+    <view class="font_14" style='padding-bottom:2%;'>
+      <image class="scimg" src="/images/search_no.png"></image>
+    </view>
+    <text>暂时还没预计佣金记录/(ㄒoㄒ)/~~</text>
+  </view>
+
+  <view class='obtain_box' wx:if="{{list_3 != 1}}">
+    <view class="nav-head" wx:if="{{list_3.length > 1}}">
+      <view class="head-title">总计</view>
+      <view class="head-num">{{ money }}</view>
+    </view>
+    <scroll-view scroll-y="true" style='height:100%;overflow:auto;padding-bottom:45px;'>
+
+      <view class='jf_obtain' wx:for="{{ list_3 }}" bindtap="navto" data-id="{{ item.id }}">
+
+        <view class='obtain_bt_3'>
+          <view class="user-name">{{ item.user_name }}</view>
+          <view style='color: #B8B8B8;font-size: 22rpx;'>{{item.addtime}}</view>
+        </view>
+
+        <view class='obtain_bt_2' wx:if="{{item.status !=1}}" style="color:#020202;font-weight:bold;">
+          -{{item.s_money}}
+        </view>
+        <view class='obtain_bt_2' wx:if="{{item.status ==1}}" style="color:#020202;font-weight:bold;">
+          +{{item.s_money}}
+        </view>
+      </view>
+
+      <view class='load' wx:if="{{ list_3.length > 1 }}">没有更多了</view>
+    </scroll-view>
+  </view>
+
+
+</view>

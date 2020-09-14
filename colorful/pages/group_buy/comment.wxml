@@ -1,0 +1,97 @@
+<!--pages/group_buy/comment.wxml-->
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='border-bottom:2rpx #ddd solid;width:100%;height:80rpx;'>
+   <view class='comment_text' style='margin-left:20rpx;display: inline;'>
+      <view class="comment_text_bq {{checked==1||checked==2||checked==3?'':'yes'}}"  data-key="null" bindtap="checkBtn">全部({{quan}})</view>
+      <view class="comment_text_bq {{checked==1?'yes':''}}" data-key="1" bindtap="checkBtn">好评({{good}})</view>
+      <view class="comment_text_bq {{checked==2?'yes':''}}" data-key='2' bindtap='checkBtn'>中评({{notbad}})</view>
+      <view class="comment_text_bq {{checked==3?'yes':''}}" data-key='3' bindtap='checkBtn'>差评({{bad}})</view>
+   </view>
+   <view style='clear:both;'></view>
+</view>
+<view>
+<scroll-view scroll-y="true" style="height:94%;" >
+                
+                   <!-- 用户评价 -->
+            <view class="comment_box" wx:for="{{comments}}" wx:key="{{item.id}}">
+                <view class="comment">
+                  <view>
+                  <image style='width:60rpx;height:60rpx;background:#eee;border-radius:50%' src='{{item.headimgurl}}'></image>
+                  </view>
+                  <view style="flex:1;font-size:30rpx;color:#333;margin-top:-5px;padding-left:10px;">{{item.user_name}}</view>
+                  <view style="font-size:24rpx;color:#666;">{{item.time}}</view>
+                </view>
+                <view class='comment_content'>
+                {{item.content}}
+                </view>
+                <view class='comment_img'>
+                  <image wx:for="{{item.images}}" wx:for-item="url" src="{{url.url}}" data-src="{{url.url}}" catchtap="previewImage"  ></image>
+                </view>
+                <view class='comment_pj'>
+                      <text style="float: left;color: #666;">规格:{{item.size}}</text>
+                      <view wx:if="{{item.CommentType == 'GOOD'||item.CommentType ==4||item.CommentType ==5}}" >
+                          <image src='/images/icon_good_select.png' class='comments_icon'></image><text>好评</text>
+                      </view>
+                      <view wx:if="{{item.CommentType == 'NOTBAD'||item.CommentType ==3}}">
+                        <image src='/images/icon_middle_select.png' class='comments_icon'></image><text>中评</text>
+                      </view>
+                      <view wx:if="{{item.CommentType == 'BAD'||item.CommentType ==1||item.CommentType ==2}}">
+                        <image src='/images/icon_bad_select.png' class='comments_icon'></image><text>差评</text>
+                      </view>
+                </view>
+               <view class="tag" wx:if="{{item.reply.length > 1}}">
+                    <view class='noe'></view>掌柜回复：{{item.reply}}
+              </view>
+        </view> 
+          <view class="clear mt10" wx:if="{{!more}}" style='border:0;' >没有更多数据了!</view>
+    <block wx:else>
+    <!-- 显示加载 -->
+          <view style="display: flex;" wx:if="{{loading}}">
+                          <view class="spinner" style='margin:20px auto;' >
+                                  <view class="spinner-container container1">
+                                      <view class="circle1"></view>
+                                      <view class="circle2"></view>
+                                      <view class="circle3"></view>
+                                      <view class="circle4"></view>
+                                  </view>
+                                  <view class="spinner-container container2">
+                                      <view class="circle1"></view>
+                                      <view class="circle2"></view>
+                                      <view class="circle3"></view>
+                                      <view class="circle4"></view>
+                                  </view>
+                                  <view class="spinner-container container3">
+                                      <view class="circle1"></view>
+                                      <view class="circle2"></view>
+                                      <view class="circle3"></view>
+                                      <view class="circle4"></view>
+                                  </view>
+                        </view>
+          </view>
+      </block>
+                </scroll-view>
+                
+</view>

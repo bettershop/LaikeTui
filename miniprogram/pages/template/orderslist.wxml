@@ -1,0 +1,57 @@
+<import src="/pages/template/loading.wxml"/>
+<template name="ordersList">
+
+<view wx:if="{{ordersList.length>0}}" class="t">
+
+<view wx:for="{{ordersList}}" wx:key="unique" class="order-group mt-10">
+  	<view class="group-msg bg-fff pull-left">
+			<text class="order-num pull-left">订单编号：{{item.orderNum}}</text>
+  		<text class="pull-right order-status">{{item.orderStatus}}</text>
+  	</view>
+
+  	<view class="order-goods pull-left" bindtap="showOrderDetail" data-id="{{item.oid}}">
+			<view class="goods-img pull-left"><image src="{{item.img}}" mode="aspectFill"></image></view>
+			<view class="goods-info pull-right">
+				<view class="goods-title pull-left">{{item.name}}</view>
+				<view class="goods-price pull-right">￥{{item.gprice}}</view>
+				<view class="goods-prop pull-left">
+					<view wx:for="{{item.goodsProp}}" wx:key="unique" wx:for-item="prop" class="prop-item pull-left">
+					<view><text>{{prop.pname}}</text>:<text>{{prop.name}}</text></view>
+					</view>
+					<view class="goods-num pull-right">x{{item.goodsNum}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="clearfix"></view>
+
+		<view class="order-price bg-fff pull-left">
+			实付：<text>¥{{item.totalPrice}}</text>
+		</view>
+
+		<view class="user-option bg-fff clearfix">
+			<view style="padding-right: 24rpx;">			
+			<!-- <view class="btn">取消订单</view>
+			<view class="btn">去支付</view> -->
+	      <block wx:if="{{item.orderStatus == '待付款'}}">
+	      <view class="btn btn-danger" bindtap="toPay" data-id="{{item.oid}}">去支付</view>
+	      </block>
+	      <block wx:if="{{item.orderStatus == '待成团'}}">
+				<view class="btn btn-danger" bindtap="toGroupDetail" data-id="{{item.oid}}">邀请好友开团</view>
+	      </block>
+	      <block wx:if="{{item.orderStatus=='待收货'}}">
+	      	<view class="btn btn-danger" bindtap="confirmReceipt" data-id="{{item.oid}}">确认收货</view>
+	      </block>
+			</view>
+		</view>
+</view>
+<template is="loading" data="{{loading:loading}}"/>
+
+</view>
+<view wx:else class="no-orders">
+	<view class="text-center">
+		<image src="/resource/no-orders.png"></image>
+		<view class="mt-20">您没有相关订单</view>
+	</view>
+</view>
+  
+</template>

@@ -1,0 +1,124 @@
+/* pages/user/transfer1.wxss */
+/* pages/user/transfer.wxss */
+page{
+  background-color: rgb(240, 239, 245); 
+}
+.page{
+  width:95%;
+margin:20px auto;
+background-color:#fff;
+border-radius:25rpx;
+margin-bottom:10px;
+
+
+}
+
+.balance{
+  text-align: center;
+  padding:10px 20px;
+  font-size: 18px;
+}
+.bb{
+  text-align: center;
+  font-size: 12px;
+}
+.Withdraw{
+  padding: 10px 20px;
+}
+.user_mc{
+  margin-top:15px;
+font-size:32px;
+margin-left:35px;
+color: #fff;
+}
+.user_top{
+  height:320rpx;
+}
+.user_top_two{
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left:40px;
+  padding-bottom:10px;
+  padding-top:25px;
+
+}
+.user_top image{
+  width:80px;
+  height: 80px;
+  border-radius:100px;
+  border:2px solid #fff;
+}
+.cash{
+  border: 1px solid #ddd;
+  flex: 1;
+  margin-left: -1px;
+  font-size: 12px;
+  padding: 0 10px;
+  line-height: 30px;
+  height: 30px;
+}
+
+.tx{
+  /* background-color: #836FFF;   */
+  background-color: #48474c;  
+  color: #fff; 
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+}
+.Phone{
+  /* border: 1px solid #ddd;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius:5px; */
+  font-size: 28rpx;
+  width: 30%;
+  padding-left:2%;
+  margin-top:5px;
+
+}
+
+.section{
+ padding: 12px 0;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  font-size: 16px;
+  /* justify-content: center; */
+}
+.inp{
+  display:flex;
+  align-items:center;
+  width: 70%;
+  margin-top:2px;
+
+}
+.t_3{
+  margin-left: 15px;
+  font-size:13px;
+}
+.text{
+  width: 27%;
+  text-align:center;
+}
+.xt{
+  height:1px;
+width:87%;
+background:#eee;
+margin:auto;
+
+}
+.sj_btn{
+  background:#FF6347;
+color:#fff;
+
+font-size:26rpx;
+margin-left:250rpx;
+
+}

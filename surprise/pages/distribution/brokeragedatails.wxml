@@ -1,0 +1,25 @@
+<view class="num">
+  <view class="num-number">￥{{ datails.s_money }}</view>
+  <view class="num-title" wx:if="{{datails.status ==3}}">退款</view>
+  <view class="num-title" wx:if="{{datails.status !=3}}">待发放</view>
+</view>
+
+<view class="list">
+  <view class="list-title">返佣账户</view>
+  <view class="list-datails">{{ datails.user_name }}</view>
+</view>
+
+<view class="list">
+  <view class="list-title">商品名称</view>
+  <view class="list-datails p-name">{{ datails.p_name }}</view>
+</view>
+
+<view class="list">
+  <view class="list-title">订单编号</view>
+  <view class="list-datails">{{ datails.sNo }}</view>
+</view>
+
+<view class="list">
+  <view class="list-title">支付时间</view>
+  <view class="list-datails">{{ datails.addtime }}</view>
+</view>
