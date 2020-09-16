@@ -828,7 +828,6 @@ Page({
         var time = res.data.time; // 当前时间
         var form_id = that.data.form_id;
         var user_id = app.globalData.userInfo.openid; // 微信id
-
         // 调用信息发送
         that.notice(orderId, oid, f_coupon_money, user_id, form_id, f_pname);
         wx.showModal({
@@ -836,7 +835,6 @@ Page({
           showCancel: false,
           confirmText: "确定",
           success: function (res) {
-
             wx.redirectTo({
               url: '../order/detail?orderId=' + oid,
               success: function () {

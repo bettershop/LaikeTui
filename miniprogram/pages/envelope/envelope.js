@@ -1,5 +1,4 @@
 var app = getApp();
-//引入这个插件，使html内容自动转换成wxml内容
 var WxParse = require('../../wxParse/wxParse.js');
 Page({
   data: {

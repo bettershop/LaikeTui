@@ -45,7 +45,6 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        // success
         var notice = res.data.notice;
         var detail = res.data.notice[0].detail;
         WxParse.wxParse('detail', 'html', detail, that, 5);//处理规则的富文本框

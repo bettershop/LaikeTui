@@ -100,10 +100,6 @@ Page({
       imageUrl:that.data.article.Article_imgurl,
       path: '/pages/index/index?id?p_openid=' + app.globalData.userInfo.openid,
       success: function (res) {
-<<<<<<< HEAD
-=======
-        // 转发成功
->>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
         wx.request({
           url: app.d.ceshiUrl + '&action=envelope&m=share',
           method: 'post',
@@ -154,11 +150,7 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-<<<<<<< HEAD
        
-=======
-        
->>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
       },
       fail: function (e) {
         

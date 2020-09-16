@@ -867,12 +867,6 @@ class examineAction extends Action
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         //要求结果为字符串且输出到屏幕上
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-<<<<<<< HEAD
-=======
-        //设置证书
-        //使用证书：cert 与 key 分别属于两个.pem文件
-        //默认格式为PEM，可以注释
->>>>>>> 1894ee1f01ea588eca372a94de8a6d97e27f0403
         $cert = MO_LIB_DIR . '/cert/apiclient_cert.pem';
         $key = MO_LIB_DIR . '/cert/apiclient_key.pem';
 

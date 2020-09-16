@@ -235,10 +235,8 @@ Page({
       }
     })
   },
-  onShow: function () {
-    // 页面显示
+  onShow: function () {    
   },
-
   // 最新
   default: function (e) {
     var that = this;

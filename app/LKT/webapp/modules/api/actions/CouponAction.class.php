@@ -344,6 +344,7 @@ class CouponAction extends BaseAction
         $typestr = trim($cart_id, ','); // 移除两侧的逗号
         $typeArr = explode(',', $typestr); // 字符串打散为数组
         $zong = 0;
+        $arr = array();
 
         // 根据微信id,查询用户id
         $sql = "select user_id from lkt_user where wx_id = '$openid' ";
@@ -427,7 +428,6 @@ class CouponAction extends BaseAction
         }
         // 根据用户id,查询优惠券状态为(未使用),以优惠券过期时间顺序排列
         $sql = "select id,money,hid from lkt_coupon where user_id = '$user_id' and type = 0 order by expiry_time";
-
         $rr = $db->select($sql);
 
         if ($rr) {
