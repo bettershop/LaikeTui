@@ -70,7 +70,7 @@ class DefineConfigHandler extends IniConfigHandler
         {
 
             // categories starting without a period will be prepended to the key
-            if ($category{0} != '.')
+            if ($category[0] != '.')
             {
 
                 $category = $prefix . $category . '_';

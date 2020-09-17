@@ -41,9 +41,6 @@ Page({
       }
     })
     if (e.detail.errMsg == 'getUserInfo:ok') {
-      //获取成功设置状态
-      //设置用户信息本地存储
-      console.log(e.detail.userInfo)
       wx.setStorageSync('userInfo', e.detail.userInfo);
       var userInfo = e.detail.userInfo;
       var nickName = userInfo.nickName;
