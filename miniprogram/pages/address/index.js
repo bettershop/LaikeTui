@@ -78,8 +78,6 @@ Page({
     });
   },
 
-
-
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
@@ -151,7 +149,6 @@ Page({
     selectedAllStatus = !selectedAllStatus;
     // 购物车数据，关键是处理selected值
     var address = this.data.address;
-    // 遍历
     for (var i = 0; i < address.length; i++) {
       address[i].selected = selectedAllStatus;
     }
@@ -165,7 +162,6 @@ Page({
   // 地址管理
   delarr: function () {
     var that = this;
-    // 初始化toastStr字符串
     var toastStr = '';
     // 遍历取出已勾选的cid
     for (var i = 0; i < this.data.address.length; i++) {
@@ -335,8 +331,8 @@ Page({
       data: {
         openid: app.globalData.userInfo.openid,
       },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {// 设置请求的 header
+      method: 'POST', 
+      header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
