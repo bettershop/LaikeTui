@@ -138,7 +138,7 @@
   <scroll-view scroll-y="true" style="height: 93%;background: #eee;">
     <view class='coupon_box' wx:key="key" wx:for="{{list}}">
       <view class='coupon_left'>
-        <view style='margin-left:30px;font-size:35px;color:#ff6347;'>
+        <view style='margin-left:30px;font-size:25px;color:#ff6347;'>
           ￥
           <text style='font-size:50px;'>{{item.money}}</text>
           <view class='gs'></view>

@@ -1451,12 +1451,12 @@ INSERT INTO `lkt_product_class` VALUES ('7', '0', '精致鞋靴', '157190239316.
 INSERT INTO `lkt_product_class` VALUES ('18', '1', '收纳整理', '1571905532198.png', '', '1', '100', '2019-10-24 16:25:34', '0');
 INSERT INTO `lkt_product_class` VALUES ('19', '1', '厨房工具', '1571905819306.png', '', '1', '100', '2019-10-24 16:30:21', '0');
 INSERT INTO `lkt_product_class` VALUES ('20', '2', '手机', '1571905896705.png', '', '1', '100', '2019-10-24 16:31:38', '0');
-INSERT INTO `lkt_product_class` VALUES ('21', '2', '平板', '1571906215766.png', '', '1', '100', '2019-10-24 16:35:40', '0');
+INSERT INTO `lkt_product_class` VALUES ('21', '2', '平板', '1571905896705.png', '', '1', '100', '2019-10-24 16:35:40', '0');
 INSERT INTO `lkt_product_class` VALUES ('22', '3', '卧室家具', '1571906316856.jpeg', '', '1', '100', '2019-10-24 16:38:37', '0');
 INSERT INTO `lkt_product_class` VALUES ('23', '4', '厨房电器', '1571906401230.jpeg', '', '1', '100', '2019-10-24 16:40:06', '0');
 INSERT INTO `lkt_product_class` VALUES ('24', '4', '大家电', '1571906455925.jpeg', '', '1', '100', '2019-10-24 16:40:56', '0');
 INSERT INTO `lkt_product_class` VALUES ('25', '5', '美容护肤', '1571906498482.jpeg', '', '1', '100', '2019-10-24 16:41:39', '0');
-INSERT INTO `lkt_product_class` VALUES ('26', '6', '女装', '1571906576506.png', '', '1', '100', '2019-10-24 16:42:58', '0');
+INSERT INTO `lkt_product_class` VALUES ('26', '6', '女装', '1571906639760.png', '', '1', '100', '2019-10-24 16:42:58', '0');
 INSERT INTO `lkt_product_class` VALUES ('27', '6', '行李箱', '1571906612578.png', '', '1', '100', '2019-10-24 16:43:33', '0');
 INSERT INTO `lkt_product_class` VALUES ('28', '7', '女鞋', '1571906639760.png', '', '1', '100', '2019-10-24 16:44:00', '0');
 

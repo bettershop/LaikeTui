@@ -137,19 +137,14 @@ Page({
     //初始化的时候渲染wxSearchdata
     WxSearch.init(that, 43, this.data.hotwords);
     WxSearch.initMindKeys(['laiketui.com', '微信小程序开发', '微信开发', '微信小程序']);
-    // 定义右侧标题的 rpx 高度 和 px 高度
     var right_titleRpxHeight = 60;
     var right_titleHeight;
-    // 定义右侧单个商品的 rpx 高度 和 px 高度
     var right_contentRpxHeight = 200;
     var right_contentHeight;
-    // 定义左侧单个tab的 rpx 高度 和 px 高度
     var left_titleRpxHeight = 140;
     var left_titleHeight;
-    //  获取可视区屏幕高度
     wx.getSystemInfo({
       success: function (res) {
-        // percent 为当前设备1rpx对应的px值
         var percent = res.windowWidth / 1200;
         that.setData({
           right_titleHeight: Number(right_titleRpxHeight * percent),

@@ -1,5 +1,8 @@
+//获取应用实例  
 var app = getApp();
 var util = require('../../utils/util.js')
+
+//引入这个插件，使html内容自动转换成wxml内容
 var WxParse = require('../../wxParse/wxParse.js');
 Page({
   data: {
@@ -96,37 +99,35 @@ Page({
   },
   // 传值
   onLoad: function (option) {
+    console.log(option)
+    var scene = decodeURIComponent(option.scene);
     var that = this;
-    if(option){
-      if(scene in option){
-        var scene = decodeURIComponent(option.scene);
-        if (scene != 'undefined' && scene.length > 1 && scene != '') {
-          option = scene;
-        }
-      }
+    if (scene != 'undefined' && scene.length > 1 && scene != '') {
+      option = scene;
     }
-    
     that.initNavHeight();
-    if (option && option.referee_openid && option.referee_openid != '') {
+    if (option.referee_openid != '') {
       app.globalData.userInfo['referee_openid'] = option.referee_openid;
     } else {
       app.globalData.userInfo['referee_openid'] = '';
     }
     that.setData({
-      productId: option?option.productId:'',
-      userid: option ? option.userid : false,
-      choujiangid: option ? option.choujiangid : '',
-      type1: option ? option.type1 : '',
-      role: option ? option.role : '',
-      size: option ? option.size : '',
-      earn: option ? option.earn : false,
+      productId: option.productId,
+      userid: option.userid ? option.userid : false,
+      choujiangid: option.choujiangid ? option.choujiangid : '',
+      type1: option.type1 ? option.type1 : '',//判断是抽奖还是其他活动
+      role: option.role ? option.role : '',
+      size: option.size ? option.size : '',
+      earn: option.earn ? option.earn : false,
+      // cart: app.globalData.userInfo.cart ? app.globalData.userInfo.cart:0//购物车数量
     });
     //显示数据
     that.loadProductDetail();
   },
   // 属性选择
   onShow: function () {
-    
+    var that = this;
+
   },
   //接受formid
   getUserformid: function (e) {
@@ -151,15 +152,17 @@ Page({
     var that = this;
     var choujiangid = that.data.choujiangid;
     var openid = app.globalData.userInfo.openid;
+    
     var bgcolor = app.d.bgcolor;
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: bgcolor, // 页面标题为路由参数
+      backgroundColor: bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
       }
     });
+    console.log(that.data.userid)
     wx.request({
       url: app.d.ceshiUrl + '&action=product&m=index',
       method: 'post',
@@ -897,27 +900,33 @@ Page({
   //点击保存到相册
   baocun: function () {
     var that = this;
+
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.writePhotosAlbum']) {
+
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
             success() {
               console.log('授权成功')
             },
             fail: function (res) {
+
               wx.openSetting({
                 success: (res) => {
+
                   res.authSetting = {
                     "scope.userInfo": true,
                     "scope.userLocation": true,
                     "scope.writePhotosAlbum": true
                   }
+
                 }
               })
             }
           })
         } else {
+
         }
       }
     })
@@ -926,6 +935,7 @@ Page({
       url: that.data.imagePath,
       success: function (res) {
         var tempFilePath = res.tempFilePath;
+
         wx.saveImageToPhotosAlbum({
           filePath: tempFilePath,
           success(res) {
