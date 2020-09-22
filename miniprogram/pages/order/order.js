@@ -131,7 +131,7 @@ Page({
     this.loadOrderList();
   },
   onShow: function () {
-    //this.loadOrderList();
+    
   },
   // 获取订单
   loadOrderList: function () {
