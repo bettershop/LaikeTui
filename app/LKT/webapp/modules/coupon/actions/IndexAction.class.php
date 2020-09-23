@@ -85,7 +85,7 @@ class IndexAction extends Action {
             $list = $r;
         }
 
-        $url = "index.php?module=finance&action=Index&activity_type=".urlencode($activity_type)."&name=".urlencode($name)."&pagesize=".urlencode($pagesize);
+        $url = "index.php?module=coupon&action=Index&activity_type=".urlencode($activity_type)."&name=".urlencode($name)."&pagesize=".urlencode($pagesize);
         $pages_show = $pager->multipage($url,$total,$page,$pagesize,$start,$para = '');
 
         $request->setAttribute("activity_type",$activity_type);
