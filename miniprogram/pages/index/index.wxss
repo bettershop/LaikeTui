@@ -250,7 +250,7 @@ swiper {
   padding-top: 15rpx;
 }
 .cont {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   padding-top: 10rpx;
 }
@@ -277,6 +277,7 @@ swiper {
   width:46%;
   margin-left:20rpx;
   font-size:13px;
+  border-radius: 5px;
 }
 .cont_image {
   width: 100%;

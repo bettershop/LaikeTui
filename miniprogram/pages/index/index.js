@@ -34,7 +34,6 @@ Page({
   //下拉事件
   onPullDownRefresh: function () {
     var that = this;
-    console.log('下拉');
     this.loadProductDetail();
   },
   current1Change: function (e) {

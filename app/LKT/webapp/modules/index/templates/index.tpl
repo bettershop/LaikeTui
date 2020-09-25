@@ -519,10 +519,25 @@
                                     </ul>
                                 </div>
                                 <div class="news">
-                                    <div class="realDivTitle" style="border-bottom: 2px solid #eee;">授权信息(此处代码可自行删除)</div>
-                                    <ul style="height: 120px;overflow: auto;">
-                                        {$authorization}
-                                    </ul>
+                                    <div class="realDivTitle" style="border-bottom: 2px solid #eee;">武林秘籍</div>
+
+                                    <div style="padding:15px;">
+                                    <a href="https://www.laiketui.com/help" target="_blank">
+                                                开发文档
+                                            </a>|
+
+                                            <a href="https://gitee.com/laiketui/open/issues" target="_blank">
+                                                BUG提交
+                                            </a>|
+
+                                        <a href="http://p.qiao.baidu.com/cps/chat?siteId=15106774&userId=30631139&siteToken=32a2acb5b7f7fcbeb81f3e3a043379b0" target="_blank">
+                                            定制开发
+                                        </a><br/>
+QQ群：<a href="//shang.qq.com/wpa/qunwpa?idkey=e608e87cf657e7f0d0a6fe85b127784efd373f6e1e18d21b590af85f2612df55" target="_blank" rel="noopener"> 631252151</a> | <a href="//shang.qq.com/wpa/qunwpa?idkey=2bc690569245606dcfbf7e67a9abcd8086cd825b4d946bb122ba3b091044a6e4" target="_blank" rel="noopener"> 615981686</a>
+                                        LaiKeTui商城系统·专注用户体验
+                                    </div>
+
+
                                 </div>
 
                                 <div class="tjtDivIn" class="clearfix"></div>

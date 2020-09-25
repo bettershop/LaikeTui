@@ -164,27 +164,8 @@ class SessionStorage extends Storage
     public function over ()
     {
         if (!isset($_SESSION['LAI_KE'])) {
-           if(function_exists('curl_init')){
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'http://110.laiketui.com/api.php');
-                curl_setopt($curl, CURLOPT_HEADER, 1);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_REFERER, $_SERVER['HTTP_HOST']);
-                $data = curl_exec($curl);
-                if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == '200') {
-                    $headerSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-                    $header = substr($data, 0, $headerSize);
-                    $body = substr($data, $headerSize);
-                    $_SESSION['LAI_KE'] = $body;
-                 }           
-                curl_close($curl);
-            }else{
-                echo 'not function curl_init';
-                exit;
-            }
+
         }
-        
-        
 
     }
 

@@ -23,7 +23,7 @@ class delAction extends Action {
         $sql = "update lkt_coupon_activity set recycle = 1 where id = '$id' ";
         $db->update($sql);
 
-        $db->admin_record($admin_id,' 删除商品id为 '.$id.' 的信息',3);
+        $db->admin_record($admin_id,' 删除优惠券id为 '.$id.' 的信息',3);
 
         echo 1;
         return;
