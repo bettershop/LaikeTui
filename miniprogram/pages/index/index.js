@@ -1,6 +1,6 @@
 var app = getApp();
 var zi = 0;
-var cont_time = 0; //首页tab点击
+var cont_time = 0; 
 var util = require('../../utils/util.js')
 Page({
   data: {

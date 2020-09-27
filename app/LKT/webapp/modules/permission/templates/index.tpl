@@ -8,15 +8,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 {php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
-
 <title></title>
-
 </head>
 <body>
-
-
-
-
 <article class="page-404 minWP text-c">
     <p class="error-title">
         <span class="va-m"> 无权限</span>
@@ -28,6 +22,5 @@
         <a href="index.php?module=index" class="c-primary ml-20">去首页 &gt;</a>
     </p>
 </article>
-
 </body>
 </html>
