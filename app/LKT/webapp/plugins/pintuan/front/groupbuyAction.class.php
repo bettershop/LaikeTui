@@ -1299,8 +1299,8 @@ class groupbuyAction extends PluginAction
     {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $openid = trim($request->getParameter('user_id'));  //--
-        $form_id = trim($request->getParameter('form_id'));//--
+        $openid = trim($request->getParameter('user_id'));  
+        $form_id = trim($request->getParameter('form_id'));
         $page = trim($request->getParameter('page'));
         $f_price = trim($request->getParameter('price'));
         $f_price = $f_price . '元';
@@ -1344,9 +1344,9 @@ class groupbuyAction extends PluginAction
     {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $openid = trim($request->getParameter('user_id'));  //--
-        $form_id = trim($request->getParameter('form_id'));//--
-        $page = trim($request->getParameter('page'));      //--
+        $openid = trim($request->getParameter('user_id'));  
+        $form_id = trim($request->getParameter('form_id'));
+        $page = trim($request->getParameter('page'));      
         $f_price = trim($request->getParameter('price'));
         $f_price = $f_price . '元';
         $f_sNo = trim($request->getParameter('order_sn'));

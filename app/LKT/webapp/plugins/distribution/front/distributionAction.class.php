@@ -49,8 +49,8 @@ class distributionAction extends PluginAction
                 $pid = $v->id;
                 $sql_ttt = "select price,yprice from lkt_configure where pid ='$pid' order by price asc ";
                 $r_ttt = $db->select($sql_ttt);
-                $price = $r_ttt[0]->yprice;
-                $price_yh = $r_ttt[0]->price;
+                $price = $r_ttt[0]->price;
+                $price_yh = $r_ttt[0]->yprice;
 
                 $attr = unserialize($v->initial);
                 $attr = array_values($attr);

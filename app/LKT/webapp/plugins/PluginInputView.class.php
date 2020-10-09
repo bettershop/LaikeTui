@@ -27,7 +27,7 @@ class PluginInputView {
 
     //默认执行方法
     public function execute() {
-        echo "hello view";
+        echo "hello PluginInputView";
         return ;
     }
 
