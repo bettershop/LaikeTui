@@ -16,13 +16,9 @@ class IndexAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $uploadImg = $this->getContext()->getStorage()->read('uploadImg');
-        // 导出
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:10;
-        // 每页显示多少条数据
         $page = $request -> getParameter('page');
-
-        // 页码
         if($page){
             $start = ($page-1)*$pagesize;
         }else{
@@ -38,7 +34,6 @@ class IndexAction extends Action {
         }
         $pager = new ShowPager($total,$pagesize,$page);
 
-        // 查询新闻分类表，根据sort顺序排列
         $sql = "select * from lkt_brand_class where recycle = 0 order by sort asc, brand_time desc limit $start,$pagesize ";
         $r = $db->select($sql);
 

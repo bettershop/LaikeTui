@@ -42,7 +42,6 @@ class shipmentAction extends Action {
         $total = count($r0);
 
         $sql1 = "select a.product_title,a.status,c.id,c.pid,c.price,c.attribute,c.total_num,b.flowing_num,b.add_date from lkt_stock as b left join lkt_product_list as a on b.product_id = a.id left join lkt_configure as c on b.attribute_id = c.id where $condition order by b.add_date desc limit $start,$pagesize";
-        // print_r($sql1);die;
         $r1 = $db->select($sql1);
         if($r1){
             foreach ($r1 as $k => $v){

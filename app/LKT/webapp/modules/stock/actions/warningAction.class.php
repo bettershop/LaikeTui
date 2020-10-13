@@ -58,7 +58,6 @@ class warningAction extends Action {
 
         $sql1 = "select a.product_title,a.status,c.id,c.pid,c.price,c.attribute,c.total_num,c.num,b.add_date from lkt_configure as c left join lkt_product_list as a on c.pid = a.id left join lkt_stock as b on c.id = b.attribute_id where $condition order by a.sort,c.id limit $start,$pagesize";
         $r1 = $db->select($sql1);
-          // print_r($sql1);die;
         if($r1){
             foreach ($r1 as $k => $v){
                 $attribute = unserialize($v->attribute);
