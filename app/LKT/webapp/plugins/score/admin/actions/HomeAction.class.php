@@ -55,7 +55,7 @@ class HomeAction extends PluginAction
         $list = $db->select($sql);
 
         $pager = new ShowPager($total, $pagesize, $page);
-        $url = "index.php?module=pi&p=distribution&c=Home&username=$username&sNo=$sNo&pagesize=" . urlencode($pagesize);
+        $url = "index.php?module=pi&p=score&c=Home&username=$username&sNo=$sNo&pagesize=" . urlencode($pagesize);
         $pages_show = $pager->multipage($url, $total, $page, $pagesize, $start, $para = '');
         $request->setAttribute("list", $list);
         $request->setAttribute("sNo", $sNo);
@@ -75,7 +75,7 @@ class HomeAction extends PluginAction
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('删除成功！');" .
-                "location.href='index.php?module=pi&p=distribution&c=Home';</script>";
+                "location.href='index.php?module=pi&p=score&c=Home';</script>";
             exit();
         }
     }
