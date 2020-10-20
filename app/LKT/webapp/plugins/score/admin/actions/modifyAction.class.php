@@ -13,10 +13,7 @@ class modifyAction extends PluginAction
        return View::INPUT;
     }
 
-    public function ajaxmodify()
-    {
-        
-    }
+    
     
     public function getRequestMethods()
     {

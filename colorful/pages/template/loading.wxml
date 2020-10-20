@@ -1,9 +1,0 @@
-<template name="loading">
-    <view class="loading text-center">
-        <block wx:if="{{loading}}">
-            <image src="/images/group/loading-black.svg"></image>
-            <view class="">正在加载</view>
-        </block>
-        <view class="no-data" wx:else>没有更多数据了</view>
-    </view>
-</template>
