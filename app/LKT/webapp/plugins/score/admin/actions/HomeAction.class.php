@@ -15,7 +15,6 @@ class HomeAction extends PluginAction
     public function getDefaultView()
     {
 
-        $request = $this->getContext()->getRequest();
         return View::INPUT;
     }
 
