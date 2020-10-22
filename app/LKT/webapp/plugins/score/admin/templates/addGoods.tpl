@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="style/js/H-ui.min.js"></script>
 	<script src="style/js/vue.min.js"></script>
 	
-	<title>添加分销商品</title>
+	<title>添加积分商品</title>
 
 	
 	{literal}
@@ -239,7 +239,7 @@
 </div>
 <div id="app">
 	<nav class="breadcrumb">
-		<a href="index.php?module=pi&p=distribution&c=Home" >分销管理</a> <span class="c-gray en">&gt;</span>
+		<a href="index.php?module=pi&p=score&c=Home" >积分商城</a> <span class="c-gray en">&gt;</span>
 		添加商品
 	</nav>
 
@@ -253,7 +253,7 @@
 				<div class="row cl">
 					<div class="col-12 row" style="margin-bottom: 14px;">
 						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
-							<span style="color: #FF0404;">*</span>分销商品：
+							<span style="color: #FF0404;">*</span>积分商品：
 						</label>
 
 						<div class="formControls col-10" style="display: flex;">
