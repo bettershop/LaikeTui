@@ -292,7 +292,7 @@
 										<tr>
 											<th><input type="checkbox" id="checkbox-1" style="visibility: initial;" @click="checkall" ></th>
 											<th>商品名称</th>
-											<th>商品id</th>
+											<th>商品ID</th>
 											<th>价格</th>
 											<th>库存</th>
 										</tr>
@@ -353,7 +353,7 @@
 									<thead>
 										<tr>
 											<th style="text-align: center;">商品名称</th>
-											<th style="text-align: center;">商品id</th>
+											<th style="text-align: center;">商品ID</th>
 											<th style="text-align: center;">价格</th>
 											<th style="text-align: center;">库存</th>
 											<th style="text-align: center;">操作</th>
@@ -535,7 +535,7 @@
 				getCommodityList(){
 					let vm = this
 					$.ajax({
-						url: "index.php?module=pi&p=distribution&c=addGoods&m=pro_query&page=1",
+						url: "index.php?module=pi&p=score&c=addGoods&m=pro_query&page=1",
 						async: false,
 						success: function (res) {
 							res = JSON.parse(res)
@@ -569,7 +569,7 @@
 					}
 
 					$.ajax({
-						url: "index.php?module=pi&p=distribution&c=addGoods&m=pro_query&&page=1",
+						url: "index.php?module=pi&p=score&c=addGoods&m=pro_query&&page=1",
 						async: false,
 						method: 'POST',
 						data: data,
