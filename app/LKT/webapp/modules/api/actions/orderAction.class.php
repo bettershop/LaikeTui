@@ -557,7 +557,7 @@ class orderAction extends BaseAction {
                     }
                     $arr = (array)$values;
                     // 根据产品id,查询产品列表 (产品图片)
-                    $sql = "select img,product_title from lkt_product_list AS a LEFT JOIN lkt_configure AS c ON a.id = c.pid where a.id = $p_id AND c.id= '$sid' ";
+                    $sql = "select imgurl as img,product_title from lkt_product_list AS a LEFT JOIN lkt_configure AS c ON a.id = c.pid where a.id = $p_id AND c.id= '$sid' ";
                     $rrr = $db->select($sql);
                     $url = $img.$rrr[0]->img; // 拼图片路径
                     $title = $rrr[0]->product_title;
