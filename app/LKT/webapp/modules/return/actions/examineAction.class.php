@@ -384,7 +384,6 @@ class examineAction extends Action
                             $consumer_money = $price;
                         }
                         //修改用户消费金
-                        // $consumer_money = number_format($consumer_money / $total * $z_price, 2);
                         $sql = "update lkt_user set consumer_money = consumer_money + '$consumer_money' where user_id = '$user_id'";
                         $res = $db->update($sql);
                         //添加日志
@@ -600,7 +599,6 @@ class examineAction extends Action
 
                 // 根据订单号,修改订单详情状态
                 $sql_d = "update lkt_order_details set r_status = '1',r_content = '$text' where r_sNo = '$sNo' ";
-                // print_r($sql_d);die;
                 $res2 = $db->update($sql_d);
 
 
