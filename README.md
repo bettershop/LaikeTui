@@ -17,6 +17,9 @@
 ，群二：615981686  [点击加入](http://shang.qq.com/wpa/qunwpa?idkey=2bc690569245606dcfbf7e67a9abcd8086cd825b4d946bb122ba3b091044a6e4)
 ，群三：340645969  [点击加入](http://shang.qq.com/wpa/qunwpa?idkey=427109459854834986069455266c718998467b63c78f455940d6291de01a7d0b)
 
+### 全场景快速体验 PC商城+IOS+Android+各端小程序+H5，请访问下列地址：
+
+- [http://www.laiketui.com/action/](http://www.laiketui.com/action/)
 
 ### 小程序端截图
 
@@ -31,13 +34,10 @@
 | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143110_9cda6231_2029865.png "在这里输入图片标题") | ![输入图片说明](https://images.gitee.com/uploads/images/2019/0514/143318_7e7574f6_2029865.png "在这里输入图片标题") |
 
-### 最新版体验后台
-
-- [http://www.laiketui.com/action/](http://www.laiketui.com/action/)
 
 ### 软件架构
 
-- PHP5.6+、 MYSQL5.5+、Uniapp、原生小程序、原生IOS、原生Android、 自主研发框架（古典式开发框架，附30分钟快速入门教程）
+- PHP5.6+、 MYSQL5.5+、Uniapp、原生小程序、原生IOS、原生Android、 自主研发框架（极速开发框架，附30分钟快速入门教程）
 
 ### 安装教程、开发文档、操作手册请进入官网查询
 
@@ -89,5 +89,6 @@
 ### 生鲜电商APP+H5+小程序版本截图（新版商业皮肤）
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0220/170134_19dbc645_2029865.png "水果.png")
 
-### 相关思维导图
-![前端](https://images.gitee.com/uploads/images/2018/1101/171831_05d3ecb6_2029865.jpeg "来客小程序.jpg")
+### PC端截图（平台自营+商家入驻）
+![输入图片说明](https://images.gitee.com/uploads/images/2020/1028/153642_4638f4ac_2029865.png "2020080506311086.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/1028/153825_36541a46_2029865.png "psfe50bd6222200d16-8d2c-4b0a-b4be-88b4f5b4d4d7.png")

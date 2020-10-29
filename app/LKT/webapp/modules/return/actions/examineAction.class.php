@@ -289,7 +289,6 @@ class examineAction extends Action
                             $rr = $db->insert($sqlldr);
                             if ($rr < 1) {
                                 $db->rollback();
-                                // echo 'rollback1';
                                 echo 0;
                                 exit;
                             }
