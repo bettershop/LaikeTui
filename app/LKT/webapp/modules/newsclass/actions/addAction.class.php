@@ -22,21 +22,9 @@ class addAction extends Action {
 
 		$db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 获取分类名称和排序号
         $cat_name = addslashes(trim($request->getParameter('cat_name')));
         $sort = floatval(trim($request->getParameter('sort')));
-		//检查分类名称是否重复
-        $sql = "select * from lkt_news_class where cat_name = '$cat_name'";
-		$r = $db->select($sql);
-		// 如果有数据 并且 数据条数大于0
-        if ($r && count($r) > 0) {
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('新闻分类 {$cat_name} 已经存在，请选用其他名称！');" .
-                "</script>";
-            return $this->getDefaultView();
-        }
-
+		
 		//添加分类
 		$sql = "insert into lkt_news_class(cat_name,sort,add_date) "
             ."values('$cat_name','$sort',CURRENT_TIMESTAMP)";
