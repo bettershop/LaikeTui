@@ -25,7 +25,6 @@ class addAction extends Action {
         $cat_name = addslashes(trim($request->getParameter('cat_name')));
         $sort = floatval(trim($request->getParameter('sort')));
 		
-		//添加分类
 		$sql = "insert into lkt_news_class(cat_name,sort,add_date) "
             ."values('$cat_name','$sort',CURRENT_TIMESTAMP)";
 		$r = $db->insert($sql);

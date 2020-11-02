@@ -19,15 +19,11 @@ class viewAction extends Action {
         $request = $this->getContext()->getRequest();
         // 接收信息
         $id = intval($request->getParameter("id"));
-        
-        // 根据新闻id，查询新闻标题
         $sql ="select Article_title a from lkt_article where Article_id = $id";
         $r = $db->select($sql);
         $Article_title = $r[0]->a;
-        // 根据新闻id，查询分享列表
         $sql = "select * from lkt_share where Article_id = $id";
         $rr = $db->select($sql);
-        // 根据新闻id，查询总条数
         $sql2 = "select count(id) c from lkt_share where Article_id = $id";
         $rrr = $db->select($sql2);
         $total = $rrr[0]->c;
