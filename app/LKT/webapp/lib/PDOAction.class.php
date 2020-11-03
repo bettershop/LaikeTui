@@ -70,6 +70,14 @@ class PDOAction {
         return false;
     }
 
+    // 管理员记录
+    public function admin_record($admin_name,$event,$type){
+        $event = $admin_name . $event;
+        $sql = "insert into lkt_admin_record(admin_name,event,type,add_date) values (?,?,?,CURRENT_TIMESTAMP)";
+        $this->query($sql,array($admin_name,$event,$type));
+        return;
+    }
+
     //开始事务
     public function beginTransaction()
     {
