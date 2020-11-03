@@ -61,12 +61,12 @@ class IndexAction extends Action {
 
         // 将数据存储起来
 		$sql = "select * from lkt_config where id = '1' ";
-        $r2 = $db->getOne($sql);
+        $r2 = $db->selectOne($sql);
         $uploadImg = "";
 		if($r2){
-			 $uploadImg = $r2['uploadImg']; // 图片上传位置
-			 
+			 $uploadImg = $r2->uploadImg; // 图片上传位置
 		}
+		
         $login_time = time();
         // 设置该用户为登录状态
         $this->getContext()->getUser()->setAuthenticated(true);

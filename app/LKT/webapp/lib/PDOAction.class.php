@@ -70,6 +70,25 @@ class PDOAction {
         return false;
     }
 
+
+    //读取多行记录,并返回对象
+    public function select($sql, $params = array())
+    {
+        $pdo = $this->dbh->prepare($sql);
+        $pdo->execute($params);
+        $data = $pdo->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    }
+
+    //读取单行记录,并返回对象
+    public function selectOne($sql, $params = array())
+    {
+        $pdo = $this->dbh->prepare($sql);
+        $pdo->execute($params);
+        $data = $pdo->fetch(PDO::FETCH_OBJ);
+        return $data;
+    }
+
     // 管理员记录
     public function admin_record($admin_name,$event,$type){
         $event = $admin_name . $event;
