@@ -15,16 +15,10 @@ class delAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
-        // 接收信息
-        $id = intval($request->getParameter('id')); // 活动id
-
-        // 根据产品id，删除产品信息
+        $id = intval($request->getParameter('id'));
         $sql = "update lkt_coupon_activity set recycle = 1 where id = '$id' ";
         $db->update($sql);
-
         $db->admin_record($admin_id,' 删除优惠券id为 '.$id.' 的信息',3);
-
         echo 1;
         return;
     }
