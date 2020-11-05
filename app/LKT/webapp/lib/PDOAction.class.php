@@ -70,6 +70,23 @@ class PDOAction {
         return false;
     }
 
+    /**
+     * 更新、删除数据
+     * @params $sql string 参数用 ? 代替
+     * @params $params array 参数
+     * @return 成功则返回受影响的行数 失败返回false
+     */
+    public function update($sql, $params = array())
+    {
+        $pdo = $this->dbh->prepare($sql);
+        $result = $pdo->execute($params);
+        if ($result) {
+            return $pdo->rowCount();
+        }
+
+        return false;
+    }
+
 
     //读取多行记录,并返回对象
     public function select($sql, $params = array())
