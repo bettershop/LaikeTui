@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "我的团",
-  "usingComponents": {
-    "pop": "../logins/logins"
-  }
-}
