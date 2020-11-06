@@ -1,0 +1,17 @@
+<!--pages/notice/index.wxml-->
+<view class="function" style='background:#fff'>
+  <view>
+    <view style='font-size:27px;text-align:left;margin:10px;'>
+      {{notice[0].name}}
+    </view>
+    <view style='font-size:10px;width:30%;float:right;margin:10px 10px 20px;'>{{notice[0].time}} </view>
+  </view>
+  <view style='clear:both;'>
+  </view>
+     <view style="height:50%;margin-bottom:10rpx;max-height:100rpx;">
+      <import src="../../wxParse/wxParse.wxml" />
+      <view class="wxParse" style='padding:1% 5% 3% 5%;'>
+        <template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+      </view>
+    </view>
+</view>

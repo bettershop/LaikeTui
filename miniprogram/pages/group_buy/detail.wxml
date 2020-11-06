@@ -1,0 +1,332 @@
+<!--pages/goods/detail.wxml-->
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner">
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+  <import src="/pages/template/toast.wxml" />
+  <import src="../../wxParse/wxParse.wxml" />
+
+  <scroll-view scroll-y="true" class="scroll-view-y" scroll-with-animation="true" scroll-top="{{scrollTop}}" lower-threshold="50" bindscrolltolower="scrolltolower" style="height: {{windowHeight-50}}px;">
+
+    <swiper class="swiper" autoplay="true" interval="5000" duration="1000">
+      <block wx:for="{{itemData.images}}" wx:for-index="index">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='xstg_box'>
+      <image class='img' src='../../images/group/xstg_bg.png' mode="widthFix"></image>
+      <view class='xstg_text'>
+        <text>限时团购</text>
+      </view>
+      <view class='xstg_text_two'>
+        <view style='margin:0 0 0px 15px;font-size:27rpx;'>距离结束仅剩</view>
+        <view class='sj'>{{day}}</view> 天
+        <view class='sj'>{{hour}}</view> 时
+        <view class='sj'>{{minute}}</view> 分
+        <view view class='sj'>{{secStr}}</view> 秒
+      </view>
+    </view>
+    <view class='commodity_box'>
+      <view class='commodity_text'>
+        <view style='font-size:30rpx;color:#333;'>{{itemData.pro_name}}</view>
+        <view style='font-size:36rpx;color:#eb3737;margin:15rpx 0;font-weight:700'>
+          <text style='color:#333;font-weight:normal;'>{{itemData.man_num}}人团： </text> ￥ {{gprice}}
+          <text style='float:right;font-size:30rpx;color:#666;font-weight:normal;line-height:26px;text-decoration:line-through;'>原价：{{itemData.market_price}}</text>
+        </view>
+        <view style='font-size:22rpx;color:#999;letter-spacing:1px;'>
+        </view>
+      </view>
+      <view class='commodity_price'>
+        <view class='commodity_price_text'>
+          <view style='font-size:24rpx;color:#333;padding-bottom:10px;'>
+            以下小伙伴正在发起拼团：
+          </view>
+          <block wx:for="{{groupList}}" wx:key="unique">
+            <view class='price_text_two' data-id="{{item.ptcode}}" style='height:120rpx;border-bottom:3rpx white solid;display:flex;flex-direction:row;align-items:center;' bindtap="joinGroup">
+              <view style='float:left;'>
+                <image src="{{item.headimgurl}}" mode="aspectFill" style='width:88rpx;height:88rpx;background:#ddd;border-radius:50%;margin-right:30rpx;'></image>
+              </view>
+              <view style='float:left;width:200rpx;display:flex;flex-direction:column;justify-content:space-between;'>
+                <view>{{item.user_name}}</view>
+                <view class="left-time" style='font-size: 22rpx;color: #5d5d5d;'>剩余{{item.leftTimeStr}}</view>
+              </view>
+              <view style='float:left;line-height:47rpx;width:180rpx;'>还差
+                <text style='color:#eb3737;font-size:30rpx;font-weight:700'>{{itemData.man_num-item.ptnumber}}</text>人成团</view>
+              <view class="pull-right btn" style='margin-left:60rpx;'>去参团</view>
+              <view style='clear:both;'></view>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class='collage_fs_box'>
+        <view class='collage_fs_text'>拼团玩法：</view>
+        <view class='collage_fs_tg_bt_box'>
+          <view class='collage_fs_tg ys' style='line-height:150%;'>支 付 开 团 或 参 团</view>
+          <text class='jiantou'>></text>
+          <view class='collage_fs_tg' style='line-height:150%;'>邀 请 好 友 参 团</view>
+          <text class='jiantou'>></text>
+          <view class='collage_fs_tg' style='line-height:150%;'>达 到 拼 团 人 数</view>
+          <text class='jiantou'>></text>
+          <view class='collage_fs_tg' style='line-height:150%;'>组 团 成 功 等 待 发 货</view>
+        </view>
+      </view>
+      <view class='comment_box'>
+        <view class='comment_bt'>
+          <view style='float:left;font-size:26rpx;color:#333;'>宝贝评论</view>
+          <view style='float:right;font-size:22rpx;color:#eb3737;margin-top:2px;' bindtap="powerDrawer" data-statu="open">查看全部 ></view>
+          <view style='clear:both;'></view>
+        </view>
+        <view class='comment_text'>
+          <view class='comment_text_bq' bindtap="powerDrawer">好评({{comnum.good}})</view>
+          <view class='comment_text_bq' style='margin-left: 20rpx;' bindtap="powerDrawer">中评({{comnum.notbad}})</view>
+          <view class='comment_text_bq' style='margin-left: 20rpx;' bindtap="powerDrawer">差评({{comnum.bad}})</view>
+          <view style='clear:both;'></view>
+          <view class='comment_text_pl'>
+            <!-- 用户评价 -->
+            <view class="comment_box" wx:for="{{comments}}" wx:key="{{item.id}}">
+              <view class="comment">
+                <view>
+                  <image style='width:60rpx;height:60rpx;background:#eee;border-radius:50%' src='{{item.headimgurl}}'></image>
+                </view>
+                <view style="flex:1;font-size:30rpx;color:#333;margin-top:-5px;padding-left:10px;">{{item.user_name}}</view>
+                <view style="font-size:24rpx;color:#666;">{{item.time}}</view>
+              </view>
+              <view class='comment_content' style='color:#000;'>
+                {{item.content}}
+              </view>
+              <view class='comment_img'>
+                <image wx:for="{{item.images}}" wx:for-item="url" src="{{url.url}}" data-src="{{url.url}}" catchtap="previewImage"></image>
+              </view>
+              <view class='comment_pj'>
+                <text style="float: left;color: #666;">规格:{{item.size}}</text>
+                <view wx:if="{{item.CommentType == 'GOOD'}}">
+                  <image src='/images/icon_good_select.png' class='comments_icon'></image>
+                  <text>好评</text>
+                </view>
+                <view wx:if="{{item.CommentType == 'NOTBAD'}}">
+                  <image src='/images/icon_middle_select.png' class='comments_icon'></image>
+                  <text>中评</text>
+                </view>
+                <view wx:if="{{item.CommentType == 'BAD'}}">
+                  <image src='/images/icon_bad_select.png' class='comments_icon'></image>
+                  <text>差评</text>
+                </view>
+              </view>
+
+              <view class="tag" wx:if="{{item.reply.length > 1}}">
+                <view class='noe'></view>掌柜回复：{{item.reply}}
+              </view>
+
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <view class='commodity_details_box'>
+      <view class='commodity_details'>
+        <view class='details_zxt xxt'></view>
+        商品详情
+        <view class='details_yxt xxt'></view>
+      </view>
+      <view style='height:800rpx;'>
+        <scroll-view scroll-y="true" style="height:750rpx;width:96%;margin:0 auto;">
+          <import src="../../wxParse/wxParse.wxml" />
+          <view class="wxParse">
+            <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+    <view class='activity_box'>
+
+      <scroll-view scroll-y="true" style="height:750rpx;width:96%;margin:0 auto;">
+        <import src="../../wxParse/wxParse.wxml" />
+        <view class="wxParse">
+          <template is="wxParse" data="{{wxParseData:rule.nodes}}" />
+        </view>
+      </scroll-view>
+    </view>
+
+  </scroll-view>
+
+  <view class='foot_box' style='display:flex;flex-direction:row;'>
+    <view style='width: 40%;display:flex;flex-direction:row;'>
+      <view class='foot_tb' style='border-right:1px solid #eee;width:150rpx;' bindtap='toIndex'>
+        <image src='../../images/icons/home.png' style='width:44rpx;height:44rpx;'></image>
+        <view style='font-size:24rpx;color:#666;'>首页</view>
+        <view style='clear:both;'></view>
+      </view>
+      <view class='foot_tb' bindtap="set_share" data-status="1" style='width:60px;'>
+        <image src='../../images/f.png' style='width:40rpx;height:44rpx;'></image>
+        <view style='font-size:24rpx;color:#666;'>分享</view>
+      </view>
+      <view style='clear:both;'></view>
+    </view>
+    <view style='width: 60%;float: left;margin-top: 2px;'>
+      <view style='margin-left:10px;'>
+
+        <view class='pt_btn gm' bindtap="setModalStatus" data-status="1" data-type="only" style='display:flex;flex-direction:column;justify-content:center;'>
+          <view style='font-size:30rpx;height: 39rpx;text-align: center;display: flex;align-items: center;text-align: center;justify-content: center;'>￥{{itemData.market_price}}</view>
+          <view style='font-size:24rpx;height: 39rpx;text-align: center;display: flex;align-items: center;text-align: center;justify-content: center;'>单独购买</view>
+        </view>
+        <block wx:if="{{is_over==false}}">
+          <form report-submit="true" data-type="group" bindtap="setModalStatus" data-status="1" style='width:40%;'>
+            <button class="pt_btn kt" type="primary" formType="submit" style='background:#ff6347;display:flex;flex-direction:column;justify-content:center;'>
+              <view style='font-size: 30rpx;height: 39rpx;text-align: center;display: flex;align-items: center;text-align: center;justify-content: center;'>￥{{gprice}}</view>
+              <view style='font-size: 24rpx;height: 39rpx;text-align: center;display: flex;align-items: center;text-align: center;justify-content: center;'>立即开团</view>
+            </button>
+          </form>
+        </block>
+        <block wx:else>
+          <view class='pt_btn kt' style='display:flex;flex-direction:column;justify-content:center;background:#666;color:#fff;'>
+            <view style='font-size:30rpx;height: 39rpx;text-align: center;display: flex;align-items: center;text-align: center;justify-content: center;'>(活动已结束)</view>
+            <view style='font-size:24rpx;height: 39rpx;text-align: center;display: flex;align-items: center;text-align: center;justify-content: center;'>立即开团</view>
+          </view>
+        </block>
+        <view style='clear:both;'></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 悬浮客服窗口 -->
+  <view class='kffd'>
+    <view style='position: relative;height: 33px;'>
+      <contact-button type="default-light" session-from="productId_{{itemData.product_id}}" class="ke"></contact-button>
+      <view style='position: absolute;top: 0px;width: 50px;background:#ff6347;height: 30px;border-radius: 15px 0 0 15px;color: #fff;right:0;'>
+        <image class="icon_kf kf_img" src="/images/kefu1.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <!--弹窗-->
+  <view class="drawer_screen" catchtouchmove="preventTouchMove" bindtap="setModalStatus" data-status="0" data-type="11" wx:if="{{showModalStatus}}"></view>
+  <view animation="{{animationData}}" class="drawer_attr_box" catchtouchmove="preventTouchMove" wx:if="{{showModalStatus}}">
+    <view class="close_icon" bindtap="setModalStatus" data-status="0" data-type="11">×</view>
+    <view class="drawer_attr_content">
+      <view class="text_center">
+        <image class="drawer_image" src="{{itemData.image}}"></image>
+      </view>
+      <view class="mingcheng">
+        <view style="font-size:38rpx;color:red">
+          <text wx:if="{{paytype == 'group'}}">开团价:</text>¥
+          <text wx:if="{{paytype == 'group'}}">{{itemData.member_price}}</text>
+          <text wx:else>{{itemData.market_price}}</text>
+        </view>
+        <view style="font-size:26rpx;color:#ccc">库存：{{itemData.num}}</view>
+      </view>
+      <view style='clear:both;'></view>
+      <view class="commodity_attr_list" catchtouchmove="preventTouchMove">
+        <!--每组属性-->
+        <scroll-view scroll-y="true" style="height:100%;">
+
+
+          <!-- 属性选择 -->
+          <view wx:for="{{attrList}}" wx:for-index="idx" wx:key="userInfoListId" class="outStyle">
+            <view class='outStyleText textStyle buttonPaddingStyle' style="padding-left:0">{{item.attrName}}</view>
+            <view class='typeStyle textStyle' style="margin-left:0">
+              <view wx:for="{{item.attr}}" data-item='{{item.attr[index]}}' data-index='{{index}}' data-idx='{{idx}}' wx:key="userInfoListId" bindtap="onChangeShowState" wx:for-item="items">
+                <view class="{{items.enable == true ?(items.select==true?'orange':'back') : 'bai'}} textStyle buttonPaddingStyle de_left">
+                  {{items.attributeValue}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <!-- 属性选择 -->
+          <view class="shu" wx:if="{{paytype != 'group'}}">
+            <text class="cun">购买数量</text>
+            <view class="dian">
+              <view class="stepper" catchtouchmove="preventTouchMove">
+                <!-- 减号 -->
+                <text class="{{minusStatuses[index]}}" data-alpha-beta="0" bindtap="minus">-</text>
+                <!-- 数值 -->
+                <view class="nownum">{{num}}</view>
+                <!-- 加号 -->
+                <text class="normal" data-alpha-beta="1" bindtap="plus">+</text>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view class="footc" style='border-radius:15rpx;'>
+        <form bindsubmit="getformidToo" report-submit="true" data-type="{{paytype}}">
+          <button class="" type="primary" formType="submit" style='width:100%;height:90rpx;background:#ff6347;color:#fff !important;line-height:90rpx;'>确定</button>
+        </form>
+      </view>
+    </view>
+  </view>
+  <!--弹框结尾  -->
+
+  <template is="toast" data="{{toast:toast}}" />
+
+
+
+
+
+  <!-- 弹窗 -->
+  <view class="drawer_screen" bindtap="set_share" data-index="0" data-status="0" wx:if="{{show_share}}"></view>
+  <view animation="{{animationData}}" class="drawer_attr_share" catchtouchmove="preventTouchMove" wx:if="{{show_share}}">
+    <view class='myyhq'> </view>
+    <view class='share_top'>
+      分享
+      <view class='close_share' bindtap="set_share" data-index="0" data-status="0">x</view>
+    </view>
+    <view class='fx_box'>
+
+      <view wx:if="{{share.friends}}" class='fx_img_box'>
+        <button open-type="share" hover-class="button-hover" style='line-height:normal;border:0;border-radius:0px;padding:0;font-size:12px;display:inline;'>
+          <view>
+            <image class='fx_img' src='/images/wx.png'></image>
+          </view>
+          <view>微信好友</view>
+        </button>
+      </view>
+      <view class='fx_img_box' wx:if="{{share.friend}}" bindtap='user_share'>
+        <view>
+          <image class='fx_img' src='/images/pyq.png'></image>
+        </view>
+        <view>朋友圈</view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class='imagePathBox' hidden="{{maskHidden == false}}">
+    <view class='images_bg'>
+      <view class='share_top'>
+        分享到朋友圈
+        <view class='close_share' bindtap='close_share'>x</view>
+      </view>
+      <image src="{{imagePath}}" data-src="{{imagePath}}" catchtap="previewImage" class='shengcheng'></image>
+      <button class='baocun' style='background:#e93737;' bindtap='baocun'>保存相册</button>
+      <view class='share_bottom'>保存图片到手机后，您可到朋友圈分享该商品图片</view>
+    </view>
+  </view>
+  <view hidden="{{maskHidden == false}}" class="mask"></view>
+</block>
+<pop id="pop"></pop>

@@ -1,0 +1,106 @@
+<!--pages/wallet/wallet.wxml-->
+<view class="body" wx:if="{{remind}}">
+    <view class='zong'>
+          <view class="spinner" >
+                    <view class="spinner-container container1">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container2">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container3">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+          </view>
+    </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<view class="page">
+  <view class="sc mt10" style='background-color:{{ bgcolor }};'>
+    <view class="df_1 df">     
+      <text class="qb_02">{{user.ljyj}}</text>
+      <text class="qb_01">累计收益</text>
+    </view>
+  </view> 
+  
+  <view class="use_detail" style="width: 100%;margin: 0 auto;position: relative;height:80%;">
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">我的分享</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">收益记录</view>
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">推广订单</view>
+    </view>
+    <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="position:relative;" bindchange="bindChange">
+      <swiper-item >
+      
+        <view class="search_no" style='padding-top:60px' wx:if="{{list_1.length < 1}}">
+          <view class="font_14"  style='padding-bottom:2%;'><image class="scimg" src="/images/search_no.png"></image></view>
+          <text>暂时还没分享记录/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='obtain_box'>
+          <scroll-view scroll-y="true" style='height:100%;overflow:auto;'>
+          <view class='jf_obtain' wx:for="{{list_1}}">
+            <view class='obtain_bt_3'>
+              <view style='color: #999;font-size: 30rpx;'>{{item.Register_data}}</view>
+            </view>
+            <view class='obtain_bt_2' >
+              {{item.wx_name}}
+            </view>
+            
+          </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+      <swiper-item >
+        <view class="search_no" style='padding-top:60px' wx:if="{{list_2.length < 1}}">
+          <view class="font_14"  style='padding-bottom:2%;'><image class="scimg" src="/images/search_no.png"></image></view>
+          <text>暂时还没收益记录/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='obtain_box'>
+          <scroll-view scroll-y="true" style='height:100%;overflow:auto;'>
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_2}}">
+            <view class='obtain_bt_3'>
+              <view style='color: #999;font-size: 30rpx;'>{{item.addtime}}</view>
+            </view>
+            <view class='obtain_bt_2' >
+              +{{item.s_money}}
+              <text class='my_money' >({{item.parent_name}})</text>
+            </view>
+            
+          </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="search_no" style='padding-top:50px;' wx:if="{{list_3.length < 1}}">
+          <view class="font_14" style='padding-bottom:2%;'><image class="scimg" src="/images/search_no.png"></image></view>
+          <text>暂时还没订单记录/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='obtain_box'>
+          <scroll-view scroll-y="true" style="height:100%;overflow:auto;">
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_3}}">
+            <view class='obtain_bt_3'>
+                <view style='color: #999;font-size: 30rpx;'>{{item.addtime}}</view>
+            </view>
+            <view class='obtain_bt_2'>
+              {{item.sNo}}
+            </view>
+            
+          </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  
+</view>
+</block>

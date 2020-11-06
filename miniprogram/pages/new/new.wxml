@@ -1,0 +1,139 @@
+<!-- 加载页面开始 -->
+<view class="body" wx:if="{{remind}}">
+    <view class='zong'>
+          <view class="spinner" >
+                    <view class="spinner-container container1">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container2">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container3">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+          </view>
+    </view>
+</view>
+<!-- 加载页面结束 -->
+    <block wx:else>
+      <view class='sort-wrap fd'>
+        <view class="sort-btn {{select == 0 ? 'select' : ''}}" bindtap="default">
+          最新
+        </view>
+        <view class="sort-btn {{select == 1 ? 'select' : ''}}" data-index="{{daindex1}}" data-sel="{{daindex1}}" bindtap="choosesort1">
+          销量
+          <image src="{{imageurl1}}"></image>
+        </view>
+        <view class="sort-btn {{select == 2 ? 'select' : ''}}" data-index="{{daindex2}}" bindtap="choosesort2">
+          价格
+          <image src="{{imageurl2}}"></image>
+        </view>
+        <view class='sort-btn'>
+         <view class='iconfont {{xianshi}}' bindtap="tabchage"> </view>
+        </view>
+      </view>
+
+    <view class="list">
+          <view class="cont" style='padding-top:10px;'>
+            
+              <view  class="{{shu}}">
+                <navigator class="pr {{shu}}" url="../product/detail?productId={{item.id}}&size={{item.size}}" hover-class="changestyle" wx:for="{{shopList}}" wx:key="*this" data-id="{{item.id}}">
+                    <!-- <view class='photo-c'>
+                      <image class="photo" src="{{item.imgurl}}"></image>
+                      <image class="photo-right" wx:if="{{item.s_type==1}}" src="../../images/new.png"></image>
+                    </view>  不启用样式  右上角  -->
+                    <view class='photo-c'>
+                      <image class="photo" src="{{item.imgurl}}"></image>
+                    </view>
+                    <view class='shu'>
+                        <view class="title">
+                        <text style="font-size:28rpx;width:30%;color:#B82136">新品  </text>
+                        {{item.name}}</view>
+                        <view style="display:flex;line-height:50rpx;;">
+                          <view class="gmxx" style="  color: red;">¥ {{item.price_yh}}</view>
+                          <view class="gmx">¥ {{item.price}}</view>
+                        </view>
+                        <view style="display:flex;line-height:50rpx;color:#999">
+                          <view class="gmxx" style="font-size:28rpx;width:30%">
+                            
+                            <!-- <text wx:if="{{item.s_type==2}}">热销</text>
+                            <text >推荐</text> -->
+                          </view>
+                          <view class="ku" style="width:100%">销量：{{item.volume}}</view>
+                        </view>
+                    </view>
+                  </navigator>
+              </view>
+              <view class="{{heng}}">
+                  <navigator class="pr pr_xt" style='display:flex;margin-bottom:0px;width:100%;margin-left:0px;' url="../product/detail?productId={{item.id}}&size={{item.size}}" hover-class="changestyle" wx:for="{{shopList}}" wx:key="*this" data-id="{{item.id}}">
+
+                    <!-- <view class='photo-c'>
+                      <image class="photo" style='height:220rpx;width:230rpx;margin-left:3px;' src="{{item.imgurl}}"></image>
+                      <image class="photo-right" wx:if="{{item.s_type==1}}" src="../../images/new.png"></image>
+                    </view>   设置右上角图标样式 目前不启用 -->
+                    <view class='photo-c'>
+                      <image class="photo" style='height:220rpx;width:230rpx;margin-left:20rpx;padding-top:20rpx' src="{{item.imgurl}}"></image>
+                    </view>
+
+                    <view class='shu shu_xt' style='width:65%;padding:0 10px;'>
+                    
+                        <view class="title">
+	                        <text style="font-size:28rpx;width:30%;color:#B82136">新品  </text>{{item.name}}
+                        </view>
+                        <view style="display:flex;line-height:50rpx;padding:10rpx 0 5rpx;">
+                          <view class="gmxx" style="  color: red;">¥ {{item.price_yh}}</view>
+                          <view class="gmx" style='text-align:right;'>¥ {{item.price}}</view>
+                        </view>
+                        <view style="display:flex;line-height:50rpx;color:#999">
+                         <!--<view class="gmxx" style="font-size:28rpx;width:30%">
+                            <text>新品</text>
+                          </view> -->
+                          <view class="ku">销量：{{item.volume}}</view>
+                        </view>
+                    </view>
+                  </navigator>
+              </view>
+            </view>
+            <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">1</view>
+    <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> 
+    <view class="clear mt10" wx:if="{{period}}" style='border:0;color#666' >-我是有底线的-</view>
+    <block wx:else>
+    <!-- 显示加载 -->
+          <view style="display: flex;" wx:if="{{loading}}">
+                          <view class="spinner" style='margin:20px auto;' >
+                                  <view class="spinner-container container1">
+                                      <view class="circle1"></view>
+                                      <view class="circle2"></view>
+                                      <view class="circle3"></view>
+                                      <view class="circle4"></view>
+                                  </view>
+                                  <view class="spinner-container container2">
+                                      <view class="circle1"></view>
+                                      <view class="circle2"></view>
+                                      <view class="circle3"></view>
+                                      <view class="circle4"></view>
+                                  </view>
+                                  <view class="spinner-container container3">
+                                      <view class="circle1"></view>
+                                      <view class="circle2"></view>
+                                      <view class="circle3"></view>
+                                      <view class="circle4"></view>
+                                  </view>
+                        </view>
+          </view>
+          <!-- <view class="clear mt10" wx:else bindtap="getMore">点击查看更多{{loading}}-</view> -->
+          <view class='goTop' hidden='{{!floorstatus}}' bindtap="goTop">
+          <image src='../../images/fanhui.png' style='width:20px;height:20px;margin:10px;'></image>  
+          </view>  
+    </block>
+    </view>
+</block>

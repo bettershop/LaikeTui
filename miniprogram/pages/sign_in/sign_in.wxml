@@ -1,0 +1,90 @@
+<!-- 加载页面开始 -->
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='wrap' wx:else>  
+    <view class='date-show-box' style="background:{{bgcolor}}">  
+        <view class='date-show'>  
+            <view class='lt-arrow' bindtap='lastMonth'>
+                <image src='../../images/z_jt.png' mode='aspectFit'></image>  
+            </view>  
+            {{year}}年{{month}}月  
+            <view class='rt-arrow' bindtap='nextMonth'> 
+                <image src='../../images/y_jt.png' mode='aspectFit'></image>  
+            </view>  
+        </view>  
+        <view class='date-dw'></view>
+        <view class='date-dw-two'></view>
+    </view>  
+    <view class='header'>  
+        <view wx:for='{{date}}' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>  
+    </view>  
+    <view class='date-box'>  
+        <view wx:for='{{dateArr}}' class='{{isToday == item.isToday ? "nowDay" : ""}}' data-date='{{item.isToday}}'>            
+            <view class='date-head'>  
+                <view wx:if="{{item.sign_status}}" style="color:red;">  
+                  <view wx:if="{{isToday == item.isToday}}" style="width:60rpx;font-size:12px;border-radius: 50%;background-image: url({{imgurl}});background-size:25px 25px;background-repeat:no-repeat;background-position:50% 50%;margin:auto;position:relative;">
+                    <view>{{item.dateNum}}</view>
+                    <view style="position:absolute;right:5px;top:-5px;font-size:8px;">签</view>
+                  </view>
+                  <view wx:else>
+                    <view>{{item.dateNum}}</view>
+                    <view style="position:absolute;right:5px;top:-5px;font-size:8px;">签</view>
+                  </view>
+                </view>
+                <view wx:else>
+                  <view wx:if="{{isToday == item.isToday}}" style="width:60rpx;font-size:12px;border-radius: 50%;background-image: url({{imgurl}});background-size:25px 25px;background-repeat:no-repeat;background-position:50% 50%;margin:auto;position:relative;">
+                    <view style="color:red;">{{item.dateNum}}</view>
+                  </view>
+                  <view wx:else>{{item.dateNum}}</view>
+                </view>
+            </view>  
+        </view> 
+    </view>  
+    <view class='btn_sign' style="color:{{bgcolor}}">已连续签到{{num}}天</view> 
+    <view class='btn_qd' bindtap="submit" style="background:{{bgcolor}};" wx:if="{{sign_status==1}}">签到</view>
+    <view class='btn_qd' style="background:#C0C0C0;" wx:if="{{sign_status==0}}">今天已签</view>
+    
+    <view class='qd_text'>
+    <view style='padding-bottom:10px;font-size:32rpx;color:#666;'>签到规则</view>
+
+    <import src="../../wxParse/wxParse.wxml"/> 
+    <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+    </view>
+    </view>
+</view> 
+<!-- 弹窗 -->
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modalDlg" wx:if="{{showModal}}">
+  <image src='../../images/qdcg.png' style="height:325px;background-size:cover;position relative;"></image>
+  <view class='modalDlg_text'>
+    <view style='font-size:24rpx;color:#666;'>恭喜你今日签到成功</view>
+    <view style='font-size:30rpx;color:#eb3737;'><text style='font-size:70rpx;'>{{sign_score}}</text>积分</view>
+    <view style='font-size:24rpx;color:#666;'>当前积分： {{score}}</view>
+  </view>
+  <view bindtap="guanbi" class='btn_gb'>
+    <image src="/images/guanbi.png" mode="widthFix"></image>
+  </view>
+</view> 

@@ -1,0 +1,69 @@
+<!--pages/address/address.wxml-->
+<view class="content">
+  <form bindsubmit="SaveAddress">
+    <view class="section">
+      <view class="section_title">联系人：</view>
+      <input name="user_name" type="text" value="{{user_name}}" placeholder="联系人"/>
+    </view>
+    <view class="section">
+      <view class="section_title">联系电话：</view>
+      <input name="mobile" type="number" maxlength="11" value="{{mobile}}" placeholder="联系人电话"/>
+    </view>
+
+
+    <view class="section">
+      <view class="section_title">所在地区：</view>
+
+      <input type="text" wx:if="{{province && city && county}}" value="{{province}}--{{city}}--{{county}}" disabled bindtap="translate"/> 
+      <input type="text" wx:else placeholder="请选择" disabled bindtap="translate"/> 
+      <input class='xzdq' disabled="false" name="province" value="{{province}}" />
+      <input class='xzdq' disabled="false" name="city" value="{{city}}" />
+      <input class='xzdq' disabled="false" name="county" value="{{county}}" /> 
+      <view class="section_right" bindtap="translate">
+        <image src="../../images/x_right.png"></image>
+      </view>
+
+      <view class="animation-element-wrapper {{ show?'openBG':'closeBG' }}" style="visibility:{{show ? 'visible':'hidden'}}" bindtap="hiddenFloatView" data-id="444">
+
+        <view class="animation-element {{ show?'open':'closes' }}" catchtap="nono">
+          <text class="left-bt" catchtap="hiddenFloatView" data-id="555">取消</text>
+          <text class="right-bt" style='color:#50b674;' catchtap="hiddenFloatView" data-id="666">确定</text>
+            <view class="line"></view>
+
+            <picker-view class="{{ show?'openpuls':'closepuls' }}" indicator-style = "height: 50rpx;" value="{{value}}" bindchange="bindChange" catchtap="nono">
+              <!--省-->
+              <picker-view-column>
+                <view wx:for="{{sheng}}" wx:for-item="sheng" wx:key="">
+                  {{sheng.G_CName}}
+                </view>
+              </picker-view-column>
+              <!--地级市-->
+              <picker-view-column>
+                <view wx:for="{{shi}}" wx:key="">
+                  {{item.G_CName}}
+                </view>
+              </picker-view-column>
+              <!--区县-->
+              <picker-view-column>
+                <view wx:for="{{xian}}" wx:key="">
+                  {{item.G_CName}}
+                </view>
+              </picker-view-column>
+            </picker-view>
+
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section_title">详细地址：</view>
+      <input name="address" type="text" value="{{address}}" placeholder="详细地址"/>
+    </view>
+     <view class="btn-area"> 
+      <button formType="submit" style='background-color:#FF6347;'>保存</button>
+     </view> 
+     <view class="btn-area"> 
+      <button  bindtap="aotuAddress" style='background-color:#FF6347;'>导入微信收货地址</button>
+     </view> 
+  </form>
+</view>

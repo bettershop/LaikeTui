@@ -1,0 +1,133 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+
+<!-- <image wx:if="{{bg != ''}}" class='class_img' src='{{bg}}'></image> -->
+<view style='height:90rpx' wx:if="{{bg != ''}}"></view>
+  <view class='sort-wrap fd' wx:if="{{shopList.length > 0}}">
+    <view class="sort-btn {{select == 0 ? 'select' : ''}}" bindtap="default">
+      最新
+    </view>
+    <view class="sort-btn {{select == 1 ? 'select' : ''}}" data-index="{{daindex1}}" data-sel="{{daindex1}}" bindtap="choosesort1">
+      销量
+      <image src="{{imageurl1}}"></image>
+    </view>
+    <view class="sort-btn {{select == 2 ? 'select' : ''}}" data-index="{{daindex2}}" bindtap="choosesort2">
+      价格
+      <image src="{{imageurl2}}"></image>
+    </view>
+    <view class='sort-btn'>
+      <view class='iconfont {{xianshi}}' bindtap="tabchage"> </view>
+    </view>
+  </view>
+
+  <view class="list {{bg == '' ? 'mt90':''}}" wx:if="{{shopList.length > 0}}">
+    <view class="cont"  style='padding-top:10px;'>
+      <view  class="{{shu}}">
+        <navigator class="pr {{shu}}" style='border:1px solid #EDEDED;' url="../product/detail?productId={{item.id}}&size={{item.sizeid}}" hover-class="changestyle" wx:for="{{shopList}}" wx:key="*this" data-id="{{item.id}}">
+          <view>
+            <image class="photo" src="{{item.imgurl}}"></image>
+          </view>
+          <view class='shu'>
+            <view class="title">{{item.name}}</view>
+            <view style="line-height:50rpx;padding:10rpx 0;">
+            <view class="gmxx" style="font-size:28rpx;">
+                <text style="padding:0px 2px;" wx:if="{{item.xp == 1}}">新品</text>
+                <text style="padding:0px 2px;" wx:if="{{item.rexiao == 1}}">热销</text>
+                <text style="padding:0px 2px;" wx:if="{{item.tuijian == 1}}">推荐</text>
+              </view>
+             
+              <!-- <view class="gmx">¥ {{item.price}}</view> -->
+            </view>
+            <view style="display:flex;line-height:50rpx;color:#999">
+               <view class="gmxx" style="  color: red;">¥ {{item.price_yh}}</view>
+              <view class="ku" style="width:60%">销量：{{item.volume}}</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+      <view class="{{heng}}">
+        <navigator class="pr pr_xt" style='display:flex;margin-bottom:0px;width:100%;margin-left:0px;' url="../product/detail?productId={{item.id}}&size={{item.sizeid}}" hover-class="changestyle" wx:for="{{shopList}}" wx:key="*this" data-id="{{item.id}}" >
+          <view style="border-bottom:1px solid #eee;">
+            <image style='height:220rpx;width:230rpx;margin-left:10px;' src="{{item.imgurl}}"></image>
+          </view>
+          <view class='shu shu_xt' style='width:65%;padding:0 10px;'>
+            <view class="title">{{item.name}}</view>
+            <view class="gmxx" style="font-size:28rpx;">
+                <text style="padding:0px 2px;" wx:if="{{item.xp == 1}}">新品</text>
+                <text style="padding:0px 2px;" wx:if="{{item.rexiao == 1}}">热销</text>
+                <text style="padding:0px 2px;" wx:if="{{item.tuijian == 1}}">推荐</text>
+              </view>
+            <view style="display:flex;line-height:50rpx;padding:10rpx 0;">
+            <view style="display:flex;line-height:50rpx;color:#999">
+              
+              
+              <!-- <view class="gmx" style='text-align:right;margin-right:17rpx;'>¥ {{item.price}}</view> -->
+            </view>
+            <view class="gmxx" style="  color: red;">¥ {{item.price_yh}}</view>
+              <view class="ku" style="width:60%">销量：{{item.volume}}</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">1</view>
+    <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> 
+    
+     <view class="clear mt10" wx:if="{{period}}" style='border: 0;color: #999;' >-我是有底线的-</view> 
+    <block wx:else>
+    <!-- 显示加载 -->
+    <view style="display: flex;" wx:if="{{loading}}">
+      <view class="spinner" style='margin:20px auto;' >
+        <view class="spinner-container container1">
+          <view class="circle1"></view>
+          <view class="circle2"></view>
+          <view class="circle3"></view>
+          <view class="circle4"></view>
+        </view>
+        <view class="spinner-container container2">
+          <view class="circle1"></view>
+          <view class="circle2"></view>
+          <view class="circle3"></view>
+          <view class="circle4"></view>
+        </view>
+        <view class="spinner-container container3">
+          <view class="circle1"></view>
+          <view class="circle2"></view>
+          <view class="circle3"></view>
+          <view class="circle4"></view>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+  <block wx:else>
+    <view style='text-align:center;padding-top:30%;'>
+        <view class="font_14"><image class="scimg" src="/images/icon-no.png"></image></view>
+        <text style="color: #666;font-size: 13px;">没有找到您需要商品(ㄒoㄒ)~~</text>
+    </view>
+  </block>
+</block>

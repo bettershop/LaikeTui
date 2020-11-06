@@ -1,0 +1,97 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<view class='score' style='display: flex;flex-direction: column;justify-content:center;'>
+  <view class="myscore" style='background:{{bgcolor}};height:170px;'>
+    <view class='jf_box'>
+      <view style='color:#fff;text-align:center;line-height:100px;'>
+        <text style='font-size:36px'>{{score}}</text>
+      </view>
+    </view>
+    <navigator  class="dibu_2" url="../user/transfer_jifen" wx:if="{{switch == 1}}"> 
+    <view  id="{{paytype}}" type="primary" bindtap="submit" style='background:{{bgcolor}};width:80px;text-align:center;margin:0 auto;line-height:1.4em;margin-top:20px;'>转账 </view>
+    </navigator>  
+  </view>
+   
+  <view class="use_detail" style="width:95%;height:800rpx;margin:0 auto;">
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">使用规则</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">获取记录</view>
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">使用记录</view>
+    </view>
+    <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+      <swiper-item>
+      <scroll-view scroll-y="true" >
+        <view class='detail'>
+           <import src="../../wxParse/wxParse.wxml" />
+          <view class="wxParse" style='padding:0;'>
+            <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+          </view>
+        </view>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y="true" >
+          <view class="search_no" wx:if="{{!sign.length}}">
+            <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+            <text>暂无积分获取记录/(ㄒoㄒ)/~~</text>
+          </view>
+          <view class='obtain_box' wx:for="{{sign}}" wx:for-item="itemadd">
+            <view class='jf_obtain' style='color:#777;margin-top:10px;height:40px;'>
+              <view class='obtain_bt'>{{itemadd.sign_time}}</view>
+                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 0}}">签到</view> 
+                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 2}}">首次关注得积分</view> 
+                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 4}}">好友转账</view>
+                
+                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 6}}">赠送</view>
+                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 7}}">抽奖</view>
+              <view class='obtain_bt' style='line-height:40px;'>+{{itemadd.sign_score}}</view>
+              <view style='clear:both;'></view>
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y="true" >
+          <view class="search_no" wx:if="{{!consumption.length}}">
+            <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+            <text>暂无积分使用记录/(ㄒoㄒ)/~~</text>
+          </view>
+          <view class='obtain_box' wx:for="{{consumption}}" wx:for-item="itemfu">
+            <view class='jf_obtain' style='color:#777;margin-top:10px;'>
+              <view class='obtain_bt'>{{itemfu.sign_time}}</view>
+              <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemfu.type == 1}}">消费</view>
+              <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemfu.type == 3}}">转账给好友</view>
+              <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemfu.type == 5}}">系统扣除</view>
+              <view class='obtain_bt' style='line-height:40px;'>-{{itemfu.sign_score}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
+</block>

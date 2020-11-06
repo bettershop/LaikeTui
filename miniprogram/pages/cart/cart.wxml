@@ -1,0 +1,105 @@
+<!--pages/cart/cart.wxml-->
+  <view class="body" wx:if="{{remind}}">
+    <view class='zong'>
+          <view class="spinner" >
+                    <view class="spinner-container container1">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container2">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+                    <view class="spinner-container container3">
+                        <view class="circle1"></view>
+                        <view class="circle2"></view>
+                        <view class="circle3"></view>
+                        <view class="circle4"></view>
+                    </view>
+          </view>
+    </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<view class="page">
+      <view class='top-ql' wx:if="{{carts !=''}}">
+          <view  wx:if="{{!upstatus}}" bindtap="updata" class='top-ql-1' style='color:#333;'>编辑商品</view>
+          <view  wx:else bindtap="ok" class='top-ql-1' style='color:#f60;'>完成</view>
+          <view  wx:if="{{upstatus}}" bindtap="delall" class='top-ql-1 iconfont icon-icon-test' style='color:#f60;'>快速清理</view>
+      </view>
+      <view class="shop df" wx:for="{{productData}}" wx:key="key">
+            <image class="sh_slt" src="{{item.imgurl}}"></image>
+            <view class="df_1">            
+                <view class="sp_text">
+                    <navigator url="../index/detail?productId={{item.ProID}}">
+                        <view class="sp_tit ovh1">{{item.ProductName}}</view>
+                    </navigator>
+                    <view class="sp_neb">数量：×{{item.BuyCount}}</view>
+                    <view class="sp_jg">¥：{{item.Price}}</view>
+                    <button class="dle" data-card-id="{{item.CartID}}" bindtap="removeShopCard">删除</button> 
+                    <navigator class="dle" url="../order/pay?productId={{item.ProID}}&cartId={{item.CartID}}&buyCount={{item.BuyCount}}">下单</navigator>
+                </view>
+            </view>
+        </view> 
+      <!--样式--> 
+      <view class="container carts-list" wx:if="{{carts==''}}">
+          <view class="pp">
+              <image class="kong" src="../../images/cart.png" mode="aspectFill"/>
+              <view class="cla">购物车空空如也</view>
+                  <view class="cla" style='padding:5px;background:{{bgcolor}};border-radius:5px;margin:6px;color:#fff;'  bindtap='go_index'>去逛逛</view>
+          </view>
+      </view>
+      <view class="container carts-list">
+      <!--勾-->
+          <view wx:for="{{carts}}"  wx:key="key" class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}">
+              <icon wx:if="{{item.selected}}" type="success_circle"    size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
+              <icon wx:else type="circle" size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
+          <!--img-->
+      <navigator style='align-content:center;' url="../product/detail?productId={{item.pid}}&size={{item.sizeid}}">
+           <view >
+              <image class="carts-image" src="{{item.imgurl}}" mode="aspectFill"/>
+           </view> 
+      </navigator>
+           <view class="carts-text">
+           <navigator style='width:100%;height:120rpx;overflow: hidden;'  url="../product/detail?productId={{item.pid}}&size={{item.sizeid}}">
+            <text class="carts-title">{{item.pro_name}}</text>
+              <text class="carts-title" style='font-size:28rpx;color:#CCCCCC;margin:0;' wx:if="{{item.size}}">[{{item.size}}]</text>
+           </navigator>
+              
+       <view class="title">
+           <text class="carts-price">¥ {{item.price}}</text> 
+         <view class="stepper">
+            <!-- 减号 -->
+                  <text class="{{minusStatuses[index]}}" data-index="{{index}}" bindtap="bindMinus" data-cartid="{{item.id}}">-</text>
+            <!-- 数值 -->
+                      <input type="number" data-cartid="{{item.id}}" data-index="{{index}}" bindblur="bindManual" value="{{item.num}}" class='cart_number'/>
+            <!-- 加号 -->
+                    <text class="normal" data-index="{{index}}" bindtap="bindPlus" data-cartid="{{item.id}}">+</text>
+            </view> 
+            </view>
+        </view>
+           </view>
+      <!--右边-->
+
+      </view>
+      <!--底部-->
+      <view class="carts-footer" wx:if="{{carts.length >= 1}}">
+        <view bindtap="bindSelectAll" class='heji'>
+            <icon wx:if="{{selectedAllStatus}}" type="success_circle" size="24" />
+              <icon wx:else type="circle" size="24" />
+              <text>全选</text>
+              <text wx:if="{{!upstatus}}" class="reds">{{total}}</text>
+        </view>
+        <view wx:if="{{upstatus}}" class="bottom_1">
+            <view class="button_1_1" bindtap='shouc'>移至收藏</view>
+            <view class="button_1_2" style='background:#f60;border:1px solid #f60;' bindtap='delarr'>删除</view>     
+        </view>
+        <view wx:else class="button" style='background:#f60;' bindtap='bindCheckout'>立即结算 </view>
+            
+      </view>
+</view>
+</block>

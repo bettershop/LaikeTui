@@ -1,0 +1,358 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner">
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+  <view class="swiper-tab">
+    <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}" style='border:1px solid {{bgcolor}};'>
+      <view class='noe' style='border-color:transparent transparent {{bgcolor}} transparent;'></view>
+      <view wx:for="{{sortingList}}" wx:key="key" catchtap="selectSorting" data-index="{{index}}" data-me="{{item.value}}" data-otype="{{item.otype}}" class="sorting-item {{item.value == activeSortingName ? 'xzbg':''}}" style="background:{{item.value == activeSortingName ? bgcolor:''}};{{index == sortingList.length-1 ? 'border-bottom:0;':''}}"
+        hover-class="click-once">{{item.value}}</view>
+    </view>
+    <!-- 下拉菜单 -->
+    <view class="swiper-tab-list phone_personal {{currentTab==0 ? 'on' : ''}} " hover-class="click-once-opaque" bindtap="clickPerson">
+      {{activeSortingName}}
+      <text class='icon iconfont {{sortingChioceIcon}}'></text>
+    </view>
+    <!-- </view> -->
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-otype="payment" bindtap="swichNav">待付款</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" data-otype="send" bindtap="swichNav">待发货</view>
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" data-otype="receipt" bindtap="swichNav">待收货</view>
+    <view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}}" data-current="4" data-otype="evaluate" bindtap="swichNav">待评价</view>
+  </view>
+  <view class="c_t60"></view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange">
+    <!-- 全部订单 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:100%;background:#fafafa;">
+        <view class="search_no" wx:if="{{!ordert0.length}}">
+          <view class="font_14">
+            <image class="scimg" src="/images/kdd.png"></image>
+          </view>
+          <text>没有可用订单/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='tab_tab' wx:for="{{ordert0}}" wx:key="key">
+          <navigator url="../order/detail?orderId={{item.id}}">
+            <view class="top">
+              <view>
+                订单号：{{item.sNo}}
+                <!-- 除拼团订单的状态 -->
+                <block wx:if="{{item.pid ==''}}">
+                  <view class='tab_statu' wx:if="{{item.status == 0}}">等待买家付款</view>
+                  <view class='tab_statu' wx:if="{{item.status == 1}}">等待卖家发货</view>
+                  <view class='tab_statu' wx:if="{{item.status == 2}}">等待买家收货</view>
+                  <view class='tab_statu' wx:if="{{item.status == 3}}">等待买家评价</view>
+                  <view class='tab_statu' wx:if="{{item.status == 4}}">退货中</view>
+                  <view class='tab_statu' wx:if="{{item.status == 5}}">交易成功</view>
+                  <view class='tab_statu' wx:if="{{item.status == 6}}">订单关闭</view>
+                </block>
+                <!-- 拼团订单的状态 -->
+                <block wx:if="{{item.pid > 0}}">
+                  <view class='tab_statu' wx:if="{{item.status == 0}}">待付款</view>
+                  <view class='tab_statu' wx:if="{{item.status == 9}}">拼团中-待成团</view>
+                  <view class='tab_statu' wx:if="{{item.status == 1}}">拼团成功-待发货</view>
+                  <view class='tab_statu' wx:if="{{item.status == 2}}">拼团成功-已发货</view>
+                  <view class='tab_statu' wx:if="{{item.status == 3}}">拼团成功-已签收</view>
+                  <view class='tab_statu' wx:if="{{item.status == 5}}">拼团成功-已评价</view>
+                  <view class='tab_statu' wx:if="{{item.status == 10}}">拼团失败-未退款</view>
+                  <view class='tab_statu' wx:if="{{item.status == 11}}">拼团失败-已退款</view>
+                </block>
+              </view>
+            </view>
+            <view>
+              <view class="shop df" wx:for="{{item.list}}" wx:for-item="list" wx:key="id">
+                <view>
+                  <image class="sh_slt" src="{{list.imgurl}}"></image>
+                </view>
+                <view class="sp_text">
+                  <view style='width:70%;'>
+                  <view class="sp_tit ovh1" style="color: #000;">{{list.p_name}}</view>
+                  <view class="sp_tit ovh1" style='color:#808080'> [{{list.size}}]</view>
+                  </view>
+                  <view class="sp_jg">
+                    <view class='guige'>¥ {{list.p_price}}</view>
+                    <view class='guige'>x{{list.num}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </navigator>
+          <view class="total">
+            <view class="zhifu mt10" style=''>
+              合计：
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info != 0}}">¥ {{item.z_price}}</span>
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info == 0}}">¥ {{item.total}}</span>
+            </view>
+          </view>
+          <view class="bottom">
+            <!--状态 0：未付款 1：未发货 2：待收货 3：待评论 4：退货 5:已完成 6 订单关闭 9拼团中 10 拼团失败-未退款 11 拼团失败-已退款 12:已完成(已追加评论) -->
+            <navigator wx:if="{{item.status != 1 && item.status != 4}}" url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
+            <navigator wx:if="{{item.status == 1 && item.pid >0}}" url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
+            <navigator wx:if="{{item.status == 1&& item.pid ==''}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">订单详情</navigator>
+            <navigator wx:if="{{item.status == 4}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">订单详情</navigator>
+            <!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
+            <view class="font_12 red fl_r mr_5" wx:if="{{item.status == 5 && item.pid ==''}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' data-order-id="{{item.id}}">订单完成</view>
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 2&& item.pid ==''}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 &&item.pid > 0}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 3}}" data-order-id="{{item.id}}">立即评价</navigator>
+            <navigator wx:if="{{item.status == 0}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">立即支付</navigator>
+            <navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+          </view>
+
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!-- 待付款 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:100%;">
+        <view class="search_no" wx:if="{{!ordert1.length}}">
+          <view class="font_14">
+            <image class="scimg" src="/images/kdd.png"></image>
+          </view>
+          <text>没有可用订单/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='tab_tab' wx:for="{{ordert1}}"wx:key="key">
+          <navigator url="../order/detail?orderId={{item.id}}">
+            <view class="top">
+              <view>
+                订单号：{{item.sNo}}
+                <!-- 除拼团订单的状态 -->
+                <block wx:if="{{item.pid ==''}}">
+                  <view class='tab_statu' wx:if="{{item.status == 0}}">等待买家付款</view>
+                </block>
+                <!-- 拼团订单的状态 -->
+                <block wx:if="{{item.pid > 0}}">
+                  <view class='tab_statu' wx:if="{{item.status == 0}}">待付款</view>
+
+                </block>
+              </view>
+            </view>
+            <view class="shop df" wx:for="{{item.list}}" wx:for-item="list" wx:key="id">
+              <view>
+                <image class="sh_slt" src="{{list.imgurl}}"></image>
+              </view>
+              <view class="sp_text">
+                <view style='width:70%;'>
+                  <view class="sp_tit ovh1" style="color: #000;">{{list.p_name}}</view>
+                  <view class="sp_tit ovh1" style='color:#808080'>[{{list.size}}]</view>
+                </view>
+                <view class="sp_jg">
+                  <view class='guige'>¥ {{list.p_price}}</view>
+                  <view class='guige'>x{{list.num}}</view>
+                </view>
+              </view>
+            </view>
+          </navigator>
+          <view class="total">
+            <view class="zhifu mt10">
+              合计：
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info != 0}}">¥ {{item.z_price}}</span>
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info == 0}}">¥ {{item.total}}</span>
+            </view>
+          </view>
+          <view class="bottom">
+            <navigator wx:if="{{item.status == 0}}" url="../order/detail?orderId={{item.id}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">立即支付</navigator>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!-- 待发货 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:100%;">
+        <view class="search_no" wx:if="{{!ordert2.length}}">
+          <view class="font_14">
+            <image class="scimg" src="/images/kdd.png"></image>
+          </view>
+          <text>没有可用订单/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='tab_tab' wx:for="{{ordert2}}"wx:key="key">
+          <navigator url="../order/detail?orderId={{item.id}}">
+            <view class="top">
+              <view>
+                订单号：{{item.sNo}}
+                <!-- 除拼团订单的状态 -->
+                <block wx:if="{{ item.pid ==''}}">
+                  <view class='tab_statu' wx:if="{{item.status == 1}}">等待卖家发货</view>
+                </block>
+                <!-- 拼团订单的状态 -->
+                <block wx:if="{{item.pid > 0}}">
+                  <view class='tab_statu' wx:if="{{item.status == 1}}">拼团成功-待发货</view>
+                </block>
+              </view>
+            </view>
+            <view class="shop df" wx:for="{{item.list}}" wx:for-item="list" wx:key="id">
+              <view>
+                <image class="sh_slt" src="{{list.imgurl}}"></image>
+              </view>
+              <view class="sp_text">
+                <view style='width:70%;'>
+                  <view class="sp_tit ovh1" style="color: #000;">{{list.p_name}}</view>
+                  <view class="sp_tit ovh1" style='color:#808080'> [{{list.size}}]</view>
+                </view>
+                <view class="sp_jg">
+                  <view class='guige'>¥ {{list.p_price}}</view>
+                  <view class='guige'>x{{list.num}}</view>
+                </view>
+              </view>
+            </view>
+          </navigator>
+          <view class="total">
+            <view class="zhifu mt10">
+              合计：
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info != 0}}">¥ {{item.z_price}}</span>
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info == 0}}">¥ {{item.total}}</span>
+            </view>
+          </view>
+          <view class="bottom">
+            <navigator url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
+            <view class="font_12 red fl_r mr_5" bindtap="add_fix" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 1&&item.pid >0}}">提醒发货</view>
+            <view class="font_12 red fl_r mr_5" bindtap="add_fix" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 1&&item.pid ==''}}">提醒发货</view>
+            <navigator wx:if="{{item.pid > 0 && item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!-- 待收货 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" style="height:100%;">
+        <view class="search_no" wx:if="{{!ordert3.length}}">
+          <view class="font_14">
+            <image class="scimg" src="/images/kdd.png"></image>
+          </view>
+          <text>没有可用订单/(ㄒoㄒ)/~~</text>
+        </view>
+        <view class='tab_tab' wx:for="{{ordert3}}"wx:key="key">
+          <navigator url="../order/detail?orderId={{item.id}}">
+            <view class="top">
+              <view>
+                订单号：{{item.sNo}}
+                <!-- 除拼团订单的状态 -->
+                <block wx:if="{{ item.pid ==''}}">
+                  <view class='tab_statu' wx:if="{{item.status == 2}}">等待买家收货</view>
+                </block>
+                <!-- 拼团订单的状态 -->
+                <block wx:if="{{item.pid > 0}}">
+                  <view class='tab_statu' wx:if="{{item.status == 2}}">拼团成功-已发货</view>
+                </block>
+              </view>
+            </view>
+            <view class="shop df" wx:for="{{item.list}}" wx:for-item="list" wx:key="id">
+              <view>
+                <image class="sh_slt" src="{{list.imgurl}}"></image>
+              </view>
+              <view class="sp_text">
+                <view style='width:70%;'>
+                  <view class="sp_tit ovh1" style="color: #000;">{{list.p_name}}</view>
+                  <view class="sp_tit ovh1" style='color:#808080'>[{{list.size}}]</view>
+                </view>
+                <view class="sp_jg">
+                  <view class='guige'>¥ {{list.p_price}}</view>
+                  <view class='guige'>x{{list.num}}</view>
+                </view>
+              </view>
+            </view>
+          </navigator>
+          <view class="total">
+            <view class="zhifu mt10">
+              合计：
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info != 0}}">¥ {{item.z_price}}</span>
+              <span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info == 0}}">¥ {{item.total}}</span>
+            </view>
+          </view>
+          <view class="bottom" >
+           <navigator url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' class="font_12 red fl_r mr_5">订单详情</navigator>
+            
+            <!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
+            <!-- <view class="font_12 red fl_r mr_5" bindtap="escOrder" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 1}}" data-order-id="{{item.id}}" data-sno="{{item.sNo}}">取消订单</view> -->
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' wx:if="{{item.status == 2&&item.pid==''}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <view class="font_12 red fl_r mr_5" bindtap="recOrder" style='border:1px solid #8a8a8a;color:#8a8a8a;' wx:if="{{item.status == 2 && item.pid > 0}}" data-sNo="{{item.sNo}}">确认收货</view>
+            <navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+		<!-- 待评价 -->
+		<swiper-item>
+			<scroll-view scroll-y="true" style="height:100%;">
+				<view class="search_no" wx:if="{{!ordert4.length}}">
+					<view class="font_14">
+						<image class="scimg" src="/images/kdd.png"></image>
+					</view>
+					<text>没有可用订单/(ㄒoㄒ)/~~</text>
+				</view>
+				<view class='tab_tab' wx:for="{{ordert4}}" wx:key="key">
+					<navigator url="../order/detail?orderId={{item.id}}">
+						<view class="top">
+							<view>
+								订单号：{{item.sNo}}
+								<!-- 除拼团订单的状态 -->
+								<block wx:if="{{ item.pid ==''}}">
+									<view class='tab_statu' wx:if="{{item.status == 3}}">等待买家评价</view>
+								</block>
+								<!-- 拼团订单的状态 -->
+								<block wx:if="{{item.pid > 0}}">
+									<view class='tab_statu' wx:if="{{item.status == 3}}">拼团成功-已签收</view>
+								</block>
+							</view>
+						</view>
+						<view class="shop df" wx:for="{{item.list}}" wx:for-item="list" wx:key="id">
+							<view>
+								<image class="sh_slt" src="{{list.imgurl}}"></image>
+							</view>
+							<view class="sp_text">
+								<view style='width:70%;'>
+									<view class="sp_tit ovh1" style="color: #000;">{{list.p_name}}</view>
+									<view class="sp_tit ovh1" style='color:#808080'>[{{list.size}}]</view>
+								</view>
+								<view class="sp_jg">
+									<view class='guige'>¥ {{list.p_price}}</view>
+									<view class='guige'>x{{list.num}}</view>
+								</view>
+							</view>
+						</view>
+					</navigator>
+					<view class="total">
+						<view class="zhifu mt10">
+							合计：
+							<span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info != 0}}">¥ {{item.z_price}}</span>
+							<span class="font_20 red" style="margin-left:5px;" wx:if="{{item.info == 0}}">¥ {{item.total}}</span>
+						</view>
+					</view>
+					<view class="bottom" >
+						<navigator wx:if="{{item.status != 1}}" url="../order/detail?orderId={{item.id}}" style='border:1px solid #8a8a8a;color:#8a8a8a;'
+						 class="font_12 red fl_r mr_5">订单详情</navigator>
+						<!-- <navigator class="font_12 red fl_r mr_5" url="../logistics/logistics?orderId={{item.sNo}}" style='border:1px solid #8a8a8a;color:#8a8a8a;'wx:if="{{item.status == 2 || item.status == 3}}" data-order-id="{{item.id}}">查看物流</navigator> -->
+						<navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}" style='color:{{bgcolor}};border:1px solid {{bgcolor}};'
+						 wx:if="{{item.status == 3&&item.pid ==''}}" data-order-id="{{item.id}}">立即评价</navigator>
+             	<navigator class="font_12 red fl_r mr_5" url="../comment/comment?ordersn={{item.sNo}}"style='border:1px solid #8a8a8a;color:#8a8a8a;'
+						 wx:if="{{item.status == 3&&item.pid > 0}}" data-order-id="{{item.id}}">立即评价</navigator>
+						<navigator wx:if="{{item.pid > 0 &&item.status > 0}}" url="../group_buy/cantuan?id={{item.ptcode}}&groupid={{item.pid}}&pro_id={{item.pro_id}}&man_num={{item.man_num}}"
+						 style='color:{{bgcolor}};border:1px solid {{bgcolor}};' class="font_12 red fl_r mr_5">分享好友</navigator>
+					</view>
+				</view>
+			</scroll-view>
+		</swiper-item>
+  </swiper>
+</block>
+<view bindtap="hideAllChioce" class="mask" hidden="{{!chioceDistrict&&!chioceSorting&&!chioceFilter}}"></view>

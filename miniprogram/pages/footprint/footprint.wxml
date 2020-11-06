@@ -1,0 +1,56 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<view class="page">
+  <view class="search_no" wx:if="{{!arr.length}}">
+    <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+    <text>暂时还没有记录/(ㄒoㄒ)/~~</text>
+  </view>
+  <view wx:for="{{arr}}">
+    <view class="top">
+      <view>{{item.time}}</view>
+    </view>
+    <view style='width:100%;padding-left:2.3%;display:flex;flex-direction:row;flex-wrap:wrap;'>
+      <view class="shop " wx:for="{{item.list}}" wx:for-item="list" wx:key="id">
+        <navigator url="../product/detail?productId={{list.id}}">
+          <image class="sh_slt" src="{{list.imgurl}}"></image>
+            <view class="">            
+            <view class="sp_text">
+              <!-- <view class="sp_tit ovh1">{{list.product_title}}</view>  -->
+              <view class="sp_jg" style='padding-left:5px;'>￥{{list.price}}</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view style='clear:both;'></view>
+  </view>
+</view>
+<view style="height:50px;"></view>
+<view class="dibu" wx:if="{{arr.length}}">
+    <button bindtap="alldel" class="cz" hover-class="czz" style='background-color:{{bgcolor}};border-radius:0px;color:#fff;height: 45px;line-height: 45px;'>清除全部记录</button>
+</view>
+</block>

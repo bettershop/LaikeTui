@@ -1,0 +1,53 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<view class="page">
+  <view class="search_no" wx:if="{{!list.length}}">
+    <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+    <text>暂时还没有收藏/(ㄒoㄒ)/~~</text>
+  </view>
+
+  <view class="shop df" wx:for="{{list}}" >
+   <navigator url="../product/detail?productId={{item.pid}}">      
+    <image class="sh_slt" src="{{item.imgurl}}"></image>
+    </navigator>
+    <view class="df_1">            
+      <view class="sp_text">
+        <navigator class="sp_tit ovh1" style='height:50%;' url="../product/detail?productId={{item.pid}}"> 
+          {{item.product_title}}
+        </navigator>
+        <!-- <view class="sp_tit ovh1" style='height:50%;'>{{item.product_title}}</view> -->
+        <view class="sp_jg">￥{{item.price}}</view>
+        <view class="dle" data-fav-id="{{item.id}}" bindtap="removeFavorites">取消收藏</view>
+      </view>
+    </view>
+  </view>
+  <view style="height:50px;"></view>
+  <view class="dibu" wx:if="{{list.length}}">
+    <button bindtap="alldel" class="cz" hover-class="czz" style="background-color:{{bgcolor}};height: 45px;line-height: 45px;">全部取消收藏</button>
+  </view>
+</view>
+</block>

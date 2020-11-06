@@ -1,0 +1,13 @@
+<include src="/commons/extension/extension" />
+<include src="/commons/navbar/navbar" />
+
+<view class="after-navber">
+	<view style="padding: 0 60rpx">
+		<view style="padding:80rpx 0 48rpx;border-bottom: 1rpx solid #e3e3e3;margin-bottom: 72rpx;text-align: center">
+			<image src="/images/icon-wechatapp.png" style="width: 200rpx;height: 200rpx;"></image>
+		</view>
+		<view style="font-size: 13pt;margin-bottom: 40rpx">申请获取以下权限</view>
+		<view style="color: #888;margin-bottom: 88rpx">获得你的公开信息（昵称、头像等）</view>
+    
+    <button bindgetuserinfo="agreeGetUser" class="login-btn" openType="getUserInfo">授权登录</button></view>
+</view>
