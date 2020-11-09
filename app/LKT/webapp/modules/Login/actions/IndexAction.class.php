@@ -18,11 +18,8 @@ class IndexAction extends Action {
 
 	public function execute(){
 		$db=PDOAction::getInstance();
-		// 获取输入的信息 
 		$request = $this->getContext()->getRequest();
-		// 获取输入的用户名
 		$name = addslashes(trim($request->getParameter("login")));
-		// 获取输入的密码
 		$password = md5($request->getParameter("pwd"));
 
         if($name == '' || $password == ''){

@@ -60,7 +60,6 @@ class modifyAction extends Action {
         $role = addslashes(trim($request->getParameter('role'))); // 角色
 
        $sql = "select sid from lkt_admin where id = '$id'";
-            // print_r($sql);die;
        $r_role = $db->select($sql);
        $sid = $r_role[0]->sid;      
             if($password != '' ){  

@@ -11,8 +11,6 @@ class member_record_delAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
-        // 接收信息
         $id = $request->getParameter('id'); // id数组
         $type = $request->getParameter('type'); //id
         if($type == 'onekey'){

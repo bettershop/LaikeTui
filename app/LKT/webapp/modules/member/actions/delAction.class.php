@@ -11,8 +11,6 @@ class delAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
-        // 接收信息
         $id = $request->getParameter('id'); //id
         $id = rtrim($id, ','); // 去掉最后一个逗号
         $id = explode(',',$id); // 变成数组
