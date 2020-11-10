@@ -199,8 +199,9 @@
     <div class="text-c">
         {if  $status==4 || $status==5}
             <form name="form1" action="index.php" method="get" style="display: flex;">
-                <input type="hidden" name="module" value="pintuan"/>
-                <input type="hidden" name="action" value="Home"/>
+                <input type="hidden" name="module" value="pi"/>
+                <input type="hidden" name="p" value="pintuan"/>
+                <input type="hidden" name="c" value="Home"/>
                 <input type="text" name="proname" size='8' value="{$proname}" id="" placeholder="请输入商品名称"
                        style="width:200px" class="input-text">
                 <input type="text" name="username" size='8' value="{$username}" id="" placeholder="请输入会员名称"
@@ -225,8 +226,9 @@
             </form>
         {else}
             <form name="form1" action="index.php" method="get" style="display: flex;align-items: center;">
-                <input type="hidden" name="module" value="pintuan"/>
-                <input type="hidden" name="action" value="Home"/>
+                <input type="hidden" name="module" value="pi"/>
+                <input type="hidden" name="p" value="pintuan"/>
+                <input type="hidden" name="c" value="Home"/>
                 <input type="hidden" name="pagesize" value="{$pagesize}" id="pagesize"/>
                 <input type="text" name="proname" size='8' value="{$proname}" id="" placeholder="请输入商品名称"
                        style="width:200px" class="input-text" autocomplete="off">

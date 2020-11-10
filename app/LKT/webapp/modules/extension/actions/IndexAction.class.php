@@ -74,6 +74,7 @@ class IndexAction extends Action
 
     public function del_simg()
     {
+        $db = DBAction::getInstance();
         $imgDir = 'product_share_img/';
         $sql = "select * from lkt_config where id=1";
         $r = $db->select($sql);
