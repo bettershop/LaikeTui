@@ -45,7 +45,6 @@ class IndexAction extends Action {
                 $level001 = $rr[0]->sid;
                 
                 $rr01 = $db->select("select sid from lkt_product_class where recycle = 0 and cid = '$level001'");
-                // print_r($rr01);die;
                 $level01 = $rr01[0]->sid;
                 // 循环查询该分类是否有商品
                 foreach ($rr as $k => $v){
