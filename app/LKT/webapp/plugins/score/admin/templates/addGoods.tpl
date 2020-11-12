@@ -397,33 +397,6 @@
 
 					<div class="col-12 row">
 						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
-							<span style="color: #FF0404;">*</span>分销层级：
-						</label>
-
-						<div class="formControls col-10">
-							<select name="pets" id="pet-select" @change="selects" style="width:340px;">
-								<option value="">请选择向上返佣的层级</option>
-								<option value="1">1级</option>
-								<option value="2">2级</option>
-								<option value="3">3级</option>
-							</select>
-						</div>
-
-						<div class="formControls col-10">
-							<div style="width:400px;background:rgba(244,247,249,1);border-radius:2px;padding: 1px 15px;margin: 10px 0px;" v-if="lvlist.length">
-
-								<div v-for="(item,i) in lvlist" :key="i" style="margin: 14px 0px;">
-									<span style="font-size:14px;font-weight:400;color:rgba(65,70,88,1);">{{ item.text }}:</span>
-									<input type="text" class="input-text" style="height: 36px;width:190px;background:rgba(255,255,255,1);border:1px solid rgba(213,219,232,1);border-radius:2px;" v-model="item.name">
-									<span style="font-size:14px;font-weight:400;color:rgba(65,70,88,1);">%</span>
-								</div>
-							
-							</div>
-						</div>
-					</div>
-
-					<div class="col-12 row">
-						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
 							<span style="color: #FF0404;">*</span>佣金发放时间：
 						</label>
 
