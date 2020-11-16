@@ -33,19 +33,19 @@
             <picker-view class="{{ show?'openpuls':'closepuls' }}" indicator-style = "height: 50rpx;" value="{{value}}" bindchange="bindChange" catchtap="nono">
               <!--省-->
               <picker-view-column>
-                <view wx:for="{{sheng}}" wx:for-item="sheng" wx:key="">
+                <view wx:for="{{sheng}}" wx:for-item="sheng" wx:key="key">
                   {{sheng.G_CName}}
                 </view>
               </picker-view-column>
               <!--地级市-->
               <picker-view-column>
-                <view wx:for="{{shi}}" wx:key="">
+                <view wx:for="{{shi}}" wx:key="key">
                   {{item.G_CName}}
                 </view>
               </picker-view-column>
               <!--区县-->
               <picker-view-column>
-                <view wx:for="{{xian}}" wx:key="">
+                <view wx:for="{{xian}}" wx:key="key">
                   {{item.G_CName}}
                 </view>
               </picker-view-column>

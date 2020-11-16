@@ -32,7 +32,7 @@
         </view>
         <text>暂时还没有活动/(ㄒoㄒ)/~~</text>
       </view>
-      <view class='coupon_box' wx:for="{{list}}">
+      <view class='coupon_box' wx:for="{{list}}" wx:key="key" >
         <view class='coupon_left'>
           <view style='margin-left:20px;color:#444;padding-top:5px;'>
             <view class='gs'></view>
@@ -96,7 +96,7 @@
             </view>
             <text>暂时还没有活动/(ㄒoㄒ)/~~</text>
           </view>
-          <view class='coupon_box' wx:for="{{list}}">
+          <view class='coupon_box' wx:for="{{list}}" wx:key="key" >
             <view class='coupon_left'>
               <view style='margin-left:20px;color:#444;padding-top:5px;'>
                 <view class='gs'></view>
@@ -154,7 +154,7 @@
             </view>
             <text>没有可用订单/(ㄒoㄒ)/~~</text>
           </view>
-          <view class='coupon_box' wx:for="{{mylist}}">
+          <view class='coupon_box' wx:for="{{mylist}}" wx:key="key" >
             <view class='coupon_left'>
               <view style='margin-left:20px;color:#444;padding-top:5px;'>
                 {{item.name}}

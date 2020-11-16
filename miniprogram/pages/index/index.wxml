@@ -47,7 +47,7 @@
     <view class='tab'>
       <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
         <view class='tablist'>
-          <view wx:for="{{twoList}}" wx:key="{{item.id}}" scroll-x class='item {{current==index?"select":""}}' data-pos='{{index}}' data-tabid='{{item.id}}' bindtap='tabItemClick'>
+          <view wx:for="{{twoList}}" wx:key="id" scroll-x class='item {{current==index?"select":""}}' data-pos='{{index}}' data-tabid='{{item.id}}' bindtap='tabItemClick'>
             <text class='tab-text'>{{item.name}}</text>
           </view>
         </view>
@@ -57,11 +57,11 @@
       </view>
     </view>
     <swiper class='out' current='{{current}}' autoplay="{{false}}" bindchange="contentChange">
-      <swiper-item wx:for="{{twoList}}" wx:for-item="item" wx:key="{{item.id}}">
+      <swiper-item wx:for="{{twoList}}" wx:for-item="item" wx:key="id">
         <scroll-view scroll-y="true" bindscrolltolower="obm" >
           <!-- /首页轮播图/ -->
           <swiper class="swiper-box" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" wx:if="{{item.id == 0 && banner.length >0}}">
-            <block wx:for="{{banner}}" wx:key="{{item.id}}">
+            <block wx:for="{{banner}}" wx:key="id">
               <navigator url='{{item.url}}'>
                 <swiper-item>
                   <image src="{{item.image}}" id="{{item.id}}" class="slide-image" width="100%" height="200" />

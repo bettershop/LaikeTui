@@ -30,7 +30,7 @@
     <text>暂时还没有收藏/(ㄒoㄒ)/~~</text>
   </view>
 
-  <view class="shop df" wx:for="{{list}}" >
+  <view class="shop df" wx:for="{{list}}" wx:key="key"  >
    <navigator url="../product/detail?productId={{item.pid}}">      
     <image class="sh_slt" src="{{item.imgurl}}"></image>
     </navigator>

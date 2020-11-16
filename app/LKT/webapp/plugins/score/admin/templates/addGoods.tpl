@@ -395,23 +395,11 @@
 						</div>
 					</div>
 
-					<div class="col-12 row">
-						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
-							<span style="color: #FF0404;">*</span>佣金发放时间：
-						</label>
-
-						<div class="formControls col-10" style="display: flex;">
-							<div>
-								<input type="radio" id="dewey" name="type" value="2" checked @click="radiosa">
-								<label for="dewey">确认收货</label>
-							</div>
-						</div>
-					</div>
-
+					
 					<div class="col-12 row">
 
 						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
-							<span style="color: #FF0404;">*</span>佣金手续费：
+							<span style="color: #FF0404;">*</span>消耗积分：
 						</label>
 
 						<div class="formControls col-10">

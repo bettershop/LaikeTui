@@ -29,7 +29,7 @@
     <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
     <text>暂时还没有记录/(ㄒoㄒ)/~~</text>
   </view>
-  <view wx:for="{{arr}}">
+  <view wx:for="{{arr}}" wx:key="key" >
     <view class="top">
       <view>{{item.time}}</view>
     </view>

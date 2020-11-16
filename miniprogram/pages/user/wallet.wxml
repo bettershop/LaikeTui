@@ -48,7 +48,7 @@
         </view>
         <view class='obtain_box'>
           <scroll-view scroll-y="true" style='height:100%;overflow:auto;padding-bottom:45px;'>
-          <view class='jf_obtain' wx:for="{{list_3}}">
+          <view class='jf_obtain' wx:for="{{list_3}}" wx:key="key" >
             <view class='obtain_bt_3'>
               <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
             </view>
@@ -82,7 +82,7 @@
         </view>
         <view class='obtain_box'>
           <scroll-view scroll-y="true" style='height:100%;overflow:auto;padding-bottom:45px;'>
-          <view class='jf_obtain' style='color:#777;' wx:for="{{list_1}}">
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_1}}" wx:key="key" >
             <view class='obtain_bt_3'>
               <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>
             </view>
@@ -115,7 +115,7 @@
         </view>
         <view class='obtain_box'>
           <scroll-view scroll-y="true" style="height:100%;overflow:auto;padding-bottom:45px;">
-          <view class='jf_obtain' style='color:#777;' wx:for="{{list_2}}">
+          <view class='jf_obtain' style='color:#777;' wx:for="{{list_2}}" wx:key="key" >
             <view class='obtain_bt_3'>
                 <!-- <view style='color:#333;'>{{item.user_name}} -->
                 <view style='color: #999;font-size: 30rpx;'>{{item.time}}</view>

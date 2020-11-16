@@ -4,7 +4,7 @@
 
         <view class="wxSearchMindKey">
             <view class="wxSearchMindKeyList">
-                <block wx:for="{{wxSearchData.mindKeys}}">
+                <block wx:for="{{wxSearchData.mindKeys}}" wx:key="key" >
                     <view class="wxSearchMindKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
                 </block>
             </view>
@@ -13,7 +13,7 @@
         <view class="wxSearchKey" style="display:{{wxSearchData.view.isShowSearchKey ? 'block':'none'}}">
             <text class="wxSearchTitle">热门搜索</text>
             <view class="wxSearchKeyList">
-                <block wx:for="{{wxSearchData.keys}}">
+                <block wx:for="{{wxSearchData.keys}}" wx:key="key" >
                     <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
                 </block>
             </view>
@@ -27,7 +27,7 @@
             </view>
             <view style='clear:both;'></view>
             <view wx:if="{{wxSearchData.his[0]}}" class="wxSearchKeyList">
-                <block wx:for="{{wxSearchData.his}}">
+                <block wx:for="{{wxSearchData.his}}" wx:key="key" >
                     <view class="wxSearchKeyItem">
                         <text class="wxSearchHistoryItemText" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</text> 
                     </view>

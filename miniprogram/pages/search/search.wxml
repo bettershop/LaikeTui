@@ -39,7 +39,7 @@
   <!--左侧栏-->
   <view class="nav_left">
      <scroll-view scroll-y="true" style="height:99%;"> 
-      <view wx:for="{{cateItems}}">
+      <view wx:for="{{cateItems}}" wx:key="key" >
             <!--当前项的id等于item项的id，那个就是当前状态-->
             <!--用data-index记录这个数据在数组的下标位置，使用data-id设置每个item的id值，供打开2级页面使用-->
             <view class="nav_left_items {{curNav == item.cate_id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.cate_id}}">{{item.cate_name}}</view>
@@ -52,7 +52,7 @@
     <!--如果有数据，才遍历项-->
     <image class='cimages' wx:if="{{cateItems[curIndex].cimgurl != ''}}" src="{{cateItems[curIndex].cimgurl}}"></image>
     <view wx:if="{{cateItems[curIndex].ishaveChild}}">
-      <block wx:for="{{cateItems[curIndex].children}}">
+      <block wx:for="{{cateItems[curIndex].children}}" wx:key="key" >
         <view class="nav_right_items">
         <!--界面跳转 -->
           <navigator url="../listdetail/listdetail?class={{item.child_id}}&title={{item.name}}" >
