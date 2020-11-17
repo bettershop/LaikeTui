@@ -145,7 +145,7 @@
             <block wx:for="{{item.twodata}}" wx:for-item="twodata" wx:key="id">
               <navigator class="pr" url="../product/detail?productId={{twodata.id}}" hover-class="changestyle">
                 <image class="photo" src="{{twodata.imgurl}}"></image>
-                <view class="title">{{twodata.name}}</view>
+                <view class="title">{{twodata.product_title}}</view>
                 <view style="display:flex;line-height:50rpx;">
                   <view class="gmxx" style="font-size:28rpx;width:80%">
                     <text style="padding:0px 2px;" wx:if="{{twodata.xp == 1}}">新品</text>

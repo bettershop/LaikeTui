@@ -96,7 +96,7 @@ order by a.sort DESC LIMIT 0,10";
                 $price = $r_ttt[0]->price;
                 $price_yh = $r_ttt[0]->yprice;
 
-                $product[$k] = array('id' => $v->id, 'name' => $v->product_title, 'price' => $price, 'price_yh' => $price_yh, 'imgurl' => $imgurl, 'volume' => $v->volume);
+                $product[$k] = array('id' => $v->id, 'product_title' => $v->product_title, 'price' => $price, 'price_yh' => $price_yh, 'imgurl' => $imgurl, 'volume' => $v->volume);
             }
             $twoList['0'] = array('id' => '0', 'name' => '首页', 'count' => 1, 'twodata' => $shou, 'distributor' => $distributor);
             $twoList[$key + 1] = array('id' => $value->cid, 'name' => $value->pname, 'count' => 1, 'twodata' => $product, 'icons' => $icons);

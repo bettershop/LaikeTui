@@ -432,9 +432,7 @@
 								<span>
 									显示位置:
 								</span>
-									<div>
-									<label for="dewey">分销商品</label>
-								</div>
+									
 								<div>
 									<input type="checkbox" id="dewey" v-model="is_show1" style="visibility: visible;">
 									<label for="dewey">热销单品</label>

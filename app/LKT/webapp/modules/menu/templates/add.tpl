@@ -41,8 +41,8 @@
     <div class="pd-20">
         <form name="form1" action="index.php?module=menu&action=add" class="form form-horizontal" method="post"
             onsubmit="return check(this);" enctype="multipart/form-data">
-            <input type="hidden" name="val" class="val" value="{$cid}">
-            <input type="hidden" name="level" class="level" value="{$level}">
+            <input type="hidden" name="val" class="val" value="0">
+            <input type="hidden" name="level" class="level" value="0">
             <div class="row cl">
                 <label class="form-label col-4"><span class="c-red">*</span>菜单名称：</label>
                 <div class="formControls col-4">
