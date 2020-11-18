@@ -1,19 +1,16 @@
 <!DOCTYPE HTML>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    {php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
+    <head>
+        <meta charset="utf-8">
+            <meta content="webkit|ie-comp|ie-stand" name="renderer">
+                <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+                    <meta content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport"/>
+                    <meta content="no-siteapp" http-equiv="Cache-Control"/>
+                    {php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
     {literal}
-    <style type="text/css">
-        .center {
+                    <style type="text/css">
+                        .center {
             text-align: center !important;
         }
 
@@ -262,13 +259,13 @@
         }
 
         .wl_maskNewContent {
-			width: 920px;
-			height: 600px;
-			background: rgba(255, 255, 255, 1);
-			border-radius: 4px;
-			margin: 0 auto;
-			position: relative;
-			top: 10%;
+            width: 920px;
+            height: 600px;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 4px;
+            margin: 0 auto;
+            position: relative;
+            top: 10%;
         }
 
         .dc {
@@ -291,10 +288,9 @@
             display: flex;
             justify-content: flex-end;
         }
-    </style>
-
-    <SCRIPT language=javascript>
-        function printpr() //预览函数
+                    </style>
+                    <script language="javascript">
+                        function printpr() //预览函数
         {
             document.all("qingkongyema").click();//打印之前去掉页眉，页脚
             document.all("dayinDiv").style.display = "none"; //打印之前先隐藏不想打印输出的元素（此例中隐藏“打印”和“打印预览”两个按钮）
@@ -321,12 +317,9 @@
         function doPage() {
             layLoading.style.display = "none";//同上
         }
-
-
-    </SCRIPT>
-
-    <script language="VBScript">
-        dim hkey_root, hkey_path, hkey_key
+                    </script>
+                    <script language="VBScript">
+                        dim hkey_root, hkey_path, hkey_key
         hkey_root = "HKEY_CURRENT_USER"
         hkey_path = "\Software\Microsoft\Internet Explorer\PageSetup"
         //设置网页打印的页眉页脚为空
@@ -348,252 +341,377 @@
         hkey_key = "\footer"
         RegWsh.RegWrite hkey_root + hkey_path + hkey_key, "&u&b&d"
         end function
-    </script>
-
-    {/literal}
-    <title>订单详情</title>
-</head>
-
-<body>
-
-<nav class="breadcrumb">
-    订单管理 <span class="c-gray en">&gt;</span> 
-    <a href="index.php?module=orderslist">订单列表</a> <span class="c-gray en">&gt;</span>  
-    订单详情 <span class="c-gray en">&gt;</span>
-    <a href="javascript:history.go(-1)">返回</a>
-</nav>
-
-
-    <div>
-        <aside class="mtb" style="margin:10px 0px 20px 10px">
-            <a class="newBtn btn radius" style="display: inline-block;border: none;"
-                href="index.php?module=orderslist&having={$da.having}&ordtype={$da.ordtype}&gcode={$da.gcode}&ocode={$da.ocode}&sNo={$da.sNo}&otype={$da.otype}&status={$da.status}&startdate={$da.startdate}&enddate={$da.enddate}&page={$da.page}">
+                    </script>
+                    {/literal}
+                    <title>
+                        订单详情
+                    </title>
+                </meta>
+            </meta>
+        </meta>
+    </head>
+    <body>
+        <nav class="breadcrumb">
+            订单管理
+            <span class="c-gray en">
+                >
+            </span>
+            <a href="index.php?module=orderslist">
+                订单列表
+            </a>
+            <span class="c-gray en">
+                >
+            </span>
+            订单详情
+            <span class="c-gray en">
+                >
+            </span>
+            <a href="javascript:history.go(-1)">
                 返回
             </a>
-            <input type="hidden" id="dingdan" value="{$data.sNo}">
-
-            <!--         <button class="btn radius newbtn b02" style="height: 36px;border: none;" onclick="printTure();">
+        </nav>
+        <div>
+            <aside class="mtb" style="margin:10px 0px 20px 10px">
+                <a class="newBtn btn radius" href="index.php?module=orderslist&having={$da.having}&ordtype={$da.ordtype}&gcode={$da.gcode}&ocode={$da.ocode}&sNo={$da.sNo}&otype={$da.otype}&status={$da.status}&startdate={$da.startdate}&enddate={$da.enddate}&page={$da.page}" style="display: inline-block;border: none;">
+                    返回
+                </a>
+                <input id="dingdan" type="hidden" value="{$data.sNo}">
+                    <!--         <button class="btn radius newbtn b02" style="height: 36px;border: none;" onclick="printTure();">
             <div style="height: 100%;display: flex;align-items: center;">
                 <img src="images/icon1/dy.png"/>&nbsp;打印
             </div>
         </button>&nbsp;&nbsp; -->
-            <input type="hidden" class="control" name="control" value="{$data.z_price}">
-            <input type="hidden" name="qingkongyema" id="qingkongyema" class="b02" value="清空页码"
-                onclick="pagesetup_null()">&nbsp;&nbsp;
-            <input type="hidden" class="tab" value="恢复页码" onclick="pagesetup_default()">
-    </div>
-    <section class="rt_wrap " style="margin-left:10px;margin-right:10px;height:100%;position:relative;">
-        <div style="border-radius: 10px;margin-bottom: 20px;background-color: #fff;">
-            <p class="ulTitle">基本信息</p>
-            <ul class="ul1" style="height: 190px;">
-                <li style="width: 26.66%;">订单号：<span class="grText">{$data.sNo}</span></li>
-                <li style="width: 26.66%;">订单类型：
+                    <input class="control" name="control" type="hidden" value="{$data.z_price}">
+                        <input class="b02" id="qingkongyema" name="qingkongyema" onclick="pagesetup_null()" type="hidden" value="清空页码">
+                            <input class="tab" onclick="pagesetup_default()" type="hidden" value="恢复页码">
+                            </input>
+                        </input>
+                    </input>
+                </input>
+            </aside>
+        </div>
+        <section class="rt_wrap " style="margin-left:10px;margin-right:10px;height:100%;position:relative;">
+            <div style="border-radius: 10px;margin-bottom: 20px;background-color: #fff;">
+                <p class="ulTitle">
+                    基本信息
+                </p>
+                <ul class="ul1" style="height: 190px;">
+                    <li style="width: 26.66%;">
+                        订单号：
+                        <span class="grText">
+                            {$data.sNo}
+                        </span>
+                    </li>
+                    <li style="width: 26.66%;">
+                        订单类型：
                     {if $data.otype=='pt'}
-                    <span class="grText">拼团订单</span>
-                    {else}{if $data.drawid > 0}
-                    <span class="grText">抽奖订单</span>
-                    {else}
-                    <span class="grText">普通订单</span>
-                    {/if}{/if}
-                </li>
-                <li style="width: 26.66%;">发送方式：<span class="grText">快递发送</span></li>
-                <li style="width: 20.00%;">退货原因：<span class="grText">{$data.content}</span></li>
-                <li style="width: 26.66%;">下单时间：<span class="grText">{$data.add_time}</span></li>
-                <li style="width: 26.66%;">订单状态：<span class="grText">{$data.r_status}</span></li>
-                <li style="width: 26.66%;">发货时间：<span class="grText">{$data.deliver_time}</span></li>
-                <li style="width: 20.00%;">购买用户：<span class="grText">{$data.user_name}</span></li>
-
-                <li style="width: 26.66%;">支付方式：<span class="grText">
-                        {if $data.paytype == 'wxPay'}
+                        <span class="grText">
+                            拼团订单
+                        </span>
+                        {else}{if $data.drawid > 0}
+                        <span class="grText">
+                            抽奖订单
+                        </span>
+                        {else}
+                        <span class="grText">
+                            普通订单
+                        </span>
+                        {/if}{/if}
+                    </li>
+                    <li style="width: 26.66%;">
+                        发送方式：
+                        <span class="grText">
+                            快递发送
+                        </span>
+                    </li>
+                    <li style="width: 20.00%;">
+                        退货原因：
+                        <span class="grText">
+                            {$data.content}
+                        </span>
+                    </li>
+                    <li style="width: 26.66%;">
+                        下单时间：
+                        <span class="grText">
+                            {$data.add_time}
+                        </span>
+                    </li>
+                    <li style="width: 26.66%;">
+                        订单状态：
+                        <span class="grText">
+                            {$data.r_status}
+                        </span>
+                    </li>
+                    <li style="width: 26.66%;">
+                        发货时间：
+                        <span class="grText">
+                            {$data.deliver_time}
+                        </span>
+                    </li>
+                    <li style="width: 20.00%;">
+                        购买用户：
+                        <span class="grText">
+                            {$data.user_name}
+                        </span>
+                    </li>
+                    <li style="width: 26.66%;">
+                        支付方式：
+                        <span class="grText">
+                            {if $data.paytype == 'wxPay'}
                         微信支付
                         {else}
                         余额支付
-                        {/if}</span></li>
-                <li style="width: 70.66%;">到货时间：<span class="grText">{$data.arrive_time}</span></li>
-                <li>快递单号：
+                        {/if}
+                        </span>
+                    </li>
+                    <li style="width: 70.66%;">
+                        到货时间：
+                        <span class="grText">
+                            {$data.arrive_time}
+                        </span>
+                    </li>
+                    <li>
+                        快递单号：
                     {foreach from=$data.courier_num item=item name=f1}
                     {if $item.courier_num ==''}
-                    <span class="grText" style="display: inline-block;"></span>
-                    {else}
-                    <span>
-                        <a class="send-btn1 " style="text-decoration:underline" href="javascript:"
-                            onclick="send_btn1(this,'{$data.sNo}','{$item.courier_num}')">
-                            <span style="width: 222px;"
-                                class="grText changeNum">{$item.courier_num}({$item.kuaidi_name})</span>
-                        </a> | 
-                    </span>
-                    {/if}
+                        <span class="grText" style="display: inline-block;">
+                        </span>
+                        {else}
+                        <span>
+                            <a class="send-btn1 " href="javascript:" onclick="send_btn1(this,'{$data.sNo}','{$item.courier_num}')" style="text-decoration:underline">
+                                <span class="grText changeNum" style="width: 222px;">
+                                    {$item.courier_num}({$item.kuaidi_name})
+                                </span>
+                            </a>
+                            |
+                        </span>
+                        {/if}
                     {/foreach}
                     注：点击单号查看物流
-                </li>
-            </ul>
-        </div>
-        <div style="border-radius: 10px;margin-bottom: 20px;background-color: #fff;">
-            <p class="ulTitle">收货人信息</p>
-            <ul class="ul2" style="height: 190px;">
-                <li style="width: 100%;padding-left: 20px;">&nbsp;&nbsp;&nbsp;收货人：<span class="grText">{$data.name}</span> </li>
-                <li style="width:100%;padding-left: 20px;">联系电话：<span class="grText">{$data.mobile}</span></li>
-                <li style="width: 100%;padding-left: 20px;">收货地址：<span class="grText">{$data.address}</span></li>
-            </ul>
-        </div>
-
-        </div> 
-                <div style="border-radius: 10px;margin-bottom: 20px;background-color: #fff;padding:10px;">
-            <p class="ulTitle">商品信息</p>
-            <table class="table">
-                <tr>
-                    <th class="center">商品名称</th>
-                    <th class="center">商品规格</th>
-                    <th class="center">商品ID</th>
-                    <th class="center">商品单价</th>
-                    <th class="center">单位</th>
-                    <th class="center">商品数量</th>
-                    <th class="center">商品总价</th>
-                    <th class="center">运费</th>
-                    <th class="center">总金额</th>
-                    <th class="center">操作</th>
-                </tr>
-                {foreach from=$detail item=item name=f1}
-                <tr>
-                    <td style="text-align:left;" id="p_name">
-                        <img class='pimg' src="{$uploadImg}{$item->pic}" style="margin-right: 20px;" width="50"
-                            height="50" />
-
-                        <input type="hidden" id="inputid-{$item->id}" value="{$item->id}">
-                        <a style="display: contents; border: none;"
-                            href="index.php?module=product&action=see&id={$item->p_id}&product_title={$item->p_name}&url=Index&uploadImg={$uploadImg}"
-                            title="查看">
-                            {$item->p_name}
-                        </a>
-
-                    </td>
-
-                    <td class="center"><span class="grText">{$item->size}</span></td>
-
-
-                    <td class="center"><span class="grText">{$item->p_id}</span></td>
-
-
-                    <td class="center" rowspan="{$item->index}">
-
-                        {if $item->r_status == '0'}
-                        <span id="Priceb-{$item->id}" class="grText" onclick="openPrice('#Prices-{$item->id}','#Priceb-{$item->id}','#inputidsss-{$item->id}','#inputid-{$item->id}')">￥{$item->p_price}</span>
-                        {else}
-                        <span id="Priceb-{$item->id}" class="grText">￥{$item->p_price}</span>
-                        {/if}
-
-                        <input type="hidden" id="inputidsss-{$item->id}" value="{$item->p_price}">
-                        <input id="Prices-{$item->id}" style="display: none;" type="text" name="p_price" value="{$item->p_price}" autofocus>
-                    </td>
-
-                    <td class="center">{$item->unit}</td>
-                    <td class="center" rowspan="{$item->index}"><span class="grText">{$item->num}</span></td>
-
-                    <td class="center" rowspan="{$item->index}"><span class="grText"
-                            style="font-weight: bold;">￥{$item->p_price*$item->num}</span></td>
-
-
-                    <td class="center">{$item->freight}</td>
-
-                    <td class="center" rowspan="{$item->index}"><span class="grText"
-                            style="font-weight: bold;">￥{$item->z_price+$item->freight}</span></td>
-                    <td class="center">
-                        <a class="hover_a" href="index.php?module=stock&product_title={$item->p_name}" title="查看">
-                            <img src="images/icon1/ck.png" />&nbsp;查看
-                        </a>
-                    </td>
-
-
-                </tr>
-                {/foreach}
-            </table>
-
-            <div class="numss">
-                <span>优惠合计：-￥{$reduce_price+$coupon_price} 元</span>
-                <span>合计支付： 
+                    </li>
+                </ul>
+            </div>
+            <div style="border-radius: 10px;margin-bottom: 20px;background-color: #fff;">
+                <p class="ulTitle">
+                    收货人信息
+                </p>
+                <ul class="ul2" style="height: 190px;">
+                    <li style="width: 100%;padding-left: 20px;">
+                        收货人：
+                        <span class="grText">
+                            {$data.name}
+                        </span>
+                    </li>
+                    <li style="width:100%;padding-left: 20px;">
+                        联系电话：
+                        <span class="grText">
+                            {$data.mobile}
+                        </span>
+                    </li>
+                    <li style="width: 100%;padding-left: 20px;">
+                        收货地址：
+                        <span class="grText">
+                            {$data.address}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </body>
+</html>
+<div style="border-radius: 10px;margin-bottom: 20px;background-color: #fff;padding:10px;">
+    <p class="ulTitle">
+        商品信息
+    </p>
+    <table class="table">
+        <tr>
+            <th class="center">
+                商品名称
+            </th>
+            <th class="center">
+                商品规格
+            </th>
+            <th class="center">
+                商品ID
+            </th>
+            <th class="center">
+                商品单价
+            </th>
+            <th class="center">
+                单位
+            </th>
+            <th class="center">
+                商品数量
+            </th>
+            <th class="center">
+                商品总价
+            </th>
+            <th class="center">
+                运费
+            </th>
+            <th class="center">
+                总金额
+            </th>
+            <th class="center">
+                操作
+            </th>
+        </tr>
+        {foreach from=$detail item=item name=f1}
+        <tr>
+            <td id="p_name" style="text-align:left;">
+                <img class="pimg" height="50" src="{$uploadImg}{$item->pic}" style="margin-right: 20px;" width="50"/>
+                <input id="inputid-{$item->id}" type="hidden" value="{$item->id}">
+                    <a href="index.php?module=product&action=see&id={$item->p_id}&product_title={$item->p_name}&url=Index&uploadImg={$uploadImg}" style="display: contents; border: none;" title="查看">
+                        {$item->p_name}
+                    </a>
+                </input>
+            </td>
+            <td class="center">
+                <span class="grText">
+                    {$item->size}
+                </span>
+            </td>
+            <td class="center">
+                <span class="grText">
+                    {$item->p_id}
+                </span>
+            </td>
+            <td class="center" rowspan="{$item->index}">
+                {if $item->r_status == '0'}
+                <span class="grText" id="Priceb-{$item->id}" onclick="openPrice('#Prices-{$item->id}','#Priceb-{$item->id}','#inputidsss-{$item->id}','#inputid-{$item->id}')">
+                    ￥{$item->p_price}
+                </span>
+                {else}
+                <span class="grText" id="Priceb-{$item->id}">
+                    ￥{$item->p_price}
+                </span>
+                {/if}
+                <input id="inputidsss-{$item->id}" type="hidden" value="{$item->p_price}">
+                    <input autofocus="" id="Prices-{$item->id}" name="p_price" style="display: none;" type="text" value="{$item->p_price}">
+                    </input>
+                </input>
+            </td>
+            <td class="center">
+                {$item->unit}
+            </td>
+            <td class="center" rowspan="{$item->index}">
+                <span class="grText">
+                    {$item->num}
+                </span>
+            </td>
+            <td class="center" rowspan="{$item->index}">
+                <span class="grText" style="font-weight: bold;">
+                    ￥{$item->p_price*$item->num}
+                </span>
+            </td>
+            <td class="center">
+                {$item->freight}
+            </td>
+            <td class="center" rowspan="{$item->index}">
+                <span class="grText" style="font-weight: bold;">
+                    ￥{$item->z_price+$item->freight}
+                </span>
+            </td>
+            <td class="center">
+                <a class="hover_a" href="index.php?module=stock&product_title={$item->p_name}" title="查看">
+                    <img src="images/icon1/ck.png"/>
+                    查看
+                </a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+    <div class="numss">
+        <span>
+            优惠合计：-￥{$reduce_price+$coupon_price} 元
+        </span>
+        <span>
+            合计支付： 
                     {if $data.z_price>$data.o_price}
                     ￥{$data.o_price} 元
                     {else}
                     ￥{$data.freight+$data.z_price-$reduce_price-$coupon_price} 元
                     {/if}
-                    </span>
-            </div>
+        </span>
+    </div>
+</div>
+<input name="ddd" type="hidden" value="{$data.lottery_status}">
+    <input name="ddcc" type="hidden" value="{$data.drawid}">
+    </input>
+</input>
+<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+    <div id="innerdiv" style="position:absolute;">
+        <img id="bigimg" src=""/>
+    </div>
+</div>
+<div class="dc" style="display:none;">
+    <div class="maskNewContent">
+        <div class="maskTitle ">
+            添加快递信息
         </div>
-        <input type="hidden" name="ddd" value="{$data.lottery_status}">
-        <input type="hidden" name="ddcc" value="{$data.drawid}">
-
-        </aside>
-
-        <div id="outerdiv"
-            style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
-            <div id="innerdiv" style="position:absolute;"><img id="bigimg" src="" /></div>
-        </div>
-        <div class="dc" style="display:none;">
-            <div class="maskNewContent">
-                <div class="maskTitle ">
-                    添加快递信息
+        <a class="closeA qx" href="javascript:void(0);" style="display: block;">
+            <img src="images/icon1/gb.png"/>
+        </a>
+        <form action="" class="form form-horizontal" enctype="multipart/form-data" id="form-category-add" method="post">
+            <div class="HuiTab" id="tab-category">
+                <div class="" style="margin-top: 35px;">
+                    <div class="">
+                        <input class="order_id" name="sNo" type="hidden" value="">
+                            <input class="otype" name="otype" type="hidden" value="{$otype}">
+                                <input name="trade" type="hidden" value="3">
+                                    <label class="maskLeft" style="">
+                                        快递公司：
+                                    </label>
+                                    <div class="formControls maskRight" style="width: 60%;float: left;">
+                                        <form action="" method="post" name="hh">
+                                            <span class="search">
+                                                <input autocomplete="off" class="ww ipt1" id="makeInput" onfocus="setDemo(this,event)" onkeyup="setContent(this,event);" placeholder="请选择或输入快递名称" type="text">
+                                                    <select class="selectName" id="num1" name="kuaidi" onclick="choose(this)" onkeyup="getfocus(this,event)" size="10" style="display: none; position: absolute;z-index:99;width: 153px;margin-top: 1px;margin-left: 0px;">
+                                                        {foreach from=$express item = item name=f1}
+                                                        <option value="{$item->id}">
+                                                            {$item->kuaidi_name}
+                                                        </option>
+                                                        {/foreach}
+                                                    </select>
+                                                </input>
+                                            </span>
+                                        </form>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                    <div class="col-3">
+                                    </div>
+                                </input>
+                            </input>
+                        </input>
+                    </div>
+                    <div class="">
+                        <label class="maskLeft" style="">
+                            快递单号：
+                        </label>
+                        <div class="maskRight" style="">
+                            <input class="ipt1" name="danhao" placeholder="请输入正确的快递单号" type="text" value=""/>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
                 </div>
-                <a href="javascript:void(0);" class="closeA qx" style="display: block;"><img
-                        src="images/icon1/gb.png" /></a>
-                <form action="" method="post" class="form form-horizontal" id="form-category-add"
-                    enctype="multipart/form-data">
-                    <div id="tab-category" class="HuiTab">
-                        <div class="" style="margin-top: 35px;">
-                            <div class="">
-                                <input type="hidden" name="sNo" value="" class="order_id">
-                                <input type="hidden" name="otype" value="{$otype}" class="otype">
-                                <input type="hidden" name="trade" value="3">
-                                <label class="maskLeft" style="">快递公司：</label>
-                                <div class="formControls maskRight" style="width: 60%;float: left;">
-                                    <form name="hh" action="" method="post">
-                                        <span class="search">
-                                            <input class="ww ipt1" id="makeInput" autocomplete="off"
-                                                onkeyup="setContent(this,event);" onfocus="setDemo(this,event)"
-                                                type="text" placeholder="请选择或输入快递名称">
-                                            <select name="kuaidi" class="selectName" id="hh"
-                                                style="display: none; position: absolute;z-index:99;width: 153px;margin-top: 1px;margin-left: 0px;"
-                                                onkeyup="getfocus(this,event)" onclick="choose(this)" size="10"
-                                                id="num1">
-                                                {foreach from=$express item = item name=f1}
-                                                <option value="{$item->id}">{$item->kuaidi_name}</option>
-                                                {/foreach}
-                                            </select>
-                                        </span>
-                                    </form>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-3">
-                                </div>
-                            </div>
-                            <div class="">
-                                <label class="maskLeft" style="">快递单号：</label>
-                                <div class="maskRight" style="">
-                                    <input type="text" class="ipt1" value="" name="danhao" placeholder="请输入正确的快递单号" />
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row cl">
-                        <div class="col-9 " style="margin-left:40%">
-                            <input class="qd closeMask" type="submit" value="提交">
-                        </div>
-                    </div>
-                </form>
             </div>
-        </div>
-
-    </section>
-
-    {php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
-    
-    <script language="javascript" src="style/js/ssd1.js"> </script>
-    {literal}
-
-
-    <script type="text/javascript">
-
-        $(function () {
+            <div class="row cl">
+                <div class="col-9 " style="margin-left:40%">
+                    <input class="qd closeMask" type="submit" value="提交">
+                    </input>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
+<script language="javascript" src="style/js/ssd1.js">
+</script>
+{literal}
+<script type="text/javascript">
+    $(function () {
             $(".pimg").click(function () {
                 var _this = $(this);//将当前的pimg元素作为_this传入函数
                 imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
@@ -637,13 +755,11 @@
                 $(this).fadeOut("fast");
             });
         }
-    </script>
-    {/literal}
+</script>
+{/literal}
     {literal}
-    <script type="text/javascript">
-
-
-        function check(f) {
+<script type="text/javascript">
+    function check(f) {
             if (Trim(f.product_title.value) == "") {
                 alert("产品名称不能为空！");
                 f.product_title.value = '';
@@ -769,73 +885,55 @@
                         var str = '';
                         var title = ''
 
-                        // for(var item of data){
-                        //     title +='<div style="margin-bottom: 30px;">' + item.kuaidi_name + ":" + item.courier_num
-
-                        //     for(var aaa of item.data){
-                        //         str += '<div class="time" style="margin-left: 30px;">' + aaa.time + '</div><div class="step" style="font-size: 0.5rem; padding: 5px 20px;    margin-left: 30px;">' + aaa.context + '</div>';
-                        //     }
-
-                        //     title += str + '</div>'
-                        // }
-
                         function getnr(data) {
                             for (var aaa of data) {
 
                                 str += `
 
-								
-									<li>
-										<i style="color:rgba(151,160,180,1);font-size:14px;font-style: initial;">${aaa.time}</i>
-										<i style="color:rgba(65,70,88,1);font-size:14px;font-style: initial;">${aaa.context}</i>
-									</li>
-								
-								
-								`
+                                
+                                    <li>
+                                        <i style="color:rgba(151,160,180,1);font-size:14px;font-style: initial;">${aaa.time}</i>
+                                        <i style="color:rgba(65,70,88,1);font-size:14px;font-style: initial;">${aaa.context}</i>
+                                    </li>
+                                
+                                
+                                `
 
 
                             }
-                            // <div class="time">
-                            // 	${aaa.time}
-                            // </div>
-
-                            // <div class="step">
-                            // ${aaa.context}
-                            // </div>
+                            
                             return str
                         }
 
                         for (var item of data) {
                             title = `
 
-						<div class="row">
-						
-							<div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">物流公司：</div>
-							<div class="col-9" style="color:rgba(65,70,88,1);font-size: 14px;">${ item.kuaidi_name}</div>
-						</div>
+                        <div class="row">
+                        
+                            <div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">物流公司：</div>
+                            <div class="col-9" style="color:rgba(65,70,88,1);font-size: 14px;">${ item.kuaidi_name}</div>
+                        </div>
 
-						<div class="row">
-							<div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">运单号码：</div>
-							<div class="col-9" style="color:rgba(65,70,88,1);font-size: 14px;">${ item.courier_num}</div>
-						</div>
+                        <div class="row">
+                            <div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">运单号码：</div>
+                            <div class="col-9" style="color:rgba(65,70,88,1);font-size: 14px;">${ item.courier_num}</div>
+                        </div>
 
-						<div class="row">
-							<div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">物流跟踪：</div>
-							<div class="col-9">
-									<ul>
-							${
+                        <div class="row">
+                            <div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">物流跟踪：</div>
+                            <div class="col-9">
+                                    <ul>
+                            ${
 
                                 getnr(item.data)
 
                                 }
-							</ul>
-							</div>
-						</div>
-						`
+                            </ul>
+                            </div>
+                        </div>
+                        `
                         }
-                        // for (var i = 0; i < data.data.length; i++) {
-                        // 	str += '<div class="time" style="margin-left: 30px;">' + data.data[i].time + '</div><div class="step" style="font-size: 0.5rem; padding: 5px 20px;    margin-left: 30px;">' + data.data[i].context + '</div>';
-                        // }
+                        
 
                         wl_appendMask(title, "cg");
                     } else {
@@ -891,23 +989,23 @@
             });
         }
         function wl_appendMask(content, src) {
-			$("body").append(`
-				<div class="wl_maskNew">
+            $("body").append(`
+                <div class="wl_maskNew">
 
-					<div class="wl_maskNewContent">
-						<a href="javascript:void(0);" class="closeA" onclick=close_wl_Mask1() ><img src="images/icon1/gb.png"/></a>
-						<div class="maskTitle" style="display: block;font-size:16px;font-weight:bold;">物流信息</div>
-						<div style="height: 470px;position: relative;top:20px;font-size: 22px;overflow: scroll;">
-							${content}
-						</div>
-						<div style="text-align:center;margin-top:30px">
-					<button class="closeMask" onclick=close_wl_Mask1() >确认</button>
-				</div>
-					</div>
-				</div>
+                    <div class="wl_maskNewContent">
+                        <a href="javascript:void(0);" class="closeA" onclick=close_wl_Mask1() ><img src="images/icon1/gb.png"/></a>
+                        <div class="maskTitle" style="display: block;font-size:16px;font-weight:bold;">物流信息</div>
+                        <div style="height: 470px;position: relative;top:20px;font-size: 22px;overflow: scroll;">
+                            ${content}
+                        </div>
+                        <div style="text-align:center;margin-top:30px">
+                    <button class="closeMask" onclick=close_wl_Mask1() >确认</button>
+                </div>
+                    </div>
+                </div>
 
 
-			`)
+            `)
         }
 
         function close_wl_Mask1() {
@@ -974,6 +1072,7 @@
                 </div>
             `)
         }
+
         function closeMask(id) {
             var sNo = '{/literal}{$data.sNo}{literal}';
             var oid = '{/literal}{$data.id}{literal}';
@@ -990,7 +1089,6 @@
                 success: function (data) {
                     $(".maskNew").remove();
                     if (data.status == 1) {
-                        // layer.msg('已退款到该用户账上!',{icon:1,time:800});
                         appendMask1("已退款到该用户账上", "cg");
                     } else {
                         appendMask("退款失败", "ts");
@@ -1003,13 +1101,16 @@
 
 
         }
+
         function closeMask1() {
             $(".maskNew").remove();
         }
+
         function closeMask4() {
             $(".maskNew1").remove();
             location.replace(location.href);
         }
+
         function confirm(content, id) {
             $("body").append(`
                 <div class="maskNew">
@@ -1032,12 +1133,6 @@
             $(".dd").hide();
         }
 
-
-        // function send_btn1(obj, id,courier_num ) {
-        //     var r_sNo = id;
-        //     var courier_num = courier_num;
-        //     system_category_add('查看物流信息','index.php?module=orderslist&action=kuaidishow&r_sNo='+r_sNo+'&courier_num='+courier_num,400,300);
-        // };
 
         $(".fk").click(function () {
             var stu = '{/literal}{$data.status01}{literal}';
@@ -1077,9 +1172,5 @@
 
             confirm('确认要退款吗？', 'ts');
         }
-    </script>
-
-    {/literal}
-</body>
-
-</html>
+</script>
+{/literal}

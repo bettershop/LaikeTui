@@ -10,11 +10,10 @@ class addAction extends Action {
 	public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 查询一级菜单，根据排序和id排列
         $sql = "select * from lkt_core_menu where s_id = 0 order by sort,id";
         $r = $db->select($sql);
         $list = "";
-        if($r){ // 存在
+        if($r){ 
             foreach ($r as $k => $v){
                 $list .= "<option value='$v->id'>$v->title</option>";
             }
@@ -28,8 +27,6 @@ class addAction extends Action {
 		$db = DBAction::getInstance();
 		$request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
-        // 接收数据 
         $title = addslashes(trim($request->getParameter('title'))); // 菜单名称
         $image = addslashes(trim($request->getParameter('image'))); // 图标
         $image1 = addslashes(trim($request->getParameter('image1'))); // 图标

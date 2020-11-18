@@ -421,6 +421,7 @@
 		<li {if $type == 0}class="active"{/if}><a href="index.php?module=AdminLogin">平台</a></li>
 		<li {if $type == 1}class="active"{/if}><a href="index.php?module=AdminLogin&type=1">小程序</a></li>
 		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">APP</a></li>
+		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">PC</a></li>
 		<li><a class="none" href="#javascript" title="正在开发中，暂未发布">数据报表</a></li>
 	</ul>
 
@@ -555,7 +556,7 @@
 	<div class="mask1Content">
 		<div style="height: 100px;position: relative;top: 20%;font-size: 22px;text-align: center;">
 			更多功能查看商业V3版<br/>
-			【微信+支付宝+百度+抖音】小程序+Saas+APP+会员制+H5+多店铺<br/>完美的二开神器+打通微信支付宝APP支付<br/>
+			【微信+支付宝+百度+抖音】小程序+SaaS+APP+PC+H5+多店铺<br/>完美的二开神器+打通微信支付宝APP支付<br/>
 			<a target="_blank" style="color:red" href="http://www.laiketui.com/action/">【点击查看】</a>
 		</div>
 		<button class="closeMask" style="bottom: 5px;position: absolute;left: 38%;">确认</button>

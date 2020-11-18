@@ -254,12 +254,10 @@ class modifyAction extends Action {
         $r = $db->update($sql);
         if($r == -1) {
             $db->admin_record($admin_id,' 修改菜单id为 '.$id.' 失败 ',2);
-            //跳转
             jump($_SESSION['url'],'未知原因，修改失败！');
             
         } else {
             $db->admin_record($admin_id,' 修改菜单id为 '.$id.' 的信息',2);
-            //跳转
             jump($_SESSION['url'],'修改成功！');
 
         }

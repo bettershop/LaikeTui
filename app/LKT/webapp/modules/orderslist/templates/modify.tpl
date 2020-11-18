@@ -777,10 +777,7 @@
             var express = $('select[name=kuaidi]').val(); // 快递公司id
             var express_name = $('select[name=kuaidi]').find("option:selected").text(); // 快递公司名称
             var courier_num = $('input[name=danhao]').val(); // 快递单号
-            // var freight = $('input[name=yunfei]').val();
             var otype = $(".otype").val(); // 类型
-            console.log(courier_num, express_name, express, "as4d65");
-            console.log(express_name.length, express.length)
             if (express_name.length < 1) {
                 appendMask_tj('请选择快递公司', "ts");
             } else if (courier_num.length < 10) {
@@ -842,29 +839,7 @@
 
         };
 
-        // function send_btn1(obj, id, courier_num) {
-        //     var r_sNo = id;
-        //     $.ajax({
-        //         url: 'index.php?module=orderslist&action=kuaidishow&r_sNo=' + r_sNo + '&courier_num=' + courier_num,
-        //         type: "post",
-        //         data: {},
-        //         success: function (res) {
-        //             var data = JSON.parse(res);
-        //             console.log(data.code);
-        //             if (data.code == 1) {
-        //                 closeMask1();
-        //                 console.log(1);
-        //                 var str = '';
-        //                 for (var i = 0; i < data.data.length; i++) {
-        //                     str += '<div class="time" style="margin-left: 30px;">' + data.data[i].time + '</div><div class="step" style="font-size: 0.5rem; padding: 5px 20px;    margin-left: 30px;">' + data.data[i].context + '</div>';
-        //                 }
-        //                 wl_appendMask(str, "cg");
-        //             } else {
-        //                 appendMask('暂无物流信息！', "ts");
-        //             }
-        //         },
-        //     });
-        // };
+        
           function send_btn1(obj, id, courier_num, is = false) {
 
             var r_sNo = id;
@@ -897,14 +872,11 @@
                         function getnr(data) {
                             for (var aaa of data) {
 
-                                str += `
-
-                                
+                                str += `                                
                                     <li>
                                         <i style="color:rgba(151,160,180,1);font-size:14px;font-style: initial;">${aaa.time}</i>
                                         <i style="color:rgba(65,70,88,1);font-size:14px;font-style: initial;">${aaa.context}</i>
-                                    </li>
-                                
+                                    </li>                                
                                 `
                             }
                             return str
@@ -912,18 +884,14 @@
 
                         for (var item of data) {
                             title = `
-
                         <div class="row">
-                        
                             <div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">物流公司：</div>
                             <div class="col-9" style="color:rgba(65,70,88,1);font-size: 14px;">${ item.kuaidi_name}</div>
                         </div>
-
                         <div class="row">
                             <div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">运单号码：</div>
                             <div class="col-9" style="color:rgba(65,70,88,1);font-size: 14px;">${ item.courier_num}</div>
                         </div>
-
                         <div class="row">
                             <div class="col-2" style="text-align: end;color: rgba(65,70,88,1);font-size: 14px;">物流跟踪：</div>
                             <div class="col-9">
@@ -946,6 +914,7 @@
                 },
             });
         };
+
         function confirm1(content, id, content1) {
             $("body").append(`
                  <div class="maskNew">
@@ -964,6 +933,7 @@
                  </div>
              `)
         }
+
         function closeMask2(id, content) {
             $(".maskNew").remove();
             $.ajax({
@@ -991,6 +961,7 @@
                 }
             });
         }
+
         function wl_appendMask(content, src) {
             $("body").append(`
                 <div class="wl_maskNew">
@@ -1075,6 +1046,7 @@
                  </div>
              `)
         }
+
         function closeMask(id) {
             var sNo = '{/literal}{$data.sNo}{literal}';
             var oid = '{/literal}{$data.id}{literal}';
@@ -1091,7 +1063,6 @@
                 success: function (data) {
                     $(".maskNew").remove();
                     if (data.status == 1) {
-                        // layer.msg('已退款到该用户账上!',{icon:1,time:800});
                         appendMask1("已退款到该用户账上", "cg");
                     } else {
                         appendMask("退款失败", "ts");
@@ -1104,13 +1075,16 @@
 
 
         }
+
         function closeMask1() {
             $(".maskNew").remove();
         }
+
         function closeMask4() {
             $(".maskNew1").remove();
             location.replace(location.href);
         }
+
         function confirm(content, id) {
             $("body").append(`
                  <div class="maskNew">
@@ -1129,16 +1103,10 @@
                  </div>
              `)
         }
+
         function hm() {
             $(".dd").hide();
-        }
-
-
-        // function send_btn1(obj, id,courier_num ) {
-        //     var r_sNo = id;
-        //     var courier_num = courier_num;
-        //     system_category_add('查看物流信息','index.php?module=orderslist&action=kuaidishow&r_sNo='+r_sNo+'&courier_num='+courier_num,400,300);
-        // };
+        }        
 
         $(".fk").click(function () {
             var stu = '{/literal}{$data.status01}{literal}';
@@ -1164,7 +1132,8 @@
 
 
         })
-        /*系统-栏目-添加*/
+        
+
         function system_category_add(title, url, w, h) {
             layer_show(title, url, w, h);
         }

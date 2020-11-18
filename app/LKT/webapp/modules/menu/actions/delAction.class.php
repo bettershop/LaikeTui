@@ -11,11 +11,9 @@ class delAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-        // 接收信息
-        $id = $request->getParameter('id'); //id
+        $id = $request->getParameter('id'); 
         $num = 0;
         $status = 0;
-        // 根据id,查询他的下级
         $sql = "select id from lkt_core_menu where s_id = '$id' and recycle = 0";
         $r = $db->select($sql);
         if($r){ // 有下级
