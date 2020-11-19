@@ -17,7 +17,6 @@ class appAction extends BaseAction
         $code = addslashes($_POST['code']);
         $software_name = addslashes(trim($request->getParameter('software_name'))); // 软件名
         $edition = addslashes(trim($request->getParameter('edition'))); // 版本号
-
         $wxname = addslashes($_POST['nickName']); // 微信昵称
         $headimgurl = addslashes($_POST['avatarUrl']); // 微信头像
         $sex = addslashes($_POST['gender']); // 性别
@@ -41,7 +40,6 @@ class appAction extends BaseAction
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HEADER, 0);
-            // 保证返回成功的结果是服务器的结果
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
