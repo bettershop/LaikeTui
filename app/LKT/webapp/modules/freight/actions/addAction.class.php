@@ -23,7 +23,6 @@ class addAction extends Action {
 		$request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
 
-        // 接收数据
         $name = addslashes(trim($request->getParameter('name'))); // 规则名称
         $type = addslashes(trim($request->getParameter('type'))); // 类型
         $hidden_freight = $request->getParameter('hidden_freight'); // 运费信息
@@ -32,17 +31,8 @@ class addAction extends Action {
             $freight_list = json_decode($hidden_freight,true);
             $freight = serialize($freight_list);
         }else{
-            // $freight = '';
-             echo "<script type='text/javascript'>" .
-                "alert('运费规则不能为空！');" .
-                "location.href='index.php?module=freight&action=add';</script>";
-            return $this->getDefaultView();
-        }
-
-
-		if($name == ''){
             echo "<script type='text/javascript'>" .
-                "alert('规则名称不能为空！');" .
+                "alert('运费规则不能为空！');" .
                 "location.href='index.php?module=freight&action=add';</script>";
             return $this->getDefaultView();
         }
