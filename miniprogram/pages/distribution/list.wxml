@@ -56,8 +56,8 @@
                         <text style="font-size:28rpx;width:30%;color:#B82136">新品  </text>
                         {{item.name}}</view>
                         <view style="display:flex;line-height:50rpx;;">
-                          <view class="gmxx" style="  color: red;">¥ {{item.price_yh}}</view>
-                          <view class="gmx">¥ {{item.price}}</view>
+                          <view class="gmxx" style="  color: red;">¥ {{item.price}}</view>
+                          <view class="gmx">¥ {{item.price_yh}}</view>
                         </view>
                         <view style="display:flex;line-height:50rpx;color:#999">
                           <view class="gmxx" style="font-size:28rpx;width:30%">
@@ -83,8 +83,8 @@
 	                        <text style="font-size:28rpx;width:30%;color:#B82136">新品  </text>{{item.name}}
                         </view>
                         <view style="display:flex;line-height:50rpx;padding:10rpx 0 5rpx;">
-                          <view class="gmxx" style="  color: red;">¥ {{item.price_yh}}</view>
-                          <view class="gmx" style='text-align:right;'>¥ {{item.price}}</view>
+                          <view class="gmxx" style="  color: red;">¥ {{item.price}}</view>
+                          <view class="gmx" style='text-align:right;'>¥ {{item.price_yh}}</view>
                         </view>
                         <view style="display:flex;line-height:50rpx;color:#999">
                          <view class="gmxx" style="font-size:28rpx;">

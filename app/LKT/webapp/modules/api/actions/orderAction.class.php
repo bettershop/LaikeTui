@@ -277,7 +277,7 @@ class orderAction extends BaseAction {
         // 获取信息
         $sNo = addslashes(trim($request->getParameter('sNo'))); // 订单号
         $time = date('Y-m-d H:i:s');
-        $sql01 = "select * from lkt_order where sNo='$sNo'";
+        $sql01 = "select * from lkt_order where sNo='$sNo' and status<3";
         $rew = $db->select($sql01);
         $pluginName = $rew[0]->plugin; //插件订单
         if($rew){

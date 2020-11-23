@@ -14,16 +14,12 @@ class addressAction extends BaseAction {
     public function index(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 获取信息
         $openid = addslashes($_POST['openid']); // 微信id
-        // 根据微信id,查询用户id
         $sql = "select * from lkt_user where wx_id = '$openid'";
         $r = $db->select($sql);
         $user_id = $r[0]->user_id;
-        // 根据用户id,查询地址表
         $sql = "select * from lkt_user_address where uid = '$user_id'";
         $r = $db->select($sql);
-
         echo json_encode(array('adds'=>$r));
         exit();
         return;
@@ -63,10 +59,8 @@ class addressAction extends BaseAction {
     public function set_default(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 获取信息
         $openid = addslashes($_POST['openid']); // 微信id
         $addr_id = addslashes($_POST['addr_id']); // 地址id
-        // 根据微信id,查询用户id
         $sql = "select * from lkt_user where wx_id = '$openid'";
         $r = $db->select($sql);
         if($r){
@@ -93,15 +87,12 @@ class addressAction extends BaseAction {
     public function del_adds(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 获取信息
-        $openid = addslashes($_POST['openid']); // 微信id
-        $id_arr = addslashes($_POST['id_arr']); // 地址id
-        // 根据微信id,查询用户id
+        $openid = addslashes($_POST['openid']); 
+        $id_arr = addslashes($_POST['id_arr']); 
         $sql = "select * from lkt_user where wx_id = '$openid'";
         $r = $db->select($sql);
         if($r){
             $user_id = $r[0]->user_id;
-            // 根据用户id,查询地址表
             $sql = "delete from lkt_user_address where uid = '$user_id' and id = '$id_arr'";
             $r = $db->delete($sql);
             if($r > 0){
@@ -124,10 +115,8 @@ class addressAction extends BaseAction {
     public function up_adds(){
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 获取信息
         $openid = addslashes($_POST['openid']); // 微信id
         $id_arr = addslashes($_POST['id_arr']); // 地址id
-
         $user_name = addslashes($_POST['user_name']); // 联系人
         $mobile = addslashes($_POST['mobile']); // 联系电话
         $province = addslashes($_POST['province']); // 省
@@ -173,9 +162,8 @@ class addressAction extends BaseAction {
     
     //页面跳转显示
     public function up_addsindex(){
-         $db = DBAction::getInstance();
+        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 获取信息
         $openid = addslashes($_POST['openid']); // 微信id
         $id_arr = addslashes($_POST['id_arr']); // 地址id
         $sql = "select * from lkt_user_address where id = '$id_arr'"; //查询修改前的详细地址
