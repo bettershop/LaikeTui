@@ -16,7 +16,6 @@ class delAction extends Action {
         $r = $db->select($sql);
         $admin_name = $r[0]->name;
         $db->admin_record($admin_id,' 删除角色 '.$admin_name,3);
-        // 根据id删除信息
         $sql = "delete from lkt_role where id = '$id'";
         $res=$db->delete($sql);
 		echo $res;

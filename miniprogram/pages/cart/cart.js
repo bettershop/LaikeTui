@@ -12,12 +12,11 @@ Page({
   },
   //页面加载完成函数 remind: '加载中',
   onReady: function () {
-    var that = this;
+    
   },
   //下拉刷新
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    
     this.loadProductData();
     this.sum();
     wx.hideNavigationBarLoading() //完成停止加载

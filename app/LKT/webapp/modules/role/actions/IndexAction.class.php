@@ -14,10 +14,8 @@ class IndexAction extends Action {
         $request = $this->getContext()->getRequest();
 
         $pageto = $request -> getParameter('pageto');
-        // 导出
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:'10';
-        // 每页显示多少条数据
         $page = $request -> getParameter('page');
 
         // 页码

@@ -56,8 +56,7 @@ class IndexAction extends Action {
 		$sql="insert into lkt_record (user_id,event) values (?,?)";
 		$r= $db -> query($sql,array($name,'登录成功'));
 
-        // 将数据存储起来
-		$sql = "select * from lkt_config where id = '1' ";
+        $sql = "select * from lkt_config where id = '1' ";
         $r2 = $db->selectOne($sql);
         $uploadImg = "";
 		if($r2){
