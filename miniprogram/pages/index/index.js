@@ -587,8 +587,6 @@ Page({
   },
   onShareAppMessage: function (res) {
     var that = this;
-    var id = that.data.productId;
-    var type1 = that.data.type1;
     var uname = app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '';
     var title = uname + '邀请你来' + that.data.mch_name;
     var user_id = app.globalData.userInfo.user_id;
@@ -607,5 +605,27 @@ Page({
       }
     }
   },
+
+  onShareTimeline: function (res) {
+    var that = this;
+    var uname = app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '';
+    var title = uname + '邀请你来' + that.data.mch_name;
+    var user_id = app.globalData.userInfo.user_id;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+    }
+    return {
+      title: title,
+      imageUrl: that.data.logo,
+      query: 'userid=' + user_id,
+      success: function (res) {
+        console.log('转发成功');
+      },
+      fail: function (res) {
+        console.log('转发失败')
+      }
+    }
+  },
+
 
 });

@@ -11,7 +11,7 @@ require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
 
 /*
-功能：插件API请求基础类
+功能：插件API请求基础类,不能随意删除,否则所有插件用不了
 */
 class piAction extends Action {
     

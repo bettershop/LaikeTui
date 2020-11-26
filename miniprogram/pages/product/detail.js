@@ -671,29 +671,37 @@ Page({
       path: 'pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid,
       success: function (res) {
         console.log('转发成功');
-        var animation = wx.createAnimation({
-          duration: 200,
-          timingFunction: "linear",
-          delay: 0
-        });
-        that.animation = animation;
-        animation.translateY(300).step();
-        that.setData({
-          animationData: animation.export()
-        })
-        setTimeout(function () {
-          animation.translateY(0).step()
-          that.setData({
-            animationData: animation,
-            show_share: false
-          })
-        }.bind(that), 200)
       },
       fail: function (res) {
         console.log('转发失败')
       }
     }
   },
+
+  onShareTimeline: function (res) {
+    var that = this;
+    var id = that.data.productId;
+    var uname = app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName + '超值推荐 ' : '我发现一个好的东西 推荐给你们 ';
+    var title = uname + that.data.title;
+    var referee_openid = app.globalData.userInfo.user_id;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+    }
+    console.log('pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid)
+    return {
+      title: title,
+      imageUrl: that.data.bannerItem[0],
+      query: 'productId=' + id + '&referee_openid=' + referee_openid,
+      success: function (res) {
+        console.log('转发成功');
+        
+      },
+      fail: function (res) {
+        console.log('转发失败')
+      }
+    }
+  },
+
   // 添加到收藏
   addFavorites: function (e) {
     if (app.userlogin(1)) {

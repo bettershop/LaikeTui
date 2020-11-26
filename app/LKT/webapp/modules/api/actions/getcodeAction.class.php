@@ -68,7 +68,7 @@ class getcodeAction extends Action
         } else { // 不存在
             $img = $uploadImg_domain . substr($uploadImg, 2); // 图片路径
         }
-        $filename = "ewm" . $id . ".jpg";///
+        $filename = "ewm" . $id . ".jpg";
         $imgDir = '../LKT/images/';
         //要生成的图片名字
         $newFilePath = $imgDir . $filename;
