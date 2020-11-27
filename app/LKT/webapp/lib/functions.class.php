@@ -16,3 +16,9 @@ function lkt_get($sql,$params = array()){
     $r = $db -> getOne($sql,$params);
     return $r;
 }
+
+function lkt_select($sql,$params = array()){
+    $db=PDOAction::getInstance();
+    $r = $db -> select($sql,$params);
+    return $r;
+}

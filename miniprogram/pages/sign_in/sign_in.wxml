@@ -38,10 +38,10 @@
         <view class='date-dw-two'></view>
     </view>  
     <view class='header'>  
-        <view wx:for='{{date}}' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>  
+        <view wx:for='{{date}}' wx:key='key' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>  
     </view>  
     <view class='date-box'>  
-        <view wx:for='{{dateArr}}' class='{{isToday == item.isToday ? "nowDay" : ""}}' data-date='{{item.isToday}}'>            
+        <view wx:for='{{dateArr}}' wx:key='key' class='{{isToday == item.isToday ? "nowDay" : ""}}' data-date='{{item.isToday}}'>            
             <view class='date-head'>  
                 <view wx:if="{{item.sign_status}}" style="color:red;">  
                   <view wx:if="{{isToday == item.isToday}}" style="width:60rpx;font-size:12px;border-radius: 50%;background-image: url({{imgurl}});background-size:25px 25px;background-repeat:no-repeat;background-position:50% 50%;margin:auto;position:relative;">
