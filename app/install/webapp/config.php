@@ -21,7 +21,7 @@ define('MO_ERROR_REPORTING', E_ALL | E_STRICT);
 // | An absolute filesystem path to the LaiKeTui package. This directory         |
 // | contains all the Mojavi packages.                                         |
 // +---------------------------------------------------------------------------+
-define('MO_APP_DIR', dirname(dirname(dirname(__FILE__))).'/LaiKeTui');
+define('MO_APP_DIR', dirname(dirname(dirname(__FILE__))).'/keengine');
 
 // +---------------------------------------------------------------------------+
 // | An absolute filesystem path to your web application directory. This       |
