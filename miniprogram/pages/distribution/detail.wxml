@@ -26,7 +26,7 @@
 <block wx:else>
   <view class="cont">
     <swiper style="height:375px" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{bannerItem}}" wx:key="{{item.id}}">
+      <block wx:for="{{bannerItem}}" wx:key="key">
         <swiper-item>
           <image src="{{item}}" class="slide-image" />
           <text style='position:absolute;z-index:999;width:20px;bottom:0;right:19px;color:#ddd;'>{{index+1}}/{{bannerItem.length}}</text>

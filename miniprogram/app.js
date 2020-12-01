@@ -50,7 +50,7 @@ App({
     wx.stopPullDownRefresh() //停止下拉刷新
   },
 
-  getUserInfo: function (cb, stype, uesr, callback) {
+  getUserInfo: function (cb, stype, user, callback) {
     var that = this;
     if (this.d.one) {
       this.d.one = false;
@@ -62,7 +62,7 @@ App({
         success: function (res) {
           var code = res.code;
           that.globalData.code = res.code;
-          that.getUserSessionKey(code, cb, uesr, callback);
+          that.getUserSessionKey(code, cb, user, callback);
         }
       });
 
