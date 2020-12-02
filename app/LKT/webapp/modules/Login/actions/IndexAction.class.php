@@ -6,6 +6,8 @@
 
 require_once(MO_LIB_DIR . '/PDOAction.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once(MO_LIB_DIR . '/db.class.php');
+
 class IndexAction extends Action {
 
 	public function getDefaultView() {
@@ -28,11 +30,12 @@ class IndexAction extends Action {
         
         // 查询表lkt_admin里的用户名,密码,权限.根据输入的用户名在数据库存在，而且输入的密码要跟数据库密码一样
 		$sql = "select id,name,password,admin_type,permission,status from lkt_admin where BINARY name = ? and password = ? ";
-		$result = $db->getOne($sql,array($name,$password));
+		$result = lkt_row($sql,array($name,$password));
+
 		if(!$result){
 			// 没有查询到匹配值就在lkt_record表里添加一组数据
 			$sql="insert into lkt_record (user_id,event) values (?,?) ";
-			$db -> query($sql,array($name,'登录密码错误'));
+			lkt_execute($sql,array($name,'登录密码错误'));
 			jump('index.php?module=Login','登录失败！');
 		}
 
@@ -51,13 +54,13 @@ class IndexAction extends Action {
         $aid = $result['id'];
         //修改token
         $sql = "update lkt_admin set token = ?,ip = ? where id = ? ";
-        $db -> query($sql,array($access_token,$ip,$aid));
+        lkt_execute($sql,array($access_token,$ip,$aid));
         // 在lkt_record表里添加一条消息
 		$sql="insert into lkt_record (user_id,event) values (?,?)";
-		$r= $db -> query($sql,array($name,'登录成功'));
+		lkt_execute($sql,array($name,'登录成功'));
 
         $sql = "select * from lkt_config where id = '1' ";
-        $r2 = $db->selectOne($sql);
+        $r2 = lkt_get($sql);
         $uploadImg = "";
 		if($r2){
 			 $uploadImg = $r2->uploadImg; // 图片上传位置

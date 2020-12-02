@@ -5,14 +5,15 @@
  */
 require_once(MO_LIB_DIR . '/PDOAction.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once(MO_LIB_DIR . '/db.class.php');
+
 class logoutAction extends Action {
 	public function getDefaultView() {
 		$db=DBAction::getInstance();
 		$this->getContext()->getUser()->setAuthenticated(false);	
 		$name = $_SESSION['admin_id'];
 		$sql="insert into lkt_record (user_id,event) values (?,?)";
-		$r= $db -> query($sql,array($name,'安全退出成功'));
-        $db->admin_record($name,' 安全退出成功 ',0);
+		lkt_execute($sql,array($name,'安全退出成功'));
 		jump('index.php?module=Login');
 	    exit;
 	}

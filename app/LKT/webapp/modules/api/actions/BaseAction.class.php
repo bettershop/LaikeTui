@@ -9,7 +9,7 @@
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
-
+require_once(MO_LIB_DIR . '/db.class.php');
 /*
 功能：API请求基础类
 */
@@ -36,22 +36,21 @@ class BaseAction extends Action {
 
     //获取系统配置信息
     public function getAppInfo(){
-        $db = DBAction::getInstance();
         $img = "";
         $sql = "select * from lkt_config where id = 1";
-        $r_1 = $db->select($sql);
-        $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
-        $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
+        $r_1 = lkt_get($sql);
+        $uploadImg_domain = $r_1->uploadImg_domain; // 图片上传域名
+        $uploadImg = $r_1->uploadImg; // 图片上传位置
         if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
             $img = $uploadImg_domain . $uploadImg; // 图片路径
         }else{ // 不存在
             $img = $uploadImg_domain . substr($uploadImg,2); // 图片路径
         }
 
-        $title = $r_1[0]->company;
-        $logo = $img.$r_1[0]->logo;
-        $appid = $r_1[0]->appid; // 小程序唯一标识
-        $appsecret = $r_1[0]->appsecret; // 小程序的 app secret
+        $title = $r_1->company;
+        $logo = $img.$r_1->logo;
+        $appid = $r_1->appid; // 小程序唯一标识
+        $appsecret = $r_1->appsecret; // 小程序的 app secret
         
         $array = array();
         $array['imageRootUrl'] = $img;
@@ -60,8 +59,6 @@ class BaseAction extends Action {
         $array['uploadImgUrl'] = $uploadImg_domain;
         $array['appid'] = $appid;
         $array['appsecret'] = $appsecret;
-
-
 
         return $array;
     }

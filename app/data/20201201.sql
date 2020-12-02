@@ -7,3 +7,11 @@ CREATE TABLE `lkt_score_pro` (
   `status` int(4) NOT NULL DEFAULT '0' COMMENT '商品状态状态（0：待上架，1已上架，2下架）',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='积分商品参数设置';
+
+CREATE TABLE `lkt_score_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `score_id` int(11) NOT NULL COMMENT '积分商品ID',
+  `uid` varchar(50) NOT NULL DEFAULT '' COMMENT '用户id',
+  `status` int(4) NOT NULL DEFAULT '0' COMMENT '0：成功，1失败',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='积分商城消耗记录表';
