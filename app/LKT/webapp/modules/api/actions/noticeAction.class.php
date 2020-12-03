@@ -12,7 +12,6 @@ require_once('BaseAction.class.php');
 class noticeAction extends BaseAction {
 
     public function index(){
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('id')));
         if($id){
@@ -26,7 +25,7 @@ class noticeAction extends BaseAction {
         $uploadImg_domain = $appConfig['uploadImgUrl'];
 
         $sql = "select * from lkt_set_notice where $con";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if(!empty($r)){
             foreach ($r as $k => $v) {
                 if($v->img_url == ''){

@@ -5,6 +5,7 @@
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once(MO_LIB_DIR . '/db.class.php');
 
 class modifyAction extends Action
 {
@@ -19,11 +20,11 @@ class modifyAction extends Action
         $id = intval($request->getParameter("id")); // 产品id
 
         $sql = "select * from lkt_config where id = '1'";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $uploadImg = $r[0]->uploadImg; // 图片上传位置
         // 根据产品id，查询产品产品信息
         $sql = "select * from lkt_product_list where id = '$id'";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $status = 0;
         $sort = 0 ;
         if ($r) {
@@ -48,14 +49,14 @@ class modifyAction extends Action
 
         if (!empty($brand_class)) {
             $sql01 = "select brand_id ,brand_name from lkt_brand_class where brand_id = $brand_class";
-            $r01 = $db->select($sql01);
+            $r01 = lkt_gets($sql01);
             $brand_name = $r01[0]->brand_name; // 产品品牌
         }
 
         //运费
 
         $sql = "select id,name from lkt_freight order by id ";
-        $r_freight = $db->select($sql);
+        $r_freight = lkt_gets($sql);
         $freight_list = '';
         if ($r_freight) {
             foreach ($r_freight as $key => $value) {
@@ -72,7 +73,7 @@ class modifyAction extends Action
 
         //绑定产品分类
         $sql = "select cid,pname from lkt_product_class where recycle = 0 and sid = 0  order by sort desc";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $res = '';
         foreach ($r as $key => $value) {
             $c = '-' . $value->cid . '-';
@@ -84,7 +85,7 @@ class modifyAction extends Action
             }
             //循环第一层
             $sql_e = "select cid,pname from lkt_product_class where sid = $value->cid and recycle = 0";
-            $r_e = $db->select($sql_e);
+            $r_e = lkt_gets($sql_e);
             if ($r_e) {
                 $hx = '-----';
                 foreach ($r_e as $ke => $ve) {
@@ -116,7 +117,7 @@ class modifyAction extends Action
 
         // 品牌
         $sql01 = "select * from lkt_brand_class where recycle = 0 and status = 0 order by sort asc, brand_time desc";
-        $r01 = $db->select($sql01);
+        $r01 = lkt_gets($sql01);
         $brand = '';
         $brand_num = 0;
         if ($r01) {
@@ -138,11 +139,11 @@ class modifyAction extends Action
 
 
         $imgs_sql = "select * from lkt_product_img where product_id = '$id'";
-        $imgurls = $db->select($imgs_sql);
+        $imgurls = lkt_gets($imgs_sql);
 
         //查询规格数据
         $size = "select * from lkt_configure where pid = '$id' and recycle =0";
-        $res_size = $db->select($size);
+        $res_size = lkt_gets($size);
         $attr_group_list = [];
         $checked_attr_list = [];
         if ($res_size) {
@@ -176,14 +177,13 @@ class modifyAction extends Action
                 $attr_group_list[$key] = $this->array_key_remove($attr_group_list[$key], 'attr_all');
             }
             foreach ($res_size as $k => $v) {
-                $res_row = $db->selectrow("select id from lkt_order_details where sid = '$v->id' and r_status !=3 and r_status !=5 and r_status !=6");
+                $res_row = lkt_rows("select id from lkt_order_details where sid = '$v->id' and r_status !=3 and r_status !=5 and r_status !=6");
                 $attribute = unserialize($v->attribute); // 属性
                 $attr_lists = [];
                 //列出属性名 
                 foreach ($attribute as $key => $value) {
 
                     if ($res_row && $attr_group_list) {
-                        // print_r($value);
                         foreach ($attr_group_list as $keya => $valuea) {
                             if ($key == $valuea['attr_group_name']) {
                                 foreach ($valuea['attr_list'] as $key11 => $value11) {
@@ -298,8 +298,6 @@ class modifyAction extends Action
             }
         }
 
-        $db->begin();
-
         if (count($s_type) == 0) {
             $type = 0;
         } else {
@@ -319,7 +317,7 @@ class modifyAction extends Action
 
         if ($files[0]) {
             $ql_img = "delete from lkt_product_img  where product_id = '$id'";
-            $db->delete($ql_img);
+            lkt_execute($ql_img);
 
             foreach ($files as $key => $file) {
                 // 移动到框架应用对应目录下
@@ -338,7 +336,7 @@ class modifyAction extends Action
                 if ($info) {
                     //循环遍历插入
                     $sql_img = "insert into lkt_product_img(id,product_url,product_id,add_date) " . "values(0,'$imgsURL_name','$id',CURRENT_TIMESTAMP)";
-                    $db->insert($sql_img);
+                    lkt_execute($sql_img);
                 }
             }
         }
@@ -361,13 +359,12 @@ class modifyAction extends Action
         $data[] = $initial;
         $data[] = $sort;
         $data[] = $id;
-        $db->preUpdate($sql_1,$data);
-
+        lkt_execute($sql_1,$data);
 
         $cids = [];
         if ($attributes) {
             $sql = "select id from lkt_configure where pid = '$id'";
-            $rcs = $db->select($sql);
+            $rcs = lkt_gets($sql);
             if ($rcs) {
                 foreach ($rcs as $keyc => $valuec) {
                     $cids[$valuec->id] = $valuec->id;
@@ -385,20 +382,20 @@ class modifyAction extends Action
                     unset($cids[$cid]);
                 }
                 // 查询剩余数量
-                $ccc = $db->select("select num,total_num from lkt_configure where id = '$cid' ");
+                $ccc = lkt_gets("select num,total_num from lkt_configure where id = '$cid' ");
                 $cnums = $ccc ? $ccc[0]->num : 0;
                 $va['total_num'] = $ccc ? $ccc[0]->total_num : 0;
                 $z_num1 = 0;
                 if ($num > $cnums) {
                     $z_num1 = $num - $cnums; // 传过来的剩余数量 - 数据库里的剩余数量
                     $sql = "insert into lkt_stock(product_id,attribute_id,flowing_num,type,add_date) values('$id','$cid','$z_num1',0,CURRENT_TIMESTAMP)";
-                    $db->insert($sql);
+                    lkt_execute($sql);
                     $va['total_num'] = $va['total_num'] + $z_num1;
                 } else if ($num < $cnums) {
                     $z_num1 = $cnums - $num;
                     // 在库存记录表里，添加一条入库信息
                     $sql = "insert into lkt_stock(product_id,attribute_id,flowing_num,type,add_date) values('$id','$cid','$z_num1',1,CURRENT_TIMESTAMP)";
-                    $db->insert($sql);
+                    lkt_execute($sql);
                     $va['total_num'] = $va['total_num'];
                 } else {
                     $va['total_num'] = $va['total_num'];
@@ -408,7 +405,6 @@ class modifyAction extends Action
 
                 if ($r_attribute < 0) {
                     $db->modify($va, 'lkt_configure', " `id` = '$cid'", 1);
-                    $db->rollback();
                     header("Content-type:text/html;charset=utf-8");
                     echo "<script type='text/javascript'>" .
                         "alert('属性数据修改失败，请稍后再试！');" .
@@ -420,7 +416,6 @@ class modifyAction extends Action
                 $va['total_num'] = $num;
                 $r_attribute = $db->insert_array($va, 'lkt_configure', '', 1);
                 if ($r_attribute < 0) {
-                    $db->rollback();
                     header("Content-type:text/html;charset=utf-8");
                     echo "<script type='text/javascript'>" .
                         "alert('属性数据添加失败，请稍后再试！');" .
@@ -430,7 +425,7 @@ class modifyAction extends Action
                 } else {
 
                     $sql = "insert into lkt_stock(product_id,attribute_id,flowing_num,type,add_date) values('$id','$r_attribute','$num',0,CURRENT_TIMESTAMP)";
-                    $db->insert($sql);
+                    lkt_execute($sql);
 
 
                 }
@@ -440,17 +435,14 @@ class modifyAction extends Action
         //删除属性
         if (!empty($cids)) {
             foreach ($cids as $keyds => $valueds) {
-                $db->delete("DELETE FROM `lkt_configure` WHERE (`id`='$valueds')");
+                lkt_execute("DELETE FROM `lkt_configure` WHERE (`id`='$valueds')");
             }
         }
-
-
-
 
         if ($z_num < 1) {
                 $sql_1 = "update lkt_product_list set status='1' where id = '$id'";
         } else {
-                $rr = $db->select("select status from lkt_product_list where id = '$id'");
+                $rr = lkt_gets("select status from lkt_product_list where id = '$id'");
                 $status = $rr[0]->status ? $rr[0]->status : 0;
                 if ($status == 2) {
                     $sql_1 = "update lkt_product_list set status='2' where id = '$id'";
@@ -459,8 +451,7 @@ class modifyAction extends Action
                 }
 
         }
-        $db->update($sql_1);
-        $db->commit();
+        lkt_execute($sql_1);
         jump($_SESSION['url'], '产品修改成功！');
         exit;
     }

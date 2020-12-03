@@ -7,6 +7,9 @@
  */
 require_once(MO_LIB_DIR . '/PDOAction.class.php');
 
+/*
+ * 更新、删除、新增操作，返回影响行数
+ */
 function lkt_execute($sql,$params = array()){
     $db=PDOAction::getInstance();
     $r = $db -> query($sql,$params);
