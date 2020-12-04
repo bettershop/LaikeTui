@@ -285,8 +285,11 @@ class getcodeAction extends Action
     public function create_imagecreatefromjpeg($pic_path)
     {
         $pathInfo = pathinfo($pic_path);
+        $res = getimagesize($pic_path);
+        $res=explode('/',$res['mime']);
+        $ext=$res[1];
         if (array_key_exists('extension', $pathInfo)) {
-            switch (strtolower($pathInfo['extension'])) {
+            switch (strtolower($ext)) {
                 case 'jpg':
                 case 'jpeg':
                     $imagecreatefromjpeg = 'imagecreatefromjpeg';
