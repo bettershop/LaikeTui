@@ -7,23 +7,22 @@
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
+require_once('BaseAction.class.php');
 
-class gethotAction extends Action {
+class gethotAction extends BaseAction {
 
     public function getDefaultView() {
-    	
-       
+
     }
 
     public function execute(){
-        $db = DBAction::getInstance();
         $sql = 'select keyword from lkt_hotkeywords';
-        $res = $db -> selectarray($sql);
+        $res = lkt_rows($sql);
         foreach ($res as $k => $v) {
             $res[$k] = $v['keyword'];
         }
-        echo json_encode($res);exit();
+        echo json_encode($res);
+        exit();
     }
 
     public function getRequestMethods(){
