@@ -160,7 +160,6 @@ class appAction extends BaseAction
 
         echo json_encode(array('user' => $user, 'access_token' => $access_token, 'user_id' => $user_id, 'plug_ins' => $r_c, 'coupon' => in_array(1, $coupon), 'wallet' => in_array(1, $wallet), 'sign' => in_array(1, $sign), 'sign_status' => $sign_status, 'sign_image' => $sign_image, 'nickName' => $nickName, 'avatarUrl' => $avatarUrl));
         exit();
-        return;
     }
 
     public function login($wxname, $headimgurl, $sex, $openid, $Referee, $db, $access_token)

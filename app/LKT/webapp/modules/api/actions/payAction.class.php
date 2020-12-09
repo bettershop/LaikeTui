@@ -12,11 +12,8 @@ require_once('BaseAction.class.php');
 class payAction extends BaseAction {
 
     //提交支付
-    public function pay(){  
-        $db = DBAction::getInstance ();
+    public function pay(){
         $request = $this->getContext ()->getRequest ();
-
-        // 接收信息
         $openid = addslashes($_POST['openid']); // 微信id
         $cmoney = addslashes($_POST['cmoney']); // 充值金额
         $type = addslashes(trim($request->getParameter('type')));
@@ -28,7 +25,7 @@ class payAction extends BaseAction {
 
         $dingdanhao = $pay.date("ymdhis").rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
         
-        $appid = ''; // 如果是公众号 就是公众号的appid
+        $appid = ''; // 小程序的appid
         $body = ''; // 公司名称
         $mch_id = ''; // 商户id
         $mch_key = ''; // 商户key
@@ -40,7 +37,7 @@ class payAction extends BaseAction {
 
         // 查询系统配置
         $ss = "select * from lkt_config where id = 1";
-        $rs = $db->select($ss);
+        $rs = lkt_gets($ss);
         if($rs){
             // 进入支付页面
             $appid =        $rs[0]->appid; // 如果是公众号 就是公众号的appid
@@ -158,21 +155,6 @@ class payAction extends BaseAction {
         $output = curl_exec($curl);
         curl_close($curl);
         return $output;
-    }
-
-    //获取xml
-    private function xml123($xml){
-        $p = xml_parser_create();
-        xml_parse_into_struct($p, $xml, $vals, $index);
-        xml_parser_free($p);
-        $data = "";
-        foreach ($index as $key=>$value) {
-            if($key == 'xml' || $key == 'XML') continue;
-            $tag = $vals[$value[0]]['tag'];
-            $value = $vals[$value[0]]['value'];
-            $data[$tag] = $value;
-        }
-        return $data;
     }
 
 

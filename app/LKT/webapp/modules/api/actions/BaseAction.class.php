@@ -16,7 +16,7 @@ require_once(MO_LIB_DIR . '/db.class.php');
 class BaseAction extends Action {
     
     public function getDefaultView() {
-        return ;
+
     }
 
     public function execute(){
@@ -26,8 +26,6 @@ class BaseAction extends Action {
         if($m){
             $this->$m();
         }
-        
-        return;
     }
 
     public function getRequestMethods(){

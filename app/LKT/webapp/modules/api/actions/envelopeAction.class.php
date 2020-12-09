@@ -13,16 +13,13 @@ class envelopeAction extends BaseAction {
     
     // 获取新闻详情
     public function index(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-        // 获取新闻id
         $id = addslashes($_POST['id']);
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
 
         // 根据新闻id,查询新闻数据
         $sql = "select * from lkt_article where Article_id=".$id;
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         
         if($r){
             $url='http://'.$_SERVER['HTTP_HOST']; // 根目录
@@ -36,7 +33,6 @@ class envelopeAction extends BaseAction {
             echo json_encode(array('status'=>0,'err'=>'网络繁忙！'));
             exit();
         }
-        return;
     }
     // 新闻详情点击分享
     public function share(){
