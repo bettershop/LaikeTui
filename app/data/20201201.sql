@@ -1,8 +1,8 @@
 CREATE TABLE `lkt_score_pro` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `pro_id` int(11) NOT NULL COMMENT '商品ID',
-  `score` float(4,2) DEFAULT NULL COMMENT '消耗积分',
-  `money` float(4,2) DEFAULT '0.00' COMMENT '消耗现金',
+  `score` float(12,2) DEFAULT NULL COMMENT '消耗积分',
+  `money` float(12,2) DEFAULT '0.00' COMMENT '消耗现金',
   `is_show` varchar(11) NOT NULL DEFAULT '0' COMMENT '是否显示（0不显示，1热销单品，2.购物车，3.个人中心）',
   `status` int(4) NOT NULL DEFAULT '0' COMMENT '商品状态状态（0：待上架，1已上架，2下架）',
   PRIMARY KEY (`id`)

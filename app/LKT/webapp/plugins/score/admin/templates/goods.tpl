@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 {php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
 
-<title>积分商城</title>
+<title>分销管理</title>
 </head>
 <body>
 
@@ -21,14 +21,13 @@
 <div class="page-container pd-20 page_absolute">
 
     <div style="display: flex;flex-direction: row;font-size: 16px;" class="page_bgcolor">
-        
         <div class="status qh isclick"><a href="index.php?module=pi&p=score&c=Home">积分商品</a></div>
-        <div class="status qh "><a href="index.php?module=pi&p=score&c=log">兑换记录</a></div>
+        <div class="status qh "  ><a href="index.php?module=pi&p=score&c=log">积分明细</a></div>
     </div>
 
 
-    <div class="page_h16"></div>
-    <div class="text-c" >
+	<div class="page_h16"></div>
+	<div class="text-c" >
         <form name="form1" action="index.php" method="get" style="display: flex;">
             <input type="hidden" name="module" value="pi"/>
             <input type="hidden" name="p" value="score"/>
@@ -54,8 +53,8 @@
       </a>
     </div>
     <div class="page_h16"></div>
-    <div class="mt-20">
-        <table class="table-border tab_content tabls">
+	<div class="mt-20">
+		<table class="table-border tab_content tabls">
 
                 <thead>
                 <tr class="text-c tab_tr">
@@ -68,7 +67,7 @@
                     <th style="width:300px;">商品名称</th>
                     <th style="width:50px;">价格</th>
                     <th style="width:50px;">库存</th>
-                    <th style="width:50px;">积分消耗</th>
+                    <th style="width:50px;">积分</th>
                     <th style="width:100px;">状态</th>
                     <th style="width:100px;">是否显示</th>
                     <th style="width: 150px;">操作</th>
@@ -159,7 +158,7 @@
 
 
 
-                            <a style="text-decoration:none" class="ml-5" href="index.php?module=pi&p=score&c=Home&m=del&id={$item->id}&type=1" onclick="return confirm('确定要删除该积分商品吗?')">
+                            <a style="text-decoration:none" class="ml-5" href="index.php?module=pi&p=distribution&c=goods&m=del&id={$item->id}&type=1" onclick="return confirm('确定要删除该分销商品吗?')">
                                 <div style="margin:0 auto;"> 
                                     <img src="images/icon1/del.png"/>&nbsp;删除
                                 </div>
@@ -171,11 +170,11 @@
                 </tbody>
            
           
-        </table>
+		</table>
 
-    </div>
-    <div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
-    <div class="page_h20"></div>
+	</div>
+	<div style="text-align: center;display: flex;justify-content: center;">{$pages_show}</div>
+	<div class="page_h20"></div>
 </div>
 
 {php}include BASE_PATH."/modules/assets/templates/footer.tpl";{/php}
@@ -208,7 +207,7 @@
 
     function updataStatus(id,status){
         $.ajax({
-            url: "index.php?module=pi&p=score&c=Home&m=status",
+            url: "index.php?module=pi&p=distribution&c=goods&m=status",
             async: false,
             data:{
                 id:id,
@@ -249,15 +248,15 @@
         let list = Array.from($(".che[type=checkbox]:checked"),item => item.dataset.id)
         
         if(!list.length){
-            layer.msg('请选择需删除的积分商品！')
+            layer.msg('请选择需删除的分销商品！')
             return 
         }
 
-        layer.confirm('确定要删除该所选积分商品吗？', {
+        layer.confirm('确定要删除该所选分销商品吗？', {
             btn: ['确定','取消'] //按钮
         }, function(){
             $.ajax({
-                url: "index.php?module=pi&p=score&c=Home&m=del",
+                url: "index.php?module=pi&p=distribution&c=goods&m=del",
                 async: false,
                 method:'POST',
                 data:{

@@ -53,3 +53,25 @@ function lkt_gets($sql,$params = array()){
     return $r;
 }
 
+
+//开始事务
+function lkt_start()
+{
+    $db=PDOAction::getInstance();
+    $db->beginTransaction();
+}
+
+//提交事务
+function lkt_commit()
+{
+    $db=PDOAction::getInstance();
+    $db->commit();
+}
+
+//回滚事务
+function lkt_rollback()
+{
+    $db=PDOAction::getInstance();
+    $db->rollBack();
+}
+

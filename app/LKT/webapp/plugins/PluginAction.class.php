@@ -7,6 +7,7 @@
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once(MO_LIB_DIR . '/db.class.php');
 
 /*
 功能：插件请求基础类

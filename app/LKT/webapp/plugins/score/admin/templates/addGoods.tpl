@@ -14,134 +14,134 @@
 	<script type="text/javascript" src="style/lib/layer/2.1/layer.js"></script>
 	<script type="text/javascript" src="style/js/H-ui.min.js"></script>
 	<script src="style/js/vue.min.js"></script>
-	
+
 	<title>添加积分商品</title>
 
-	
+
 	{literal}
-	<style type="text/css">
-		.page_h10 {
-			height: 68px!important;
-			margin-top: 140px;
-			border-top: 1px solid #E9ECEF;
-			position: fixed;
-			z-index: 1;
-			bottom: 0;
-			width: 99%;
-			background: #ffffff;
-		}
+		<style type="text/css">
+			.page_h10 {
+				height: 68px!important;
+				margin-top: 140px;
+				border-top: 1px solid #E9ECEF;
+				position: fixed;
+				z-index: 1;
+				bottom: 0;
+				width: 99%;
+				background: #ffffff;
+			}
 
-		.form-horizontal {
-			margin-bottom: 10px;
-			padding: 10px 10px 0 10px !important;
-		}
+			.form-horizontal {
+				margin-bottom: 10px;
+				padding: 10px 10px 0 10px !important;
+			}
 
-		.modalform-btn {
-			width:60px;
-			height:36px;
-			padding: 0;
-			background:rgba(40,144,255,1);
-			border-radius:2px;
-			color:rgba(255,255,255,1);
-		}
+			.modalform-btn {
+				width:60px;
+				height:36px;
+				padding: 0;
+				background:rgba(40,144,255,1);
+				border-radius:2px;
+				color:rgba(255,255,255,1);
+			}
 
-		.tabls  tbody {
-      display:block;
-      height:240px;
-      overflow-y:overlay;
-    }
-    .tabls  thead, .tabls tbody tr {
-      display:table;
-      width:100%;
-      table-layout:fixed;
-			padding:0;
-    }
+			.tabls  tbody {
+				display:block;
+				height:240px;
+				overflow-y:overlay;
+			}
+			.tabls  thead, .tabls tbody tr {
+				display:table;
+				width:100%;
+				table-layout:fixed;
+				padding:0;
+			}
 
-		.tfoots {
-			height:60px;
-			background:rgba(255,255,255,1);
-			border:1px solid rgba(233,236,239,1);
-			border: 1px solid rgba(233,236,239,1);
-			display: flex;
-    	justify-content: space-between;
-			align-items: center;
-			padding:0px 23px;
-		}
+			.tfoots {
+				height:60px;
+				background:rgba(255,255,255,1);
+				border:1px solid rgba(233,236,239,1);
+				border: 1px solid rgba(233,236,239,1);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding:0px 23px;
+			}
 
-		.boxfoot {
-			max-width:1460px;
-			border-radius: 2px;
-    	background: rgba(255,255,255,1);
-			border:1px solid rgba(233,236,239,1);
-			border-radius:2px;
-		}
+			.boxfoot {
+				max-width:1460px;
+				border-radius: 2px;
+				background: rgba(255,255,255,1);
+				border:1px solid rgba(233,236,239,1);
+				border-radius:2px;
+			}
 
-		.tfoots-btn {
-			width:56px;
-			height:36px;
-			background:rgba(40,144,255,1);
-			border-radius:2px;
-			font-size:14px;
-			font-weight:400;
-			color:rgba(255,255,255,1);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
+			.tfoots-btn {
+				width:56px;
+				height:36px;
+				background:rgba(40,144,255,1);
+				border-radius:2px;
+				font-size:14px;
+				font-weight:400;
+				color:rgba(255,255,255,1);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 
-		.classss {
-			width:195px;
-			height:36px;
-			background:rgba(255,255,255,1);
-			border:1px solid rgba(213,219,232,1);
-			border-radius:2px;
-		}
+			.classss {
+				width:195px;
+				height:36px;
+				background:rgba(255,255,255,1);
+				border:1px solid rgba(213,219,232,1);
+				border-radius:2px;
+			}
 
-		.classinput {
-			width:346px;
-			height:36px;
-			background:rgba(255,255,255,1);
-			border:1px solid rgba(213,219,232,1);
-			border-radius:2px;
-		}
+			.classinput {
+				width:346px;
+				height:36px;
+				background:rgba(255,255,255,1);
+				border:1px solid rgba(213,219,232,1);
+				border-radius:2px;
+			}
 
-		.acisx {
-			width:112px;
-			height:42px;
-			background:rgba(40,144,255,1);
-			border-radius:0px 2px 2px 0px;
-			font-size:16px;
-			font-weight:400;
-			color:rgba(255,255,255,1);
-		}
+			.acisx {
+				width:112px;
+				height:42px;
+				background:rgba(40,144,255,1);
+				border-radius:0px 2px 2px 0px;
+				font-size:16px;
+				font-weight:400;
+				color:rgba(255,255,255,1);
+			}
 
-		.scisxs {
-			width:112px;
-			height:42px;
-			background:rgba(237,241,245,1);
-			border:1px solid rgba(213,219,232,1);
-			border-radius:2px 2px 2px 0px;
-			font-size:16px;
-			font-weight:400;
-			color:rgba(106,112,118,1);
-		}
+			.scisxs {
+				width:112px;
+				height:42px;
+				background:rgba(237,241,245,1);
+				border:1px solid rgba(213,219,232,1);
+				border-radius:2px 2px 2px 0px;
+				font-size:16px;
+				font-weight:400;
+				color:rgba(106,112,118,1);
+			}
 
-		.loadding {
-			position:fixed;
-			top: 0;
-			width:100%;
-			min-height:100vh;
-			z-index: 999;
-    	background: #ffffff;
-		}
-		.loadEffect{
-			width: 100px;
-			height: 100px;
-			position: relative;
-			margin: 0 auto;
-			margin-top:100px;
-		}
-		.loadEffect span{
+			.loadding {
+				position:fixed;
+				top: 0;
+				width:100%;
+				min-height:100vh;
+				z-index: 999;
+				background: #ffffff;
+			}
+			.loadEffect{
+				width: 100px;
+				height: 100px;
+				position: relative;
+				margin: 0 auto;
+				margin-top:100px;
+			}
+			.loadEffect span{
 				display: inline-block;
 				width: 16px;
 				height: 16px;
@@ -149,84 +149,80 @@
 				background: #2890FF;
 				position: absolute;
 				-webkit-animation: load 1.04s ease infinite;
-		}
-		@-webkit-keyframes load{
+			}
+			@-webkit-keyframes load{
 				0%{
-						opacity: 1;
+					opacity: 1;
 				}
 				100%{
-						opacity: 0.2;
+					opacity: 0.2;
 				}
-		}
-		.loadEffect span:nth-child(1){
+			}
+			.loadEffect span:nth-child(1){
 				left: 0;
 				top: 50%;
 				margin-top:-8px;
 				-webkit-animation-delay:0.13s;
-		}
-		.loadEffect span:nth-child(2){
+			}
+			.loadEffect span:nth-child(2){
 				left: 14px;
 				top: 14px;
 				-webkit-animation-delay:0.26s;
-		}
-		.loadEffect span:nth-child(3){
+			}
+			.loadEffect span:nth-child(3){
 				left: 50%;
 				top: 0;
 				margin-left: -8px;
 				-webkit-animation-delay:0.39s;
-		}
-		.loadEffect span:nth-child(4){
+			}
+			.loadEffect span:nth-child(4){
 				top: 14px;
 				right:14px;
 				-webkit-animation-delay:0.52s;
-		}
-		.loadEffect span:nth-child(5){
+			}
+			.loadEffect span:nth-child(5){
 				right: 0;
 				top: 50%;
 				margin-top:-8px;
 				-webkit-animation-delay:0.65s;
-		}
-		.loadEffect span:nth-child(6){
+			}
+			.loadEffect span:nth-child(6){
 				right: 14px;
 				bottom:14px;
 				-webkit-animation-delay:0.78s;
-		}
-		.loadEffect span:nth-child(7){
+			}
+			.loadEffect span:nth-child(7){
 				bottom: 0;
 				left: 50%;
 				margin-left: -8px;
 				-webkit-animation-delay:0.91s;
-		}
-		.loadEffect span:nth-child(8){
+			}
+			.loadEffect span:nth-child(8){
 				bottom: 14px;
 				left: 14px;
 				-webkit-animation-delay:1.04s;
-		}
+			}
 
-		.acisx:active, .acisx:focus{
-			background-color: rgba(40,144,255,1) !important;
-			background-image: none;
-			border-color: rgba(40,144,255,1) !important;
-		}
+			.acisx:active, .acisx:focus{
+				background-color: rgba(40,144,255,1) !important;
+				background-image: none;
+				border-color: rgba(40,144,255,1) !important;
+			}
 
-		.scisxs:active, .scisxs:focus {
-			background-color: rgba(237,241,245,1) !important;
-			background-image: none;
-			border-color: rgba(237,241,245,1) !important;
-		}
+			.scisxs:active, .scisxs:focus {
+				background-color: rgba(237,241,245,1) !important;
+				background-image: none;
+				border-color: rgba(237,241,245,1) !important;
+			}
 
-		
-
-
-
-	</style>
+		</style>
 	{/literal}
 </head>
 
 <body>
 {literal}
-<div class="loadding">
-	<div class="loadEffect">
+	<div class="loadding">
+		<div class="loadEffect">
 			<span></span>
 			<span></span>
 			<span></span>
@@ -235,34 +231,34 @@
 			<span></span>
 			<span></span>
 			<span></span>
+		</div>
 	</div>
-</div>
-<div id="app">
-	<nav class="breadcrumb">
-		<a href="index.php?module=pi&p=score&c=Home" >积分商城</a> <span class="c-gray en">&gt;</span>
-		添加商品
-	</nav>
-
-	<div id="addpro" class="pd-20" style="background-color: white;">
-		<p style="font-size: 15px;" class="page_title">
+	<div id="app">
+		<nav class="breadcrumb">
+			<a href="index.php?module=pi&p=score&c=Home" >积分商城</a> <span class="c-gray en">&gt;</span>
 			添加商品
-		</p>
-		<div style="height: 600px;overflow: overlay;">
-			<form name="form1" id="form1" class="form-horizontal" method="post" enctype="multipart/form-data" style="height: 1000px;overflow: hidden;">
+		</nav>
 
-				<div class="row cl">
-					<div class="col-12 row" style="margin-bottom: 14px;">
-						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
-							<span style="color: #FF0404;">*</span>积分商品：
-						</label>
+		<div id="addpro" class="pd-20" style="background-color: white;">
+			<p style="font-size: 15px;" class="page_title">
+				添加商品
+			</p>
+			<div style="height: 600px;overflow: overlay;">
+				<form name="form1" id="form1" class="form-horizontal" method="post" enctype="multipart/form-data" style="height: 1000px;overflow: hidden;">
 
-						<div class="formControls col-10" style="display: flex;">
-							<button type="button" class="btn btn-info" :class=" istype?'acisx':'scisxs' " @click="chandchick(true)">选择商品</button>
-							<button type="button" class="btn btn-info" :class=" !istype?'acisx':'scisxs' " @click="chandchick(false)">已选商品</button>
-						</div>
+					<div class="row cl">
+						<div class="col-12 row" style="margin-bottom: 14px;">
+							<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
+								<span style="color: #FF0404;">*</span>积分商品：
+							</label>
 
-						<div class="formControls col-10" v-show="istype">
-							<div style="margin: 14px 0px;">
+							<div class="formControls col-10" style="display: flex;">
+								<button type="button" class="btn btn-info" :class=" istype?'acisx':'scisxs' " @click="chandchick(true)">选择商品</button>
+								<button type="button" class="btn btn-info" :class=" !istype?'acisx':'scisxs' " @click="chandchick(false)">已选商品</button>
+							</div>
+
+							<div class="formControls col-10" v-show="istype">
+								<div style="margin: 14px 0px;">
 									<form id="modalform">
 										<div class="row" style="display: flex;padding-left: 15px;">
 											<div>
@@ -284,11 +280,11 @@
 											</div>
 										</div>
 									</form>
-							</div>
+								</div>
 
-							<div class="boxfoot">
-								<table class="table table-hover tabls">
-									<thead>
+								<div class="boxfoot">
+									<table class="table table-hover tabls">
+										<thead>
 										<tr>
 											<th><input type="checkbox" id="checkbox-1" style="visibility: initial;" @click="checkall" ></th>
 											<th>商品名称</th>
@@ -296,43 +292,43 @@
 											<th>价格</th>
 											<th>库存</th>
 										</tr>
-									</thead>
-									<tbody @scroll="onScroll" ref="nameScroll">
-											<tr v-for="(item,i) in splist" :key="i">
-												<td>
-													<input type="checkbox" id="checkbox-1" style="visibility: initial;" v-model="item.is" :value="i" @click="checkboxs($event,i,item.id)">
-												</td>
-												<td>
-													<div>
-														<img :src="item.image" style="width: 40px;height:40px;">
-														{{  item.product_title}}
-													</div>
-												</td>
-												<td>
-													{{ item.id }}
-												</td>
-												<td>{{ item.price }}</td>
-												<td>{{ item.num }}</td>
-											</tr>
+										</thead>
+										<tbody @scroll="onScroll" ref="nameScroll">
+										<tr v-for="(item,i) in splist" :key="i">
+											<td>
+												<input type="checkbox" id="checkbox-1" style="visibility: initial;" v-model="item.is" :value="i" @click="checkboxs($event,i,item.id)">
+											</td>
+											<td>
+												<div>
+													<img :src="item.image" style="width: 40px;height:40px;">
+													{{  item.product_title}}
+												</div>
+											</td>
+											<td>
+												{{ item.id }}
+											</td>
+											<td>{{ item.price }}</td>
+											<td>{{ item.num }}</td>
+										</tr>
 
-											<tr style="display: flex;align-items: center;justify-content: center;">
-												<td style="border-top: 0px;background: #ffffff01;">{{ loaddingtext }}</td>
-											</tr>
-											<tr v-if="splist.length == 0" style="height: 27vh;display: flex;align-items: center;justify-content: center;">
-												<td style="border-top: 0px;background: #ffffff01;">暂无商品</td>
-											</tr>
-									</tbody>
-								</table>
-								<div class="tfoots">
-									<div style="display: flex;align-items: center;">
+										<tr style="display: flex;align-items: center;justify-content: center;">
+											<td style="border-top: 0px;background: #ffffff01;">{{ loaddingtext }}</td>
+										</tr>
+										<tr v-if="splist.length == 0" style="height: 27vh;display: flex;align-items: center;justify-content: center;">
+											<td style="border-top: 0px;background: #ffffff01;">暂无商品</td>
+										</tr>
+										</tbody>
+									</table>
+									<div class="tfoots">
+										<div style="display: flex;align-items: center;">
 										<span style="font-size:14px;font-weight:400;color:rgba(65,70,88,1);">
 											已选
 												<span style="color:#2890FF;font-weight:Bold;"> {{ checkboxlist.length }} </span>
 											款商品
 										</span>
-									</div>
+										</div>
 
-									<div>
+										<div>
 										<span style="font-size:14px;font-weight:400;color:rgba(65,70,88,1);">
 											共款
 											<span style="font-weight:Bold;">
@@ -340,26 +336,26 @@
 											</span>
 											商品
 										</span>
+										</div>
 									</div>
 								</div>
+
 							</div>
 
-						</div>
+							<div class="formControls col-10" v-show="!istype">
 
-						<div class="formControls col-10" v-show="!istype">
-
-							<div class="boxfoot" style="margin-top: 14px;">
-								<table class="table table-hover tabls">
-									<thead>
+								<div class="boxfoot" style="margin-top: 14px;">
+									<table class="table table-hover tabls">
+										<thead>
 										<tr>
 											<th style="text-align: center;">商品名称</th>
-											<th style="text-align: center;">商品ID</th>
+											<th style="text-align: center;">商品id</th>
 											<th style="text-align: center;">价格</th>
 											<th style="text-align: center;">库存</th>
 											<th style="text-align: center;">操作</th>
 										</tr>
-									</thead>
-									<tbody>
+										</thead>
+										<tbody>
 
 										<tr v-for="(item,i) in checkboxlist" :key="i">
 											<td>
@@ -388,77 +384,297 @@
 										<tr v-if="checkboxlist.length == 0" style="height: 27vh;display: flex;align-items: center;justify-content: center;">
 											<td style="border-top: 0px;background: #ffffff01;">暂未选择商品</td>
 										</tr>
-									</tbody>
-								</table>
-							</div>
+										</tbody>
+									</table>
+								</div>
 
-						</div>
-					</div>
-
-					
-					<div class="col-12 row">
-
-						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
-							<span style="color: #FF0404;">*</span>消耗积分：
-						</label>
-
-						<div class="formControls col-10">
-							<input type="number" class="input-text" style="width:190px;height:36px;background:rgba(255,255,255,1);border:1px solid rgba(213,219,232,1);border-radius:2px;" v-model="commissions">
-							<span>%</span>
-						</div>
-					</div>
-
-					<div class="col-12 row">
-						<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
-							是否显示：
-						</label>
-
-						<div class="formControls col-10" style="display: flex;">
-							<div>
-								<input type="radio" name="drone" value="1" checked @click="radios">
-								<label for="dewey">是</label>
-							</div>
-
-							<div style="margin-left: 20px;">
-								<input type="radio" name="drone" value="0" @click="radios">
-								<label for="louie">否</label>
 							</div>
 						</div>
 
-						<div class="formControls col-10" v-if="isshowtyoe">
 
-							<div style="width:400px;height:44px;background:rgba(244,247,249,1);border-radius:2px;display: flex;align-items: center;justify-content: space-around;">
-							
-								<span>
-									显示位置:
-								</span>
-									
+
+						<div class="col-12 row">
+
+							<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
+								<span style="color: #FF0404;">*</span>消耗积分：
+							</label>
+
+							<div class="formControls col-10">
+								<input type="number" class="input-text" style="width:190px;height:36px;background:rgba(255,255,255,1);border:1px solid rgba(213,219,232,1);border-radius:2px;" v-model="score">
+
+							</div>
+						</div>
+
+						<div class="col-12 row">
+							<label class="form-label col-2" style="margin-top: 0px;padding-right: 0px!important;height: 36px;line-height: 36px;">
+								是否显示：
+							</label>
+
+							<div class="formControls col-10" style="display: flex;">
 								<div>
-									<input type="checkbox" id="dewey" v-model="is_show1" style="visibility: visible;">
-									<label for="dewey">热销单品</label>
+									<input type="radio" name="is_show" v-model="is_show" value="1" checked @click="radios">
+									<label for="dewey">是</label>
 								</div>
-								<div>
-									<input type="checkbox" id="dewey" v-model="is_show2" style="visibility: visible;">
-									<label for="dewey">购物车</label>
-								</div>
-									<div>
-									<input type="checkbox" id="dewey" v-model="is_show3" style="visibility: visible;">
-									<label for="dewey">个人中心</label>
+
+								<div style="margin-left: 20px;">
+									<input type="radio" name="is_show" v-model="is_show" value="0" @click="radios">
+									<label for="louie">否</label>
 								</div>
 							</div>
+
+
 						</div>
 					</div>
-				</div>
-			</form>
-		</div>
-		<div class="page_h10" style="margin-top: 0px;">
-			<input class="fo_btn2" type="button" name="Submit" value="保存" @click="baocungroup">
-			<input type="button" name="reset" value="取消" class="fo_btn1" onclick="javascript :history.back(-1);">
+				</form>
+			</div>
+			<div class="page_h10" style="margin-top: 0px;">
+				<input class="fo_btn2" type="button" name="Submit" value="保存" @click="baocungroup">
+				<input type="button" name="reset" value="取消" class="fo_btn1" onclick="javascript :history.back(-1);">
+			</div>
 		</div>
 	</div>
-</div>
 {/literal}
-	
+{literal}
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				istype: true,
+				splist: [],
+				total: 0,
+				checkboxlist: [],
+				lvlist: [],
+				score: 0,
+				is_show: 1,
+				page: 2,
+				loaddingtext:'加载更多...'
+			},
+			created(){
+				this.$nextTick(function () {
+					$('.loadding').hide()
+				})
+			},
+			mounted(){
+				this.getCommodityList()
+			},
+			methods:{
+				chandchick(is){
+					this.istype = is
+				},
+				// 获取商品列表
+				getCommodityList(){
+					let vm = this
+					$.ajax({
+						url: "index.php?module=pi&p=score&c=addGoods&m=pro_query&page=1",
+						async: false,
+						success: function (res) {
+							res = JSON.parse(res)
+							$('#spfl').append(`<option value="" selected>请选择商品分类</option>` + res.product_class)
+							$('#sppp').append(`<option value="" selected>请选择商品品牌</option>` + res.brand)
+
+
+							for(let item of res.res){
+								item.is = false
+							}
+
+							if(res.total >= 10){
+								vm.loaddingtext = '没有更多了'
+							}
+
+							vm.splist = res.res
+							vm.total = res.total
+						}
+					})
+				},
+				// 查询
+				search(){
+
+					let vm = this
+					vm.splist = []
+
+					let data = {
+						my_class: $('#spfl').val(),
+						my_brand: $('#sppp').val(),
+						pro_name: $('input[name=pro_name]').val()
+					}
+
+					$.ajax({
+						url: "index.php?module=pi&p=score&c=addGoods&m=pro_query&&page=1",
+						async: false,
+						method: 'POST',
+						data: data,
+						success: function (res) {
+							res = JSON.parse(res)
+
+							for(let item of res.res){
+								item.is = false
+							}
+
+							if(vm.checkboxlist.length){
+								vm.checkboxlist.forEach(items => {
+									for(let item of res.res){
+										if(item.id == items.id){
+											item.is = true
+										}
+									}
+								})
+							}
+
+
+							console.log(vm.checkboxlist,1111)
+
+							vm.splist = res.res
+							vm.total = res.total
+						}
+					})
+				},
+				checkboxs(event,i,id){
+
+					if(event.path[0].checked){
+						this.checkboxlist.push(this.splist[i])
+					} else {
+
+						for(var item in this.checkboxlist){
+							if(this.checkboxlist[item].id == id){
+								this.checkboxlist.splice(item,1)
+							}
+						}
+
+					}
+
+				},
+				selects(ele){
+					let value = parseInt(ele.target.value)
+					this.lvlist = []
+					this.leve = value
+
+				},
+				baocungroup(){
+
+					if(this.checkboxlist.length == 0){
+						layer.msg('请至少加入一个商品！')
+						return
+					}
+
+					let data = {}
+
+
+					if(this.score.toString() == ''){
+						layer.msg('请输入积分！')
+						return
+					}
+
+					data['score'] = this.score
+
+					data['is_show'] = this.is_show
+
+
+					let list = []
+					for(let item of this.checkboxlist){
+
+						list.push({
+							id: item.id,
+							is_show: data.is_show || 0,
+							score: data.score
+						})
+					}
+
+					$.ajax({
+						url: 'index.php?module=pi&p=score&c=addGoods&m=insert',
+						method: 'POST',
+						data: {
+							data:list
+						},
+						success: function (res) {
+
+							res = JSON.parse(res)
+							if (res.code == 200) {
+
+								layer.msg(res.message);
+								setTimeout(function () {
+									location.href = 'index.php?module=pi&p=score&c=Home'
+								}, 800)
+
+							} else if (res.status == 1) {
+								layer.msg(res.info);
+							} else if (res.status == 2) {
+								layer.msg(res.info);
+							}
+
+						}
+					})
+
+				},
+				radios(ele){
+					if(ele.target.value == '0'){
+						this.isshowtyoe = false
+					} else {
+						this.isshowtyoe = true
+					}
+				},
+				radiosa(ele){
+					this.type = ele.target.value
+				},
+				deletes(i){
+					this.checkboxlist[i].is = false
+					this.checkboxlist.splice(i,1)
+				},
+				checkall(ele){
+
+					this.checkboxlist =[]
+					let is = ele.target.checked
+
+					if(is){
+
+						for(let item of this.splist){
+							item.is = true
+						}
+
+						this.checkboxlist.push(...this.splist)
+
+					} else {
+						for(let item of this.splist){
+							item.is = false
+						}
+					}
+				},
+				onScroll(e){
+					let sh = this.$refs.nameScroll.scrollHeight
+					let st = this.$refs.nameScroll.scrollTop
+					let ch = this.$refs.nameScroll.clientHeight
+					if (Math.ceil(st + ch) === sh) {
+						this.loadmore(this.page)
+						this.page++
+					}
+				},
+				loadmore(page){
+					let vm = this
+					$.ajax({
+						url: "index.php?module=pi&p=score&c=addGoods&m=pro_query&page=" + page,
+						async: false,
+						success: function (res) {
+							res = JSON.parse(res)
+
+							if(res.res.length){
+								for(let item of res.res){
+									item.is = false
+								}
+
+								vm.splist = 	vm.splist.concat(res.res);
+
+								vm.total = res.total
+							} else {
+								vm.loaddingtext = '没有更多了'
+							}
+						}
+					})
+				}
+			}
+		})
+
+	</script>
+
+{/literal}
 </body>
 
 </html>
