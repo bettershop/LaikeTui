@@ -7,13 +7,13 @@
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
 
  */
-class goodsInputView extends PluginInputView {
+class logInputView extends PluginInputView {
     public function execute() {
         $request = $this->getContext()->getRequest();
         $this->setAttribute("list", $request->getAttribute("list"));
         $this->setAttribute("name", $request->getAttribute("name"));
         $this->setAttribute("status", $request->getAttribute("status"));
         $this->setAttribute("pages_show", $request->getAttribute("pages_show"));
-        $this->setTemplate('goods.tpl');
+        $this->setTemplate('log.tpl');
     }
 }

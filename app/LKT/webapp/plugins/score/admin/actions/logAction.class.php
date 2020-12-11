@@ -6,15 +6,14 @@
  */
 
 
-class HomeAction extends PluginAction
+class logAction extends PluginAction
 {
 
     public function getDefaultView()
     {
         $request = $this->getContext()->getRequest();
-        $name = $request->getParameter("username"); // 商品名称
+        $name = $request->getParameter("username");
         $pagesize = $request->getParameter('pagesize');
-        $status = $request->getParameter('status') ? $request->getParameter('status') : 2;
         $pagesize = $pagesize ? $pagesize : 10;
         $res1 = array();
         // 每页显示多少条数据
@@ -30,10 +29,10 @@ class HomeAction extends PluginAction
 
         $condition = '';
         if ($name) {
-            $condition .= "  AND b.product_title like '%$name%' ";
+            $condition .= "  AND c.uid = '$name' ";
         }
 
-        $res = lkt_gets("select a.*,b.product_title,b.volume,b.imgurl,b.num,b.status as sta,b.initial  from lkt_score_pro AS a,lkt_product_list AS b where a.pro_id = b.id AND b.num > 0  " . $condition . " order by a.id desc  ");
+        $res = lkt_gets("select c.id,a.score,c.uid,c.status,b.product_title,b.volume,b.imgurl,b.num,b.initial  from lkt_score_pro AS a,lkt_product_list AS b,lkt_score_record AS c where a.pro_id = b.id AND a.id = c.score_id  " . $condition . " order by c.id desc  ");
 
         $total = count($res);
         if ($res) {
@@ -55,35 +54,13 @@ class HomeAction extends PluginAction
         }
 
         $pager = new ShowPager($total, $pagesize, $page);
-        $url = "index.php?module=pi&p=score&c=Home&name=$name&pagesize=" . urlencode($pagesize);
+        $url = "index.php?module=pi&p=score&c=log&name=$name&pagesize=" . urlencode($pagesize);
         $pages_show = $pager->multipage($url, $total, $page, $pagesize, $start, $para = '');
         $request->setAttribute("list", $res1);
         $request->setAttribute("name", $name);
-        $request->setAttribute("status", $status);
         $request->setAttribute("pages_show", $pages_show);
         return View::INPUT;
     }
-
-    //商品上下架
-    public function status()
-    {
-        $request = $this->getContext()->getRequest();
-        $id = intval($request->getParameter('id'));
-        $status = intval($request->getParameter('status')); //1上架，2下架
-        $data = array();
-        $data[] = $status;
-        $data[] = $id;
-        $res = lkt_execute("update lkt_score_pro set status=? where id = ?",$data);
-        if ($res > 0) {
-            echo json_encode(array('code' => 200, 'message' => '修改成功!'));
-            exit();
-        } else {
-            echo json_encode(array('code' => 400, 'message' => '未知原因，修改失败!'));
-            exit();
-        }
-        return;
-    }
-
 
     public function del()
     {
@@ -94,7 +71,7 @@ class HomeAction extends PluginAction
         if ($id) {
             $data = explode(',', $id);
             foreach ($data as $key => $value) {
-                $res = lkt_execute("delete from lkt_score_pro where id =  ?",array($value));
+                $res = lkt_execute("delete from lkt_score_record where id =  ?",array($value));
                 if ($res==0){
                     break;
                 }
@@ -106,7 +83,7 @@ class HomeAction extends PluginAction
                 header("Content-type:text/html;charset=utf-8");
                 echo "<script type='text/javascript'>" .
                     "alert('删除成功！');" .
-                    "location.href='index.php?module=pi&p=score&c=Home';</script>";
+                    "location.href='index.php?module=pi&p=score&c=log';</script>";
             }else{
                 echo json_encode(array('code' => 200, 'message' => '删除成功!'));
             }
@@ -116,13 +93,13 @@ class HomeAction extends PluginAction
                 header("Content-type:text/html;charset=utf-8");
                 echo "<script type='text/javascript'>" .
                     "alert('删除失败！');" .
-                    "location.href='index.php?module=pi&p=score&c=goods';</script>";
+                    "location.href='index.php?module=pi&p=score&c=log';</script>";
             }else{
                 echo json_encode(array('code' => 400, 'message' => '未知原因，删除失败!'));
             }
             exit();
         }
-
+        return;
     }
 
 
