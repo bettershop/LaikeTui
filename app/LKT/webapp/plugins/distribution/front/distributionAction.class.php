@@ -137,6 +137,11 @@ class distributionAction extends PluginAction
                             $creattime = date('Y-m-d H:i:s');
                             $sql = "insert into lkt_detailed_commission(userid,sNo,money,s_money,status,addtime,type,Referee) values('$pid',$sNo,$money,$s_money,2,'$creattime',1,'$user_id')";
                             $db->insert($sql);
+
+                            $record = $pid . "获取分销收入" . $s_money . " 来自".$user_id;
+                            $sql = "insert into lkt_sign_record (user_id,sign_score,record,sign_time,type) value ('$pid','$s_money','$record',CURRENT_TIMESTAMP,6)";
+                            $db->insert($sql);
+
                             //充值积分
                             $sql = "update lkt_user set score=score+$s_money where user_id='$pid' ";
                             $db->update($sql);

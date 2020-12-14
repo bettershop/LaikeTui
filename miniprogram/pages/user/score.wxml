@@ -63,10 +63,10 @@
             <view class='jf_obtain' style='color:#777;margin-top:10px;height:40px;'>
               <view class='obtain_bt'>{{itemadd.sign_time}}</view>
                 <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 0}}">签到</view> 
-                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 2}}">首次关注得积分</view> 
+                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 2}}">首次关注</view> 
                 <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 4}}">好友转账</view>
                 
-                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 6}}">赠送</view>
+                <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 6}}">分销</view>
                 <view class='obtain_bt' style='line-height:40px;' wx:if="{{itemadd.type == 7}}">抽奖</view>
               <view class='obtain_bt' style='line-height:40px;'>+{{itemadd.sign_score}}</view>
               <view style='clear:both;'></view>

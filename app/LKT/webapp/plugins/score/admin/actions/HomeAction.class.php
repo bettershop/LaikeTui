@@ -116,7 +116,7 @@ class HomeAction extends PluginAction
                 header("Content-type:text/html;charset=utf-8");
                 echo "<script type='text/javascript'>" .
                     "alert('删除失败！');" .
-                    "location.href='index.php?module=pi&p=score&c=goods';</script>";
+                    "location.href='index.php?module=pi&p=score&c=Home';</script>";
             }else{
                 echo json_encode(array('code' => 400, 'message' => '未知原因，删除失败!'));
             }
