@@ -8,7 +8,6 @@ class IndexAction extends Action {
 
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $id = intval($request->getParameter("id")); 
         $sql = "select * from lkt_config where id = '1'";
         $r = $db->select($sql);
        
@@ -42,7 +41,6 @@ class IndexAction extends Action {
 
         $request = $this->getContext()->getRequest();
         $db = DBAction::getInstance();
-        //取得参数
         $image= addslashes($request->getParameter('image')); // 公司logo
         $oldpic= addslashes($request->getParameter('oldpic')); // 原图片
         $company= addslashes($request->getParameter('company')); // 公司名称
@@ -54,45 +52,11 @@ class IndexAction extends Action {
         $upload_file = addslashes(trim($request->getParameter('upload_file'))); // 软件上传位置
         $ip = addslashes(trim($request->getParameter('ip'))); // ip地址
 
-        if($company == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('公司名称不能为空！');" .
-                "location.href='index.php?module=system';</script>";
+
+        if(is_dir($upload_file) == ''){ // 如果文件不存在
+            mkdir($upload_file); // 创建文件
         }
-        if($appid == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('小程序id不能为空！');" .
-                "location.href='index.php?module=system';</script>";
-        }
-        if($appsecret == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('小程序密钥不能为空！');" .
-                "location.href='index.php?module=system';</script>";
-        }
-        if($domain == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('小程序域名不能为空！');" .
-                "location.href='index.php?module=system';</script>";
-        }
-        if($uploadImg_domain == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('图片上传域名不能为空！');" .
-                "location.href='index.php?module=system';</script>";
-        }
-        if($uploadImg == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('图片上传位置不能为空！');" .
-                "location.href='index.php?module=system';</script>";
-        }
-        if($upload_file == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('软件上传位置不能为空！');" .
-                "location.href='index.php?module=system';</script>";
-        }else{
-            if(is_dir($upload_file) == ''){ // 如果文件不存在
-                mkdir($upload_file); // 创建文件
-            }
-        }
+
         if(substr($uploadImg,-1) != '/'){
             $uploadImg .= '/';
         }

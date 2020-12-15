@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>小程序域名：</label>
+                <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>小程序接口路径：</label>
                 <div class="formControls col-xs-8 col-sm-6">
                     <input type="text" name="domain" value="{$domain}" class="input-text">
                 </div>
@@ -75,6 +75,7 @@
                 <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>系统后台路径：</label>
                 <div class="formControls col-xs-8 col-sm-6">
                     <input type="text" name="uploadImg_domain" value="{$uploadImg_domain}" class="input-text">
+                    * 也与图片路径有关 有可能导致图片不显示
                 </div>
             </div>
             <div class="row cl" style="display: none;">
