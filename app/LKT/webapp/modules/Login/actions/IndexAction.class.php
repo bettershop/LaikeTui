@@ -19,7 +19,6 @@ class IndexAction extends Action {
 	}
 
 	public function execute(){
-		$db=PDOAction::getInstance();
 		$request = $this->getContext()->getRequest();
 		$name = addslashes(trim($request->getParameter("login")));
 		$password = md5($request->getParameter("pwd"));
@@ -76,7 +75,6 @@ class IndexAction extends Action {
 		$this->getContext()->getStorage()->write('admin_permission',$admin_permission);
 		// 登录成功后跳转地址
 		jump('index.php?module=AdminLogin');
-        return;
     }
 
 	public function getRequestMethods(){
