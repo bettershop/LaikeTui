@@ -26,7 +26,6 @@ class DelAction extends Action {
                 "alert('删除成功！');".
                 "location.href='index.php?module=keyword';</script>";
         }
-        return View :: INPUT;
     }
 
     public function execute() {

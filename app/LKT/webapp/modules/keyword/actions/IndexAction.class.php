@@ -18,7 +18,6 @@ class IndexAction extends Action {
         $request = $this->getContext()->getRequest();
         $sql = 'select * from lkt_hotkeywords';
         $res = $db -> selectarray($sql);
-        
         $request -> setAttribute("res",$res);
         return View :: INPUT;
     }

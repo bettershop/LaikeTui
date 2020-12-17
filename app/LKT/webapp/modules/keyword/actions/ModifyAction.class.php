@@ -1,14 +1,9 @@
 <?php
-
 /**
-
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
-
 
 class ModifyAction extends Action {
 
@@ -16,12 +11,11 @@ class ModifyAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $id = trim($request -> getParameter('id'));
-
         $sel = $db -> selectarray('select id,keyword from lkt_hotkeywords where id='.$id);
         if(!empty($sel)){
            $id = $sel['0']['id'];
            $sel = $sel['0']['keyword'];
-          }
+        }
         $request -> setAttribute("id",$id);
         $request -> setAttribute("sel",$sel);
         return View :: INPUT;
@@ -32,7 +26,6 @@ class ModifyAction extends Action {
         $request = $this->getContext()->getRequest();
         $id = intval(trim($request -> getParameter('id')));
         $name = addslashes(trim($request -> getParameter('name')));
-        
         if($name !== ''){
           $sql = 'update lkt_hotkeywords set keyword="'.$name.'" where id='.$id;
           $res = $db -> update($sql);
@@ -49,7 +42,6 @@ class ModifyAction extends Action {
                 "</script>";
            }
 
-        return;
     }
 
     public function getRequestMethods(){

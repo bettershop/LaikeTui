@@ -20,17 +20,6 @@ class AddAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $kw = addslashes(trim($request -> getParameter('keyword')));
-        
-        $countsql = 'select count(keyword) from lkt_hotkeywords';
-        $count = $db -> selectarray($countsql);
-        list($count) = $count;
-        $count = intval($count['count(keyword)']);
-        if($count >= 6){
-           header("Content-type:text/html;charset=utf-8");
-             echo "<script type='text/javascript'>" .
-                "alert('添加失败,最多只能添加六个关键词！');window.location.href='index.php?module=keyword';" .
-                "</script>";die;
-        }
         if($kw !== '') {
             $sql = 'insert into lkt_hotkeywords(keyword) values("' . $kw . '");';
             $res = $db->insert($sql);
@@ -46,7 +35,6 @@ class AddAction extends Action {
                     "</script>";
             }
         }
-        return;                                                                                                                                                                                                                                
     }
 
     public function getRequestMethods(){
