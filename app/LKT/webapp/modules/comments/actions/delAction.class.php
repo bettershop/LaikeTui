@@ -25,11 +25,8 @@ class delAction extends Action {
         $id = intval($request->getParameter('id'));
         $sql = "delete from lkt_comments where id = '$id'";
         $res = $db->delete($sql);
-
         $db->admin_record($admin_id,' 删除评论id为 '.$id.' 的信息',3);
-
         echo $res;
-        exit;
     }
 
     public function getRequestMethods(){

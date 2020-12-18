@@ -41,7 +41,6 @@ class is_defaultAction extends Action {
         }
         $res = array('status' => '1','info'=>'成功！');
         echo json_encode($res);
-        return;
     }
 
     public function execute(){

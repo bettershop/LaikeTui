@@ -50,7 +50,6 @@ class ModifyAction extends Action
         $up  = $db->update($sql);
         $db->admin_record($admin_id, ' 修改评论id为 ' . $id . ' 的信息 ', 2);
         echo $up;
-        exit;
     }
 
     public function getRequestMethods()

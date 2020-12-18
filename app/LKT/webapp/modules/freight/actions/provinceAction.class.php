@@ -64,7 +64,6 @@ class provinceAction extends Action {
         $res = array('status' => '1','list'=>$list,'info'=>'成功！');
         echo json_encode($res);
 
-        return;
 	}
 
 	public function execute(){
@@ -84,7 +83,6 @@ class provinceAction extends Action {
         $res = array('status' => '1','name'=>$name,'info'=>'成功！');
         echo json_encode($res);
 
-	    return;
 	}
 
 	public function getRequestMethods(){

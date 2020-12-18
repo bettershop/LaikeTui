@@ -22,7 +22,6 @@ class ajaxAction extends Action {
             echo json_encode($data);
         }
 
-        return;
     }
 
     public function execute(){
@@ -41,7 +40,6 @@ class ajaxAction extends Action {
             }
         }
         echo json_encode($asd);
-        return;
     }
 
 	public function getRequestMethods(){

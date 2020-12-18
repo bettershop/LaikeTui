@@ -53,7 +53,6 @@ class replyAction extends Action {
 	   $up = $db -> insert($sql);
        $db->admin_record($admin_id,' 回复评论id为 '.$id.' 的信息',8);
 	   echo $up;
-	   exit;
 
 	}
 
