@@ -11,7 +11,7 @@ require_once(MO_LIB_DIR . '/db.class.php');
 class IndexAction extends Action {
 
 	public function getDefaultView() {
-		$request = $this->getContext()->getRequest();
+	    $request = $this->getContext()->getRequest();
 		$this->getContext()->getUser()->setAuthenticated(false);
 		$request->setAttribute("name",$request->getParameter("name"));
         $request->setAttribute("password",$request->getParameter("password"));

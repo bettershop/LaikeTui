@@ -8,14 +8,13 @@
 
  */
 
-require_once(MO_LIB_DIR . '/DBAction.class.php');
 
+require_once(MO_LIB_DIR . '/db.class.php');
 
 class addAction extends Action {
 
 
 	public function getDefaultView() {
-        $db = DBAction::getInstance();
         $dd = $_SERVER['PHP_SELF'];
         $ddd =explode('/', $dd);//打散成数组
         if($ddd){
@@ -29,7 +28,7 @@ class addAction extends Action {
         $request = $this->getContext()->getRequest();
         //获取文章类别
         $sql = "select cat_id,cat_name from lkt_news_class ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $request->setAttribute("ctype",$r);
         $request->setAttribute('pic', $pic.'/images');
 
@@ -41,7 +40,6 @@ class addAction extends Action {
 
 	public function execute(){
 
-		$db = DBAction::getInstance();
 		$request = $this->getContext()->getRequest();
         $Article_title = addslashes(trim($request->getParameter('Article_title'))); // 文章标题
         $Article_prompt = addslashes(trim($request->getParameter('Article_prompt'))); // 文章副标题
@@ -55,7 +53,14 @@ class addAction extends Action {
         // 发布文章
         $sql = "insert into lkt_article(Article_title,Article_prompt,Article_imgurl,sort,content,add_date) " .
             "values('$Article_title','$Article_prompt','$imgurl','$sort','$content',CURRENT_TIMESTAMP)";
-        $r = $db->insert($sql);
+        $data = array();
+        $data[] = $Article_title;
+        $data[] = $Article_prompt;
+        $data[] = $imgurl;
+        $data[] = $sort;
+        $data[] = $content;
+        $data[] = CURRENT_TIMESTAMP;
+        $r = lkt_execute($sql,$data);
 
         if($r == -1){
             header("Content-type:text/html;charset=utf-8");
@@ -63,9 +68,7 @@ class addAction extends Action {
                 "alert('未知原因，文章发布失败！');" .
                 "</script>";
             return $this->getDefaultView();
-
         }else{
-
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('文章发布成功！');" .
@@ -74,7 +77,6 @@ class addAction extends Action {
 
         }
 
-	    return;
 
 	}
 

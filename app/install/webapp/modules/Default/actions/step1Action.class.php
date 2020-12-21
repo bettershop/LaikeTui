@@ -38,7 +38,7 @@ class step1Action extends Action
 
 
         //PHP版本检测
-        if(PHP_VERSION < 5.6 || phpversion()< 5.6 ){
+        if(version_compare(PHP_VERSION,'5.6.0','<')){
             $config[1][4] = 'error';
             $_SESSION['install_error'] = 1;
         }

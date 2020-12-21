@@ -4,7 +4,7 @@
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
  */
-
+require_once(MO_LIB_DIR . '/db.class.php');
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
 
@@ -47,7 +47,7 @@ class addAction extends Action
         /*** 报错不清除输入内容 结束 ***/
 
         $sql = "select * from lkt_config where id = '1'";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $uploadImg = $r[0]->uploadImg; // 图片上传位置
         $res = $this->product_class($product_class);//产品类别
         $brand = $this->brand($brand_id1);//品牌
@@ -55,7 +55,7 @@ class addAction extends Action
 
         // 运费
         $sql = "select id,name,is_default from lkt_freight order by is_default desc, add_time desc";
-        $rr = $db->select($sql);
+        $rr = lkt_gets($sql);
         $freight = [];
         $freight_num = 0;
         if ($rr) {
@@ -136,7 +136,7 @@ class addAction extends Action
         if (!empty($product_class)) {
             //获取产品类别
             $sql = "select cid,pname from lkt_product_class where sid = 0 and recycle =0";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
 
             foreach ($r as $key => $value) {
                 $c = '-' . $value->cid . '-';
@@ -149,7 +149,7 @@ class addAction extends Action
 
                 //循环第一层
                 $sql_e = "select cid,pname from lkt_product_class where sid = $value->cid and recycle =0";
-                $r_e = $db->select($sql_e);
+                $r_e = lkt_gets($sql_e);
                 if ($r_e) {
                     $hx = '-----';
                     foreach ($r_e as $ke => $ve) {
@@ -162,7 +162,7 @@ class addAction extends Action
 
                         //循环第二层
                         $sql_t = "select cid,pname from lkt_product_class where sid = $ve->cid and recycle =0";
-                        $r_t = $db->select($sql_t);
+                        $r_t = lkt_gets($sql_t);
                         if ($r_t) {
                             $hxe = $hx . '-----';
                             foreach ($r_t as $k => $v) {
@@ -182,14 +182,14 @@ class addAction extends Action
         } else {
             //获取产品类别
             $sql = "select cid,pname from lkt_product_class where sid = 0 and recycle =0";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
 
             foreach ($r as $key => $value) {
                 $c = '-' . $value->cid . '-';
                 $res .= '<option  value="-' . $value->cid . '-">' . $value->pname . '</option>';
                 //循环第一层
                 $sql_e = "select cid,pname from lkt_product_class where sid = $value->cid and recycle =0";
-                $r_e = $db->select($sql_e);
+                $r_e = lkt_gets($sql_e);
                 if ($r_e) {
                     $hx = '-----';
                     foreach ($r_e as $ke => $ve) {
@@ -197,7 +197,7 @@ class addAction extends Action
                         $res .= '<option  value="' . $cone . '">' . $hx . $ve->pname . '</option>';
                         //循环第二层
                         $sql_t = "select cid,pname from lkt_product_class where sid = $ve->cid and recycle =0";
-                        $r_t = $db->select($sql_t);
+                        $r_t = lkt_gets($sql_t);
                         if ($r_t) {
                             $hxe = $hx . '-----';
                             foreach ($r_t as $k => $v) {
@@ -216,7 +216,7 @@ class addAction extends Action
     {//品牌
         $db = DBAction::getInstance();
         $sql01 = "select brand_id ,brand_name from lkt_brand_class where status = 0 and recycle = 0 ";
-        $r01 = $db->select($sql01);
+        $r01 = lkt_gets($sql01);
         $brand = '';
         $brand_num = 0;
         if ($r01) {

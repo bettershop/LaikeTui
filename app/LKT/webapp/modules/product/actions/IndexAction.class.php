@@ -4,6 +4,7 @@
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
  */
+require_once(MO_LIB_DIR . '/db.class.php');
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 require_once(MO_LIB_DIR . '/ShowPager.class.php');
 require_once(MO_LIB_DIR . '/Tools.class.php');
@@ -33,12 +34,12 @@ class IndexAction extends Action
 
         //分类
         $sql = "select cid,pname from lkt_product_class where recycle = 0 and sid = 0  order by sort desc";
-        $rr = $db->select($sql);
+        $rr = lkt_gets($sql);
         $res = $this->product_class($rr, $product_class);
 
         //品牌
         $sql = "select * from lkt_brand_class where recycle = 0 and status = 0 order by sort asc, brand_time desc";
-        $rr1 = $db->select($sql);
+        $rr1 = lkt_gets($sql);
         $rew = '';
         foreach ($rr1 as $key => $value) {
             if ($brand_id == $value->brand_id) {
@@ -49,7 +50,7 @@ class IndexAction extends Action
         }
         //查询设置的最低库存值，低于该库存值的商品不显示在该页面
         $sql = "select config from lkt_product_config where id =1";
-        $rr = $db->select($sql);
+        $rr = lkt_gets($sql);
         if ($rr) {
             $config = unserialize($rr[0]->config);
             $min_inventory = $config['min_inventory'];
@@ -89,7 +90,7 @@ class IndexAction extends Action
             $condition .= " and a.product_title like '%$product_title%' ";
         }
         $sql = "select * from lkt_product_list as a where $condition order by a.sort asc,status asc,a.add_date desc ";
-        $r_pager = $db->select($sql);
+        $r_pager = lkt_gets($sql);
         if ($r_pager) {
             $total = count($r_pager);
         } else {
@@ -98,7 +99,7 @@ class IndexAction extends Action
         $pager = new ShowPager($total, $pagesize, $page);//[total_record] => 12 [pagesize] => 10 [total_pages] => 2 [cur_page] => 1 [offset] => 0 [_pernum] => 10
 
         $sql = "select * from lkt_product_list as a where $condition order by a.sort asc,status asc,a.add_date desc limit $start,$pagesize ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $list = [];
         $status_num = 0;
         foreach ($r as $key => $value) {
@@ -117,7 +118,7 @@ class IndexAction extends Action
             //  取数组最后一个元素 并查询分类名称
             $cid = end($typeArr);
             $sql_p = "select pname from lkt_product_class where cid ='" . $cid . "'";
-            $r_p = $db->select($sql_p);
+            $r_p = lkt_gets($sql_p);
             if ($r_p) {
                 $pname = $r_p['0']->pname;
             } else {
@@ -128,7 +129,7 @@ class IndexAction extends Action
             }
 
             $sql = "select id,num,unit,price from lkt_configure where pid = '$pid'";//根据商品ID去查询商品对应的规格
-            $r_s = $db->select($sql);
+            $r_s = lkt_gets($sql);
             if ($r_s) {
                 $price = [];
                 $unit = $r_s[0]->unit;
@@ -151,7 +152,7 @@ class IndexAction extends Action
             }
 
             //根据品牌ID查询对应名称
-            $r01 = $db->select("select brand_name from lkt_brand_class where brand_id ='" . $value->brand_id . "'");
+            $r01 = lkt_gets("select brand_name from lkt_brand_class where brand_id ='" . $value->brand_id . "'");
             $value->brand_name = $r01 ? $r01[0]->brand_name : '';
             $value->unit = $unit;
             $value->price = $present_price;
@@ -166,7 +167,7 @@ class IndexAction extends Action
         $pages_show = $pager->multipage($url, $total, $page, $pagesize, $start, $para = '');// url 总条数 当前页码  每页显示条数
 
         $sql = "select * from lkt_config where id = '1'";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $uploadImg = $r[0]->uploadImg; // 图片上传位置
 
         $request->setAttribute("uploadImg", $uploadImg);// 图片上传位置
@@ -195,12 +196,12 @@ class IndexAction extends Action
 
         if (!empty($cid)) {//循环下一级
             $sql_e = "select cid,pname from lkt_product_class where recycle = 0 and sid = $cid";
-            $r_e = $db->select($sql_e);
+            $r_e = lkt_gets($sql_e);
             if ($r_e) {
                 foreach ($r_e as $k01 => $v01) {//循环第三级
                     $k[] = $product_class . $v01->cid . '-';
                     $sql_e01 = "select cid,pname from lkt_product_class where recycle = 0 and sid = $v01->cid";
-                    $r_e01 = $db->select($sql_e01);
+                    $r_e01 = lkt_gets($sql_e01);
 
                     if ($r_e01) {
                         foreach ($r_e01 as $k02 => $v02) {
@@ -231,7 +232,7 @@ class IndexAction extends Action
                 //循环第一层
                 $sql_e = "select cid,pname from lkt_product_class where recycle = 0 and sid = $value->cid";
 
-                $r_e = $db->select($sql_e);
+                $r_e = lkt_gets($sql_e);
                 if ($r_e) {
                     $hx = '-----';
                     foreach ($r_e as $ke => $ve) {
@@ -244,7 +245,7 @@ class IndexAction extends Action
                         }
                         //循环第二层
                         $sql_t = "select cid,pname from lkt_product_class where recycle = 0 and sid = $ve->cid";
-                        $r_t = $db->select($sql_t);
+                        $r_t = lkt_gets($sql_t);
                         if ($r_t) {
                             $hxe = $hx . '-----';
                             foreach ($r_t as $k => $v) {
