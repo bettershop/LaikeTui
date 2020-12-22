@@ -14,7 +14,6 @@ class IndexAction extends Action
 
     public function getDefaultView()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $product_class = addslashes(trim($request->getParameter('cid'))); // 分类名称
         $brand_id = addslashes(trim($request->getParameter('brand_id'))); // 品牌id
@@ -138,10 +137,7 @@ class IndexAction extends Action
                     $configure_id = $v1->id;
                     if ($v1->num <= $min_inventory && $v1->num > 0) {//还有商品，但是库存不足 修改状态  status( 0:未开启砍价 1:开启砍价 2 上架 3 缺货 4下架)
                         $sql = "update lkt_configure set status = 3 where id = '$configure_id'";
-                        $db->update($sql);
-                    } else if ($v1->num == 0) {
-                        // $sql = "update lkt_configure set status = 4 where id = '$configure_id'";
-                        // $db->update($sql);
+                        lkt_execute($sql);
                     }
                 }
                 $min = min($price);
@@ -187,7 +183,6 @@ class IndexAction extends Action
 
     public function class_sort($product_class)//根据类别查询下一级
     {
-        $db = DBAction::getInstance();
         $typestr = trim($product_class, '-');
         $typeArr = explode('-', $typestr);
         //  取数组最后一个元素 并查询分类名称
@@ -218,7 +213,7 @@ class IndexAction extends Action
     //所有的商品分类
     public function product_class($rr, $product_class)
     {
-        $db = DBAction::getInstance();
+
         $res = '';
         if ($rr) {
             foreach ($rr as $key => $value) {
