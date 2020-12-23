@@ -97,7 +97,7 @@ class IndexAction extends Action
         }
         $pager = new ShowPager($total, $pagesize, $page);//[total_record] => 12 [pagesize] => 10 [total_pages] => 2 [cur_page] => 1 [offset] => 0 [_pernum] => 10
 
-        $sql = "select * from lkt_product_list as a where $condition order by a.sort asc,status asc,a.add_date desc limit $start,$pagesize ";
+        $sql = "select * from lkt_product_list as a where $condition order by a.add_date desc limit $start,$pagesize ";
         $r = lkt_gets($sql);
         $list = [];
         $status_num = 0;

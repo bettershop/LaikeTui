@@ -176,17 +176,17 @@ form[name=form1] input{
             <div class="formContentSD">
                 <div class="formListSD">
                     <div class="formTextSD"><span class="must">*</span><span>成本价：</span></div>
-                    <div class="formInputSD"><input type="number" name="initial[cbj]" onkeypress="return noNumbers(event)" min="0" step="0.01" onblur="set_cbj(this);" value="{$initial->cbj}" placeholder="请设置商品的默认成本价" ></div>
+                    <div class="formInputSD"><input type="text" name="initial[cbj]" onkeypress="return noNumbers(event)" min="0" step="0.01" onblur="set_cbj(this);" value="{$initial->cbj}" placeholder="请设置商品的默认成本价" ></div>
                 </div>
 
                 <div class="formListSD">
                     <div class="formTextSD"><span class="must">*</span><span>原价：</span></div>
-                    <div class="formInputSD"><input type="number" name="initial[yj]" onkeypress="return noNumbers(event)" min="0" step="0.01"  onblur="set_yj(this);" value="{$initial->yj}" placeholder="请设置商品的默认原价" ></div>
+                    <div class="formInputSD"><input type="text" name="initial[yj]" onkeypress="return noNumbers(event)" min="0" step="0.01"  onblur="set_yj(this);" value="{$initial->yj}" placeholder="请设置商品的默认原价" ></div>
                 </div>
 
                 <div class="formListSD">
                     <div class="formTextSD"><span class="must">*</span><span>售价：</span></div>
-                    <div class="formInputSD"><input type="number" name="initial[sj]" onkeypress="return noNumbers(event)" min="0" step="0.01"  onblur="set_sj(this);" value="{$initial->sj}" placeholder="请设置商品的默认售价" ></div>
+                    <div class="formInputSD"><input type="text" name="initial[sj]" onkeypress="return noNumbers(event)" min="0" step="0.01"  onblur="set_sj(this);" value="{$initial->sj}" placeholder="请设置商品的默认售价" ></div>
                 </div>
 
                 <div class="formListSD">
@@ -292,13 +292,13 @@ form[name=form1] input{
                                             <span>{{attr.attr_name}}</span>
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-sm" type="number" onkeypress="return noNumbers(event)" min="0" step="0.01"  v-bind:name="'attr['+index+'][costprice]'" :value="item.costprice">
+                                            <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0" step="0.01"  v-bind:name="'attr['+index+'][costprice]'" :value="item.costprice">
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-sm" type="number" onkeypress="return noNumbers(event)" min="0" step="0.01"  v-bind:name="'attr['+index+'][yprice]'" :value="item.yprice" >
+                                            <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0" step="0.01"  v-bind:name="'attr['+index+'][yprice]'" :value="item.yprice" >
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-sm" type="number" onkeypress="return noNumbers(event)" min="0" step="0.01"  v-bind:name="'attr['+index+'][price]'" :value="item.price">
+                                            <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0" step="0.01"  v-bind:name="'attr['+index+'][price]'" :value="item.price">
                                         </td>
                                         <td>
                                             <input class="form-control form-control-sm" oninput="value=value.replace(/[^\d]/g,'')" v-bind:name="'attr['+index+'][num]'" min="0" step="1" :value="item.num" >

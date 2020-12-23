@@ -14,7 +14,6 @@ class addAction extends Action
     public function getDefaultView()
     {
 
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
         /*** 报错不清除输入内容 ***/
@@ -240,7 +239,6 @@ class addAction extends Action
 
     public function execute()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收数据
         $attr = $request->getParameter('attr'); // 属性
@@ -303,7 +301,7 @@ class addAction extends Action
         }
 
         //    开启事务
-        $db->begin();
+        lkt_start();
 
         // 发布产品
         $sql = "insert into lkt_product_list(product_title,subtitle,product_class,brand_id,weight,imgurl,content,num,s_type,add_date,volume,freight,initial,status,sort) " .
@@ -324,8 +322,7 @@ class addAction extends Action
         $data[] = $initial;
         $data[] = 2;
         $data[] = 0;
-        $id1 = $db->preInsert($sql,$data);
-
+        $id1 = lkt_insert($sql,$data);
 
         if ($id1) {
             $files = ($_FILES['imgurls']['tmp_name']);
@@ -345,7 +342,8 @@ class addAction extends Action
                     if ($info) {
                         //循环遍历插入商品图片表
                         $sql_img = "insert into lkt_product_img(id,product_url,product_id,add_date) " . "values(0,'$imgURL_name','$id1',CURRENT_TIMESTAMP)";
-                        $db->insert($sql_img, 'last_insert_id');
+                        //$db->insert($sql_img, 'last_insert_id');
+                        lkt_execute($sql_img);
 
                     }
                 }
@@ -363,10 +361,10 @@ class addAction extends Action
                 $attribute = $va['attribute'];//属性，数组转字符串
 
                 $sql = "insert into lkt_configure(costprice,yprice,price,img,pid,num,unit,attribute,total_num) values('$costprice','$yprice','$price','$img','$id1','$num','$unit','$attribute','$num')";//成本价 ，原价，现价，商品图片，ID ，数量，单位，属性 
-                $r_attribute = $db->insert($sql, 'last_insert_id');
+                $r_attribute = lkt_insert($sql);
                 // 在库存记录表里，添加一条入库信息
                 $sql = "insert into lkt_stock(product_id,attribute_id,flowing_num,type,add_date) values('$id1','$r_attribute','$num',0,CURRENT_TIMESTAMP)";
-                $db->insert($sql);
+                lkt_insert($sql);
 
                 $c_num += $num;//所有商品数量
                 if ($r_attribute > 0) {
@@ -379,32 +377,31 @@ class addAction extends Action
             if ($r_num == count($attributes)) {//判断属性是否添加完全
                 if ($c_num < 1) {//库存不足，下架（0::上架 1:下架）
                     $sql_1 = "update lkt_product_list set status='1' where id = '$id1'";
-                    $db->update($sql_1);
+                    lkt_execute($sql_1);
                 }
-                $db->commit();
+                lkt_commit();
                 jump('index.php?module=product', '产品发布成功！');
                 exit;
 
 
             } else {
                 $sql = "delete from lkt_product_list where id = '$id1'";
-                $db->delete($sql);
+                lkt_execute($sql);
                 $sql = "delete from lkt_product_img where product_id = '$id1'";
-                $db->delete($sql);
+                lkt_execute($sql);
                 $sql = "delete from lkt_product_attribute where pid = '$id1'";
-                $db->delete($sql);
-                $db->rollback();
+                lkt_execute($sql);
+                lkt_rollback();
                 jump('index.php?module=product', '未知原因，产品发布失败！');
                 exit;
 
             }
 
         } else {
-            $db->rollback();
+            lkt_rollback();
             jump('index.php?module=product', '未知原因，产品发布失败！');
 
         }
-        return;
     }
 
     //删除指定数组元素[description]

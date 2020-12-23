@@ -17,6 +17,15 @@ function lkt_execute($sql,$params = array()){
 }
 
 /*
+ * 新增操作，返回新增ID
+ */
+function lkt_insert($sql,$params = array()){
+    $db=PDOAction::getInstance();
+    $r = $db -> insert($sql,$params);
+    return $r;
+}
+
+/*
  * 获取单行数组
  */
 function lkt_row($sql,$params = array()){

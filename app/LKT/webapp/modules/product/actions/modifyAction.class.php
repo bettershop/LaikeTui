@@ -12,7 +12,6 @@ class modifyAction extends Action
 
     public function getDefaultView()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
@@ -47,14 +46,7 @@ class modifyAction extends Action
 
         $arr = explode(',', $s_type);
 
-        if (!empty($brand_class)) {
-            $sql01 = "select brand_id ,brand_name from lkt_brand_class where brand_id = $brand_class";
-            $r01 = lkt_gets($sql01);
-            $brand_name = $r01[0]->brand_name; // 产品品牌
-        }
-
         //运费
-
         $sql = "select id,name from lkt_freight order by id ";
         $r_freight = lkt_gets($sql);
         $freight_list = '';
@@ -98,7 +90,7 @@ class modifyAction extends Action
                     }
                     //循环第二层
                     $sql_t = "select cid,pname from lkt_product_class where sid = $ve->cid and recycle = 0";
-                    $r_t = $db->select($sql_t);
+                    $r_t = lkt_gets($sql_t);
                     if ($r_t) {
                         $hxe = $hx . '-----';
                         foreach ($r_t as $k => $v) {
