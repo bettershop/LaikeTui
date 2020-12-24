@@ -351,8 +351,11 @@ class modifyAction extends Action
         $data[] = $initial;
         $data[] = $sort;
         $data[] = $id;
-        lkt_execute($sql_1,$data);
-
+        $r = lkt_execute($sql_1,$data);
+        if(!$r){
+            jump($_SESSION['url'], '产品修改失败！');
+        }
+        
         $cids = [];
         if ($attributes) {
             $sql = "select id from lkt_configure where pid = '$id'";
