@@ -353,7 +353,7 @@ class modifyAction extends Action
         $data[] = $id;
         $r = lkt_execute($sql_1,$data);
         if(!$r){
-            jump($_SESSION['url'], '产品修改失败！');
+            jump($_SESSION['url'], '似乎没有做修改？');
         }
         
         $cids = [];
@@ -400,23 +400,14 @@ class modifyAction extends Action
 
                 if ($r_attribute < 0) {
                     $db->modify($va, 'lkt_configure', " `id` = '$cid'", 1);
-                    header("Content-type:text/html;charset=utf-8");
-                    echo "<script type='text/javascript'>" .
-                        "alert('属性数据修改失败，请稍后再试！');" .
-                        "</script>";
-                    return $this->getDefaultView();
+                    jump($_SESSION['url'], '属性数据添加失败，请稍后再试！！');
                 }
             } else {
                 $va['pid'] = $id;
                 $va['total_num'] = $num;
                 $r_attribute = $db->insert_array($va, 'lkt_configure', '', 1);
                 if ($r_attribute < 0) {
-                    header("Content-type:text/html;charset=utf-8");
-                    echo "<script type='text/javascript'>" .
-                        "alert('属性数据添加失败，请稍后再试！');" .
-                        "</script>";
-                    return $this->getDefaultView();
-
+                    jump($_SESSION['url'], '属性数据添加失败，请稍后再试！！');
                 } else {
 
                     $sql = "insert into lkt_stock(product_id,attribute_id,flowing_num,type,add_date) values('$id','$r_attribute','$num',0,CURRENT_TIMESTAMP)";
