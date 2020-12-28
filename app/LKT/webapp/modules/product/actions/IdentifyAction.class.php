@@ -15,9 +15,6 @@ class IdentifyAction extends Action
 
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
-        // 接收信息
         $id = $request->getParameter('id'); // 产品id      
         $id = rtrim($id, ','); // 去掉最后一个逗号
         $id = explode(',', $id); // 变成数组
@@ -52,14 +49,11 @@ class IdentifyAction extends Action
         $data['con04'] = $con04;
         $res = array('data' => $data);
         echo json_encode($res);
-        return;
     }
 
     public function execute()
     {
         echo json_encode(2);
-        return;
-        return $this->getDefaultView();
     }
 
 

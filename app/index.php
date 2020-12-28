@@ -9,8 +9,6 @@ if($INSTALL_PATH==="/"){
 define('INSTALL_PATH',$INSTALL_PATH);//安装目录
 define('APP_PATH', __DIR__ . '/LKT/');
 define('REAL_PATH', realpath('./') . '/');
-//设置目录权限
-chmod(REAL_PATH, 0777);
 $_SESSION["APP_PATH"]=APP_PATH;
 $_SESSION["INSTALL_PATH"]=INSTALL_PATH;
 clearstatcache();
