@@ -49,7 +49,6 @@ class modifyAction extends Action {
 		$db = DBAction::getInstance();
 		$request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-        // 接收数据
         $id = addslashes(trim($request->getParameter('id'))); // 规则id
         $name = addslashes(trim($request->getParameter('name'))); // 规则名称
         $type = addslashes(trim($request->getParameter('type'))); // 类型
@@ -61,12 +60,6 @@ class modifyAction extends Action {
             echo "<script type='text/javascript'>" .
                 "alert('运费规则不能为空！');" .
                 "location.href='index.php?module=freight&action=modify&id=$id ';</script>";
-            return $this->getDefaultView();
-        }
-        if($name == ''){
-            echo "<script type='text/javascript'>" .
-                "alert('规则名称不能为空！');" .
-                "location.href='index.php?module=freight&action=modify&id=$id';</script>";
             return $this->getDefaultView();
         }
 
@@ -85,7 +78,6 @@ class modifyAction extends Action {
                 "location.href='index.php?module=freight';</script>";
             return $this->getDefaultView();
         }
-		return;
 	}
 
 	public function getRequestMethods(){

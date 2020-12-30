@@ -55,7 +55,6 @@ class addAction extends Action {
                 "location.href='index.php?module=freight';</script>";
             return $this->getDefaultView();
         }
-	    return;
 	}
 
 	public function getRequestMethods(){

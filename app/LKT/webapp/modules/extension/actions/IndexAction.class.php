@@ -94,8 +94,6 @@ class IndexAction extends Action
                 if ($val != "." && $val != "..") {
                     //如果是目录则递归子目录，继续操作
                     if (is_dir($path . $val)) {
-                        //子目录中操作删除文件夹和文件
-                        deldir($path . $val . '/');
                         //目录清空后删除空文件夹
                         @rmdir($path . $val . '/');
                     } else {
