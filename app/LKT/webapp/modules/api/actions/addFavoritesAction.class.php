@@ -27,7 +27,7 @@ class addFavoritesAction extends BaseAction
         } else {
             // 在收藏表里添加一条数据
             $sql = "insert into lkt_user_collection(user_id,p_id,add_time) values('$user_id','$pid',CURRENT_TIMESTAMP)";
-            $r   = lkt_execute($sql);
+            $r   = lkt_insert($sql);
             if ($r) {
                 echo json_encode(array('status' => 1, 'succ' => '收藏成功!', 'id' => $r));
                 exit();
@@ -37,7 +37,6 @@ class addFavoritesAction extends BaseAction
             }
         }
 
-        return;
     }
 
     // 查看收藏
@@ -73,7 +72,6 @@ select l.id,a.id as pid,a.product_title,a.imgurl as img,c.price
             echo json_encode(array('status' => 1, 'list' => ''));
             exit();
         }
-        return;
     }
 
     // 取消收藏
@@ -89,7 +87,6 @@ select l.id,a.id as pid,a.product_title,a.imgurl as img,c.price
             echo json_encode(array('status' => 0, 'err' => '网络繁忙！'));
             exit();
         }
-        return;
     }
 
     public function alldel()
