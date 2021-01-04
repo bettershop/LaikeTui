@@ -54,7 +54,7 @@
           <view class='inp'>
             
             <radio-group class="radio-group" bindchange="radioChange">
-              <label class="radio" wx:for="{{items}}">
+              <label class="radio" wx:for="{{items}}" wx:key="key">
                 <radio value="{{item.name}}" checked="{{item.checked}}" color='#FF6347'/>{{item.value}}
               </label>
             </radio-group>

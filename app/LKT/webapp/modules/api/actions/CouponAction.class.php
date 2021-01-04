@@ -13,10 +13,9 @@ class CouponAction extends BaseAction
     // 获取小程序优惠券活动
     public function index()
     {
-        $db = DBAction::getInstance();
         // 根据活动为开启状态,查询活动列表,根据开始时间降序排列
         $sql = "select * from lkt_coupon_activity where status = 1 and recycle = 0 order by start_time desc";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         if ($r_1) {
             foreach ($r_1 as $k => $v) {
                 $v = $this->index_coupon($v);
@@ -34,7 +33,6 @@ class CouponAction extends BaseAction
     public function index_coupon($v)
     {
 
-        $db = DBAction::getInstance();
         $activity_type = $v->activity_type; // 活动类型
         $product_class_id = $v->product_class_id; // 商品类型
         $product_id = $v->product_id; // 商品id
@@ -57,12 +55,12 @@ class CouponAction extends BaseAction
                     $product_class_id = $arr_1[$count];
                     // 根据商品分类id,查询分类id、分类名称
                     $sql = "select cid,pname from lkt_product_class where cid = '$product_class_id' ";
-                    $rr = $db->select($sql);
+                    $rr = lkt_gets($sql);
                     $v->cid = $rr[0]->cid; // 商品分类id
                     $v->pname = $rr[0]->pname; // 商品分类名称
                     if ($product_id != 0) {
                         $sql = "select id,product_title from lkt_product_list where id = '$product_id'";
-                        $rrr = $db->select($sql);
+                        $rrr = lkt_gets($sql);
                         $v->p_id = $rrr[0]->id;
                         $v->product_title = $rrr[0]->product_title;
                         $v->limit = '只能在' . $rrr[0]->product_title . '商品中使用'; // 限制
@@ -84,20 +82,19 @@ class CouponAction extends BaseAction
     // 点击领取
     public function receive()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $openid = addslashes(trim($request->getParameter('openid'))); // 微信id
         $id = addslashes(trim($request->getParameter('id'))); // 活动id
 
         // 查询用户id
         $sql = "select user_id,Register_data from lkt_user where wx_id = '$openid' ";
-        $user = $db->select($sql);
+        $user = lkt_gets($sql);
         $user_id = $user[0]->user_id; // 用户id
         $time = date('Y-m-d H:i:s');  // 当前时间
 
         // 根据活动id,查询活动
         $sql = "select * from lkt_coupon_activity where id = '$id'";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         if ($r_1) {
             $activity_type = $r_1[0]->activity_type; // 活动类型
             $money = $r_1[0]->money; // 金额
@@ -106,19 +103,19 @@ class CouponAction extends BaseAction
 
             // 根据用户id,活动id ,查询优惠券表,该用户是否领取过优惠券
             $sql = "select * from lkt_coupon where user_id = '$user_id' and hid = '$id' ";
-            $r_2 = $db->select($sql);
+            $r_2 = lkt_gets($sql);
             if ($r_2) {//已经领取了
                 echo json_encode(array('status' => 0, 'info' => '已经领取了'));
                 exit();
             } else {//未领取
                 if ($activity_type == 1) {//注册
                     $sql = "select * from lkt_coupon_config where id = 1 ";
-                    $r = $db->select($sql);
+                    $r = lkt_gets($sql);
                     $coupon_validity = $r[0]->coupon_validity;
                     $time = date('Y-m-d', strtotime('+' . $coupon_validity . ' day'));
                     // 在优惠券表里添加一条数据
                     $sql = "insert into lkt_coupon(user_id,money,add_time,expiry_time,hid) values('$user_id','$money',CURRENT_TIMESTAMP,'$time','$id')";
-                    $db->insert($sql);
+                    lkt_insert($sql);
                     echo json_encode(array('status' => 1, 'info' => '您领取了' . $money . '！'));
                     exit();
                 } else {//节假日
@@ -129,11 +126,11 @@ class CouponAction extends BaseAction
                         } else {
                             // 根据活动id,修改活动信息
                             $sql = "update lkt_coupon_activity set num='$num'-1 where id = '$id'";
-                            $db->update($sql);
+                            lkt_execute($sql);
 
                             // 在优惠券表里添加一条数据
                             $sql = "insert into lkt_coupon(user_id,money,add_time,expiry_time,hid) values('$user_id','$money',CURRENT_TIMESTAMP,'$end_time','$id')";
-                            $db->insert($sql);
+                            lkt_insert($sql);
                             echo json_encode(array('status' => 1, 'info' => '您领取了' . $money . '！'));
                             exit();
                         }
@@ -156,13 +153,12 @@ class CouponAction extends BaseAction
     // 我的优惠券
     public function mycoupon()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $openid = addslashes(trim($request->getParameter('openid'))); // 微信id
 
         // 根据微信id,查询用户id
         $sql = "select user_id from lkt_user where wx_id = '$openid' ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if (!$r) {
             echo json_encode(array('status' => 0, 'info' => '暂无数据'));
             exit();
@@ -170,19 +166,19 @@ class CouponAction extends BaseAction
         $user_id = $r[0]->user_id;
         // 查询配置表(公司logo)
         $sql = "select * from lkt_config where id = 1";
-        $r_c = $db->select($sql);
+        $r_c = lkt_gets($sql);
         $company = $r_c[0]->company; // 公司名称
 
         $list = array();
         // 查询优惠券插件配置
         $sql = "select * from lkt_coupon_config where id = 1";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $coupon_overdue = $r[0]->coupon_overdue; // 优惠券过期删除时间
         }
         // 根据用户id,查询优惠券表
         $sql = "select * from lkt_coupon where user_id = '$user_id' order by type,add_time";
-        $rr = $db->select($sql);
+        $rr = lkt_gets($sql);
         if ($rr) {
             foreach ($rr as $k => $v) {
 
@@ -203,7 +199,7 @@ class CouponAction extends BaseAction
                 }
                 // 根据活动id,查询活动信息
                 $sql = "select * from lkt_coupon_activity where id = '$hid'";
-                $rrr = $db->select($sql);
+                $rrr = lkt_gets($sql);
                 if ($rrr) {
                     $v->name = $rrr[0]->name; // 活动名称
                     $activity_type = $rrr[0]->activity_type; // 类型
@@ -224,12 +220,12 @@ class CouponAction extends BaseAction
                                 $product_class_id = $arr_1[$count];
                                 // 根据商品分类id,查询分类id、分类名称
                                 $sql = "select cid,pname from lkt_product_class where cid = '$product_class_id' ";
-                                $rr = $db->select($sql);
+                                $rr = lkt_gets($sql);
                                 $v->cid = $rr[0]->cid; // 商品分类id
                                 $v->pname = $rr[0]->pname; // 商品分类名称
                                 if ($product_id != 0) {
                                     $sql = "select id,product_title from lkt_product_list where id = '$product_id'";
-                                    $rrr = $db->select($sql);
+                                    $rrr = lkt_gets($sql);
                                     $v->p_id = $rrr[0]->id;
                                     $v->product_title = $rrr[0]->product_title;
                                     $v->limit = '只能在' . $rrr[0]->product_title . '商品中使用'; // 限制
@@ -254,7 +250,7 @@ class CouponAction extends BaseAction
                 if ($expiry_time < $time) { // 已过期
                     // 根据用户id,修改优惠券表的状态
                     $sql = "update lkt_coupon set type = 3 where user_id = '$user_id' and id = '$id' and type != 2 ";
-                    $db->update($sql);
+                    lkt_execute($sql);
                     $v->type = 3;
                 }
                 if ($coupon_overdue != 0) {
@@ -263,7 +259,7 @@ class CouponAction extends BaseAction
                     if ($time_r < $time) {
                         // 根据用户id、优惠券id、优惠券类型为过期,删除这条信息
                         $sql = "delete from lkt_coupon where user_id = '$user_id' and id = '$id'";
-                        $db->delete($sql);
+                        lkt_execute($sql);
                     }
                 }
 
@@ -285,40 +281,39 @@ class CouponAction extends BaseAction
     // 立即使用
     public function immediate_use()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('id'))); // 优惠券id
         $openid = addslashes(trim($request->getParameter('openid'))); // 微信id
         // 根据微信id,查询用户id
         $sql = "select user_id from lkt_user where wx_id = '$openid' ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $user_id = $r[0]->user_id;
 
         // 根据用户id,查询优惠券表里在使用中的优惠券
         $sql = "select * from lkt_coupon where user_id = '$user_id' and type = 1";
-        $rr = $db->select($sql);
+        $rr = lkt_gets($sql);
         if ($rr) {
             foreach ($rr as $k => $v) {
                 $coupon_id = $v->id; // 优惠券id
                 $hid = $v->hid; // 活动id
                 // 根据优惠券id,查询订单表
                 $sql = "select id from lkt_order where coupon_id = '$coupon_id' ";
-                $rr = $db->select($sql);
+                $rr = lkt_gets($sql);
                 if (empty($rr)) {
                     // 优惠券没有绑定
                     if ($coupon_id == $id) { // 传过来的优惠券id 与 查询没绑定的优惠券id 相等
                         // 根据优惠券id,修改优惠券状态(未使用)
                         $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                        $db->update($sql);
+                        lkt_execute($sql);
                         echo json_encode(array('status' => 0));
                         exit();
                     } else { // 传过来的优惠券id 与 查询没绑定的优惠券id 不相等
                         // 根据查询没绑定的优惠券id,修改优惠券状态(未使用)
                         $sql = "update lkt_coupon set type = 0 where id = '$coupon_id'";
-                        $db->update($sql);
+                        lkt_execute($sql);
                         // 根据传过来的优惠券id,修改优惠券状态(未使用)
                         $sql = "update lkt_coupon set type = 1 where id = '$id'";
-                        $db->update($sql);
+                        lkt_execute($sql);
                         echo json_encode(array('status' => 1));
                         exit();
                     }
@@ -327,7 +322,7 @@ class CouponAction extends BaseAction
         } else {
             // 没有数据,就直接把优惠券状态改成(使用中)
             $sql = "update lkt_coupon set type = 1 where id = '$id'";
-            $db->update($sql);
+            lkt_execute($sql);
             echo json_encode(array('status' => 1));
             exit();
         }
@@ -348,29 +343,29 @@ class CouponAction extends BaseAction
 
         // 根据微信id,查询用户id
         $sql = "select user_id from lkt_user where wx_id = '$openid' ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $user_id = $r[0]->user_id; // 用户id
 
         // 根据用户id,查询收货地址
         $sql_a = 'select id from lkt_user_address where uid=\'' . $user_id . '\'';
-        $r_a = $db->select($sql_a);
+        $r_a = lkt_gets($sql_a);
         $address = [];
         $yunfei = 0;
         if (!empty($r_a)) {
             // 根据用户id、默认地址,查询收货地址信息
             $sql_e = 'select * from lkt_user_address where uid=\'' . $user_id . '\' and is_default = 1';
-            $r_e = $db->select($sql_e);
+            $r_e = lkt_gets($sql_e);
             if (!empty($r_e)) {
                 $address = (array)$r_e['0']; // 收货地址
             } else {
                 // 根据用户id、默认地址,查询收货地址信息
                 $aaaid = $r_a[0]->id;
                 $sql_q = "select * from lkt_user_address where id= '$aaaid'";
-                $r_e = $db->select($sql_q);
+                $r_e = lkt_gets($sql_q);
                 if ($r_e) {
                     $address = (array)$r_e['0']; // 收货地址
                     $sql_u = "update lkt_user_address set is_default = 1 where id = '$aaaid'";
-                    $db->update($sql_u);
+                    lkt_execute($sql_u);
                 }
 
             }
@@ -379,7 +374,7 @@ class CouponAction extends BaseAction
         foreach ($typeArr as $key => $value) {
             // 联合查询返回购物信息
             $sql_c = "select a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,c.price,c.attribute,c.img,c.yprice,m.freight,m.product_class from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id  where c.num >0 and m.status ='0' and a.id = '$value'";
-            $r_c = $db->select($sql_c);
+            $r_c = lkt_gets($sql_c);
             if ($r_c) {
                 $product = (array)$r_c['0']; // 转数组
                 $attribute = unserialize($product['attribute']);
@@ -404,7 +399,7 @@ class CouponAction extends BaseAction
         $rew_1 = 0;
         // 根据用户id,查询优惠券状态为使用中的数据
         $sql = "select * from lkt_coupon where user_id = '$user_id' and type = 1";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
 
         if ($r_1) {
             foreach ($r_1 as $k => $v) {
@@ -412,12 +407,12 @@ class CouponAction extends BaseAction
                 $hid = $v->hid;
                 // 根据优惠券id,查询订单
                 $sql = "select id from lkt_order where coupon_id = '$id' ";
-                $rr = $db->select($sql);
+                $rr = lkt_gets($sql);
                 if (empty($rr)) { // 没有数据,表示该优惠券没绑定
                     // 根据用户id,查询优惠券状态为使用中的数据
                     $sql = "select id,money from lkt_coupon where user_id = '$user_id' and id = '$id'";
 
-                    $r_2 = $db->select($sql);
+                    $r_2 = lkt_gets($sql);
                     if ($r_2) {
                         $r_2[0]->point = '正在使用';
                         $arr[0] = $r_2[0];
@@ -428,7 +423,7 @@ class CouponAction extends BaseAction
         }
         // 根据用户id,查询优惠券状态为(未使用),以优惠券过期时间顺序排列
         $sql = "select id,money,hid from lkt_coupon where user_id = '$user_id' and type = 0 order by expiry_time";
-        $rr = $db->select($sql);
+        $rr = lkt_gets($sql);
 
         if ($rr) {
             foreach ($rr as $k => $v) {
@@ -439,7 +434,7 @@ class CouponAction extends BaseAction
 
                 // 根据优惠券活动id，查询活动
                 $sql = "select * from lkt_coupon_activity where id = '$hid'";
-                $rr1 = $db->select($sql);
+                $rr1 = lkt_gets($sql);
                 $activity_type = $rr1[0]->activity_type; // 类型
                 $product_class_id = $rr1[0]->product_class_id; // 分类id
                 $product_id1 = $rr1[0]->product_id; // 商品id
@@ -463,7 +458,7 @@ class CouponAction extends BaseAction
                     } else { // 当设置商品分类
                         // 根据活动指定的商品分类查询所有商品的分类
                         $sql = "select product_class from lkt_product_list where product_class like '%$product_class_id%'";
-                        $rr_1 = $db->select($sql);
+                        $rr_1 = lkt_gets($sql);
                         if ($rr_1) {
                             $calss_status = 1; // 商品属于优惠券指定的分类
                             foreach ($rr_1 as $k1 => $v1) {
@@ -524,7 +519,7 @@ class CouponAction extends BaseAction
         $coupon_id = addslashes(trim($request->getParameter('coupon_id'))); // 优惠券id
         // 根据活动id,查询活动信息
         $sql = "select user_id from lkt_user where wx_id = '$openid' ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if (!$r) {
             echo json_encode(array('status' => 0, 'info' => '暂无数据'));
             exit();
@@ -537,7 +532,7 @@ class CouponAction extends BaseAction
         foreach ($typeArr as $key => $value) {
             // 联合查询返回购物信息
             $sql_c = 'select a.Goods_num,a.Goods_id,a.id,c.price from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id  where a.id = \'' . $value . '\'';
-            $r_c = $db->select($sql_c);
+            $r_c = lkt_gets($sql_c);
             if ($r_c) {
                 $product = (array)$r_c['0']; // 转数组
                 $num = $product['Goods_num']; // 产品数量
@@ -549,7 +544,7 @@ class CouponAction extends BaseAction
 
         // 根据用户id、优惠劵状态为使用中，查询没绑定的优惠劵
         $sql = "select a.* from lkt_coupon as a where (select count(1) AS num from lkt_order as b where a.id = b.coupon_id) = 0 and user_id = '$user_id' and a.type = 1";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         if ($r_1) { // 有没绑定的优惠劵id
             $r_1 = $r_1;
             // break;
@@ -564,18 +559,18 @@ class CouponAction extends BaseAction
                     $coupon_money = $coupon_money + $money; // 付款金额+上优惠卷金额
                     // 当获取的优惠券id 与 状态为(使用中的id) 相等时,改状态为(未使用)
                     $sql = "update lkt_coupon set type = 0 where id = '$coupon_id'";
-                    $db->update($sql);
+                    lkt_execute($sql);
                     echo json_encode(array('status' => 1, 'id' => '', 'money' => '', 'zong' => $zong, 'coupon_money' => $coupon_money));
                     exit();
                 } else { // 当前在使用的优惠劵id与传过来的优惠劵不相等
                     // 查询当前在使用的优惠券金额
                     $sql = "select * from lkt_coupon where id = '$id'";
-                    $r_3 = $db->select($sql);
+                    $r_3 = lkt_gets($sql);
                     $ymoney = $r_3[0]->money; // 原优惠券金额
                     $coupon_money = $coupon_money + $ymoney; // 优惠后金额 加上 原优惠金额
                     // 查询传过来的优惠券金额
                     $sql = "select * from lkt_coupon where id = '$coupon_id'";
-                    $r_2 = $db->select($sql);
+                    $r_2 = lkt_gets($sql);
                     if ($r_2) {
                         $money = $r_2[0]->money; // 优惠券金额
                     } else {
@@ -585,11 +580,11 @@ class CouponAction extends BaseAction
                     if ($coupon_money > $money) { // 当付款金额大于优惠劵金额
                         // 改原状态为(使用中 变为 未使用)
                         $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                        $db->update($sql);
+                        lkt_execute($sql);
 
                         // 改获取id状态为(未使用 变为 使用中)
                         $sql = "update lkt_coupon set type = 1 where id = '$coupon_id'";
-                        $db->update($sql);
+                        lkt_execute($sql);
                         $coupon_money = $coupon_money - $money;
                         echo json_encode(array('status' => 1, 'id' => $coupon_id, 'money' => $money, 'zong' => $zong, 'coupon_money' => $coupon_money));
                         exit();
@@ -602,7 +597,7 @@ class CouponAction extends BaseAction
             } else { // 传过来的优惠劵id,不存在
                 // 查询优惠券金额
                 $sql = "select * from lkt_coupon where id = '$id'";
-                $r_2 = $db->select($sql);
+                $r_2 = lkt_gets($sql);
                 if ($r_2) {
                     $money = $r_2[0]->money; // 优惠券金额
                 } else {
@@ -616,7 +611,7 @@ class CouponAction extends BaseAction
             if ($coupon_id) { // 传过来的优惠劵id存在
                 // 根据传过来的优惠劵id,查询优惠金额
                 $sql = "select * from lkt_coupon where id = '$coupon_id'";
-                $r = $db->select($sql);
+                $r = lkt_gets($sql);
                 if ($r) {
                     $money = $r[0]->money; // 优惠劵金额
                 } else {
@@ -628,7 +623,7 @@ class CouponAction extends BaseAction
                     $coupon_money = $coupon_money - $money; // 付款金额-优惠劵金额
                     // 根据传过来的优惠劵id, 修改优惠劵状态（使用中）
                     $sql = "update lkt_coupon set type = 1 where id = '$coupon_id'";
-                    $db->update($sql);
+                    lkt_execute($sql);
                     echo json_encode(array('status' => 1, 'id' => $coupon_id, 'money' => $money, 'zong' => $zong, 'coupon_money' => $coupon_money));
                     exit();
                 } else {
@@ -647,7 +642,7 @@ class CouponAction extends BaseAction
     public function freight($freight, $num, $address, $db)
     {
         $sql = "select * from lkt_freight where id = '$freight'";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         if ($r_1) {
             $rule = $r_1[0];
             $yunfei = 0;
@@ -656,7 +651,7 @@ class CouponAction extends BaseAction
             } else {
                 $sheng = $address['sheng'];
                 $sql2 = "select G_CName from admin_cg_group where GroupID = '$sheng'";
-                $r_2 = $db->select($sql2);
+                $r_2 = lkt_gets($sql2);
                 if ($r_2) {
                     $city = $r_2[0]->G_CName;
                     $rule_1 = $r_1[0]->freight;
