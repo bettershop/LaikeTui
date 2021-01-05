@@ -12,8 +12,6 @@ class footprintAction extends BaseAction
     // 获取我的历史记录
     public function index()
     {
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
 
         $openid = addslashes($_POST['openid']); // 微信id
         $appConfig = $this->getAppInfo();
@@ -21,7 +19,7 @@ class footprintAction extends BaseAction
 
         // 根据微信id,查询用户id
         $sql = "select user_id from lkt_user where wx_id = '$openid' ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $user_id = $r[0]->user_id;
 
         $start_time_1 = date("Y-m-d H:i:s", mktime(0, 0, 0, date('m'), date('d'), date('Y'))); // 今天开始时间
@@ -35,7 +33,7 @@ class footprintAction extends BaseAction
         // 根据用户id,查询今天足迹
         $sql = "select * from lkt_user_footprint where user_id = '$user_id' and add_time > '$start_time_1' and add_time < '$end_time_1' ";
 
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         if ($r_1) {
             $time_1 = date('Y年m月d日', strtotime($r_1[0]->add_time));
             $res_1 = [];
@@ -44,7 +42,7 @@ class footprintAction extends BaseAction
                 $sql = "select a.id,a.product_title,a.volume,a.imgurl as img,c.price 
 from lkt_product_list AS a RIGHT JOIN (select min(price) price,pid from lkt_configure group by pid) AS c ON a.id = c.pid 
 where a.id ='$p_id' ";
-                $rr_1 = $db->select($sql);
+                $rr_1 = lkt_gets($sql);
                 if ($rr_1) {
                     foreach ($rr_1 as $key_1 => $value_1) {
                         $value_1->imgurl = $img . $value_1->img; // 拼图片路径
@@ -60,7 +58,7 @@ where a.id ='$p_id' ";
         }
         // 根据用户id,查询昨天足迹
         $sql = "select * from lkt_user_footprint where user_id = '$user_id' and add_time > '$start_time_2' and add_time < '$end_time_2' ";
-        $r_2 = $db->select($sql);
+        $r_2 = lkt_gets($sql);
         if ($r_2) {
             $res_2 = [];
             $time_2 = date('Y年m月d日', strtotime($r_2[0]->add_time));
@@ -69,7 +67,7 @@ where a.id ='$p_id' ";
 
                 $sql = "select a.id,a.product_title,a.volume,min(c.price) as price,c.yprice,c.img,c.id AS sizeid from lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid where a.id ='$p_id' and a.num >0 group by c.pid ";
 
-                $rr_2 = $db->select($sql);
+                $rr_2 = lkt_gets($sql);
                 if ($rr_2) {
                     foreach ($rr_2 as $key_2 => $value_2) {
                         $value_2->imgurl = $img . $value_2->img; // 拼图片路径
@@ -84,14 +82,14 @@ where a.id ='$p_id' ";
         }
         // 根据用户id,查询前天足迹
         $sql = "select * from lkt_user_footprint where user_id = '$user_id' and add_time > '$start_time_3' and add_time < '$end_time_3' ";
-        $r_3 = $db->select($sql);
+        $r_3 = lkt_gets($sql);
         if ($r_3) {
             $res_3 = [];
             $time_3 = date('Y年m月d日', strtotime($r_3[0]->add_time));
             foreach ($r_3 as $k_3 => $v_3) {
                 $p_id = $v_3->p_id;
                 $sql = "select a.id,a.product_title,a.volume,min(c.price) as price,c.yprice,c.img,c.id AS sizeid from lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid where a.id ='$p_id' and a.num >0 group by c.pid ";
-                $rr_3 = $db->select($sql);
+                $rr_3 = lkt_gets($sql);
                 if ($rr_3) {
                     foreach ($rr_3 as $key_3 => $value_3) {
                         $value_3->imgurl = $img . $value_3->img; // 拼图片路径
@@ -106,14 +104,14 @@ where a.id ='$p_id' ";
         }
         // 查询更早的历史记录
         $sql = "select * from lkt_user_footprint where user_id = '$user_id' and add_time < '$start_time_3'";
-        $r_4 = $db->select($sql);
+        $r_4 = lkt_gets($sql);
         if ($r_4) {
             $res_4 = [];
             $time_4 = '更早时间';
             foreach ($r_4 as $k_4 => $v_4) {
                 $p_id = $v_4->p_id;
                 $sql = "select a.id,a.product_title,a.volume,min(c.price) as price,c.yprice,c.img,c.id AS sizeid from lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid where a.id ='$p_id' and a.num >0 group by c.pid ";
-                $rr_4 = $db->select($sql);
+                $rr_4 = lkt_gets($sql);
                 if ($rr_4) {
                     foreach ($rr_4 as $key_4 => $value_4) {
                         $value_4->imgurl = $img . $value_4->img; // 拼图片路径
@@ -134,20 +132,19 @@ where a.id ='$p_id' ";
             echo json_encode(array('status' => 1, 'arr' => ''));
             exit();
         }
-        return;
+        
     }
 
     // 删除我的历史记录
     public function alldel()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $openid = addslashes(trim($request->getParameter('openid'))); // 微信id
         $sql_user = "select user_id from lkt_user where wx_id='$openid' ";
-        $r_user = $db->select($sql_user);
+        $r_user = lkt_gets($sql_user);
         $userid = $r_user['0']->user_id;
         $sql = "delete from lkt_user_footprint where user_id = '$userid' ";
-        $r = $db->delete($sql);
+        $r = lkt_execute($sql);
         if ($r) {
             echo json_encode(array('status' => 1, 'succ' => '删除成功！'));
             exit();
