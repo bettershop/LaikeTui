@@ -46,7 +46,6 @@ class noticeAction extends BaseAction {
        
         echo json_encode(array('notice'=>$r));
         exit();
-        return;
     }
   
 }

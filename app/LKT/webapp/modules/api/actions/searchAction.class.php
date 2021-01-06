@@ -11,15 +11,13 @@ class searchAction extends BaseAction
 
     public function index()
     {
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
 
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
 
         //查询商品并分类显示返回JSON至小程序
         $sql_c = "select cid,pname,img,bg from lkt_product_class where sid=0 and recycle != 1 order by sort asc";
-        $r_c = $db->select($sql_c);
+        $r_c = lkt_gets($sql_c);
 
         $twoList = [];
         $abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -28,7 +26,7 @@ class searchAction extends BaseAction
         if ($r_c) {
             foreach ($r_c as $key => $value) {
                 $sql_e = 'select cid,pname,img from lkt_product_class where sid=\'' . $value->cid . '\' and recycle != 1 order by sort asc';
-                $r_e = $db->select($sql_e);
+                $r_e = lkt_gets($sql_e);
                 $son = [];
                 if ($r_e) {
                     foreach ($r_e as $ke => $ve) {
@@ -52,7 +50,7 @@ class searchAction extends BaseAction
 
 
         $sql = 'select keyword from lkt_hotkeywords';
-        $res = $db->selectarray($sql);
+        $res = lkt_rows($sql);
         if ($res) {
             foreach ($res as $k => $v) {
                 $res[$k] = $v['keyword'];
@@ -65,7 +63,6 @@ class searchAction extends BaseAction
 
     public function search()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $keyword = addslashes(trim($request->getParameter('keyword'))); // 关键词
         $num = addslashes(trim($request->getParameter('num'))); //  '次数'
@@ -90,7 +87,7 @@ class searchAction extends BaseAction
 
         //查出所有产品分类
         $sql = 'select pname from lkt_product_class where recycle != 1';
-        $res = $db->select($sql);
+        $res = lkt_gets($sql);
         if ($res) {
             foreach ($res as $key => $value) {
                 $res[] = $value->pname;
@@ -102,7 +99,7 @@ class searchAction extends BaseAction
             $type = 0;
             $keyword = addslashes($keyword);
             $sqla = "select cid from lkt_product_class where pname='$keyword' and recycle != 1";
-            $a = $db->select($sqla);
+            $a = lkt_gets($sqla);
             if (!empty($a)) {
                 $cid = $a['0']->cid; // 分类id
             }
@@ -115,7 +112,7 @@ ON a.id = c.pid
 where a.product_class like '%$cid%' and a.status = 0  
 order by $select $sort LIMIT $start,$end
 ";
-            $data = $db->select($sqlb);
+            $data = lkt_gets($sqlb);
 
         } else {   //如果不是商品分类名称，则直接搜产品
             $type = 1;
@@ -127,7 +124,7 @@ ON a.id = c.pid
 where a.product_title like '%$keyword%' and a.status = 0  
 order by $select $sort 
 ";
-            $data = $db->select($sqlb);
+            $data = lkt_gets($sqlb);
         }
         if (!empty($data)) {
             $product = array();
@@ -151,7 +148,6 @@ order by $select $sort
 
     public function listdetail()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('cid'))); //  '分类ID'
         $paegr = addslashes(trim($request->getParameter('page'))); //  '页面'
@@ -182,14 +178,14 @@ order by $select $sort
         $end = 10;
         $bg = '';
         $sql_c = "select bg from lkt_product_class where cid='$id' ";
-        $r_c = $db->select($sql_c);
+        $r_c = lkt_gets($sql_c);
         if ($r_c) {
             $bg = $img . $r_c[0]->bg;
         }
 
 
         $sql = "select * from lkt_product_list as a where a.recycle = 0 and a.num >0 and a.status = 0 and  a.product_class like '%-$id-' order by sort asc,status asc,a.add_date desc,a.sort desc limit $start,$end ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         $status_num = 0;
         if ($r) {
             foreach ($r as $key => $value) {
@@ -203,7 +199,7 @@ order by $select $sort
                 }
                 $imgurl = $img . $value->imgurl;/* end 保存*/
                 $sql = "select id,num,unit,price,yprice from lkt_configure where pid = '$pid'";//根据商品ID去查询商品对应的规格
-                $r_s = $db->select($sql);
+                $r_s = lkt_gets($sql);
                 if ($r_s) {
                     $price = [];
                     $yprice = [];
@@ -236,7 +232,6 @@ order by $select $sort
 
     public function class_sort($product_class)//根据类别查询下一级
     {
-        $db = DBAction::getInstance();
         $typestr = trim($product_class, '-');
         $typeArr = explode('-', $typestr);
         //  取数组最后一个元素 并查询分类名称
@@ -245,12 +240,12 @@ order by $select $sort
 
         if (!empty($cid)) {//循环下一级
             $sql_e = "select cid,pname from lkt_product_class where recycle = 0 and sid = $cid";
-            $r_e = $db->select($sql_e);
+            $r_e = lkt_gets($sql_e);
             if ($r_e) {
                 foreach ($r_e as $k01 => $v01) {//循环第三级
                     $k[] = '-' . $product_class . '-' . $v01->cid . '-';
                     $sql_e01 = "select cid,pname from lkt_product_class where recycle = 0 and sid = $v01->cid";
-                    $r_e01 = $db->select($sql_e01);
+                    $r_e01 = lkt_gets($sql_e01);
 
                     if ($r_e01) {
                         foreach ($r_e01 as $k02 => $v02) {
