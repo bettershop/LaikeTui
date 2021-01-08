@@ -13,7 +13,6 @@ class productAction extends BaseAction
     // 获取产品详情
     public function index()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
         // 获取产品id
@@ -37,12 +36,12 @@ class productAction extends BaseAction
 
         if ($openid) {
             $sql = "select * from lkt_user where wx_id = '$openid'";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
             if ($r) {
                 $user_id = $r[0]->user_id;
                 // 根据用户id、产品id,获取收藏表信息
                 $sql = "select * from lkt_user_collection where user_id = '$user_id' and p_id = '$id'";
-                $rr = $db->select($sql);
+                $rr = lkt_gets($sql);
                 if ($rr) {
                     $type = 1;
                     $collection_id = $rr['0']->id;
@@ -53,28 +52,28 @@ class productAction extends BaseAction
                 $time = date("Y-m-d");
                 // 根据用户id,在足迹表里插入一条数据
                 $sql_collection = "select * from lkt_user_footprint where user_id = '$user_id' and p_id = '$id' and add_time like '$time%' ";
-                $rr_collection = $db->select($sql_collection);
+                $rr_collection = lkt_gets($sql_collection);
 
                 if (empty($rr_collection)) {
                     $sql = "insert into lkt_user_footprint(user_id,p_id,add_time) values('$user_id','$id',CURRENT_TIMESTAMP)";
-                    $rrr = $db->insert($sql);
+                    $rrr = lkt_execute($sql);
                 }
             }
         }
 
         // 根据产品id,查询产品数据
         $sql = "select a.*,c.price,c.yprice,c.attribute,c.img from lkt_product_list AS a LEFT JOIN lkt_configure AS c ON a.id = c.pid where a.id = '$id' and a.status = 0 and  a.num > 0 and c.recycle = 0";
-        $res = $db->select($sql);
+        $res = lkt_gets($sql);
         if (!$res) {
             if ($collection_id) {
-                $res = $db->delete('delete from lkt_user_collection where id="' . $collection_id . '"');
+                $res = lkt_execute('delete from lkt_user_collection where id="' . $collection_id . '"');
             }
             echo json_encode(array('status' => 0, 'err' => '该商品已下架！'));
             exit();
         } else {
             $img_arr = [];
             $sql_img = "select product_url,id from lkt_product_img where product_id = '$id'";
-            $r = $db->select($sql_img);
+            $r = lkt_gets($sql_img);
             if ($r) {
                 foreach ($r as $key => $value) {
                     $img_arr[$key] = $img . $value->product_url;
@@ -89,7 +88,7 @@ class productAction extends BaseAction
             $cid = end($typeArr);
             $pname = '';
             $sql_p = "select pname from lkt_product_class where cid ='" . $cid . "'";
-            $r_p = $db->select($sql_p);
+            $r_p = lkt_gets($sql_p);
             $pname = '自营';
             if ($r_p) {
                 $pname = $r_p['0']->pname;
@@ -110,7 +109,7 @@ class productAction extends BaseAction
 
             $freight_id = $res[0]->freight;
             $sql = "select * from lkt_freight where id = '$freight_id'";
-            $r_freight = $db->select($sql);
+            $r_freight = lkt_gets($sql);
             if ($r_freight) {
                 $freight = unserialize($r_freight[0]->freight); // 属性
                 foreach ($freight as $k => $v) {
@@ -171,7 +170,7 @@ class productAction extends BaseAction
             if (!empty($res[0]->brand_id)) {
                 $b_id = $res[0]->brand_id;
                 $sql01 = "select brand_name from lkt_brand_class where brand_id = '$b_id'";
-                $r01 = $db->select($sql01);
+                $r01 = lkt_gets($sql01);
             }
             if (!empty($r01)) {
                 $product['brand_name'] = $r01[0]->brand_name;
@@ -180,7 +179,7 @@ class productAction extends BaseAction
             }
 
             $sql_c = "select a.id,a.add_time,a.content,a.CommentType,a.size,m.user_name,m.headimgurl from lkt_comments AS a LEFT JOIN lkt_user AS m ON a.uid = m.user_id where a.pid = '$id'";
-            $r_c = $db->select($sql_c);
+            $r_c = lkt_gets($sql_c);
             $arr = [];
             if ($r_c) {
                 foreach ($r_c as $key => $value) {
@@ -189,7 +188,7 @@ class productAction extends BaseAction
                     //-------------2018-05-03  修改  作用:返回评论图片
                     $comments_id = $va['id'];
                     $comments_sql = "select comments_url from lkt_comments_img where comments_id = '$comments_id' ";
-                    $comment_res = $db->select($comments_sql);
+                    $comment_res = lkt_gets($comments_sql);
                     $va['images'] = '';
                     if ($comment_res) {
                         $va['images'] = $comment_res;
@@ -202,7 +201,7 @@ class productAction extends BaseAction
                     }
                     //-------------2018-07-27  修改
                     $ad_sql = "select content from lkt_reply_comments where cid = '$comments_id' and uid = 'admin' ";
-                    $ad_res = $db->select($ad_sql);
+                    $ad_res = lkt_gets($ad_sql);
                     if ($ad_res) {
                         $reply_admin = $ad_res[0]->content;
                     } else {
@@ -218,7 +217,7 @@ class productAction extends BaseAction
 
             $commodityAttr = [];
             $sql_size = "select * from lkt_configure where pid = '$id' AND num > 0 and recycle = 0";
-            $r_size = $db->select($sql_size);
+            $r_size = lkt_gets($sql_size);
 
             $array_price = [];
             $array_yprice = [];
@@ -301,14 +300,13 @@ class productAction extends BaseAction
     //普通商品储存from_id 用于发货 退款等操作信息推送
     public function save_formid()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $uid = addslashes(trim($request->getParameter('userid')));
         $formid = addslashes(trim($request->getParameter('from_id')));
         $lifetime = date('Y-m-d H:i:s', time() + 7 * 24 * 3600);
         if ($formid != 'the formId is a mock one' && $formid != '') {
             $addsql = "insert into lkt_user_fromid(open_id,fromid,lifetime) values('$uid','$formid','$lifetime')";
-            $addres = $db->insert($addsql);
+            $addres = lkt_execute($addsql);
             echo json_encode(array('status' => 1, 'succ' => $addres));
         }
     }
@@ -316,7 +314,6 @@ class productAction extends BaseAction
     // 加入购物车
     public function add_cart()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $Uid = addslashes(trim($request->getParameter('uid'))); //  '微信id',
         $Goods_id = addslashes(trim($request->getParameter('pid'))); //  '产品id',
@@ -328,7 +325,7 @@ class productAction extends BaseAction
             echo json_encode(array('status' => 0, 'info' => '添加失败请重新提交!!'));
         } else {
             $sql = "select user_id from lkt_user where wx_id = '$Uid'";
-            $r_1 = $db->select($sql);
+            $r_1 = lkt_gets($sql);
             if ($r_1) {
                 $user_id = $r_1[0]->user_id;
             } else {
@@ -336,7 +333,7 @@ class productAction extends BaseAction
             }
 
             $sql_k = "select num from lkt_configure where pid = '$Goods_id' and num >0 and recycle = 0";
-            $res_k = $db->select($sql_k);
+            $res_k = lkt_gets($sql_k);
             if ($res_k) {
                 $num = $res_k[0]->num;
             } else {
@@ -344,17 +341,17 @@ class productAction extends BaseAction
             }
             if ($num >= $Goods_num) {
                 $sql = "select * from lkt_cart where user_id='$user_id' and Uid='$Uid' and Goods_id='$Goods_id' and Size_id='$size_id' ";
-                $rs = $db->select($sql);
+                $rs = lkt_gets($sql);
                 $r = 0;
                 if (count($rs) > 0) {
                     $sql = "update lkt_cart set Goods_num=Goods_num+$Goods_num where user_id='$user_id' and Uid='$Uid' and Goods_id='$Goods_id' and Size_id='$size_id' ";
-                    $r = $db->update($sql);
+                    $r = lkt_execute($sql);
                     $sql = "select * from lkt_cart  where user_id='$user_id' and Uid='$Uid' and Goods_id='$Goods_id' and Size_id='$size_id' ";
-                    $r2 = $db->select($sql);
+                    $r2 = lkt_gets($sql);
                     $r = $r2[0]->id;
                 } else {
                     $sql = "insert into lkt_cart (user_id,Uid,Goods_id,Goods_num,Create_time,Size_id,plugin) values('$user_id','$Uid','$Goods_id','$Goods_num',CURRENT_TIMESTAMP,$size_id,'$plugin') ";
-                    $r = $db->insert($sql, 'last_insert_id');
+                    $r = lkt_insert($sql);
                 }
                 if ($r) {
                     echo json_encode(array('status' => 1, 'cart_id' => $r));
@@ -370,7 +367,6 @@ class productAction extends BaseAction
 
     public function listdetail()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('cid'))); //  '分类ID'
         $paegr = addslashes(trim($request->getParameter('page'))); //  '页面'
@@ -399,7 +395,7 @@ class productAction extends BaseAction
         $start = ($paegr - 1) * 10;
         $end = $paegr * 10;
         $sql = 'select a.id,a.product_title,volume,c.price,c.yprice,c.img,a.s_type,c.id AS sizeid from lkt_product_list AS a LEFT JOIN lkt_configure AS c ON a.id = c.pid where a.product_class like \'%-' . $id . "-%' and a.status = 0 and c.recycle = 0 order by $select $sort LIMIT $start,$end ";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $product = [];
             foreach ($r as $k => $v) {
@@ -417,7 +413,6 @@ class productAction extends BaseAction
     // 加载更多商品
     public function get_more()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('cid'))); //  '分类ID'
         $paegr = addslashes(trim($request->getParameter('page'))); //  '分页显示'
@@ -431,7 +426,7 @@ class productAction extends BaseAction
         $start = ($paegr - 1) * 10;
         $end = $paegr * 10;
         $sql = 'select a.id,a.product_title,a.volume,c.price,c.yprice,c.img,c.id AS sizeid from lkt_product_list AS a LEFT JOIN lkt_configure AS c ON a.id = c.pid where a.product_class like \'%-' . $id . '-%\' and c.num >0 order by a.sort LIMIT $start,$end';
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $product = [];
             foreach ($r as $k => $v) {
@@ -450,7 +445,7 @@ class productAction extends BaseAction
     {
 
         $sql = "select * from lkt_freight where id = '$freight'";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         if ($r_1) {
             $rule = $r_1[0];
             $yunfei = 0;
@@ -459,7 +454,7 @@ class productAction extends BaseAction
             } else {
                 $sheng = $address['sheng'];
                 $sql2 = "select G_CName from admin_cg_group where GroupID = '$sheng'";
-                $r_2 = $db->select($sql2);
+                $r_2 = lkt_gets($sql2);
 
                 if ($r_2) {
                     $city = $r_2[0]->G_CName;
@@ -513,7 +508,7 @@ class productAction extends BaseAction
         $yunfei = 0;
         // 根据微信id,查询用户id
         $sql_user = 'select user_id,money,consumer_money from lkt_user where wx_id=\'' . $uid . '\' ';
-        $r_user = $db->select($sql_user);
+        $r_user = lkt_gets($sql_user);
         if ($r_user) {
             $userid = $r_user['0']->user_id; // 用户id
             $user_money = $r_user['0']->money; // 用户余额
@@ -524,22 +519,22 @@ class productAction extends BaseAction
 
         // 根据用户id,查询收货地址
         $sql_a = 'select id from lkt_user_address where uid=\'' . $userid . '\'';
-        $r_a = $db->select($sql_a);
+        $r_a = lkt_gets($sql_a);
         if (!empty($r_a)) {
             $arr['addemt'] = 0; // 有收货地址
             // 根据用户id、默认地址,查询收货地址信息
             $sql_e = 'select * from lkt_user_address where uid=\'' . $userid . '\' and is_default = 1';
-            $r_e = $db->select($sql_e);
+            $r_e = lkt_gets($sql_e);
             if (!empty($r_e)) {
                 $arr['adds'] = (array)$r_e['0']; // 收货地址
             } else {
                 // 根据用户id、默认地址,查询收货地址信息
                 $aaaid = $r_a[0]->id;
                 $sql_q = "select * from lkt_user_address where id= '$aaaid'";
-                $r_e = $db->select($sql_q);
+                $r_e = lkt_gets($sql_q);
                 $arr['adds'] = (array)$r_e['0']; // 收货地址 
                 $sql_u = "update lkt_user_address set is_default = 1 where id = '$aaaid'";
-                $db->update($sql_u);
+                lkt_execute($sql_u);
             }
             $address = (array)$r_e['0']; // 收货地址
         } else {
@@ -565,20 +560,20 @@ class productAction extends BaseAction
         $usort = 0;
 
         foreach ($typeArr as $key => $value) {
-            $r_c01 = $db->select("select m.status,c.num  from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id  where  a.id = '$value'");
+            $r_c01 = lkt_gets("select m.status,c.num  from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id  where  a.id = '$value'");
             if ($r_c01 && $r_c01[0]->status && $r_c01[0]->status != 0) {
-                $db->delete('delete from lkt_cart where id="' . $value . '"');
+                lkt_execute('delete from lkt_cart where id="' . $value . '"');
                 echo json_encode(array('status' => 3, 'err' => '存在下架商品！'));
                 exit;
             }
             if ($r_c01 && $r_c01[0]->num && $r_c01[0]->num == 0) {
-                $db->delete('delete from lkt_cart where id="' . $value . '"');
+                lkt_execute('delete from lkt_cart where id="' . $value . '"');
                 echo json_encode(array('status' => 3, 'err' => '存在库存不足商品！'));
                 exit;
             }
             // 联合查询返回购物信息
             $sql_c = "select a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,c.price,c.attribute,m.imgurl as img,c.yprice,m.freight,m.product_class from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id  where c.num >0 and m.status ='0' and a.id = '$value'";
-            $r_c = $db->select($sql_c);
+            $r_c = lkt_gets($sql_c);
             if ($r_c) {
                 $product = (array)$r_c['0']; // 转数组
                 $attribute = unserialize($product['attribute']);
@@ -634,7 +629,7 @@ class productAction extends BaseAction
             $time = date("Y-m-d H:i:s"); // 当前时间
 
             $scoresql = 'select lever,ordernum,scorenum from lkt_setscore order by lever';  //查询消费金参数
-            $scoremsg = $db->select($scoresql);
+            $scoremsg = lkt_gets($scoresql);
             if ($scoremsg) {
                 foreach ($scoremsg as $k => $v) {
                     if ($v->lever < 0) {
@@ -650,7 +645,7 @@ class productAction extends BaseAction
 
             // 根据用户id,查询优惠券状态为 (使用中)
             $sql = "select * from lkt_coupon where user_id = '$userid' and type = 1";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
             if ($r) {
                 $r = $r;
             } else {
@@ -662,13 +657,13 @@ class productAction extends BaseAction
                     $id = $v->id; // 优惠券id
                     // 根据优惠券id,查询订单表(查看优惠券是否绑定)
                     $sql = "select id from lkt_order where coupon_id = '$id' ";
-                    $rr = $db->select($sql);
+                    $rr = lkt_gets($sql);
 
                     if (empty($rr)) { // 没有数据,表示优惠券没绑定
                         $hid = $v->hid; // 活动id
                         $money = $v->money; // 优惠券金额
                         $sql = "select * from lkt_coupon_activity where id = '$hid'";
-                        $rr1 = $db->select($sql);
+                        $rr1 = lkt_gets($sql);
                         $activity_type = $rr1[0]->activity_type; // 类型
                         $product_class_id = $rr1[0]->product_class_id; // 分类id
                         $product_id1 = $rr1[0]->product_id; // 商品id
@@ -677,7 +672,7 @@ class productAction extends BaseAction
                             if ($money >= $order_zong) {
                                 // 当优惠券金额比总价格高时,修改优惠券状态为(未使用)
                                 $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                                $db->update($sql);
+                                lkt_execute($sql);
                                 $arr['coupon_id'] = ''; // 付款金额
                                 $arr['money'] = ''; // 优惠券金额
                                 $arr['coupon_money'] = $order_zong; // 付款金额
@@ -698,7 +693,7 @@ class productAction extends BaseAction
                             if ($order_zong < $z_money) {
                                 // 当订单总价格不满足满减金额时,修改优惠券状态为(未使用)
                                 $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                                $db->update($sql);
+                                lkt_execute($sql);
                                 $arr['coupon_id'] = ''; // 付款金额
                                 $arr['money'] = ''; // 优惠券金额
                                 $arr['coupon_money'] = $order_zong; // 付款金额
@@ -719,7 +714,7 @@ class productAction extends BaseAction
                                 if ($money >= $order_zong) {
                                     // 当优惠券金额比总价格高时,修改优惠券状态为(未使用)
                                     $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                                    $db->update($sql);
+                                    lkt_execute($sql);
                                     $arr['coupon_id'] = ''; // 付款金额
                                     $arr['money'] = ''; // 优惠券金额
                                     $arr['coupon_money'] = $order_zong; // 付款金额
@@ -739,7 +734,7 @@ class productAction extends BaseAction
                             } else { // 当设置商品分类
                                 // 根据活动指定的商品分类查询所有商品的分类
                                 $sql = "select product_class from lkt_product_list where product_class like '%$product_class_id%'";
-                                $rr_1 = $db->select($sql);
+                                $rr_1 = lkt_gets($sql);
                                 if ($rr_1) {
                                     $calss_status = 1; // 商品属于优惠券指定的分类
                                     foreach ($rr_1 as $k1 => $v1) {
@@ -754,7 +749,7 @@ class productAction extends BaseAction
                                     if ($calss_status == 0) { // 当有商品不属于优惠券指定的分类
                                         // 根据优惠券id,修改优惠券状态（未使用）
                                         $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                                        $db->update($sql);
+                                        lkt_execute($sql);
                                         $arr['coupon_id'] = ''; // 付款金额
                                         $arr['money'] = ''; // 优惠券金额
                                         $arr['coupon_money'] = $order_zong; // 付款金额
@@ -772,7 +767,7 @@ class productAction extends BaseAction
                                             if ($product_status == 0) {
                                                 // 根据优惠券id,修改优惠券状态（未使用）
                                                 $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                                                $db->update($sql);
+                                                lkt_execute($sql);
                                                 $arr['coupon_id'] = ''; // 付款金额
                                                 $arr['money'] = ''; // 优惠券金额
                                                 $arr['coupon_money'] = $order_zong; // 付款金额
@@ -782,7 +777,7 @@ class productAction extends BaseAction
                                                 if ($money >= $order_zong) {
                                                     // 当优惠券金额比总价格高时,修改优惠券状态为(未使用)
                                                     $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                                                    $db->update($sql);
+                                                    lkt_execute($sql);
                                                     $arr['coupon_id'] = ''; // 付款金额
                                                     $arr['money'] = ''; // 优惠券金额
                                                     $arr['coupon_money'] = $order_zong; // 付款金额
@@ -800,7 +795,7 @@ class productAction extends BaseAction
                                             if ($money >= $order_zong) {
                                                 // 当优惠券金额比总价格高时,修改优惠券状态为(未使用)
                                                 $sql = "update lkt_coupon set type = 0 where id = '$id'";
-                                                $db->update($sql);
+                                                lkt_execute($sql);
                                                 $arr['coupon_id'] = ''; // 付款金额
                                                 $arr['money'] = ''; // 优惠券金额
                                                 $arr['coupon_money'] = $order_zong; // 付款金额
@@ -852,7 +847,7 @@ class productAction extends BaseAction
     // 显示购物车列表
     public function Shopping()
     {
-        $db = DBAction::getInstance();
+
         $request = $this->getContext()->getRequest();
 
         $appConfig = $this->getAppInfo();
@@ -862,7 +857,7 @@ class productAction extends BaseAction
         $uid = addslashes(trim($request->getParameter('user_id'))); //  '分类ID'
         $sql_c = 'select a.*,c.price,c.attribute,m.imgurl,c.img,c.num as pnum,m.product_title,c.id AS sizeid from lkt_cart AS a LEFT JOIN lkt_product_list AS m  ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where c.num >0 and a.Uid = \'' . $uid . '\' order by Create_time desc';
 
-        $r_c = $db->select($sql_c);
+        $r_c = lkt_gets($sql_c);
 
         if ($r_c) {
             foreach ($r_c as $key => $value) {
@@ -885,11 +880,10 @@ class productAction extends BaseAction
     // 清空购物车
     public function delAll_cart()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $user_id = addslashes(trim($request->getParameter('user_id')));
         $sql = 'delete from lkt_cart where Uid="' . $user_id . '"';
-        $res = $db->delete($sql);
+        $res = lkt_execute($sql);
         if ($res) {
             echo json_encode(array('status' => 1, 'succ' => '操作成功!'));
             exit;
@@ -903,7 +897,6 @@ class productAction extends BaseAction
     // 删除购物车指定商品  
     public function delcart()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $carts = addslashes(trim($request->getParameter('carts')));
 
@@ -912,7 +905,7 @@ class productAction extends BaseAction
         //循环删除指定的购物车商品
         foreach ($cartArr as $key => $value) {
             $sql = 'delete from lkt_cart where id="' . $value . '"';
-            $res = $db->delete($sql);
+            $res = lkt_execute($sql);
         }
 
         if ($res) {
@@ -927,7 +920,6 @@ class productAction extends BaseAction
     // 移动购物车指定商品去收藏  
     public function to_Collection()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         //购物车商品
         $carts = addslashes($request->getParameter('carts'));
@@ -940,7 +932,7 @@ class productAction extends BaseAction
         foreach ($cartArr as $key => $value) {
             //查询商品id
             $csql = "select Goods_id from lkt_cart where id='$value' ";
-            $cres = $db->select($csql);
+            $cres = lkt_gets($csql);
             if ($cres) {
                 $pid = $cres[0]->Goods_id;
             } else {
@@ -950,7 +942,7 @@ class productAction extends BaseAction
             $this->addFavorites($userid, $pid);
             //删除指定购物车id
             $sql = 'delete from lkt_cart where id="' . $value . '"';
-            $res = $db->delete($sql);
+            $res = lkt_execute($sql);
         }
 
         if ($res) {
@@ -964,18 +956,17 @@ class productAction extends BaseAction
 
     public function addFavorites($openid, $pid)
     {
-        $db = DBAction::getInstance();
         $sql = "select user_id from lkt_user where wx_id = '$openid'";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $user_id = $r[0]->user_id;
             // 根据用户id,产品id,查询收藏表
             $sql = "select * from lkt_user_collection where user_id = '$user_id' and p_id = '$pid'";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
             if (!$r) {
                 // 在收藏表里添加一条数据
                 $sql = "insert into lkt_user_collection(user_id,p_id,add_time) values('$user_id','$pid',CURRENT_TIMESTAMP)";
-                $db->insert($sql);
+                lkt_execute($sql);
             }
         }
     }
@@ -983,19 +974,18 @@ class productAction extends BaseAction
     // 用户修改购物车数量操作
     public function up_cart()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $cart_id = addslashes(trim($request->getParameter('cart_id')));
         $num = addslashes(trim($request->getParameter('num')));
         $user_id = addslashes(trim($request->getParameter('user_id')));
 
         $sql_num = "select c.num from lkt_cart as a LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$cart_id'";
-        $r_num = $db->select($sql_num);
+        $r_num = lkt_gets($sql_num);
         if ($r_num) {
             $pnum = $r_num[0]->num;
             if ($pnum > $num) {
                 $sql_u = "update lkt_cart set Goods_num = '$num' where id = '$cart_id' and Uid = '$user_id'";
-                $r_u = $db->update($sql_u);
+                $r_u = lkt_execute($sql_u);
                 if ($r_u) {
                     echo json_encode(array('status' => 1, 'succ' => '操作成功!'));
                     exit;
@@ -1016,13 +1006,12 @@ class productAction extends BaseAction
     //余额支付
     public function wallet_pay()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $uid = addslashes(trim($request->getParameter('uid'))); // 微信id
         $total = addslashes(trim($request->getParameter('total'))); // 付款余额
         // 根据微信id,查询用户列表(支付密码,钱包余额,用户id)
         $sql_user = "select password,money,user_id from lkt_user where wx_id='$uid'";
-        $r_user = $db->select($sql_user);
+        $r_user = lkt_gets($sql_user);
         if ($r_user) {
             $user_money = $r_user['0']->money; // 用户余额
             $userid = $r_user['0']->user_id; // 用户id
@@ -1031,10 +1020,10 @@ class productAction extends BaseAction
                 // 根据微信id,修改用户余额
                 if ($total > 0) {
                     $sql = "update lkt_user set money = money-'$total' where user_id = '$userid'";
-                    $r = $db->update($sql);
+                    $r = lkt_execute($sql);
                     $event = $userid . '使用了' . $total . '元余额';
                     $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$total','$user_money','$event',4)";
-                    $rr = $db->insert($sqll);
+                    $rr = lkt_execute($sqll);
                 }
                 echo json_encode(array('status' => 1, 'succ' => '扣款成功!'));
             } else {
@@ -1052,7 +1041,7 @@ class productAction extends BaseAction
     {
         $db = DBAction::getInstance();
         //开启事务
-        $db->begin();
+        lkt_start();
 
         $request = $this->getContext()->getRequest();
         $cart_id = addslashes(trim($request->getParameter('cart_id'))); // 购物车id
@@ -1082,7 +1071,7 @@ class productAction extends BaseAction
         }
         // 根据微信id,查询用户id
         $sql_user = 'select user_id,money from lkt_user where wx_id=\'' . $uid . '\'';
-        $r_user = $db->select($sql_user);
+        $r_user = lkt_gets($sql_user);
         if ($r_user) {
             $userid = $r_user['0']->user_id; // 用户id
             $user_money = $r_user['0']->money; // 用户余额
@@ -1098,7 +1087,7 @@ class productAction extends BaseAction
         } else {
             // 根据用户id、默认地址,查询地址信息
             $sql_a = 'select * from lkt_user_address where uid=\'' . $userid . '\' and is_default = 1';
-            $r_a = $db->select($sql_a);
+            $r_a = lkt_gets($sql_a);
             if ($r_a) {
                 $name = $r_a['0']->name; // 联系人
                 $mobile = $r_a['0']->tel; // 联系电话
@@ -1120,7 +1109,7 @@ class productAction extends BaseAction
             $sNo = $this->order_number(); // 生成订单号
             // 根据省的id,查询省名称
             $sql = "select G_CName from admin_cg_group where GroupID = '$sheng'";
-            $r1 = $db->select($sql);
+            $r1 = lkt_gets($sql);
             if ($r1) {
                 $G_CName = $r1[0]->G_CName; // 省
             } else {
@@ -1141,7 +1130,7 @@ class productAction extends BaseAction
                     $sql_c = "select a.plugin,a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= a.Goods_num ";
                 }
 
-                $r_c = $db->select($sql_c);
+                $r_c = lkt_gets($sql_c);
 
                 if (!empty($r_c)) {
                     $plugin = $r_c[0]->plugin;
@@ -1166,7 +1155,7 @@ class productAction extends BaseAction
                     } else {
                         // 根据运费id,查询运费信息
                         $sql = "select type,freight from lkt_freight where id = '$freight_id'";
-                        $r2 = $db->select($sql);
+                        $r2 = lkt_gets($sql);
                         if ($r2) {
                             $freight_type = $r2[0]->type;
                             $freight_1 = unserialize($r2[0]->freight);
@@ -1222,21 +1211,21 @@ class productAction extends BaseAction
                     // 循环插入订单附表
                     $sql_d = 'insert into lkt_order_details(user_id,p_id,p_name,p_price,num,unit,r_sNo,add_time,r_status,size,sid,freight,plugin) VALUES ' . "('$userid','$pid','$product_title','$price','$num','$unit','$sNo',CURRENT_TIMESTAMP,0,'$size','$size_id','$freight','$plugin')";
 
-                    $beres = $db->insert($sql_d);
+                    $beres = lkt_execute($sql_d);
 
                     delkuncun($db, $size_id, $pid, $num);//创建订单修改库存
 
                     if ($beres < 1) {
-                        $db->rollback();
+                        lkt_rollback();
                         echo json_encode(array('status' => 0, 'err' => '下单失败,请稍后再试!'));
                         exit;
                     }
                     if ($typee == 0) {
                         // 删除对应购物车内容
                         $sql_del = 'delete from lkt_cart where id="' . $value . '"';
-                        $res_del = $db->delete($sql_del);
+                        $res_del = lkt_execute($sql_del);
                         if ($res_del < 1) {
-                            $db->rollback();
+                            lkt_rollback();
                             echo json_encode(array('status' => 0, 'err' => '下单失败,请稍后再试!'));
                             exit;
                         }
@@ -1244,7 +1233,7 @@ class productAction extends BaseAction
 
                 } else {
                     //回滚删除已经创建的订单
-                    $db->rollback();
+                    lkt_rollback();
                     echo json_encode(array('status' => 0, 'err' => '下单失败,请稍后再试!'));
                     exit;
                 }
@@ -1272,7 +1261,7 @@ class productAction extends BaseAction
             //判断优惠券
             if ($coupon_id) {
                 $sql = "select * from lkt_coupon where id = '$coupon_id'";
-                $r_coupon = $db->select($sql);
+                $r_coupon = lkt_gets($sql);
                 if ($r_coupon) {
                     $c_money = $r_coupon[0]->money;
                 } else {
@@ -1290,15 +1279,15 @@ class productAction extends BaseAction
             $sql_o = 'insert into lkt_order(user_id,name,mobile,num,z_price,sNo,sheng,shi,xian,address,remark,pay,add_time,status,coupon_id,consumer_money,coupon_activity_name,spz_price,reduce_price,coupon_price,red_packet,source,plugin) VALUES ' .
                 "('$userid','$name','$mobile','$z_num','$z_price','$sNo','$sheng','$shi','$xian','$address',' ','$type',CURRENT_TIMESTAMP,0,'$coupon_id','$allow','$coupon_activity_name','$spz_price','$reduce_money','$c_money','$red_packet',1,'$plugin')";
 
-            $r_o = $db->insert($sql_o, "last_insert_id");
+            $r_o = lkt_insert($sql_o);
             if ($r_o > 0) {
-                $db->commit();
+                lkt_commit();
                 $arr = array('pay_type' => $type, 'sNo' => $sNo, 'coupon_money' => $z_price, 'coupon_id' => $coupon_id, 'order_id' => $r_o);
                 echo json_encode(array('status' => 1, 'arr' => $arr));
                 exit;
             } else {
                 //回滚删除已经创建的订单
-                $db->rollback();
+                lkt_rollback();
                 echo json_encode(array('status' => 0, 'err' => '下单失败,请稍后再试!'));
                 exit;
             }
@@ -1315,7 +1304,6 @@ class productAction extends BaseAction
     // 付款后修改订单状态,并修改商品库存-
     public function up_order()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $coupon_id = addslashes(trim($request->getParameter('coupon_id'))); // 优惠券id
         $allow = addslashes(trim($request->getParameter('allow'))); // 用户使用消费金
@@ -1327,7 +1315,7 @@ class productAction extends BaseAction
         $pay = addslashes(trim($request->getParameter('pay')));
         // 根据微信id,查询用户id
         $sql_user = 'select user_id,money from lkt_user where wx_id=\'' . $user_id . '\'';
-        $r_user = $db->select($sql_user);
+        $r_user = lkt_gets($sql_user);
         if ($r_user) {
             $userid = $r_user['0']->user_id; // 用户id
             $user_money = $r_user['0']->money; // 用户余额
@@ -1335,32 +1323,32 @@ class productAction extends BaseAction
             if ($d_yuan) {
                 // 使用组合支付的时候 lkt_combined_pay
                 $sql = "update lkt_user set money = money-'$d_yuan' where user_id = '$userid'";
-                $r = $db->update($sql);
+                $r = lkt_execute($sql);
                 $weixin_pay = $coupon_money - $d_yuan;
                 //写入日志
                 $sqll = "insert into lkt_combined_pay (weixin_pay,balance_pay,total,order_id,add_time,user_id) values ('$weixin_pay','$d_yuan','$coupon_money','$order_id',CURRENT_TIMESTAMP,'$user_id')";
-                $rr = $db->insert($sqll);
+                $rr = lkt_execute($sqll);
                 // 根据修改支付方式
                 $sql_combined = "update lkt_order set pay = 'combined_Pay' where sNo = '$order_id' and user_id = '$userid' ";
-                $r_combined = $db->update($sql_combined);
+                $r_combined = lkt_execute($sql_combined);
 
                 //微信支付记录-写入日志
                 $event = $userid . '使用组合支付了' . $coupon_money . '元--订单号:' . $order_id;
                 $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$coupon_money','$d_yuan','$event',4)";
-                $rr = $db->insert($sqll);
+                $rr = lkt_execute($sqll);
             }
 
             if ($trade_no) {
                 //微信支付记录-写入日志
                 $event = $userid . '使用微信支付了' . $coupon_money . '元--订单号:' . $order_id;
                 $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$coupon_money','$d_yuan','$event',4)";
-                $rr = $db->insert($sqll);
+                $rr = lkt_execute($sqll);
             }
 
             if ($coupon_money <= 0 && $allow > 0) {
                 // 根据订单号、用户id,修改订单状态(未发货)
                 $sql_u = "update lkt_order set status = 1,pay = 'consumer_pay',trade_no='$trade_no' where sNo = '$order_id' and user_id = '$userid' ";
-                $r_u = $db->update($sql_u);
+                $r_u = lkt_execute($sql_u);
             } else {
                 // 根据订单号、用户id,修改订单状态(未发货)
                 $rpay = '';
@@ -1368,7 +1356,7 @@ class productAction extends BaseAction
                     $rpay = " ,pay = '$pay'";
                 }
                 $sql_u = "update lkt_order set status = 1 $rpay,trade_no='$trade_no' where sNo = '$order_id' and user_id = '$userid' ";
-                $r_u = $db->update($sql_u);
+                $r_u = lkt_execute($sql_u);
             }
 
             if ($allow && $coupon_money > 0) {
@@ -1381,27 +1369,27 @@ class productAction extends BaseAction
                 //写入日志
                 $total = $allow + $coupon_money;
                 $sqll = "insert into lkt_combined_pay ($zpay,consumer_pay,total,order_id,add_time,user_id) values ('$coupon_money','$allow','$total','$order_id',CURRENT_TIMESTAMP,'$user_id')";
-                $rr = $db->insert($sqll);
+                $rr = lkt_execute($sqll);
                 // 根据修改支付方式
                 $sql_combined = "update lkt_order set pay = 'combined_Pay' where sNo = '$order_id' and user_id = '$userid' ";
-                $r_combined = $db->update($sql_combined);
+                $r_combined = lkt_execute($sql_combined);
 
                 //微信支付记录-写入日志
                 $event = $userid . '使用组合支付了' . $total . '元--订单号:' . $order_id;
                 $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$coupon_money','$d_yuan','$event',4)";
-                $rr = $db->insert($sqll);
+                $rr = lkt_execute($sqll);
             }
 
             // 根据用户id、优惠券id,修改优惠券状态(已使用)
             $sql = "update lkt_coupon set type = 2 where user_id = '$userid' and id = '$coupon_id'";
-            $db->update($sql);
+            lkt_execute($sql);
 
             // 根据订单号,查询商品id、商品名称、商品数量
             $sql_o = "select p_id,num,p_name,sid from lkt_order_details where r_sNo = '$order_id' ";
-            $r_o = $db->select($sql_o);
+            $r_o = lkt_gets($sql_o);
             // 根据订单号,修改订单详情状态(未发货)
             $sql_d = "update lkt_order_details set r_status = 1 where r_sNo = '$order_id' ";
-            $r_d = $db->update($sql_d);
+            $r_d = lkt_execute($sql_d);
             // 修改产品数据库数量
             $pname = '';
             foreach ($r_o as $key => $value) {
@@ -1415,7 +1403,7 @@ class productAction extends BaseAction
             if ($r_u >= 0) {
                 // 根据订单号,查询订单id、订单金额
                 $sql_id = "select * from lkt_order where sNo = '$order_id' ";
-                $r_id = $db->select($sql_id);
+                $r_id = lkt_gets($sql_id);
                 if ($r_id) {
                     $id = $r_id['0']->id; // 订单id
                     $time = $r_id[0]->add_time;
@@ -1441,7 +1429,7 @@ class productAction extends BaseAction
     // 发送评论数据
     public function comment()
     {
-        $db = DBAction::getInstance();
+
         $request = $this->getContext()->getRequest();
         $order_id = addslashes(trim($request->getParameter('order_id'))); // 订单号
         $user_id = addslashes(trim($request->getParameter('user_id'))); // 微信id
@@ -1452,7 +1440,7 @@ class productAction extends BaseAction
         $img = $appConfig['imageRootUrl'];
 
         $sql_user = 'select user_id from lkt_user where wx_id=\'' . $user_id . '\'';
-        $r_user = $db->select($sql_user);
+        $r_user = lkt_gets($sql_user);
 
         if ($r_user) {
             if ($pid && $attribute_id) {
@@ -1460,7 +1448,7 @@ class productAction extends BaseAction
             } else {
                 $sql_o = "select a.p_id as commodityId,m.img,a.size,a.sid from lkt_order_details AS a LEFT JOIN lkt_configure AS m ON a.sid = m.id  where a.r_sNo = '$order_id' and (a.r_status = 3 or a.r_status = 1 or a.r_status = -1)";
             }
-            $r_o = $db->select($sql_o);
+            $r_o = lkt_gets($sql_o);
 
             if ($r_o) {
                 foreach ($r_o as $key => $value) {
@@ -1479,8 +1467,7 @@ class productAction extends BaseAction
     //添加评论
     public function t_comment()
     {
-        $db = DBAction::getInstance();
-        $db->begin();
+        lkt_start();
         $request = $this->getContext()->getRequest();
         $type = addslashes(trim($request->getParameter('type')));
         if ($type == 'file') {
@@ -1488,7 +1475,7 @@ class productAction extends BaseAction
             $id = addslashes(trim($request->getParameter('id')));//评论ID
             // 查询配置表信息
             $sql = "select * from lkt_config where id = '1'";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
             if ($r) {
                 $uploadImg = $r[0]->uploadImg;
                 // 图片上传位置
@@ -1504,14 +1491,14 @@ class productAction extends BaseAction
             $imgURL_name = time() . mt_rand(1, 1000) . $type;
             move_uploaded_file($imgURL, $uploadImg . $imgURL_name);
             $sql = "insert into lkt_comments_img(comments_url,comments_id,add_time) VALUES ('$imgURL_name','$id',CURRENT_TIMESTAMP)";
-            $res = $db->insert($sql);
+            $res = lkt_execute($sql);
 
             if ($res) {
-                $db->commit();
+                lkt_commit();
                 echo json_encode(array('status' => 1, 'err' => '修改成功', 'sql' => $sql));
                 exit;
             } else {
-                $db->rollback();
+                lkt_rollback();
                 echo json_encode(array('status' => 0, 'err' => '修改失败'));
                 exit;
             }
@@ -1524,7 +1511,7 @@ class productAction extends BaseAction
 
             // 查询配置表信息
             $sql = "select * from lkt_config where id = '1'";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
             if ($r) {
                 $uploadImg = $r[0]->uploadImg;
                 // 图片上传位置
@@ -1556,7 +1543,7 @@ class productAction extends BaseAction
                 $CommentType = $value->score; // 评论类型
 
                 $sql = "select user_id from lkt_user where wx_id = '$uid'";
-                $r_name = $db->select($sql);
+                $r_name = lkt_gets($sql);
                 if ($r_name) {
                     $user_id = $r_name[0]->user_id;
                 } else {
@@ -1566,17 +1553,17 @@ class productAction extends BaseAction
                 $arr = array();
                 if ($content != '' || count($images) != 0) {
                     $sql_c = "select oid from lkt_comments where oid = '$oid' and pid = '$pid' and attribute_id = '$attribute_id' ";
-                    $r_c = $db->select($sql_c);
+                    $r_c = lkt_gets($sql_c);
                     if (empty($r_c['0'])) {
                         $sql_d = 'insert into lkt_comments(oid,uid,pid,attribute_id,size,content,CommentType,add_time) VALUES ' . "('$oid','$user_id','$pid','$attribute_id','$size','$content','$CommentType',CURRENT_TIMESTAMP)";
-                        $lcid = $db->insert($sql_d, 'last_insert_id');
+                        $lcid = lkt_insert($sql_d);
                         $cid[$value->pingid] = $lcid;
                         if ($lcid > 0) {
                             $sql_d = "update lkt_order_details set r_status = 5 where r_sNo = '$oid' and sid = '$attribute_id'";
-                            $r_d = $db->update($sql_d);
+                            $r_d = lkt_execute($sql_d);
 
                             $sql = "select r_status from lkt_order_details where r_sNo = '$oid'";
-                            $rr = $db->select($sql);
+                            $rr = lkt_gets($sql);
                             if ($rr) {
                                 foreach ($rr as $k => $v) {
                                     $r_status[] = $v->r_status;
@@ -1584,7 +1571,7 @@ class productAction extends BaseAction
                                 $arr = array_count_values($r_status);
                                 if ($arr[5] == count($rr)) {
                                     $sql = "update lkt_order set status = 5 where sNo = '$oid'";
-                                    $db->update($sql);
+                                    lkt_execute($sql);
                                 }
                             }
                         } else {
@@ -1592,18 +1579,18 @@ class productAction extends BaseAction
                             exit;
                         }
                     } else {
-                        $db->rollback();
+                        lkt_rollback();
                         echo json_encode(array('status' => 0, 'err' => '亲!评论过了1'));
                         exit;
                     }
                 } else {
-                    $db->rollback();
+                    lkt_rollback();
                     echo json_encode(array('status' => 0, 'err' => '修改失败'));
                     exit;
                 }
             }
 
-            $db->commit();
+            lkt_commit();
             echo json_encode(array('status' => 1, 'succ' => '评论成功!', 'arrid' => $cid));
             exit;
         }
@@ -1646,7 +1633,7 @@ class productAction extends BaseAction
     //显示新产品
     public function new_product()
     {
-        $db = DBAction::getInstance();
+
         $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('cid'))); //  '分类ID'
         $paegr = addslashes(trim($request->getParameter('page'))); //  '页面'
@@ -1681,14 +1668,14 @@ from lkt_product_list AS a RIGHT JOIN (select min(price) price,pid from lkt_conf
 where a.status = 0 and a.num >0 and s_type like '%$id%' 
  order by a.sort asc,$select $sort LIMIT $start,$end ";
 
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $product = [];
             foreach ($r as $k => $v) {
                 $imgurl = $img . $v->imgurl;
                 $pid = $v->id;
                 $sql_ttt = "select price,yprice from lkt_configure where pid ='$pid' order by price asc ";
-                $r_ttt = $db->select($sql_ttt);
+                $r_ttt = lkt_gets($sql_ttt);
                 $price = $r_ttt[0]->yprice;
                 $price_yh = $r_ttt[0]->price;
                 $product[$k] = array('id' => $v->id, 'name' => $v->product_title, 'price' => $price, 'price_yh' => $price_yh, 'imgurl' => $imgurl, 'volume' => $v->volume, 's_type' => $v->s_type);
