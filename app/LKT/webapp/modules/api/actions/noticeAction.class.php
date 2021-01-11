@@ -49,4 +49,3 @@ class noticeAction extends BaseAction {
     }
   
 }
-?>

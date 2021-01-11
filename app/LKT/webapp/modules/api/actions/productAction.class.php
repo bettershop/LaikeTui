@@ -1690,4 +1690,3 @@ where a.status = 0 and a.num >0 and s_type like '%$id%'
 
 }
 
-?>

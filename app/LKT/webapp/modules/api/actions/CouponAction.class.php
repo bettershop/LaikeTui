@@ -686,4 +686,3 @@ class CouponAction extends BaseAction
 
 }
 
-?>

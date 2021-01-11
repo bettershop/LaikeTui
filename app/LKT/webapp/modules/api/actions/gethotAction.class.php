@@ -31,4 +31,3 @@ class gethotAction extends BaseAction {
 
 }
 
-?>

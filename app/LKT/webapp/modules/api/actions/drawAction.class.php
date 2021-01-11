@@ -241,4 +241,3 @@ class drawAction extends BaseAction {
 
 }
 
-?>

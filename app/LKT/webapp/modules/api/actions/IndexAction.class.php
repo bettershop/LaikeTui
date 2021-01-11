@@ -239,4 +239,3 @@ where a.status = 0 and a.num >0 and product_class like '%-$index-%'
     }
 }
 
-?>

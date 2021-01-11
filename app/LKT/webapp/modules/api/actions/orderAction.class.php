@@ -265,7 +265,6 @@ class orderAction extends BaseAction
             echo json_encode(array('status' => 0, 'err' => '网络繁忙!'));
             exit();
         }
-        return;
     }
 
 
@@ -310,7 +309,6 @@ class orderAction extends BaseAction
             echo json_encode(array('status' => 0, 'err' => '网络繁忙!'));
             exit();
         }
-        return;
     }
 
 
@@ -465,7 +463,6 @@ class orderAction extends BaseAction
             echo json_encode(array('status' => 0, 'err' => '操作失败!'));
             exit();
         }
-        return;
     }
 
     // 订单详情
@@ -728,7 +725,6 @@ class orderAction extends BaseAction
             exit();
         }
 
-        return;
     }
 
     //储存快递回寄信息
@@ -767,12 +763,9 @@ class orderAction extends BaseAction
     public function see_send()
     {
         $request = $this->getContext()->getRequest();
-        // 获取信息 
         $order_id = addslashes(trim($request->getParameter('order_id'))); // 订单详情id
-
         $sql = "select address,name,tel from lkt_user_address where uid = 'admin'";
         $r_1 = lkt_gets($sql);
-
         if ($r_1) {
             $address = $r_1[0]->address;
             $name = $r_1[0]->name;
@@ -834,4 +827,3 @@ class orderAction extends BaseAction
 
 }
 
-?>

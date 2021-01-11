@@ -11,12 +11,11 @@ class rechargeAction extends BaseAction
 
     public function index()
     {
-        $db = DBAction::getInstance();
         $openid = addslashes($_POST['openid']); // 微信id
 
         // 查询会员信息
         $sql = "select * from lkt_user where wx_id = '$openid'";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql); 
         if ($r) {
             $user['money'] = $r[0]->money;
             $user_id = $r[0]->user_id; // 会员编号
@@ -26,7 +25,7 @@ class rechargeAction extends BaseAction
             }
             // 根据推荐人等于会员编号,查询推荐人总数
             $sql = "select count(Referee) as a from lkt_user where Referee = '$user_id'";
-            $rr = $db->select($sql);
+            $rr = lkt_gets($sql);
             if ($rr) {
                 $user['invitation_num'] = $rr[0]->a;
             } else {
@@ -39,7 +38,7 @@ class rechargeAction extends BaseAction
 
         // 根据微信id,查询分享列表里的礼券总和
         $sql = "select sum(coupon) as a from lkt_share where wx_id = '$openid'";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r[0]->a == '') {
             $user['coupon'] = 0;
         } else {
@@ -48,7 +47,7 @@ class rechargeAction extends BaseAction
 
         //查询最低充值金额
         $ss = "select * from lkt_finance_config where id = 1";
-        $rs = $db->select($ss);
+        $rs = lkt_gets($ss);
         $min_cz = $rs[0]->min_cz;
 
         echo json_encode(array('status' => 1, 'user' => $user, 'min_cz' => $min_cz));
@@ -65,14 +64,13 @@ class rechargeAction extends BaseAction
     //充值
     public function recharge()
     {
-        $db = DBAction::getInstance();
 
         $openid = addslashes($_POST['openid']); // 微信id
         $cmoney = addslashes($_POST['cmoney']); // 充值金额
 
         // 查询余额参数表
         $sql = "select cz_multiple from lkt_finance_config where id = 1";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $cz_multiple = $r[0]->cz_multiple;
             if ($cz_multiple) {
@@ -88,7 +86,7 @@ class rechargeAction extends BaseAction
         $dingdanhao = "CZ" . date("ymdhis") . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
         // 查询系统配置
         $ss = "select * from lkt_config where id = 1";
-        $rs = $db->select($ss);
+        $rs = lkt_gets($ss);
         if ($rs) {
             // 进入支付页面
             $appid = $rs[0]->appid; // 如果是公众号 就是公众号的appid
@@ -234,4 +232,3 @@ class rechargeAction extends BaseAction
     }
 }
 
-?>

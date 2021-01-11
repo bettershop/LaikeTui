@@ -173,4 +173,3 @@ class payAction extends BaseAction {
         return $data;
     }
 }
-?>

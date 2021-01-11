@@ -31,7 +31,6 @@ class addressAction extends BaseAction {
         $r = lkt_gets($sql);
         if($r){
          $user_id = $r[0]->user_id;
-
          if(!empty($arr)){
             $arrid = explode(',', $arr);
             foreach ($arrid as $key => $value) {
@@ -191,4 +190,3 @@ class addressAction extends BaseAction {
 
     }
 }
-?>

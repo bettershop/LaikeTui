@@ -631,4 +631,3 @@ class getcodeAction extends Action
 
 }
 
-?>
