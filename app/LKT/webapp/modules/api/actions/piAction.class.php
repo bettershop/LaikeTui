@@ -35,7 +35,7 @@ class piAction extends Action {
             }
             
         }
-        return;
+
     }
 
     public function getRequestMethods(){

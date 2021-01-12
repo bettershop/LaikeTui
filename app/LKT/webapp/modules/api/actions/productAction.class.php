@@ -1323,26 +1323,27 @@ class productAction extends BaseAction
             if ($d_yuan) {
                 // 使用组合支付的时候 lkt_combined_pay
                 $sql = "update lkt_user set money = money-'$d_yuan' where user_id = '$userid'";
-                $r = lkt_execute($sql);
+                lkt_execute($sql);
+
                 $weixin_pay = $coupon_money - $d_yuan;
                 //写入日志
                 $sqll = "insert into lkt_combined_pay (weixin_pay,balance_pay,total,order_id,add_time,user_id) values ('$weixin_pay','$d_yuan','$coupon_money','$order_id',CURRENT_TIMESTAMP,'$user_id')";
-                $rr = lkt_execute($sqll);
+                lkt_execute($sqll);
                 // 根据修改支付方式
                 $sql_combined = "update lkt_order set pay = 'combined_Pay' where sNo = '$order_id' and user_id = '$userid' ";
-                $r_combined = lkt_execute($sql_combined);
+                lkt_execute($sql_combined);
 
                 //微信支付记录-写入日志
                 $event = $userid . '使用组合支付了' . $coupon_money . '元--订单号:' . $order_id;
                 $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$coupon_money','$d_yuan','$event',4)";
-                $rr = lkt_execute($sqll);
+                lkt_execute($sqll);
             }
 
             if ($trade_no) {
                 //微信支付记录-写入日志
                 $event = $userid . '使用微信支付了' . $coupon_money . '元--订单号:' . $order_id;
                 $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$coupon_money','$d_yuan','$event',4)";
-                $rr = lkt_execute($sqll);
+                lkt_execute($sqll);
             }
 
             if ($coupon_money <= 0 && $allow > 0) {
@@ -1372,12 +1373,12 @@ class productAction extends BaseAction
                 $rr = lkt_execute($sqll);
                 // 根据修改支付方式
                 $sql_combined = "update lkt_order set pay = 'combined_Pay' where sNo = '$order_id' and user_id = '$userid' ";
-                $r_combined = lkt_execute($sql_combined);
+                lkt_execute($sql_combined);
 
                 //微信支付记录-写入日志
                 $event = $userid . '使用组合支付了' . $total . '元--订单号:' . $order_id;
                 $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$coupon_money','$d_yuan','$event',4)";
-                $rr = lkt_execute($sqll);
+                lkt_execute($sqll);
             }
 
             // 根据用户id、优惠券id,修改优惠券状态(已使用)
@@ -1523,6 +1524,7 @@ class productAction extends BaseAction
             }
 
             //敏感词表
+            $badword = "";
             require('badword.src.php');
 
             foreach ($comments as $key => $value) {
