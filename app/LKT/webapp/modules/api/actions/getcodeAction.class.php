@@ -4,16 +4,14 @@
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
  */
-require_once(MO_LIB_DIR . '/DBAction.class.php');
-require_once(MO_LIB_DIR . '/Tools.class.php');
+require_once('BaseAction.class.php');
 
-class getcodeAction extends Action
+class getcodeAction extends BaseAction
 {
 
     public function getDefaultView()
     {
 
-       
     }
 
     public function execute()
@@ -25,7 +23,6 @@ class getcodeAction extends Action
             $this->$m();
         }
 
-        return;
     }
 
     public function getRequestMethods()
@@ -36,9 +33,8 @@ class getcodeAction extends Action
     // 获取用户会话密钥
     public function code()
     {
-        $db = DBAction::getInstance();
         $sql = "select * from lkt_config where id=1";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql); 
         if ($r) {
             $appid = $r[0]->appid; // 小程序唯一标识
             $appsecret = $r[0]->appsecret; // 小程序的 app secret
@@ -53,14 +49,14 @@ class getcodeAction extends Action
     public function get_qrcode($AccessToken)
     {
         // header('content-type:image/jpeg');  测试时可打开此项 直接显示图片
-        $db = DBAction::getInstance();
+
         $request = $this->getContext()->getRequest();
         $path = addslashes($request->getParameter('path'));
         $width = addslashes($request->getParameter('width'));
         $id = addslashes(trim($request->getParameter('id')));
         // 查询系统参数
         $sql = "select * from lkt_config where id = 1";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
         $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
         if (strpos($uploadImg, '../') === false) { // 判断字符串是否存在 ../
@@ -111,9 +107,7 @@ class getcodeAction extends Action
 
     public function product_share()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-
         $product_img = addslashes($request->getParameter('product_img_path'));
         $str_r = trim(strrchr($product_img, '/'), '/');
         if ($str_r) {
@@ -141,14 +135,14 @@ class getcodeAction extends Action
         }
 
         $usql = "select img_token from lkt_user where user_id = '$id' ";
-        $uur = $db->select($usql);
+        $uur = lkt_gets($usql);
         $lu_token = isset($uur[0]) ? md5($uur[0]->img_token) : md5($id);
         $img_token = isset($uur[0]) ? $uur[0]->img_token : false;
 
         //定义固定分享图片储存路径 以便删除
         $imgDir = '/product_share_img/';
         $sql = "select * from lkt_config where id=1";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $appid = $r[0]->appid; // 小程序唯一标识
             $appsecret = $r[0]->appsecret; // 小程序的 app secret
@@ -167,14 +161,14 @@ class getcodeAction extends Action
 
         $this->mkFolder($uploadImg . $imgDir);
         $tkt_sql = "select * from lkt_extension where type ='$type' and isdefault='1' ";
-        $tkt_r = $db->select($tkt_sql);
+        $tkt_r = lkt_gets($tkt_sql);
 
         $pic = $lu_token . '-' . $type . '-' . $pid . '-ewm.jpg';
         if ($regenerate || !$img_token) {
             @unlink($uploadImg . $imgDir . $pic);
             $lu_token = md5($utoken);
             $sql = "update lkt_user set img_token = '$utoken' where user_id = '$id' ";
-            $db->update($sql);
+            lkt_execute($sql);
             $pic = $lu_token . '-' . $type . '-ewm.jpg';
         }
 
@@ -189,7 +183,7 @@ class getcodeAction extends Action
 
         if (empty($tkt_r)) {
             $tkt_sql = "select * from lkt_extension where type ='$type'";
-            $tkt_r = $db->select($tkt_sql);
+            $tkt_r = lkt_gets($tkt_sql);
             if (empty($tkt_r)) {
                 $url = $img . $imgDir . 'img.jpg';
                 echo json_encode(array('status' => true, 'url' => $url));
@@ -425,11 +419,10 @@ class getcodeAction extends Action
     //获得二维码
     public function get_share_qrcode($path, $width, $id, $AccessToken)
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 查询系统参数
         $sql = "select * from lkt_config where id = 1";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
         $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
         if (strpos($uploadImg, '../') === false) { // 判断字符串是否存在 ../
@@ -490,9 +483,8 @@ class getcodeAction extends Action
 
     public function getToken()
     {
-        $db = DBAction::getInstance();
         $sql = "select * from lkt_config where id=1";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $appid = $r[0]->appid; // 小程序唯一标识
             $appsecret = $r[0]->appsecret; // 小程序的 app secret
@@ -505,7 +497,6 @@ class getcodeAction extends Action
 
     public function Send_Prompt()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $openid = addslashes(trim($request->getParameter('user_id')));
         $form_id = addslashes(trim($request->getParameter('form_id')));
@@ -516,7 +507,7 @@ class getcodeAction extends Action
         $time = addslashes(trim($request->getParameter('time')));
         $time = $time ? $time : date("Y-m-d H:i:s", time());
         $sql = "select * from lkt_config where id=1";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if ($r) {
             $appid = $r[0]->appid; // 小程序唯一标识
             $appsecret = $r[0]->appsecret; // 小程序的 app secret
@@ -532,7 +523,7 @@ class getcodeAction extends Action
             $AccessToken = $this->getAccessToken($appid, $appsecret);
             $url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' . $AccessToken;
             $sql = "select * from lkt_notice where id = '1'";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
             $template_id = $r[0]->order_success;
             $data = json_encode(array('access_token' => $AccessToken, 'touser' => $openid, 'template_id' => $template_id, 'form_id' => $form_id, 'page' => $page, 'data' => $o_data));
             $da = $this->httpsRequest($url, $data);
@@ -571,9 +562,8 @@ class getcodeAction extends Action
     //生成推广图片
     function getPromotion($name, $ditu, $x, $y, $wx_id, $kuan = 300)
     {
-        $db = DBAction::getInstance();
         $sql_w = "select user_id from lkt_user where wx_id='" . $wx_id . '\' ';
-        $r_w = $db->select($sql_w);
+        $r_w = lkt_gets($sql_w);
         //信息准备
         $userid = $r_w[0]->user_id;
         $dest = imagecreatefromjpeg($ditu);  //底图1

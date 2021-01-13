@@ -68,8 +68,6 @@ class piAction extends Action {
         $array['appid'] = $appid;
         $array['appsecret'] = $appsecret;
 
-
-
         return $array;
     }
 

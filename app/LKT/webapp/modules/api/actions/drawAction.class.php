@@ -13,19 +13,18 @@ class drawAction extends BaseAction {
 
     //存formid
     public function getFormid(){
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $uid = addslashes(trim($request->getParameter('userid')));
         $formid = addslashes(trim($request->getParameter('from_id')));
       
         $fromidsql = "select count(*) as have from lkt_draw_user_fromid where open_id='$uid'";
-        $fromres = $db -> select($fromidsql);
+        $fromres = lkt_gets($fromidsql);
         $fromres = intval($fromres[0] -> have);
         $lifetime = date('Y-m-d H:i:s',time());
         if($formid != 'the formId is a mock one'){
             if($fromres < 8){           
                 $addsql = "insert into lkt_draw_user_fromid(open_id,fromid,lifetime) values('$uid','$formid','$lifetime')";
-                $addres = $db -> insert($addsql);
+                lkt_insert($addsql);
             }else{
                 return false;
             }
@@ -33,29 +32,27 @@ class drawAction extends BaseAction {
     }
 
     public function ceshi(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         //现在时间的前一天
         $datetime = date('Y-m-d H:i:s',time()-24*60*60);
         //现在时间的前七天
         $datetime1 = date('Y-m-d H:i:s',time()-7*24*60*60);
         //删除超过七天的数据
         $delsql = "delete from lkt_draw_user_fromid where lifetime < '$datetime1'";
-        $delres = $db -> delete($delsql);
+        $delres = lkt_execute($delsql);
         //过去五分钟
         $oldtime = date('Y-m-d H:i:s',time()-5*60-24*60*60);
         $sql01 = "select * from lkt_draw where end_time >='$oldtime'and end_time<'$datetime'";//查询符合条件的活动ID
-        $re01 = $db -> select($sql01);
+        $re01 = lkt_gets($sql01);
         if(!empty($re01)){
             foreach ($re01 as $key01 => $value01) {
                $draw_id = $value01->id;//活动ID
                $name = $value01->name;//活动名称
                $draw_brandid = $value01->draw_brandid;//活动名称
                $sql03 = "select product_title from lkt_product_list where id='$draw_brandid'";//通过活动ID查询活动人员
-               $re03 = $db -> select($sql03);
+               $re03 = lkt_gets($sql03);
                 $product_title = $re03[0]->product_title;//活动商品
                $sql02 = "select * from lkt_draw_user where draw_id='$draw_id'";//通过活动ID查询活动人员
-               $re02 = $db -> select($sql02);
+               $re02 = lkt_gets($sql02);
                
                 if(!empty($re02)){//存在参加活动的订单
                     foreach ($re02 as $key02 => $value02) {
@@ -63,10 +60,10 @@ class drawAction extends BaseAction {
                         $user_id = $value02->user_id;//用户ID
 
                         $sql04 = "select wx_id from lkt_user where user_id='$user_id'";//查询活动人员wx_id
-                        $re04 = $db -> select($sql04);
+                        $re04 = lkt_gets($sql04);
                         $openid =$re04[0]->wx_id;
                         $sql05 = "select fromid from lkt_draw_user_fromid where open_id='$openid' order by lifetime asc ";//查询活动人员wx_id
-                        $re05 = $db -> select($sql05);
+                        $re05 = lkt_gets($sql05);
                         if(!empty($re05)){//存在符合条件的fromid
                             $fromid = $re05[0]->fromid;//状态
                             $lottery_status = $value02->lottery_status;//状态
@@ -92,10 +89,8 @@ class drawAction extends BaseAction {
     }
     
     public function Send_success($rew){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
         $sql = "select * from lkt_config where id=1";
-        $r = $db->select($sql);
+        $r = lkt_gets($sql);
         if($r){
           $appid = $r[0]->appid; // 小程序唯一标识
             $appsecret = $r[0]->appsecret; // 小程序的 app secret
@@ -116,7 +111,7 @@ class drawAction extends BaseAction {
                 $data['access_token'] = $AccessToken;
                 $data['touser'] = $openid;
                 $sql = "select * from lkt_notice where id = '1'";
-                $r = $db->select($sql);
+                $r = lkt_gets($sql);
                 $template_id = $r[0]->lottery_res;
                 $data['template_id'] = $template_id;
                 $data['form_id'] = $fromid;
@@ -126,14 +121,12 @@ class drawAction extends BaseAction {
                 
                 $da = $this->httpsRequest($url,$data);
                 $delsql = "delete from lkt_draw_user_fromid where open_id='$openid' and fromid='$fromid'";
-                $db -> delete($delsql);          
-                var_dump(json_encode($da));
+                lkt_execute($delsql);
             }
         }
     }
 
     public function getdraw(){
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
         $openid = addslashes(trim($request->getParameter('openid'))); // 本人微信id
@@ -142,7 +135,7 @@ class drawAction extends BaseAction {
         
         // 查询系统参数
         $sql = "select * from lkt_config where id = 1";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         $uploadImg_domain = $r_1[0]->uploadImg_domain; // 图片上传域名
         $uploadImg = $r_1[0]->uploadImg; // 图片上传位置
         if(strpos($uploadImg,'../') === false){ // 判断字符串是否存在 ../
@@ -155,27 +148,27 @@ class drawAction extends BaseAction {
         $user = [];
         // 根据订单id,查询订单号和抽奖id
         $sql = "select sNo,drawid from lkt_order where id = '$order_id'";
-        $r_1 = $db->select($sql);
+        $r_1 = lkt_gets($sql);
         $sNo = $r_1[0]->sNo; // 订单号
         $arr['drawid'] = $r_1[0]->drawid; // 抽奖id
         // 根据抽奖id,查询抽奖活动id
         $sql = "select draw_id,role from lkt_draw_user where id = " . $arr['drawid'];
-        $rr = $db->select($sql);
+        $rr = lkt_gets($sql);
         $arr['draw_id'] = $rr[0]->draw_id; // 抽奖活动id
         $role = $rr[0]->role; // 角色
         
         // 根据抽奖id,查询那些用户参加了
         $sql = "select user_id from lkt_draw_user where role = '$role' order by id";
-        $rrr = $db->select($sql);
+        $rrr = lkt_gets($sql);
 
         $user_num = count($rrr);
         foreach ($rrr as $k => $v) {
             $sql = "select user_id,wx_name,headimgurl from lkt_user where user_id = '$v->user_id'";
-            $r = $db->select($sql);
+            $r = lkt_gets($sql);
             $user[] = $r[0];
         }
         $sql = "select a.p_id,a.p_price,a.sid,c.img,c.yprice from lkt_order_details AS a LEFT JOIN lkt_configure AS c ON a.sid = c.id where a.r_sNo = '$sNo'";
-        $r_2 = $db->select($sql);
+        $r_2 = lkt_gets($sql);
         $p_id = $r_2[0]->p_id; // 商品id
         $arr['p_id'] = $r_2[0]->p_id; // 商品id
         $arr['p_price'] = $r_2[0]->p_price; // 商品抽奖价格
@@ -184,11 +177,11 @@ class drawAction extends BaseAction {
         $arr['img'] = $img . $r_2[0]->img; // 商品图片
 
         $sql = "select product_title from lkt_product_list where id = '$p_id'";
-        $r_4 = $db->select($sql);
+        $r_4 = lkt_gets($sql);
         $arr['product_title'] = $r_4[0]->product_title; // 商品名称
 
         $sql = "select num,end_time from lkt_draw where draw_brandid = '$p_id'";
-        $r_3 = $db->select($sql);
+        $r_3 = lkt_gets($sql);
         $arr['num'] = $r_3[0]->num; // 参加抽奖人数
         $arr['user_num'] = $arr['num'] - $user_num; // 参团还差的人数
 
@@ -215,12 +208,12 @@ class drawAction extends BaseAction {
             }
         }
         $sql = "select num from lkt_product_list where id = " . $arr['p_id'];
-        $r_r = $db->select($sql);
+        $r_r = lkt_gets($sql);
         $arr['stock'] = $r_r[0]->num;
         /* 获取商品属性 */
         $commodityAttr = [];
         $sql_size = "select * from lkt_configure where pid = " . $arr['p_id'];
-        $r_size = $db->select($sql_size);
+        $r_size = lkt_gets($sql_size);
         $array_price = [];
         $array_yprice = [];
         if ($r_size) {
