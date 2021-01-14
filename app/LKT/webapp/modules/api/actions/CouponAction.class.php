@@ -331,7 +331,6 @@ class CouponAction extends BaseAction
     // 我的优惠券(可以使用的)
     public function my_coupon()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $openid = addslashes(trim($request->getParameter('openid'))); // 微信id
         $cart_id = addslashes(trim($request->getParameter('cart_id'))); //  购物车id
@@ -389,7 +388,7 @@ class CouponAction extends BaseAction
                 $product['size'] = $size; // 产品价格
                 $zong += $num * $price; // 产品总价
                 //计算运费
-                $yunfei = $yunfei + $this->freight($product['freight'], $product['Goods_num'], $address, $db);
+                $yunfei = $yunfei + $this->freight($product['freight'], $product['Goods_num'], $address);
                 $res[$key] = $product;
             }
 
@@ -510,7 +509,6 @@ class CouponAction extends BaseAction
     // 选择优惠券
     public function getvou()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
 
         $cart_id = addslashes(trim($request->getParameter('cart_id'))); // 购物车id
@@ -639,7 +637,7 @@ class CouponAction extends BaseAction
     }
 
 
-    public function freight($freight, $num, $address, $db)
+    public function freight($freight, $num, $address)
     {
         $sql = "select * from lkt_freight where id = '$freight'";
         $r_1 = lkt_gets($sql);

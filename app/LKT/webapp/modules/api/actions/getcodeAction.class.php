@@ -252,14 +252,14 @@ class getcodeAction extends BaseAction
                 $dest = $this->write_img($dest, $data, $product_img);
             } else if ($value->type == 'marketprice') {
                 //价格
-                $product_title = '￥' . $price;
-                $dest = $this->write_text($dest, $data, $product_title, $font_file);
+                $marketprice = '￥' . $price;
+                $dest = $this->write_text($dest, $data, $marketprice, $font_file);
             } else if ($value->type == 'productprice') {
                 //原价
-                $product_title = '￥' . $yprice;
-                $dest = $this->write_text($dest, $data, $product_title, $font_file);
+                $productprice = '￥' . $yprice;
+                $dest = $this->write_text($dest, $data, $productprice, $font_file);
                 $shanchuxian = '—';
-                for ($i = 0; $i < (strlen($product_title) - 3) / 4; $i++) {
+                for ($i = 0; $i < (strlen($productprice) - 3) / 4; $i++) {
                     $shanchuxian .= $shanchuxian;
                 }
                 $dest = $this->write_text($dest, $data, $shanchuxian, $font_file);

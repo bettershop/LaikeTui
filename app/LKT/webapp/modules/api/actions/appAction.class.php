@@ -11,7 +11,6 @@ class appAction extends BaseAction
     // 获取用户会话密钥
     public function index()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 获取临时凭证
         $code = addslashes($_POST['code']);
@@ -78,7 +77,7 @@ class appAction extends BaseAction
         }
 
         if ($user['openid']) {
-            $data = $this->login($wxname, $headimgurl, $sex, $user['openid'], $Referee, $db, $access_token);
+            $data = $this->login($wxname, $headimgurl, $sex, $user['openid'], $Referee, $access_token);
             $nickName = $data['nickName'];
             $avatarUrl = $data['avatarUrl'];
             $user_id = $data['user_id'];
@@ -163,7 +162,7 @@ class appAction extends BaseAction
     }
 
     //添加会员
-    public function login($wxname, $headimgurl, $sex, $openid, $Referee, $db, $access_token)
+    public function login($wxname, $headimgurl, $sex, $openid, $Referee,$access_token)
     {
         // 根据wxid,查询会员信息
         $sql = "select * from lkt_user where wx_id = '$openid' ";
@@ -314,7 +313,7 @@ class appAction extends BaseAction
     //推荐人储存
     public function referee_openid()
     {
-        $db = DBAction::getInstance();
+
         $request = $this->getContext()->getRequest();
         $openid = addslashes($request->getParameter('openid'));
         $referee_openid = addslashes($request->getParameter('referee_openid'));

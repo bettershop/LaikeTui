@@ -441,7 +441,7 @@ class productAction extends BaseAction
         }
     }
 
-    public function freight($freight, $num, $address, $db)
+    public function freight($freight, $num, $address)
     {
 
         $sql = "select * from lkt_freight where id = '$freight'";
@@ -492,7 +492,6 @@ class productAction extends BaseAction
     // 进入结算页面
     public function Settlement()
     {
-        $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $cart_id = addslashes(trim($request->getParameter('cart_id'))); //  购物车id
         $uid = addslashes(trim($request->getParameter('uid'))); // 微信id
@@ -598,7 +597,7 @@ class productAction extends BaseAction
                 }
 
                 //计算运费
-                $yunfei = $yunfei + $this->freight($product['freight'], $product['Goods_num'], $address, $db);
+                $yunfei = $yunfei + $this->freight($product['freight'], $product['Goods_num'], $address);
                 $product['yunfei'] = $yunfei;//运费
                 $product['photo_x'] = $img . $product['img'];/* 拼接图片链接*/
                 $num = $product['Goods_num']; // 产品数量
@@ -1297,8 +1296,7 @@ class productAction extends BaseAction
     // 生成订单号
     private function order_number()
     {
-        $num = date('Ymd', time()) . time() . rand(10, 99);//18位
-        return $num;
+        return date('Ymd', time()) . time() . rand(10, 99);//18位
     }
 
     // 付款后修改订单状态,并修改商品库存-
