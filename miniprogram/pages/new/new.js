@@ -30,7 +30,7 @@ Page({
     var select = that.data.select;
     var sort = that.data.sort;
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=new_product',
+      url: app.d.laikeUrl + '&action=product&m=new_product',
       method: 'post',
       data: {
         page: 1,
@@ -188,7 +188,7 @@ Page({
     var sort = that.data.sort;
     var page = that.data.page;
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=new_product',
+      url: app.d.laikeUrl + '&action=product&m=new_product',
       method: 'post',
       data: {
         cid: 1,
@@ -229,7 +229,7 @@ Page({
       page: page+1
     });
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=new_product',
+      url: app.d.laikeUrl + '&action=product&m=new_product',
       method: 'post',
       data: {
         page: page,

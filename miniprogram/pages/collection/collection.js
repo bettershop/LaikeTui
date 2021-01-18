@@ -37,7 +37,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: app.d.ceshiUrl + '&action=addFavorites&m=alldel',
+            url: app.d.laikeUrl + '&action=addFavorites&m=alldel',
             method: 'post',
             data: {
               openid: app.globalData.userInfo.openid,
@@ -78,7 +78,7 @@ Page({
   collection: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=addFavorites&m=collection',
+      url: app.d.laikeUrl + '&action=addFavorites&m=collection',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -120,7 +120,7 @@ Page({
       content: '你确认移除吗',
       success: function (res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '&action=addFavorites&m=removeFavorites',
+          url: app.d.laikeUrl + '&action=addFavorites&m=removeFavorites',
           method: 'post',
           data: {
             id: id,

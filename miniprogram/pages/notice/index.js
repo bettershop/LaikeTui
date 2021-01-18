@@ -36,7 +36,7 @@ Page({
     });
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=notice&m=index',
+      url: app.d.laikeUrl + '&action=notice&m=index',
       data: {
         id: options.Id
       },
@@ -68,7 +68,7 @@ Page({
   DataonLoad: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=notice&m=index',
+      url: app.d.laikeUrl + '&action=notice&m=index',
       data: {
         id: options.Id
       },

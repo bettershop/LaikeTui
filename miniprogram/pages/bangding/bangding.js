@@ -124,7 +124,7 @@ Page({
     });
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=perfect_index',
+      url: app.d.laikeUrl + '&action=user&m=perfect_index',
       method: 'post',
       data: {
         user_id: app.globalData.userInfo.user_id
@@ -205,7 +205,7 @@ Page({
         content: '同意授权',
         success: function (res) {
           wx.request({
-            url: app.d.ceshiUrl + '&action=user&m=secret_key',
+            url: app.d.laikeUrl + '&action=user&m=secret_key',
             method: 'post',
             data: {
               encryptedData: encryptedData, // 加密数据
@@ -266,7 +266,7 @@ Page({
     } else {
 
       wx.request({
-        url: app.d.ceshiUrl + '&action=user&m=perfect',
+        url: app.d.laikeUrl + '&action=user&m=perfect',
         method: 'post',
         data: {
           user_id: app.globalData.userInfo.user_id,

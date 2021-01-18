@@ -38,7 +38,7 @@ Page({
   get_plug: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=get_plug',
+      url: app.d.laikeUrl + '&action=app&m=get_plug',
       method: 'post',
       data: {
         userid: app.globalData.userInfo.openid,
@@ -370,7 +370,7 @@ Page({
       if (address) {
 
         wx.request({
-          url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=isgrouppacked',
+          url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=isgrouppacked',
           method: 'post',
           data: {
             oid: that.options.oid, // 微信支付  
@@ -440,7 +440,7 @@ Page({
   isgroupfull: function () {
     var that = this
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=isgrouppacked',
+      url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=isgrouppacked',
       method: 'post',
       data: {
         oid: that.options.oid, // 微信支付  
@@ -474,7 +474,7 @@ Page({
     if (user_money > coupon_money) {
 
       wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=wallet_pay',
+        url: app.d.laikeUrl + '&action=product&m=wallet_pay',
         method: 'post',
         data: {
           uid: app.globalData.userInfo.openid, // 微信支付
@@ -685,7 +685,7 @@ Page({
 
 
     wx.request({
-      url: app.d.ceshiUrl + '&action=pay&m=pay',
+      url: app.d.laikeUrl + '&action=pay&m=pay',
       data: {
         cmoney: cmoney, // 付款金额
         openid: app.globalData.userInfo.openid, // 微信id
@@ -797,7 +797,7 @@ Page({
   up_out_trade_no: function (status, trade_no) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=up_out_trade_no',
+      url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=up_out_trade_no',
       method: 'post',
       data: {
         uid: app.globalData.userInfo.openid,
@@ -836,7 +836,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=pintuan&c=groupbuy&m=verification',
+      url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=verification',
       method: 'post',
       data: {
         trade_no: trade_no //微信交易单号
@@ -888,7 +888,7 @@ Page({
   //储存推荐人
   refereeopenid: function (referee_openid, openid) {
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=referee_openid',
+      url: app.d.laikeUrl + '&action=app&m=referee_openid',
       method: 'post',
       data: {
         openid: openid,
@@ -909,7 +909,7 @@ Page({
 
   detailed: function (sNo) {//分销
     wx.request({
-      url: app.d.ceshiUrl + '&action=distribution&m=pt_detailed_commission',
+      url: app.d.laikeUrl + '&action=distribution&m=pt_detailed_commission',
       method: 'post',
       data: {
         userid: app.globalData.userInfo.openid,

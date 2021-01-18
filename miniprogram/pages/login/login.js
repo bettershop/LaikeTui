@@ -25,7 +25,7 @@ Page({
         var avatarUrl = userInfo.avatarUrl;
         var gender = userInfo.gender; //性别 0：未知、1：男、2：女
         wx.request({
-          url: app.d.ceshiUrl + '&action=user&m=material',
+          url: app.d.laikeUrl + '&action=user&m=material',
           method: 'post',
           data: {
             openid: app.globalData.userInfo.openid,
@@ -146,7 +146,7 @@ Page({
     var avatarUrl = userInfo.avatarUrl;
     var gender = userInfo.gender; //性别 0：未知、1：男、2：女
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=material',
+      url: app.d.laikeUrl + '&action=user&m=material',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,

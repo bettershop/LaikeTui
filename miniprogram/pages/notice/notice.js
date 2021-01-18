@@ -36,7 +36,7 @@ Page({
     });
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=notice&m=index',
+      url: app.d.laikeUrl + '&action=notice&m=index',
       data: {
         openid: app.globalData.userInfo.openid
       },
@@ -67,7 +67,7 @@ Page({
     var that = this;
     // 页面初始化 options为页面跳转所带来的参数
     wx.request({
-      url: app.d.ceshiUrl + '&action=notice&m=index',
+      url: app.d.laikeUrl + '&action=notice&m=index',
       data: {
         openid: app.globalData.userInfo.openid,
       },

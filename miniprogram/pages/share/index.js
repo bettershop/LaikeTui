@@ -15,7 +15,7 @@ Page({
       headimgurl: app.globalData.userInfo.avatarUrl
     })
     wx.request({
-      url: app.d.ceshiUrl + '&action=getcode&m=madeCode',
+      url: app.d.laikeUrl + '&action=getcode&m=madeCode',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid

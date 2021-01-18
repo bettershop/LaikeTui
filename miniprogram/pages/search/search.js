@@ -20,7 +20,7 @@ Page({
   search: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=search&m=index',
+      url: app.d.laikeUrl + '&action=search&m=index',
       method: 'post',
       data: {
         keyword:'百货'

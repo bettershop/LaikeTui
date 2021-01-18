@@ -32,7 +32,7 @@ Page({
     var courier_num = options.courier_num;//kuaididanhao
     var express_id = options.express_id;//快递编号
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=logistics',
+      url: app.d.laikeUrl + '&action=order&m=logistics',
       method: 'post',
       data: {
         id: orderId,

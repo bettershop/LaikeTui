@@ -156,7 +156,7 @@
                   
                 </view>
                 <view style="display:flex;line-height:50rpx;color:#999">
-                  <view class="gmxx" style="  color: red;">¥ {{twodata.price_yh}}</view>
+                  <view class="gmxx" style="  color: red;">¥ {{twodata.price}}</view>
                   <view class="ku" style="width:60%">销量：{{twodata.volume}}</view>
                 </view>
               </navigator>

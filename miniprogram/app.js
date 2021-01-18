@@ -11,7 +11,7 @@ App({
     bf_color: '#FF6347',
     h_color: '#FF63477',
     order: {},
-    ceshiUrl: util.getUri(),
+    laikeUrl: util.getUri(),
     titlee: '',
     bgcolor: '',
 
@@ -86,7 +86,7 @@ App({
   getUserSessionKey: function (code, cb, stype, callback) {
     var that = this;
     wx.request({
-      url: that.d.ceshiUrl + '&action=app&m=index',
+      url: that.d.laikeUrl + '&action=app&m=index',
       method: 'post',
       data: {
         code: code,
@@ -108,7 +108,7 @@ App({
           return false;
         }
 
-        that.d.ceshiUrl = that.d.ceshiUrl + '&token=' + res.data.access_token; // 线上密钥
+        that.d.laikeUrl = that.d.laikeUrl + '&token=' + res.data.access_token; // 线上密钥
         that.d.localhost = that.d.localhost + '&token=' + res.data.access_token; // 本地密钥 
         that.globalData.userInfo['plug_ins'] = res.data.plug_ins; // 插件状态
         that.globalData.userInfo['coupon'] = res.data.coupon; // 优惠券状态

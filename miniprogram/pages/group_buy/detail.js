@@ -460,7 +460,7 @@ Page({
       return false;
     }
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=add_cart',
+      url: app.d.laikeUrl + '&action=product&m=add_cart',
       method: 'post',
       data: {
         uid: app.globalData.userInfo.openid,

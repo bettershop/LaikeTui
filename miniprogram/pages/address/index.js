@@ -31,7 +31,7 @@ Page({
         if (res.confirm) {
           console.log(11)
           wx.request({
-            url: app.d.ceshiUrl + '&action=address&m=del_select',
+            url: app.d.laikeUrl + '&action=address&m=del_select',
             data: {
               openid: app.globalData.userInfo.openid,
               id_arr: carts
@@ -99,7 +99,7 @@ Page({
     }
 
     wx.request({
-      url: app.d.ceshiUrl + '&action=address&m=index',
+      url: app.d.laikeUrl + '&action=address&m=index',
       data: {
         openid: app.globalData.userInfo.openid
       },
@@ -235,7 +235,7 @@ Page({
         console.log(t_res.confirm)
         if (t_res.confirm) {
           wx.request({
-            url: app.d.ceshiUrl + '&action=address&m=set_default',
+            url: app.d.laikeUrl + '&action=address&m=set_default',
             data: {
               openid: app.globalData.userInfo.openid,
               addr_id: addrId
@@ -289,7 +289,7 @@ Page({
       content: '你确认移除吗',
       success: function (res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '&action=address&m=del_adds',
+          url: app.d.laikeUrl + '&action=address&m=del_adds',
           data: {
             openid: app.globalData.userInfo.openid,
             id_arr: addrId
@@ -327,7 +327,7 @@ Page({
     var that = this;
     // 页面初始化 options为页面跳转所带来的参数
     wx.request({
-      url: app.d.ceshiUrl + '&action=address&m=index',
+      url: app.d.laikeUrl + '&action=address&m=index',
       data: {
         openid: app.globalData.userInfo.openid,
       },

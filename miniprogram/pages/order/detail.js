@@ -18,7 +18,7 @@ function countdown(that) {
       title: '请稍等',
     }),
       wx.request({
-        url: app.d.ceshiUrl + '&action=order&m=removeOrder',
+        url: app.d.laikeUrl + '&action=order&m=removeOrder',
         method: 'post',
         data: {
           openid: app.globalData.userInfo.openid,
@@ -318,7 +318,7 @@ Page({
   get_plug: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=get_plug',
+      url: app.d.laikeUrl + '&action=app&m=get_plug',
       method: 'post',
       data: {
         userid: app.globalData.userInfo.openid,
@@ -363,7 +363,7 @@ Page({
     var type1 = that.data.type1;
     const promise = new Promise((resolve) => {
       wx.request({
-        url: app.d.ceshiUrl + '&action=order&m=order_details',
+        url: app.d.laikeUrl + '&action=order&m=order_details',
         method: 'post',
         data: {
           order_id: that.data.orderId,
@@ -454,7 +454,7 @@ Page({
       content: '你确定要取消订单吗？',
       success: function (res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '&action=order&m=removeOrder',
+          url: app.d.laikeUrl + '&action=order&m=removeOrder',
           method: 'post',
           data: {
             openid: app.globalData.userInfo.openid,
@@ -499,7 +499,7 @@ Page({
       content: '你确定已收到宝贝吗？',
       success: function (res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '&action=order&m=recOrder',
+          url: app.d.laikeUrl + '&action=order&m=recOrder',
           method: 'post',
           data: {
             id: orderId,
@@ -602,7 +602,7 @@ Page({
     var user_id = app.globalData.userInfo.openid;
     //调起微信支付    
     wx.request({
-      url: app.d.ceshiUrl + '&action=pay&m=pay',
+      url: app.d.laikeUrl + '&action=pay&m=pay',
       data: {
         order_id: order_sn,
         cmoney: price,
@@ -753,7 +753,7 @@ Page({
 		2.支付失败：提示；清空密码；自动聚焦isFocus:true，拉起键盘再次输入
 		*/
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=wallet_pay',
+      url: app.d.laikeUrl + '&action=product&m=wallet_pay',
       method: 'post',
       data: {
         uid: app.globalData.userInfo.openid,
@@ -807,7 +807,7 @@ Page({
   up_order: function (coupon_money) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=up_order',
+      url: app.d.laikeUrl + '&action=product&m=up_order',
       method: 'post',
       data: {
         coupon_id: that.data.coupon_id ? that.data.coupon_id : '', // 优惠券id
@@ -852,7 +852,7 @@ Page({
   //发送数据到客户微信上
   notice: function (order_id, order_sn, price, user_id, form_id, f_pname) {
     wx.request({
-      url: app.d.ceshiUrl + '&action=getcode&m=Send_Prompt',
+      url: app.d.laikeUrl + '&action=getcode&m=Send_Prompt',
       method: 'post',
       data: {
         page: 'pages/order/detail?orderId=' + order_sn,
@@ -897,7 +897,7 @@ Page({
   up_out_trade_no: function (out_trade_no) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=up_out_trade_no',
+      url: app.d.laikeUrl + '&action=order&m=up_out_trade_no',
       method: 'post',
       data: {
         allow: that.data.allow, // 使用积分
@@ -922,7 +922,7 @@ Page({
   //储存推荐人
   refereeopenid: function (referee_openid, openid) {
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=referee_openid',
+      url: app.d.laikeUrl + '&action=app&m=referee_openid',
       method: 'post',
       data: {
         openid: openid,

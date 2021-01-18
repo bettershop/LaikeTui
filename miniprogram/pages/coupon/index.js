@@ -72,7 +72,7 @@ Page({
   requestaward: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=Coupon&m=index',
+      url: app.d.laikeUrl + '&action=Coupon&m=index',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -106,7 +106,7 @@ Page({
   mycoupon: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=Coupon&m=mycoupon',
+      url: app.d.laikeUrl + '&action=Coupon&m=mycoupon',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -138,7 +138,7 @@ Page({
     if (e.currentTarget.dataset.point == '领取') {
       var that = this;
       wx.request({
-        url: app.d.ceshiUrl + '&action=Coupon&m=receive',
+        url: app.d.laikeUrl + '&action=Coupon&m=receive',
         method: 'post',
         data: {
           openid: app.globalData.userInfo.openid,
@@ -175,7 +175,7 @@ Page({
   getvou: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=Coupon&m=immediate_use',
+      url: app.d.laikeUrl + '&action=Coupon&m=immediate_use',
       method: 'post',
       data: {
         id: e.target.dataset.id,

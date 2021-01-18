@@ -40,7 +40,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: app.d.ceshiUrl + '&action=footprint&m=alldel',
+            url: app.d.laikeUrl + '&action=footprint&m=alldel',
             method: 'post',
             data: {
               openid: app.globalData.userInfo.openid,
@@ -82,7 +82,7 @@ Page({
   footprint: function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=footprint&m=index',
+      url: app.d.laikeUrl + '&action=footprint&m=index',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,

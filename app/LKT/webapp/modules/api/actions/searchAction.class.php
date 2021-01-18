@@ -184,8 +184,6 @@ order by $select $sort
         }
 
 
-        //$sql = "select * from lkt_product_list as a where a.recycle = 0 and a.num >0 and a.status = 0 and  a.product_class like '%-$id-' order by  $select $sort LIMIT $start,$end ";
-
         $sql = "select a.initial,a.imgurl,a.id,a.product_title,a.product_class,a.volume,a.s_type,
 a.imgurl as img ,c.price 
 from lkt_product_list AS a RIGHT JOIN (select min(price) price,pid from lkt_configure group by pid) AS c

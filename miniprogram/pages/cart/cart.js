@@ -40,7 +40,7 @@ Page({
       });
     } else {
       wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=up_cart',
+        url: app.d.laikeUrl + '&action=product&m=up_cart',
         method: 'post',
         data: {
           user_id: that.data.user_id,
@@ -94,7 +94,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: app.d.ceshiUrl + '&action=product&m=delAll_cart',
+            url: app.d.laikeUrl + '&action=product&m=delAll_cart',
             method: 'post',
             data: {
               user_id: that.data.user_id,
@@ -190,7 +190,7 @@ Page({
     }
     //ajax请求
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=to_Collection',
+      url: app.d.laikeUrl + '&action=product&m=to_Collection',
       method: 'post',
       data: {
         user_id: that.data.user_id,
@@ -229,7 +229,7 @@ Page({
     console.log(pnum)
     if (pnum > num) {
       wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=up_cart',
+        url: app.d.laikeUrl + '&action=product&m=up_cart',
         method: 'post',
         data: {
           user_id: that.data.user_id,
@@ -402,7 +402,7 @@ Page({
       success: function (res) {
         
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '&action=product&m=delcart',
+          url: app.d.laikeUrl + '&action=product&m=delcart',
           method: 'post',
           data: {
             carts: carts,
@@ -440,7 +440,7 @@ Page({
   loadProductData: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=Shopping',
+      url: app.d.laikeUrl + '&action=product&m=Shopping',
       method: 'post',
       data: {
         user_id: app.globalData.userInfo.openid
@@ -472,7 +472,7 @@ Page({
     if (Number(num) > 0) {
       if (Number(num) <= Number(pnum)) {
         wx.request({
-          url: app.d.ceshiUrl + '&action=product&m=up_cart',
+          url: app.d.laikeUrl + '&action=product&m=up_cart',
           method: 'post',
           data: {
             user_id: that.data.user_id,

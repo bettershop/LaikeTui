@@ -66,7 +66,7 @@ Page({
       page: page + 1
     });
     wx.request({
-      url: app.d.ceshiUrl + '&action=Index&m=get_more',
+      url: app.d.laikeUrl + '&action=Index&m=get_more',
       method: 'post',
       data: {
         page: page,
@@ -178,7 +178,7 @@ Page({
     var openid = app.globalData.userInfo.openid ? app.globalData.userInfo.openid : false;
     if (openid) {
       wx.request({
-        url: app.d.ceshiUrl + '&action=Index&m=index',
+        url: app.d.laikeUrl + '&action=Index&m=index',
         method: 'post',
         data: {
           user_id: app.globalData.userInfo.user_id
@@ -239,7 +239,7 @@ Page({
       })
     } else {
       wx.request({
-        url: app.d.ceshiUrl + '&action=Index&m=index',
+        url: app.d.laikeUrl + '&action=Index&m=index',
         method: 'post',
         data: {},
         header: {
@@ -400,13 +400,15 @@ Page({
     this.checkCor();
   },
   onShow: function () {
-    console.log(app)
+    console.log('index onshow')
     var indexchase = app.d.indexchase;
     var that = this;
+    that.onLoad();
+    /*
     if (indexchase) {
       that.onLoad();
       app.d.indexchase = false;
-    }
+    }*/
     util.getUesrBgplus(that, app, false)
   },
   onReady: function () {
@@ -440,7 +442,7 @@ Page({
         var avatarUrl = userInfo.avatarUrl;
         var gender = userInfo.gender; //性别 0：未知、1：男、2：女
         wx.request({
-          url: app.d.ceshiUrl + '&action=user&m=material',
+          url: app.d.laikeUrl + '&action=user&m=material',
           method: 'post',
           data: {
             openid: app.globalData.userInfo.openid,
@@ -551,7 +553,7 @@ Page({
     var avatarUrl = userInfo.avatarUrl;
     var gender = userInfo.gender; //性别 0：未知、1：男、2：女
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=material',
+      url: app.d.laikeUrl + '&action=user&m=material',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,

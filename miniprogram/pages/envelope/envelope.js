@@ -45,7 +45,7 @@ Page({
   y_detail: function (id) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=envelope&m=index',
+      url: app.d.laikeUrl + '&action=envelope&m=index',
       method: 'post',
       data: {
         id: id,
@@ -97,7 +97,7 @@ Page({
       success: function (res) {
         // 转发成功
         wx.request({
-          url: app.d.ceshiUrl + '&action=envelope&m=share',
+          url: app.d.laikeUrl + '&action=envelope&m=share',
           method: 'post',
           data: {
             id: id,
@@ -133,7 +133,7 @@ Page({
   storage: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=user',
+      url: app.d.laikeUrl + '&action=app&m=user',
       method: 'post',
       data: {
         nickName: app.globalData.userInfo.nickName,

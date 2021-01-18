@@ -75,7 +75,7 @@ Page({
     if (kdcode.length > 8 && kdname.length > 2 && lxdh.length == 11 && lxr.length > 1 ){
         console.log('OK');
         wx.request({
-          url: app.d.ceshiUrl + '&action=order&m=back_send',
+          url: app.d.laikeUrl + '&action=order&m=back_send',
           method: 'post',
           data: {
             kdcode: kdcode,
@@ -137,7 +137,7 @@ Page({
   loadList: function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=ReturnDataList',
+      url: app.d.laikeUrl + '&action=order&m=ReturnDataList',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -191,7 +191,7 @@ Page({
   setModalStatus: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=see_send',
+      url: app.d.laikeUrl + '&action=order&m=see_send',
       method: 'post',
       data: {},
       header: {

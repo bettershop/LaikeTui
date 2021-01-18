@@ -50,7 +50,7 @@ Page({
       attribute_id = '';
     }
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=comment',
+      url: app.d.laikeUrl + '&action=product&m=comment',
       method: 'post',
       data: {
         order_id: orderId, // 订单号
@@ -211,7 +211,7 @@ Page({
       });
     }
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=t_comment&type=json',
+      url: app.d.laikeUrl + '&action=product&m=t_comment&type=json',
       method: 'post',
       data: {
         comments: commentList
@@ -252,7 +252,7 @@ Page({
   //上传文件
   upload_file: function (url, filePath, name, formData, success, fail) {
     wx.uploadFile({
-      url: app.d.ceshiUrl + url,
+      url: app.d.laikeUrl + url,
       filePath: filePath,
       name: name,
       header: {

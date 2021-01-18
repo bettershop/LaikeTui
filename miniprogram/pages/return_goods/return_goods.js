@@ -57,7 +57,7 @@ Page({
   loadate: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=return_type',
+      url: app.d.laikeUrl + '&action=order&m=return_type',
       method: 'post',
       data: {
         id: that.data.id,
@@ -121,7 +121,7 @@ Page({
     }
 
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=ReturnData',
+      url: app.d.laikeUrl + '&action=order&m=ReturnData',
       method: 'post',
       data: {
         id: that.data.id,

@@ -30,7 +30,7 @@ Page({
     var select = that.data.select;
     var sort = that.data.sort;
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=distribution&c=distribution&m=home',
+      url: app.d.laikeUrl + '&action=pi&p=distribution&c=distribution&m=home',
       method: 'post',
       data: {
         page: 1,
@@ -191,7 +191,7 @@ Page({
     var page = that.data.page;
     //ajax请求数据
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=distribution&c=distribution&m=home',
+      url: app.d.laikeUrl + '&action=pi&p=distribution&c=distribution&m=home',
       method: 'post',
       data: {
         cid: 1,
@@ -235,7 +235,7 @@ Page({
       page: page + 1
     });
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=distribution&c=distribution&m=home',
+      url: app.d.laikeUrl + '&action=pi&p=distribution&c=distribution&m=home',
       method: 'post',
       data: {
         page: page,

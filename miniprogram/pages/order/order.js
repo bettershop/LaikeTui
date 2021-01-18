@@ -138,7 +138,7 @@ Page({
     var that = this;
     var isStatus1 = that.options.order_type1
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=index',
+      url: app.d.laikeUrl + '&action=order&m=index',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -208,7 +208,7 @@ Page({
       content: '你确定已收到宝贝吗？',
       success: function (res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '&action=order&m=ok_Order',
+          url: app.d.laikeUrl + '&action=order&m=ok_Order',
           method: 'post',
           data: {
             sNo: sNo,
@@ -250,7 +250,7 @@ Page({
       content: '你确定要取消订单吗？',
       success: function (res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '&action=order&m=removeOrder',
+          url: app.d.laikeUrl + '&action=order&m=removeOrder',
           method: 'post',
           data: {
             openid: app.globalData.userInfo.openid,
@@ -361,7 +361,7 @@ Page({
     var coupon_id = e.detail.target.dataset.coupon_id // 优惠券id
     // 调起微信支付
     wx.request({
-      url: app.d.ceshiUrl + '&action=pay&m=pay',
+      url: app.d.laikeUrl + '&action=pay&m=pay',
       data: {
         cmoney: price, // 实付金额
         openid: user_id, // 微信id
@@ -389,7 +389,7 @@ Page({
             success: function (res) {
               //成功后修改订单状态
               wx.request({
-                url: app.d.ceshiUrl + '&action=product&m=up_order',
+                url: app.d.laikeUrl + '&action=product&m=up_order',
                 method: 'post',
                 data: {
                   coupon_id: coupon_id, // 付款金额
@@ -442,7 +442,7 @@ Page({
   //发送数据到客户微信上
   notice: function (order_id, order_sn, price, user_id, form_id, f_pname) {
     wx.request({
-      url: app.d.ceshiUrl + '&action=getcode&m=Send_Prompt',
+      url: app.d.laikeUrl + '&action=getcode&m=Send_Prompt',
       method: 'post',
       data: {
         page: 'pages/order/detail?orderId=' + order_id,
@@ -483,7 +483,7 @@ Page({
   //储存推荐人
   refereeopenid: function (referee_openid, openid) {
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=referee_openid',
+      url: app.d.laikeUrl + '&action=app&m=referee_openid',
       method: 'post',
       data: {
         openid: openid,
@@ -503,7 +503,7 @@ Page({
   },
   detailed: function (sNo, openid) { //分销
     wx.request({
-      url: app.d.ceshiUrl + '&action=distribution&m=detailed_commission',
+      url: app.d.laikeUrl + '&action=distribution&m=detailed_commission',
       method: 'post',
       data: {
         userid: app.globalData.userInfo.openid,
@@ -516,7 +516,7 @@ Page({
   },
   commission: function (sNo) { //分销返佣
     wx.request({
-      url: app.d.ceshiUrl + '&action=distribution&m=commission',
+      url: app.d.laikeUrl + '&action=distribution&m=commission',
       method: 'post',
       data: {
         order_id: sNo,

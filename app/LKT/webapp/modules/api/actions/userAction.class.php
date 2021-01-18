@@ -318,6 +318,7 @@ class userAction extends BaseAction
                 exit();
             }
             // 根据卡号,查询银行名称
+            $bankList = "";
             require_once('bankList.php');
             $r = $this->bankInfo($Bank_card_number, $bankList);
             if ($r == '') {

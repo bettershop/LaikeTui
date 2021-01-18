@@ -70,7 +70,7 @@ Page({
 
 
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=selectuser',
+      url: app.d.laikeUrl + '&action=user&m=selectuser',
       method: 'post',
       data: {
         user_id: user_id,
@@ -135,7 +135,7 @@ Page({
     }
     if (mon >= money && money > 0) {
       wx.request({
-        url: app.d.ceshiUrl + '&action=user&m=transfer',
+        url: app.d.laikeUrl + '&action=user&m=transfer',
         method: 'post',
         data: {
           user_id: user_id,

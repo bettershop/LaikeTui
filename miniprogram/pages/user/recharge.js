@@ -34,7 +34,7 @@ Page({
     });
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=recharge&m=index',
+      url: app.d.laikeUrl + '&action=recharge&m=index',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid
@@ -87,7 +87,7 @@ Page({
     } else {
       var that = this;
       wx.request({
-        url: app.d.ceshiUrl + '&action=recharge&m=recharge',
+        url: app.d.laikeUrl + '&action=recharge&m=recharge',
         method: 'post',
         data: {
           openid: app.globalData.userInfo.openid,
@@ -107,7 +107,7 @@ Page({
               paySign: res.data.paySign,
               success: function (res) {
                 wx.request({
-                  url: app.d.ceshiUrl + '&action=recharge&m=cz',
+                  url: app.d.laikeUrl + '&action=recharge&m=cz',
                   method: 'post',
                   data: {
                     openid: app.globalData.userInfo.openid,

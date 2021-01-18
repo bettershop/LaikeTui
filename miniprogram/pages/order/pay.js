@@ -105,7 +105,7 @@ Page({
     var type = that.data.type
     if (type == 1) { //直接结算离开页面清除购物车数量
       wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=delcart',
+        url: app.d.laikeUrl + '&action=product&m=delcart',
         method: 'post',
         data: {
           carts: that.data.cartId, // 购物车id
@@ -160,7 +160,7 @@ Page({
   Settlement: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=Settlement',
+      url: app.d.laikeUrl + '&action=product&m=Settlement',
       method: 'post',
       data: {
         cart_id: that.data.cartId, // 购物车id
@@ -251,7 +251,7 @@ Page({
   my_coupon: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=Coupon&m=my_coupon',
+      url: app.d.laikeUrl + '&action=Coupon&m=my_coupon',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -278,7 +278,7 @@ Page({
   getvou: function (id) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=Coupon&m=getvou',
+      url: app.d.laikeUrl + '&action=Coupon&m=getvou',
       method: 'post',
       data: {
         cart_id: that.data.cartId, // 购物车id
@@ -384,9 +384,9 @@ Page({
         }
       }
     } else if (i == 2) {
-      console.log('两种支付方式')
+      console.log('两种支付方式'+Number(user_money))
       //两种支付方式时当支付金额大于用户余额 则抵扣全部余额 并验证 //否则 直接选择默认钱包支付
-      if (Number(user_money) >= Number(coupon_money)) {
+      if (Number(user_money) >= Number(coupon_money) && Number(user_money)!=0) {
         for (var j = 0; j < pay_type.length; j++) {
           if (pay_type[j].value == check) {
             pay_type[j].checked = true;
@@ -402,6 +402,26 @@ Page({
 
       } else {
         // 组合支付
+        if(Number(user_money)==0){
+          wx.showToast({
+            title: '钱包余额不足',
+            icon: 'none',
+            duration: 2000,
+          });
+          for (var j = 0; j < pay_type.length; j++) {
+            if (pay_type[j].value == 'wxPay') {
+              pay_type[j].checked = true;
+            } else {
+              pay_type[j].checked = false;
+            }
+          }
+
+          that.setData({
+            paytype: false,
+            pays: pay_type
+          });
+          return;
+        }
         wx.showModal({
           title: '组合支付',
           content: '是否使用余额抵用？',
@@ -550,7 +570,7 @@ Page({
     var type1 = that.data.type1;
     app.d.purchase = 1; //设置购物车刷新
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=payment',
+      url: app.d.laikeUrl + '&action=product&m=payment',
       method: 'post',
       data: {
         uid: that.data.userId, // 微信id
@@ -628,7 +648,7 @@ Page({
     var user_money = that.data.user_money;
     if (Number(user_money) >= Number(coupon_money)) {
       wx.request({
-        url: app.d.ceshiUrl + '&action=product&m=wallet_pay',
+        url: app.d.laikeUrl + '&action=product&m=wallet_pay',
         method: 'post',
         data: {
           uid: app.globalData.userInfo.openid, // 微信支付
@@ -706,7 +726,7 @@ Page({
     }
     cmoney = cmoney.toFixed(2);
     wx.request({
-      url: app.d.ceshiUrl + '&action=pay&m=pay',
+      url: app.d.laikeUrl + '&action=pay&m=pay',
       data: {
         cmoney: cmoney, // 付款金额
         openid: app.globalData.userInfo.openid, // 微信id
@@ -822,7 +842,7 @@ Page({
       cmoney = cmoney - d_yuan;
     }
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=up_order',
+      url: app.d.laikeUrl + '&action=product&m=up_order',
       method: 'post',
       data: {
         coupon_id: order.coupon_id, // 优惠券id
@@ -883,7 +903,7 @@ Page({
   //储存推荐人
   refereeopenid: function (referee_openid, openid) {
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=referee_openid',
+      url: app.d.laikeUrl + '&action=app&m=referee_openid',
       method: 'post',
       data: {
         openid: openid,
@@ -907,7 +927,7 @@ Page({
   get_plug: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=app&m=get_plug',
+      url: app.d.laikeUrl + '&action=app&m=get_plug',
       method: 'post',
       data: {
         userid: app.globalData.userInfo.openid,
@@ -930,7 +950,7 @@ Page({
   //发送数据到客户微信上
   notice: function (order_id, order_sn, price, user_id, form_id, f_pname) {
     wx.request({
-      url: app.d.ceshiUrl + '&action=getcode&m=Send_Prompt',
+      url: app.d.laikeUrl + '&action=getcode&m=Send_Prompt',
       method: 'post',
       data: {
         page: 'pages/order/detail?orderId=' + order_sn,
@@ -996,7 +1016,7 @@ Page({
       cmoney = cmoney - d_yuan;
     }
     wx.request({
-      url: app.d.ceshiUrl + '&action=order&m=up_out_trade_no',
+      url: app.d.laikeUrl + '&action=order&m=up_out_trade_no',
       method: 'post',
       data: {
         coupon_id: order.coupon_id, // 优惠券id

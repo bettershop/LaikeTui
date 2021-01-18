@@ -180,7 +180,7 @@ class orderAction extends BaseAction
                             $rew['man_num'] = select_num($db, $v->pid);//查询该拼团活动拼团人数
                             $rew['pro_id'] = $values->p_id;
                         }
-                        // $rew[$key]->details_id = $values->id;
+
                         $rew['pname'] .= $values->p_name; // 订单内商品
                         $p_id = $values->p_id; // 产品id
                         $arr = (array)$values;

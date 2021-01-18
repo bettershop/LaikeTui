@@ -52,7 +52,7 @@ Page({
   AddressManagement: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=address&m=up_addsindex',
+      url: app.d.laikeUrl + '&action=address&m=up_addsindex',
       data: {
         openid: app.globalData.userInfo.openid,
         id_arr: that.data.id_arr,
@@ -85,7 +85,7 @@ Page({
   AddressManagement1: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=AddressManagement',
+      url: app.d.laikeUrl + '&action=user&m=AddressManagement',
       data: {
         openid: app.globalData.userInfo.openid,
       },
@@ -156,7 +156,7 @@ Page({
   getCityArr: function (count) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=getCityArr',
+      url: app.d.laikeUrl + '&action=user&m=getCityArr',
       data: {
         count: count,
       },
@@ -183,7 +183,7 @@ Page({
   getCountyInfo: function (count, column) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=getCountyInfo',
+      url: app.d.laikeUrl + '&action=user&m=getCountyInfo',
       data: {
         count: count,
         column: column,
@@ -212,7 +212,7 @@ Page({
   Preservation: function (rew) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=Preservation',
+      url: app.d.laikeUrl + '&action=user&m=Preservation',
       data: {
         sheng: rew[0],
         shi: rew[1],
@@ -267,7 +267,7 @@ Page({
       wx.hideToast()
     } else {
       wx.request({
-        url: app.d.ceshiUrl + '&action=address&m=up_adds',
+        url: app.d.laikeUrl + '&action=address&m=up_adds',
         data: {
           openid: app.globalData.userInfo.openid,
           user_name: e.detail.value.user_name,

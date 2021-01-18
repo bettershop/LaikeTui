@@ -54,7 +54,7 @@ Page({
     });
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=details',
+      url: app.d.laikeUrl + '&action=user&m=details',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid
@@ -112,7 +112,7 @@ Page({
         content: '同意授权',
         success: function (res) {
           wx.request({
-            url: app.d.ceshiUrl + '&action=user&m=secret_key',
+            url: app.d.laikeUrl + '&action=user&m=secret_key',
             method: 'post',
             data: {
               encryptedData: encryptedData, // 加密数据
@@ -177,7 +177,7 @@ Page({
     } else {
       var that = this;
       wx.request({
-        url: app.d.ceshiUrl + '&action=user&m=withdrawals',
+        url: app.d.laikeUrl + '&action=user&m=withdrawals',
         method: 'post',
         data: {
           money: that.data.money,
@@ -227,7 +227,7 @@ Page({
     var bnak_card_num = e.detail.value;
     console.log(bnak_card_num);
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=verify_bank',
+      url: app.d.laikeUrl + '&action=user&m=verify_bank',
       method: 'post',
       data: {
         Bank_card_number: bnak_card_num,

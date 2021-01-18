@@ -168,7 +168,7 @@ Page({
     });
     console.log(that.data.userid)
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=index',
+      url: app.d.laikeUrl + '&action=product&m=index',
       method: 'post',
       data: {
         pro_id: that.data.productId,
@@ -572,7 +572,7 @@ Page({
     var ptype = e.currentTarget.dataset.type;
     // console.log(ptype, '--jnkmjkl')
     wx.request({
-      url: app.d.ceshiUrl + '&action=product&m=add_cart',
+      url: app.d.laikeUrl + '&action=product&m=add_cart',
       method: 'post',
       data: {
         uid: app.globalData.userInfo.openid,
@@ -710,7 +710,7 @@ Page({
     }
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=addFavorites&m=index',
+      url: app.d.laikeUrl + '&action=addFavorites&m=index',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -758,7 +758,7 @@ Page({
   delFavorites: function (e) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=addFavorites&m=removeFavorites',
+      url: app.d.laikeUrl + '&action=addFavorites&m=removeFavorites',
       method: 'post',
       data: {
         id: that.data.collection_id,

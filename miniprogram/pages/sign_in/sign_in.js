@@ -124,7 +124,7 @@ Page({
   sign: function (year, month) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=sign&c=Home&m=sign',
+      url: app.d.laikeUrl + '&action=pi&p=sign&c=Home&m=sign',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid,
@@ -194,7 +194,7 @@ Page({
   submit: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=pi&p=sign&c=Home&m=index',
+      url: app.d.laikeUrl + '&action=pi&p=sign&c=Home&m=index',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid

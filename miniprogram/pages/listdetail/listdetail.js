@@ -86,7 +86,7 @@ Page({
     }
 
     wx.request({
-      url: app.d.ceshiUrl + '&action=search&m=listdetail',
+      url: app.d.laikeUrl + '&action=search&m=listdetail',
       method: 'post',
       data: {
         cid: objectId,
@@ -178,7 +178,7 @@ Page({
       backgroundColor: app.d.bgcolor //页面标题为路由参数
     });
     wx.request({
-      url: app.d.ceshiUrl + '&action=search&m=search',
+      url: app.d.laikeUrl + '&action=search&m=search',
       method: 'post',
       data: {
         keyword: keyword,

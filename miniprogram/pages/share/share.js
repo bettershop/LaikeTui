@@ -12,7 +12,7 @@ Page({
       headimgurl: app.globalData.userInfo.avatarUrl
     })
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=share',
+      url: app.d.laikeUrl + '&action=user&m=share',
       method: 'post',
       data: {
         n: that.options.n,

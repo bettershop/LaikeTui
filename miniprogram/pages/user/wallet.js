@@ -60,7 +60,7 @@ Page({
   requestMyData: function () {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '&action=user&m=details',
+      url: app.d.laikeUrl + '&action=user&m=details',
       method: 'post',
       data: {
         openid: app.globalData.userInfo.openid
