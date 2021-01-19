@@ -47,34 +47,12 @@ class userAction extends BaseAction
         foreach ($num_arr as $key => $value) {
             if ($value == '4') {
                 $sql_order = "select num from lkt_order_details where r_status = '$value' and  user_id = '$user_id'";
-                $order_num = lkt_rows($sql_order);
+                $order_num = sizeof(lkt_gets($sql_order));
                 $res_order[$key] = $order_num;
             } else {
-                if ($value == 1) {
-                    $sql_order01 = "select drawid from lkt_order where status = '$value' and  user_id = '$user_id'";
-                    $re = lkt_gets($sql_order01);
-                    if (!empty($re)) {//未发货
-                        foreach ($re as $key001 => $value001) {
-                            $drawid = $value001->drawid;
-                            if ($drawid > 0) {
-                                $sql0001 = "select lottery_status,draw_id from lkt_draw_user where id= '$drawid'";
-                                $ddd = lkt_gets($sql0001);
-                                if (!empty($ddd)) {
-                                    $lottery_status = $ddd[0]->lottery_status;
-                                    if ($lottery_status != 4) {
-                                        //抽奖成功
-                                        unset($re[$key001]);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    $res_order[$key] = sizeof($re);
-                } else {
-                    $sql_order = "select num from lkt_order where status = '$value' and  user_id = '$user_id'";
-                    $order_num = lkt_rows($sql_order);
-                    $res_order[$key] = $order_num;
-                }
+                $sql_order = "select num from lkt_order where status = '$value' and  user_id = '$user_id'";
+                $order_num = sizeof(lkt_gets($sql_order));
+                $res_order[$key] = $order_num;
             }
         }
 
