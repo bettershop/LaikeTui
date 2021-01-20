@@ -381,6 +381,7 @@ class userAction extends BaseAction
         $request = $this->getContext()->getRequest();
         $Bank_card_number = $request->getParameter('Bank_card_number');
         // 根据卡号,查询银行名称
+        $bankList = "";
         require_once('bankList.php');
         $r = $this->bankInfo($Bank_card_number, $bankList);
         if ($r == '') {
@@ -826,8 +827,7 @@ class userAction extends BaseAction
 
     public function transfer()
     {
-        //开启事务
-        lkt_start();
+
         $user_id = addslashes($_POST['user_id']);
         $openid = addslashes($_POST['openid']);
         $money = addslashes($_POST['money']);
@@ -842,15 +842,16 @@ class userAction extends BaseAction
             if ($r) {
                 $transfer_multiple = $r[0]->transfer_multiple;
                 if ($transfer_multiple) {
-                    if ($money % $transfer_multiple == 0) {
-
-                    } else {
+                    if ($money % $transfer_multiple != 0) {
                         echo json_encode(array('status' => 0, 'err' => '转账金额需要是' . $transfer_multiple . '的倍数'));
                         exit();
                     }
                 }
             }
 
+            //开启事务
+            lkt_start();
+            
             $sql001 = "select user_id,money from lkt_user where wx_id = '$openid'";
             $r001 = lkt_gets($sql001);//本人
             if ($r001) {

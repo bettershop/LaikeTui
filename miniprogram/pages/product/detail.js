@@ -120,8 +120,7 @@ Page({
         type1: option.type1 ? option.type1 : '',//判断是抽奖还是其他活动
         role: option.role ? option.role : '',
         size: option.size ? option.size : '',
-        earn: option.earn ? option.earn : false,
-        // cart: app.globalData.userInfo.cart ? app.globalData.userInfo.cart:0//购物车数量
+        earn: option.earn ? option.earn : false
       });
     }
     
