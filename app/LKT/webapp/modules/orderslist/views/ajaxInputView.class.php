@@ -17,4 +17,3 @@ class ajaxInputView extends SmartyView{
 
     }
 }
-?>

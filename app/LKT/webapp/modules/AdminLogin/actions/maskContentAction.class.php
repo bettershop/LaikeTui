@@ -1,16 +1,16 @@
 <?php
 /**
-
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once(MO_LIB_DIR . '/version.php');
-class maskContentAction extends Action {
 
-   
-    public function getDefaultView() {
+class maskContentAction extends Action
+{
+
+
+    public function getDefaultView()
+    {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
@@ -23,47 +23,44 @@ class maskContentAction extends Action {
         // 根据id查询管理员信息
         $sql = "select * from lkt_admin where name = '$admin_name'";
         $r = $db->select($sql);
-            if(!$r){
-                $res = array('status' => '1','info'=>'没有该用户');
+        if (!$r) {
+            $res = array('status' => '1', 'info' => '没有该用户');
+            echo json_encode($res);
+            exit();
+        }
+
+        if (!empty($nickname) || !empty($birthday) || !empty($sex) || !empty($tel)) {
+            $sql01 = "update lkt_admin set nickname = '$nickname',birthday = '$birthday',sex = '$sex',tel = '$tel' where name ='$admin_name'";
+
+            $r01 = $db->update($sql01);
+            if ($r01 == -1) {
+                $db->admin_record($admin_name, '修改管理员昵称为 ' . $nickname . '，生日为' . $birthday . '，性别' . $sex . '，手机号码为' . $tel . ' 失败', 2);
+                $res = array('status' => '2', 'info' => '未知原因，修改失败!', 're' => $r);
+                echo json_encode($res);
+                exit();
+            } else {
+                $db->admin_record($admin_name, '修改管理员昵称为 ' . $nickname . '，生日为' . $birthday . '，性别' . $sex . '，手机号码为' . $tel . '  成功', 2);
+                $res = array('status' => '3', 'info' => '修改成功！', 're' => $r);
                 echo json_encode($res);
                 exit();
             }
-            
-        if(!empty($nickname) || !empty($birthday)  || !empty($sex)|| !empty($tel)){
-             $sql01 = "update lkt_admin set nickname = '$nickname',birthday = '$birthday',sex = '$sex',tel = '$tel' where name ='$admin_name'";
-
-             $r01 = $db->update($sql01);
-             if($r01 == -1) {
-                  $db->admin_record($admin_name,'修改管理员昵称为 '.$nickname.'，生日为'.$birthday.'，性别'.$sex.'，手机号码为'.$tel.' 失败',2);
-                    $res = array('status' => '2','info'=>'未知原因，修改失败!','re'=>$r);
-                    echo json_encode($res);
-                    exit();
-                } else {
-                      $db->admin_record($admin_name,'修改管理员昵称为 '.$nickname.'，生日为'.$birthday.'，性别'.$sex.'，手机号码为'.$tel.'  成功',2);
-                    $res = array('status' => '3','info'=>'修改成功！','re'=>$r);
-                    echo json_encode($res);
-                    exit();
-                }
-        }else{
-            $res = array('re'=>$r);
-                    echo json_encode($res);
-                    exit();
+        } else {
+            $res = array('re' => $r);
+            echo json_encode($res);
+            exit();
         }
 
-        return View :: INPUT;
+
     }
 
-    public function execute(){
-        $db = DBAction::getInstance();
-        $request = $this->getContext()->getRequest();
-    
-        return;
+    public function execute()
+    {
+
     }
 
-    public function getRequestMethods(){
+    public function getRequestMethods()
+    {
         return Request :: NONE;
     }
 
 }
-
-?>

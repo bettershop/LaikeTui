@@ -286,4 +286,3 @@ class addsignAction extends Action {
 	}
 
 }
-?>

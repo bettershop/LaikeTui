@@ -17,7 +17,6 @@ class modifyAction extends Action {
         $sql = "select * from lkt_core_menu where id = '$id'";
         $r_1 = $db->select($sql);
         if($r_1){
-            $space = "---";
             $s_id = $r_1[0]->s_id; // 上级id
             $title = $r_1[0]->title; // 菜单名称
             $image = $r_1[0]->image; // 图片
@@ -270,4 +269,3 @@ class modifyAction extends Action {
 
 }
 
-?>

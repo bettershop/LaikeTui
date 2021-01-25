@@ -642,7 +642,6 @@ class CouponAction extends BaseAction
         $sql = "select * from lkt_freight where id = '$freight'";
         $r_1 = lkt_gets($sql);
         if ($r_1) {
-            $rule = $r_1[0];
             $yunfei = 0;
             if (empty($address)) {
                 return 0;

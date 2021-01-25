@@ -30,4 +30,4 @@ class IndexInputView extends SmartyView {
 		}
     }
 }
-?>
+

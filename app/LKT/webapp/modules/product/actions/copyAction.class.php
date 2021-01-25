@@ -372,4 +372,4 @@ class copyAction extends Action
     }
 }
 
-?>
+

@@ -212,5 +212,3 @@ class template_messageAction extends Action
 
 }
 
-
-?>

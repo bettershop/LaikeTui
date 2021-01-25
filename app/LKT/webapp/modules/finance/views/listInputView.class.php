@@ -27,4 +27,4 @@ class listInputView extends SmartyView {
 		}
     }
 }
-?>
+

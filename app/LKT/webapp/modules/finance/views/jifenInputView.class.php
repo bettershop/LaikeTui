@@ -29,4 +29,4 @@ class jifenInputView extends SmartyView {
 		}
     }
 }
-?>
+

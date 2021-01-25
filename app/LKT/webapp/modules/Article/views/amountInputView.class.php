@@ -18,4 +18,4 @@ class amountInputView extends SmartyView {
 		$this->setTemplate("amount.tpl");
     }
 }
-?>
+

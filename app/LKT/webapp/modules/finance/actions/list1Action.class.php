@@ -94,4 +94,3 @@ class list1Action extends Action {
 
 }
 
-?>

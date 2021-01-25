@@ -14,4 +14,4 @@ class setInputView extends SmartyView {
 		$this->setTemplate('set.tpl');
     }
 }
-?>
+

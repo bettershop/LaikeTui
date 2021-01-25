@@ -890,4 +890,3 @@ class examineAction extends Action
 
 }
 
-?>

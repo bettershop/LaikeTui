@@ -55,4 +55,3 @@ class IndexAction extends Action {
         return Request :: NONE;
     }
 }
-?>

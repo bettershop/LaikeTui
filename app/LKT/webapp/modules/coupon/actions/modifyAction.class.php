@@ -254,4 +254,3 @@ class modifyAction extends Action {
 		return Request :: POST;
 	}
 }
-?>

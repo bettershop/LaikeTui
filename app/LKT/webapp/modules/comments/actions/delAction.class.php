@@ -33,4 +33,3 @@ class delAction extends Action {
         return Request :: POST;
     }
 }
-?>

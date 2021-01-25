@@ -10,4 +10,3 @@ class maskContentInputView extends SmartyView {
         $this->setTemplate("index.tpl");
     }
 }
-?>

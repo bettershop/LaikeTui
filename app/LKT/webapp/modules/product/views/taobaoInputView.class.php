@@ -14,4 +14,4 @@ class taobaoInputView extends SmartyView {
 		$this->setTemplate("taobao.tpl");
     }
 }
-?>
+

@@ -203,4 +203,3 @@ class payAction extends Action
 
 }
 
-?>

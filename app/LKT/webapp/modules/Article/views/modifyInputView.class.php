@@ -14,25 +14,15 @@ class modifyInputView extends SmartyView {
 
 		$request = $this->getContext()->getRequest();
         $this->setAttribute('pic', $request->getAttribute('pic'));
-
         $this->setAttribute('id',$request->getAttribute('id'));
-
         $this->setAttribute('Article_title',$request->getAttribute('Article_title'));
-
         $this->setAttribute('Article_prompt',$request->getAttribute('Article_prompt'));
-
         $this->setAttribute('Article_imgurl',$request->getAttribute('Article_imgurl'));
-
 		$this->setAttribute('uploadImg',$request->getAttribute('uploadImg'));
-
         $this->setAttribute('sort',$request->getAttribute('sort'));
-
-        $this->setAttribute('content',$request->getAttribute('content'));		 
-
+        $this->setAttribute('content',$request->getAttribute('content'));
 		$this->setTemplate("modify.tpl");
 
     }
 
 }
-
-?>

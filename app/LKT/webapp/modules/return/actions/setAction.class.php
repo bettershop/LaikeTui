@@ -62,4 +62,3 @@ class setAction extends Action {
 
 }
 
-?>

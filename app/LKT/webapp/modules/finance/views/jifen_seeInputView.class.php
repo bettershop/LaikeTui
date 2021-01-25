@@ -17,4 +17,4 @@ class jifen_seeInputView extends SmartyView {
 		$this->setTemplate('jifen_see.tpl');
     }
 }
-?>
+

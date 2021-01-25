@@ -25,4 +25,3 @@ class payInputView extends SmartyView {
 		$this->setTemplate("pay.tpl");
     }
 }
-?>

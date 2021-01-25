@@ -27,4 +27,4 @@ class rechargeInputView extends SmartyView {
 		}
     }
 }
-?>
+

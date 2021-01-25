@@ -55,4 +55,3 @@ class statusAction extends Action
 
 }
 
-?>

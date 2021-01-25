@@ -225,4 +225,3 @@ class addAction extends Action {
 		return Request :: POST;
 	}
 }
-?>

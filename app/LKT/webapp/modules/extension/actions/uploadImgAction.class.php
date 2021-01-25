@@ -66,4 +66,3 @@ class uploadImgAction extends Action {
     }
 
 }
-?>

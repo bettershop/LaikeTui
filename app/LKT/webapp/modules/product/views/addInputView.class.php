@@ -27,8 +27,6 @@ class addInputView extends SmartyView {
         $this->setAttribute("product_number",$request->getAttribute("product_number"));
         $this->setAttribute("product_title",$request->getAttribute("product_title"));
         $this->setAttribute("subtitle",$request->getAttribute("subtitle"));
-        // $this->setAttribute("scan",$request->getAttribute("scan"));
-        // $this->setAttribute("keyword",$request->getAttribute("keyword"));
         $this->setAttribute("weight",$request->getAttribute("weight"));
         $this->setAttribute("s_type",$request->getAttribute("s_type"));
         $this->setAttribute("is_distribution",$request->getAttribute("is_distribution"));
@@ -42,4 +40,3 @@ class addInputView extends SmartyView {
         $this->setTemplate("add.tpl");
     }
 }
-?>

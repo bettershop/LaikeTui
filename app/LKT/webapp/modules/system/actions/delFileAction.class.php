@@ -61,4 +61,3 @@ class delFileAction extends Action {
 
 }
 
-?>

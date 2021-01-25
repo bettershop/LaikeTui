@@ -369,4 +369,3 @@ class StatusAction extends Action {
     }
 
 }
-?>

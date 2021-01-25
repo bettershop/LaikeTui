@@ -46,4 +46,3 @@ class viewAction extends Action {
 
 }
 
-?>

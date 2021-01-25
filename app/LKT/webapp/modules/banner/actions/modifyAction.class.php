@@ -92,4 +92,3 @@ class modifyAction extends Action {
 
 }
 
-?>

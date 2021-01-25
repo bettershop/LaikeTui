@@ -16,4 +16,4 @@ class yue_seeInputView extends SmartyView {
 		$this->setTemplate('yue_see.tpl');
     }
 }
-?>
+

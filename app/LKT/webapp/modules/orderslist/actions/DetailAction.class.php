@@ -292,5 +292,3 @@ class DetailAction extends Action {
 }
 
 
-
-?>

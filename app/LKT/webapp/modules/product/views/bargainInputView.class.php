@@ -20,4 +20,4 @@ class bargainInputView extends SmartyView {
 		$this->setTemplate("bargain.tpl");
     }
 }
-?>
+

@@ -99,4 +99,3 @@ class couponAction extends Action {
 
 }
 
-?>

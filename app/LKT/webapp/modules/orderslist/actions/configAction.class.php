@@ -115,5 +115,3 @@ class configAction extends Action
     }
 
 }
-
-?>

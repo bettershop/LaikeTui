@@ -17,4 +17,4 @@ class numInputView extends SmartyView {
 		$this->setTemplate("num.tpl");
     }
 }
-?>
+

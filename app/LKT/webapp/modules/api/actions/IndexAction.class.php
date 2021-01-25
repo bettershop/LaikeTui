@@ -138,16 +138,16 @@ order by a.sort DESC LIMIT 0,10";
     {
 
         $request = $this->getContext()->getRequest();
-        $paegr = addslashes(trim($request->getParameter('page'))); //  '显示位置'
+        $pager = addslashes(trim($request->getParameter('page'))); //  '显示位置'
         $index = addslashes(trim($request->getParameter('index'))); //  '分类ID'
 
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
 
-        if (!$paegr) {
-            $paegr = 1;
+        if (!$pager) {
+            $pager = 1;
         }
-        $start = 10 * $paegr;
+        $start = 10 * $pager;
         $end = 10;
         $product = array();
         //查询商品并分类显示返回JSON至小程序

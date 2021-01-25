@@ -32,4 +32,3 @@ class DetailInputView extends SmartyView {
 
 }
 
-?>

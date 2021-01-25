@@ -28,4 +28,4 @@ class yueInputView extends SmartyView {
 		}
     }
 }
-?>
+

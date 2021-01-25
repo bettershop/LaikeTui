@@ -32,4 +32,3 @@ class ModifyInputView extends SmartyView {
 
 }
 
-?>

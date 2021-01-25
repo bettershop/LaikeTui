@@ -136,13 +136,10 @@ class delAction extends Action
     public function b($cid)
     {
         $db = DBAction::getInstance();
-        $res = '';
         $sqlc = "select cid from lkt_product_class where recycle = 0 and sid = '$cid'";;
-        $res = $db->select($sqlc);
-        return $res;
+        return $db->select($sqlc);
     }
 
 
 }
 
-?>

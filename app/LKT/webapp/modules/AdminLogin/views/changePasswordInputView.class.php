@@ -9,4 +9,3 @@ class changePasswordInputView extends SmartyView {
         $this->setTemplate("index.tpl");
     }
 }
-?>

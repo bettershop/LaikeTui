@@ -26,7 +26,6 @@ class modifyInputView extends SmartyView {
         $this->setAttribute('product_number',$request->getAttribute('product_number'));
         $this->setAttribute('product_title',$request->getAttribute('product_title'));
         $this->setAttribute('subtitle',$request->getAttribute('subtitle'));
-        // $this->setAttribute('scan',$request->getAttribute('scan'));
         $this->setAttribute('weight',$request->getAttribute('weight'));
         $this->setAttribute('content',$request->getAttribute('content'));
         $this->setAttribute('num',$request->getAttribute('num'));
@@ -38,4 +37,3 @@ class modifyInputView extends SmartyView {
         $this->setTemplate("modify.tpl");
     }
 }
-?>

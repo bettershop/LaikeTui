@@ -58,4 +58,3 @@ class jifen_seeAction extends Action {
     }
 
 }
-?>

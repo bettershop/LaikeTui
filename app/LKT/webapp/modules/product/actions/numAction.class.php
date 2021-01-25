@@ -97,4 +97,3 @@ class numAction extends Action {
     }
 }
 
-?>

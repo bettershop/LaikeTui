@@ -28,4 +28,3 @@ class kuaidishowInputView extends SmartyView {
 
 }
 
-?>

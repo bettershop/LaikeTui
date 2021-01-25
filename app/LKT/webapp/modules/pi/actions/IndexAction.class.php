@@ -50,4 +50,3 @@ class IndexAction extends Action {
 
 }
 
-?>

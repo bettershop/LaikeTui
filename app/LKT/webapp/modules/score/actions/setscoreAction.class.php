@@ -74,4 +74,3 @@ class setscoreAction extends Action {
 
 
 
-?>

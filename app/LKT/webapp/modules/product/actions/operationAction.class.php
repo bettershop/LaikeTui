@@ -130,4 +130,3 @@ class operationAction extends Action {
 
 }
 
-?>

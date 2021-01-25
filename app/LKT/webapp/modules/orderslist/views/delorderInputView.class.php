@@ -22,4 +22,3 @@ class delorderInputView extends SmartyView {
 
 }
 
-?>

@@ -8,4 +8,3 @@ class addInputView extends SmartyView {
         $this->setTemplate("add.tpl");
     }
 }
-?>

@@ -42,4 +42,3 @@ class ajaxAction extends Action {
 		return Request :: NONE;
 	}
 }
-?>

@@ -19,9 +19,6 @@ class delAction extends Action {
         $sql = "delete from lkt_role where id = '$id'";
         $res=$db->delete($sql);
 		echo $res;
-		exit;
-
-        return;
     }
 
     public function execute(){
@@ -35,4 +32,3 @@ class delAction extends Action {
 
 }
 
-?>

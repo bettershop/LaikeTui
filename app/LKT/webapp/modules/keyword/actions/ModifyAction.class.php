@@ -49,5 +49,3 @@ class ModifyAction extends Action {
     }
 
 }
-
-?>

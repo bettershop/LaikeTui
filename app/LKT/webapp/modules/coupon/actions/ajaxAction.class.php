@@ -53,4 +53,3 @@ class ajaxAction extends Action {
 
 }
 
-?>

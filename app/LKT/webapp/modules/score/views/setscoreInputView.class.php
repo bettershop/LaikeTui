@@ -15,4 +15,4 @@ class setscoreInputView extends SmartyView {
 		$this->setTemplate("setscore.tpl");
     }
 }
-?>
+

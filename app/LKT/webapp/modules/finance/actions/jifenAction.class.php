@@ -114,4 +114,3 @@ class jifenAction extends Action {
     }
 
 }
-?>

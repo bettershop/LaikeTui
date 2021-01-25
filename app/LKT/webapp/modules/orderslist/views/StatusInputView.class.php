@@ -15,4 +15,4 @@ class StatusInputView extends SmartyView {
         $this->setTemplate("detail.tpl");
     }
 }
-?>
+
