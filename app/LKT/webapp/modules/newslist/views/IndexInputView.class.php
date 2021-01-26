@@ -17,4 +17,4 @@ class IndexInputView extends SmartyView {
 		$this->setTemplate("index.tpl");
     }
 }
-?>
+

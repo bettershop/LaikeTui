@@ -1,11 +1,7 @@
 <?php
-
 /**
-
  * [Laike System] Copyright (c) 2017-2020 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once (MO_LIB_DIR . '/DBAction.class.php');
 require_once (MO_LIB_DIR . '/ShowPager.class.php');
@@ -68,9 +64,7 @@ class addsignAction extends Action {
 			$r = $db -> select($sql_config);
 			if ($r) {
 				$appid = $r[0] -> appid;
-				// 小程序唯一标识
 				$appsecret = $r[0] -> appsecret;
-				// 小程序的 app secret
 				$company = $r[0] -> company;
 			}
 
@@ -83,7 +77,6 @@ class addsignAction extends Action {
 			}
 			$sqld = "update lkt_order_details set r_status='$trade' $con where id='$id'";
 			$rd = $db -> update($sqld);
-
 
 			//查询订单信息
 			$sql_p = "select o.id,o.user_id,o.sNo,d.p_name,o.name,o.address from lkt_order as o left join lkt_order_details as d on o.sNo=d.r_sNo where d.id='$id'";
@@ -116,7 +109,7 @@ class addsignAction extends Action {
 				$keyword7 = array('value' => $name, "color" => "#173177");
 				//拼成规定的格式
 				$o_data = array('keyword1' => $keyword1, 'keyword2' => $keyword2, 'keyword3' => $keyword3, 'keyword4' => $keyword4, 'keyword5' => $keyword5, 'keyword6' => $keyword6, 'keyword7' => $keyword7);
-				$res = $this -> Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data);
+				$this -> Send_Prompt($appid, $appsecret, $form_id, $openid, $page, $send_id, $o_data);
 				$this -> get_fromid($openid, $form_id);
 			}
 
@@ -157,14 +150,13 @@ class addsignAction extends Action {
 				$sql = "select * from lkt_notice where id = '1'";
 				$r = $db -> select($sql);
 				$template_id = $r[0] -> order_delivery;
-				$res = $this -> Send_success($msgres, $template_id);
-
+				$this -> Send_success($msgres, $template_id);
                 $db->admin_record($admin_id,' 使订单号为 '.$sNo.' 的订单发货 ',7);
-
                 echo 1;
 				exit();
 			}
-			echo "string2";exit;
+			echo "string2";
+			exit;
 		}
 
 		return View::INPUT;

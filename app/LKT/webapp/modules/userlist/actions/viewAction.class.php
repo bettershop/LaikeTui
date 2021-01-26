@@ -34,8 +34,6 @@ class viewAction extends Action
     public function execute()
     {
 
-
-
     }
 
 
@@ -49,4 +47,3 @@ class viewAction extends Action
 
 }
 
-?>

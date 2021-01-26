@@ -89,11 +89,8 @@ class IndexAction extends Action {
         $url = "index.php?module=product_class&pagesize=".urlencode($pagesize).'&cid='.urlencode($cid).'&con='.urlencode($con);
         $pages_show = $pager->multipage($url,$total,$page,$pagesize,$start,$para = '');
 
-
         $level= $level ? $level:0;
-        // print_r($array);die;
         $newlerevl = $array[$level];
-// print_r($newlerevl);die;
         $request->setAttribute("level_xs",$newlerevl);
         $request->setAttribute("level",$level);
         $request->setAttribute("list",$rr);
@@ -110,7 +107,6 @@ class IndexAction extends Action {
         $sid = $request->getParameter("sid"); // 上级分类sid
         $sql = "select MAX(sort) as sort from lkt_product_class where recycle = 0 and sid = '$sid' ";
         $rr = $db->select($sql);
-        // var_dump($rr);exit;
         $sort = $rr[0]->sort;
         $sort= $sort +1 ;
         $sql = "update lkt_product_class set sort = '$sort' where recycle = 0 and cid = '$cid'";

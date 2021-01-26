@@ -20,4 +20,4 @@ class member_recordInputView extends SmartyView {
         }
     }
 }
-?>
+

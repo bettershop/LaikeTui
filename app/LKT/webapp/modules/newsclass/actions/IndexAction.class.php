@@ -14,7 +14,6 @@ class IndexAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 查询新闻分类表，根据sort顺序排列
         $sql = "select * from lkt_news_class order by sort";
         $r = $db->select($sql);
         $request->setAttribute("list",$r);
@@ -31,5 +30,3 @@ class IndexAction extends Action {
     }
 
 }
-
-?>

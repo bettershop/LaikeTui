@@ -43,4 +43,3 @@ class member_record_delAction extends Action {
 
 }
 
-?>

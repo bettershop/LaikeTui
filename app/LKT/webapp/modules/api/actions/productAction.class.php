@@ -321,7 +321,7 @@ class productAction extends BaseAction
         $size_id = addslashes(trim($request->getParameter('sizeid'))); //  '商品属性id',
         $plugin = addslashes(trim($request->getParameter('plugin'))); //  '插件类型',
 
-        if (empty($Uid) || empty($Goods_id) || empty($Goods_id) || empty($size_id)) {
+        if ($Uid=='undefined' || empty($Uid) || empty($Goods_id) || empty($Goods_id) || empty($size_id)) {
             echo json_encode(array('status' => 0, 'info' => '添加失败请重新提交!!'));
         } else {
             $sql = "select user_id from lkt_user where wx_id = '$Uid'";

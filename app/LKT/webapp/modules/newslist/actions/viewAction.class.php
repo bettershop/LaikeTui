@@ -49,4 +49,3 @@ class viewAction extends Action {
         return Request :: NONE;
     }
 }
-?>

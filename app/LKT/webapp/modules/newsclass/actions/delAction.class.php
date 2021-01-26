@@ -12,9 +12,7 @@ class delAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 获取分类id
         $cat_id = intval($request->getParameter('cat_id'));
-        // 根据分类id,删除这条数据
         $sql = "delete from lkt_news_class where cat_id = '$cat_id'";
         $db->delete($sql);
 
@@ -33,4 +31,3 @@ class delAction extends Action {
         return Request :: NONE;
     }
 }
-?>

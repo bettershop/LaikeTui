@@ -22,5 +22,3 @@ class articleInputView extends SmartyView {
     }
 
 }
-
-?>

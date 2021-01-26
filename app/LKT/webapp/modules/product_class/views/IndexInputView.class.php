@@ -16,7 +16,6 @@ class IndexInputView extends SmartyView {
         $this->setAttribute("level01",$request->getAttribute("level01"));
         $this->setAttribute("level_xs",$request->getAttribute("level_xs"));
 		$this->setAttribute("uploadImg",$request->getAttribute("uploadImg"));
-		// $this->setAttribute("pages",$request->getAttribute("pages"));
 		$this->setAttribute("pages_show",$request->getAttribute("pages_show"));
 		$this->setTemplate("index.tpl");
     }

@@ -36,7 +36,7 @@ class addInputView extends SmartyView {
         $this->setAttribute("freight",$request->getAttribute("freight"));
         $this->setAttribute("content",$request->getAttribute("content"));
         $this->setAttribute("volume",$request->getAttribute("volume"));
-          $this->setAttribute('initial',$request->getAttribute('initial'));
+        $this->setAttribute('initial',$request->getAttribute('initial'));
         $this->setTemplate("add.tpl");
     }
 }

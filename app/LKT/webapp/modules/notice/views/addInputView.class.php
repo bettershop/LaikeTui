@@ -24,4 +24,3 @@ class addInputView extends SmartyView {
 
 }
 
-?>

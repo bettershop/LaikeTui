@@ -83,5 +83,3 @@ class member_recordAction extends Action {
     }
 
 }
-
-?>

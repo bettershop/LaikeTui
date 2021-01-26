@@ -57,4 +57,3 @@ class IndexAction extends Action {
 
 }
 
-?>

@@ -22,4 +22,4 @@ class configInputView extends SmartyView {
 		$this->setTemplate("config.tpl");
     }
 }
-?>
+

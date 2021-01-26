@@ -178,5 +178,3 @@ class addAction extends Action
 
 }
 
-
-?>

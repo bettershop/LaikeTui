@@ -6,7 +6,6 @@ class modifyInputView extends SmartyView {
         $this->setAttribute('name',$request->getAttribute('name'));
         $this->setAttribute('permission',$request->getAttribute('permission'));
         $this->setAttribute('list',$request->getAttribute('list'));
-
 		$this->setTemplate("modify.tpl");
     }
 }

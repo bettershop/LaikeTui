@@ -19,9 +19,7 @@ class viewAction extends Action {
         $id = intval($request->getParameter("id")); // 产品id
         $sql = "select * from lkt_order_details where id = '$id'";
         $r = $db->select($sql);
-       
         $request->setAttribute("list",$r);
-
         return View :: INPUT;
 
 	}
@@ -29,9 +27,6 @@ class viewAction extends Action {
 
 
 	public function execute(){
-
-
-		return;
 
 	}
 

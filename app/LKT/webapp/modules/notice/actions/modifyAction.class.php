@@ -1,17 +1,16 @@
 <?php
 
 /**
-
  * [Laike System] Copyright (c) 2018 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once(MO_LIB_DIR . '/DBAction.class.php');
 
-class modifyAction extends Action {
+class modifyAction extends Action
+{
 
-	public function getDefaultView() {
+    public function getDefaultView()
+    {
 
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
@@ -20,9 +19,9 @@ class modifyAction extends Action {
         $uploadImg = addslashes(trim($request->getParameter('uploadImg'))); // 图片上传位置
 
         // 根据插件id，查询插件信息 
-        $sql = 'select * from lkt_set_notice where id='.$id;
-        $res = $db -> select($sql);
-        if($res){
+        $sql = 'select * from lkt_set_notice where id=' . $id;
+        $res = $db->select($sql);
+        if ($res) {
             $id = $res[0]->id;
             $image = $res[0]->img_url;
             $name = $res[0]->name;
@@ -30,32 +29,32 @@ class modifyAction extends Action {
         }
 
         $dd = $_SERVER['PHP_SELF'];
-        $ddd =explode('/', $dd);//打散成数组
-        $dddd =array_pop($ddd);//去除数组最后一个元素
-        if($ddd){
+        $ddd = explode('/', $dd);//打散成数组
+        $dddd = array_pop($ddd);//去除数组最后一个元素
+        if ($ddd) {
             $pic = implode('/', $ddd);
 
-        }else{
-             $pic = "/LKT";
+        } else {
+            $pic = "/LKT";
         }
 
-        $pic =str_replace('..', '', $pic);
-        $request->setAttribute('pic', $pic.'/images');
-        $request->setAttribute("uploadImg",$uploadImg);
-        $request->setAttribute("id",$id);
-        $request->setAttribute("name",$name);
-        $request->setAttribute("image",$image);
-        $request->setAttribute("detail",$detail);
+        $pic = str_replace('..', '', $pic);
+        $request->setAttribute('pic', $pic . '/images');
+        $request->setAttribute("uploadImg", $uploadImg);
+        $request->setAttribute("id", $id);
+        $request->setAttribute("name", $name);
+        $request->setAttribute("image", $image);
+        $request->setAttribute("detail", $detail);
 
         return View :: INPUT;
 
-	}
+    }
 
 
-
-	public function execute(){
-		$db = DBAction::getInstance();
-		$request = $this->getContext()->getRequest();
+    public function execute()
+    {
+        $db = DBAction::getInstance();
+        $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('id'))); // 
         $url = addslashes(trim($request->getParameter('uploadImg'))); // 图片上传位置
         $name = addslashes(trim($request->getParameter('notice'))); // name
@@ -63,12 +62,12 @@ class modifyAction extends Action {
         $oldpic = addslashes(trim($request->getParameter('oldpic')));
         $image = addslashes(trim($request->getParameter('image')));
 
-        if($image){
-            $image = preg_replace('/.*\//','',$image);
-            if($image != $oldpic){
-                @unlink ($uploadImg.$oldpic);
+        if ($image) {
+            $image = preg_replace('/.*\//', '', $image);
+            if ($image != $oldpic) {
+                @unlink($uploadImg . $oldpic);
             }
-        }else{
+        } else {
             $image = $oldpic;
         }
 
@@ -76,9 +75,9 @@ class modifyAction extends Action {
         //更新数据表
         $sql = "update lkt_set_notice " .
             "set name='$name',img_url = '$image',user = '$admin_id',detail = '$detail',time = CURRENT_TIMESTAMP " . "where id = '$id'";
-        $r = $db->update($sql); 
+        $r = $db->update($sql);
 
-        if($r == -1) {
+        if ($r == -1) {
             echo "<script type='text/javascript'>" .
                 "alert('未知原因，修改失败！');" .
                 "location.href='index.php?module=notice';</script>";
@@ -91,13 +90,13 @@ class modifyAction extends Action {
         }
 
 
-	}
+    }
 
-	public function getRequestMethods(){
+    public function getRequestMethods()
+    {
 
-		return Request :: POST;
+        return Request :: POST;
 
-	}
+    }
 
 }
-?>

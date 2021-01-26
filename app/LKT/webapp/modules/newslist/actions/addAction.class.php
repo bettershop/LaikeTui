@@ -84,5 +84,3 @@ class addAction extends Action {
 }
 
 
-
-?>
