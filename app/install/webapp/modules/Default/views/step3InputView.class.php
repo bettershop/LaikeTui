@@ -1,15 +1,1 @@
-<?php
-
-class step3InputView extends SmartyView
-{
-
-    public function execute ()
-    {
-    	$request = $this->getContext()->getRequest();
-    	$this->setAttribute("url",$request->getAttribute("url"));
-        $this->setTemplate('step3.tpl');
-    }
-
-}
-
-?>
+<?php/** * [Laike System] Copyright (c) 2017-2020 laiketui.com * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details. */class step3InputView extends SmartyView{    public function execute ()    {    	$request = $this->getContext()->getRequest();    	$this->setAttribute("url",$request->getAttribute("url"));        $this->setTemplate('step3.tpl');    }}

@@ -20,4 +20,3 @@ class modifyInputView extends SmartyView {
 		$this->setTemplate("modify.tpl");
     }
 }
-?>

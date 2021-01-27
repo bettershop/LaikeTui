@@ -1,16 +1,1 @@
-<?php
-
-class UnavailableSuccessView extends SmartyView
-{
-
-    public function execute ()
-    {
-
-        // set our template
-        $this->setTemplate('UnavailableSuccess.tpl');
-
-    }
-
-}
-
-?>
+<?php/** * [Laike System] Copyright (c) 2017-2020 laiketui.com * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details. */class UnavailableSuccessView extends SmartyView{    public function execute ()    {        $this->setTemplate('UnavailableSuccess.tpl');    }}

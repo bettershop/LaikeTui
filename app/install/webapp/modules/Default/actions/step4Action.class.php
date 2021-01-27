@@ -46,4 +46,3 @@ class step4Action extends Action
     }
 
 }
-?>

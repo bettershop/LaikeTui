@@ -1,16 +1,1 @@
-<?php
-
-class step4InputView extends SmartyView
-{
-
-    public function execute ()
-    {
-
-        // set our template
-        $this->setTemplate('step4.tpl');
-
-    }
-
-}
-
-?>
+<?php/** * [Laike System] Copyright (c) 2017-2020 laiketui.com * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details. */class step4InputView extends SmartyView{    public function execute ()    {        $this->setTemplate('step4.tpl');    }}

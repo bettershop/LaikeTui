@@ -54,4 +54,3 @@ class is_defaultAction extends Action {
 
 }
 
-?>

@@ -56,4 +56,3 @@ class step2Action extends Action
 
 }
 
-?>
