@@ -25,4 +25,3 @@ class LoginAction extends Action
 
 }
 
-?>

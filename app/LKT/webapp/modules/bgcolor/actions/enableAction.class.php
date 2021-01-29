@@ -34,5 +34,3 @@ class enableAction extends Action {
     }
 
 }
-
-?>

@@ -10,14 +10,10 @@
 
 class addInputView extends SmartyView {
 
-	
-
     public function execute() {
 
 		$request = $this->getContext()->getRequest();
-
 		$this->setAttribute("software",$request->getAttribute("software"));
-
 		$this->setAttribute("list",$request->getAttribute("list"));
 		$this->setAttribute("software",$request->getAttribute("software"));
 		$this->setAttribute("name",$request->getAttribute("name"));
@@ -28,11 +24,9 @@ class addInputView extends SmartyView {
 		$this->setAttribute("num",$request->getAttribute("num"));
 		$this->setAttribute("start_time",$request->getAttribute("start_time"));
 		$this->setAttribute("end_time",$request->getAttribute("end_time"));
-
         $this->setTemplate("add.tpl");
 
     }
 
 }
 
-?>

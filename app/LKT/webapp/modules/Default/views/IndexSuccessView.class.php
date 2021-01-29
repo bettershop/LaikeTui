@@ -13,4 +13,3 @@ class IndexSuccessView extends SmartyView
 
 }
 
-?>

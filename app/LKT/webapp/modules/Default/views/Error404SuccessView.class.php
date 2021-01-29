@@ -13,4 +13,3 @@ class Error404SuccessView extends SmartyView
 
 }
 
-?>

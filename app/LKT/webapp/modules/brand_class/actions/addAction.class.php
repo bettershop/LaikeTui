@@ -17,7 +17,7 @@ class addAction extends Action {
 		$sql = "select * from lkt_config where id = '1'";
         $r = $db->select($sql);
         $uploadImg = $r[0]->uploadImg; // 图片上传位置
-         $brand_name = addslashes(trim($request->getParameter('pname'))); // 品牌名称
+        $brand_name = addslashes(trim($request->getParameter('pname'))); // 品牌名称
         $brand_y_pname = addslashes(trim($request->getParameter('y_pname'))); // 品牌名称
         $image = addslashes(trim($request->getParameter('image'))); // 品牌图片
         $producer = addslashes(trim($request->getParameter('producer'))); // 产地

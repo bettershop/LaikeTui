@@ -32,5 +32,3 @@ class ModuleDisabledAction extends Action
     }
 
 }
-
-?>

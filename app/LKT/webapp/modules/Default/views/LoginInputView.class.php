@@ -13,4 +13,3 @@ class LoginInputView extends SmartyView
 
 }
 
-?>

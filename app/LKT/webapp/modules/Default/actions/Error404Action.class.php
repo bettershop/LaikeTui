@@ -33,4 +33,3 @@ class Error404Action extends Action
 
 }
 
-?>

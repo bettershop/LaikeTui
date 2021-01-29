@@ -32,5 +32,3 @@ class SecureAction extends Action
     }
 
 }
-
-?>

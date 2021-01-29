@@ -44,4 +44,3 @@ class delAction extends Action {
 
 }
 
-?>

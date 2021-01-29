@@ -32,5 +32,3 @@ class UnavailableAction extends Action
     }
 
 }
-
-?>
