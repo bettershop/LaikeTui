@@ -66,5 +66,3 @@ class seeAction extends Action {
     }
 
 }
-
-?>

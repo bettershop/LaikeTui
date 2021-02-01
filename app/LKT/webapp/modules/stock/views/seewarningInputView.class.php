@@ -7,4 +7,4 @@ class seewarningInputView extends SmartyView {
 		$this->setTemplate("seewarning.tpl");
     }
 }
-?>
+

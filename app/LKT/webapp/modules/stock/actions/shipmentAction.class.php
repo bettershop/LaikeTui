@@ -121,5 +121,3 @@ class shipmentAction extends Action {
     }
 
 }
-
-?>

@@ -426,16 +426,16 @@ function check(f) {
                                                 <span>{{attr.attr_name}}</span>
                                             </td>
                                             <td>
-                                                <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0" step="0.01" v-bind:name="'attr['+index+'][costprice]'" :value="cbj">
+                                                <input class="form-control form-control-sm" type="text"  v-bind:name="'attr['+index+'][costprice]'" :value="cbj">
                                             </td>
                                             <td>
-                                                <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0" step="0.01" v-bind:name="'attr['+index+'][yprice]'" :value="yj">
+                                                <input class="form-control form-control-sm" type="text"  v-bind:name="'attr['+index+'][yprice]'" :value="yj">
                                             </td>
                                             <td>
-                                                <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0" step="0.01" v-bind:name="'attr['+index+'][price]'" :value="sj">
+                                                <input class="form-control form-control-sm" type="text"  v-bind:name="'attr['+index+'][price]'" :value="sj">
                                             </td>
                                             <td>
-                                                <input class="form-control form-control-sm" oninput="value=value.replace(/[^\d]/g,'')" v-bind:name="'attr['+index+'][num]'" :value="kucun" onkeypress="return noNumbers(event)" min="0" step="1">
+                                                <input class="form-control form-control-sm" oninput="value=value.replace(/[^\d]/g,'')" v-bind:name="'attr['+index+'][num]'" :value="kucun" >
                                             </td>
                                             <td>
                                                 <input class="unit" v-bind:name="'attr['+index+'][unit]'" :value="unit" style="border: 0px;background-color: transparent;" readOnly="readOnly">

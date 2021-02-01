@@ -20,4 +20,4 @@ class shipmentInputView extends SmartyView {
         }
     }
 }
-?>
+

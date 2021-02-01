@@ -19,4 +19,4 @@ class enterInputView extends SmartyView {
         }
     }
 }
-?>
+

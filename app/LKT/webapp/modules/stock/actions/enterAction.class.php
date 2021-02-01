@@ -110,5 +110,3 @@ class enterAction extends Action {
     }
 
 }
-
-?>

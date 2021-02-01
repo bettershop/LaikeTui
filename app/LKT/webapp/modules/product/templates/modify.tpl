@@ -416,13 +416,13 @@
                                             <span>{{attr.attr_name}}</span>
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0"  step="0.01"  v-bind:name="'attr['+index+'][costprice]'" :value="item.costprice">
+                                            <input class="form-control form-control-sm" type="text"  v-bind:name="'attr['+index+'][costprice]'" :value="item.costprice">
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0"  step="0.01"  v-bind:name="'attr['+index+'][yprice]'" :value="item.yprice" >
+                                            <input class="form-control form-control-sm" type="text"   v-bind:name="'attr['+index+'][yprice]'" :value="item.yprice" >
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-sm" type="text" onkeypress="return noNumbers(event)" min="0"  step="0.01"  v-bind:name="'attr['+index+'][price]'" :value="item.price">
+                                            <input class="form-control form-control-sm" type="text"   v-bind:name="'attr['+index+'][price]'" :value="item.price">
                                         </td>
                                         <td>
                                             <input class="form-control form-control-sm" oninput="value=value.replace(/[^\d]/g,'')" v-bind:name="'attr['+index+'][num]'"  step="1" :value="item.num" >

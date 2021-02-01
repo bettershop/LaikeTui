@@ -21,4 +21,4 @@ class warningInputView extends SmartyView {
         }
     }
 }
-?>
+

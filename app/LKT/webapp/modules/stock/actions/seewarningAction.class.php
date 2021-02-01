@@ -79,5 +79,3 @@ class seewarningAction extends Action {
     }
 
 }
-
-?>
