@@ -13,9 +13,7 @@ class delAction extends Action
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
         $brand_id = intval($request->getParameter('cid')); // 品牌id
-
         $uploadImg = $this->getContext()->getStorage()->read('uploadImg');// 图片上传位置
         $sql = "select * from lkt_brand_class where brand_id = '$brand_id'";
         $r = $db->select($sql);
@@ -41,7 +39,7 @@ class delAction extends Action
                 $db->admin_record($admin_id, ' 删除商品品牌id为 ' . $brand_id . ' 失败', 3);
                 echo 0;
                 exit;
-            };
+            }
         }
 
 

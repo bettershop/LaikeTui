@@ -17,10 +17,11 @@ class enableAction extends Action {
         // 接收信息
         $id = intval($request->getParameter('id')); // id
         $sql = "update lkt_background_color set status = 0 ";
-        $r = $db->update($sql);
+        $db->update($sql);
         $sql = "update lkt_background_color set status = 1 where id = '$id'";
         $r = $db->update($sql);
-		echo $r;exit;
+		echo $r;
+		exit;
        
     }
 

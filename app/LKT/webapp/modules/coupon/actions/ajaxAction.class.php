@@ -39,8 +39,7 @@ class ajaxAction extends Action {
             $res = 0;
             echo $res;
         }
-        
-        return;
+
     }
 
     public function execute(){

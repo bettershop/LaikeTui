@@ -234,14 +234,13 @@ class modifyAction extends Action {
 
         if($r == -1) {
             $db->admin_record($admin_id,' 修改活动id为 '.$id.' 失败 ',2);
-
+            header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('未知原因，活动修改失败！');" .
                 "location.href='index.php?module=coupon';</script>";
             return $this->getDefaultView();
         } else {
             $db->admin_record($admin_id,' 修改活动id为 '.$id.' 成功 ',2);
-
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('活动修改成功！');" .

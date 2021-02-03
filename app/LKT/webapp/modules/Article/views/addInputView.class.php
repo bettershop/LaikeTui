@@ -15,10 +15,8 @@ class addInputView extends SmartyView {
     public function execute() {
 
 		$request = $this->getContext()->getRequest();
-
 		$this->setAttribute("ctype",$request->getAttribute("ctype"));
 		$this->setAttribute('pic', $request->getAttribute('pic'));
-
         $this->setTemplate("add.tpl");
 
     }

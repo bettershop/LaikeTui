@@ -656,8 +656,7 @@ Page({
   onShareAppMessage: function (res) {
     var that = this;
     var id = that.data.productId;
-    var type1 = that.data.type1;
-    var uname = app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName + '超值推荐 ' : '我发现一个好的东西 推荐给你们 ';
+    var uname = app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName + '超值推荐 ' : '我发现一个好的东西推荐给你们 ';
     var title = uname + that.data.title;
     var referee_openid = app.globalData.userInfo.user_id;
     if (res.from === 'button') {
