@@ -34,7 +34,7 @@ class delAction extends Action
             $event = $user_id . "提现了" . $zmoney;
             // 在操作列表里添加一条数据
             $sql = "insert into lkt_record (user_id,money,oldmoney,event,type) values('$user_id','$zmoney','$ymoney','$event',21)";
-            $r   = $db->insert($sql);
+            $db->insert($sql);
 
             // 根据id,修改提现列表中数据的状态
             $sql = "UPDATE lkt_withdraw SET status=1 WHERE id = '$id'";
@@ -46,12 +46,12 @@ class delAction extends Action
         } else {
             // 根据微信昵称,修改会员列表里的金额
             $sql = "update lkt_user set money = money+'$zmoney' where user_id = '$user_id'";
-            $r   = $db->update($sql);
+            $db->update($sql);
 
             $event = $user_id . "提现" . $zmoney . "找拒绝";
             // 在操作列表里添加一条数据
             $sql = "insert into lkt_record (user_id,money,oldmoney,event,type) values('$user_id','$zmoney','$ymoney','$event',22)";
-            $r   = $db->insert($sql);
+            $db->insert($sql);
 
             $sql = "UPDATE lkt_withdraw SET status=2 WHERE id = '$id'";
             $db->update($sql);
@@ -143,7 +143,7 @@ class delAction extends Action
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);
         //两个证书（必填，请求需要双向证书。）
         $zs1 = MO_LIB_DIR . "/cert/apiclient_cert.pem";
-        $zs2 = MO_LIB_DIR . "/WxpayAPI_php/cert/apiclient_key.pem";
+        $zs2 = MO_LIB_DIR . "/cert/apiclient_key.pem";
         curl_setopt($ch, CURLOPT_SSLCERT, $zs1);
         curl_setopt($ch, CURLOPT_SSLKEY, $zs2);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
