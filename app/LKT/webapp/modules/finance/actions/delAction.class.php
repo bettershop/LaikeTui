@@ -42,7 +42,6 @@ class delAction extends Action
 
             $db->admin_record($admin_id, ' 通过id为 ' . $id . ' 的提现信息', 6);
             echo 1;
-            return;
         } else {
             // 根据微信昵称,修改会员列表里的金额
             $sql = "update lkt_user set money = money+'$zmoney' where user_id = '$user_id'";
@@ -59,7 +58,6 @@ class delAction extends Action
             $db->admin_record($admin_id, ' 拒绝id为 ' . $id . ' 的提现信息', 6);
 
             echo 1;
-            return;
         }
 
     }
