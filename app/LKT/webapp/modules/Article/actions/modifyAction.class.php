@@ -96,7 +96,7 @@ class modifyAction extends Action {
 				"location.href='index.php?module=Article';</script>";
 		}
 
-		return;
+
 
 	}
 

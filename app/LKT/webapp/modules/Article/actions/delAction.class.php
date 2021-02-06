@@ -30,7 +30,7 @@ class delAction extends Action {
         echo "<script type='text/javascript'>" .
             "alert('删除成功！');" .
             "location.href='index.php?module=Article';</script>";
-        return;
+
     }
 
     public function execute(){
