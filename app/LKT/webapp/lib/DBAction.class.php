@@ -5,16 +5,7 @@
  */
 require_once (MO_CONFIG_DIR . '/db_config.php');
 class DBAction {
-    /*
-     * Auth: ketter Date : 2019-10-28
-     * 本类是用来调用数据库操作的
-     * 利用单例模式创建一个业务逻辑的实例 客户可以通过getInstance方法来得到DBAction的实例
-     * 在整个运行周期中，该实例只会被创建一次
-     * 作为单例模式的需要，构造子方法被设置为private私有方法，不让客户端调用
-     * 作为单例模式的需要，提供DBAction类型的私有变量让getInstance方法使用作为返回
-     * 作为单例模式的需要，提供getInstance方法来为客户端得到DBAction的实例
-     */
-    //属性
+
     public $mConnId; //连接标识
 
     private static $instances = null; //连接实例
@@ -321,7 +312,6 @@ class DBAction {
         $event = $admin_name . $event;
         $sql = "insert into lkt_admin_record(admin_name,event,type,add_date) values ('$admin_name','$event','$type',CURRENT_TIMESTAMP)";
         $this->insert($sql);
-        return;
     }
 }
 ?>

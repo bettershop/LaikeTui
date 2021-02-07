@@ -20,21 +20,13 @@ class whetherAction extends Action
         if ($r[0]->status == 1) {
             $sql = "update lkt_coupon_activity set status = 2 where id = '$id'";
             $res = $db->update($sql);
-            echo $res;exit;
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('禁用成功！');" .
-                "location.href='index.php?module=coupon';</script>";
-            return;
+            echo $res;
+            exit;
         } else {
             $sql = "update lkt_coupon_activity set status = 1 where id = '$id'";
             $res = $db->update($sql);
-            echo $res;exit;
-            header("Content-type:text/html;charset=utf-8");
-            echo "<script type='text/javascript'>" .
-                "alert('启用成功！');" .
-                "location.href='index.php?module=coupon';</script>";
-            return;
+            echo $res;
+            exit;
         }
     }
 

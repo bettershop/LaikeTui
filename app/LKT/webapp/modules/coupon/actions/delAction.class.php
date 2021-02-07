@@ -20,7 +20,6 @@ class delAction extends Action {
         $db->update($sql);
         $db->admin_record($admin_id,' 删除优惠券id为 '.$id.' 的信息',3);
         echo 1;
-        return;
     }
 
     public function execute(){
