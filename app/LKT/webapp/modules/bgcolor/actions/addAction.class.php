@@ -49,7 +49,7 @@ class addAction extends Action {
             return $this->getDefaultView();
         }
 
-	    return;
+
 	}
 
 

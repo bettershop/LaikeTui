@@ -695,7 +695,7 @@
 
 	<div>
 			<span>
-				<a class="ba" href="http://www.laiketui.com">Copyright&nbsp;©&nbsp;2020&nbsp;壹拾捌号网络版权所有[官方网站]&nbsp;&nbsp;</a>
+				<a class="ba" href="http://www.laiketui.com">Copyright&nbsp;©&nbsp;2021&nbsp;壹拾捌号网络版权所有[官方网站]&nbsp;&nbsp;</a>
 			</span>
 	</div>
 </div>

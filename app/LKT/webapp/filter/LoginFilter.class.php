@@ -82,7 +82,7 @@ class LoginFilter extends Filter {
 				$controller->redirect("index.php?module=Login");
 			}
 		}
-		return;
+
 	}
 
     public function initialize ($context, $params = null) {

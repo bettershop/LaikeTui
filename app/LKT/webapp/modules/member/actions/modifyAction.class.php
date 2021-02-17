@@ -13,9 +13,7 @@ class modifyAction extends Action
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         // 接收信息
-        $admin_name = $this->getContext()->getStorage()->read('admin_id'); // 管理员账号
         $id = $request->getParameter("id");
-
         // 根据id查询管理员信息
         $sql = "select * from lkt_admin where id = '$id'";
         $r = $db->select($sql);
@@ -54,11 +52,8 @@ class modifyAction extends Action
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin = $this->getContext()->getStorage()->read('admin_id');
-
-        // 接收数据 
         $id = $request->getParameter("id");
         $name = addslashes(trim($request->getParameter('name')));
-        $y_password = addslashes(trim($request->getParameter('y_password')));
         $password = md5(addslashes(trim($request->getParameter('password'))));
         $role = addslashes(trim($request->getParameter('role'))); // 角色
 
@@ -93,7 +88,7 @@ class modifyAction extends Action
                 "alert('修改成功！');" .
                 "location.href='index.php?module=member';</script>";
         }
-        return;
+
     }
 
     public function getRequestMethods()

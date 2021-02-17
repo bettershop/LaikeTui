@@ -80,7 +80,7 @@ class amountAction extends Action {
                 "location.href='index.php?module=newslist';</script>";
             return $this->getDefaultView();
         }
-        return;
+
     }
 
     public function getRequestMethods(){

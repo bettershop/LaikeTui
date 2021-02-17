@@ -47,7 +47,6 @@ class addAction extends Action {
             $t_link = preg_replace('/.*\//','',$t_link);
         }
 
-
         // 发布新闻
         $sql = "insert into lkt_news_list(news_class,news_title,author,imgurl,sort,content,t_link,add_date) " .
             "values('$news_class','$news_title','$author','$imgurl','$sort','$content','$t_link',CURRENT_TIMESTAMP)";
@@ -67,7 +66,6 @@ class addAction extends Action {
 
         }
 
-	    return;
 
 	}
 

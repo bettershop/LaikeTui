@@ -82,7 +82,7 @@ class modifyAction extends Action {
 				"location.href='index.php?module=banner';</script>";
 		}
 
-		return;
+
 	}
 
 	public function getRequestMethods(){

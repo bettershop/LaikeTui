@@ -10,15 +10,12 @@
   <meta http-equiv="Cache-Control" content="no-siteapp" />
 
   {php}include BASE_PATH."/modules/assets/templates/top.tpl";{/php}
-
-
   {literal}
   <style>
     .button-conter {
       display: flex;
       justify-content: center;
     }
-
     #btn1 {
       margin-right: 5px;
     }

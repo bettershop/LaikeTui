@@ -29,7 +29,7 @@ class ThdFilter extends Filter {
 				$controller->redirect($this->filterurl);
 			}
 		}
-		return;
+
 	}
 
 	public function canAccess($module,$action){

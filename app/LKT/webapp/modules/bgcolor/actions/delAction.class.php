@@ -24,7 +24,7 @@ class delAction extends Action {
         echo "<script type='text/javascript'>" .
             "alert('删除成功！');" .
             "location.href='index.php?module=bgcolor';</script>";
-        return;
+
     }
 
     public function execute(){

@@ -27,7 +27,7 @@ class delAction extends Action {
 
         $res = array('status' => '1','info'=>'删除成功！');
         echo json_encode($res);
-        return;
+
     }
 
     public function execute(){

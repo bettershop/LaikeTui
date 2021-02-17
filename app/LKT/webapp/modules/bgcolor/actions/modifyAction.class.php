@@ -66,7 +66,7 @@ class modifyAction extends Action {
 
 		}
 
-		return;
+
 
 	}
 

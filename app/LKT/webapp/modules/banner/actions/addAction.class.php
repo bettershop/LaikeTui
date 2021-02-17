@@ -47,8 +47,7 @@ class addAction extends Action {
         }
 
         // 添加轮播图
-        $sql = "insert into lkt_banner(image,url,sort,add_date) " .
-            "values('$image','$url','$sort',CURRENT_TIMESTAMP)";
+        $sql = "insert into lkt_banner(image,url,sort,add_date) values('$image','$url','$sort',CURRENT_TIMESTAMP)";
         $r = $db->insert($sql);
         if($r == -1){
             header("Content-type:text/html;charset=utf-8");
@@ -64,7 +63,7 @@ class addAction extends Action {
             return $this->getDefaultView();
 
         }
-	    return;
+
 	}
 
 

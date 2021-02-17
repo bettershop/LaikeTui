@@ -75,7 +75,7 @@ class member_recordAction extends Action {
     }
 
     public function execute() {
-        print_r(222);die;
+
     }
 
     public function getRequestMethods(){
