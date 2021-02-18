@@ -16,9 +16,7 @@ class DelAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $id = intval(trim($request -> getParameter('id')));
-
         $sql = 'delete from lkt_hotkeywords where id='.$id;
-        
         $res = $db -> delete($sql);
         if($res > 0){
           header("Content-type:text/html;charset=utf-8");

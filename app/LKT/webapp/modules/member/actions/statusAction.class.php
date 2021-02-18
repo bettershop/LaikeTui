@@ -13,9 +13,7 @@ class statusAction extends Action
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
         $id = addslashes(trim($request->getParameter('id')));
-
         $sql = "select name,status from lkt_admin where id = '$id'";
         $r = $db->select($sql);
         if ($r) {
@@ -30,7 +28,6 @@ class statusAction extends Action
                 $db->admin_record($admin_id, '启用管理员' . $admin_name, 5);
                 $res = array('status' => '1', 'info' => '启用成功！');
                 echo json_encode($res);
-                return;
             } else if ($status == 2) {
                 $sql = "update lkt_admin set status = 1 where id = '$id'";
                 $db->update($sql);
@@ -39,7 +36,6 @@ class statusAction extends Action
                 $db->admin_record($admin_id, '禁用管理员' . $admin_name, 5);
                 $res = array('status' => '1', 'info' => '禁用成功！');
                 echo json_encode($res);
-                return;
             }
         }
     }
