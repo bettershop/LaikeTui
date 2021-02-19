@@ -260,7 +260,7 @@ class modifyAction extends Action {
             jump($_SESSION['url'],'修改成功！');
 
         }
-		return;
+
 	}
 
 	public function getRequestMethods(){

@@ -12,7 +12,6 @@ class delAction extends Action {
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
         $id = $request->getParameter('id'); 
-        $num = 0;
         $status = 0;
         $sql = "select id from lkt_core_menu where s_id = '$id' and recycle = 0";
         $r = $db->select($sql);
@@ -26,13 +25,11 @@ class delAction extends Action {
             $db->update($sql);
             $res = array('status' => '1','info'=>'删除成功！');
             echo json_encode($res);
-            return;
         }else{
             $db->admin_record($admin_id,' 删除菜单id为 '.$id.' 失败 ',3);
 
             $res = array('status' => '0','info'=>'删除失败！');
             echo json_encode($res);
-            return;
         }
     }
 

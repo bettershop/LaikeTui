@@ -47,7 +47,7 @@
 
 ### APP+公众号+小程序更多演示请用微信扫码
 
-![扫码体验](https://images.gitee.com/uploads/images/2019/0418/094953_2048c86e_2029865.jpeg)
+![扫码体验](https://images.gitee.com/uploads/images/2021/0219/093029_ebf0792c_2029865.png "WX20210219-092943@2x.png")
 
 ### 功能列表 
 

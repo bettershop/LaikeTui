@@ -15,14 +15,11 @@ class IndexAction extends Action {
         $cart_id = $request->getParameter('cart_id'); // 菜单id
         $title = $request->getParameter('title'); // 菜单名称
 
-        $pageto = $request -> getParameter('pageto');
-        // 导出
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:'10';
         // 每页显示多少条数据
         $page = $request -> getParameter('page');
 
-        // 页码
         if($page){
             $start = ($page-1)*$pagesize;
         }else{

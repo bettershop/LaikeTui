@@ -25,8 +25,7 @@ class addAction extends Action {
         $cat_name = addslashes(trim($request->getParameter('cat_name')));
         $sort = floatval(trim($request->getParameter('sort')));
 		
-		$sql = "insert into lkt_news_class(cat_name,sort,add_date) "
-            ."values('$cat_name','$sort',CURRENT_TIMESTAMP)";
+		$sql = "insert into lkt_news_class(cat_name,sort,add_date) values('$cat_name','$sort',CURRENT_TIMESTAMP)";
 		$r = $db->insert($sql);
 		if($r == -1) {
 			header("Content-type:text/html;charset=utf-8");
@@ -43,7 +42,6 @@ class addAction extends Action {
 			return $this->getDefaultView();
 		}
 
-		return;
 
 	}
 

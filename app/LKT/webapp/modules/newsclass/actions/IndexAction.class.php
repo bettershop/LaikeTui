@@ -17,7 +17,6 @@ class IndexAction extends Action {
         $sql = "select * from lkt_news_class order by sort";
         $r = $db->select($sql);
         $request->setAttribute("list",$r);
-
         return View :: INPUT;
     }
 
