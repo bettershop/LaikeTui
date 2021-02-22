@@ -16,10 +16,8 @@ class seeAction extends Action {
     public function getDefaultView() {
 
         $db = DBAction::getInstance();
-
         $request = $this->getContext()->getRequest();
         $user_id = $request->getParameter('user_id'); // 用户id
-
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:'10';
         // 每页显示多少条数据

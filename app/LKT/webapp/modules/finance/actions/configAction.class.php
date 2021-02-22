@@ -96,7 +96,6 @@ class configAction extends Action
             }
         }
 
-        return;
 
     }
 

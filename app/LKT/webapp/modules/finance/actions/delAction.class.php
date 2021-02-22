@@ -1,11 +1,8 @@
 <?php
 
 /**
-
  * [Laike System] Copyright (c) 2018 laiketui.com
-
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
-
  */
 require_once MO_LIB_DIR . '/DBAction.class.php';
 
@@ -14,21 +11,21 @@ class delAction extends Action
 
     public function getDefaultView()
     {
-        $db       = DBAction::getInstance();
-        $request  = $this->getContext()->getRequest();
+        $db = DBAction::getInstance();
+        $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
 
         // 接收信息
-        $id       = intval($request->getParameter('id')); // 提现id
-        $m        = intval($request->getParameter('m')); // 参数
-        $user_id  = $request->getParameter('user_id'); // 用户id
-        $money    = $request->getParameter('money'); // 实际提款金额
+        $id = intval($request->getParameter('id')); // 提现id
+        $m = intval($request->getParameter('m')); // 参数
+        $user_id = $request->getParameter('user_id'); // 用户id
+        $money = $request->getParameter('money'); // 实际提款金额
         $s_charge = $request->getParameter('s_charge'); // 手续费
-        $zmoney   = $money + $s_charge;
-        $sql      = "select * from lkt_user where user_id = '$user_id'";
-        $r        = $db->select($sql);
-        $user_id  = $r[0]->user_id; // 用户id
-        $ymoney   = $r[0]->money; // 原有金额
+        $zmoney = $money + $s_charge;
+        $sql = "select * from lkt_user where user_id = '$user_id'";
+        $r = $db->select($sql);
+        $user_id = $r[0]->user_id; // 用户id
+        $ymoney = $r[0]->money; // 原有金额
         // 根据提现id，修改状态信息
         if ($m == 1) {
             $event = $user_id . "提现了" . $zmoney;
@@ -76,12 +73,13 @@ class delAction extends Action
     private function nonce_str()
     {
         $result = '';
-        $str    = '1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+        $str = '1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
         for ($i = 0; $i < 32; $i++) {
             $result .= $str[rand(0, 48)];
         }
         return $result;
     }
+
     // 签名 $data要先排好顺序
     private function sign($data)
     {
@@ -98,7 +96,7 @@ class delAction extends Action
             }
 
         }
-        $wx_key         = 'vfhdsj45hrthrt45j6t4y8h1t5r4re8t'; // 申请支付后有给予一个商户账号和密码，登陆后自己设置key
+        $wx_key = 'vfhdsj45hrthrt45j6t4y8h1t5r4re8t'; // 申请支付后有给予一个商户账号和密码，登陆后自己设置key
         $stringSignTemp = $stringA . '&key=' . $wx_key; // 申请支付后有给予一个商户账号和密码，登陆后自己设置key
         return strtoupper(md5($stringSignTemp));
     }
@@ -133,7 +131,7 @@ class delAction extends Action
         <sign>" . $sign . "</sign>
         <sign_type>MD5</sign_type>
         </xml>";
-        $ch       = curl_init();
+        $ch = curl_init();
         $MENU_URL = "https://fraud.mch.weixin.qq.com/risk/getpublickey";
         curl_setopt($ch, CURLOPT_URL, $MENU_URL);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
