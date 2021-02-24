@@ -21,13 +21,11 @@ class modifyAction extends Action
         $y_password = $r[0]->password;
         $admin_type = $r[0]->admin_type;
         $role = $r[0]->role; // 角色id
-
         // 根据角色id,查询角色信息
         $sql = "select * from lkt_role where id = '$role'";
         $r_1 = $db->select($sql);
         $r_id = $r_1[0]->id; // 角色id
         $r_name = $r_1[0]->name; // 角色名称
-
         $rew = "<option value='$r_id'>$r_name</option>";
         // 查询角色
         $sql = "select * from lkt_role";
@@ -75,14 +73,12 @@ class modifyAction extends Action
         $r = $db->update($sql);
         if ($r == -1) {
             $db->admin_record($admin, '修改管理员id为 ' . $id . ' 失败', 2);
-
             echo "<script type='text/javascript'>" .
                 "alert('未知原因，修改失败！');" .
                 "location.href='index.php?module=member';</script>";
             return $this->getDefaultView();
         } else {
             $db->admin_record($admin, '修改管理员id为 ' . $id . ' 的信息', 2);
-
             header("Content-type:text/html;charset=utf-8");
             echo "<script type='text/javascript'>" .
                 "alert('修改成功！');" .

@@ -1525,7 +1525,7 @@ class productAction extends BaseAction
 
             //敏感词表
             $badword = "";
-            require('badword.src.php');
+            
 
             foreach ($comments as $key => $value) {
                 $oid = $value->orderId; // 订单号

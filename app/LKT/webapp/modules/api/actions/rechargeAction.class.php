@@ -12,7 +12,6 @@ class rechargeAction extends BaseAction
     public function index()
     {
         $openid = addslashes($_POST['openid']); // 微信id
-
         // 查询会员信息
         $sql = "select * from lkt_user where wx_id = '$openid'";
         $r = lkt_gets($sql); 
