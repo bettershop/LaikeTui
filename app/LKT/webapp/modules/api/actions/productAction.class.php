@@ -1525,8 +1525,6 @@ class productAction extends BaseAction
 
             //敏感词表
             $badword = "";
-            
-
             foreach ($comments as $key => $value) {
                 $oid = $value->orderId; // 订单号
                 $uid = $value->userid; // 微信id
