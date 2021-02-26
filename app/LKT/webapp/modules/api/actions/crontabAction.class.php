@@ -379,14 +379,12 @@ class crontabAction extends Action
             } // end foreach
         } //end if 
 
-        return;
 
     }
 
 
     public function execute()
     {
-        return;
     }
 
     public function getRequestMethods()
