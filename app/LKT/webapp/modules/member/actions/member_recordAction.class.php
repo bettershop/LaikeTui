@@ -13,23 +13,14 @@ class member_recordAction extends Action {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $admin_id = $this->getContext()->getStorage()->read('admin_id');
-
-        $pageto = $request->getParameter('pageto'); // 导出
-        $pagesize = $request->getParameter('pagesize'); // 每页显示多少条数据
-        $page = $request->getParameter('page'); // 页码
-
         $admin_name = $request->getParameter('admin_name'); // 管理员账号
         $startdate = $request->getParameter("startdate");
         $enddate = $request->getParameter("enddate");
-
         $pageto = $request -> getParameter('pageto');
-        // 导出
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:'10';
-        // 每页显示多少条数据
         $page = $request -> getParameter('page');
 
-        // 页码
         if($page){
             $start = ($page-1)*10;
         }else{

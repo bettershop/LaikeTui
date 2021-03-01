@@ -15,7 +15,6 @@ class logoutAction extends Action {
 		$sql="insert into lkt_record (user_id,event) values (?,?)";
 		lkt_execute($sql,array($name,'安全退出成功'));
 		jump('index.php?module=Login');
-	    exit;
 	}
 
 	public function execute(){

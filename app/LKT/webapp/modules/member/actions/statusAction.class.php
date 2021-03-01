@@ -24,7 +24,6 @@ class statusAction extends Action
                 $db->update($sql);
                 $sql = "update lkt_admin set status = 2 where sid = '$id'";
                 $db->update($sql);
-
                 $db->admin_record($admin_id, '启用管理员' . $admin_name, 5);
                 $res = array('status' => '1', 'info' => '启用成功！');
                 echo json_encode($res);
