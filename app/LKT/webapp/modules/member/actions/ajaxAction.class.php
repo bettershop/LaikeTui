@@ -18,7 +18,6 @@ class ajaxAction extends Action {
 		$sql = "select permission from lkt_admin where name = '$userid'";
 		$r = $db->select($sql);
 		echo json_encode(unserialize($r[0]->permission));
-
 	}
 
 	public function execute(){

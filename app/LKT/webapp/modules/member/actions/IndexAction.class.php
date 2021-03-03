@@ -73,7 +73,6 @@ class IndexAction extends Action {
             }
         }
         $request->setAttribute("list",$rr);
-
         return View :: INPUT;
     }
 
