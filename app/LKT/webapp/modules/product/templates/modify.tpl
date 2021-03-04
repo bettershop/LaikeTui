@@ -19,6 +19,11 @@
                 f.pname.value = '';
                 return false;
             }
+
+            if(Trim(f.sort.value)==""){
+                alert("排序不能为空！");
+                return false;
+            }
             return true;
         }
     </script>

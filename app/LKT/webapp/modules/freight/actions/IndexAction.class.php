@@ -15,14 +15,9 @@ class IndexAction extends Action
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
         $name = addslashes(trim($request->getParameter('name'))); // 标题
-
-        // 导出
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:'10';
-        // 每页显示多少条数据
         $page = $request -> getParameter('page');
-
-        // 页码
         if($page){
             $start = ($page-1)*$pagesize;
         }else{

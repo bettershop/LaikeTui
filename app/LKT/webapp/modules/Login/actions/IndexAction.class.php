@@ -25,7 +25,7 @@ class IndexAction extends Action {
 
         if($name == '' || $password == ''){
 			jump('index.php?module=Login','登录失败！');
-        };
+        }
         
         // 查询表lkt_admin里的用户名,密码,权限.根据输入的用户名在数据库存在，而且输入的密码要跟数据库密码一样
 		$sql = "select id,name,password,admin_type,permission,status from lkt_admin where BINARY name = ? and password = ? ";
