@@ -68,8 +68,6 @@ class configAction extends Action
         $customer = trim($request->getParameter('customer'));
         $kdkey = trim($request->getParameter('kdkey'));
 
-
-
         $sql = "select * from lkt_order_config";
         $r = $db->select($sql);
         if ($r) {
@@ -106,7 +104,7 @@ class configAction extends Action
                     "location.href='index.php?module=orderslist&action=config';</script>";
             }
         }
-        return;
+
     }
 
     public function getRequestMethods()

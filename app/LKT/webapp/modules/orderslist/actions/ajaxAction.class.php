@@ -27,7 +27,6 @@ class ajaxAction extends Action {
 			}
 		}
         echo  $strID;
-		return;
 	}
 
 	public function execute(){

@@ -69,16 +69,15 @@ class delorderAction extends Action
     {//取消订单或者取消支付或者过期未付款修改库存
         // 根据商品id,修改商品数量
         $sql_p = "update lkt_configure set  num = num + $num where id = $size_id";
-        $r_p = $db->update($sql_p);
+        $db->update($sql_p);
         // 根据商品id,修改卖出去的销量
         $sql_x = "update lkt_product_list set volume = volume - $num,num = num+$num where id = $pid";
-        $r_x = $db->update($sql_x);
+        $db->update($sql_x);
 
         // 在库存记录表里，添加一条入库信息
         $sql = "insert into lkt_stock(product_id,attribute_id,flowing_num,type,add_date) values('$pid','$size_id','$num',0,CURRENT_TIMESTAMP)";
         $db->insert($sql);
 
-        return;
     }
 
 
