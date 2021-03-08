@@ -64,9 +64,7 @@ class modifyAction extends Action {
         }
 
 		//更新数据表
-		$sql = "update lkt_banner " .
-			"set image = '$image',url = '$url', sort = '$sort' "
-			."where id = '$id'";
+		$sql = "update lkt_banner set image = '$image',url = '$url', sort = '$sort' where id = '$id'";
 		$r = $db->update($sql);
 
 		if($r == -1) {

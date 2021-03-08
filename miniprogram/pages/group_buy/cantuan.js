@@ -242,17 +242,13 @@ Page({
       }
 
       var enableIds = [];
-
       var skuBeanListIn = this.data.skuBeanList;
-
       for (var z = 0; z < skuBeanListIn.length; z++) {
         var ism = true;
         var skuBean = skuBeanListIn[z];
-
         for (var j = 0; j < attrsOtherSelect.length; j++) {
           var enable = false;
           for (var k = 0; k < skuBean.attributes.length; k++) {
-
             var goodAttrBean = skuBean.attributes[k];
             if (attrsOtherSelect[j].attributeId == goodAttrBean.attributeId
               && attrsOtherSelect[j].id == goodAttrBean.attributeValId) {
@@ -279,9 +275,7 @@ Page({
       var integers = enableIds;
       for (var s = 0; s < attrListBig.attr.length; s++) {
         var attrItem = attrListBig.attr[s];
-
         attrItem.enable = integers.indexOf(attrItem.id) != -1;
-
       }
     }
 
@@ -300,19 +294,14 @@ Page({
     var listItem = this.data.attrList;
     var items = listItem[event.currentTarget.dataset.idx];
     var item = items.attr[event.currentTarget.dataset.index];
-
     if (!item.enable) {
       return;
     }
-
     var select = !item.select;
-
     for (var i = 0; i < items.attr.length; i++) {
       items.attr[i].select = false;
     }
-
     item.select = select;
-
     // 获取点击属性列表
     var canGetInfo = [];
     for (var skuIndex = 0; skuIndex < listItem.length; skuIndex++) {
@@ -324,11 +313,8 @@ Page({
     }
 
     console.log(canGetInfo, "目前点击的属性");
-
     var canGetInfoLog = "";
-
     var skuBeanList = this.data.skuBeanList;
-
     var haveSkuBean = [];
     // 对应库存清单扫描
     for (var skuBeanIndex = 0; skuBeanIndex < skuBeanList.length; skuBeanIndex++) {

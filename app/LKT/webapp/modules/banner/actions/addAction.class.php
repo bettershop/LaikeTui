@@ -18,12 +18,9 @@ class addAction extends Action {
         $products = $db->select($sql);
         $request->setAttribute('products', $products);    
         $request->setAttribute("uploadImg",$uploadImg);
-
         $sql = "select * from lkt_set_notice order by id desc";
         $r = $db->select($sql);
         $request->setAttribute("notices",$r);
-
-
         return View :: INPUT;
 
 
