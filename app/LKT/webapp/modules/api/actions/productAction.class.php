@@ -14,12 +14,9 @@ class productAction extends BaseAction
     public function index()
     {
         $request = $this->getContext()->getRequest();
-
         // 获取产品id
         $id = addslashes(trim($request->getParameter('pro_id')));
         $openid = addslashes(trim($request->getParameter('openid')));
-
-        // 根据微信id,查询用户id
         // 获取类别值id，用于区分是抽奖和其他
         $type1 = addslashes($request->getParameter('type1'));
         $choujiangid = addslashes($request->getParameter('choujiangid'));
