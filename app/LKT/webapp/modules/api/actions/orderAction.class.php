@@ -17,7 +17,6 @@ class orderAction extends BaseAction
 
         $request = $this->getContext()->getRequest();
         $id = addslashes(trim($request->getParameter('id'))); //订单id
-        $oid = addslashes(trim($request->getParameter('oid'))); // 订单号
         $sql = "select r_status from lkt_order_details where id = '$id'";
         $r = lkt_gets($sql);
         if ($r) {
