@@ -21,13 +21,11 @@ class appAction extends BaseAction
         $sex = addslashes($_POST['gender']); // 性别
         $pid = addslashes($request->getParameter('referee_openid'));
 
-
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
         $appid = $appConfig['appid']; // 小程序唯一标识
         $appsecret = $appConfig['appsecret']; // 小程序的 app secret
         $company = $appConfig['appName']; // 小程序的 标题
-
 
         if (!$appid || !$appsecret) {
             echo json_encode(array('status' => 0, 'err' => '非法操作！'));
