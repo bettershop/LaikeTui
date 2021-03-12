@@ -353,7 +353,7 @@ class modifyAction extends Action
         $data[] = $id;
         $r = lkt_execute($sql_1,$data);
         if(!$r){
-            jump($_SESSION['url'], '似乎没有做修改？');
+            //jump($_SESSION['url'], '似乎没有做修改？');
         }
         
         $cids = [];

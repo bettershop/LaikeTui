@@ -58,7 +58,7 @@ class IndexAction extends Action
         }
         $k = '';
         $con = [];
-        $condition = ' recycle = 0 and num > 0 ';//0.不回收 1.回收
+        $condition = ' recycle = 0  ';//0.不回收 1.回收
         if ($product_class != 0) {//存在产品类别
             $k = $this->class_sort($product_class);
             if ($k) {
@@ -101,6 +101,7 @@ class IndexAction extends Action
         $r = lkt_gets($sql);
         $list = [];
         $status_num = 0;
+
         foreach ($r as $key => $value) {
             $pid = $value->id;//id
             $prrr = 0;//初始价格
@@ -154,9 +155,6 @@ class IndexAction extends Action
             $value->price = $present_price;
             $value->pname = $pname;
             $list[$key] = $value;
-        }
-        if ($status_num > 0) {
-            $this->getDefaultView();
         }
 
         $url = "index.php?module=product&action=Index&cid=" . urlencode($product_class) . "&brand_id=" . urlencode($brand_id) . "&status=" . urlencode($status) . "&s_type=" . urlencode($s_type) . "&product_title=" . urlencode($product_title) . "&pagesize=" . urlencode($pagesize);
