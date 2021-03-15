@@ -59,11 +59,7 @@ class replyAction extends Action {
 
 
 	public function getRequestMethods(){
-
 		return Request :: POST;
-
 	}
-
-
 
 }
