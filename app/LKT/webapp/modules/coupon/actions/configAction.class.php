@@ -15,9 +15,8 @@ class configAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $plug_ins_id = intval($request->getParameter("id")); // 插件id
-        $software_id = intval($request->getParameter("software_id")); // 软件id
-        
+        $plug_ins_id = intval($request->getParameter("id"));
+        $software_id = intval($request->getParameter("software_id"));
         $sql = "select * from lkt_coupon_config where plug_ins_id = '$plug_ins_id'";
         $r = $db->select($sql);
         if($r){
@@ -102,7 +101,7 @@ class configAction extends Action {
                     "location.href='index.php?module=plug_ins';</script>";
             }
         }
-        return;
+
     }
 
     public function getRequestMethods(){

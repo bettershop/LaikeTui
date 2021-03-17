@@ -25,7 +25,6 @@ class crontabAction extends Action
 
                 $db->update("UPDATE `lkt_order_details` SET`r_status`='5' WHERE id = " . $value01->id);
 
-                $this->detailedcommission($sNo);
                 $sql_o = "select id from lkt_order_details where r_sNo = '$sNo' AND  r_status = '5' ";
                 $res_o = $db->selectrow($sql_o);//查询订单状态为待收货的行数
 
@@ -152,7 +151,7 @@ class crontabAction extends Action
             //$buff .= strtolower($k) . "=" . $v . "&";
             $buff .= $k . "=" . $v . "&";
         }
-        $reqPar;
+        $reqPar = "";
         if (strlen($buff) > 0) {
             $reqPar = substr($buff, 0, strlen($buff) - 1);
         }

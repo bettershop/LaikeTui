@@ -16,17 +16,10 @@ class couponAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $sql = "select * from lkt_coupon_config where id = '1'";
-        $r_1 = $db->select($sql);
-
         $name = addslashes(trim($request->getParameter('name'))); // 用户id
-
         $pagesize = $request -> getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize:'10';
-        // 每页显示多少条数据
         $page = $request -> getParameter('page');
-
-        // 页码
         if($page){
             $start = ($page-1)*$pagesize;
         }else{
