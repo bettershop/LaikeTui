@@ -20,4 +20,3 @@ class ErrorCode
     public static $DecodeBase64Error = -41004;
 }
 
-?>

@@ -27,8 +27,8 @@ Page({
     bank_name: '',
     binding: false,
     multiIndex: [0, 0, 0],
-    date: '2021-01-01',
-    time: '12:01',
+    date: '2021-03-01',
+    time: '00:00',
     region: ['湖南省', '长沙市', '岳麓区'],
     customItem: '全部',
     items: [

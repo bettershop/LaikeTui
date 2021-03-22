@@ -1020,7 +1020,7 @@ class productAction extends BaseAction
                     $r = lkt_execute($sql);
                     $event = $userid . '使用了' . $total . '元余额';
                     $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$total','$user_money','$event',4)";
-                    $rr = lkt_execute($sqll);
+                    lkt_execute($sqll);
                 }
                 echo json_encode(array('status' => 1, 'succ' => '扣款成功!'));
             } else {
@@ -1121,15 +1121,12 @@ class productAction extends BaseAction
             $typeArr = explode(',', $typestr);
             foreach ($typeArr as $key => $value) {
                 // 联合查询返回购物信息
-
                 if ($typee == 1) {//直接购买
                     $sql_c = "select a.plugin,a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= $num ";
                 } else {
                     $sql_c = "select a.plugin,a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= a.Goods_num ";
                 }
-
                 $r_c = lkt_gets($sql_c);
-
                 if (!empty($r_c)) {
                     $plugin = $r_c[0]->plugin;
                     $product = (array)$r_c['0']; // 转数组
