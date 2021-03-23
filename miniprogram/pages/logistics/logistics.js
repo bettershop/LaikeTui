@@ -2,17 +2,11 @@
 var app = getApp();
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     wuliu: ['已接收', '抵达长沙', '抵达湖南'],
     remind: '加载中'
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     console.log(options)
     var that = this;
