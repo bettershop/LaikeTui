@@ -137,7 +137,6 @@ Page({
         var status = res.data.status;
         if (status == 1) {
           var data = res.data.data;
-
           var items = that.data.items;
           for (var i = 0; i < items.length; i++) {
             if (items[i].name == data.sex) {
@@ -156,8 +155,6 @@ Page({
           } else {
             var date = that.data.date;
           }
-
-
           that.setData({
             name: data.name,
             mobile: data.mobile,

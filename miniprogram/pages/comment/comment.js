@@ -104,7 +104,6 @@ Page({
     })
   },
   onShow: function () {
-    // 页面显示
   },
   chooseImage: function (e) {
     var id = e.target.id;

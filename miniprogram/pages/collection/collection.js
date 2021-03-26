@@ -22,8 +22,7 @@ Page({
     wx.stopPullDownRefresh() //停止下拉刷新
   },
   //页面加载完成函数
-  onReady: function () {
-    
+  onReady: function () {    
   },
   
   onShow: function () {

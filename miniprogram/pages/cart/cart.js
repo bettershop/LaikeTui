@@ -139,8 +139,7 @@ Page({
   },
   //编辑购物车
   updata: function () {
-    var that = this;
-    
+    var that = this;    
     that.setData({
       upstatus: true
     });
@@ -149,7 +148,6 @@ Page({
   //删除
   delarr: function () {
     var that = this;
-    
     // 初始化toastStr字符串
     var toastStr = '';
     // 遍历取出已勾选的cid
