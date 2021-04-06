@@ -18,7 +18,7 @@
     </view>
     
     <view>
-      <button class="pupContent-btn" bindgetuserinfo="agreeGetUser" class="login-btn" openType="getUserInfo" style="background-color: #1AAD19; border-radius:10rpx;height:46px;display:flex;justify-content:center;align-items: center;" >确定</button>
+      <button class="pupContent-btn"  bindtap="getUserProfile" class="login-btn" openType="getUserProfile" style="background-color: #1AAD19; border-radius:10rpx;height:46px;display:flex;justify-content:center;align-items: center;" >确定</button>
     </view>
   </view>
 

@@ -18,7 +18,7 @@ Page({
     })
   },
   material: function (res) {
-    wx.getUserInfo({
+    wx.getUserProfile({
       success: function (res) {
         var userInfo = res.userInfo;
         var nickName = userInfo.nickName;
