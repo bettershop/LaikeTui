@@ -1,6 +1,5 @@
 <!-- 底部弹窗动画的内容 -->
-<!-- <include src="/commons/extension/extension" />
-<include src="/commons/navbar/navbar" /> -->
+
 <view class='pupContent {{click? "showContent": "hideContent"}} {{option? "open": "closes"}}' hover-stop-propagation='true'>
   <image src="../../images/logonsgb.png" catchtap="setCloses"></image>
   <view class="pupContent-body">
