@@ -17,5 +17,3 @@ class modifyInputView extends PluginInputView {
     }
 
 }
-
-?>

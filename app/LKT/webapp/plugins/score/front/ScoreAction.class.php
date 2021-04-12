@@ -20,5 +20,3 @@ class ScoreAction extends PluginAction
     
 
 }
-
-?>

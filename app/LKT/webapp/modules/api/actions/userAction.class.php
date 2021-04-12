@@ -137,7 +137,6 @@ class userAction extends BaseAction
         $r_2 = lkt_gets($sql);
         if ($r_2) {
             $user_id = $r_2[0]->user_id; // 用户id
-            $user_name = $r_2[0]->user_name; // 用户昵称
             $user['money'] = $r_2[0]->money; // 用户余额
             if ($user['money'] == '') {
                 $user['money'] = 0;

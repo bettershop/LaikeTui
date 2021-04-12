@@ -1083,6 +1083,13 @@ class productAction extends BaseAction
             echo json_encode(array('status' => 0, 'err' => '余额不足！'));
             exit;
         } else {
+            $name = ''; // 联系人
+            $mobile = ''; // 联系电话
+            $address = ''; // 加省市县的详细地址
+            $sheng = ''; // 省
+            $shi = ''; // 市
+            $xian = ''; // 县
+
             // 根据用户id、默认地址,查询地址信息
             $sql_a = 'select * from lkt_user_address where uid=\'' . $userid . '\' and is_default = 1';
             $r_a = lkt_gets($sql_a);
@@ -1093,13 +1100,6 @@ class productAction extends BaseAction
                 $sheng = $r_a['0']->sheng; // 省
                 $shi = $r_a['0']->city; // 市
                 $xian = $r_a['0']->quyu; // 县
-            } else {
-                $name = ''; // 联系人
-                $mobile = ''; // 联系电话
-                $address = ''; // 加省市县的详细地址
-                $sheng = ''; // 省
-                $shi = ''; // 市
-                $xian = ''; // 县
             }
 
             $z_num = 0;
