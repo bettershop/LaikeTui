@@ -99,7 +99,7 @@ class logAction extends PluginAction
             }
             exit();
         }
-        return;
+
     }
 
 

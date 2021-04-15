@@ -81,7 +81,7 @@ class HomeAction extends PluginAction
             echo json_encode(array('code' => 400, 'message' => '未知原因，修改失败!'));
             exit();
         }
-        return;
+
     }
 
 
@@ -120,7 +120,7 @@ class HomeAction extends PluginAction
             }else{
                 echo json_encode(array('code' => 400, 'message' => '未知原因，删除失败!'));
             }
-            exit();
+
         }
 
     }
