@@ -16,7 +16,6 @@ class logAction extends PluginAction
         $pagesize = $request->getParameter('pagesize');
         $pagesize = $pagesize ? $pagesize : 10;
         $res1 = array();
-        // 每页显示多少条数据
         $page = $request->getParameter('page');
         if ($page) {
             $start = ($page - 1) * $pagesize;
