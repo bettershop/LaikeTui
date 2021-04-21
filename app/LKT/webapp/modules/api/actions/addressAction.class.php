@@ -158,19 +158,16 @@ class addressAction extends BaseAction {
             // 查询省的编号
             $sql01 = "select G_CName from admin_cg_group a where a.GroupID='$sheng'";
             $r01 = lkt_gets($sql01);
+            $province = '';
             if($r01){
                 $province = $r01[0]->G_CName;
-            }else{
-                $province = '';
             }
-            $province = $r01[0]->G_CName;
             // 根据省查询市
             $sql02 = "select G_CName from admin_cg_group a where a.GroupID='$city'";
             $r02 = lkt_gets($sql02);
+            $city = '';
             if($r02){
                 $city = $r02[0]->G_CName;
-            }else{
-                $city = '';
             }
             
             // 根据市查询县
