@@ -41,12 +41,10 @@ class addressAction extends BaseAction {
                
            }
            echo json_encode(array('status'=>1,'succ'=>'删除成功!'));
-           exit();
          }
            
         }else{
             echo json_encode(array('status'=>0,'err'=>'删除失败!'));
-            exit();
         }
     }
 
@@ -68,10 +66,8 @@ class addressAction extends BaseAction {
 
         if($rr > 0){
             echo json_encode(array('status'=>1,'err'=>'操作成功!'));
-            exit();
         }else{
             echo json_encode(array('status'=>0,'err'=>'设置失败'));
-            exit();
         }
     }
 
@@ -87,14 +83,11 @@ class addressAction extends BaseAction {
             $r = lkt_execute($sql);
             if($r > 0){
                 echo json_encode(array('status'=>1));
-                exit();
             }else{
                 echo json_encode(array('status'=>0,'err'=>'删除失败'));
-                exit();
             }
         }else{
             echo json_encode(array('status'=>0,'err'=>'删除失败'));
-            exit();
         }
 
 
@@ -178,9 +171,7 @@ class addressAction extends BaseAction {
             }else{
                 $county = '';
             }
-            
             echo json_encode(array('adds'=>$r,'province'=>$province,'city'=>$city,'county'=>$county));
-            exit();
         }else{
             echo json_encode(array('status'=>0,'info'=>'操作有误！'));
         }
