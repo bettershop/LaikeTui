@@ -65,15 +65,6 @@ td a{
 				</select>
 				<input type="text" class="input-text" style="width:250px" placeholder="用户名/用户ID" autocomplete="off" name="user_name" value="{$user_name}">
 				<input type="text" class="input-text" style="width:250px" placeholder="手机号" autocomplete="off" name="mobile" value="{$mobile}">
-
-				{*<div style="position: relative;display: inline-block;">*}
-				{*<input name="startdate" value="{$startdate}" size="8" readonly class="scinput_s iptRl" style="" />*}
-				{*<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 25px;top: 7px;" onclick="new Calendar().show(document.form1.startdate);" />~*}
-				{*</div>*}
-				{*<div style="position: relative;display: inline-block;">*}
-				{*<input  name="enddate" value="{$enddate}" size="8" readonly class="scinput_s iptRl" style="" />*}
-				{*<img src="images/icon1/rl.png" style="cursor:pointer;position: absolute;right: 10px;top: 7px;" onclick="new Calendar().show(document.form1.enddate);" />*}
-				{*</div>*}
 				<input type="submit" class="btn btn-success" id="btn1" value="查 询">
 				<input type="button" value="导出" class="btn btn-success" id="btn2" onclick="excel('all')">
 			</div>
@@ -98,7 +89,6 @@ td a{
 	                <tr class="text-c">
 	                    <td>{$item->user_id}</td>
 	                    <td>{$item->user_name}</td>
-	         			
 	                    <td>
 							{if $item->type ==0 ||$item->type ==2|| $item->type ==4 || $item->type ==6 || $item->type ==7}+{$item->sign_score}{/if}
 							{if $item->type ==1 ||$item->type ==3 ||$item->type ==5}-{$item->sign_score}{/if}
@@ -113,8 +103,7 @@ td a{
 	                    	{if $item->type == 4 }好友转积分{/if}
 							{if $item->type == 5 }系统扣除{/if}
 							{if $item->type == 6 }系统充值{/if}
-							{if $item->type == 7 }抽奖{/if}
-	                    </td>
+						</td>
 	                    <td style="min-width:120px;">
 							<a style="text-decoration:none" class="ml-5" href="index.php?module=finance&action=jifen_see&user_id={$item->user_id}" title="查看">
 								<div style="align-items: center;font-size: 12px;display: flex;">
