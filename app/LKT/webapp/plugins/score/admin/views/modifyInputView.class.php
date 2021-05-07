@@ -11,7 +11,9 @@
 class modifyInputView extends PluginInputView {
 
     public function execute() {
-        $this->setTemplate("modify.tpl");
+
+		$this->setTemplate("modify.tpl");
+
     }
 
 }

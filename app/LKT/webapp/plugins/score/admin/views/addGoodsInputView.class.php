@@ -9,6 +9,7 @@
  */
 class addGoodsInputView extends PluginInputView {
     public function execute() {
+        $request = $this->getContext()->getRequest();
         $this->setTemplate('addGoods.tpl');
     }
 }
