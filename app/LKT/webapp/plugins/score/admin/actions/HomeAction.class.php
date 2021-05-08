@@ -17,7 +17,6 @@ class HomeAction extends PluginAction
         $status = $request->getParameter('status') ? $request->getParameter('status') : 2;
         $pagesize = $pagesize ? $pagesize : 10;
         $res1 = array();
-        // 每页显示多少条数据
         $page = $request->getParameter('page');
         if ($page) {
             $start = ($page - 1) * $pagesize;
@@ -37,10 +36,8 @@ class HomeAction extends PluginAction
 
         $total = count($res);
         if ($res) {
-            $res1 = array_slice($res, $start, $pagesize); //分页
-
+            $res1 = array_slice($res, $start, $pagesize);
             foreach ($res1 as $k => $v) {
-
                 $attr = unserialize($v->initial);
                 $res1[$k]->price = $attr['sj'];
                 $attr = array_values($attr);
