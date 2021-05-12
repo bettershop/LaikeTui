@@ -14,9 +14,7 @@
   width: 20px; 
   height: 20px;
 }
-/* .dibu_2{
-  border-left: 1px solid red;
-} */
+
 .dibu{
   background-color: #48474c;
   width: 100%;
@@ -39,7 +37,6 @@
   color: #7e7e80;
 }
 .dibu_1{
-  /* background-color: red; */
   width: 50%;
   height: 100%;
   display: flex;
@@ -48,10 +45,9 @@
   margin: 0 auto;
 }
 .dibu_2{
-   background-color: #48474c; 
+  background-color: #48474c; 
   width: 50%;
   height: 100%;
-  /* text-align: center; */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -31,9 +31,6 @@
   font-family:SimHei;
 }
 .group_name{
-  /* display:flex;
-  flex-direction:row;
-  justify-content:center;  */
   padding: 12px 10px;
 }
 .group_name_box image{
@@ -283,8 +280,6 @@ border-radius:10rpx;
 .shu{
   width: 100%;
   margin-top: 35rpx;
-
-    /* margin-bottom: 160rpx; */
 }
 .stepper {
   text-align: right;
@@ -364,7 +359,6 @@ border-radius:10rpx;
 .attr_value {  
   padding:10rpx 20rpx;
   float: left;
-  /*padding: 0 20rpx;*/
   margin: 0 10rpx;
   border: 1rpx solid #ececec;
   border-radius: 10rpx;
@@ -375,7 +369,6 @@ border-radius:10rpx;
   background: #FF6347;
   border-radius: 10rpx;
   color: #fff;
-  /*padding: 0 20rpx;*/
   padding:10rpx 20rpx;  
 }  
 /*禁用属性*/  
@@ -461,7 +454,6 @@ transform:translate3d(0,0,0);
 }
 
 .tablist .item {
-/* flex: auto; */
 display: flex;
 position: relative;
 justify-content: center;

@@ -56,10 +56,6 @@ flex:1;
     padding:20rpx 5%;
     background-color: #fff;
 }
-/* .order_comment_h{
-  border-bottom: 1px solid gainsboro;
-} */
-
 /*输入框*/
 textarea {
 	background: #fcfcfc;
@@ -74,10 +70,8 @@ textarea {
   height:134rpx;
 }
 
-
 /*画廊*/
 .gallery {
-	/*margin-bottom: 100rpx;*/
 	display: flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
