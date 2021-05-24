@@ -360,6 +360,7 @@ Page({
       })
       return false;
     }
+
     if (that.data.num > that.data.itemData.num) {
       wx.showToast({
         title: '抱歉,此属性的产品库存不足!',
@@ -817,7 +818,6 @@ Page({
   },
   // 分享到朋友圈
   close_share: function (e) {
-
     var that = this;
     that.setData({
       maskHidden: false

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>完成-来客电商 V2.0 系统</title>
+		<title>完成-来客推 V2.0 系统</title>
 	<link type="text/css" href="style/install/css/index.css" rel="stylesheet">
 	<link type="text/css" href="style/install/css/style.css" rel="stylesheet">
 	<script type="text/javascript" src="style/install/js/jquery.min.js" ></script>
@@ -40,7 +40,7 @@
 
 			</div>
 
-			<div class="rule_title">来客电商 V2.0<span>安装协议</span></div>
+			<div class="rule_title">来客推 V2.0<span>安装协议</span></div>
 			<div class="rules" style="height:300px">
 
       			<h1>完成</h1>
