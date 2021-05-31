@@ -1527,9 +1527,8 @@ class productAction extends BaseAction
                 $size = $value->size; // 属性名称
                 $attribute_id = $value->attribute_id; // 属性id
                 $content = $value->content; // 评论内容
-                $badword1 = array_combine($badword, array_fill(0, count($badword), '*'));
-
-                $content = preg_replace("/\s(?=\s)/", "\\1", $this->strtr_array($content, $badword1));
+                //$badword1 = array_combine($badword, array_fill(0, count($badword), '*'));
+                //$content = preg_replace("/\s(?=\s)/", "\\1", $this->strtr_array($content, $badword1));
 
                 //特殊字符处理
                 $content = htmlentities($content);
