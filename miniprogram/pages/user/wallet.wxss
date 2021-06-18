@@ -1,4 +1,3 @@
-/* pages/wallet/wallet.wxss */
 .sc{
   width: 100%;
   height: 311rpx;
@@ -343,7 +342,6 @@ contact-button{
   font-size:28rpx;
   font-weight:500;
   color: #F4F4F4;
-
 }
 
 .nav-sum {
