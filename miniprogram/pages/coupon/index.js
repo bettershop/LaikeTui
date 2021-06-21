@@ -10,7 +10,6 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh: function () {
-
   },
   //页面加载完成函数
   onReady: function () {

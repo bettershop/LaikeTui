@@ -58,7 +58,6 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       success: function (res) {
-        // success
         var address = res.data.adds;
         var province = res.data.province;
         var city = res.data.city;
