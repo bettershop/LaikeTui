@@ -307,10 +307,8 @@ Page({
     })
   },
   onHide: function () {
-    // 页面隐藏
   },
   onUnload: function () {
-    // 页面关闭
   },
   // 获取滚动条当前位置
   onPageScroll: function (e) {
