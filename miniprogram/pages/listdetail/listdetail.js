@@ -301,7 +301,6 @@ Page({
 
   //排序
   sort: function () {
-    //页面初始化 options为页面跳转所带来的参数
     var that = this;
     var objectId = that.data.objectId;
     if (that.data.type == 1 || that.data.type == 0) {
