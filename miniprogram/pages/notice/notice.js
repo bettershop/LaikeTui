@@ -11,21 +11,21 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
     this.DataonLoad();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh() 
   },
   onShow: function () {
     this.DataonLoad();
   },
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '公告', //修改页面标题
+      title: '公告', 
     });
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -40,8 +40,8 @@ Page({
       data: {
         openid: app.globalData.userInfo.openid
       },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {// 设置请求的 header
+      method: 'POST',
+      header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
@@ -65,14 +65,13 @@ Page({
   // 数据加载
   DataonLoad: function () {
     var that = this;
-    // 页面初始化 options为页面跳转所带来的参数
     wx.request({
       url: app.d.laikeUrl + '&action=notice&m=index',
       data: {
         openid: app.globalData.userInfo.openid,
       },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {// 设置请求的 header
+      method: 'POST', 
+      header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
