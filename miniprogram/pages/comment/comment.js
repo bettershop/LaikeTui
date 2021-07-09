@@ -9,13 +9,11 @@ Page({
     remind: '加载中',
     addHide: 0,
   },
-  //页面加载完成函数
+
   onReady: function () {
-    
   },
   onLoad: function (options) {
     that = this;
-    // 设备信息
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -26,7 +24,6 @@ Page({
         });
       }
     });
-    // 设备信息结束
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
       backgroundColor: app.d.bgcolor, //页面标题为路由参数
