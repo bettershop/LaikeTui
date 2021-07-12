@@ -28,10 +28,9 @@ Page({
     images: {},
     zjList: {},
     zjList_box: false,
-    cart: 0, //购物车数量
-    // mainHeight: 0,
+    cart: 0, 
   },
-  //下拉事件
+ 
   onPullDownRefresh: function () {
     var that = this;
     this.loadProductDetail();
@@ -77,8 +76,8 @@ Page({
       },
       success: function (res) {
         var prolist = res.data.prolist;
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
+        wx.hideNavigationBarLoading() 
+        wx.stopPullDownRefresh() 
         that.setData({
           loading: false,
         });
