@@ -539,18 +539,16 @@ Page({
     })
   },
   getOP: function (res) {
-    //提交用户信息 获取用户id
     let that = this
     let userInfo = res;
     var user = app.globalData.userInfo;
-    app.globalData.userInfo['avatarUrl'] = userInfo.avatarUrl; // 头像
-    app.globalData.userInfo['nickName'] = userInfo.nickName; // 昵称
-    app.globalData.userInfo['gender'] = userInfo.gender; //  性别
+    app.globalData.userInfo['avatarUrl'] = userInfo.avatarUrl; 
+    app.globalData.userInfo['nickName'] = userInfo.nickName; 
+    app.globalData.userInfo['gender'] = userInfo.gender; 
     wx.setStorageSync('userInfo', app.globalData.userInfo);
-    //写入缓存
     var nickName = userInfo.nickName;
     var avatarUrl = userInfo.avatarUrl;
-    var gender = userInfo.gender; //性别 0：未知、1：男、2：女
+    var gender = userInfo.gender; 
     wx.request({
       url: app.d.laikeUrl + '&action=user&m=material',
       method: 'post',
