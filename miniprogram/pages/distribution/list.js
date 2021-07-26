@@ -60,7 +60,7 @@ Page({
       }
     })
   },
-  /*  tab   */
+
   choosesort1: function (e) {
     var that = this;
     if (this.data.daindex1 == 0) {
@@ -135,7 +135,6 @@ Page({
     }
   },
   showModal: function () {
-    // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
@@ -155,7 +154,6 @@ Page({
     }.bind(this), 200)
   },
   hideModal: function () {
-    // 隐藏遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
