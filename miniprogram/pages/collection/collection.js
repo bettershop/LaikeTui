@@ -16,10 +16,10 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
     this.collection();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh()
   },
   //页面加载完成函数
   onReady: function () {    

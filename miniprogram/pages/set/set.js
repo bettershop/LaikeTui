@@ -15,8 +15,8 @@ Page({
   },
 
   onReady: function () {
-
   },
+
   agreeGetUser: function (e) {
     let that = this;
     wx.getSetting({

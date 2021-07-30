@@ -3,7 +3,6 @@ var app = getApp();
 Page({
   data: {
     color:'',
-    // 左侧点击类样式
     listHeight: '',
     cont: 1,
     remind: '加载中',
@@ -12,10 +11,10 @@ Page({
     isFocus:false,
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
     this.search();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh() 
   },
   search: function (e) {
     var that = this;
