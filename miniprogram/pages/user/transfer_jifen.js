@@ -1,9 +1,7 @@
 // pages/user/transfer_jifen.js
 var app = getApp()
 Page({
-  /**
-   * 页面的初始数据
-   */
+
   data: {
     inp_money: 0,
     iv: '',

@@ -8,9 +8,6 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	<link rel="Bookmark" href="/favicon.ico">
-	<link rel="Shortcut Icon" href="/favicon.ico" />
-
 	<link rel="stylesheet" type="text/css" href="style/css/H-ui.min.css" />
 	<link rel="stylesheet" type="text/css" href="style/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="style/css/style.css" />
@@ -52,16 +49,17 @@
 		}
 
 		.tabls  tbody {
-      display:block;
-      height:240px;
-      overflow-y:overlay;
-    }
-    .tabls  thead, .tabls tbody tr {
-      display:table;
-      width:100%;
-      table-layout:fixed;
-			padding:0;
-    }
+		  display:block;
+		  height:240px;
+		  overflow-y:overlay;
+		}
+
+		.tabls  thead, .tabls tbody tr {
+		  display:table;
+		  width:100%;
+		  table-layout:fixed;
+				padding:0;
+		}
 
 		.tfoots {
 			height:60px;
@@ -69,7 +67,7 @@
 			border:1px solid rgba(233,236,239,1);
 			border: 1px solid rgba(233,236,239,1);
 			display: flex;
-    	justify-content: space-between;
+    		justify-content: space-between;
 			align-items: center;
 			padding:0px 23px;
 		}
@@ -77,7 +75,7 @@
 		.boxfoot {
 			max-width:1460px;
 			border-radius: 2px;
-    	background: rgba(255,255,255,1);
+    		background: rgba(255,255,255,1);
 			border:1px solid rgba(233,236,239,1);
 			border-radius:2px;
 		}
