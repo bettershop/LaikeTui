@@ -1,9 +1,7 @@
 // pages/group_buy/comment.js
 var app = getApp();
 Page({
-  /**
-   * 页面的初始数据
-   */
+
   data: {
     checked: null,
     remind: true,
@@ -18,16 +16,13 @@ Page({
     page: 0
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     var that = this
     that.pid = options.pid
     console.log(options)
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor 
     });
     that.setData({
       quan: parseInt(options.good) + parseInt(options.notbad) + parseInt(options.bad),
@@ -36,9 +31,7 @@ Page({
       bad: options.bad
     })
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
+
   onShow: function () {
     var that = this
     app.request.wxRequest({
@@ -101,17 +94,13 @@ Page({
 
   //下拉事件
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载    
+    wx.showNavigationBarLoading() 
     this.onShow();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading()
+    wx.stopPullDownRefresh()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-
   },
 
   checkBtn: function (e) {
@@ -138,9 +127,6 @@ Page({
     })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function () {
 
   },
