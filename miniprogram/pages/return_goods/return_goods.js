@@ -2,9 +2,6 @@
 var app = getApp()
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     itemList: [],
     itemList_text:'退货退款',
@@ -15,9 +12,7 @@ Page({
     wx.showActionSheet({
       itemList: that.data.itemList,
       success: function (e) {
-
         var arrayType = that.data.arrayType, itemList = that.data.itemList;
-
         for (var i = 0; i < arrayType.length; i++) {
           if (itemList[e.tapIndex] == arrayType[i].text){
             that.setData({

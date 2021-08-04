@@ -131,8 +131,7 @@ Page({
   },
   // 生命周期函数--监听页面初次渲染完成
   onReady: function () {
-    var that = this;
-    
+    var that = this;    
     //初始化的时候渲染wxSearchdata
     WxSearch.init(that, 43, this.data.hotwords);
     WxSearch.initMindKeys(['laiketui.com', '微信小程序开发', '微信开发', '微信小程序']);
