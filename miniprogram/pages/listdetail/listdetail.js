@@ -27,9 +27,9 @@ Page({
     bg: ''
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.showNavigationBarLoading() 
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh() 
   },
   //上拉
   onReachBottom: function () {
