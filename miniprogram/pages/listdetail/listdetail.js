@@ -49,13 +49,11 @@ Page({
   onLoad: function (options) {
     var objectId = options.class;
     var title = options.title;
-    //页面初始化 options为页面跳转所带来的参数
     if (objectId || title) {
       wx.setNavigationBarColor({
-        frontColor: app.d.frontColor,//
-        backgroundColor: app.d.bgcolor //页面标题为路由参数
+        frontColor: app.d.frontColor,
+        backgroundColor: app.d.bgcolor 
       })
-      //更改头部标题
       wx.setNavigationBarTitle({
         title: options.title,
         success: function () {
@@ -72,7 +70,7 @@ Page({
       this.setData({
         pagefrom: 'keyword'
       });
-      this.getkeywordgood(keyword); //如果存在关键词，则调用getkeywordgood方法
+      this.getkeywordgood(keyword);
     }
   },
   listdetail: function (objectId, types = 0) {
