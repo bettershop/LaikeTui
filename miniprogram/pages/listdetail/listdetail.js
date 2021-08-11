@@ -9,21 +9,21 @@ Page({
     catId: 0,
     brandId: 0,
     keyword: null,
-    pagefrom: 'index',  //判断页面来源
-    goodslist: [], //全部商品
+    pagefrom: 'index',  
+    goodslist: [], 
     remind: '加载中',
-    heng: 'xs',//控制显示方式
+    heng: 'xs',
     shu: 'bxs',
     xianshi: 'icon-yduipaibanleixingliebiao',
-    imageurl1: "../../images/mo.png",//默认排序图
+    imageurl1: "../../images/mo.png",
     daindex1: 0,
     imageurl2: "../../images/mo.png",
     daindex2: 0,
-    loading: false,//显示加载
-    period: false,//显示无数据
-    select: 0,//选中
+    loading: false,
+    period: false,
+    select: 0,
     sort: 0,// 1 asc 升序   0 desc 降序
-    types: '刷新', // 点击更多、下拉上啦刷新
+    types: '刷新', 
     bg: ''
   },
   onPullDownRefresh: function () {
@@ -97,7 +97,7 @@ Page({
       },
       success: function (res) {
         if (res.data.status) {
-          var shoplist = res.data.pro;// 商品信息
+          var shoplist = res.data.pro;
           if (types == 0) {
             that.setData({
               shopList: shoplist,
@@ -172,8 +172,8 @@ Page({
       },
     });
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor 
     });
     wx.request({
       url: app.d.laikeUrl + '&action=search&m=search',
