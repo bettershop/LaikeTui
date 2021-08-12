@@ -1,0 +1,1 @@
+ALTER TABLE `lkt_order_config` ADD `customer` VARCHAR(255) NULL DEFAULT NULL COMMENT '快递100公司编号' AFTER `unit`, ADD `kdkey` VARCHAR(255) NULL DEFAULT NULL COMMENT '快递100客户授权key' AFTER `customer`;
