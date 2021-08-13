@@ -834,6 +834,7 @@ Page({
   },
   verification: function (trade_no) {
     var that = this;
+
     wx.request({
       url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=verification',
       method: 'post',
@@ -844,6 +845,7 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
+        // debugger;
         if (app.globalData.userInfo.referee_openid && app.globalData.userInfo.openid && app.globalData.userInfo.referee_openid != 'undefined') {
           var referee_openid = app.globalData.userInfo.referee_openid;
           var openid = app.globalData.userInfo.openid
@@ -859,10 +861,13 @@ Page({
             showCancel: false,
             confirmText: "确定",
             success: function () {
+
               wx.redirectTo({
                 url: '../group_buy/cantuan?id=' + res.data.data.ptcode + '&groupid=' + that.data.groupres.status + '&pro_id=' +
                   that.data.pro_id + '&man_num=' + that.data.groupres.man_num
               })
+
+
             }
           })
         } else {

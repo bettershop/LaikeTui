@@ -27,8 +27,8 @@ Page({
     bank_name: '',
     binding: false,
     multiIndex: [0, 0, 0],
-    date: '2021-03-01',
-    time: '00:00',
+    date: '2021-01-01',
+    time: '12:01',
     region: ['湖南省', '长沙市', '岳麓区'],
     customItem: '全部',
     items: [
@@ -137,6 +137,7 @@ Page({
         var status = res.data.status;
         if (status == 1) {
           var data = res.data.data;
+
           var items = that.data.items;
           for (var i = 0; i < items.length; i++) {
             if (items[i].name == data.sex) {
@@ -155,6 +156,8 @@ Page({
           } else {
             var date = that.data.date;
           }
+
+
           that.setData({
             name: data.name,
             mobile: data.mobile,

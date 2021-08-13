@@ -123,6 +123,7 @@ Page({
   // 属性选择
   onShow: function () {
     var that = this;
+
   },
   //接受formid
   getUserformid: function (e) {
@@ -138,6 +139,7 @@ Page({
       data: { from_id: fromid, userid: app.globalData.userInfo.openid, page: page },
       method: 'post',
       success: function () {
+
       }
     })
   },
@@ -876,9 +878,11 @@ Page({
   //点击保存到相册
   baocun: function () {
     var that = this;
+
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.writePhotosAlbum']) {
+
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
             success() {
@@ -888,6 +892,7 @@ Page({
 
               wx.openSetting({
                 success: (res) => {
+
                   res.authSetting = {
                     "scope.userInfo": true,
                     "scope.userLocation": true,

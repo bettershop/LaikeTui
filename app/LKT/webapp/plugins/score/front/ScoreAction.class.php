@@ -12,8 +12,13 @@ class ScoreAction extends PluginAction
 
     public function home()
     {
+        
 
     }
 
 
+    
+
 }
+
+?>

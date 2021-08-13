@@ -31,6 +31,9 @@
   font-family:SimHei;
 }
 .group_name{
+  /* display:flex;
+  flex-direction:row;
+  justify-content:center;  */
   padding: 12px 10px;
 }
 .group_name_box image{
@@ -140,7 +143,7 @@ padding-top:10px;
 .group_like image{
   width: 340rpx;
   height: 340rpx;
-  border-radius: 10rpx 10rpx  0 0; 
+   border-radius: 10rpx 10rpx  0 0; 
   background: #999;
 }
 .like_text{
@@ -167,6 +170,7 @@ bottom:0;
 left:0;
 background:#fff;
 z-index:100;
+/*background: #dd2727;*/
 width:94.6%;
 padding:5px 10px;
 border-top:1px solid #eee;
@@ -242,7 +246,9 @@ border-radius:10rpx;
     width: 100%;
 }
 .cun{
+  /* margin: 5px; */
   font-size:30rpx; 
+  /* padding-left: 20rpx; */
   width: 20%
 }
 
@@ -261,12 +267,15 @@ border-radius:10rpx;
   border-radius: 10rpx;
   text-align: center;
 }
+
 .open_btn {
   margin: 40rpx 10%;
   border-radius: 10rpx;
   background: #20bb21;
   color: #fff;
 }
+
+/*数量*/
 .dian{
   width: 70%;
   display: inline-block;
@@ -274,6 +283,8 @@ border-radius:10rpx;
 .shu{
   width: 100%;
   margin-top: 35rpx;
+
+    /* margin-bottom: 160rpx; */
 }
 .stepper {
   text-align: right;
@@ -353,6 +364,7 @@ border-radius:10rpx;
 .attr_value {  
   padding:10rpx 20rpx;
   float: left;
+  /*padding: 0 20rpx;*/
   margin: 0 10rpx;
   border: 1rpx solid #ececec;
   border-radius: 10rpx;
@@ -363,6 +375,7 @@ border-radius:10rpx;
   background: #FF6347;
   border-radius: 10rpx;
   color: #fff;
+  /*padding: 0 20rpx;*/
   padding:10rpx 20rpx;  
 }  
 /*禁用属性*/  
@@ -448,6 +461,7 @@ transform:translate3d(0,0,0);
 }
 
 .tablist .item {
+/* flex: auto; */
 display: flex;
 position: relative;
 justify-content: center;

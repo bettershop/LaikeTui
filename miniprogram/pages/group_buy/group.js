@@ -22,6 +22,8 @@ Page({
     period: false,//显示无数据
     select: 0,//选中
     sort: 0,// 1 asc 升序   0 desc 降序
+    // groupman: '',
+    // groupid: '',
     titlee: '',
   },
   onPullDownRefresh: function () {
@@ -29,6 +31,7 @@ Page({
     var that = this;
     var select = that.data.select;
     var sort = that.data.sort;
+    //ajax请求数据
     wx.request({
       url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=grouphome',
       method: 'post',
@@ -186,10 +189,12 @@ Page({
   },
   //排序
   sort: function () {
+    //页面初始化 options为页面跳转所带来的参数
     var that = this;
     var select = that.data.select;
     var sort = that.data.sort;
     var page = that.data.page;
+    //ajax请求数据
     wx.request({
       url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=grouphome',
       method: 'post',
@@ -354,8 +359,10 @@ Page({
     })
   },
   onHide: function () {
+    // 页面隐藏
   },
   onUnload: function () {
+    // 页面关闭
   },
   // 获取滚动条当前位置
   onPageScroll: function (e) {

@@ -31,6 +31,9 @@ Page({
       title: '个人积分中心',
     })
     that.getRequest();
+    /** 
+     * 获取系统信息 
+     */
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -42,17 +45,21 @@ Page({
     });
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() 
-    wx.hideNavigationBarLoading() 
-    wx.stopPullDownRefresh() 
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
-
+  /** 
+   * 滑动切换tab 
+   */
   bindChange: function (e) {
     console.log(e)
     var that = this;
     that.setData({ currentTab: e.detail.current });
   },
-
+  /** 
+   * 点击tab切换 
+   */
   swichNav: function (e) {
     console.log(e)
     var that = this;
@@ -64,7 +71,7 @@ Page({
       })
     }
   },
-
+  // 进入我的积分
   getRequest: function () {
     var that = this
     wx.request({
@@ -73,7 +80,7 @@ Page({
       data: {
         openid: app.globalData.userInfo.openid,
       },
-      header: { 
+      header: { //请求头
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {

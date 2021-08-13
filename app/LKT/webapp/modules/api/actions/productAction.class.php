@@ -1020,7 +1020,7 @@ class productAction extends BaseAction
                     $r = lkt_execute($sql);
                     $event = $userid . '使用了' . $total . '元余额';
                     $sqll = "insert into lkt_record (user_id,money,oldmoney,event,type) values ('$userid','$total','$user_money','$event',4)";
-                    lkt_execute($sqll);
+                    $rr = lkt_execute($sqll);
                 }
                 echo json_encode(array('status' => 1, 'succ' => '扣款成功!'));
             } else {
@@ -1083,13 +1083,6 @@ class productAction extends BaseAction
             echo json_encode(array('status' => 0, 'err' => '余额不足！'));
             exit;
         } else {
-            $name = ''; // 联系人
-            $mobile = ''; // 联系电话
-            $address = ''; // 加省市县的详细地址
-            $sheng = ''; // 省
-            $shi = ''; // 市
-            $xian = ''; // 县
-
             // 根据用户id、默认地址,查询地址信息
             $sql_a = 'select * from lkt_user_address where uid=\'' . $userid . '\' and is_default = 1';
             $r_a = lkt_gets($sql_a);
@@ -1100,6 +1093,13 @@ class productAction extends BaseAction
                 $sheng = $r_a['0']->sheng; // 省
                 $shi = $r_a['0']->city; // 市
                 $xian = $r_a['0']->quyu; // 县
+            } else {
+                $name = ''; // 联系人
+                $mobile = ''; // 联系电话
+                $address = ''; // 加省市县的详细地址
+                $sheng = ''; // 省
+                $shi = ''; // 市
+                $xian = ''; // 县
             }
 
             $z_num = 0;
@@ -1121,12 +1121,15 @@ class productAction extends BaseAction
             $typeArr = explode(',', $typestr);
             foreach ($typeArr as $key => $value) {
                 // 联合查询返回购物信息
+
                 if ($typee == 1) {//直接购买
                     $sql_c = "select a.plugin,a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= $num ";
                 } else {
                     $sql_c = "select a.plugin,a.Size_id,a.Goods_num,a.Goods_id,a.id,m.product_title,m.volume,m.freight,c.price,c.attribute,c.img,c.yprice,c.unit from lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON a.Size_id = c.id where a.id = '$value' and c.num >= a.Goods_num ";
                 }
+
                 $r_c = lkt_gets($sql_c);
+
                 if (!empty($r_c)) {
                     $plugin = $r_c[0]->plugin;
                     $product = (array)$r_c['0']; // 转数组
@@ -1527,8 +1530,9 @@ class productAction extends BaseAction
                 $size = $value->size; // 属性名称
                 $attribute_id = $value->attribute_id; // 属性id
                 $content = $value->content; // 评论内容
-                //$badword1 = array_combine($badword, array_fill(0, count($badword), '*'));
-                //$content = preg_replace("/\s(?=\s)/", "\\1", $this->strtr_array($content, $badword1));
+                $badword1 = array_combine($badword, array_fill(0, count($badword), '*'));
+
+                $content = preg_replace("/\s(?=\s)/", "\\1", $this->strtr_array($content, $badword1));
 
                 //特殊字符处理
                 $content = htmlentities($content);

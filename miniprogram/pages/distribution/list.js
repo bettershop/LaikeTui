@@ -60,7 +60,7 @@ Page({
       }
     })
   },
-
+  /*  tab   */
   choosesort1: function (e) {
     var that = this;
     if (this.data.daindex1 == 0) {
@@ -135,6 +135,7 @@ Page({
     }
   },
   showModal: function () {
+    // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
@@ -154,6 +155,7 @@ Page({
     }.bind(this), 200)
   },
   hideModal: function () {
+    // 隐藏遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
@@ -317,9 +319,12 @@ Page({
     })
   },
   onHide: function () {
+    // 页面隐藏
   },
   onUnload: function () {
+    // 页面关闭
   },
+  // 获取滚动条当前位置
   onPageScroll: function (e) {
     if (e.scrollTop > 300) {
       this.setData({

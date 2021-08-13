@@ -45,9 +45,9 @@ App({
   },
 
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() 
-    wx.hideNavigationBarLoading() 
-    wx.stopPullDownRefresh() 
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
 
   getUserInfo: function (cb, stype, user, callback) {
@@ -125,6 +125,7 @@ App({
         that.globalData.userInfo['gender'] = res.data.user.gender;
         that.globalData.userInfo['company'] = res.data.user.company;
         that.globalData.userInfo['bgcolor'] = res.data.user.bgcolor;
+
         //修改缓存写入
         wx.setStorageSync('userInfo', that.globalData.userInfo);
         callback()

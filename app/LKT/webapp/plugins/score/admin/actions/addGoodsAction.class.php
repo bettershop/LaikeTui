@@ -168,6 +168,7 @@ class addGoodsAction extends PluginAction
 
     public function getRequestMethods()
     {
+
         return Request::NONE;
     }
 

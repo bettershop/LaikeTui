@@ -8,6 +8,7 @@ Page({
     remind: '加载中',
     detailed_commission:0
   },
+  //页面加载完成函数 
   onReady: function () {
     var that = this;
     that.setData({
@@ -15,14 +16,14 @@ Page({
     });
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() 
-    wx.hideNavigationBarLoading() 
-    wx.stopPullDownRefresh() 
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   onLoad: function (options) {
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,
-      backgroundColor: app.d.bf_color, 
+      frontColor: app.d.frontColor,//
+      backgroundColor: app.d.bf_color, //页面标题为路由参数
       animation: {
         duration: 400,
         timingFunc: 'easeIn'

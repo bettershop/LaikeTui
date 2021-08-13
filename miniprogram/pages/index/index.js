@@ -28,9 +28,10 @@ Page({
     images: {},
     zjList: {},
     zjList_box: false,
-    cart: 0, 
+    cart: 0, //购物车数量
+    // mainHeight: 0,
   },
- 
+  //下拉事件
   onPullDownRefresh: function () {
     var that = this;
     this.loadProductDetail();
@@ -76,8 +77,8 @@ Page({
       },
       success: function (res) {
         var prolist = res.data.prolist;
-        wx.hideNavigationBarLoading() 
-        wx.stopPullDownRefresh() 
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
         that.setData({
           loading: false,
         });
@@ -247,11 +248,11 @@ Page({
         success: function (res) {
           var banner = res.data.banner; // 轮播图
           var twoList = res.data.twoList; //产品显示
-          var bgcolor = res.data.bgcolor; 
-          var plug = res.data.plug; 
+          var bgcolor = res.data.bgcolor; //产品显示
+          var plug = res.data.plug; //抽奖产品
           var title = res.data.title;
           app.d.bgcolor = bgcolor;
-          var arr = []; 
+          var arr = []; //Object.keys(twoList[0].distributor);
           var banner_num = Object.keys(banner); // 轮播图
           var notice = res.data.notice;
           var indexTwoData = twoList[0].twodata // 获取首页的数据对象
@@ -344,7 +345,9 @@ Page({
     that.getMore();
 
   },
-
+  /**
+   * Tab的点击切换事件
+   */
   tabItemClick: function (e) {
     //防止点击过快带来的闪屏问题
     var timestamp = Date.parse(new Date());
@@ -401,6 +404,11 @@ Page({
     var indexchase = app.d.indexchase;
     var that = this;
     that.onLoad();
+    /*
+    if (indexchase) {
+      that.onLoad();
+      app.d.indexchase = false;
+    }*/
     util.getUesrBgplus(that, app, false)
   },
   onReady: function () {
@@ -532,16 +540,18 @@ Page({
     })
   },
   getOP: function (res) {
+    //提交用户信息 获取用户id
     let that = this
     let userInfo = res;
     var user = app.globalData.userInfo;
-    app.globalData.userInfo['avatarUrl'] = userInfo.avatarUrl; 
-    app.globalData.userInfo['nickName'] = userInfo.nickName; 
-    app.globalData.userInfo['gender'] = userInfo.gender; 
+    app.globalData.userInfo['avatarUrl'] = userInfo.avatarUrl; // 头像
+    app.globalData.userInfo['nickName'] = userInfo.nickName; // 昵称
+    app.globalData.userInfo['gender'] = userInfo.gender; //  性别
     wx.setStorageSync('userInfo', app.globalData.userInfo);
+    //写入缓存
     var nickName = userInfo.nickName;
     var avatarUrl = userInfo.avatarUrl;
-    var gender = userInfo.gender; 
+    var gender = userInfo.gender; //性别 0：未知、1：男、2：女
     wx.request({
       url: app.d.laikeUrl + '&action=user&m=material',
       method: 'post',

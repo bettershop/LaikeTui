@@ -360,7 +360,6 @@ Page({
       })
       return false;
     }
-
     if (that.data.num > that.data.itemData.num) {
       wx.showToast({
         title: '抱歉,此属性的产品库存不足!',
@@ -572,6 +571,8 @@ Page({
    */
   onData: function () {
     var attrListIn = this.data.attrList;
+    // console.log(this.data.attrList, "待扫描 列表清单");
+    // console.log(this.data.skuBeanList, "待扫描 库存清单");
     for (var i = 0; i < attrListIn.length; i++) {
       var attrListBig = attrListIn[i];
       //当前类别之外的选择列表
@@ -665,9 +666,13 @@ Page({
     }
 
     console.log(canGetInfo, "目前点击的属性");
+
     var canGetInfoLog = "";
+
     var skuBeanList = this.data.skuBeanList;
+
     var haveSkuBean = [];
+    // 对应库存清单扫描
     for (var skuBeanIndex = 0; skuBeanIndex < skuBeanList.length; skuBeanIndex++) {
       var iListCount = 0;
       for (var skuBeanIndexIn = 0; skuBeanIndexIn < skuBeanList[skuBeanIndex].attributes.length; skuBeanIndexIn++) {
@@ -701,6 +706,7 @@ Page({
       }
       // itemData.member_price = haveSkuBean[0].price;
       itemData.num = haveSkuBean[0].count;
+
       var sizeid = haveSkuBean[0].cid;
       console.log(sizeid)
       that.setData({
@@ -725,6 +731,8 @@ Page({
     // 重新sku运算
     this.onData();
   },
+
+
 
   // 弹窗
   set_share: function (e) {
@@ -818,6 +826,7 @@ Page({
   },
   // 分享到朋友圈
   close_share: function (e) {
+
     var that = this;
     that.setData({
       maskHidden: false

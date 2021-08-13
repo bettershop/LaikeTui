@@ -10,16 +10,17 @@ Page({
     upstatus: false,
     remind: '加载中',
   },
-
+  //页面加载完成函数 remind: '加载中',
   onReady: function () {
+    
   },
-
+  //下拉刷新
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() 
+    wx.showNavigationBarLoading() //在标题栏中显示加载
     this.loadProductData();
     this.sum();
-    wx.hideNavigationBarLoading()
-    wx.stopPullDownRefresh() 
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
   bindMinus: function (e) {
     var that = this;
@@ -138,7 +139,8 @@ Page({
   },
   //编辑购物车
   updata: function () {
-    var that = this;    
+    var that = this;
+    
     that.setData({
       upstatus: true
     });
@@ -147,6 +149,7 @@ Page({
   //删除
   delarr: function () {
     var that = this;
+    
     // 初始化toastStr字符串
     var toastStr = '';
     // 遍历取出已勾选的cid
@@ -165,6 +168,7 @@ Page({
     }
     that.removeShopCard(toastStr);
   },
+
   //移至收藏
   shouc: function () {
     var that = this;
@@ -408,9 +412,11 @@ Page({
           },
           success: function (res) {
             util.getUesrBgplus(that, app, false)
+            //--init data
             var data = res.data;
             if (data.status == 1) {
-              that.loadProductData();            
+              that.loadProductData();
+            
             } else {
               wx.showToast({
                 title: '操作失败！',
