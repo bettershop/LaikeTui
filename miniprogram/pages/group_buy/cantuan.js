@@ -10,11 +10,11 @@ Page({
     minute: '',
     miao: '',
     remind: true,
-    xefl: true,//点击选择规格显示状态
+    xefl: true,
     bgcolor: '',
     price: '',
     image: '',
-    man_num: null //团满人数
+    man_num: null 
   },
   onLoad: function (options) {
     var self = this

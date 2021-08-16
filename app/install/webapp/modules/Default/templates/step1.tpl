@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>环境检测-来客电商 V2.0 系统</title>
+		<title>环境检测-来客推 V2.0 系统</title>
 	    <link type="text/css" href="style/install/css/index.css" rel="stylesheet">
         <link type="text/css" href="style/install/css/style.css" rel="stylesheet">
 </head>
@@ -36,7 +36,7 @@
 
 			</div>
 
-			<div class="rule_title">来客电商 V2.0 <span>安装协议</span></div>
+			<div class="rule_title">来客推 V2.0 <span>安装协议</span></div>
 
 			<div class="rules">
 

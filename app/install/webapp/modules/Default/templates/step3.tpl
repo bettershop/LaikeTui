@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>创建数据库-来客电商 V2.0 系统</title>
+		<title>创建数据库-来客推 V2.0 系统</title>
 	<link type="text/css" href="style/install/css/index.css" rel="stylesheet">
 	<link type="text/css" href="style/install/css/style.css" rel="stylesheet">
 	<script type="text/javascript" src="style/install/js/jquery.min.js" ></script>
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 
-			<div class="rule_title">来客电商 V2.0 <span>安装协议</span></div>
+			<div class="rule_title">来客推 V2.0 <span>安装协议</span></div>
 			<div class="rules">
 
 		     <h1>安装中系统将在 <span id="time">10</span> 秒钟后自动安装成功</h1>

@@ -12,13 +12,10 @@ class userAction extends BaseAction
     public function index()
     {
         $openid = addslashes($_POST['openid']); // 微信id
-
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
         $company = $appConfig['appName'];
         $logo = $appConfig['logo'];
-
-
         // 获取文章信息
         $sql_2 = "select Article_id,Article_prompt,Article_title from lkt_article";
         $r_2 = lkt_gets($sql_2);
@@ -140,7 +137,6 @@ class userAction extends BaseAction
         $r_2 = lkt_gets($sql);
         if ($r_2) {
             $user_id = $r_2[0]->user_id; // 用户id
-            $user_name = $r_2[0]->user_name; // 用户昵称
             $user['money'] = $r_2[0]->money; // 用户余额
             if ($user['money'] == '') {
                 $user['money'] = 0;
@@ -232,9 +228,7 @@ class userAction extends BaseAction
             echo json_encode(array('status' => 0, 'info' => '手机号码没获取!'));
             exit();
         } else {
-
             $appConfig = $this->getAppInfo();
-
             $appid = $appConfig['appid'];
             include_once "wxBizDataCrypt.php";
             $data = '';

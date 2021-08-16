@@ -1,6 +1,5 @@
 <!-- 底部弹窗动画的内容 -->
-<!-- <include src="/commons/extension/extension" />
-<include src="/commons/navbar/navbar" /> -->
+
 <view class='pupContent {{click? "showContent": "hideContent"}} {{option? "open": "closes"}}' hover-stop-propagation='true'>
   <image src="../../images/logonsgb.png" catchtap="setCloses"></image>
   <view class="pupContent-body">
@@ -18,7 +17,7 @@
     </view>
     
     <view>
-      <button class="pupContent-btn" bindgetuserinfo="agreeGetUser" class="login-btn" openType="getUserInfo" style="background-color: #1AAD19; border-radius:10rpx;height:46px;display:flex;justify-content:center;align-items: center;" >确定</button>
+      <button class="pupContent-btn"  bindtap="getUserProfile" class="login-btn" openType="getUserProfile" style="background-color: #1AAD19; border-radius:10rpx;height:46px;display:flex;justify-content:center;align-items: center;" >确定</button>
     </view>
   </view>
 

@@ -74,7 +74,6 @@
   padding-right:10px;
 }
 .comments_icon{
-  /* float:right; */
   padding-right:10px;
   width:10px;
   height:10px;
@@ -97,10 +96,8 @@
   margin:auto;
 }
 .comment_content{
-  /* background:#eee; */
   font-size:14px;
   width:90%;
-  /* height:100px; */
   margin:10px auto;
 }
 .comment_img{

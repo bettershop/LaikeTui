@@ -41,12 +41,10 @@ class addressAction extends BaseAction {
                
            }
            echo json_encode(array('status'=>1,'succ'=>'删除成功!'));
-           exit();
          }
            
         }else{
             echo json_encode(array('status'=>0,'err'=>'删除失败!'));
-            exit();
         }
     }
 
@@ -68,10 +66,8 @@ class addressAction extends BaseAction {
 
         if($rr > 0){
             echo json_encode(array('status'=>1,'err'=>'操作成功!'));
-            exit();
         }else{
             echo json_encode(array('status'=>0,'err'=>'设置失败'));
-            exit();
         }
     }
 
@@ -87,14 +83,11 @@ class addressAction extends BaseAction {
             $r = lkt_execute($sql);
             if($r > 0){
                 echo json_encode(array('status'=>1));
-                exit();
             }else{
                 echo json_encode(array('status'=>0,'err'=>'删除失败'));
-                exit();
             }
         }else{
             echo json_encode(array('status'=>0,'err'=>'删除失败'));
-            exit();
         }
 
 
@@ -158,19 +151,16 @@ class addressAction extends BaseAction {
             // 查询省的编号
             $sql01 = "select G_CName from admin_cg_group a where a.GroupID='$sheng'";
             $r01 = lkt_gets($sql01);
+            $province = '';
             if($r01){
                 $province = $r01[0]->G_CName;
-            }else{
-                $province = '';
             }
-            $province = $r01[0]->G_CName;
             // 根据省查询市
             $sql02 = "select G_CName from admin_cg_group a where a.GroupID='$city'";
             $r02 = lkt_gets($sql02);
+            $city = '';
             if($r02){
                 $city = $r02[0]->G_CName;
-            }else{
-                $city = '';
             }
             
             // 根据市查询县
@@ -181,9 +171,7 @@ class addressAction extends BaseAction {
             }else{
                 $county = '';
             }
-            
             echo json_encode(array('adds'=>$r,'province'=>$province,'city'=>$city,'county'=>$county));
-            exit();
         }else{
             echo json_encode(array('status'=>0,'info'=>'操作有误！'));
         }

@@ -14,9 +14,7 @@ class delAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 接收信息
-        $id = intval($request->getParameter('id')); //id
-        // 根据id删除信息
+        $id = intval($request->getParameter('id'));
         $sql = "delete from lkt_background_color where id = '$id'";
         $res = $db->delete($sql);
         echo $res;exit;

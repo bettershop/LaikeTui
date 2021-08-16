@@ -3,7 +3,6 @@ var app = getApp();
 Page({
   data: {
     color:'',
-    // 左侧点击类样式
     listHeight: '',
     cont: 1,
     remind: '加载中',
@@ -12,10 +11,10 @@ Page({
     isFocus:false,
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
     this.search();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh() 
   },
   search: function (e) {
     var that = this;
@@ -132,8 +131,7 @@ Page({
   },
   // 生命周期函数--监听页面初次渲染完成
   onReady: function () {
-    var that = this;
-    
+    var that = this;    
     //初始化的时候渲染wxSearchdata
     WxSearch.init(that, 43, this.data.hotwords);
     WxSearch.initMindKeys(['laiketui.com', '微信小程序开发', '微信开发', '微信小程序']);

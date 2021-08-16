@@ -13,19 +13,19 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
     this.DataonLoad();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh() 
   },
 
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '公告详情', //修改页面标题
+      title: '公告详情', 
     });
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -40,8 +40,8 @@ Page({
       data: {
         id: options.Id
       },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {// 设置请求的 header
+      method: 'POST', 
+      header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
@@ -72,14 +72,14 @@ Page({
       data: {
         id: options.Id
       },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {// 设置请求的 header
+      method: 'POST', 
+      header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
         var notice = res.data.notice;
         var detail = res.data.notice[0].detail;
-        WxParse.wxParse('detail', 'html', detail, that, 5);//处理规则的富文本框
+        WxParse.wxParse('detail', 'html', detail, that, 5);
         if (notice == '') {
           var notice = []
         }

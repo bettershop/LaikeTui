@@ -126,7 +126,7 @@ Page({
         });
       },
       fail: function (res) {
-        // 转发失败
+        
       }
     }
   },

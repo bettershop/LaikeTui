@@ -8,23 +8,22 @@ Page({
     page: 1,
     catId: 0,
     cont: 1,
-    remind: '加载中',//进来加载
+    remind: '加载中',
     brandId: 0,
-    heng:'xs',//控制显示方式
+    heng:'xs',
     shu:'bxs',
     xianshi:'icon-yduipaibanleixingliebiao',
-    imageurl1: "../../images/mo.png",//默认排序图
+    imageurl1: "../../images/mo.png",
     daindex1: 0,
     imageurl2: "../../images/mo.png",
     daindex2: 0,
-    loading: false,//显示加载
-    period: false,//显示无数据
-    select:0,//选中
-    sort: 0,// 1 asc 升序   0 desc 降序
+    loading: false,
+    period: false,
+    select:0,
+    sort: 0,
   },
   onPullDownRefresh: function () {
-    
-    wx.showNavigationBarLoading() //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
     var that = this;
     var objectId = that.data.objectId;
     var select = that.data.select;
@@ -48,8 +47,8 @@ Page({
           page:2,
           period: false
         })
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
+        wx.hideNavigationBarLoading() 
+        wx.stopPullDownRefresh() 
       },
       error: function (e) {
         wx.showToast({
@@ -283,10 +282,9 @@ Page({
       bgcolor: app.d.bgcolor,
     });
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor 
     })
-    //页面初始化 options为页面跳转所带来的参数
     this.getMore();
   },
   //详情页跳转
@@ -307,10 +305,8 @@ Page({
     })
   },
   onHide: function () {
-    // 页面隐藏
   },
   onUnload: function () {
-    // 页面关闭
   },
   // 获取滚动条当前位置
   onPageScroll: function (e) {
@@ -326,7 +322,7 @@ Page({
   },
 
   //回到顶部
-  goTop: function (e) {  // 一键回到顶部
+  goTop: function (e) {  
     if (wx.pageScrollTo) {
       wx.pageScrollTo({
         scrollTop: 0

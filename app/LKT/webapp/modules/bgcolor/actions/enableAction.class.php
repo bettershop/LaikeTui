@@ -14,15 +14,12 @@ class enableAction extends Action {
     public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 接收信息
-        $id = intval($request->getParameter('id')); // id
+        $id = intval($request->getParameter('id'));
         $sql = "update lkt_background_color set status = 0 ";
         $db->update($sql);
         $sql = "update lkt_background_color set status = 1 where id = '$id'";
         $r = $db->update($sql);
 		echo $r;
-		exit;
-       
     }
 
     public function execute(){

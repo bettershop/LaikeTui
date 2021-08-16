@@ -8,7 +8,7 @@ function countdown(that) {
   let total_micro_second = that.data.total_micro_second;
   if (that.data.rstatus != 0) return;
   that.setData({
-    clock: dateformat(total_micro_second) //格式化时间  
+    clock: dateformat(total_micro_second) 
   });
   if (total_micro_second <= 0) {
     that.setData({

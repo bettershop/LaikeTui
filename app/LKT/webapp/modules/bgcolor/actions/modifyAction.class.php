@@ -16,9 +16,7 @@ class modifyAction extends Action {
 	public function getDefaultView() {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        // 接收信息
-        $id = intval($request->getParameter("id")); // id
-        // 根据id查询
+        $id = intval($request->getParameter("id"));
         $sql = "select * from lkt_background_color where id = '$id'";
         $r = $db->select($sql);
         if($r){

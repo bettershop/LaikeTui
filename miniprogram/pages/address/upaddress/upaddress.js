@@ -10,9 +10,6 @@ var xian = [];//区县
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     sheng: sheng,
     shi: shi,
@@ -22,7 +19,6 @@ Page({
   // 下拉刷新
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
-    
     this.AddressManagement();
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
@@ -62,7 +58,6 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       success: function (res) {
-        // success
         var address = res.data.adds;
         var province = res.data.province;
         var city = res.data.city;

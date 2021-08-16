@@ -11,10 +11,8 @@ class searchAction extends BaseAction
 
     public function index()
     {
-
         $appConfig = $this->getAppInfo();
         $img = $appConfig['imageRootUrl'];
-
         //查询商品并分类显示返回JSON至小程序
         $sql_c = "select cid,pname,img,bg from lkt_product_class where sid=0 and recycle != 1 order by sort asc";
         $r_c = lkt_gets($sql_c);
@@ -183,7 +181,6 @@ order by $select $sort
             $bg = $img . $r_c[0]->bg;
         }
 
-
         $sql = "select a.initial,a.imgurl,a.id,a.product_title,a.product_class,a.volume,a.s_type,
 a.imgurl as img ,c.price 
 from lkt_product_list AS a RIGHT JOIN (select min(price) price,pid from lkt_configure group by pid) AS c
@@ -222,7 +219,6 @@ order by $select $sort LIMIT $start,$end
                     $present_price = $prrr;
                     $ymin = $yprrr;
                 }
-
 
                 $value->unit = $unit;
                 $value->price = $present_price;

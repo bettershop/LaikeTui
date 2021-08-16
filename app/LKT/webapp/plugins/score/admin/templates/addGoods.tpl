@@ -521,8 +521,6 @@
 							}
 
 
-							console.log(vm.checkboxlist,1111)
-
 							vm.splist = res.res
 							vm.total = res.total
 						}

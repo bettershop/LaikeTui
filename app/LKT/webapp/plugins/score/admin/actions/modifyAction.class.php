@@ -37,12 +37,10 @@ class modifyAction extends PluginAction
         $data[] = $id = $request->getParameter('id');
 
         $res = lkt_execute("update lkt_score_pro set score = ?,is_show = ? where id = ?",$data);
-        if ($res > 0) { //
+        if ($res > 0) {
             echo json_encode(array('code' => 200, 'message' => '修改成功!'));
-            exit();
         } else {
             echo json_encode(array('code' => 400, 'message' => '未知原因，修改失败!'));
-            exit();
         }
     }
 

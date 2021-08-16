@@ -115,7 +115,6 @@ Page({
   withdrawals1: function (e) {
     console.log(this);
     var that = this;
-    console.log(6666)
     var money = Number(e.detail.value.money);
     var user_id = that.options.user_id;
     var mon = Number(that.data.money);//账户余额

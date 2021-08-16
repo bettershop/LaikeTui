@@ -17,4 +17,4 @@ class HomeInputView extends PluginInputView {
 		$this->setTemplate('index.tpl');
     }
 }
-?>
+

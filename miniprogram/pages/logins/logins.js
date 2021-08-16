@@ -53,12 +53,44 @@ Page({
     }
   },
 
-  getUserInfo: function (t) {
-    wx.showLoading({
-      title: "正在登录",
-      mask: !0
+
+  getUserProfile(e) {
+    let that = this
+    let thatplus = this.data.thvm
+    wx.getUserProfile({
+      desc: '用于完善会员资料', 
+      success: (res) => {
+        this.getOP(res.userInfo)
+        var userInfo = res.userInfo;
+        var nickName = userInfo.nickName;
+        var avatarUrl = userInfo.avatarUrl;
+        var gender = userInfo.gender; //性别 0：未知、1：男、2：女
+        wx.request({
+          url: app.d.laikeUrl + '&action=user&m=material',
+          method: 'post',
+          data: {
+            openid: app.globalData.userInfo.openid,
+            nickName: nickName,
+            avatarUrl: avatarUrl,
+            gender: gender
+          },
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            app.globalData.userlogin = true;
+            wx.setStorageSync('userlogin', true);
+            wx.setStorageSync('userInfo', userInfo);
+            thatplus.onLoad()
+
+          }
+        })
+
+      }
     })
   },
+
+
   material: function (res) {
     wx.getUserInfo({
       success: function (res) {

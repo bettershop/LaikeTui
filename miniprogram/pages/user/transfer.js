@@ -19,7 +19,6 @@ Page({
   },
 
   onLoad: function (options) {
-
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,//
       backgroundColor: app.d.bgcolor, //页面标题为路由参数
@@ -28,7 +27,6 @@ Page({
         timingFunc: 'easeIn'
       }
     })
-
     wx.checkSession({
       success: function (e) {
         console.log(e)
