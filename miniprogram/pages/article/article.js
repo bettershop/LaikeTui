@@ -11,7 +11,7 @@ Page({
     console.log(options)
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -44,7 +44,7 @@ Page({
       data: {
         id: id,
       },
-      header: { //请求头
+      header: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
@@ -52,7 +52,6 @@ Page({
         if (status == 1) {
           var article = res.data.article;
           var content = article['0'].content;
-          //绑定页面数据，使用插件titstu
           WxParse.wxParse('content', 'html', content, that, 3);
           that.setData({
             article: article['0'],
