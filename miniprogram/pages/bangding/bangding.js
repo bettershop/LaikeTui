@@ -108,12 +108,11 @@ Page({
           success: function (res) {
             var code = res.code;
             that.globalData.code = res.code;
-            //取出本地存储用户信息，解决需要每次进入小程序弹框获取用户信息
             var userinfo = wx.getStorageSync('userInfo');
             that.globalData.userInfo = userinfo;
             app.getUserSessionKey(code, cb);
           }
-        }); //重新登录
+        }); 
       }
     });
     var date = getNowFormatDate();

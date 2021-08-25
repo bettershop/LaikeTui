@@ -322,7 +322,6 @@ Page({
       });
       return false;
     }
-    //存回data
     wx.navigateTo({
       url: '../order/pay?cartId=' + toastStr,
     })
