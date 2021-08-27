@@ -21,7 +21,6 @@ Page({
     wx.hideNavigationBarLoading() 
     wx.stopPullDownRefresh()
   },
-  //页面加载完成函数
   onReady: function () {    
   },
   
