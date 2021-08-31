@@ -332,8 +332,7 @@ Page({
     }
   },
 
-  //回到顶部
-  goTop: function (e) {  // 一键回到顶部
+  goTop: function (e) { 
     if (wx.pageScrollTo) {
       wx.pageScrollTo({
         scrollTop: 0
