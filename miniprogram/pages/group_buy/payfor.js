@@ -13,7 +13,7 @@ Page({
     paytype: 'wxPay', //支付方式
     remark: '',
     cartId: 'group',
-    addrId: 0, //收货地址//测试--
+    addrId: 0, //收货地址
     btnDisabled: false,
     productData: [],
     address: {},
