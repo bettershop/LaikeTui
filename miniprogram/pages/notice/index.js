@@ -47,7 +47,7 @@ Page({
       success: function (res) {
         var notice = res.data.notice;
         var detail = res.data.notice[0].detail;
-        WxParse.wxParse('detail', 'html', detail, that, 5);//处理规则的富文本框
+        WxParse.wxParse('detail', 'html', detail, that, 5);
         if (notice == '') {
           var notice = []
         }

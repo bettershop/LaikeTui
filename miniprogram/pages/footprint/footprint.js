@@ -78,7 +78,7 @@ Page({
       }
     })
   },
-  // 查看足迹
+
   footprint: function(){
     var that = this;
     wx.request({
