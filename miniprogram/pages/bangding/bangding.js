@@ -54,31 +54,26 @@ Page({
 
   },
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
   },
   bindMultiPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       multiIndex: e.detail.value
     })
   },
   bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
   },
   bindTimeChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
     })
   },
   bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       region: e.detail.value
     })
@@ -86,8 +81,8 @@ Page({
 
   onLoad: function () {
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -198,8 +193,8 @@ Page({
             url: app.d.laikeUrl + '&action=user&m=secret_key',
             method: 'post',
             data: {
-              encryptedData: encryptedData, // 加密数据
-              iv: iv, // 加密算法
+              encryptedData: encryptedData, 
+              iv: iv, 
               sessionId: app.globalData.userInfo.session_key
             },
             header: {
