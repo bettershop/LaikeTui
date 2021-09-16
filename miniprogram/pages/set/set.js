@@ -1,4 +1,3 @@
-// pages/set/set.js
 var app = getApp()
 Page({
   data: {

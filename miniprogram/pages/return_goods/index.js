@@ -1,4 +1,3 @@
-// pages/return_goods/index.js
 var app = getApp();
 function initSubMenuDisplay() {
   return ['hidden', 'hidden', 'hidden'];

@@ -1,4 +1,3 @@
-// pages/return_goods/return_goods.js
 var app = getApp()
 Page({
 
