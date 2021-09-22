@@ -1,4 +1,3 @@
-// pages/share/share.js
 var app = getApp();
 Page({
   data: {

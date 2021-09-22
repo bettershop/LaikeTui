@@ -1,4 +1,3 @@
-// pages/user/score.js
 var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
 Page({
@@ -80,11 +79,11 @@ Page({
         var content = res.data.rule;
         WxParse.wxParse('content', 'html', content, that, 5);
         that.setData({
-          score: res.data.score, // 积分
+          score: res.data.score, 
           logo: res.data.logo,
-          sign: res.data.sign, // 获取记录
-          consumption: res.data.consumption, // 使用记录
-          switch: res.data.switch//转账按钮（0 关闭  1.开启）
+          sign: res.data.sign, 
+          consumption: res.data.consumption, 
+          switch: res.data.switch
         })
         console.log(res.data.sign);
 
