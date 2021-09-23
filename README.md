@@ -1,5 +1,6 @@
 # 来客电商，免费商用，可去LOGO
 ### 这是一款能跑起来的开源商城系统！稳定且小巧！
+### JAVA版本请移驾：[https://www.laiketui.com/cpc/web/index.html?source=gitee](https://www.laiketui.com/cpc/web/index.html?source=gitee)
 
 ```
 微信小程序电商平台（前后端开源PHP），包含拼团，Fen销，多店，会员制，种草社交，新零售，社区团购等功能，整个系统架构非常简单，适合小型团队或者个人开发者二次开发。
@@ -21,6 +22,7 @@
 ### 全场景快速体验 PC商城+IOS+Android+各端小程序+H5，请访问下列地址：
 
 - [http://www.laiketui.com/action/](http://www.laiketui.com/action/)
+- JAVA版本请移驾：[https://www.laiketui.com/cpc/web/index.html?source=gitee](https://www.laiketui.com/cpc/web/index.html?source=gitee)
 
 ### 小程序端截图
 

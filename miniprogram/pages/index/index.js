@@ -245,16 +245,16 @@ Page({
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
-          var banner = res.data.banner; // 轮播图
-          var twoList = res.data.twoList; //产品显示
+          var banner = res.data.banner; 
+          var twoList = res.data.twoList; 
           var bgcolor = res.data.bgcolor; 
           var plug = res.data.plug; 
           var title = res.data.title;
           app.d.bgcolor = bgcolor;
           var arr = []; 
-          var banner_num = Object.keys(banner); // 轮播图
+          var banner_num = Object.keys(banner); 
           var notice = res.data.notice;
-          var indexTwoData = twoList[0].twodata // 获取首页的数据对象
+          var indexTwoData = twoList[0].twodata 
 
           app.globalData.logoimg = res.data.logo
           app.globalData.title = res.data.title

@@ -154,9 +154,9 @@ Page({
             num = num + 1;
           }
           that.setData({
-            dateArr: dateArr, // 签到数组 
-            imgurl: res.data.imgurl, // 签到图片
-            num: num, // 连续签到天数
+            dateArr: dateArr,
+            imgurl: res.data.imgurl, 
+            num: num, 
             sign_status: res.data.sign_status
           });
         } else if (res.data.status == 2) {
@@ -172,8 +172,8 @@ Page({
         } else {
           WxParse.wxParse('content', 'html', res.data.details, that, 5);
           that.setData({
-            num: res.data.num, // 连续签到天数
-            status: res.data.status, // 连续签到天数
+            num: res.data.num, 
+            status: res.data.status, 
           });
           wx.showToast({
             title: res.data.err,
