@@ -92,7 +92,7 @@ Page({
         var userInfo = res.userInfo;
         var nickName = userInfo.nickName;
         var avatarUrl = userInfo.avatarUrl;
-        var gender = userInfo.gender; //性别 0：未知、1：男、2：女
+        var gender = userInfo.gender; 
         wx.request({
           url: app.d.laikeUrl + '&action=user&m=material',
           method: 'post',
