@@ -9,7 +9,7 @@ Page({
     cartId: 0,
     numbers: ""
   },
-  // 下拉刷新
+
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() 
     this.DataonLoad();
@@ -62,7 +62,6 @@ Page({
     })
   },
 
-  // 数据加载
   DataonLoad: function () {
     var that = this;
     wx.request({
