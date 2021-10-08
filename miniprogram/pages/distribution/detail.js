@@ -148,7 +148,7 @@ Page({
     var bgcolor = app.d.bgcolor;
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: bgcolor, // 页面标题为路由参数
+      backgroundColor: bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -197,7 +197,7 @@ Page({
           that.setData({
             remind: false
           });
-          //默认选中
+          
           that.one();
 
         } else if (status == 3) {
@@ -247,9 +247,9 @@ Page({
       timingFunction: "linear",
       delay: 0
     });
-    //定义点击的类型
+    
     var type = e.target.dataset.type ? e.target.dataset.type : false;
-    //控制两种不同显示方式 
+    
     if (type) {
       this.setData({
         xefl: false,

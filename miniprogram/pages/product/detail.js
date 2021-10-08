@@ -569,7 +569,6 @@ Page({
     var that = this;
     var pro_type = e.target.dataset.type;
     var ptype = e.currentTarget.dataset.type;
-    // console.log(ptype, '--jnkmjkl')
     wx.request({
       url: app.d.laikeUrl + '&action=product&m=add_cart',
       method: 'post',
@@ -584,7 +583,6 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        //设置购物车刷新
         app.d.purchase = 1;
         var data = res.data;
         if (data.status == 1) {
@@ -621,11 +619,11 @@ Page({
       }
     });
   },
-  bindChange: function (e) {//滑动切换tab 
+  bindChange: function (e) {
     var that = this;
     that.setData({ currentTab: e.detail.current });
   },
-  initNavHeight: function () {////获取系统信息
+  initNavHeight: function () {
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -683,7 +681,6 @@ Page({
     var title = uname + that.data.title;
     var referee_openid = app.globalData.userInfo.user_id;
     if (res.from === 'button') {
-      // 来自页面内转发按钮
     }
     console.log('pages/product/detail?productId=' + id + '&referee_openid=' + referee_openid)
     return {
