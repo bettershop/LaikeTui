@@ -83,13 +83,12 @@ Page({
       },
     });
   },
-  // 转发分享
+ 
   onShareAppMessage: function (res) {
     var that = this;
     var id = that.data.article.Article_id;
     var Article_title = that.data.article.Article_title;
     if (res.from === 'button') {
-      // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
