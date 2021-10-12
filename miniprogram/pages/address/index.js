@@ -29,19 +29,17 @@ Page({
       content: '你确认移除吗?',
       success: function (res) {
         if (res.confirm) {
-          console.log(11)
           wx.request({
             url: app.d.laikeUrl + '&action=address&m=del_select',
             data: {
               openid: app.globalData.userInfo.openid,
               id_arr: carts
             },
-            method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-            header: {// 设置请求的 header
+            method: 'POST', 
+            header: {
               'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: function (res) {
-              // success
               var status = res.data.status;
               if (status == 1) {
                 wx.showToast({
@@ -91,7 +89,6 @@ Page({
       bgcolor: app.d.bgcolor
     });
     var that = this;
-    // 页面初始化 options为页面跳转所带来的参数
     if (options.cartId) {
       var cartId = options.cartId;
     } else {
@@ -108,7 +105,6 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        // success
         var address = res.data.adds;
         if (address == '') {
           var address = []
@@ -294,8 +290,8 @@ Page({
             openid: app.globalData.userInfo.openid,
             id_arr: addrId
           },
-          method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-          header: {// 设置请求的 header
+          method: 'POST', 
+          header: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
           success: function (res) {
@@ -325,7 +321,6 @@ Page({
   // 数据加载
   DataonLoad: function () {
     var that = this;
-    // 页面初始化 options为页面跳转所带来的参数
     wx.request({
       url: app.d.laikeUrl + '&action=address&m=index',
       data: {

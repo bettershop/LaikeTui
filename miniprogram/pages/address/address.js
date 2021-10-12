@@ -117,8 +117,6 @@ Page({
   //滑动事件
   bindChange: function (e) {
     var val = e.detail.value
-    //判断滑动的是第几个column
-    //若省份column做了滑动则定位到地级市和区县第一位
     if (index[0] != val[0]) {
       val[1] = 0;
       val[2] = 0;
