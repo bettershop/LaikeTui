@@ -2,9 +2,9 @@ var app = getApp();
 var t = 0;
 var moveY = 200;
 var index = [0, 0, 0];
-var sheng = [];//省
-var shi = [];//城市
-var xian = [];//区县
+var sheng = [];
+var shi = [];
+var xian = [];
 Page({
 
   data: {
@@ -17,9 +17,6 @@ Page({
     show: false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
