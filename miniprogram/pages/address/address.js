@@ -141,7 +141,7 @@ Page({
       },
       method: "POST",
       header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
+        'content-type': 'application/x-www-form-urlencoded' 
       },
       success: function (res) {
         if (res.data.status == 1) {
@@ -198,7 +198,7 @@ Page({
       },
       method: "POST",
       header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
+        'content-type': 'application/x-www-form-urlencoded' 
       },
       success: function (res) {
         if (res.data.status == 1) {
