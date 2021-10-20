@@ -283,7 +283,6 @@ Page({
             }
           },
           fail: function () {
-            // fail
             wx.showToast({
               title: '网络异常！',
               duration: 2000

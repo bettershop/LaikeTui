@@ -55,10 +55,10 @@ class modifyAction extends Action
     {
         $db = DBAction::getInstance();
         $request = $this->getContext()->getRequest();
-        $id = addslashes(trim($request->getParameter('id'))); // 
-        $url = addslashes(trim($request->getParameter('uploadImg'))); // 图片上传位置
-        $name = addslashes(trim($request->getParameter('notice'))); // name
-        $detail = addslashes(trim($request->getParameter('detail'))); // 
+        $id = addslashes(trim($request->getParameter('id'))); 
+        $url = addslashes(trim($request->getParameter('uploadImg'))); 
+        $name = addslashes(trim($request->getParameter('notice'))); 
+        $detail = addslashes(trim($request->getParameter('detail'))); 
         $oldpic = addslashes(trim($request->getParameter('oldpic')));
         $image = addslashes(trim($request->getParameter('image')));
 
