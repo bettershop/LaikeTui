@@ -19,7 +19,7 @@ Page({
       data: {
         openid: app.globalData.userInfo.openid
       },
-      header: { //请求头
+      header: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
