@@ -124,10 +124,10 @@ Page({
     });
     this.onData();
   },
-  //下拉事件
+
   onPullDownRefresh: function () {
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh() 
   },
 
   onReady: function () {

@@ -285,15 +285,15 @@ Page({
       bgcolor: app.d.bgcolor,
     });
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor 
     })
     //页面初始化 options为页面跳转所带来的参数
     var that = this;
     var select = that.data.select;
     var sort = that.data.sort;
     var page = that.data.page;
-    //ajax请求数据
+    
     wx.request({
       url: app.d.laikeUrl + '&action=pi&p=pintuan&c=groupbuy&m=grouphome',
       method: 'post',
