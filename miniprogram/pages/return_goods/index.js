@@ -18,7 +18,7 @@ Page({
     console.log(options)
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -30,7 +30,7 @@ Page({
     });
     this.loadList();
   },
-  //页面加载完成函数 remind: '加载中',
+  
   onReady: function () {
     var that = this;
     that.setData({
@@ -186,7 +186,7 @@ Page({
       that.loadList();
     };
   },
-  // 弹窗
+
   setModalStatus: function (e) {
     var that = this;
     wx.request({
@@ -235,7 +235,7 @@ Page({
       timingFunction: "linear",
       delay: 0
     });
-    //定义点击的类型
+    
     this.animation = animation
     animation.translateY(300).step();
     this.setData({
