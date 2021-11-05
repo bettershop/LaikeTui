@@ -1,0 +1,402 @@
+page{
+ height: 100%;
+ width: 100%;
+}
+.scimg {
+  width:246rpx;
+  height:246rpx;
+}
+.swiper-tab{  
+    width: 100%;  
+    border-bottom: 1px solid #eee;  
+    text-align: center;  
+    line-height: 80rpx;
+    background: #fff;  
+    position: fixed;
+    top: 0;  
+    z-index: 999;
+    }  
+.swiper-tab-list{  
+  font-size: 12px;  
+  display: inline-block;  
+  width: 20%;  
+  color: #666;  
+  }  
+.on{ 
+  color: #dd2727;  
+  border-bottom: 5rpx solid #dd2727;
+  }  
+  
+.swiper-box{ 
+  display: block; 
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden;
+  /* margin-top: 20px  */
+  }  
+
+.clearbutton{
+    background: #fff; 
+    display: inline-block;
+    margin:3% 3% 2% 3%; 
+    color: #dd2727;
+    font-size: 14px;
+    width: 94%;
+}
+button::after{
+border: none;
+}
+.shop{
+    background: #fafafa;
+    padding: 15px;
+    border-bottom:1px solid #eee;
+}
+.shop checkbox{ 
+    margin-top: 27px;
+    }
+.sh_slt{
+    width: 65px;
+    height: 65px;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-right: 4%;
+    float: left;
+}
+.sp_text{
+    display:flex;
+    line-height: 20px;
+    width: 100%;
+    text-align: left;
+    padding-left:10px;
+}
+.sp_tit{
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    -webkit-line-clamp:2;
+}
+.guige{
+    font-size:12px;
+    color:#808080;
+    text-align:right;
+}
+
+
+
+.sp_neb{
+    width: 100%;
+    overflow: hidden;
+    font-size: 13px;
+    color: #999;
+}
+.sp_jg{
+    width: 30%;
+    overflow: hidden;
+    font-size: 13px;
+    color: #fc0628;
+}
+.dle{
+    color: #999;
+    font-size: 12px;
+    float: right;
+}
+.dle image{
+    width: 18px;
+    height: 18px;
+    vertical-align: sub;
+}
+.jk_bottom{
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 100%; 
+    display: inline-flex;
+    border-bottom: 1px solid #eee; 
+    font-size: 14px;
+    color: #999;       
+}
+.jk_bottom checkbox{
+    margin: 4% 0 4% 4%;    
+}
+.jk_bottom .heji{
+    margin-top: 5.5%;
+    width: 30%; 
+    text-align: right;   
+}
+.jk_bottom .all{
+    margin-top: 5.5%;
+    padding-left: 2%;  
+}
+.jk_bottom .js_button{
+    background: #dd2727;
+    float: right;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    width: 40%;
+    position: absolute;
+    right: 0;
+    line-height: 50px;
+}
+.c_t60{
+    clear: both;
+    height: 1px;
+    padding-top: 35px;
+}
+.blue{
+  color: #42b1ff;
+}
+.mr_5{
+    margin-right: 5px;
+}
+.top{
+  padding: 15px;
+  font-size:12px;
+}
+.font_12{
+  padding: 5px 10px;
+  border-radius:15px;
+  color:#fff;
+  width:55px;
+  text-align:center;
+  line-height:15px;
+  height:15px;
+}
+.bottom{
+  border-top:1px #eee solid;
+  height:36px;
+  margin:auto;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+.total{
+  font-size:14px;
+  padding-bottom:3px;
+  height:28px;
+  /* padding-right:14px; */
+}
+
+.zhifu{
+  height:28px;
+  line-height:28px;
+  float:right;
+  padding-right:4%;
+}
+
+.tab_statu{
+  float: right;
+  font-size: 13px;
+  color: #FF6347;
+}
+.tab_tab{
+  background:#fff;
+  margin-bottom:8px;
+}
+scroll-view {
+  background:#eee;
+}
+.person_box{
+    position: relative;
+}
+.phone_select{
+    margin-top:0;
+    z-index: 100;
+     position: absolute; /*//小程序中z-index和absolute需要同时存在，元素才能脱离文档。 */
+}
+.select_one{
+    text-align: center;
+    background-color:rgb(239, 239, 239);
+    width:100%;  /*  //脱离文档后元素width不能再用百分比。 */
+    height:100rpx;
+    line-height:100rpx;
+    margin:0 5%;
+    border-bottom:2rpx solid rgb(255, 255, 255);
+}
+
+/*下拉*/
+.product-list {
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  padding-top: 80rpx;
+  box-sizing: border-box;
+}
+
+/*条件选择*/
+
+.choice-bar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100vw;
+  font-size: 16px;
+  background-color: #fff;
+  z-index: 9;
+}
+
+.chioce-item {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  width: 33.33%;
+  height: 80rpx;
+  border-top: 1rpx solid #ddd;
+  border-bottom: 1rpx solid #ddd;
+  border-left: 1rpx solid #ddd;
+  /*border-right: 1rpx solid #ddd;*/
+}
+
+.chioce-item-last {
+  border-right: none;
+}
+
+.chioce-item-first {
+  border-left: none;
+}
+
+.icon-chioce {
+  height: 30rpx;
+  width: 30rpx;
+}
+.mask{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+}
+.district-list,.sorting-list,.filter-list {
+  margin-top: 2rpx;
+  position: absolute;
+  top: 80rpx;
+  left: 10px;
+  width: 100%;
+  background-color: #fff;
+  z-index: -1;
+  font-size: 14px;
+  border-bottom: 1rpx solid #ddd;
+}
+.iconfont {
+  font-size:9px;
+  margin:0;
+  padding:0;
+}
+.xzbg{
+  color: #fff;
+}
+.chioce-list-show {
+  top: 110rpx;
+  animation: slide 500ms;
+  width:25%;
+  border:1px solid red;
+  border-radius:5px;
+  font-size:12px;
+}
+
+@keyframes slide {
+  0% {
+    top: -500rpx;
+  }
+
+  100% {
+    top: 80rpx;
+  }
+}
+
+.chioce-list-hide {
+  display: none !important;
+}
+
+/*区域位置*/
+
+.district-list {
+  display: flex;
+}
+
+.district-left {
+  flex-grow: 1;
+}
+
+.district-right {
+  flex-grow: 4;
+}
+.scroll-district{
+  height: 500rpx;
+}
+.district-parent {
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 40rpx;
+  border-bottom: 1rpx solid #ddd;
+  border-right: 1rpx solid #ddd;
+  background-color: #f0f0f0;
+}
+
+.district-parent-active {
+  background-color: #fff;
+}
+
+.district-children {
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 40rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+
+/*综合排序*/
+
+.sorting-item {
+  height: 80rpx;
+  line-height: 80rpx;
+  /* padding: 0 40rpx; */
+  border-bottom: 1rpx solid #eee;
+}
+
+/*筛选*/
+
+.filter-item {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 40rpx;
+  border-bottom: 1rpx solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-selected {
+  height: 30rpx;
+  width: 30rpx;
+}
+
+.filter-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-footer button {
+  margin: 20rpx 80rpx;
+  border-radius: 0 !important;
+}
+
+.button-reset {
+  border: 1rpx solid #ddd !important;
+  color: #666 !important;
+}
+
+/* 小标签 */
+.noe {
+  display: block;
+  border-width: 10px;
+  position: absolute;
+  left: 10px;
+  top: -20px;
+  border-style: solid dashed dashed;
+  border-color: transparent transparent red transparent;
+  font-size: 0;
+  line-height: 0;
+}

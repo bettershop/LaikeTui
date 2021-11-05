@@ -1,0 +1,89 @@
+<view class="body" wx:if="{{remind}}">
+  <view class='zong'>
+    <view class="spinner" >
+      <view class="spinner-container container1">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container2">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+      <view class="spinner-container container3">
+        <view class="circle1"></view>
+        <view class="circle2"></view>
+        <view class="circle3"></view>
+        <view class="circle4"></view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 加载页面结束 -->
+<block wx:else>
+<form bindsubmit="submitComment">
+  <view class="order_comment_bg">
+    <view class="order_comment_h" wx:for="{{commentList}}" wx:for-item="comments" style="background:#fff;">
+      <view class="order_comment_item">
+        <view class="weui-flex order_comment_content bottom_border">
+          <view>
+            <view class="placeholder">
+              <image src="{{comments.commodityIcon}}" class="order_comment_img"></image>
+            </view>
+          </view>
+          <view class="weui-flex__item order_comment_textarea_box">
+          <view class="textarea-container">
+            <textarea value="{{comments.content}}" name="content_{{index}}" bindblur='setcon' data-index="{{index}}" style='height:134rpx;' placeholder="请输入评价内容" data-index="{{index}}" maxlength="-1" />
+          </view>
+          </view>
+        </view>
+        <view>
+          <view class="weui-flex order_comment_type">
+            <view class="weui-flex__item">
+              <view class="placeholder" bindtap="selectCommentType" data-index="{{index}}" data-type="GOOD">
+                <image src="{{comments.commentType=='GOOD'?'/images/icon_good_select.png':'/images/icon_good.png'}}" style="width:30rpx;height:30rpx;"></image>
+                <text class="{{comments.commentType=='GOOD'?'order_comment_type_selected':'order_comment_type_default'}}">好评</text>
+              </view>
+            </view>
+            <view class="weui-flex__item" style="text-align:center;">
+              <view class="placeholder" bindtap="selectCommentType" data-index="{{index}}" data-type="NOTBAD">
+                <image src="{{comments.commentType=='NOTBAD'?'/images/icon_middle_select.png':'/images/icon_middle.png'}}" style="width:30rpx;height:30rpx;"></image>
+                <text class="{{comments.commentType=='NOTBAD'?'order_comment_type_selected':'order_comment_type_default'}}">中评</text>
+              </view>
+            </view>
+            <view class="weui-flex__item" style="text-align:right;">
+              <view class="placeholder" bindtap="selectCommentType" data-index="{{index}}" data-type="BAD">
+                <image src="{{comments.commentType=='BAD'?'/images/icon_bad_select.png':'/images/icon_bad.png'}}" style="width:30rpx;height:30rpx;"></image>
+                <text class="{{comments.commentType=='BAD'?'order_comment_type_selected':'order_comment_type_default'}}">差评</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      <!-- /图片上传/ -->
+      <view class="gallery">
+    <view class="item" wx:for="{{comments.images}}" wx:key="" wx:for-item="images">
+      <image style="width: 100%; height: 100%" src=" {{images}}" id="{{index}}" bindtap="previewImage" mode="aspectFill"/>
+      <!-- 删除按钮 -->
+      <view class="delete" id="{{comments.id}}" bindtap="delete" data-index="{{index}}"><image style="left: {{imageWidth / 2 - 10}}px;" src="/images/icon_delete.png" /></view>
+    </view>
+    <view class="item" wx:if="{{comments.addHide<3}}">
+      <view style='margin:auto;width:40px;padding-top:40rpx;'>
+      <image style="width:40px; height:40px" src="/images/shangchuan.png" id="{{index}}" class="button-upload" bindtap="chooseImage" />
+      </view>
+    </view>
+     <!-- /图片上传/ -->
+
+      </view>
+      <view class="line"></view>
+    </view>
+
+</view>
+    <view class="commnet_btn_box">
+      <button class="weui-btn" style="background:{{bgcolor}};font-size:30rpx;padding:10rpx 0;" type="primary" formType="submit">确定</button>
+    </view>
+  </view>
+</form>
+</block>

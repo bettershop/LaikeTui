@@ -1,0 +1,9 @@
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=pintuan&c=Home' WHERE `lkt_core_menu`.`id` = 170;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=pintuan&c=Home' WHERE `lkt_core_menu`.`id` = 175;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=sign' WHERE `lkt_core_menu`.`id` = 163;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=sign' WHERE `lkt_core_menu`.`id` = 164;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=sign&c=add' WHERE `lkt_core_menu`.`id` = 165;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=sign&c=modify' WHERE `lkt_core_menu`.`id` = 166;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=sign&c=del' WHERE `lkt_core_menu`.`id` = 167;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=sign' WHERE `lkt_core_menu`.`id` = 168;
+UPDATE `lkt_core_menu` SET `url` = 'index.php?module=pi&p=sign&c=record' WHERE `lkt_core_menu`.`id` = 169;

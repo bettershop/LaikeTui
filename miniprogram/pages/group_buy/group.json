@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "爱拼才会赢",
+  "usingComponents": {
+    "pop": "../logins/logins"
+  }
+}

@@ -1,0 +1,69 @@
+<!--地址管理-->
+ <view class='top-ql' wx:if="{{address !=''}}">
+          <view wx:if="{{!flag}}" bindtap="upflag" class='top-ql-1' style='color:#333;'>地址管理</view>
+          <view wx:else class='top-ql-1' bindtap="uptrue" style='color:#f60;'>完成</view>
+      </view>
+<radio-group class="radio-group" wx:for="{{address}}" wx:key="key">
+  <view hidden="{{hiddenAddress}}" class="address">
+    <view class="address-detail">
+    <view class='address_div'>
+      <view class="address-name-phone">
+        <text class="address-name">{{item.name}}</text>
+        <text class="address-phone">{{item.tel}}</text>
+      </view>
+      <view class="address-info">{{item.address_xq}}</view>
+      <navigator class='address_img_div' url="../address/upaddress/upaddress?addr_id={{item.id}}"><image src='../../images/x_right.png' class='address_img'></image></navigator>
+    </view>
+      
+      <view class="address-edit">
+        <view>
+          <icon></icon>
+          <text hidden="{{item.is_default==0?false:true}}"></text>
+        </view>
+        <view >
+
+          <!-- <text hidden="{{item.is_default==0?false:true}}" bindtap="setDefault" data-id="{{item.id}}">设置默认</text> -->
+          <!-- <text hidden="{{item.is_default==0?false:true}}"> | </text> -->
+          
+          <view class="address-icon">
+            <view wx:if="{{!flag}}" bindtap="setDefault" data-id="{{item.id}}">
+              <radio  checked="{{item.is_default==1?true:false}}" value="{{index}}" style='margin:auto'      color='#FF6347' />
+              <text class='address_text'>设置默认地址</text>
+            </view>
+            
+            <view wx:if="{{flag}}" class='add_icon'>
+              <icon wx:if="{{item.selected}}" type="success_circle"  size="26" bindtap="bindCheckbox" data-index="{{index}}" class='address_icon'/>
+              <icon wx:else type="circle" size="26" bindtap="bindCheckbox" data-index="{{index}}" class='address_icon'/>
+            </view>
+          </view>
+
+          
+
+          <navigator style='display:inline-block;' url="../address/upaddress/upaddress?addr_id={{item.id}}">
+          
+            <text style='margin:10px'>编辑</text>
+          </navigator>
+          <text data-id="{{item.id}}" bindtap="delAddress">删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</radio-group>
+<navigator wx:if="{{!flag}}" url="../address/address?cartId={{cartId}}" style='width: 94%;margin: 0 auto;margin-bottom: 50px;'>
+  <view hidden="{{hiddenAddress}}" class="add-address" style="background-color:#FF6347;">
+    <view class="iconfont icon-tianjia"></view>
+    <view style='color:#fff'>新增地址</view>
+  </view>
+
+  
+</navigator>
+<view  class="add_dell" wx:if="{{flag}}">
+    <view class='add_left'>
+      <view bindtap="bindSelectAll" class='heji'>
+            <icon wx:if="{{selectedAllStatus}}" type="success_circle" size="26" class='heji_icon'/>
+              <icon wx:else type="circle" size="26" class='heji_icon'/>
+              <text class='heji_text'>全选</text>
+        </view>
+    </view>
+    <view class='add_right' bindtap='delarr' style='color:#fff'>删除</view>
+</view>

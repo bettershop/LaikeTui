@@ -1,0 +1,90 @@
+* {
+  padding: 0;
+  margin: 0; }
+body{background-color: #313131}
+.drag-container {
+  position: relative;
+  background: #fff; }
+  .drag-container img {
+    max-width: 100%;
+    max-height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  .drag-container .drag-opa {
+    /*opacity: .3;*/
+     }
+  .drag-container .drag-clip {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .drag-container .drag-move {
+    position: relative;
+    position: absolute;
+    top: 40px;
+    left: 200px;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    /*border: 1px solid #ca0000;*/
+    cursor: -webkit-grabbing;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    .drag-container .drag-move span {
+      width: 5px;
+      z-index: 3;
+      position: absolute;
+      /*background: #ca0000;*/
+      width: 7px;
+      height: 7px; }
+      .drag-container .drag-move span:nth-child(1) {
+        top: -3.5px;
+        left: -3.5px;
+        cursor: nw-resize; }
+      .drag-container .drag-move span:nth-child(2) {
+        top: -3.5px;
+        right: -3.5px;
+        cursor: sw-resize; }
+      .drag-container .drag-move span:nth-child(3) {
+        bottom: -3.5px;
+        right: -3.5px;
+        cursor: se-resize; }
+      .drag-container .drag-move span:nth-child(4) {
+        bottom: -3.5px;
+        left: -3.5px;
+        cursor: sw-resize; }
+
+/*# sourceMappingURL=drag.css.map */
+.clip-show{
+    position: fixed;
+    bottom: 10px;
+    z-index: 999;
+    left: 50%;
+    width: 100%;
+}
+.clip-show button{
+    width: 100px;
+}
+
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1523857246471'); /* IE9*/
+  src: url('iconfont.eot?t=1523857246471#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAXAAAsAAAAACFwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kgsY21hcAAAAYAAAABeAAABhppABr5nbHlmAAAB4AAAAfMAAAJEVAqbq2hlYWQAAAPUAAAALwAAADYRE/S5aGhlYQAABAQAAAAcAAAAJAfeA4RobXR4AAAEIAAAAAwAAAAMC+kAAGxvY2EAAAQsAAAACAAAAAgAdgEibWF4cAAABDQAAAAfAAAAIAEpAHxuYW1lAAAEVAAAAUUAAAJtPlT+fXBvc3QAAAWcAAAAJAAAADXP81JyeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2Bk/sE4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVDxzYm7438AQw9zA0AAUZgTJAQAoQgyueJzFkMENgDAMAy9t6QMxCA+m6BS8mKMTd41iQnkwQS05VhxLiQIsQBQPMYFdGA9OueZ+ZHU/eSZLjUBtpXf1nyqiWXYNKplpsHmr/9i87qPTV6iDOrGVl4Qb9+8MlwAAeJxNT01rE2EQntnX3Xw0H2Y/sskmabJZ01WiUZPYHoqNoFBaCxWWdzchAZFgxSxZPQTqwUNBBA8evEkpCorgwSa55GR7EPsT/AWi92BPgrq6KREyPM/MM8MMwwMswN+v5JAkQICzcBluwC0A5IqYjzAZVPVqiSmipLKSLEaIrumqT8uXyFWU85wYLy9WF2TOx0UxgvNYUcuLeonR8Up1hVnGcjyDmEwpBl9I8+QFBhP6/FN3nXmLUlZLR1cuuGvna2I5J/i3Qzyf5Pnnfo5l/QxzKhrBrhwPsIEg575jo4p0mD3HZDGU1JWNRjiX4u88qzqZghxA3NlBIZWLvK/FlJiHx0pc4JO+02F/QglrZ0Tc/j6XEEKZhW/gRdrz2idfiAEEfDAHUc+zDCnIggY6FOEiVGAJlqEG12EVbsImGGBBE25DG+6BDQ8ABFVSCxVJm5D1NKnENPRIprOlKfWZys7oyf3szoQ47f/f+2b0JXzlthl2PMZV0/w9OukoxXVKD3o9fGQY42azbpo/dnfNvb0PlP75SSlttby0j6z7q+Y4jW6XdjrW1hYOj46Obdv9aNv7J0BmOKxbFjG8bWodU3ztticPEHsH9fqbtZdmV26YJv3Et0gfR53gXXlo9h0HR4OBLX5+8vCaY1mD+/APy7OBRAB4nGNgZGBgAGKOAL/D8fw2Xxm4WRhA4NqviDgE/X8tCwNzMJDLwcAEEgUAHR0KNgB4nGNgZGBgbvjfwBDDwgACQJKRARUwAwBHCQJsBAAAAAPpAAAEAAAAAAAAAAB2ASJ4nGNgZGBgYGYoYJBhAAEmIOYCQgaG/2A+AwAWDwGmAHicZY9NTsMwEIVf+gekEqqoYIfkBWIBKP0Rq25YVGr3XXTfpk6bKokjx63UA3AejsAJOALcgDvwSCebNpbH37x5Y08A3OAHHo7fLfeRPVwyO3INF7gXrlN/EG6QX4SbaONVuEX9TdjHM6bCbXRheYPXuGL2hHdhDx18CNdwjU/hOvUv4Qb5W7iJO/wKt9Dx6sI+5l5XuI1HL/bHVi+cXqnlQcWhySKTOb+CmV7vkoWt0uqca1vEJlODoF9JU51pW91T7NdD5yIVWZOqCas6SYzKrdnq0AUb5/JRrxeJHoQm5Vhj/rbGAo5xBYUlDowxQhhkiMro6DtVZvSvsUPCXntWPc3ndFsU1P9zhQEC9M9cU7qy0nk6T4E9XxtSdXQrbsuelDSRXs1JErJCXta2VELqATZlV44RelzRiT8oZ0j/AAlabsgAAAB4nGNgYoAALgbsgJmRiZGZkYWBsYI9tag8NTM3kYEBABpqA4Y=') format('woff'),
+  url('iconfont.ttf?t=1523857246471') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1523857246471#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-erweima:before { content: "\e642"; }
+

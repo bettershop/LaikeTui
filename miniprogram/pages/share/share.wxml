@@ -1,0 +1,11 @@
+<!--pages/share/share.wxml-->
+<view class="share_1">
+  <image class='img' src="/images/head.jpg"/>
+  <view class="userinfo">
+    <image class="userinfo-avatar fl_l" src="{{headimgurl}}" background-size="cover"></image>
+    <text class="fl_l userinfo-nickname">{{wx_name}}</text> 
+  </view>
+  <view class="share_4">{{wishing}}</view>
+  <view class="share_3"><text class='mtxt'>{{text}}</text>元</view>
+  <view class="share_5" bindtap="close">关闭</view> 
+</view>

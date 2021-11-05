@@ -1,0 +1,1311 @@
+BODY {
+	PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #f7f7f7; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-FAMILY: tahoma, ����; COLOR: black; FONT-SIZE: 12px; TEXT-DECORATION: none; PADDING-TOP: 0px
+}
+A {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #cc9933; TEXT-DECORATION: underline
+}
+.WidthAuto {
+	WIDTH: auto
+}
+.Width1 {
+	WIDTH: 1px
+}
+.Width5 {
+	WIDTH: 5px
+}
+.Width10 {
+	WIDTH: 10px
+}
+.Width14 {
+	WIDTH: 14px
+}
+.Width15 {
+	WIDTH: 15px
+}
+.Width18 {
+	WIDTH: 18px
+}
+.Width20 {
+	WIDTH: 20px
+}
+.Width24 {
+	WIDTH: 24px
+}
+.Width25 {
+	WIDTH: 25px
+}
+.Width30 {
+	WIDTH: 30px
+}
+.Width31 {
+	WIDTH: 31px
+}
+.Width32 {
+	WIDTH: 32px
+}
+.Width33 {
+	WIDTH: 33px
+}
+.Width34 {
+	WIDTH: 34px
+}
+.Width35 {
+	WIDTH: 35px
+}
+.Width36 {
+	WIDTH: 36px
+}
+.Width37 {
+	WIDTH: 37px
+}
+.Width38 {
+	WIDTH: 38px
+}
+.Width39 {
+	WIDTH: 39px
+}
+.Width40 {
+	WIDTH: 40px
+}
+.Width45 {
+	WIDTH: 45px
+}
+.Width47 {
+	WIDTH: 47px
+}
+.Width50 {
+	WIDTH: 50px
+}
+.Width55 {
+	WIDTH: 55px
+}
+.Width60 {
+	WIDTH: 60px
+}
+.Width65 {
+	WIDTH: 65px
+}
+.Width66 {
+	WIDTH: 66px
+}
+.Width70 {
+	WIDTH: 70px
+}
+.Width75 {
+	WIDTH: 75px
+}
+.Width78 {
+	WIDTH: 78px
+}
+.Width80 {
+	WIDTH: 80px
+}
+.Width85 {
+	WIDTH: 85px
+}
+.Width90 {
+	WIDTH: 90px
+}
+.Width100 {
+	WIDTH: 100px
+}
+.Width105 {
+	WIDTH: 105px
+}
+.Width110 {
+	WIDTH: 110px
+}
+.Width111 {
+	WIDTH: 111px
+}
+.Width112 {
+	WIDTH: 112px
+}
+.Width113 {
+	WIDTH: 113px
+}
+.Width114 {
+	WIDTH: 114px
+}
+.Width115 {
+	WIDTH: 115px
+}
+.Width116 {
+	WIDTH: 116px
+}
+.Width117 {
+	WIDTH: 117px
+}
+.Width118 {
+	WIDTH: 118px
+}
+.Width119 {
+	WIDTH: 119px
+}
+.Width120 {
+	WIDTH: 140px
+}
+.Width124 {
+	WIDTH: 124px
+}
+.Width125 {
+	WIDTH: 125px
+}
+.Width130 {
+	WIDTH: 130px
+}
+.Width135 {
+	WIDTH: 135px
+}
+.Width140 {
+	WIDTH: 140px
+}
+.Width145 {
+	WIDTH: 145px
+}
+.Width150 {
+	WIDTH: 150px
+}
+.Width155 {
+	WIDTH: 155px
+}
+.Width160 {
+	WIDTH: 160px
+}
+.Width162 {
+	WIDTH: 162px
+}
+.Width164 {
+	WIDTH: 164px
+}
+.Width165 {
+	WIDTH: 165px
+}
+.Width166 {
+	WIDTH: 166px
+}
+.Width167 {
+	WIDTH: 167px
+}
+.Width168 {
+	WIDTH: 168px
+}
+.Width170 {
+	WIDTH: 170px
+}
+.Width175 {
+	WIDTH: 175px
+}
+.Width180 {
+	WIDTH: 180px
+}
+.Width182 {
+	WIDTH: 182px
+}
+.Width184 {
+	WIDTH: 184px
+}
+.Width185 {
+	WIDTH: 185px
+}
+.Width186 {
+	WIDTH: 186px
+}
+.Width188 {
+	WIDTH: 188px
+}
+.Width190 {
+	WIDTH: 190px
+}
+.Width195 {
+	WIDTH: 195px
+}
+.Width200 {
+	WIDTH: 200px
+}
+.Width206 {
+	WIDTH: 206px
+}
+.Width212 {
+	WIDTH: 212px
+}
+.Width215 {
+	WIDTH: 215px
+}
+.Width220 {
+	WIDTH: 220px
+}
+.Width230 {
+	WIDTH: 230px
+}
+.Width240 {
+	WIDTH: 240px
+}
+.Width250 {
+	WIDTH: 250px
+}
+.Width255 {
+	WIDTH: 255px
+}
+.Width260 {
+	WIDTH: 260px
+}
+.Width270 {
+	WIDTH: 270px
+}
+.Width275 {
+	WIDTH: 275px
+}
+.Width280 {
+	WIDTH: 280px
+}
+.Width285 {
+	WIDTH: 285px
+}
+.Width288 {
+	WIDTH: 288px
+}
+.Width290 {
+	WIDTH: 290px
+}
+.Width300 {
+	WIDTH: 300px
+}
+.Width310 {
+	WIDTH: 310px
+}
+.Width320 {
+	WIDTH: 320px
+}
+.Width325 {
+	WIDTH: 325px
+}
+.Width340 {
+	WIDTH: 340px
+}
+.Width342 {
+	WIDTH: 342px
+}
+.Width350 {
+	WIDTH: 350px
+}
+.Width360 {
+	WIDTH: 360px
+}
+.Width362 {
+	WIDTH: 362px
+}
+.Width364 {
+	WIDTH: 364px
+}
+.Width365 {
+	WIDTH: 365px
+}
+.Width370 {
+	WIDTH: 370px
+}
+.Width380 {
+	WIDTH: 380px
+}
+.Width390 {
+	WIDTH: 390px
+}
+.Width400 {
+	WIDTH: 400px
+}
+.Width405 {
+	WIDTH: 405px
+}
+.Width410 {
+	WIDTH: 410px
+}
+.Width420 {
+	WIDTH: 420px
+}
+.Width450 {
+	WIDTH: 450px
+}
+.Width460 {
+	WIDTH: 460px
+}
+.Width465 {
+	WIDTH: 465px
+}
+.Width470 {
+	WIDTH: 470px
+}
+.Width475 {
+	WIDTH: 475px
+}
+.Width480 {
+	WIDTH: 480px
+}
+.Width486 {
+	WIDTH: 486px
+}
+.Width490 {
+	WIDTH: 490px
+}
+.Width500 {
+	WIDTH: 500px
+}
+.Width550 {
+	WIDTH: 550px
+}
+.Width580 {
+	WIDTH: 580px
+}
+.Width590 {
+	WIDTH: 590px
+}
+.Width600 {
+	WIDTH: 600px
+}
+.Width610 {
+	WIDTH: 610px
+}
+.Width620 {
+	WIDTH: 620px
+}
+.Width630 {
+	WIDTH: 630px
+}
+.Width640 {
+	WIDTH: 640px
+}
+.Width650 {
+	WIDTH: 650px
+}
+.Width660 {
+	WIDTH: 660px
+}
+.Width670 {
+	WIDTH: 670px
+}
+.Width680 {
+	WIDTH: 680px
+}
+.Width690 {
+	WIDTH: 690px
+}
+.Width700 {
+	WIDTH: 700px
+}
+.Width710 {
+	WIDTH: 710px
+}
+.Width740 {
+	WIDTH: 740px
+}
+.Width764 {
+	WIDTH: 764px
+}
+.Width800 {
+	WIDTH: 800px
+}
+.Width830 {
+	WIDTH: 830px
+}
+.Width831 {
+	WIDTH: 831px
+}
+.Width832 {
+	WIDTH: 832px
+}
+.Width833 {
+	WIDTH: 833px
+}
+.Width834 {
+	WIDTH: 834px
+}
+.Width835 {
+	WIDTH: 835px
+}
+.Width836 {
+	WIDTH: 836px
+}
+.Width837 {
+	WIDTH: 837px
+}
+.Width838 {
+	WIDTH: 838px
+}
+.Width839 {
+	WIDTH: 839px
+}
+.Width840 {
+	WIDTH: 840px
+}
+.Width900 {
+	WIDTH: 900px
+}
+.Width910 {
+	WIDTH: 910px
+}
+.Width915 {
+	WIDTH: 915px
+}
+.Width916 {
+	WIDTH: 916px
+}
+.Width917 {
+	WIDTH: 917px
+}
+.Width918 {
+	WIDTH: 918px
+}
+.Width919 {
+	WIDTH: 919px
+}
+.Width920 {
+	WIDTH: 920px
+}
+.Width921 {
+	WIDTH: 921px
+}
+.Width922 {
+	WIDTH: 922px
+}
+.Width923 {
+	WIDTH: 923px
+}
+.Width924 {
+	WIDTH: 924px
+}
+.Width925 {
+	WIDTH: 925px
+}
+.Width930 {
+	WIDTH: 930px
+}
+.Width940 {
+	WIDTH: 940px
+}
+.Width950 {
+	WIDTH: 950px
+}
+.Width960 {
+	WIDTH: 960px
+}
+.Width965 {
+	WIDTH: 965px
+}
+.Width970 {
+	WIDTH: 970px
+}
+.Width980 {
+	WIDTH: 980px
+}
+.Width_per10 {
+	WIDTH: 10%
+}
+.Width_per15 {
+	WIDTH: 15%
+}
+.Width_per20 {
+	WIDTH: 20%
+}
+.Width_per30 {
+	WIDTH: 30%
+}
+.Width_per40 {
+	WIDTH: 40%
+}
+.Width_per50 {
+	WIDTH: 50%
+}
+.Width_per60 {
+	WIDTH: 60%
+}
+.Width_per70 {
+	WIDTH: 70%
+}
+.Width_per80 {
+	WIDTH: 80%
+}
+.Width_per90 {
+	WIDTH: 90%
+}
+.Width_per100 {
+	WIDTH: 100%
+}
+.Height1 {
+	HEIGHT: 1px
+}
+.Height2 {
+	HEIGHT: 2px
+}
+.Height3 {
+	HEIGHT: 3px
+}
+.Height4 {
+	HEIGHT: 4px
+}
+.Height5 {
+	HEIGHT: 5px
+}
+.Height10 {
+	HEIGHT: 10px
+}
+.Height12 {
+	HEIGHT: 12px
+}
+.Height15 {
+	HEIGHT: 15px
+}
+.Height16 {
+	HEIGHT: 16px
+}
+.Height17 {
+	HEIGHT: 17px
+}
+.Height18 {
+	HEIGHT: 18px
+}
+.Height19 {
+	HEIGHT: 19px
+}
+.Height20 {
+	HEIGHT: 20px
+}
+.Height22 {
+	HEIGHT: 22px
+}
+.Height23 {
+	HEIGHT: 23px
+}
+.Height25 {
+	HEIGHT: 25px
+}
+.Height26 {
+	HEIGHT: 26px
+}
+.Height29 {
+	HEIGHT: 29px
+}
+.Height30 {
+	HEIGHT: 30px
+}
+.Height35 {
+	HEIGHT: 35px
+}
+.Height40 {
+	HEIGHT: 40px
+}
+.Height50 {
+	HEIGHT: 50px
+}
+.Height60 {
+	LINE-HEIGHT: 60px; HEIGHT: 60px
+}
+.Height76 {
+	HEIGHT: 76px
+}
+.Height77 {
+	HEIGHT: 77px
+}
+.Height78 {
+	HEIGHT: 78px
+}
+.Height79 {
+	HEIGHT: 79px
+}
+.Height80 {
+	HEIGHT: 80px
+}
+.Height90 {
+	HEIGHT: 90px
+}
+.Height100 {
+	HEIGHT: 100px
+}
+.Height110 {
+	HEIGHT: 110px
+}
+.Height130 {
+	HEIGHT: 130px
+}
+.Height140 {
+	HEIGHT: 140px
+}
+.Height145 {
+	HEIGHT: 145px
+}
+.Height160 {
+	HEIGHT: 160px
+}
+.Height165 {
+	HEIGHT: 165px
+}
+.Height170 {
+	HEIGHT: 170px
+}
+.Height178 {
+	HEIGHT: 178px
+}
+.Height180 {
+	HEIGHT: 180px
+}
+.Height190 {
+	HEIGHT: 190px
+}
+.Height200 {
+	HEIGHT: 200px
+}
+.Height208 {
+	HEIGHT: 208px
+}
+.Height210 {
+	HEIGHT: 210px
+}
+.Height215 {
+	HEIGHT: 215px
+}
+.Height216 {
+	HEIGHT: 216px
+}
+.Height218 {
+	HEIGHT: 218px
+}
+.Height220 {
+	HEIGHT: 220px
+}
+.Height222 {
+	HEIGHT: 222px
+}
+.Height224 {
+	HEIGHT: 224px
+}
+.Height230 {
+	HEIGHT: 230px
+}
+.Height240 {
+	HEIGHT: 240px
+}
+.Height244 {
+	HEIGHT: 244px
+}
+.Height250 {
+	HEIGHT: 250px
+}
+.Height260 {
+	HEIGHT: 260px
+}
+.Height270 {
+	HEIGHT: 270px
+}
+.Height280 {
+	HEIGHT: 280px
+}
+.Height290 {
+	HEIGHT: 290px
+}
+.Height300 {
+	HEIGHT: 300px
+}
+.Height310 {
+	HEIGHT: 310px
+}
+.Height320 {
+	HEIGHT: 320px
+}
+.Height340 {
+	HEIGHT: 340px
+}
+.Height345 {
+	HEIGHT: 345px
+}
+.Height350 {
+	HEIGHT: 350px
+}
+.Height360 {
+	HEIGHT: 360px
+}
+.Height362 {
+	HEIGHT: 362px
+}
+.Height370 {
+	HEIGHT: 370px
+}
+.Height380 {
+	HEIGHT: 380px
+}
+.Height390 {
+	HEIGHT: 390px
+}
+.Height395 {
+	HEIGHT: 395px
+}
+.Height400 {
+	HEIGHT: 400px
+}
+.Height402 {
+	HEIGHT: 402px
+}
+.Height403 {
+	HEIGHT: 403px
+}
+.Height404 {
+	HEIGHT: 404px
+}
+.Height405 {
+	HEIGHT: 405px
+}
+.Height410 {
+	HEIGHT: 410px
+}
+.Height415 {
+	HEIGHT: 415px
+}
+.Height420 {
+	HEIGHT: 420px
+}
+.Height425 {
+	HEIGHT: 425px
+}
+.Height430 {
+	HEIGHT: 430px
+}
+.Height435 {
+	HEIGHT: 435px
+}
+.Height440 {
+	HEIGHT: 440px
+}
+.Height445 {
+	HEIGHT: 445px
+}
+.Height450 {
+	HEIGHT: 450px
+}
+.Height500 {
+	HEIGHT: 500px
+}
+.Height510 {
+	HEIGHT: 510px
+}
+.Height520 {
+	HEIGHT: 520px
+}
+.Height530 {
+	HEIGHT: 530px
+}
+.Height540 {
+	HEIGHT: 540px
+}
+.Height550 {
+	HEIGHT: 550px
+}
+.Height630 {
+	HEIGHT: 630px
+}
+.Height700 {
+	HEIGHT: 700px
+}
+.Pad5 {
+	PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 5px
+}
+.PT2 {
+	PADDING-TOP: 2px
+}
+.PT3 {
+	PADDING-TOP: 3px
+}
+.PT4 {
+	PADDING-TOP: 4px
+}
+.PT5 {
+	PADDING-TOP: 0px !important
+}
+.PT6 {
+	PADDING-TOP: 6px
+}
+.PT7 {
+	PADDING-TOP: 7px
+}
+.PT8 {
+	PADDING-TOP: 8px
+}
+.PT9 {
+	PADDING-TOP: 9px
+}
+.PT10 {
+	PADDING-TOP: 10px
+}
+.PT20 {
+	PADDING-TOP: 20px
+}
+.PT30 {
+	PADDING-TOP: 30px
+}
+.PT9 {
+	PADDING-TOP: 9px
+}
+.PL2 {
+	PADDING-LEFT: 2px
+}
+.PL5 {
+	PADDING-LEFT: 5px
+}
+.PL10 {
+	PADDING-LEFT: 10px
+}
+.PL15 {
+	PADDING-LEFT: 15px
+}
+.PL20 {
+	PADDING-LEFT: 20px
+}
+.PL25 {
+	PADDING-LEFT: 25px
+}
+.PL30 {
+	PADDING-LEFT: 30px
+}
+.PL40 {
+	PADDING-LEFT: 40px
+}
+.PL50 {
+	PADDING-LEFT: 50px
+}
+.PL70 {
+	PADDING-LEFT: 70px
+}
+.PL100 {
+	PADDING-LEFT: 100px
+}
+.PL130 {
+	PADDING-LEFT: 130px
+}
+.PL150 {
+	PADDING-LEFT: 150px
+}
+.PL400 {
+	PADDING-LEFT: 400px
+}
+.PR10 {
+	PADDING-RIGHT: 10px
+}
+.PR15 {
+	PADDING-RIGHT: 15px
+}
+.PR20 {
+	PADDING-RIGHT: 20px
+}
+.PR30 {
+	PADDING-RIGHT: 30px
+}
+.PR40 {
+	PADDING-RIGHT: 40px
+}
+.PR60 {
+	PADDING-RIGHT: 60px
+}
+.ML-1 {
+	MARGIN-LEFT: -1px
+}
+.ML-2 {
+	MARGIN-LEFT: -2px
+}
+.ML-3 {
+	MARGIN-LEFT: -3px
+}
+.ML-4 {
+	MARGIN-LEFT: -4px
+}
+.ML-5 {
+	MARGIN-LEFT: -5px
+}
+.ML0 {
+	MARGIN-LEFT: 0px
+}
+.ML1 {
+	MARGIN-LEFT: 1px
+}
+.ML2 {
+	MARGIN-LEFT: 2px
+}
+.ML3 {
+	MARGIN-LEFT: 3px
+}
+.ML4 {
+	MARGIN-LEFT: 4px
+}
+.ML5 {
+	MARGIN-LEFT: 5px
+}
+.ML8 {
+	MARGIN-LEFT: 8px
+}
+.ML10 {
+	MARGIN-LEFT: 10px
+}
+.ML15 {
+	MARGIN-LEFT: 15px
+}
+.ML20 {
+	MARGIN-LEFT: 20px
+}
+.ML25 {
+	MARGIN-LEFT: 25px
+}
+.ML30 {
+	MARGIN-LEFT: 30px
+}
+.ML35 {
+	MARGIN-LEFT: 35px
+}
+.ML40 {
+	MARGIN-LEFT: 40px
+}
+.ML45 {
+	MARGIN-LEFT: 45px
+}
+.ML50 {
+	MARGIN-LEFT: 50px
+}
+.ML55 {
+	MARGIN-LEFT: 55px
+}
+.ML60 {
+	MARGIN-LEFT: 60px
+}
+.ML65 {
+	MARGIN-LEFT: 65px
+}
+.ML80 {
+	MARGIN-LEFT: 80px
+}
+.ML85 {
+	MARGIN-LEFT: 85px
+}
+.ML90 {
+	MARGIN-LEFT: 90px
+}
+.ML100 {
+	MARGIN-LEFT: 100px
+}
+.ML105 {
+	MARGIN-LEFT: 105px
+}
+.ML110 {
+	MARGIN-LEFT: 110px
+}
+.ML130 {
+	MARGIN-LEFT: 130px
+}
+.ML170 {
+	MARGIN-LEFT: 170px
+}
+.ML260 {
+	MARGIN-LEFT: 260px
+}
+.ML400 {
+	MARGIN-LEFT: 400px
+}
+.ML8 {
+	MARGIN-LEFT: 8px
+}
+.MR0 {
+	MARGIN-RIGHT: 0px
+}
+.MR1 {
+	MARGIN-RIGHT: 1px
+}
+.MR2 {
+	MARGIN-RIGHT: 2px
+}
+.MR3 {
+	MARGIN-RIGHT: 3px
+}
+.MR4 {
+	MARGIN-RIGHT: 4px
+}
+.MR5 {
+	MARGIN-RIGHT: 5px
+}
+.MR6 {
+	MARGIN-RIGHT: 6px
+}
+.MR10 {
+	MARGIN-RIGHT: 10px
+}
+.MR15 {
+	MARGIN-RIGHT: 15px
+}
+.MR20 {
+	MARGIN-RIGHT: 20px
+}
+.MR22 {
+	MARGIN-RIGHT: 22px
+}
+.MR30 {
+	MARGIN-RIGHT: 30px
+}
+.MR40 {
+	MARGIN-RIGHT: 40px
+}
+.MR100 {
+	MARGIN-RIGHT: 100px
+}
+.MarginRight {
+	MARGIN-RIGHT: auto
+}
+.MT0 {
+	MARGIN-TOP: 0px
+}
+.MT1 {
+	MARGIN-TOP: 1px
+}
+.MT2 {
+	MARGIN-TOP: 2px
+}
+.MT3 {
+	MARGIN-TOP: 3px
+}
+.MT4 {
+	MARGIN-TOP: 4px
+}
+.MT5 {
+	MARGIN-TOP: 5px
+}
+.MT6 {
+	MARGIN-TOP: 6px
+}
+.MT7 {
+	MARGIN-TOP: 7px
+}
+.MT8 {
+	MARGIN-TOP: 8px
+}
+.MT10 {
+	MARGIN-TOP: 10px
+}
+.MT12 {
+	MARGIN-TOP: 12px
+}
+.MT15 {
+	MARGIN-TOP: 15px
+}
+.MT20 {
+	MARGIN-TOP: 20px
+}
+.MT30 {
+	MARGIN-TOP: 30px
+}
+.MT40 {
+	MARGIN-TOP: 40px
+}
+.MT45 {
+	MARGIN-TOP: 45px
+}
+.MT50 {
+	MARGIN-TOP: 50px
+}
+.MT60 {
+	MARGIN-TOP: 60px
+}
+.MT80 {
+	MARGIN-TOP: 80px
+}
+.MT100 {
+	MARGIN-TOP: 100px
+}
+.MT150 {
+	MARGIN-TOP: 150px
+}
+.MT_2 {
+	MARGIN-TOP: -2px
+}
+.MB01 {
+	MARGIN-BOTTOM: -1px
+}
+.MB0 {
+	MARGIN-BOTTOM: 0px
+}
+.MB2 {
+	MARGIN-BOTTOM: 2px
+}
+.MB3 {
+	MARGIN-BOTTOM: 3px
+}
+.MB5 {
+	MARGIN-BOTTOM: 5px
+}
+.MB10 {
+	MARGIN-BOTTOM: 10px
+}
+.MB20 {
+	MARGIN-BOTTOM: 20px
+}
+.MB30 {
+	MARGIN-BOTTOM: 30px
+}
+.MB13 {
+	MARGIN-BOTTOM: 13px
+}
+.MB15 {
+	MARGIN-BOTTOM: 15px
+}
+.MB50 {
+	MARGIN-BOTTOM: 50px
+}
+.LH13 {
+	LINE-HEIGHT: 13px
+}
+.LH14 {
+	LINE-HEIGHT: 14px
+}
+.LH15 {
+	LINE-HEIGHT: 15px
+}
+.LH16 {
+	LINE-HEIGHT: 16px
+}
+.LH17 {
+	LINE-HEIGHT: 17px
+}
+.LH18 {
+	LINE-HEIGHT: 18px
+}
+.LH20 {
+	LINE-HEIGHT: 20px
+}
+.LH24 {
+	LINE-HEIGHT: 24px
+}
+.LH25 {
+	LINE-HEIGHT: 25px
+}
+.LH26 {
+	LINE-HEIGHT: 26px
+}
+.LH28 {
+	LINE-HEIGHT: 28px
+}
+.LH29 {
+	LINE-HEIGHT: 29px
+}
+.LH30 {
+	LINE-HEIGHT: 30px
+}
+.LH32 {
+	LINE-HEIGHT: 32px
+}
+.LH35 {
+	LINE-HEIGHT: 35px
+}
+.LH50 {
+	LINE-HEIGHT: 50px
+}
+.LH80 {
+	LINE-HEIGHT: 80px
+}
+.LH90 {
+	LINE-HEIGHT: 90px
+}
+.LH100 {
+	LINE-HEIGHT: 100px
+}
+.table {
+	BORDER-BOTTOM: #ccc4a9 0px solid; BORDER-LEFT: #ccc4a9 0px solid; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; FONT-SIZE: 12px; BORDER-TOP: #ccc4a9 0px solid; BORDER-RIGHT: #ccc4a9 0px solid; PADDING-TOP: 2px
+}
+.trtd {
+	BORDER-BOTTOM: #ffcc66 1px solid; BORDER-LEFT: #ffcc66 1px solid; OVERFLOW: hidden; BORDER-TOP: #ffcc66 1px solid; BORDER-RIGHT: #ffcc66 1px solid
+}
+.dline {
+	DISPLAY: inline
+}
+.AligntoLeft {
+	FLOAT: left
+}
+.AligntoRight {
+	FLOAT: right
+}
+.AutoMargin {
+	MARGIN: 0px
+}
+.MarginAuto {
+	MARGIN: auto 0px
+}
+.TXTOverEllipsis {
+	TEXT-OVERFLOW: ellipsis; DISPLAY: block; WHITE-SPACE: nowrap; OVERFLOW: hidden; WORD-BREAK: keep-all
+}
+.ShowMemberPass {
+	LINE-HEIGHT: 25px; MARGIN: 15px auto 0px; WIDTH: 140px; FONT-WEIGHT: bold
+}
+.Font_addbold {
+	FONT-WEIGHT: bold
+}
+.Font_white {
+	COLOR: #ffffff
+}
+.Font_black {
+	COLOR: #222222
+}
+.Font_red {
+	COLOR: #ff0000
+}
+.Font_blue {
+	COLOR: blue
+}
+.Font_green {
+	COLOR: #008000
+}
+.Font_gray {
+	COLOR: #666666
+}
+.Font_yellow {
+	COLOR: #dc6a1a
+}
+.TxtColorAct {
+	COLOR: #a0410a
+}
+.TextColorGray {
+	COLOR: #88816c
+}
+.TextColorDark {
+	COLOR: #821122
+}
+.Store_BgGJ {
+	BACKGROUND-COLOR: #6fab5c; COLOR: #ffffff
+}
+.Store_BgGN {
+	BACKGROUND-COLOR: #0151a6; COLOR: #ffffff
+}
+.Member_BgGJ {
+	BACKGROUND-COLOR: #a13db8; COLOR: #ffffff
+}
+.Member_BgGN {
+	BACKGROUND-COLOR: #ff9935; COLOR: #ffffff
+}
+.TxtBorderColor {
+	BORDER-BOTTOM: #7f9db9 1px solid; BORDER-LEFT: #7f9db9 1px solid; BORDER-TOP: #7f9db9 1px solid; BORDER-RIGHT: #7f9db9 1px solid
+}
+.txt_date {
+	BORDER-BOTTOM: #e7ca96 1px solid; BORDER-LEFT: #e7ca96 1px solid; BORDER-TOP: #e7ca96 1px solid; BORDER-RIGHT: #e7ca96 1px solid
+}
+.GridView_border {
+	BORDER-BOTTOM: #cccc99 1px solid; BORDER-LEFT: #cccc99 1px solid; BORDER-TOP: #cccc99 1px solid; BORDER-RIGHT: #cccc99 1px solid
+}
+.TxtNoneBorder {
+	BORDER-BOTTOM: #abadb3 2px solid; BORDER-LEFT: #abadb3 0px solid; BORDER-TOP: #abadb3 0px solid; BORDER-RIGHT: #abadb3 0px solid
+}
+.TxtNoneBorderOne {
+	BORDER-BOTTOM: #008000 1px solid
+}
+.border_bm {
+	BORDER-BOTTOM: white 1px solid
+}
+.border_tp {
+	BORDER-TOP: white 1px solid
+}
+.BgColor_gray {
+	BACKGROUND-COLOR: #e4e4e4
+}
+.MsoNormal {
+	LINE-HEIGHT: 22px; FONT-SIZE: 14px
+}
