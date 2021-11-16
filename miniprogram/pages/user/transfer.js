@@ -10,7 +10,7 @@ Page({
     remind: '加载中',
     bank_name: ''
   },
-  //页面加载完成函数
+  
   onReady: function () {
     var that = this;
     that.setData({
@@ -20,8 +20,8 @@ Page({
 
   onLoad: function (options) {
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -39,12 +39,11 @@ Page({
           success: function (res) {
             var code = res.code;
             that.globalData.code = res.code;
-            //取出本地存储用户信息，解决需要每次进入小程序弹框获取用户信息
             var userinfo = wx.getStorageSync('userInfo');
             that.globalData.userInfo = userinfo;
             app.getUserSessionKey(code, cb);
           }
-        }); //重新登录
+        }); 
       }
     });
     this.setData({

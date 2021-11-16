@@ -18,7 +18,7 @@ Page({
         id: that.options.id,
         openid: app.globalData.userInfo.openid
       },
-      header: { //请求头
+      header: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
@@ -43,7 +43,7 @@ Page({
       },
     });
   },
-  // 点击关闭
+ 
   close: function () {
     wx.navigateBack({
       delta: 2
