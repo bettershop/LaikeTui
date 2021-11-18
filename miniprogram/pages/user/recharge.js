@@ -42,11 +42,11 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        //最小充值金额
+        
         that.setData({
           min_cz: res.data.min_cz
         });
-        //--init data        
+              
         var status = res.data.status;
         if (status == 1) {
           var user = res.data.user;
