@@ -50,11 +50,11 @@ Page({
       bgcolor: app.d.bf_color
     });
   },
-  //获取好友ID
+  
   withdrawals: function (e) {
     var that = this;
     var user_id = e.detail.value.user_id;
-    wx.redirectTo({//跳转
+    wx.redirectTo({
       url: "../user/transfer1?user_id=" + user_id,
     })
   }

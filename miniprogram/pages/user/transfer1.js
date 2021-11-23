@@ -34,14 +34,12 @@ Page({
 
     wx.checkSession({
       success: function (e) {
-        console.log(e)
         console.log('session_key 未过期' + app.globalData.userInfo.session_key)
         //session_key 未过期，并且在本生命周期一直有效
         app.globalData.userInfo['session_key'] = app.globalData.userInfo.session_key;
 
       },
       fail: function () {
-        // session_key 已经失效，需要重新执行登录流程
         wx.login({
           success: function (res) {
             var code = res.code;
@@ -51,7 +49,7 @@ Page({
             that.globalData.userInfo = userinfo;
             app.getUserSessionKey(code, cb);
           }
-        }); //重新登录
+        }); 
       }
     });
     this.setData({
