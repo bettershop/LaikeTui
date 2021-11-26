@@ -24,8 +24,8 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -34,8 +34,6 @@ Page({
 
     wx.checkSession({
       success: function (e) {
-        console.log('session_key 未过期' + app.globalData.userInfo.session_key)
-        //session_key 未过期，并且在本生命周期一直有效
         app.globalData.userInfo['session_key'] = app.globalData.userInfo.session_key;
 
       },
@@ -44,7 +42,6 @@ Page({
           success: function (res) {
             var code = res.code;
             that.globalData.code = res.code;
-            //取出本地存储用户信息，解决需要每次进入小程序弹框获取用户信息
             var userinfo = wx.getStorageSync('userInfo');
             that.globalData.userInfo = userinfo;
             app.getUserSessionKey(code, cb);
