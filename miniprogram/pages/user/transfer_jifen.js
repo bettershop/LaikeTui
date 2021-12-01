@@ -17,9 +17,7 @@ Page({
       remind: ''
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,//
@@ -57,7 +55,7 @@ Page({
   //获取好友ID
   withdrawals: function (e) {
     var user_id = e.detail.value.user_id;
-    wx.redirectTo({//跳转
+    wx.redirectTo({
       url: "../user/transfer_jifen1?user_id=" + user_id,
     })
   }

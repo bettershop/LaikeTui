@@ -38,12 +38,12 @@ Page({
 		remind: '加载中',
 		tjr: false,
 	},
-	//下拉刷新
+	
 	onPullDownRefresh: function () {
-		wx.showNavigationBarLoading() //在标题栏中显示加载
+		wx.showNavigationBarLoading() 
 		this.requestMyData();
-		wx.hideNavigationBarLoading() //完成停止加载
-		wx.stopPullDownRefresh() //停止下拉刷新
+		wx.hideNavigationBarLoading() 
+		wx.stopPullDownRefresh() 
 	},
 	copyText: function (t) {
 		var a = t.currentTarget.dataset.text;
@@ -70,8 +70,8 @@ Page({
 		});
 		var plug_ins = app.globalData.userInfo.plug_ins; // 插件
 		this.setData({
-			bgcolor: app.d.bgcolor, // 背景颜色
-			plug_ins: plug_ins, // 插件
+			bgcolor: app.d.bgcolor, 
+			plug_ins: plug_ins, 
 		});
 		this.requestMyData();
 	},

@@ -1,9 +1,6 @@
 // pages/user/transfer1.js
 var app = getApp()
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     inp_money: 0,
     iv: '',
@@ -12,16 +9,14 @@ Page({
     remind: '加载中',
     bank_name: ''
   },
-  //页面加载完成函数
+
   onReady: function () {
     var that = this;
     that.setData({
       remind: ''
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
