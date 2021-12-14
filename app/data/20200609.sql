@@ -1,0 +1,2 @@
+ALTER TABLE `lkt_order_details` ADD `plugin` VARCHAR(255) NULL DEFAULT NULL COMMENT '插件标志' AFTER `sid`;
+ALTER TABLE `lkt_order` ADD `plugin` VARCHAR(255) NULL DEFAULT NULL COMMENT '插件标志' AFTER `source`;

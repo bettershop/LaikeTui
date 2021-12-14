@@ -1,0 +1,1 @@
+INSERT INTO `lkt_core_menu` (`s_id`, `title`, `name`, `image`, `image1`, `module`, `action`, `url`, `sort`, `level`, `is_core`, `type`, `add_time`, `recycle`) VALUES (153, '分销', '', '', '', 'distribution', 'index', 'index.php?module=pi&p=distribution&c=Home', '100', '2', '0', '0', '2020-05-02 20:01:01', '0');

@@ -108,7 +108,7 @@ Page({
       }
     });
   },
-  // 取消收藏
+  
   removeFavorites: function (e) {
     console.log(e)
     var that = this;

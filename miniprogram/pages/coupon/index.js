@@ -18,7 +18,7 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -170,7 +170,7 @@ Page({
       });
     }
   },
-  // 点击使用
+ 
   getvou: function (e) {
     var that = this;
     wx.request({

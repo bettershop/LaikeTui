@@ -1,0 +1,1 @@
+INSERT INTO `lkt_plug_ins` (`id`, `software_id`, `name`, `subtitle_name`, `type`, `image`, `subtitle_image`, `url`, `subtitle_url`, `add_time`, `sort`, `status`, `Customer_id`, `code`) VALUES (NULL, '3', '分销', '我的分销', '0', '153667229722.png', '1571904730253.png', '../distribution/list', '../distribution/user', '2020-06-08 22:54:35', '5', '1', '', 'distribution');

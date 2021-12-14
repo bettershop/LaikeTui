@@ -26,16 +26,16 @@ Page({
     });
     wx.setNavigationBarColor({
       frontColor: app.d.frontColor,
-      backgroundColor: app.d.bgcolor, //页面标题为路由参数
+      backgroundColor: app.d.bgcolor, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
       }
     })
-    var orderId = options.ordersn; // 订单号
-    var user_id = app.globalData.userInfo.openid; // 微信id
-    var pid = options.pid; // 商品id
-    var attribute_id = options.attribute_id; // 属性id
+    var orderId = options.ordersn;
+    var user_id = app.globalData.userInfo.openid; 
+    var pid = options.pid;
+    var attribute_id = options.attribute_id; 
     if (pid) {
       pid = pid;
     } else {
@@ -50,10 +50,10 @@ Page({
       url: app.d.laikeUrl + '&action=product&m=comment',
       method: 'post',
       data: {
-        order_id: orderId, // 订单号
-        user_id: user_id, //微信id
-        pid: pid, // 商品id
-        attribute_id: attribute_id, // 属性id
+        order_id: orderId, 
+        user_id: user_id, 
+        pid: pid, 
+        attribute_id: attribute_id, 
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -107,7 +107,7 @@ Page({
     var that = this;
     // 选择图片
     wx.chooseImage({
-      count: 3, // 默认9
+      count: 3, 
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -127,7 +127,7 @@ Page({
           } else {
             images = tempFilePaths;
           }
-          // 循环设置数据
+          
           for (var i = 0, len = commentList.length; i < len; i++) {
             if (i == id) {
               commentList[id].images = images;
@@ -213,13 +213,12 @@ Page({
         comments: commentList
       },
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json' 
       },
       success: function (res) {
         var status = res.data.status;
         if (status == 1) {
           var arrid = res.data.arrid;
-          //获取ID后转至上传图片
           for (var i = 0, len = arrid.length; i < len; i++) {
             that.saveimg(arrid[i], i);
           }
