@@ -49,7 +49,7 @@ Page({
       currentTab: cur,
     });
   },
-  // 跳转页面
+ 
   swichNav: function (e) {
     var that = this;
     if (that.data.currentTab === e.target.dataset.current) {
@@ -67,7 +67,7 @@ Page({
       }
     };
   },
-  // 请求活动
+ 
   requestaward: function () {
     var that = this;
     wx.request({
@@ -101,7 +101,7 @@ Page({
       }
     });
   },
-  // 我的优惠券
+ 
   mycoupon: function () {
     var that = this;
     wx.request({
@@ -127,7 +127,7 @@ Page({
       }
     });
   },
-  // 点击领取
+
   receive: function (e) {
     if (app.userlogin(1)) {
       this.pop.clickPup(this)

@@ -22,8 +22,8 @@ Page({
   },
   onLoad: function (options) {
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bgcolor //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bgcolor 
     })
     var that = this;
     var id = options.id;
@@ -41,7 +41,7 @@ Page({
   onShow: function () {
 
   },
-  // 获取文章详情
+  
   y_detail: function (id) {
     var that = this;
     wx.request({
@@ -50,7 +50,7 @@ Page({
       data: {
         id: id,
       },
-      header: { //请求头
+      header: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
@@ -58,17 +58,17 @@ Page({
         if (status == 1) {
           var article = res.data.article;
           var content = article['0'].content;
-          //绑定页面数据，使用插件
+          
           WxParse.wxParse('content', 'html', content, that, 3);
           that.setData({
             article: article['0'],
           })
-          //设置动态标题
+          
           wx.setNavigationBarTitle({
             title: article['0'].Article_title
           });
         } else {
-          //返回错误提示
+         
           wx.showToast({
             title: res.data.err,
             duration: 2000,

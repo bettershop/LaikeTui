@@ -126,7 +126,7 @@ Page({
         });
       },
       fail: function (res) {
-        // 转发失败
+        
       }
     }
   },
@@ -256,12 +256,12 @@ Page({
   //图片预览
   previewImage: function (e) {
     var current = e.target.dataset.src;
-    // 路径和 图片的数组
+    
     var arr = [current];
-    // 图片预览函数
+    
     wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: arr, // 需要预览的图片http链接列表  
+      current: current, 
+      urls: arr, 
     })
   },
   preventTouchMove: function (e) {
