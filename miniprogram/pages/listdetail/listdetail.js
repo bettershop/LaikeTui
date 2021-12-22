@@ -125,13 +125,13 @@ Page({
       }
     })
   },
-  //点击加载更多
+  
   getMore: function (e) {
     var that = this;
     var objectId = that.data.objectId;
     that.listdetail(objectId, 1);
   },
-  //详情页跳转
+  
   lookdetail: function (e) {
     var lookid = e.currentTarget.dataset;
     wx.navigateTo({
@@ -153,7 +153,7 @@ Page({
     var that = this;
     that.getkeywordgood(that.data.keyword, that.data.types);
   },
-  // 根据关键词进入列表
+  
   getkeywordgood: function (keyword, types) {
     var that = this;
     if (types == '刷新') {
