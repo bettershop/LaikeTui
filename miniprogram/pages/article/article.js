@@ -35,7 +35,7 @@ Page({
   onPullDownRefresh: function () {
     
   },
-  // 获取文章详情
+  
   y_detail: function (id) {
     var that = this;
     wx.request({
@@ -153,7 +153,7 @@ Page({
       },
     });
   },
-  //分享朋友圈 查看保存图片
+  
   user_share: function () {
     var that = this;
     wx.showToast({
