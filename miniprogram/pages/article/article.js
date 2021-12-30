@@ -63,12 +63,10 @@ Page({
               titstu:true,
             });
           }
-          //设置动态标题
           wx.setNavigationBarTitle({
             title: article['0'].Article_title
           });
         } else {
-          //返回错误提示
           wx.showToast({
             title: res.data.err,
             duration: 2000,
