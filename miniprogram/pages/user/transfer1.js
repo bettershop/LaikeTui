@@ -107,7 +107,7 @@ Page({
     var that = this;
     var money = Number(e.detail.value.money);
     var user_id = that.options.user_id;
-    var mon = Number(that.data.money);//账户余额
+    var mon = Number(that.data.money);
     console.log(mon);
     console.log(money);
     if (money > mon) {

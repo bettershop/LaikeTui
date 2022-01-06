@@ -22,8 +22,8 @@ Page({
   },
   onLoad: function (options) {
     wx.setNavigationBarColor({
-      frontColor: app.d.frontColor,//
-      backgroundColor: app.d.bf_color, //页面标题为路由参数
+      frontColor: app.d.frontColor,
+      backgroundColor: app.d.bf_color, 
       animation: {
         duration: 400,
         timingFunc: 'easeIn'

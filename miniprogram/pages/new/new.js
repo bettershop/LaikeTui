@@ -133,7 +133,6 @@ Page({
     }
   },
   showModal: function () {
-    // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
@@ -153,7 +152,6 @@ Page({
     }.bind(this), 200)
   },
   hideModal: function () {
-    // 隐藏遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
@@ -213,11 +211,10 @@ Page({
       }
     })
   },
-  //页面加载完成函数
+  
   onReady: function () {
-    
   },
-  // 点击加载更多
+  
   getMore: function (e) {
     var that = this;
     var page = that.data.page;

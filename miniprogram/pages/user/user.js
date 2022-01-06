@@ -62,13 +62,13 @@ Page({
 	onLoad: function (options) {
 		wx.setNavigationBarColor({
 			frontColor: app.d.frontColor,
-			backgroundColor: app.d.bgcolor, //页面标题为路由参数7a896c app.d.bgcolor
+			backgroundColor: app.d.bgcolor, 
 			animation: {
 				duration: 400,
 				timingFunc: 'easeIn'
 			}
 		});
-		var plug_ins = app.globalData.userInfo.plug_ins; // 插件
+		var plug_ins = app.globalData.userInfo.plug_ins; 
 		this.setData({
 			bgcolor: app.d.bgcolor, 
 			plug_ins: plug_ins, 

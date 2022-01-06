@@ -296,7 +296,6 @@ Page({
     });
     that.sort();
   },
-
   //排序
   sort: function () {
     var that = this;
@@ -343,7 +342,6 @@ Page({
     }.bind(this), 200)
   },
   hideModal: function () {
-    // 隐藏遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",

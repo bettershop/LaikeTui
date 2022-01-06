@@ -44,7 +44,6 @@ Page({
     var id = e.currentTarget.dataset.index;
     var orderList0 = that.data.orderList0;
     var r_content = orderList0[id].r_content;
-    
     wx.showToast({
       title: '拒绝理由:'+r_content,
       icon:'none',
