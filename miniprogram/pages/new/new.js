@@ -246,7 +246,6 @@ Page({
           return false;
         }
 
-        //成功返回设置数据
         that.setData({
           remind: '',
           loading:false,
