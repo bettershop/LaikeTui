@@ -313,7 +313,7 @@ Page({
       remind: ''
     });
   },
-  //获取插件
+
   get_plug: function (e) {
     var that = this;
     wx.request({
@@ -338,9 +338,9 @@ Page({
   },
 
   getUserformid: function (e) {
-    //储存id 并跳转
+    
     var formid = e.detail.formId;
-    var order_id = e.detail.target.dataset.orderid; //订单ID
+    var order_id = e.detail.target.dataset.orderid;
     this.sendFormid(formid, 'order');
     wx.navigateTo({
       url: '../draw/cantuan?orderId=' + order_id + '&&type1=11'
