@@ -279,7 +279,6 @@ Page({
       }
     }
 
-    // 重新赋值
     this.setData({
       attrList: attrListIn,
       skuBeanList: skuBeanListIn
@@ -302,7 +301,6 @@ Page({
       items.attr[i].select = false;
     }
     item.select = select;
-    // 获取点击属性列表
     var canGetInfo = [];
     for (var skuIndex = 0; skuIndex < listItem.length; skuIndex++) {
       for (var skuIndexIn = 0; skuIndexIn < listItem[skuIndex].attr.length; skuIndexIn++) {
@@ -316,7 +314,6 @@ Page({
     var canGetInfoLog = "";
     var skuBeanList = this.data.skuBeanList;
     var haveSkuBean = [];
-    // 对应库存清单扫描
     for (var skuBeanIndex = 0; skuBeanIndex < skuBeanList.length; skuBeanIndex++) {
       var iListCount = 0;
       for (var skuBeanIndexIn = 0; skuBeanIndexIn < skuBeanList[skuBeanIndex].attributes.length; skuBeanIndexIn++) {
