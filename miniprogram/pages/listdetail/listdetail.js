@@ -235,7 +235,6 @@ Page({
   },
   onShow: function () {    
   },
-  // 最新
   default: function (e) {
     var that = this;
     this.setData({
@@ -248,7 +247,6 @@ Page({
     })
     that.sort();
   },
-  // 销量
   choosesort1: function (e) {
     var that = this;
     if (this.data.daindex1 == 0) {
@@ -360,8 +358,6 @@ Page({
       })
     }.bind(this), 200)
   },
-
-  //页面加载完成函数
   onReady: function () {
     var that = this;
     that.setData({

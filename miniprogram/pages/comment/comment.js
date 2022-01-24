@@ -63,7 +63,6 @@ Page({
         if (status == 1) {
           var commentList = res.data.commentList;
           if (commentList.length > 1) {
-            // 初始化评论选项为好评
             for (var i = 0, len = commentList.length; i < len; i++) {
               commentList[i].commentType = 'GOOD';
               commentList[i].images = [];
@@ -105,7 +104,6 @@ Page({
   chooseImage: function (e) {
     var id = e.target.id;
     var that = this;
-    // 选择图片
     wx.chooseImage({
       count: 3, 
       sizeType: ['compressed'],
