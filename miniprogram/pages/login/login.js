@@ -141,7 +141,6 @@ Page({
     app.globalData.userInfo['nickName'] = userInfo.nickName; // 昵称
     app.globalData.userInfo['gender'] = userInfo.gender; //  性别
     wx.setStorageSync('userInfo', app.globalData.userInfo);
-    //写入缓存
     var nickName = userInfo.nickName;
     var avatarUrl = userInfo.avatarUrl;
     var gender = userInfo.gender; //性别 0：未知、1：男、2：女

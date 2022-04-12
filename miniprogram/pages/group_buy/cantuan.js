@@ -435,10 +435,8 @@ Page({
   agreeGetUser: function (e) {
     let that = this
     if (e.detail.errMsg == 'getUserInfo:ok') {
-      //获取成功设置状态
       app.globalData.userlogin = true;
       wx.setStorageSync('userlogin', true);
-      //设置用户信息本地存储
       try {
         wx.setStorageSync('userInfo', e.detail.userInfo);
       } catch (e) {
@@ -491,7 +489,6 @@ Page({
 
     wx.getSetting({
       success: (res) => {
-        //没有授权需要弹框 
         if (!res.authSetting['scope.userInfo']) {
           that.setData({
             userlogin: true
@@ -521,7 +518,6 @@ Page({
     })
   },
   getOP: function (res) {
-    //提交用户信息 获取用户id
     let that = this
     let userInfo = res;
     var user = app.globalData.userInfo;
