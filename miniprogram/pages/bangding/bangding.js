@@ -169,7 +169,7 @@ Page({
       binding: !that.data.binding
     })
   },
-  // 获取手机号码
+  
   getPhoneNumber: function (e) {
     var res_d = e;
     var iv = e.detail.iv;
@@ -221,7 +221,7 @@ Page({
       })
     }
   },
-  // 获取信息
+  
   perfect: function (res) {
     console.log(res)
     var that = this;

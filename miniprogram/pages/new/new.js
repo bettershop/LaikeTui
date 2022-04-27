@@ -283,7 +283,7 @@ Page({
     })
     this.getMore();
   },
-  //详情页跳转
+  
   lookdetail: function (e) {
     var lookid = e.currentTarget.dataset;
     wx.navigateTo({

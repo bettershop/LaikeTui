@@ -604,7 +604,7 @@ Page({
     var title = uname + '邀请你来' + that.data.mch_name;
     var user_id = app.globalData.userInfo.user_id;
     if (res.from === 'button') {
-      // 来自页面内转发按钮
+      
     }
     return {
       title: title,

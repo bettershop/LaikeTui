@@ -95,7 +95,6 @@ Page({
       title: Article_title,
       path: '/pages/envelope/envelope?id=' + id + '&p_openid=' + app.globalData.userInfo.openid,
       success: function (res) {
-        // 转发成功
         wx.request({
           url: app.d.laikeUrl + '&action=envelope&m=share',
           method: 'post',
