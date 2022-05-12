@@ -320,7 +320,6 @@ Page({
     }
   },
   showModal: function () {
-    // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
