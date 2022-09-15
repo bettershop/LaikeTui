@@ -57,7 +57,7 @@
 
 [![输入图片说明](https://images.gitee.com/uploads/images/2019/1030/082053_51b4b4e5_2029865.gif "1572394734266.gif")](http://www.laiketui.com)
 
-### Fen销小程序单店版本截图（开源版本截图）
+### 分销小程序单店版本截图（开源版本截图）
 
 ![稳定版皮肤](https://images.gitee.com/uploads/images/2019/0514/100638_e7f9fbc9_2029865.png "在这里输入图片标题")
 
