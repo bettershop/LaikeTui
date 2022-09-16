@@ -2,7 +2,7 @@
 ### 这是一款能跑起来的开源商城系统！稳定且小巧！
 ### JAVA版本请移驾：[https://www.laiketui.com/cpc/web/index.html?source=gitee](https://www.laiketui.com/cpc/web/index.html?source=gitee)
 ### PHP版本请移驾：[https://www.laiketui.com/cpc/web/product/phpExtension.html?source=gitee](https://www.laiketui.com/cpc/web/product/phpExtension.html?source=gitee)
-
+### S2B2C供应链系统请移驾：[https://www.laiketui.com/cpc/web/product/S2B2C.html?source=github](https://www.laiketui.com/cpc/web/product/S2B2C.html?source=github)
 ```
 微信小程序电商平台（前后端开源PHP），包含拼团，Fen销，多店，会员制，种草社交，新零售，社区团购等功能，整个系统架构非常简单，适合小型团队或者个人开发者二次开发。
 
