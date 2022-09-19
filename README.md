@@ -4,7 +4,7 @@
 ### PHP版本请移驾：[https://www.laiketui.com/cpc/web/product/phpExtension.html?source=github](https://www.laiketui.com/cpc/web/product/phpExtension.html?source=github)
 ### S2B2C供应链系统请移驾：[https://www.laiketui.com/cpc/web/product/S2B2C.html?source=github](https://www.laiketui.com/cpc/web/product/S2B2C.html?source=github)
 ```
-微信小程序电商平台（前后端开源PHP），包含拼团，分销，多店，会员制，种草社交，新零售，社区团购等功能，整个系统架构非常简单，适合小型团队或者个人开发者二次开发。
+电商平台（前后端开源PHP），包含拼团，分销，多店，会员制，种草社交，新零售，社区团购等功能，整个系统架构非常简单，适合小型团队或者个人开发者二次开发。
 
 小程序 + APP + 公众号 + PC + H5 + 支付宝小程序 + 百度小程序 + 头条号小程序
 
