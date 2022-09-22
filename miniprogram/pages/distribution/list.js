@@ -13,7 +13,7 @@ Page({
     heng: 'xs',//控制显示方式
     shu: 'bxs',
     xianshi: 'icon-yduipaibanleixingliebiao',
-    imageurl1: "../../images/mo.png",//默认排序图
+    imageurl1: "../../images/mo.png",
     daindex1: 0,
     imageurl2: "../../images/mo.png",
     daindex2: 0,
