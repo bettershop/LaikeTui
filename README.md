@@ -1,8 +1,8 @@
-![输入图片说明](%E7%A0%81%E4%BA%91%E4%B8%BB.png)
+![输入图片说明](https://foruda.gitee.com/images/1664178249623598776/13aa2a84_11650488.png "码云主.png")
 
 ### 加入LaiKeTui，共同打造独特电商系统生态圈
 ##### 企业微信交流
-![输入图片说明](images/%E7%A0%81%E4%BA%91%E4%BA%8C%E7%BB%B4%E7%A0%81.gif)
+![输入图片说明](https://foruda.gitee.com/images/1664179028225102122/11c3b244_11650488.gif "码云二维码.gif")
 ##### QQ技术交流群
 为了方便咨询和交流技术，请加入来客推QQ技术交流群，一起讨论商城系统的技术难题
 QQ交流群 (入群前，请在网页右上角点 "Star" )
@@ -16,23 +16,22 @@ QQ交流群 (入群前，请在网页右上角点 "Star" )
 群五：631252151 [点击加入](http://shang.qq.com/wpa/qunwpa?idkey=e608e87cf657e7f0d0a6fe85b127784efd373f6e1e18d21b590af85f2612df55)
 
 ### 软件架构
-![输入图片说明](images/PHP.png)
-![输入图片说明](images/JAVA.png)
+![输入图片说明](https://foruda.gitee.com/images/1664178351897539118/0086cff5_11650488.png "PHP (2).png")
+![输入图片说明](https://foruda.gitee.com/images/1664178364673075358/9887787c_11650488.png "JAVA (2).png")
 ### 安装教程、开发文档、操作手册请进入官网查询
 
-[![输入图片说明](images/%E5%AE%98%E7%BD%91.png)](http://www.laiketui.com)
-
+[![输入图片说明](https://foruda.gitee.com/images/1664178607174390583/569eb415_11650488.png "官网.png")](http://www.laiketui.com)
 ### JAVA开源商城
 
-[![输入图片说明](JAVA.png)](http://www.laiketui.com/cpc/web/index.html?source=gitee)
+[![输入图片说明](https://foruda.gitee.com/images/1664178711821043702/8a672ed1_11650488.png "JAVA.png")](http://www.laiketui.com/cpc/web/index.html?source=gitee)
 
 ### PHP开源商城
 
-[![输入图片说明](php.png)](http://www.laiketui.com/cpc/web/product/phpExtension.html?source=gitee)
+[![输入图片说明](https://foruda.gitee.com/images/1664178722881050897/2ce635bc_11650488.png "php.png")](http://www.laiketui.com/cpc/web/product/phpExtension.html?source=gitee)
 
 ### 全场景快速体验 PC商城+IOS+Android+各端小程序+H5
-![输入图片说明](images/%E6%BC%94%E7%A4%BA.png)
-![输入图片说明](images/%E5%B9%BF%E5%91%8Agif.gif)
+![输入图片说明](https://foruda.gitee.com/images/1664178621759193890/52c7e25b_11650488.png "演示.png")
+![输入图片说明](https://foruda.gitee.com/images/1664178817074940504/8d4aa790_11650488.gif "广告gif.gif")
 #### 部分商城系统功能
 PS：我们有的功能，以及以后可能会有的功能。
 ![输入图片说明](https://foruda.gitee.com/images/1663731302243061048/d0908da2_11650488.png "组 2341.png")
