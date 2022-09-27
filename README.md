@@ -23,11 +23,11 @@ QQ交流群 (入群前，请在网页右上角点 "Star" )
 [![输入图片说明](https://foruda.gitee.com/images/1664178607174390583/569eb415_11650488.png "官网.png")](http://www.laiketui.com)
 ### JAVA开源商城
 
-[![输入图片说明](https://foruda.gitee.com/images/1664178711821043702/8a672ed1_11650488.png "JAVA.png")](http://www.laiketui.com/cpc/web/index.html?source=gitee)
+[![输入图片说明](https://foruda.gitee.com/images/1664178711821043702/8a672ed1_11650488.png "JAVA.png")](http://www.laiketui.com/cpc/web/index.html?source=github)
 
 ### PHP开源商城
 
-[![输入图片说明](https://foruda.gitee.com/images/1664178722881050897/2ce635bc_11650488.png "php.png")](http://www.laiketui.com/cpc/web/product/phpExtension.html?source=gitee)
+[![输入图片说明](https://foruda.gitee.com/images/1664178722881050897/2ce635bc_11650488.png "php.png")](http://www.laiketui.com/cpc/web/product/phpExtension.html?source=github)
 
 ### 全场景快速体验 PC商城+IOS+Android+各端小程序+H5
 ![输入图片说明](https://foruda.gitee.com/images/1664178621759193890/52c7e25b_11650488.png "演示.png")
