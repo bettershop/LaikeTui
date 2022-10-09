@@ -1,5 +1,8 @@
 ![输入图片说明](https://foruda.gitee.com/images/1664178249623598776/13aa2a84_11650488.png "码云主.png")
 
+### 访问官网，获取更多商城系统（S2B2C，种草，竞拍，SAAS，跨境等等）
+#### https://www.laiketui.com
+
 ### 加入LaiKeTui，共同打造独特电商系统生态圈
 ##### 企业微信交流
 ![输入图片说明](https://foruda.gitee.com/images/1664179028225102122/11c3b244_11650488.gif "码云二维码.gif")
@@ -40,11 +43,11 @@ PS：我们有的功能，以及以后可能会有的功能。
 #### 后台截图
 ![输入图片说明](https://foruda.gitee.com/images/1663731649748532276/bd452747_11650488.png "组 2346.png")
 
-#### Fen销小程序单店版本截图（开源版本截图）
+#### 分销小程序单店版本截图（开源版本截图）
 ![输入图片说明](https://foruda.gitee.com/images/1663731701812710944/43151dee_11650488.png "组 2348.png")
 #### 百货小程序单店版本截图（新版炫彩皮肤）
 ![输入图片说明](https://foruda.gitee.com/images/1663731728799844710/bd61887b_11650488.png "组 2351.png")
 #### 生鲜电商APP+H5+小程序版本截图（新版商业皮肤）
 ![输入图片说明](https://foruda.gitee.com/images/1663731790089624964/bde763d6_11650488.png "组 2353.png")
 ### 访问官网，获取更多商城系统（S2B2C，种草，竞拍，SAAS，跨境等等）
-#### http://www.laiketui.com
+#### https://www.laiketui.com
