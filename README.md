@@ -1,6 +1,6 @@
 ![输入图片说明](https://gitee.com/laiketui/open/raw/master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1.png "gzh.png")
 
-### 访问官网，获取更多商城系统（S2B2C，种草，竞拍，SAAS，跨境等等）
+### 访问官网，获取更多商城系统（B2B2C,S2B2C,种草,竞拍,SAAS,跨境等等）
 #### https://www.laiketui.com
 
 ### 加入LaiKeTui，共同打造独特电商系统生态圈
