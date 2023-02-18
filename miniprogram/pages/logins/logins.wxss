@@ -33,7 +33,7 @@
   color: #020202 !important;
   font-weight:bold !important;
   font-size:34rpx !important;
-  padding-bottom: 60rpx !important;
+  padding-bottom: 10rpx !important;
 }
 .pupContent-head view{
   padding-left: 20rpx !important;
@@ -158,3 +158,15 @@
   /* animation-fill-mode: both 动画将会执行 forwards 和 backwards 执行的动作。 */
 }
 
+.avatar-wrapper {
+  padding: 0;
+  width: 56px !important;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+}

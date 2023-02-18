@@ -240,13 +240,14 @@ Page({
     }
     var sex = that.data.sex;
     var province = region[0], city = region[1], county = region[2];
+    console.log(res.detail.value.name.length)
     if (res.detail.value.name.length == 0) {
       wx.showToast({
         title: '姓名不得为空!',
         icon: 'loading',
         duration: 1500
       })
-      wx.hideToast()
+      //wx.hideToast()
     } else {
 
       wx.request({
@@ -254,6 +255,7 @@ Page({
         method: 'post',
         data: {
           user_id: app.globalData.userInfo.user_id,
+          user_name: res.detail.value.user_name,
           name: res.detail.value.name,
           mobile: that.data.mobile,
           province: province,

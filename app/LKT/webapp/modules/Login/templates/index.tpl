@@ -16,8 +16,8 @@
         <div class="page_login">
             <div class='login_title'>
                 <img src="images/iIcon/logo2.png"/>
-                <p style="color: #fff;font-size: 30px;">来客电商管理系统</p>
-                <p style="font-size: 14px; color: #fff;">Laike E-commerce Management System</p>
+                <p style="color: #fff;font-size: 30px;">来客推电商管理系统</p>
+                <p style="font-size: 14px; color: #fff;">LaikeTui E-commerce Management System</p>
             </div>
 
             <div class='login_fields'>
@@ -56,8 +56,8 @@
                 </div>
 
                 <br/><br/>
-                <p ><a  style="color: #ffffff" href="http://www.laiketui.com/"  target="_blank">来客电商</a>  专注用户体验的全场景商城系统 - 可免费商用</p>
-                <p>湖南壹拾捌号网络技术有限公司&nbsp;版权所有<i> © </i>2017-2021</p>
+                <p ><a  style="color: #ffffff" href="http://www.laiketui.com/"  target="_blank">来客推</a>  专注用户体验的全场景商城系统 - 可免费商用</p>
+                <p>湖南壹拾捌号网络技术有限公司&nbsp;版权所有<i> © </i>2017-2022</p>
 
 
             </div>

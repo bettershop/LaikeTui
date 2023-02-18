@@ -1,6 +1,6 @@
 <?php
 /**
- * [Laike System] Copyright (c) 2017-2020 laiketui.com
+ * [Laike System] Copyright (c) 2017-2022 laiketui.com
  * Laike is not a free software, it under the license terms, visited http://www.laiketui.com/ for more details.
  *
  * 通用通知接口
@@ -9,8 +9,6 @@
  * 商户接收回调信息后，根据需要设定相应的处理流程。
  *
  */
-
-session_name("money_mojavi");
 session_start();
 date_default_timezone_set('Asia/Chongqing');
 set_time_limit(0);

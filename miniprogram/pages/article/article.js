@@ -251,7 +251,7 @@ Page({
     })
 
   },
-  //图片预览
+  
   previewImage: function (e) {
     var current = e.target.dataset.src;
     

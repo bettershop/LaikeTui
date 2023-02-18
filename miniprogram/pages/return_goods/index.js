@@ -204,7 +204,7 @@ Page({
           for (j = 0; j < express.length; j++) {
             exp[j] = express[j].kuaidi_name;
           }
-          //返回退回信息
+          
           that.setData({
             address: res.data.address,
             name: res.data.name,

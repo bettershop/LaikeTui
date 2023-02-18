@@ -2,10 +2,10 @@ var request = require('request.js');
 var util = require('./utils/util.js');
 App({
   d: {
-    appId: "", // 小程序appid
-    appKey: "", // 小程序密钥
-    purchase: 0, //设置购物车刷新
-    indexchase: false, //设置首页刷新
+    appId: "", // 小程序appid，不需要填，只需要在后台设置
+    appKey: "", // 小程序密钥，不需要填，只需要在后台设置
+    purchase: 0, 
+    indexchase: false, 
     frontColor: '#ffffff',
     one: false,
     bf_color: '#FF6347',

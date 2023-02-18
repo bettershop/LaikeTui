@@ -639,7 +639,7 @@ Page({
       bannerApp: false,
     })
   },
-  swichNav: function (e) {//点击tab切换
+  swichNav: function (e) {
     var that = this;
     if (that.data.currentTab === e.target.dataset.current) {
       return false;

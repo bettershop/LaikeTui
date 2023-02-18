@@ -62,7 +62,7 @@ Page({
             },
             error: function (e) {
               wx.showToast({
-                title: '网络异常！',
+                title: '网络异常',
                 duration: 2000
               });
             }

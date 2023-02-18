@@ -37,6 +37,18 @@
   <block wx:else >
     <form bindsubmit="perfect">
       <view class="page">
+
+        <view class="section">
+          <view class="text">
+            <text class='t_3'>微信昵称： </text>
+          </view>
+          <view class='inp'>
+            <input name="user_name" maxlength='10' style='font-size:13px;width:100%;' value='{{user_name}}' placeholder="昵称" type='nickname' />
+          </view>
+        </view>
+
+        <view class='xt'></view>
+
         <view class="section">
           <view class="text">
             <text class='t_3'>您的姓名： </text>

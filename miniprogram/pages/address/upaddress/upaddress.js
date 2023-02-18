@@ -203,7 +203,7 @@ Page({
       }
     })
   },
-  // 滑动事件结束
+  
   Preservation: function (rew) {
     var that = this;
     wx.request({

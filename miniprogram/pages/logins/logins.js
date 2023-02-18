@@ -1,4 +1,7 @@
 var app = getApp();
+
+const defaultAvatarUrl = '../../images/heads.png'
+
 Page({
 
   data: {
@@ -6,6 +9,9 @@ Page({
     option: false, //显示弹窗或关闭弹窗的操作动画
     logoimg: '',
     loadtitle:'',
+    avatarUrl: defaultAvatarUrl,
+    navatarUrl: '',
+    nickname:'',
     thvm:{}
   },
   myCatchTouch: function () {
@@ -52,27 +58,57 @@ Page({
       })
     }
   },
+  
+  onChooseAvatar(e) {
+    const { avatarUrl } = e.detail 
+    this.setData({
+      avatarUrl,
+    })
+    let that = this
+    wx.uploadFile({
+      url: app.d.laikeUrl+'&action=user&m=upload', 
+      filePath: that.data.avatarUrl,
+      name: 'file',	
+      success(res) {
+        that.data.navatarUrl = res.data;
+        console.log(res.data);
+      }
+    })
 
+  },
 
   getUserProfile(e) {
     let that = this
     let thatplus = this.data.thvm
-    wx.getUserProfile({
-      desc: '用于完善会员资料', 
-      success: (res) => {
-        this.getOP(res.userInfo)
-        var userInfo = res.userInfo;
-        var nickName = userInfo.nickName;
-        var avatarUrl = userInfo.avatarUrl;
-        var gender = userInfo.gender; //性别 0：未知、1：男、2：女
-        wx.request({
+    
+
+    let index = app.d.laikeUrl .lastIndexOf("/")
+    var url =app.d.laikeUrl .substring(0,index);
+    var userInfo = {avatarUrl:'',nickName:'',gender:0};
+
+    if(that.data.avatarUrl.length > 0){
+      userInfo.avatarUrl = url+"/images/"+that.data.navatarUrl; 
+    }
+    userInfo.nickName = e.detail.value.nickname;
+    if (userInfo.nickName.length == 0) {
+      wx.showToast({
+        title: '昵称不能为空!',
+        icon: 'loading',
+        duration: 1500
+      })
+      return
+    } 
+
+    this.getOP(userInfo)
+    console.log(userInfo);
+    wx.request({
           url: app.d.laikeUrl + '&action=user&m=material',
           method: 'post',
           data: {
             openid: app.globalData.userInfo.openid,
-            nickName: nickName,
-            avatarUrl: avatarUrl,
-            gender: gender
+            nickName: userInfo.nickName,
+            avatarUrl: userInfo.avatarUrl,
+            gender: userInfo.gender
           },
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -85,9 +121,8 @@ Page({
 
           }
         })
-
-      }
-    })
+        
+   
   },
 
 

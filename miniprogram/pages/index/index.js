@@ -193,9 +193,9 @@ Page({
           var title = res.data.title;
           app.d.bgcolor = bgcolor;
           var arr = Object.keys(twoList[0].distributor);
-          var banner_num = Object.keys(banner); // 轮播图
+          var banner_num = Object.keys(banner);
           var notice = res.data.notice;
-          var indexTwoData = twoList[0].twodata // 获取首页的数据对象
+          var indexTwoData = twoList[0].twodata 
 
           app.globalData.logoimg = res.data.logo
           app.globalData.title = res.data.title
@@ -216,7 +216,7 @@ Page({
 
           wx.setNavigationBarColor({
             frontColor: app.d.frontColor,
-            backgroundColor: app.d.bgcolor //页面标题为路由参数
+            backgroundColor: app.d.bgcolor 
           });
           wx.setNavigationBarTitle({
             title: title,
@@ -370,7 +370,7 @@ Page({
       tabid: data.tabid
     });
   },
-  //设置点击tab大于第七个是自动跳到后面
+  
   checkCor: function (e) {
     if (this.data.current > 4) {
       this.setData({
@@ -432,7 +432,7 @@ Page({
         var userInfo = res.userInfo;
         var nickName = userInfo.nickName;
         var avatarUrl = userInfo.avatarUrl;
-        var gender = userInfo.gender; //性别 0：未知、1：男、2：女
+        var gender = userInfo.gender; 
         wx.request({
           url: app.d.laikeUrl + '&action=user&m=material',
           method: 'post',
@@ -583,7 +583,7 @@ Page({
     var title = uname + '邀请你来' + that.data.mch_name;
     var user_id = app.globalData.userInfo.user_id;
     if (res.from === 'button') {
-      // 来自页面内转发按钮
+      
     }
     return {
       title: title,
