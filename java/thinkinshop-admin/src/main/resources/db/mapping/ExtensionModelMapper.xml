@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ExtensionModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.config.ExtensionModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="store_id" property="store_id" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="CHAR" />
+    <result column="x" property="x" jdbcType="CHAR" />
+    <result column="y" property="y" jdbcType="CHAR" />
+    <result column="add_date" property="add_date" jdbcType="TIMESTAMP" />
+    <result column="kuan" property="kuan" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="isdefault" property="isdefault" jdbcType="INTEGER" />
+    <result column="bg" property="bg" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="waittext" property="waittext" jdbcType="VARCHAR" />
+    <result column="data" property="data" jdbcType="VARCHAR" />
+    <result column="store_type" property="store_type" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, store_id, name, image, sort, x, y, add_date, kuan, type, keyword, url, isdefault, 
+    bg, color, waittext, data, store_type
+  </sql>
+</mapper>

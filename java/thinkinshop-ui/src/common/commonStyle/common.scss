@@ -1,0 +1,297 @@
+
+// 分页公共样式
+
+// 分页器
+.pageBox{
+    padding: 0 20px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border-top: 1px solid #edf1f5;
+    .pageLeftText{
+      font-size: 14px;
+      font-weight: 400;
+      color: #6A7076;
+    }
+    .el-pagination {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 0;
+    }
+    .el-pagination__sizes{
+      height: 36px!important;
+      line-height: 36px!important;
+      .el-input--mini .el-input__inner{
+        height: 36px!important;
+        line-height: 36px!important;
+      }
+    }
+    .pageRightText {
+      margin-right: auto;
+      font-size: 14px;
+      font-weight: 400;
+      color: #6A7076;
+    }
+    .btn-next,.btn-prev{
+      padding: 0;
+      width: 82px;
+      height: 36px;
+      border: 1px solid #D5DBE8;
+      border-radius: 2px;
+    }
+    .btn-prev{
+      margin-right: 8px;
+    }
+    
+    .el-pager li{
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      border: 1px solid #D5DBE8!important;
+      border-radius: 2px;
+      color: #6A7076;
+      margin-right: 8px;
+      font-weight: normal;
+    }
+    .el-pager li:hover{
+      border: 1px solid #2890FF!important;
+      color: #2890FF;
+    }
+    .el-pager li.active{
+      border: 1px solid #D5DBE8!important;
+      color: #FFFFFF!important;
+      background: #2890FF;
+    }
+}
+
+// 搜索输入框按钮
+.Search {
+  width: 100%;
+  .Search-condition{
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .el-input__inner {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #d5dbe8;
+  }
+  .el-input__inner:hover {
+    border: 1px solid #b2bcd4;
+  }
+  .el-input__inner:focus {
+    border-color: #409eff;
+  }
+  .el-input__inner::-webkit-input-placeholder {
+    color: #97a0b4;
+  }
+
+  .btn-list {
+    flex: 1;
+    .bgColor {
+      background-color: #2890ff;
+    }
+    .bgColor:hover {
+      background-color: #70aff3;
+    }
+    .fontColor {
+      color: #6a7076;
+      border: 1px solid #d5dbe8;
+      background-color: #fff;
+    }
+    .fontColor:hover {
+      color: #2890FF;
+      border: 1px solid #2890FF;
+      background-color: #fff;
+    }
+    .export {
+      position: absolute;
+      right: 30px;
+    }
+  }
+}
+
+// 导出弹框组件
+.dialog-export {
+  .el-dialog {
+    width: 540px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0 !important;
+    .el-dialog__header {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      font-size: 16px;
+      margin-left: 19px;
+      font-weight: bold;
+      border-bottom: 2px solid #E9ECEF;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0 0 0 19px;
+      .el-dialog__headerbtn {
+        font-size: 18px;
+        top: 0 !important;
+      }
+      .el-dialog__title {
+        font-weight: normal;
+      }
+    }
+
+    .el-dialog__body {
+      width: 100%;
+      height: 240px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .item {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #7EBCFF;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #2890ff;
+        font-size: 14px;
+        i {
+          font-size: 30px;
+          margin-bottom: 10px;
+        }
+        &:hover {
+          background-color: #2890ff;
+          color: #fff;
+        }
+      }
+
+      .item-center {
+        margin: 0 60px;
+      }
+    }
+  }
+}
+
+// 输入框样式
+.el-input__inner {
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #d5dbe8;
+}
+.el-input__inner:hover {
+  border: 1px solid #b2bcd4;
+}
+.el-input__inner:focus {
+  border-color: #409eff;
+}
+.el-input__inner::-webkit-input-placeholder {
+  color: #97a0b4;
+}
+.el-form-item__label {
+  font-weight: normal;
+}
+.el-form-item__label {
+  color: #414658;
+}
+
+// table操作按钮样式
+.el-table {
+  .OP-button{
+    button{
+      padding: 5Px;
+      min-height: 22px;
+      line-height: 9px;
+      text-align: center;
+      background: #FFFFFF;
+      border: 1px solid #D5DBE8;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: normal;
+      color: #888F9E;
+    }
+    button:hover{
+      border:1px solid rgb(64, 158, 255);
+      color: rgb(64, 158, 255);
+    }
+    button:hover i{
+      color: rgb(64, 158, 255);
+    }
+    .OP-button-top{
+      button {
+        &:not(:first-child) {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .OP-button-bottom {
+      button {
+        min-height: 22px;
+        &:not(:first-child) {
+          margin-left: 8px !important;
+        }
+      }
+    }
+  }
+}
+
+.el-message-box__wrapper {
+  z-index: 9999999999999 !important;
+}
+
+.ql-toolbar{
+  .ql-formats{
+    line-height: 14px;
+  }
+}
+
+.ql-snow .ql-toolbar button svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.quillWrapper .ql-snow.ql-toolbar button svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.ql-snow {
+  .ql-formats {
+    margin-bottom: 0 !important;
+    .ql-picker {
+      &:not(.ql-background) {
+        top: 0px !important;
+      }
+    }
+  }
+}
+
+.ql-toolbar {
+  display: flex;
+}
+
+.quillWrapper {
+  .ql-toolbar {
+    padding-bottom: 8px !important;
+  }
+}
+
+.ql-snow {
+  .ql-formats {
+    .ql-background {
+      bottom: 2px;
+    }
+  }
+}
+
+.ql-editor {
+  img {
+    display: block;
+  }
+}

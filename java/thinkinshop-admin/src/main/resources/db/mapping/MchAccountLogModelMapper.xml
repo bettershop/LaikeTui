@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.MchAccountLogModelMapper">
+
+    <sql id="MchAccountLogSQL">
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="mch_id != null">AND a.mch_id = #{mch_id}</if>
+        <if test="startDay != null">AND a.addtime <![CDATA[  >=  ]]> #{startDay}</if>
+        <if test="endDay != null">AND a.addtime <![CDATA[  <=  ]]> #{endDay}</if>
+        <if test="status != null">AND a.status = #{status}</if>
+        <if test="type != null">AND a.type = #{type}</if>
+        <if test="jifen != null">and a.integral <![CDATA[  >  ]]> 0</if>
+        <if test="typeList != null">
+            <foreach collection="typeList" item="type" separator="," open="and a.type in(" close=")">
+                #{type,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </sql>
+    <select id="getMchAccountLogDynamic" parameterType="Map" resultType="Map">
+        SELECT * FROM lkt_mch_account_log a
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="MchAccountLogSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">a.addtime ${add_time_sort},</if>
+        </trim>
+        <if test="pageNo!=null and pageSize!=null">limit #{pageNo},#{pageSize}</if>
+    </select>
+    <select id="countMchAccountLogDynamic" parameterType="Map" resultType="int">
+        SELECT count(1) FROM lkt_mch_account_log a
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="MchAccountLogSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="sumMchAccountLogDynamic" parameterType="Map" resultType="BigDecimal">
+        SELECT
+        sum(price)
+        FROM
+        lkt_mch_account_log
+        WHERE
+        store_id = #{store_id}
+        <if test="mch_id != null and mch_id!=''">
+            AND mch_id = #{mch_id}
+        </if>
+        <if test="startDay != null and startDay!=''">
+            AND addtime <![CDATA[  >=  ]]> #{startDay}
+        </if>
+        <if test="endDay != null and endDay!=''">
+            AND addtime <![CDATA[  <=  ]]> #{endDay}
+        </if>
+        <if test="type != null">
+            AND type = #{type}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="typeList != null">
+            <foreach collection="typeList" item="type" separator="," open="and type in(" close=")">
+                #{type,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </select>
+</mapper>

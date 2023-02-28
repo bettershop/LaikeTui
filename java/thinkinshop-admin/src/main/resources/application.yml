@@ -1,0 +1,123 @@
+node:
+  ip: 127.0.0.1
+    # 微信p12证书保存位置：不同的操作系统需要修改保存的位置 需要读写权限
+    # windows
+  #  wx-certp12-path: C:/certs
+  # Linux
+  wx-certp12-path: /var/local
+server:
+#  port: 18080
+  port: 18168
+  ssl:
+    enabled: false
+  servlet:
+    context-path: /
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+
+druid:
+  allow:
+    ip: localhost
+  login:
+    user_name: root
+    password: laiketui18
+
+spring:
+  devtools:
+    restart:
+      enabled: false
+  main:
+    allow-bean-definition-overriding: true
+  jmx:
+    enabled: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 30MB
+      file-size-threshold: 1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.48:3306/thinkinshop_open_db?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false
+    username: root
+    password: root
+#    url: jdbc:mysql://mysql:3306/v3_db?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false
+#    username: laiketui_db
+#    password: laiketui18
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 1
+    minIdle: 1
+    maxIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    #useGlobalDataSourceStat: true
+
+  redis:
+    database: 8
+    host: 192.168.0.48
+    port: 6339
+#    host: redis
+#    port: 6379
+    password: laiketui18
+    lettuce:
+      pool:
+        # 连接池中的最大空闲连接 默认8
+        max-idle: 10
+        # 连接池中的最小空闲连接 默认0
+        min-idle: 1
+        # 连接池最大连接数 默认8 ，负数表示没有限制
+        max-active: 20
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认-1
+        max-wait: -1
+    timeout: 5000
+
+mybatis:
+  mapper-locations: classpath:/db/mapping/*Mapper.xml
+  type-aliases-package: com.laiketui.domain
+  mapper:
+    identity: MYSQL
+    mappers: tk.mybatis.mapper.commgeneratoron.Mapper
+    not-empty: true
+  ######### 分页插件 ##########
+  pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    params: count=countSql
+    support-methods-arguments: true
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+#文件上传路径
+uploadFile:
+  #  path: E:/test
+  path: /usr/local/upload_temp/
+#  path: /Users/wangxian/upload/
+
+logging:
+  level:
+    com:
+      laiketui: debug
+
+swagger:
+  title: 来客电商接口
+  desc: 来客电商接口API
+  version: 0.0.1.SNAPSHOT
+  termsOfServiceUrl: javascript:void(0)
+  license: Apache 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html
+  basePackage: com.laiketui.thinkinshop
+  groupName: all
+  contactName: all
+  contactUrl: http://www.laiketui.com/
+  contactEmail:

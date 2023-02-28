@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.UserFirstModalMapper">
+
+    <select id="getUserFirstInfoDynamic" parameterType="Map" resultType="Map">
+        select attr_id, end_time, is_use as flag, level
+        from lkt_user_first
+        where store_id = #{store_id}
+          <if test="user_id!=null">
+              and user_id = #{user_id}
+          </if>
+        <if test="attrIdNotNull!=null">
+            and attr_id is not NULL
+        </if>
+    </select>
+
+</mapper>

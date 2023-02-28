@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.UserRuleModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.user.UserRuleModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="rate_now" property="rate_now" jdbcType="DECIMAL" />
+    <result column="active" property="active" jdbcType="CHAR" />
+    <result column="wait" property="wait" jdbcType="INTEGER" />
+    <result column="store_id" property="store_id" jdbcType="INTEGER" />
+    <result column="is_auto" property="is_auto" jdbcType="TINYINT" />
+    <result column="auto_time" property="auto_time" jdbcType="INTEGER" />
+    <result column="method" property="method" jdbcType="CHAR" />
+    <result column="is_wallet" property="is_wallet" jdbcType="TINYINT" />
+    <result column="upgrade" property="upgrade" jdbcType="CHAR" />
+    <result column="is_birthday" property="is_birthday" jdbcType="TINYINT" />
+    <result column="bir_multiple" property="bir_multiple" jdbcType="INTEGER" />
+    <result column="is_product" property="is_product" jdbcType="TINYINT" />
+    <result column="bond" property="bond" jdbcType="DECIMAL" />
+    <result column="is_jifen" property="is_jifen" jdbcType="TINYINT" />
+    <result column="jifen_m" property="jifen_m" jdbcType="TINYINT" />
+    <result column="back" property="back" jdbcType="TINYINT" />
+    <result column="back_scale" property="back_scale" jdbcType="DECIMAL" />
+    <result column="poster" property="poster" jdbcType="CHAR" />
+    <result column="is_limit" property="is_limit" jdbcType="TINYINT" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="distribute_l" property="distribute_l" jdbcType="INTEGER" />
+    <result column="valid" property="valid" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="bonus_points_shopping" property="bonus_points_shopping" jdbcType="TINYINT" />
+    <result column="proportion_of_gifts" property="proportion_of_gifts" jdbcType="INTEGER" />
+    <result column="release_time" property="release_time" jdbcType="TINYINT" />
+    <result column="rule" property="rule" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rate_now, active, wait, store_id, is_auto, auto_time, method, is_wallet, upgrade,
+    is_birthday, bir_multiple, is_product, bond, is_jifen, jifen_m, back, back_scale, 
+    poster, is_limit, level, distribute_l, valid, score, bonus_points_shopping, proportion_of_gifts, 
+    release_time,rule
+  </sql>
+</mapper>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ReturnOrderModelMapper">
+    <sql id="getReturnOrderListDynamicSQL">
+        <where>
+            <trim prefixOverrides="and">
+                <if test="store_id != null">and a.store_id = #{store_id}</if>
+                <if test="orderDetailId != null">and a.p_id = #{orderDetailId}</if>
+                <if test="likeOrderno != null">and a.sNo like CONCAT('%',#{likeOrderno},'%')</if>
+                <if test="sNo != null">and a.sNo like CONCAT('%',#{sNo},'%')</if>
+                <if test="orderNo != null">and a.sNo =#{orderNo}</if>
+                <if test="re_type_GT != null">and a.re_type <![CDATA[  >  ]]> #{re_type_GT}</if>
+                <if test="user_id != null and user_id!=''">AND a.user_id = #{user_id}</if>
+                <if test="orderType != null ">AND exists (select id from lkt_order x where x.sno = a.sno and x.otype=#{orderType})</if>
+                <if test="r_typeList != null and r_type!=''">
+                    <foreach collection="r_typeList" item="type" separator="," open="and a.r_type in(" close=")">
+                        #{type,jdbcType=INTEGER}
+                    </foreach>
+                </if>
+            </trim>
+        </where>
+    </sql>
+
+    <select id="getReturnOrderListDynamic" parameterType="Map" resultType="com.laiketui.domain.order.ReturnOrderModel">
+        SELECT * FROM lkt_return_order a
+        <include refid="getReturnOrderListDynamicSQL"/>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="re_time_sort!=null and re_time_sort!=''">re_time ${re_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countReturnOrderListDynamic" parameterType="Map"
+            resultType="int">
+        SELECT count(1) FROM lkt_return_order a
+        <include refid="getReturnOrderListDynamicSQL"/>
+    </select>
+
+    <select id="getReturnOrderJoinOrderListDynamic" parameterType="Map" resultType="Map">
+        SELECT
+        a.readd,
+        a.id oId,
+        a.sNo,
+        a.z_price,
+        a.pay,
+        a.user_id,
+        a.name,
+        a.mobile,
+        a.offset_balance,
+        a.real_sno,
+        a.subtraction_id,
+        a.mch_id,
+        a.p_sNo,
+        a.STATUS,
+        a.real_sno,
+        m.id detialId,
+        m.p_id goodsId,
+        m.p_name,
+        m.p_price,
+        m.sid attributeId,
+        m.num,
+        m.r_sNo,
+        m.express_id,
+        m.coupon_id detailCouponId,
+        m.arrive_time,
+        m.freight,
+        b.re_type,
+        b.p_id
+        FROM
+        lkt_order a,
+        lkt_return_order b,
+        lkt_order_details m
+        <where>
+            a.store_id = #{store_id}
+            AND a.sNo = m.r_sNo
+            AND b.p_id = m.id
+            <if test="id != null and id!=''">
+                AND b.id = #{id}
+            </if>
+        </where>
+    </select>
+    <sql id="selectRturnOrderNumDynamicSQL">
+        and a.store_id = #{store_id}
+        <if test="mch_id != null and mch_id!=''">AND b.mch_id LIKE CONCAT('%', #{mch_id}, '%')</if>
+        <if test="likeOrderno != null and likeOrderno!=''">and a.sNo like CONCAT('%',#{likeOrderno},'%')</if>
+        <if test="sNo != null and sNo!=''">and a.sNo like CONCAT('%',#{sNo},'%')</if>
+        # 售后未完成的
+        <if test="rType = 1">and a.r_type not in (2,4,5,8,9,10,12)</if>
+        <if test="rTypeList != null">
+            <foreach collection="rTypeList" item="type" separator="," open="and a.r_type in(" close=")">
+                #{type,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </sql>
+    <select id="selectRturnOrderNumDynamic" parameterType="Map" resultType="Map">
+        SELECT b.*
+        FROM lkt_return_order a
+        LEFT JOIN lkt_order b ON a.sNo = b.sNo
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectRturnOrderNumDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_sNo!=null and group_sNo!=''">b.sNo,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">b.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countRturnOrderNumDynamic" parameterType="Map" resultType="int">
+        SELECT count(distinct b.sno)
+        FROM lkt_return_order a
+        LEFT JOIN lkt_order b ON a.sNo = b.sNo
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectRturnOrderNumDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+
+    <sql id="getReturnOrderByGoodsInfoSQL">
+        a.store_id = #{store_id}
+        <if test="likeOrderno != null and likeOrderno!=''">and d.sNo like CONCAT('%',#{likeOrderno},'%')</if>
+        <if test="orderno != null and orderno!=''">and d.sNo=#{orderno}</if>
+        <if test="orderType != null">and o.otype=#{orderType}</if>
+        <if test="mch_id!=null">AND b.mch_id = #{mch_id}</if>
+        <if test="startDate!=null">AND d.re_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate!=null">AND d.re_time <![CDATA[  <=  ]]> #{endDate}</if>
+        <if test="newReturn != null">and d.re_time= (select max(re_time) from lkt_return_order x where x.sno=d.sno group
+            by x.sno)
+        </if>
+        <if test="return_type!=null">
+            <if test="return_type==1">AND d.r_type in(1,3) and d.re_type=1</if>
+            <if test="return_type==2">AND d.r_type in(4,9)</if>
+            <if test="return_type==3">AND d.r_type in(2,5,8) AND d.re_type != 3</if>
+            <if test="return_type==4">AND d.r_type in(1,3,11) AND d.re_type = 3</if>
+            <if test="return_type==5">AND d.r_type =12</if>
+            <if test="return_type==6">AND d.r_type in(5,10) AND d.re_type = 3</if>
+            <if test="return_type==7">and d.r_type =0</if>
+        </if>
+    </sql>
+    <select id="getReturnOrderByGoodsInfo" parameterType="Map" resultType="Map">
+        SELECT d.id,d.sNo,d.pid,d.re_money,d.user_id,a.p_name,a.p_price,a.re_apply_money,a.num,a.size,a.sid,d.real_money,d.re_photo,
+        CAST(d.re_type AS char) re_type,CAST(d.r_type AS char) r_type,d.re_time,b.imgurl,b.is_distribution,c.img,e.name
+        mchName,
+        CASE
+        WHEN (d.r_type = 1 || d.r_type = 3)
+        AND d.re_type = 1 THEN
+        '退款中'
+        when d.r_type = 4 || d.r_type = 9 then '退款成功'
+        when (d.r_type = 2 || d.r_type = 5 || d.r_type = 8) and d.re_type != 3 then '退款失败'
+        when (d.r_type = 1 || d.r_type = 3 || d.r_type = 11) and d.re_type = 3 then '换货中'
+        when d.r_type = 12 then '换货成功'
+        when (d.r_type = 5 || d.r_type = 10) and d.re_type = 3 then '换货失败'
+        ELSE '审核中'
+        END prompt
+        FROM
+        lkt_return_order AS d
+        inner join lkt_order o on o.sno=d.sNo
+        LEFT JOIN lkt_order_details AS a ON d.p_id = a.id
+        left join lkt_configure c on c.id = a.sid
+        LEFT JOIN lkt_product_list AS b ON c.pid = b.id
+        LEFT JOIN lkt_mch AS e ON e.id = b.mch_id
+        <where>
+            <include refid="getReturnOrderByGoodsInfoSQL"/>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_order!=null">d.sNo,</if>
+            <if test="group_p_id!=null">d.p_id,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="reTypeSort!=null">field(prompt,'审核中','换货中','退款中','换货失败','退款失败','换货成功','退款成功') ${reTypeSort},</if>
+            <if test="reTimeSort!=null">d.re_time ${reTimeSort},</if>
+        </trim>
+        <if test="pageNo != null and pageSize!=null">LIMIT #{pageNo},#{pageSize}</if>
+    </select>
+    <select id="getReturnOrderByGoodsCount" parameterType="Map" resultType="int">
+        select count(a.id) from (SELECT d.id FROM
+        lkt_return_order AS d
+        inner join lkt_order o on o.sno=d.sNo
+        LEFT JOIN lkt_order_details AS a ON d.p_id = a.id
+        left join lkt_configure c on c.id = a.sid
+        LEFT JOIN lkt_product_list AS b ON c.pid = b.id
+        LEFT JOIN lkt_mch AS e ON e.id = b.mch_id
+        <where>
+            <include refid="getReturnOrderByGoodsInfoSQL"/>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_order!=null">d.sNo,</if>
+            <if test="group_p_id!=null">d.p_id,</if>
+        </trim>
+        ) a
+    </select>
+
+    <sql id="getReturnOrderListSQL">
+        a.store_id = #{storeId}
+        and a.user_id = #{userId}
+        and a.re_time= (select max(re_time) from lkt_return_order x where x.sno=a.sno group by x.sno)
+        <if test=" keyword != null and keyword!=''">
+            and ( a.sNo like concat('%',#{keyword},'%') or b.p_name like concat('%',#{keyword},'%'))
+        </if>
+        <if test=" returnOrderId != null">
+            and a.id=#{returnOrderId}
+        </if>
+        and a.re_type > 0
+    </sql>
+    <!-- 个人中心售后列表 -->
+    <select id="getReturnOrderList" parameterType="Map" resultType="Map">
+        select a.*,b.p_name,b.p_price,b.num,b.size,attr.pid goodsId
+        from lkt_return_order as a
+        left join lkt_order_details as b on a.p_id = b.id
+        left join lkt_configure attr on attr.id = b.sid
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getReturnOrderListSQL"/>
+            </trim>
+        </where>
+        order by case
+        when a.r_type='1' then 1
+        when a.r_type='11' then 2
+        when a.r_type='0' then 3
+        when a.r_type='3' then 4
+        when a.r_type='2' then 5
+        when a.r_type='5' then 6
+        when a.r_type='8' then 7
+        when a.r_type='10' then 8
+        when a.r_type='4' then 9
+        when a.r_type='9' then 10
+        when a.r_type='12' then 11
+        end
+        limit #{start},#{pageSize}
+    </select>
+
+    <!-- 个人中心售后列表 -->
+    <select id="getReturnOrderListCount" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_return_order as a
+        left join lkt_order_details as b on a.p_id = b.id
+        left join lkt_configure attr on attr.id = b.sid
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getReturnOrderListSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="getUnFinishShouHouOrder" parameterType="Map" resultType="int">
+        select count(1) from lkt_return_order where store_id = #{storeId}
+        and user_id = #{userId}
+        <if test="orderDetailsId != null and orderDetailsId != 0 ">
+            and p_id = #{orderDetailsId}
+        </if>
+        and sNo = #{sNo}
+    </select>
+
+    <sql id="selectRturnOrderNumDynamic1SQL">
+        <if test="store_id != null">and b.store_id = #{store_id}</if>
+        <if test="mch_id != null">and a.mch_id = concat(',',#{mch_id},',')</if>
+        <if test="sNo != null">and b.sNo like concat(',',#{sNo},',')</if>
+        <if test="re_type != null">and b.re_type=#{re_type}</if>
+        <if test="not_re_type != null">and b.re_type!=#{not_re_type}</if>
+        <choose>
+            <when test="r_type != null">and b.r_type = #{r_type}</when>
+            <when test="rTypeList != null">
+                <foreach collection="rTypeList" item="type" separator="," open="and b.r_type in(" close=")">
+                    #{type,jdbcType=INTEGER}
+                </foreach>
+            </when>
+            <otherwise>and b.r_type != '100'</otherwise>
+        </choose>
+        <if test="ordernoLike!=null">and (a.sNo like concat('%',#{ordernoLike},'%') or a.name like
+            concat('%',#{ordernoLike},'%') or a.mobile like concat('%',#{ordernoLike},'%') or a.user_id like
+            concat('%',#{ordernoLike},'%') or a.p_sNo like concat('%',#{ordernoLike},'%'))
+        </if>
+        <if test="startDate!=null">AND b.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate!=null">AND b.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+    </sql>
+    <select id="selectRturnOrderNumDynamic1" parameterType="Map" resultType="Map">
+        select b.*, lm.name as shop_name, a.pay, c.p_name, c.p_price, c.num,
+        CASE
+        WHEN (b.r_type = 1 || b.r_type = 3)
+        AND b.re_type = 1 THEN
+        '退款中'
+        when b.r_type = 4 || b.r_type = 9 then '退款成功'
+        when (b.r_type = 2 || b.r_type = 5 || b.r_type = 8) and b.re_type != 3 then '退款失败'
+        when (b.r_type = 1 || b.r_type = 3 || b.r_type = 11) and b.re_type = 3 then '换货中'
+        when b.r_type = 12 then '换货成功'
+        when (b.r_type = 5 || b.r_type = 10) and b.re_type = 3 then '换货失败'
+        ELSE
+        '审核中'
+        END returnName
+        from lkt_return_order as b
+        left join lkt_order_details as c on b.p_id = c.id
+        left join lkt_order as a on c.r_sNo = a.sNo
+        LEFT JOIN lkt_product_list as lpl on lpl.id = c.p_id
+        LEFT JOIN lkt_mch as lm on lm.id = lpl.mch_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectRturnOrderNumDynamic1SQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_sNo!=null and group_sNo!=''">o.sNo,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="re_time_sort!=null and re_time_sort!=''">b.re_time ${re_time_sort},</if>
+            <if test="r_type_sort!=null and r_type_sort!=''">b.r_type ${r_type_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+</mapper>

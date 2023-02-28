@@ -1,0 +1,82 @@
+.merchants-list{
+  margin-top: 10px;
+}
+.statistical {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: #FFFFFF;
+  .goods-totalprice,.discount-stores,.discount-platform,.totle-pay {
+    margin: 15px 0;
+    display: flex;
+  }
+  .title {
+    font-size: 14px;
+  }
+  .title-totle {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .red {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .price {
+    display: block;
+    width: 150px;
+    text-align: right;
+    margin-right: 50px;
+  }
+}
+
+
+.footerBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px;
+  height: 72px;
+  background: #FFFFFF;
+  border-top: 1px solid #E9ECEF;
+  box-sizing: border-box;
+}
+
+//主体
+.card {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  //标题
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 20px;
+    border-bottom: 1px solid #E9ECEF;
+    font-size: 16px;
+    font-weight: 400;
+    color: #414658;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    position: sticky;
+    top: 0;
+    background-color: #FFFFFF;
+    z-index: 1000;
+  }
+  img{
+    width: 50px;
+    height: 50px;
+  }
+
+}
+
+/deep/.el-table {
+  .cell {
+    .name-info {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

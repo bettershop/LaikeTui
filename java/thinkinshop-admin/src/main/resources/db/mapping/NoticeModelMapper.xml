@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laiketui.common.mapper.NoticeModelMapper">
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.order.NoticeModel">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="store_id" jdbcType="INTEGER" property="store_id" />
+    <result column="pay_success" jdbcType="VARCHAR" property="pay_success" />
+    <result column="order_delivery" jdbcType="VARCHAR" property="order_delivery" />
+    <result column="delivery" jdbcType="VARCHAR" property="delivery" />
+    <result column="refund_res" jdbcType="VARCHAR" property="refund_res" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, store_id, pay_success, order_delivery, delivery, refund_res, update_time
+  </sql>
+</mapper>

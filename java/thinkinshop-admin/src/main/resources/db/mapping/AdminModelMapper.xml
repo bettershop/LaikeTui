@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.AdminModelMapper">
+
+    <select id="selectAdminListInfo" resultType="Map" parameterType="Map">
+        select a.*,
+        (select `name` from lkt_admin x where x.id=a.sid) superName,
+        (select `name` from lkt_role x where x.id=a.role) roleName
+        from lkt_admin a
+        <where>
+            <trim prefixOverrides="and">
+                <if test="store_id!=null">
+                    and store_id = #{store_id}
+                </if>
+                <if test="id!=null">
+                    and id = #{id}
+                </if>
+                <if test="type!=null">
+                    and type = #{type}
+                </if>
+                <if test="recycle!=null">
+                    and recycle = 0
+                </if>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countAdminListInfo" resultType="int" parameterType="Map">
+        select count(1)
+        from lkt_admin
+        <where>
+            <trim prefixOverrides="and">
+                <if test="store_id!=null">
+                    and store_id = #{store_id}
+                </if>
+                <if test="id!=null">
+                    and id = #{id}
+                </if>
+                <if test="type!=null">
+                    and type = #{type}
+                </if>
+                <if test="recycle!=null">
+                    and recycle = 0
+                </if>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

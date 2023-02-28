@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /deep/.jump-list {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      .laiketui-add:before {
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .laiketui-shangjia:before {
+          font-size: 14px;
+          margin-right: 8px;
+          position: relative;
+          top: 1px;
+      }
+      button {
+          width: 120px;
+          height: 40px;
+          background: #28B6FF;
+          border-radius: 4px;
+          padding: 0;
+          border: none;
+      &:hover {
+          opacity: 0.8;
+      }
+      span {
+          font-size: 14px;
+      }
+      }
+      
+      .fontColor {
+          width: 120px;
+          height: 42px;
+          color: #6a7076;
+          background-color: #fff;
+          border-radius: 4px;
+      }
+
+      .el-icon-printer:before  {
+          margin-right: 8px;
+      }
+  }
+
+  .menu-list {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+        thead {
+          tr {
+            th{
+              height: 61px;
+              text-align: center;
+              font-size: 14px;
+              font-weight: bold;
+              color: #414658;
+            }
+          }
+        }
+      }
+      /deep/.el-table__body {
+        tbody {
+          tr {
+            td{
+              height: 92px;
+              text-align: center;
+              font-size: 14px;
+              color: #414658;
+              font-weight: 400;
+            }
+          }
+        }
+        .cell {
+          .condition {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+          }
+        }
+      }
+  
+      /deep/.el-table{
+          .add {
+            .cell {
+              overflow: visible !important;
+            }
+          }
+          .OP-button{
+            button{
+              padding: 5px;
+              height: 22px;
+              background: #FFFFFF;
+              border: 1px solid #D5DBE8;
+              border-radius: 2px;
+              font-size: 12px;
+              font-weight: 400;
+              color: #888F9E;
+              line-height: 9px;
+            }
+            button:hover{
+              border:1px solid rgb(64, 158, 255);
+              color: rgb(64, 158, 255);
+            }
+            button:hover i{
+              color: rgb(64, 158, 255);
+            }
+            .OP-button-top{
+              margin-bottom: 8px;
+              button {
+                &:not(:first-child) {
+                  margin-left: 8px !important;
+                }
+              }
+            }
+          }
+      }
+  }
+}

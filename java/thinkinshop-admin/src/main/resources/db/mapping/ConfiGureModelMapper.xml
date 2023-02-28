@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ConfiGureModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="id != null">and id = #{id}</if>
+        <if test="goodsId != null">and pid = #{goodsId}</if>
+        <choose>
+            <when test="recycle !=null">and recycle = #{recycle}</when>
+            <otherwise>and recycle = 0</otherwise>
+        </choose>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_configure
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">ctime ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_configure
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="getProductListLeftJoinMchDynamicSQL">
+        b.store_id = #{store_id}
+        and b.id = a.pid
+        <if test="active != null">and b.active = #{active}</if>
+        <if test="goodsStatus != null">and b.status = #{goodsStatus}</if>
+        <if test="mch_status != null">and b.mch_status = #{mch_status}</if>
+        <if test="stockNum_gt != null">and a.num <![CDATA[ > ]]> #{stockNum_gt}</if>
+        <if test="stockNum != null">and a.num = #{stockNum}</if>
+        <if test="attr_id != null">and a.id = #{attr_id}</if>
+        <if test="goodsId != null">and b.id = #{goodsId}</if>
+        <if test="goodsStatus != null">and b.status = #{goodsStatus}</if>
+        <if test="goodsRecycle != null">and b.recycle = #{goodsRecycle}</if>
+        <if test="product_class != null">and b.product_class like concat('%-',#{product_class},'-%')</if>
+        <if test="brand_id != null">and b.brand_id = #{brand_id}</if>
+        <if test="product_title != null">and b.product_title like concat('%',#{product_title},'%')</if>
+        <if test="not_time_id != null">and a.id not in (SELECT attr_id from lkt_seconds_pro where store_id = #{store_id}
+            and is_delete = 0 and label_id = #{label_id})
+        </if>
+    </sql>
+    <select id="getProductListLeftJoinMchDynamic" parameterType="Map" resultType="Map">
+        select a.id as attr_id, b.id goodsId, b.product_title,a.img
+        imgurl,c.name,a.num,a.total_num,b.min_inventory,a.attribute,a.price as price,b.product_number
+        from lkt_configure as a
+        left join lkt_product_list as b on a.pid = b.id
+        left join lkt_mch as c on b.mch_id = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductListLeftJoinMchDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix=" ORDER BY " suffixOverrides=",">
+            <if test="price_sort != null">a.price ${price_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd!=null">LIMIT #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countProductListLeftJoinMchDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_configure as a
+        left join lkt_product_list as b on a.pid = b.id
+        left join lkt_mch as c on b.mch_id = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductListLeftJoinMchDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="selectStockInfoSQL">
+        and a.recycle = 0 and c.recycle = 0 and a.mch_status = 2
+        and c.num <![CDATA[ <= ]]> a.min_inventory
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="mch_id != null">and a.mch_id = #{mch_id}</if>
+        <if test="pid != null">and c.pid = #{pid}</if>
+        <if test="stockType != null">and b.type = #{stockType}</if>
+        <if test="goodsName != null">and a.product_title like concat('%',#{goodsName},'%')</if>
+        <if test="startDate != null">and b.startDate <![CDATA[ >= ]]> #{startDate}</if>
+        <if test="endDate != null">and b.endDate <![CDATA[ <= ]]> #{endDate}</if>
+    </sql>
+
+    <select id="selectStockInfo" parameterType="Map" resultType="Map">
+        SELECT a.product_number, a.product_title, a.min_inventory, a.imgurl, a. STATUS, a.mch_id, a.upper_shelf_time,
+        c.id, c.pid, c.price, c.attribute, c.total_num, c.num, max(b.add_date) warningDate,
+        m. NAME AS shop_name FROM lkt_configure AS c
+        INNER JOIN lkt_product_list AS a ON c.pid = a.id LEFT JOIN lkt_mch AS m ON a.mch_id = m.id LEFT JOIN lkt_stock
+        AS
+        b ON c.id = b.attribute_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectStockInfoSQL"/>
+            </trim>
+        </where>
+        <trim prefix=" GROUP BY " suffixOverrides=",">
+            <if test="group_cid != null">c.id,</if>
+        </trim>
+        <trim prefix=" ORDER BY " suffixOverrides=",">
+            <if test="warningDate_sort != null">warningDate ${price_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd!=null">LIMIT #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countStockInfo" parameterType="Map" resultType="int">
+        SELECT count(distinct c.id) FROM lkt_configure AS c
+        INNER JOIN lkt_product_list AS a ON c.pid = a.id LEFT JOIN lkt_mch AS m ON a.mch_id = m.id LEFT JOIN lkt_stock
+        AS
+        b ON c.id = b.attribute_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectStockInfoSQL"/>
+            </trim>
+        </where>
+    </select>
+
+
+
+</mapper>

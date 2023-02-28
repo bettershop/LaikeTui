@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ReturnRecordModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.order.ReturnRecordModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="user_id" jdbcType="VARCHAR" />
+    <result column="store_id" property="store_id" jdbcType="INTEGER" />
+    <result column="re_type" property="re_type" jdbcType="TINYINT" />
+    <result column="r_type" property="r_type" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="sNo" property="sNo" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="real_money" property="real_money" jdbcType="DECIMAL" />
+    <result column="re_photo" property="re_photo" jdbcType="VARCHAR" />
+    <result column="product_id" property="product_id" jdbcType="INTEGER" />
+    <result column="attr_id" property="attr_id" jdbcType="INTEGER" />
+    <result column="express_id" property="express_id" jdbcType="INTEGER" />
+    <result column="courier_num" property="courier_num" jdbcType="VARCHAR" />
+    <result column="re_time" property="re_time" jdbcType="TIMESTAMP" />
+    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="p_id" property="p_id" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, user_id, store_id, re_type, r_type, content, sNo, money, real_money, re_photo, 
+    product_id, attr_id, express_id, courier_num, re_time, explain, p_id
+  </sql>
+</mapper>

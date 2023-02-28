@@ -1,0 +1,103 @@
+.container {
+    width: 100%;
+    height: 737px;
+    background-color: #fff;
+    border-radius: 4px;
+    .header {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      padding-left: 20px;
+      border-bottom: 1px solid #E9ECEF;
+      span {
+        font-size: 16px;
+        font-weight: 400;
+        color: #414658;
+      }
+    }
+  
+    /deep/.el-form {
+      width: 100%;
+      height: 677px;
+      overflow: hidden;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      .notice {
+        padding: 40px 0 0 0px;
+        display: flex;
+        flex-direction: column;
+        .el-form-item {
+          margin-bottom: 20px;
+          .el-form-item__content {
+            .el-input {
+              width: 420px;
+              height: 40px;
+              input {
+                  width: 420px;
+                  height: 40px;
+              }
+            }
+          }
+        }
+
+        .input-interval {
+          margin-bottom: 14px !important;
+        }
+  
+        .business-license {
+            img {
+              width: 100px;
+              height: 100px;
+              border: 1px solid #e3e3e3;
+              border-radius: 2px;
+            }
+        }
+
+        .cascadeAddress {
+            .el-form-item__content {
+                .cascadeAddress-block {
+                    .el-select {
+                        width: 128px;
+                        &:not(:last-child) {
+                            margin-right: 15px !important;
+                        }
+                        .el-input {
+                            width: 135px;
+                        }
+                        .el-input {
+                            width: 135px;
+                            input {
+                                width: 135px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-button {
+          padding-bottom: 40px;
+        }
+  
+      }
+  
+      // .footer-button {
+      //   position: fixed;
+      //   right: 0;
+      //   bottom: 40px;
+      //   display: flex;
+      //   align-items: center;
+      //   justify-content: flex-end;
+      //   padding: 15px 20px;
+      //   border-top: 1px solid #E9ECEF;
+      //   background: #FFFFFF;
+      //   width: 300%;
+      //   z-index: 10;
+      //   button {
+      //     width: 70px;
+      //     height: 40px;
+      //   }
+      // }
+    }
+}

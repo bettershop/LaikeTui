@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.JumpPathModelMapper">
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="id != null">and a.id = #{id}</if>
+        <if test="type != null">and a.type = #{type}</if>
+        <if test="type0 != null">and a.type0 = #{type0}</if>
+        <if test="status != null">and a.status = #{status}</if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select a.id,a.store_id,a.type0,a.type,a.url,a.status,a.parameter_status,a.parameter,a.add_date,a.sid
+        <choose>
+            <when test="type0 == 1">,x.pname name</when>
+            <when test="type0 == 2">,x.product_title name</when>
+            <otherwise>,x.name</otherwise>
+        </choose>
+        from lkt_jump_path a
+        <choose>
+            <when test="type0 == 1">left join lkt_product_class x on a.sid = x.cid  </when>
+            <when test="type0 == 2">left join lkt_product_list x on a.sid = x.id</when>
+            <when test="type0 == 3">left join lkt_mch x on a.sid = x.id</when>
+        </choose>
+        <where>
+            <trim prefixOverrides="and">
+                <choose>
+                    <when test="type0 == 1"> and x.level=0 and x.recycle = 0  and x.store_id=a.store_id</when>
+                    <when test="type0 == 2"> and x.recycle = 0 and x.store_id=a.store_id </when>
+                    <when test="type0 == 3"> and x.recovery = 0 and x.store_id=a.store_id </when>
+                </choose>
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_jump_path
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+
+</mapper>

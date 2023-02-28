@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.SystemTellModelMapper">
+    <sql id="selectDynamicSQL">
+        <if test="id != null">and id = #{id}</if>
+        <if test="store_id != null">and store_id = #{store_id}</if>
+        <if test="startDate != null">and startdate <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null">and enddate <![CDATA[  <=  ]]> #{endDate}</if>
+        <if test="endDate_gt != null">and enddate <![CDATA[  >  ]]> #{endDate_gt}</if>
+        <if test="startDate_lt != null">and startdate <![CDATA[  <  ]]> #{startDate_lt}</if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_system_tell
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_system_tell
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

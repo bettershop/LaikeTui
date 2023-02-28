@@ -1,0 +1,60 @@
+.container {
+    width: 100%;
+    height: 737px;
+    background-color: #fff;
+    .header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        padding-left: 20px;
+        border-bottom: 1px solid #E9ECEF;
+        span {
+          font-size: 16px;
+          font-weight: 400;
+          color: #414658;
+        }
+    }
+    /deep/.form-search {
+        width: 100%;
+        height: 677px;
+        overflow: hidden;
+        overflow-y: auto;
+        padding-bottom: 80px;
+        display: flex;
+        justify-content: center;
+        .notice {
+          padding: 40px 0 0 0px;
+          display: flex;
+          flex-direction: column;
+          .selects {
+            width: 400px;
+          }
+          .type-stlect {
+            width: 100px;
+            margin-right: 5px;
+            .el-input {
+              width: 100px;
+              input {
+                width: 100px;
+              }
+            }
+          }
+          .el-input {
+            width: 400px;
+            height: 40px;
+            input {
+              width: 400px;
+              height: 40px;
+            }
+          }
+        }
+    
+        .footer-button {
+          margin-left: 135Px;
+          button {
+            width: 70px;
+            height: 40px;
+          }
+        }
+    }
+}

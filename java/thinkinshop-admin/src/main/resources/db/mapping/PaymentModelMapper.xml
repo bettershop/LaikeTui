@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.PaymentModelMapper">
+
+    <select id="getPaymentConfigInfoDynamic" parameterType="Map" resultType="Map">
+        SELECT
+        c.config_data
+        FROM
+        lkt_payment AS p
+        LEFT JOIN lkt_payment_config AS c ON c.pid = p.id
+        WHERE
+        c. STATUS = 1
+        AND p. STATUS = 0
+        <if test="class_name!=null">
+            AND p.class_name = #{class_name}
+        </if>
+    </select>
+
+    <sql id="getPaymentConfigInfoSQL">
+        <if test="store_id!=null">and store_id=#{store_id}</if>
+        <if test="status!=null">and p.status =#{status}</if>
+        <if test="id!=null">and p.id=#{id}</if>
+    </sql>
+    <select id="getPaymentConfigInfo" parameterType="Map" resultType="Map">
+        select p.logo,p.name,p.id,p.class_name,c.status,p.status switch
+        from lkt_payment p left join lkt_payment_config c on p.id=c.pid
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getPaymentConfigInfoSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by " suffixOverrides=",">
+            <if test="sort_sort!=null and sort_sort!=''">p.sort ${sort_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countPaymentConfigInfo" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_payment p left join lkt_payment_config c on p.id=c.pid
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getPaymentConfigInfoSQL"/>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

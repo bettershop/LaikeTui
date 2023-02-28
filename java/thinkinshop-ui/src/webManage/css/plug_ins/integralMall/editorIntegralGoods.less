@@ -1,0 +1,262 @@
+.container {
+    width: 100%;
+    /deep/.el-form {
+      .header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        border-bottom: 1px solid #E9ECEF;
+        padding-left: 20px;
+        span {
+          font-weight: 400;
+          font-size: 16px;
+          color: #414658;
+        }
+      }
+
+      .select-goods {
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 16px;
+        .goods-block {
+          margin-top: 40px;
+          display: flex;
+          flex-direction: column;
+          padding: 0 20px 40px 20px;
+          .menu-list {
+            height: 410px;
+            width: 100%;
+            flex: 1;
+            background: #FFFFFF;
+            border-radius: 4px;
+            .el-table__header {
+              thead {
+                tr {
+                  th{
+                    height: 50px;
+                    text-align: center;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #414658;
+                  }
+                }
+              }
+            }
+            .el-table__body {
+              tbody {
+                tr {
+                  td{
+                    height: 90px;
+                    text-align: center;
+                    font-size: 14px;
+                    color: #414658;
+                    font-weight: 400;
+                  }
+                }
+              }
+              .cell {
+                .goods-info {
+                  display: flex;
+                  justify-content: flex-start;
+                  align-items: center;
+                  img {
+                    width: 60px;
+                    height: 60px;
+                  }
+                  span {
+                    margin-left: 10px;
+                    text-align: left;
+                  }
+                }
+              }
+                
+                        
+            }
+          }
+        }
+      }
+
+      .activity-set {
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 16px;
+        .activity-block {
+          margin-top: 40px;
+          justify-content: space-between;
+          padding: 0 20px 80px 20px;
+          .exchange-price {
+            .el-form-item__content {
+                display: flex;
+                .add {
+                    margin: 0 10px;
+                }
+            }
+          }
+          .el-input {
+            width: 400px;
+            height: 40px;
+          }
+
+          .shelves-num {
+            display: flex;
+            .el-form-item__content {
+                margin-left: 0 !important;
+                .el-input {
+                    width: 294px;
+                    input {
+                        width: 294px;
+                    }
+                }
+                button {
+                    width: 96px;
+                    height: 38px;
+                    border: 1px solid #2890FF;
+                    border-radius: 4px;
+                    background-color: #fff;
+                    color: #2890FF;
+                    margin-left: 10px !important;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+          }
+        }
+      }
+  
+      .footer-button {
+        position: fixed;
+        right: 0;
+        bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 15px 20px;
+        border-top: 1px solid #E9ECEF;
+        background: #FFFFFF;
+        width: 300%;
+        z-index: 10;
+        button {
+          width: 70px;
+          height: 40px;
+        }
+        .bgColor {
+          margin-left: 14px;
+        }
+        .bgColor:hover {
+          opacity: 0.8;
+        }
+  
+        .fontColor {
+          color: #6a7076;
+          border: 1px solid #d5dbe8;
+          margin-left: 14px;
+        }
+        .fontColor:hover {
+          color: #2890ff;
+          border: 1px solid #2890ff;
+        }
+      }
+    }
+
+    .dialog-block {
+        // 弹框样式
+        /deep/.el-dialog {
+          width: 580px;
+          height: 252px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          margin: 0 !important;
+          .el-dialog__header {
+            width: 100%;
+            height: 58px;
+            line-height: 58px;
+            font-size: 16px;
+            margin-left: 19px;
+            font-weight: bold;
+            border-bottom: 1px solid #e9ecef;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0 0 0 19px;
+            .el-dialog__headerbtn {
+              font-size: 18px;
+              top: 0 !important;
+            }
+            .el-dialog__title {
+              font-weight: normal;
+              font-size: 16px;
+              color: #414658;
+            }
+          }
+    
+          .el-dialog__body {
+            border-bottom: 1px solid #e9ecef;
+            padding: 41px 60px 16px 60px !important;
+            .pass-input {
+              .el-form {
+                width: 340px;
+                .el-form-item {
+                  width: 340px;
+                  height: 40px;
+                  .el-form-item__content {
+                    .el-input {
+                      width: 340px;
+                      height: 40px;
+                      input {
+                        width: 340px;
+                        height: 40px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            .form-footer {
+              width: 174px;
+              height: 72px;
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              .el-form-item {
+                padding: 0 !important;
+                height: 100%;
+                .el-form-item__content {
+                  height: 100%;
+                  line-height: 72px;
+                  margin: 0 !important;
+                }
+              }
+    
+              .qxcolor {
+                color: #6a7076;
+                border: 1px solid #d5dbc6;
+              }
+              .qdcolor {
+                background-color: #2890ff;
+              }
+              .qdcolor {
+                background-color: #2890ff;
+              }
+              .qdcolor:hover {
+                opacity: 0.8;
+              }
+              .qxcolor {
+                color: #6a7076;
+                border: 1px solid #d5dbe8;
+                // margin-left: 14px;
+              }
+              .qxcolor:hover {
+                color: #2890ff;
+                border: 1px solid #2890ff;
+                background-color: #fff;
+              }
+            }
+          }
+        }
+        /deep/.el-form-item__label {
+          font-weight: normal;
+          color: #414658;
+        }
+    }
+}

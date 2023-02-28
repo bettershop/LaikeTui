@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CouponActivityModelMapper">
+
+    <sql id="getCouponActivityDynamicSQL">
+        AND store_id = #{store_id}
+        AND recycle = 0
+        <if test="id != null">AND id = #{id}</if>
+        <if test="status != null">AND STATUS = #{status}</if>
+        <if test="activity_type != null">AND activity_type = #{activity_type}</if>
+        <if test="activity_type_4 != null">AND activity_type != 4</if>
+        <if test="mch_id != null">AND mch_id =#{mch_id}</if>
+        <if test="is_display != null">AND is_display =#{is_display}</if>
+        <if test="likeName != null">AND name like concat('%',#{likeName},'%')</if>
+        <if test="validate_overdue != null">AND end_time <![CDATA[  >  ]]> #{validate_overdue}</if>
+        <if test="validate_not_overdue != null">AND end_time <![CDATA[  <  ]]> #{validate_not_overdue}</if>
+        <if test="mchList != null">
+            <foreach collection="mchList" item="mchId" separator="," open="and mch_id in(" close=")">
+                #{mchId,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="typeList != null">
+            <foreach collection="typeList" item="type" separator="," open="and type in(" close=")">
+                #{type,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="getCouponActivityDynamic" parameterType="Map" resultType="Map">
+        SELECT * FROM lkt_coupon_activity
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getCouponActivityDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix=" ORDER BY " suffixOverrides=",">
+            <if test="start_time_sort != null"> start_time ${start_time_sort} </if>
+            <if test="add_time_sort != null"> add_time ${add_time_sort} </if>
+        </trim>
+        <if test="page != null and pageSize!=null">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+    <select id="countCouponActivityDynamic" parameterType="Map" resultType="int">
+        SELECT count(1) FROM lkt_coupon_activity
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getCouponActivityDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

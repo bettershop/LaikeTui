@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.MchConfigModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.mch.MchConfigModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="store_id" property="store_id" jdbcType="INTEGER" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="settlement" property="settlement" jdbcType="VARCHAR" />
+    <result column="min_charge" property="min_charge" jdbcType="DECIMAL" />
+    <result column="max_charge" property="max_charge" jdbcType="DECIMAL" />
+    <result column="service_charge" property="service_charge" jdbcType="DECIMAL" />
+    <result column="illustrate" property="illustrate" jdbcType="VARCHAR" />
+    <result column="agreement" property="agreement" jdbcType="VARCHAR" />
+    <result column="delete_settings" property="delete_settings" jdbcType="INTEGER" />
+    <result column="commodity_setup" property="commodity_setup" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, store_id, logo, settlement, min_charge, max_charge, service_charge, illustrate, 
+    agreement, delete_settings, commodity_setup
+  </sql>
+</mapper>

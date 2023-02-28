@@ -1,0 +1,142 @@
+::-webkit-scrollbar-thumb {
+	background-color: #97A0B4;
+	border-radius: 5px;
+	background-clip: padding-box;
+	border: 1px solid rgba(180, 180, 180, 0.4);
+	min-height: 28px;
+}
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+.l-transfer{
+	display: flex;
+	align-items: center;
+
+	.transfer_left,.transfer_right{
+		width: 280px;
+		border: 1px solid #D5DBE8;
+		background-color: #FFFFFF;
+		
+		&_top{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 15px;
+			height: 40px;
+			background: #F4F7F9;
+			border-bottom: 1px solid #D5DBE8;
+			border-radius: 2px;
+			box-sizing: border-box;
+			font-size: 14px;
+			font-family: Microsoft YaHei;
+			font-weight: bold;
+			color: #414658;
+			
+			a{
+				font-size: 14px;
+				font-family: Microsoft YaHei;
+				font-weight: 400;
+				color: #2890FF;
+			}
+
+			&_Box{
+				display: flex;
+				align-items: center;
+
+				.hr{
+					font-size: 14px;
+					color: #D5DBE8;
+					font-weight: 400;
+					line-height: 14px;
+					margin: 0 10px;
+				}
+			}
+		}
+		
+		&_bottom{
+			display: flex;
+			flex-direction: column;
+			padding: 20px 0 0;
+			height: 292px;
+			
+			.iptBox{
+				padding: 0 15px;
+			}
+			
+			.treeBox{
+				flex: 1;
+				overflow: hidden auto;
+				margin: 10px 0;
+
+				.el-tree{
+					min-height: 200px;
+				}
+
+				.loading{
+					text-align: center;
+					font-size: 13px;
+				}
+			}
+		}
+
+		.checkBox{
+			height: 292px;
+			overflow: hidden auto;
+
+			>div{
+				display: flex;
+				align-items: center;
+				width: 278px;
+				height: 34px;
+				cursor: pointer;
+				padding: 0 14px;
+
+				>div{
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					flex: 1;
+				}
+			}
+
+			>div:hover{
+				background-color: #F4F7F9;
+			}
+
+		}
+	}
+
+	.transfer_center{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 54px;
+		height: 36px;
+		background-color: #2890FF;
+		border-radius: 2px;
+		color: #FFFFFF;
+		font-size: 18px;
+		margin: 0 auto;
+		cursor: pointer;
+	}
+
+	.transfer_center.disabled{
+		background: #94c8ff!important;
+	}
+	
+	.transfer_center:hover{
+		background-color: #53a6ff;
+	}
+
+	.el-tree-node__content>.el-tree-node__expand-icon{
+		padding: 2px;
+	}
+	
+	.custom-tree-node{
+		overflow: hidden; 
+		white-space: nowrap; 
+		text-overflow: ellipsis;
+	}
+}

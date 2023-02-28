@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CustomerModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and id = #{store_id}</if>
+        <if test="store_name != null and store_name != ''">and `name` like concat('%',#{store_name},'%')</if>
+        <if test="startDate != null and startDate != ''">and add_date <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and end_date <![CDATA[  <=  ]]> #{endDate}</if>
+        <choose>
+            <when test="recycle == null">and recycle =0</when>
+            <otherwise>and recycle = #{recycle}</otherwise>
+        </choose>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_customer
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="is_default_sort!=null and is_default_sort!=''">is_default ${is_default_sort},</if>
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_customer
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

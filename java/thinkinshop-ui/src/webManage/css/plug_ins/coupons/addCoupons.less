@@ -1,0 +1,169 @@
+.container {
+  width: 100%;
+  height: 737px;
+  background-color: #fff;
+  border-radius: 4px;
+  .header {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    border-bottom: 1px solid #E9ECEF;
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      color: #414658;
+    }
+  }
+
+  /deep/.el-form {
+    width: 100%;
+    height: 677px;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-bottom: 60px;
+    .notice {
+      padding: 40px 0 0 60px;
+      display: flex;
+      flex-direction: column;
+      margin-left: 50%;
+      transform: translateX(-50%);
+      .el-form-item {
+        .el-form-item__content {
+          .select-input,.coupons-name {
+            width: 245px;
+            height: 40px;
+          }
+
+          .issue-number,.consumption-threshold {
+            width: 125px;
+            height: 40px;
+          }
+          .issue-number {
+            margin-right: 10px;
+          }
+          .consumption-threshold {
+            margin: 0 10px;
+          }
+
+          .instructions {
+            width: 400px;
+          }
+
+          .select-goods {
+            .el-select {
+              width: 400px;
+            }
+          }
+
+          .select-class {
+            width: 460px;
+            padding: 10px;
+            .addBtn {
+              button {
+                width: 96px;
+                height: 38px;
+                border: 1px solid #2890FF;
+                border-radius: 4px;
+                background-color: #fff;
+                color: #2890FF;
+                margin-left: 10px;
+                margin: 0;
+              }
+            }
+
+            .class-block {
+              max-height: 200px;
+              overflow: auto;
+              .remove {
+                margin-left: 20px;
+              }
+            }
+          }
+          
+        }
+      }
+
+    }
+
+    .footer-button {
+      margin-left: 110Px;
+      button {
+        width: 70px;
+        height: 40px;
+      }
+    }
+  }
+
+  .dialog-block {
+    // 弹框样式
+    /deep/.el-dialog {
+      width: 680px;
+      height: 540px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      margin: 0 !important;
+      .el-dialog__header {
+        width: 100%;
+        height: 58px;
+        line-height: 58px;
+        font-size: 16px;
+        margin-left: 19px;
+        font-weight: bold;
+        border-bottom: 2px solid #E9ECEF;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 0 0 19px;
+        .el-dialog__headerbtn {
+          font-size: 18px;
+          top: 0 !important;
+        }
+        .el-dialog__title {
+          font-weight: normal;
+        }
+      }
+
+      .el-dialog__body {
+        width: 100%;
+        height: 410px;
+        padding: 0 !important;
+        .dialog-container {
+          width: 100%;
+          height: 410px;
+          padding: 10px;
+          .wl-transfer {
+            height: 100% !important;
+
+            .transfer-left,.transfer-right {
+              width: 45% !important;
+            }
+            .transfer-center {
+              width: 10% !important;
+              left: 45%;
+            }
+          }
+        }
+      }
+
+      .el-dialog__footer {
+        width: 100%;
+        height: 72px;
+        border-top: 1px solid #E9ECEF;
+        .form-footer {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          .bgColor:hover {
+            background-color: #fff;
+            color: #2890ff;
+            border: 1px solid #2890ff;
+          }
+        }
+      }
+    }
+  }
+}

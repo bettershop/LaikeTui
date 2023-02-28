@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.SkuModelMapper">
+    <resultMap id="BaseResultMap" type="com.laiketui.domain.config.SkuModel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="store_id" property="store_id" jdbcType="INTEGER"/>
+        <result column="sid" property="sid" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="admin_name" property="admin_name" jdbcType="VARCHAR"/>
+        <result column="recycle" property="recycle" jdbcType="TINYINT"/>
+        <result column="add_date" property="add_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, store_id, sid, code, name, status, type, admin_name, recycle, add_date
+    </sql>
+
+    <sql id="selectDynamicSQL">
+        <if test="id != null">and id = #{id}</if>
+        <if test="sid != null">and sid = #{sid}</if>
+        <if test="store_id != null">and store_id = #{store_id}</if>
+        <if test="code !=null and code!=''">and `code` =#{code}</if>
+        <if test="codeLike !=null and codeLike!=''">and `code` like concat('%',#{codeLike},'%')</if>
+        <if test="name !=null and name!=''">and `name` = #{name}</if>
+        <if test="nameLike !=null and nameLike!=''">and `name` like concat('%',#{nameLike},'%')</if>
+        <if test="status !=null">and `status` = #{status}</if>
+        <if test="type !=null">and `type` = #{type}</if>
+        <choose>
+            <when test="recycle !=null">and recycle = #{recycle}</when>
+            <otherwise>and recycle = 0</otherwise>
+        </choose>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_sku
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_sku
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="getAttributeDynamic" resultType="Map" parameterType="Map">
+        select id, name from lkt_sku
+        where recycle = 0
+        <if test="type !=null "> and type = #{type} </if>
+        <if test="status !=null "> and status = #{status} </if>
+        <if test="name !=null and name !=''"> and name = #{name} </if>
+        <if test="sid !=null"> and sid = #{sid} </if>
+        <if test="storeIds !=null ">
+            <foreach collection="storeIds" item="storeId" separator="," open="and store_id in(" close=")">
+                #{storeId,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="attrIdList !=null ">
+            <foreach collection="attrIdList" item="attrId" separator="," open="and id in(" close=")">
+                #{attrId,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+
+    <select id="getAttributeDynamicAll" parameterType="Map" resultType="Map">
+        select a.id id0,b.id id1,a.name name0,b.name name1,'false' status
+        from lkt_sku a,lkt_sku b
+        <where>
+            <trim prefixOverrides="and">
+                and a.id = b.sid
+                and a.recycle = 0 and b.recycle = 0 and a.status = 1 and b.status=1
+                <if test="store_id != null">and a.store_id = #{store_id}</if>
+                <if test="type != null">
+                    <choose>
+                        <when test="type==1">and a.type = #{type}</when>
+                        <otherwise>and b.type = #{type}</otherwise>
+                    </choose>
+                </if>
+                <if test="sidList != null and type != null and type == 2">
+                    <foreach collection="sidList" item="sid" separator="," open="and b.sid in(" close=")">
+                        #{sid,jdbcType=INTEGER}
+                    </foreach>
+                </if>
+                <if test="name !=null and name !=''">and a.name = #{name}</if>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="name_sort!=null and name_sort!=''">a.name ${name_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+</mapper>

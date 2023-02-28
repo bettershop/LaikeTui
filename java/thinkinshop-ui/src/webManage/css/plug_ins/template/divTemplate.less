@@ -1,0 +1,151 @@
+.container {
+    width: 100%;
+    height: 60rem;
+    background-color: #fff;
+    /deep/.el-form {
+        margin-top: 16px;
+        height: 60rem;
+        overflow: hidden;
+        overflow-y: auto;
+        .header {
+          width: 100%;
+          height: 60px;
+          line-height: 60px;
+          border-bottom: 1px solid #E9ECEF;
+          padding-left: 20px;
+          span {
+            font-weight: 400;
+            font-size: 16px;
+            color: #414658;
+          }
+        }
+
+        .div-content {
+            width: 100%;
+            height: 677px;
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            .left-show {
+               width: 20%;
+               height: 100%;
+               display: flex;
+               flex-direction: column;
+               .show-header {
+                   width: 100%;
+                   height: 40px;
+                   display: flex;
+                   justify-content: space-between;
+                   align-items: center;
+                   .title {
+                       font-size: 14px;
+                       font-weight: bold;
+                   }
+                   .editor {
+                       color: #2890ff;
+                       cursor: pointer;
+                   }
+               }
+               .show-content {
+                   width: 100%;
+                   flex: 1;
+                   iframe {
+                       width: 100%;
+                       height: 100%;
+                   }
+               }
+            }
+
+            .right-template {
+                flex: 1;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                margin-left: 200px;
+                .template-header {
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .title {
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                    .add {
+                        cursor: pointer;
+                    }
+                }
+                .template-content {
+                    width: 100%;
+                    flex: 1;
+                    ul {
+                        display: flex;
+                        justify-content: flex-start;
+                        flex-wrap: wrap;
+                        li {
+                            max-width: 170px;
+                            margin-top: 20px;
+                            margin-left: 20px;
+                            margin-bottom: 60px;
+                            width: auto;
+                            background-color: #aabbcd;
+                            position: relative;
+                            img {
+                                max-width: 170px;
+                                width: auto;
+                            }
+
+                            .default-p {
+                                position: absolute;
+                                bottom: -30px;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                color: #414658;
+                            }
+                            .operation {
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                top: 0;
+                                left: 0;
+                                background-color: rgba(0, 0, 0, 0.6);
+                                display: none;
+                                .btn-item {
+                                    width: 100%;
+                                    height: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    align-items: center;
+                                    button {
+                                        width: 100px;
+                                        height: 40px;
+                                        border-radius: 6px;
+                                        cursor: pointer;
+                                    }
+                                    .edit {
+                                        margin: 20px 0;
+                                    }
+                                    .edit,.del {
+                                        border: 1px solid #fff;
+                                        color: #fff;
+                                        background: rgba(255,255,255,0.1);
+                                    }
+                                    .del {
+                                        margin-right: 8px;
+                                    }
+                                }  
+                            }
+
+                            &:hover .operation  {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+}

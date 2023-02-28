@@ -1,0 +1,100 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    /deep/.Search{
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 16px;
+      .Search-condition{
+        display: flex;
+        align-items: center;
+        .query-input {
+          display: flex;
+          margin-right: 10px;
+          .Search-input{
+            width: 280px;
+            margin-right: 10px;
+          }
+          .select-input {
+            margin-right: 8px;
+            width: 180px;
+          }
+        }
+        .btn-list {
+          margin-left: 10px;
+        }
+      }
+    }
+  
+    .menu-list {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+        thead {
+          tr {
+            th{
+              height: 61px;
+              text-align: center;
+              font-size: 14px;
+              font-weight: bold;
+              color: #414658;
+            }
+          }
+        }
+      }
+      /deep/.el-table__body {
+        tbody {
+          tr {
+            td{
+              height: 92px;
+              text-align: center;
+              font-size: 14px;
+              color: #414658;
+              font-weight: 400;
+            }
+          }
+        }
+        .cell {
+          .status_name {
+            width: 58px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            display: block;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #fff;
+            &.active {
+                background-color: #18C364;
+            }
+            &.actives {
+                background-color: #97A0B4;
+            }
+          }
+        }
+        .cell {
+            img {
+              width: 60px;
+              height: 60px;
+            }
+        }
+      }
+  
+      /deep/.el-table{
+          .add {
+            .cell {
+              overflow: visible !important;
+            }
+          }
+          .OP-button{
+            .OP-button-top{
+              margin-bottom: 8px;
+            }
+          }
+      }
+    }
+}

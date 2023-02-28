@@ -1,0 +1,228 @@
+.dialog-container {
+  /deep/ .el-tabs {
+	  display: flex;
+	  flex-direction: column;
+    width: 100%;
+    border: none;
+    overflow: hidden;
+
+    /deep/ .el-tabs__nav-wrap {
+      padding-top: 10px;
+    }
+
+    /deep/ .el-tabs__item {
+      margin-top: 0;
+      color: #414658 !important;
+    }
+
+    .is-active {
+      border-top: 1px solid #dcdfe6;
+    }
+  }
+
+  /deep/ .el-tabs__content {
+	  flex: 1;
+	  display: flex;
+	  flex-direction: column;
+		padding: 0;
+		overflow: hidden;
+	.file-list-tab-pane,.upload-tab-pane{
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+    width: 148px;
+  }
+  .dialog_search_file {
+    width: 280px;
+  }
+  .el-link.el-link--danger {
+    color: #ff453d;
+  }
+  }
+
+  /deep/ .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
+    height: 41px !important;
+  }
+
+  .el-form .file-info-form {
+    height: 51px;
+  }
+
+  // 上传页面
+  /deep/ .upload-tab-pane {
+    .upload-wrap {
+      flex: 1;
+      display: flex;
+      border-bottom: 1px solid #e9ecef;
+      .upload-drag {
+        margin: auto auto;
+
+        /deep/ .el-upload {
+          display: flex;
+          flex-direction: column;
+
+          /deep/ .el-upload-dragger {
+            width: 580px;
+            margin: 0 auto;
+          }
+        }
+
+        /deep/ .el-upload__tip {
+          text-align: center;
+        }
+
+        .gap {
+          height: 1px;
+          background: #e9ecef;
+        }
+      }
+    }
+
+
+  }
+
+  // 文件列表
+  .file-list-tab-pane {
+    .file-list {
+      flex: 1;
+      display: flex;
+      box-sizing: border-box;
+	    overflow: hidden;
+      border-bottom: 1px solid #e9ecef;
+      .file-list-left {
+        padding: 12px 3px 0px 20px;
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .infinite-list {
+          box-sizing: border-box;
+          flex: 1;
+          display: grid;
+          grid-template-columns: repeat(auto-fill, 101px);
+          grid-template-rows: 111px;
+          grid-row-gap: 12px;
+          grid-column-gap: 22.3px;
+          margin-top: 20px;
+          //display: flex;
+          //flex-wrap: wrap;
+          //justify-content: space-between;
+          ///* visibility: hidden; */
+          //flex-direction: row;
+          //align-content: flex-start;
+
+          li {
+            width: 110px;
+            height: 110px;
+            background: #FFFFFF;
+            border: 1px solid #D5DBE8;
+            //display: inline-block;
+            // margin-bottom: 10px;
+            cursor: pointer;
+            list-style: none;
+			      box-sizing: border-box;
+
+            &.active {
+              border:2px solid #2890ff;
+            }
+
+            position: relative;
+            img {
+              width: 100%;
+              height: 100%;
+              display: block;
+            }
+
+            .infinite-list-checked {
+              position: absolute;
+              top: 3px;
+              right: 3px;
+            }
+          }
+        }
+      }
+
+      .file-list-right {
+        height: 100%;
+        width: 240px;
+        background: #EDF1F5;
+        box-sizing: border-box;
+        padding: 20px;
+		    overflow-y: auto;
+        h4 {
+          font-size: 14px;
+          font-family: Microsoft YaHei;
+          font-weight: bold;
+          color: #414658;
+          margin-bottom: 10px;
+          line-height: 14px;
+        }
+        .image-info {
+          display: flex;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #D5DBE8;
+
+          .image {
+            width: 100px;
+            height: 100px;
+            margin-right: 12px;
+          }
+          .image-info-content {
+            // position: relative;
+            // top: -12px;
+           p {
+            line-height: 20px;
+             color: #414658;
+             font-size: 12px;
+           }
+           .flie_dellink {
+             position: absolute;
+             bottom: -23px;
+           }
+          }
+        }
+
+        /deep/.file-info-form {
+          padding-top: 20px;
+          .el-form-item {
+            display: flex;
+            flex-direction: column;
+            .el-form-item__content {
+              line-height: 0px !important;
+              .el-input {
+                width: 190px !important;
+                height: 40px;
+                input {
+                  width: 190px !important;
+                  height: 40px;
+                }
+              }
+            }
+          }
+        }
+		
+      }
+    }
+  }
+}
+
+.all-date {
+  margin-right: 10px;
+  /deep/.el-date-editor {
+    width: 140px;
+    
+    input {
+      width: 140px !important;
+    }
+  }
+}
+
+/deep/.el-form--label-top .el-form-item__label{
+	padding-top: 10px;
+	line-height: 14px;
+}

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.UserBaseMapper">
+    <sql id="selectOneSQL">
+        <if test="id != null">and a.id = #{id}</if>
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="user_id != null">and a.user_id = #{user_id}</if>
+        <if test="user_name != null and user_name != ''">and a.user_name = #{user_name}</if>
+        <if test="access_id != null and access_id != ''">and a.access_id = #{access_id}</if>
+        <if test="access_key != null and access_key != ''">and a.access_key = #{access_key}</if>
+        <if test="wx_id != null and wx_id != ''">and a.wx_id = #{wx_id}</if>
+        <if test="wx_name != null and wx_name != ''">and a.wx_name = #{wx_name}</if>
+        <if test="gzh_id != null and gzh_id != ''">and a.gzh_id = #{gzh_id}</if>
+        <if test="zfb_id != null and zfb_id != ''">and a.zfb_id = #{zfb_id}</if>
+        <if test="bd_id != null and bd_id != ''">and a.bd_id = #{bd_id}</if>
+        <if test="tt_id != null and tt_id != ''">and a.tt_id = #{tt_id}</if>
+        <if test="clientid != null and clientid != ''">and a.clientid = #{clientid}</if>
+        <if test="sex != null">and a.sex = #{sex}</if>
+        <if test="headimgurl != null and headimgurl != ''">and a.headimgurl = #{headimgurl}</if>
+        <if test="city != null">and a.city = #{city}</if>
+        <if test="score != null">and a.score = #{score}</if>
+        <if test="password != null">and a.password = #{password}</if>
+        <if test="mobile != null">and a.mobile = #{mobile}</if>
+        <if test="zhanghao != null">and a.zhanghao = #{zhanghao}</if>
+        <if test="mima != null">and a.mima = #{mima}</if>
+        <if test="source != null">and a.source = #{source}</if>
+        <if test="login_num != null">and a.login_num = #{login_num}</if>
+        <if test="grade != null">and a.grade = #{grade}</if>
+        <if test="grade_end != null">and a.grade_end = #{grade_end}</if>
+        <if test="access_token != null">and a.access_token = #{access_token}</if>
+    </sql>
+    <select id="selectOne" parameterType="User" resultType="User">
+        select a.*,b.id mchId from lkt_user a left join lkt_mch b on a.user_id=b.user_id and b.recovery=0
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectOneSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="Base_Column_List">
+        id
+        , store_id, user_id, user_name, access_id, access_key, wx_id, wx_name, gzh_id,
+        zfb_id, bd_id, tt_id, clientid, sex, headimgurl, province, city, county, detailed_address,
+        money, score, lock_score, Register_data, e_mail, real_name, mobile, birthday,
+        wechat_id, address, Bank_name, Cardholder, Bank_card_number, share_num, Referee,
+        access_token, consumer_money, img_token, zhanghao, `source`, login_num, verification_time,
+        parameter, is_lock, last_time, grade, tui_id, grade_add, grade_m, grade_end, is_out,
+        is_box
+    </sql>
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null and store_id != ''">and store_id = #{store_id}</if>
+        <if test="user_name != null and user_name != ''">and user_name like concat('%',#{user_name},'%')</if>
+        <if test="user_id != null and user_id != ''">and user_id = #{user_id}</if>
+        <if test="zhanghao != null and zhanghao != ''">and zhanghao = #{zhanghao}</if>
+        <if test="mobile != null and mobile != ''">and mobile = #{mobile}</if>
+        <if test="grade != null">and grade = #{grade}</if>
+        <if test="is_out != null and is_out != ''">and is_out = #{is_out}</if>
+        <if test="source != null and source != ''">and source = #{source}</if>
+        <if test="user_name1 != null and user_name1 != ''">and ( user_name like concat('%',#{user_name1},'%') or
+            user_id like concat('%',#{user_name1},'%') or mobile like concat('%',#{user_name1},'%'))
+        </if>
+        <if test="sourceList != null">
+            <foreach collection="sourceList" item="source" separator="," open="and source in(" close=")">
+                #{source,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="notIdList != null">
+            <foreach collection="notIdList" item="id" separator="," open="and id not in(" close=")">
+                #{id,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="startDate != null and startDate != ''">and Register_data <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and Register_data <![CDATA[  <=  ]]> #{endDate}</if>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lkt_user
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="Register_data_sort!=null and Register_data_sort!=''">Register_data ${Register_data_sort},</if>
+        </trim>
+        <trim prefix="group by " suffixOverrides=",">
+            <if test="group_Register_data!=null">DATE_FORMAT(Register_data,'%Y-%m-%d'),</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select
+        count(1)
+        from lkt_user
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="sumMchTurnoverReportSQL">
+        b.recycle = 0 and b.status = 0 and a.is_lock = 0
+        <if test="startDate!=null">and a.Register_data <![CDATA[  >  ]]> #{startDate}</if>
+        <if test="startEnd!=null">and a.Register_data <![CDATA[  <  ]]> #{startEnd}</if>
+        <if test="mchName!=null">and b.name like concat('%',#{mchName},'%')</if>
+        <if test="addTimeStartBetween!=null and addTimeEndBetween">and a.Register_data between #{addTimeStartBetween}
+            and
+            #{addTimeEndBetween}
+        </if>
+    </sql>
+    <select id="sumMchTurnoverReport" parameterType="Map" resultType="Map">
+        select count(a.id) as total,b.name,b.id mchId from lkt_user as a left join lkt_customer as b on a.store_id =
+        b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="sumMchTurnoverReportSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_store_id!=null">a.store_id,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="total_sort!=null and total_sort!=''">total ${total_sort},</if>
+        </trim>
+        <if test="startPage != null and pageEnd != ''">limit #{startPage},#{pageEnd}</if>
+    </select>
+    <select id="countMchTurnoverReport" parameterType="Map" resultType="int">
+        select count(distinct a.store_id) as total,b.name from lkt_user as a left join lkt_customer as b on a.store_id =
+        b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="sumMchTurnoverReportSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="selectUserConsumptionReport" parameterType="Map" resultType="Map">
+        SELECT a.id, a.user_id,CAST(a.user_name AS char) user_name, a.source ,
+        count(1) AS orderNum, sum(b.z_price) AS orderAmt ,
+        #来源
+        ( SELECT x.text FROM lkt_data_dictionary_list x WHERE x.sid = 5 AND x.`value` = a.source AND x.recycle = 0 ) AS
+        sourceName ,
+        #有效订单数量
+        ( SELECT count(1) AS yx_num FROM lkt_order x WHERE x.user_id = a.user_id AND x.`status` not in (0,7) ) AS yx_num
+        ,
+        #有效订单金额
+        ( SELECT if(sum(x.z_price) IS NULL, 0, sum(x.z_price)) AS orderAmt FROM lkt_order x WHERE x.user_id = a.user_id
+        AND x.`status` not in (0,7) ) AS yx_price ,
+        #退款订单数量
+        ( SELECT count(1) AS reback_num FROM lkt_return_order x WHERE x.store_id = a.store_id AND x.user_id = a.user_id
+        AND x.re_type != 3 AND x.r_type IN (4, 9) ) AS reback_num ,
+        #退款订单金额
+        ( SELECT if(sum(x.re_money) IS NULL, 0, sum(x.re_money)) AS rebackAmt FROM lkt_return_order x WHERE x.store_id =
+        a.store_id AND x.user_id = a.user_id AND x.re_type != 3 AND x.r_type IN (4, 9) ) AS reback_amt
+        FROM lkt_user a, lkt_order b
+        WHERE a.store_id = #{store_id}
+        AND a.user_id = b.user_id
+        and b.status in (1,2,5)
+        <if test="user_id != null and user_id != ''">and a.user_id = #{user_id}</if>
+        <if test="startDate != null and startDate != ''">and a.Register_data <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and a.Register_data <![CDATA[  <=  ]]> #{endDate}</if>
+        group by a.user_id
+        order by orderAmt
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countUserConsumptionReport" parameterType="Map" resultType="int">
+        SELECT count(distinct a.user_id)
+        FROM lkt_user a, lkt_order b
+        WHERE a.store_id = #{store_id}
+        AND a.user_id = b.user_id
+        and b.status in (1,2,5)
+        <if test="user_id != null and user_id != ''">and a.user_id = #{user_id}</if>
+        <if test="startDate != null and startDate != ''">and Register_data <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and Register_data <![CDATA[  <=  ]]> #{endDate}</if>
+    </select>
+
+    <update id="updateUserInfoById" parameterType="User">
+        update lkt_user
+        <set>
+            <trim suffixOverrides=",">
+                <if test="zhanghao != null and zhanghao != ''">zhanghao = #{zhanghao},</if>
+                <if test="mima != null and mima != ''">mima = #{mima},</if>
+                <if test="user_name != null and user_name != ''">user_name = #{user_name},</if>
+                <if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+                <if test="birthday != null">birthday = #{birthday},</if>
+                <if test="password != null and password != ''">`password` = #{password},</if>
+                <if test="headimgurl != null and headimgurl != ''">headimgurl = #{headimgurl},</if>
+                <if test="login_num != null and login_num != ''">login_num = #{login_num},</if>
+                <if test="access_id != null and access_id != ''">access_id = #{access_id},</if>
+                <if test="referee != null and referee != ''">Referee = #{referee},</if>
+            </trim>
+        </set>
+        <where>
+            <choose>
+                <when test="user_id!=null and user_id!=''">
+                    user_id = #{user_id}
+                </when>
+                <otherwise>
+                    id = #{id}
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <update id="updateUserAccessId" parameterType="Map">
+        update lkt_user
+        <set>
+            <trim suffixOverrides=",">
+                <if test="token != null and token != ''">access_id = #{token},</if>
+                <if test="language != null and language != ''">lang = #{language},</if>
+            </trim>
+        </set>
+        <where>
+            store_id = #{store_id}
+            and access_id = #{access_id}
+        </where>
+    </update>
+</mapper>

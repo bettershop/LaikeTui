@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.StockModelMapper">
+
+    <sql id="getStorckInfoDynamicSQL">
+        <trim prefixOverrides="and">
+            and a.store_id = #{store_id}
+            and a.recycle = 0
+            and a.mch_status = 2
+            <if test="product_number!=null"> and a.product_number = #{product_number} </if>
+            <if test="mch_id!=null"> and m.id =#{mch_id} </if>
+            <if test="mch_name!=null"> and m.name =#{mch_name} </if>
+            <if test="mch_name_like !=null"> and m.name like concat('%',#{mch_name_like},'%') </if>
+            <if test="product_title_like !=null"> and a.product_title like CONCAT('%',#{product_title_like},'%') </if>
+        </trim>
+    </sql>
+    <select id="getStorckInfoDynamic" resultType="Map" parameterType="Map">
+        select a.product_number,a.product_title,a.imgurl,a.status,a.mch_id,a.upper_shelf_time,c.id,c.pid,c.price,c.attribute,c.total_num,c.num,b.add_date,m.name
+        as shop_name
+        from lkt_configure as c
+        left join lkt_product_list as a on c.pid = a.id
+        left join lkt_mch as m on a.mch_id = m.id
+        left join (select max(add_date) as add_date, attribute_id from lkt_stock group by attribute_id) as b
+        on c.id = b.attribute_id
+        <where>
+            <include refid="getStorckInfoDynamicSQL"/>
+        </where>
+        order by a.upper_shelf_time desc
+        <if test="pageStart != null and pageEnd!=null">
+            LIMIT #{pageStart},#{pageEnd}
+        </if>
+    </select>
+
+    <select id="exportQuery" resultType="Map" parameterType="Map">
+        select a.product_number,a.product_title,a.imgurl,a.status,a.mch_id,a.upper_shelf_time,c.id,c.pid,c.price,c.attribute,c.total_num,c.num,b.add_date,m.name
+        as shop_name
+        from lkt_configure as c
+        left join lkt_product_list as a on c.pid = a.id
+        left join lkt_mch as m on a.mch_id = m.id
+        left join (select max(add_date) as add_date, attribute_id from lkt_stock group by attribute_id) as b
+        on c.id = b.attribute_id
+        <where>
+            <include refid="getStorckInfoDynamicSQL"/>
+        </where>
+        order by a.upper_shelf_time desc
+    </select>
+
+    <select id="stockInfoCountDynamic" resultType="int" parameterType="Map">
+        select count(1)
+        from lkt_configure as c
+        left join lkt_product_list as a on c.pid = a.id
+        left join lkt_mch as m on a.mch_id = m.id
+        left join (select max(add_date) as add_date, attribute_id from lkt_stock group by attribute_id) as b
+        on c.id = b.attribute_id
+        <where>
+            <include refid="getStorckInfoDynamicSQL"/>
+        </where>
+        <if test="pageStart != null and pageEnd!=null">
+            LIMIT #{pageStart},#{pageEnd}
+        </if>
+    </select>
+
+    <sql id="getGoodsStockInfoDynamicSQL">
+        and a.store_id = #{store_id}
+        and a.recycle = 0
+        <if test="stockTypeList!=null">
+            <foreach collection="stockTypeList" item="stockType" separator="," open="and b.type in(" close=")">
+                #{stockType,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="stockType!=null">and b.type = #{stockType}</if>
+        <if test="product_id!=null">and b.product_id = #{product_id}</if>
+        <if test="attribute_id!=null">and b.attribute_id = #{attribute_id}</if>
+        <if test="product_title_like !=null">and a.product_title like CONCAT('%',#{product_title_like},'%')</if>
+        <if test="mch_name!=null">and m.name like concat('%',#{mch_name},'%') </if>
+        <if test="startDate!=null">AND b.add_date <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate!=null">AND b.add_date <![CDATA[  <=  ]]> #{endDate}</if>
+        <if test="stockStartDate!=null">AND b.add_date <![CDATA[  >=  ]]> #{stockStartDate}</if>
+        <if test="stockEndDate!=null">AND b.add_date <![CDATA[  <=  ]]> #{stockEndDate}</if>
+    </sql>
+    <select id="getGoodsStorckInfoDynamic" resultType="Map" parameterType="Map">
+        select b.product_id goodsId,b.attribute_id attrId,a.product_number,a.product_title,a.imgurl,a.upper_shelf_time,
+               a.status,a.mch_id,c.price,c.attribute,c.total_num,c.num,
+               b.flowing_num,b.user_id,b.type,b.add_date,b.content,m.name
+        from lkt_stock as b right join lkt_product_list as a on b.product_id = a.id right join lkt_configure as c on
+        b.attribute_id = c.id
+        left join lkt_mch as m on a.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getGoodsStockInfoDynamicSQL"/>
+            </trim>
+        </where>
+        order by b.add_date desc
+        <if test="pageStart != null and pageEnd!=null"> LIMIT #{pageStart},#{pageEnd} </if>
+    </select>
+
+    <select id="goodsStockInfoCountDynamic" resultType="int" parameterType="Map">
+        select count(1) from lkt_stock as b right join lkt_product_list as a on b.product_id = a.id right join lkt_configure as c on
+        b.attribute_id = c.id
+        left join lkt_mch as m on a.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getGoodsStockInfoDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

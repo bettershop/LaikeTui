@@ -1,0 +1,172 @@
+.container {
+    width: 100%;
+    height: 737px;
+    background-color: #fff;
+    .header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        padding-left: 20px;
+        border-bottom: 1px solid #E9ECEF;
+        span {
+          font-size: 16px;
+          font-weight: 400;
+          color: #414658;
+        }
+    }
+    /deep/.el-form {
+        width: 100%;
+        overflow: hidden;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        .notice {
+          padding: 40px 0 0 0px;
+          display: flex;
+          flex-direction: column;
+          .el-input {
+            width: 300px;
+            height: 40px;
+            input {
+                width: 300px;
+                height: 40px; 
+            }
+          }
+          .el-select {
+            width: 300px;
+            height: 40px;
+            input {
+                width: 300px;
+                height: 40px; 
+            }
+          }
+          .goos-block {
+            .cancel {
+                width: 96px;
+                height: 40px;
+                border: 1px solid #2890FF;
+                border-radius: 4px;
+                font-size: 14px;
+                font-family: Microsoft YaHei;
+                font-weight: 400;
+                color: #2890FF;
+                margin-bottom: 14px;
+            }
+
+            .changeUser {
+                width: 800px;
+            }
+
+            .delete {
+                width: 56px;
+                height: 22px;
+                line-height: 22px;
+                border: 1px solid #D5DBE8;
+                border-radius: 2px;
+                font-size: 12px;
+                font-family: Microsoft YaHei;
+                font-weight: 400;
+                color: #888F9E;
+                margin: 0;
+                padding: 0;
+            }
+
+            .cell {
+                .Info {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-left: 30px;
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+          }
+
+          .footer-button {
+            margin-left: 100Px;
+            button {
+              width: 70px;
+              height: 40px;
+            }
+          }
+          
+        }
+    
+    }
+
+    /deep/.el-dialog {
+        .el-dialog__footer {
+            border-top: 1px solid #E9ECEF;
+            padding: 16px 20px !important;
+        }
+        
+        .el-dialog__header {
+            border-bottom: 1px solid #E9ECEF;
+        }
+
+        .el-dialog__body {
+            padding: 0px 20px !important;
+            .Search {
+                display: flex;
+                padding-bottom: 20px;
+                .el-select,.el-input {
+                    width: 200px;
+                    height: 40px;
+                    input {
+                        width: 200px;
+                        height: 40px;
+                    }
+                }
+
+                .Search-select {
+                    margin-left: 8px;
+                }
+
+                .Search-input {
+                    margin: 0 8px;
+                }
+                
+            }
+            .Table {
+                .el-table {
+                    .el-table__body {
+                        tbody {
+                            tr {
+                            td{
+                                height: 92px;
+                                text-align: center;
+                                font-size: 14px;
+                                color: #414658;
+                                font-weight: 400;
+                            }
+                            }
+                        }
+                        .cell {
+                            .Info {
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center;
+                                margin-left: 30px;
+                                img {
+                                    width: 40px;
+                                    height: 40px;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+        .el-icon-close {
+            color: #888F9E !important;
+            font-size: 20px !important;
+        }
+    }
+}

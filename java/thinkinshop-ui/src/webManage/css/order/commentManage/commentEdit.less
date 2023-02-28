@@ -1,0 +1,199 @@
+.container{
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 10px;
+  height: 737px;
+  width: 100%;
+}
+
+.page_bort {
+  float: right;
+  margin: 0px 50px 20px 0px;
+}
+
+.commentAll {
+  padding: 0px;
+  background-color: #fff;
+
+  .page_title {
+    line-height: 60px;
+    height: 60px;
+    border-bottom: 1px solid #E9ECEF;
+    font-size: 16px;
+    color: #414658;
+    font-family: "Microsoft Yahei";
+    padding-left: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .userbox {
+    display: flex;
+    margin: 40px 60px 0px 60px;
+  }
+
+  .userbox > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 999em;
+    margin-top: 0px !important;
+  }
+
+  .userbox-body {
+    flex: 1;
+    padding-left: 15px;
+    .singlebox {
+      margin-bottom: 30px;
+
+      .singlebox-red {
+        color: #FF3333 !important;
+      }
+
+      .singlebox-username {
+        font-size: 14px;
+        font-weight: bold;
+        color: rgba(65, 70, 88, 1);
+      }
+
+      //星星
+      .singlebox-starlist {
+        display: flex;
+        margin: 5px 0px;
+
+        svg {
+          width: 18px;
+          height: 18px;
+          margin-right: 5px;
+        }
+      }
+
+      .singlebox-time {
+        font-size: 14px;
+        font-weight: 400;
+        color: #97A0B4;
+        margin-bottom: 20px;
+      }
+
+      .singlebox-content {
+        font-size: 14px;
+        font-weight: 400;
+        color: #414658;
+      }
+
+      .singlebox-imglist {
+        display: flex;
+        margin-bottom: 16px;
+
+        img {
+          width: 80px;
+          height: 80px;
+          background: rgba(237, 237, 237, 1);
+          border-radius: 2px;
+          margin-top: 0px !important;
+        }
+      }
+
+      //回复
+      .singlebox-reply {
+        padding: 13px 9px 11px 9px;
+        margin: 20px 0px;
+        background: rgba(244, 247, 248, 1);
+        border-radius: 4px;
+        width: 836px;
+      }
+
+      .singlebox-reply::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border: 0.5em solid rgba(244, 247, 248, 1);
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        margin-top: -27px;
+        position: absolute;
+        margin-left: -50px;
+      }
+    }
+
+    // .xian {
+    //   border-top: 1px solid #c6c8ce;
+    // }
+
+    .edit-box {
+      margin-bottom: 50px;
+
+      .singlebox {
+        margin-bottom: 20px;
+
+        .singlebox-starlist {
+          display: flex;
+          margin: 13px 0px;
+        }
+      }
+
+      .singlebox-time {
+        font-size: 14px;
+        font-weight: 400;
+        color: #97A0B4;
+      }
+
+      textarea {
+        margin-bottom: 20px;
+        line-height: 1.7;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 100%;
+        padding: 10px 0px 10px 1%;
+        border: 1px solid #c6c8ce;
+        width: 854px;
+        -webkit-appearance: none;
+        background: #fff;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        -moz-background-clip: padding;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        -webkit-transition-duration: 300ms;
+        -moz-transition-duration: 300ms;
+        -o-transition-duration: 300ms;
+        -ms-transition-duration: 300ms;
+        transition-duration: 300ms;
+        -webkit-transition-easing: ease-in-out;
+        -moz-transition-easing: ease-in-out;
+        -o-transition-easing: ease-in-out;
+        -ms-transition-easing: ease-in-out;
+        transition-easing: ease-in-out;
+        -webkit-transition-property: border-color, -webkit-box-shadow;
+        -webkit-transition-property: border-color, box-shadow;
+        -moz-transition-property: border-color, -moz-box-shadow;
+        -moz-transition-property: border-color, box-shadow;
+        -o-transition-property: border-color, box-shadow;
+        -ms-transition-property: border-color, box-shadow;
+        transition-property: border-color, box-shadow;
+      }
+
+      .l-upload {
+        display: flex;
+
+        .l-upload .img-item {
+          margin-right: 15px;
+          position: relative;
+          overflow: hidden;
+          width: 80px;
+          height: 80px;
+        }
+      }
+    }
+
+  }
+
+}
+
+.iframe-table {
+  flex: 1;
+  overflow: auto;
+  background: #FFFFFF;
+}
+
+

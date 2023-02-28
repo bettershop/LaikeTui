@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.BrandClassModelMapper">
+
+    <sql id="getBrandClassDynamicSQL">
+        <where>
+            <trim prefixOverrides="and">
+                <if test="store_id!=null">and store_id = #{store_id}</if>
+                <if test="categories!=null and categories!=''"> AND categories LIKE CONCAT('%,', #{categories}, ',%') </if>
+                <if test="categoriesList != null">
+                    <foreach collection="categoriesList" item="classId" separator="or" open="and (" close=")">
+                        categories LIKE CONCAT('%,', #{classId}, ',%')
+                    </foreach>
+                </if>
+                <choose>
+                    <when test="status!=null">AND status = #{status}</when>
+                    <otherwise>
+                        AND status = 0
+                    </otherwise>
+                </choose>
+                <if test="brandIdList != null">
+                    <foreach collection="brandIdList" item="id" separator="," open="and brand_id in(" close=")">
+                        #{id,jdbcType=INTEGER}
+                    </foreach>
+                </if>
+                <choose>
+                    <when test="recycle!=null">AND recycle = #{recycle}</when>
+                    <otherwise>
+                        AND recycle = 0
+                    </otherwise>
+                </choose>
+            </trim>
+        </where>
+    </sql>
+
+    <select id="getBrandClassDynamic" parameterType="Map" resultType="Map">
+        SELECT distinct brand_id,
+        brand_name
+        FROM lkt_brand_class
+        <include refid="getBrandClassDynamicSQL"/>
+        <trim prefix="order by" suffixOverrides=",">
+            <choose>
+                <otherwise>sort DESC</otherwise>
+            </choose>
+        </trim>
+    </select>
+
+    <sql id="getBrandClassInfoSQL">
+        AND recycle = 0
+        <if test="store_id!=null">and store_id = #{store_id}</if>
+        <if test="brand_name!=null">AND brand_name LIKE CONCAT('%', #{brand_name}, '%')</if>
+        <if test="brand_id!=null">AND brand_id =#{brand_id}</if>
+    </sql>
+
+    <select id="getBrandClassInfo" parameterType="Map" resultType="Map">
+        SELECT *
+        FROM lkt_brand_class
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getBrandClassInfoSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <choose>
+                <otherwise>sort DESC</otherwise>
+            </choose>
+        </trim>
+        <if test="pageStart != null and pageEnd!=null">
+            LIMIT #{pageStart},#{pageEnd}
+        </if>
+    </select>
+
+    <select id="countBrandClassInfo" parameterType="Map" resultType="int">
+        SELECT count(1)
+        FROM lkt_brand_class
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getBrandClassInfoSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

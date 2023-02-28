@@ -1,0 +1,116 @@
+.container{
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 10px;
+  height: 737px;
+  width: 100%;
+}
+.reviewArea{
+  padding: 0 24px;
+}
+textarea {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 10px 0px 10px 1%;
+  border: 1px solid #c6c8ce;
+  width: 100%;
+  background: #fff;
+  outline: none;
+}
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+
+.reply{
+  padding: 0 24px;
+  position: absolute;
+  bottom: 40px;
+  right: 24px;
+}
+
+//回复box main
+.comment-show {
+  margin-top: 16px;
+  margin-left: 24px;
+  .comment-show-con {
+    width: 100%;
+    .comment-show-con-img {
+      width: 36px;
+      height: 36px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .comment-show-con-img>img {
+      width: 100%;
+      height: 100%;
+    }
+    .comment-show-con-list {
+      width: 94%;
+      margin-left: 10px;
+      //评论
+      .pl-text {
+        width: 100%;
+        margin-top: 7px;
+        word-wrap: break-word;
+        overflow: hidden;
+        .comment-size-name {
+          font-size: 12px;
+          color: #8b8b8b;
+        }
+      }
+      .hf-list-con {
+        float: left;
+        width: 100%;
+        background-color: #eaeaec;
+        margin-top: 7px;
+      }
+
+    }
+  }
+}
+
+.date-dz {
+  width: 100%;
+  float: left;
+  //分割线
+  .xian_h{
+    clear: both;
+    height: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 0 24px;
+  }
+  //左边文字
+  .date-dz-left {
+    font-size: 12px;
+    color: #8b8b8b;
+    display: block;
+    padding-top: 18px;
+  }
+  //右边图标
+  .date-dz-right {
+    display: block;
+    padding-top: 6px;
+    padding-right: 18px;
+    position: relative;
+    overflow: hidden;
+    .comment-pl-block {
+      margin-top: 0;
+    }
+  }
+  .commentText{
+    margin-left: 5px;
+  }
+  //评论样式
+  .content {
+    flex: 1;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+  }
+}

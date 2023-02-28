@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  flex-direction: column;
+    /deep/.btn-nav {
+      span {
+        width: 112px;
+        height: 42px;
+        font-size: 16px;
+        border: none;
+      }
+      .el-radio-group {
+        .el-radio-button {
+          &:not(:last-child) {
+            span {
+              border-right: 1px solid #d5dbe8;
+            }
+          }
+        }
+      }
+          
+    }
+  
+    /deep/.jump-list {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 16px 0;
+      .laiketui-add:before {
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      button {
+      width: 120px;
+      height: 40px;
+      background: #28B6FF;
+      border-radius: 4px;
+      padding: 0;
+      border: none;
+        &:hover {
+          opacity: 0.8;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+  
+    .menu-list {
+      // height: 609px;
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+      thead {
+        tr {
+          th{
+            height: 61px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #414658;
+          }
+        }
+      }
+      }
+      /deep/.el-table__body {
+      tbody {
+        tr {
+          td{
+            height: 92px;
+            text-align: center;
+            font-size: 14px;
+            color: #414658;
+            font-weight: 400;
+          }
+        }
+      }
+      .cell {
+        img {
+          width: 80px;
+          height: 80px;
+        }
+      }
+      }
+  
+      /deep/.el-table{
+        .OP-button{
+          .OP-button-top{
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: start;
+            .laiketui-zhiding:before {
+              margin-right: 5px;
+              color: #888f9e;
+              font-weight: 600;
+            }
+          }
+          .OP-button-bottom {
+            display: flex;
+            justify-content: start;
+          }
+        }
+      }
+    }
+}

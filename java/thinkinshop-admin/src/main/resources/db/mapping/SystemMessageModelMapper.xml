@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.SystemMessageModelMapper">
+    <sql id="Base_Column_List">
+        id
+        , store_id, senderid, recipientid, title, content, time, type
+    </sql>
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and store_id = #{store_id}</if>
+        <if test="recipientid != null">and recipientid = #{recipientid}</if>
+    </sql>
+
+    <select id="selectDynamic" resultType="Map"
+            parameterType="Map">
+        select * from lkt_system_message
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="time_sort!=null and time_sort!=''">time ${time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" resultType="int"
+            parameterType="Map">
+        select count(1) from lkt_system_message
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="getMessageList" resultType="Map"
+            parameterType="com.laiketui.domain.home.SystemMessageModel">
+        select *
+        from lkt_system_message
+        where store_id = #{store_id}
+        and recipientid = #{recipientid}
+        ORDER BY time desc
+        <if test="pageModel!=null">
+            limit #{pageModel.pageNo},#{pageModel.pageSize}
+        </if>
+    </select>
+
+    <update id="updateMessage" parameterType="com.laiketui.domain.home.SystemMessageModel">
+        update lkt_system_message
+        <set>
+            <if test="type!=null"> type = #{type} </if>
+        </set>
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="id!=null and id!=''"> AND id = #{id} </if>
+                <if test="store_id!=null"> AND store_id = #{store_id} </if>
+                <if test="recipientid!=null and recipientid!=''"> AND recipientid = #{recipientid} </if>
+            </trim>
+        </where>
+    </update>
+
+    <insert id="noticeUserAll" parameterType="Map">
+        INSERT INTO  `lkt_system_message` (`store_id`, `senderid`, `recipientid`, `title`, `content`, `time`, `type`) VALUES
+        <foreach collection ="userList" item="userId" separator =",">
+            (#{store_id},#{senderid},#{userId},#{title},#{content},#{date},#{type})
+        </foreach >
+    </insert>
+
+</mapper>

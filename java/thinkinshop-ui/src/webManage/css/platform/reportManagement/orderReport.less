@@ -1,0 +1,102 @@
+.container {
+    /deep/.btn-nav {
+      margin-bottom: 16px;
+      span {
+        width: 150px;
+        height: 42px;
+        font-size: 16px;
+        border: none;
+      }
+      .el-radio-group {
+        .el-radio-button {
+          &:not(:last-child) {
+            span {
+              border-right: 1px solid #d5dbe8;
+            }
+          }
+  
+          .el-radio-button__inner {
+            padding: 12px 0 !important;
+          }
+        }
+      }
+    }
+
+    #app {
+        overflow: auto!important;
+        .nav-title span {
+          cursor: pointer;
+        }
+  
+        #chart {
+          height: 300px ;
+          width:100%;
+        }
+  
+        .allDataRight {
+          button {
+              height: 38px;
+              margin-left: 10px;
+          }
+        }
+    
+        .Ranking {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .Ranking .Ranking-title {
+          font-size: 16px;
+          font-weight: bold;
+          color: #414658;
+        }
+        .Ranking .Ranking-date {
+          display: flex;
+          align-items: center;
+        }
+        .Ranking-tab {
+          display: flex;
+          align-items: center;
+        }
+        .Ranking-tab span {
+          font-size: 14px;
+          font-weight: 400;
+          color: #6A7076;
+          margin-right: 20px;
+          cursor: pointer;
+        }
+        .Ranking-tab .active {
+          color: #2890FF;
+        }
+        #chart {
+          zoom: 1.1!important;
+        }
+        /* #chart div:nth-child(1) {
+          width: 100%!important;
+        }
+        #chart div canvas {
+          width: 100%!important;
+        } */
+    
+        .allData {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .allData h2 {
+          font-size: 16px;
+          font-weight: bold;
+          color: #414658;
+        }
+        .allData .allDataRight {
+          display: flex;
+          align-items: center;
+          
+        }
+    
+        .allData .allDataRight input {
+          width: 280px;
+          margin-right: 10px;
+        }
+    }
+}

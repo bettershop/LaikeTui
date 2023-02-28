@@ -1,0 +1,272 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /deep/.btn-nav {
+    span {
+      width: 120px;
+      height: 42px;
+      font-size: 16px;
+      border: none;
+      display: flex;
+      justify-content: center;
+    }
+    .el-radio-group {
+      .el-radio-button {
+        &:not(:last-child) {
+          span {
+            border-right: 1px solid #d5dbe8;
+          }
+        }
+      }
+    }
+
+    .order_dfhNum {
+      color: red;
+      border-right: none !important;
+      &.active {
+        color: #fff;
+      }
+    }
+        
+  }
+
+  /deep/.jump-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+    .laiketui-add:before {
+      font-size: 14px;
+      margin-right: 8px;
+    }
+    
+    button {
+      width: 120px;
+      height: 40px;
+      background: #28B6FF;
+      border-radius: 4px;
+      padding: 0;
+      border: none;
+      &:hover {
+        opacity: 0.8;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .menu-list {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+        thead {
+          tr {
+            th{
+              height: 61px;
+              text-align: center;
+              font-size: 14px;
+              font-weight: bold;
+              color: #414658;
+            }
+          }
+        }
+      }
+      /deep/.el-table__body {
+        tbody {
+          tr {
+            td{
+              height: 92px;
+              text-align: center;
+              font-size: 14px;
+              color: #414658;
+              font-weight: 400;
+            }
+          }
+        }
+        .cell {
+          .stores-info {
+            display: flex;
+            align-items: center;
+            margin-left: 40px;
+            .head-img {
+              img {
+                width: 60px;
+                height: 60px;
+              }
+            }
+
+            .store-info {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: flex-start;
+              margin-left: 20px;
+              .name {
+                font-size: 14px;
+                font-weight: bold
+              }
+
+              .center {
+                margin: 6px 0;
+              }
+
+              .grey {
+                color: #888f9e;
+              }
+            }
+          }
+        }
+
+        .cell {
+          .ststus {
+            &.active1 {
+              color: #18c364;
+            }
+            &.active2 {
+              color: #414658;
+            }
+            &.active3 {
+              color: #ff453d;
+            }
+          }
+        }
+      }
+  
+      /deep/.el-table{
+        .cell {
+          display: flex;
+          justify-content: center;
+        }
+        .OP-button{
+          .OP-button-top{
+            margin-bottom: 8px;
+            display: flex;
+            .laiketui-zhiding:before {
+              margin-right: 5px;
+              color: #888f9e;
+              font-weight: 600;
+            }
+          }
+          .OP-button-bottom {
+            display: flex;
+            justify-content: start;
+            .laiketui-zhiding:before {
+              margin-right: 5px;
+              color: #888f9e;
+              font-weight: 600;
+            }
+            .laiketui-shangpin:before {
+              color: #888f9e;
+              margin-right: 6px;
+              font-size: 13px;
+              margin-top: 1px;
+            }
+          }
+        }
+      }
+  }
+
+  .dialog-block {
+    // 弹框样式
+    /deep/.el-dialog {
+      width: 580px;
+      height: 310px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0 !important;
+      .el-dialog__header {
+        width: 100%;
+        height: 58px;
+        line-height: 58px;
+        font-size: 16px;
+        margin-left: 19px;
+        font-weight: bold;
+        border-bottom: 1px solid #e9ecef;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 0 0 19px;
+        .el-dialog__headerbtn {
+          font-size: 18px;
+          top: 0 !important;
+        }
+        .el-dialog__title {
+          font-weight: normal;
+          font-size: 16px;
+          color: #414658;
+        }
+      }
+
+      .el-dialog__body {
+        border-bottom: 1px solid #e9ecef;
+        padding: 41px 60px 16px 60px !important;
+        .pass-input {
+          .el-form {
+            width: 340px;
+            .el-form-item {
+              width: 340px;
+              height: 40px;
+              .el-form-item__content {
+                .el-input {
+                  width: 340px;
+                  height: 40px;
+                  input {
+                    width: 340px;
+                    height: 40px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .form-footer {
+          width: 174px;
+          height: 72px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          .el-form-item {
+            padding: 0 !important;
+            height: 100%;
+            .el-form-item__content {
+              height: 100%;
+              line-height: 72px;
+              margin: 0 !important;
+            }
+          }
+
+          .qxcolor {
+            color: #6a7076;
+            border: 1px solid #d5dbc6;
+          }
+          .qdcolor {
+            background-color: #2890ff;
+          }
+          .qdcolor {
+            background-color: #2890ff;
+          }
+          .qdcolor:hover {
+            opacity: 0.8;
+          }
+          .qxcolor {
+            color: #6a7076;
+            border: 1px solid #d5dbe8;
+            // margin-left: 14px;
+          }
+          .qxcolor:hover {
+            color: #2890ff;
+            border: 1px solid #2890ff;
+            background-color: #fff;
+          }
+        }
+      }
+    }
+    /deep/.el-form-item__label {
+      font-weight: normal;
+      color: #414658;
+    }
+  }
+}

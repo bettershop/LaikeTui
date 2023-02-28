@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CouponConfigModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.coupon.CouponConfigModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="store_id" property="store_id" jdbcType="INTEGER" />
+    <result column="mch_id" property="mch_id" jdbcType="INTEGER" />
+    <result column="is_status" property="is_status" jdbcType="TINYINT" />
+    <result column="coupon_del" property="coupon_del" jdbcType="TINYINT" />
+    <result column="coupon_day" property="coupon_day" jdbcType="INTEGER" />
+    <result column="activity_del" property="activity_del" jdbcType="TINYINT" />
+    <result column="activity_day" property="activity_day" jdbcType="INTEGER" />
+    <result column="payment_type" property="payment_type" jdbcType="TINYINT" />
+    <result column="limit_type" property="limit_type" jdbcType="TINYINT" />
+    <result column="coupon_type" property="coupon_type" jdbcType="VARCHAR" />
+    <result column="modify_date" property="modify_date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, store_id, mch_id, is_status, coupon_del, coupon_day, activity_del, activity_day,
+    payment_type, limit_type, coupon_type, modify_date
+  </sql>
+</mapper>

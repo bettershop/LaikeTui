@@ -1,0 +1,42 @@
+* {
+  font-family: 'Microsoft YaHei' !important;
+}
+
+body,
+html,
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: none;
+  font-size: 0;
+}
+a {
+  color: #71777d;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul,
+li {
+  list-style-type: none;
+}
+
+.small-disabled {
+  opacity: 0.9;
+  border: 1px solid #e9ecef !important;
+  color: #d8dbe8 !important;
+  i {
+    color: #d8dbe8 !important
+  }
+}

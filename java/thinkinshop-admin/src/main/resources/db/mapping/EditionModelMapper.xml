@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.EditionModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.config.EditionModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="store_id" property="store_id" jdbcType="INTEGER" />
+    <result column="edition" property="edition" jdbcType="VARCHAR" />
+    <result column="edition_url" property="edition_url" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="add_date" property="add_date" jdbcType="TIMESTAMP" />
+    <result column="appname" property="appname" jdbcType="VARCHAR" />
+    <result column="android_url" property="android_url" jdbcType="VARCHAR" />
+    <result column="ios_url" property="ios_url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, store_id, edition, edition_url, type, content, add_date, appname, android_url, 
+    ios_url
+  </sql>
+</mapper>

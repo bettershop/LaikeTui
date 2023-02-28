@@ -1,0 +1,187 @@
+.container{
+  //表单样式
+  .formCenter{
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 16px 0;
+  }
+  //搜索
+  .Search {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 16px;
+
+    .Search-condition {
+      display: flex;
+      align-items: center;
+
+      .query-input {
+        display: flex;
+        margin-right: 8px;
+
+        .Search-input {
+          width: 280px;
+          margin-right: 8px;
+
+          .el-input__inner {
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #d5dbe8;
+          }
+
+          .el-input__inner:hover {
+            border: 1px solid #b2bcd4;
+          }
+
+          .el-input__inner:focus {
+            border-color: #409eff;
+          }
+
+          .el-input__inner::-webkit-input-placeholder {
+            color: #97a0b4;
+          }
+        }
+      }
+
+      .btn-list {
+        .bgColor {
+          color: #fff;
+          background-color: #2890ff;
+          border: 1px solid #d5dbe8;
+        }
+
+        .bgColor:hover {
+          background-color: #70aff3;
+        }
+
+        .fontColor {
+          color: #6a7076;
+          background-color: #fff;
+          border: 1px solid #d5dbe8;
+        }
+
+        .fontColor:hover {
+          background-color: #fff;
+          color: #2890FF;
+          border: 1px solid #2890FF;
+        }
+
+        .export {
+          position: absolute;
+          right: 30px;
+        }
+      }
+    }
+
+  }
+
+  //分组按钮
+  .groupBtn{
+    margin: 10px 0;
+  }
+
+  .jump-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .laiketui-add:before {
+      font-size: 14px;
+      margin-right: 8px;
+    }
+
+    button {
+      width: 120px;
+      height: 40px;
+      background: #28B6FF;
+      border-radius: 4px;
+      padding: 0;
+      border: none;
+
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .merchants-list {
+    height: 605px;
+    background: #FFFFFF;
+    border-radius: 4px;
+
+    /deep/ .el-table__header {
+      thead {
+        tr {
+          th {
+            height: 61px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #414658;
+          }
+        }
+      }
+    }
+
+    /deep/ .el-table__body {
+      tbody {
+        tr {
+          td {
+            height: 92px;
+            text-align: center;
+            font-size: 14px;
+            color: #414658;
+            font-weight: 400;
+          }
+        }
+      }
+
+      .cell {
+        img {
+          width: 60px;
+          height: 60px;
+        }
+      }
+    }
+
+    /deep/ .el-table {
+      .state.active1 {
+        color: #13CE66;
+      }
+
+      .state.active2 {
+        color: #FF453D;
+      }
+
+      .OP-button {
+        .OP-button-top {
+          margin-bottom: 8px;
+          display: flex;
+          .laiketui-zhiding:before {
+            margin-right: 5px;
+          }
+        }
+        .OP-button-bottom {
+          display: flex;
+          justify-content: start;
+        }
+      }
+    }
+  }
+
+  //居中
+  .formCenter{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    //字体
+  }
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ProductClassModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and store_id = #{store_id}</if>
+        <if test="id != null">and id = #{id}</if>
+        <if test="sid != null">and sid = #{sid}</if>
+        <if test="recycle != null">and recycle = #{recycle}</if>
+        <if test="level != null">and `level` = #{level}</if>
+        <if test="classIdList != null">
+            <foreach collection="classIdList" item="classId" separator="," open="and cid in("
+                     close=")">
+                #{classId}
+            </foreach>
+        </if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_product_class
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="sort_sort!=null and sort_sort!=''">sort ${sort_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_product_class
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="getProductClassLevelSQL">
+        store_id = #{store_id}
+        AND recycle = 0
+        <if test="sid!=null"> AND sid = #{sid} </if>
+        <if test="cid!=null"> AND cid = #{cid} </if>
+        <if test="pname!=null"> AND pname like concat('%',#{pname},'%') </if>
+        <if test="level!=null"> AND `level` = #{level} </if>
+        <if test="is_display!=null"> AND is_display = #{is_display} </if>
+    </sql>
+    <select id="getProductClassLevel" parameterType="com.laiketui.domain.product.ProductClassModel"
+            resultType="com.laiketui.domain.product.ProductClassModel">
+        SELECT * FROM lkt_product_class
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductClassLevelSQL"></include>
+            </trim>
+        </where>
+        ORDER BY
+        sort DESC
+        <if test="pageModel!=null">limit #{pageModel.pageNo},#{pageModel.pageSize}</if>
+    </select>
+
+    <select id="getGoodsClassCount" parameterType="com.laiketui.domain.product.ProductClassModel"
+            resultType="int">
+        SELECT count(1) FROM lkt_product_class
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductClassLevelSQL"></include>
+            </trim>
+        </where>
+
+    </select>
+</mapper>

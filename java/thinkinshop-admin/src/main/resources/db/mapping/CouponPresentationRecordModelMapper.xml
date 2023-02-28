@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CouponPresentationRecordModelMapper">
+
+    <sql id="getCouponGiveInfoSQL">
+        <if test="hid != null">AND a.coupon_activity_id = #{hid}</if>
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="type != null">and b.type = #{type}</if>
+        <if test="likeOrderno != null and likeOrderno != ''">and c.sNo like concat('%',#{likeOrderno},'%')</if>
+        <if test="user_name != null and user_name != ''">and d.user_name like concat('%',#{user_name},'%')</if>
+        <if test="user_name1 != null and user_name1 != ''">and ( d.user_name like concat('%',#{user_name1},'%') or
+            d.user_id like concat('%',#{user_name1},'%') or d.mobile like concat('%',#{user_name1},'%'))
+        </if>
+    </sql>
+
+    <select id="getCouponGiveInfo" parameterType="Map" resultType="Map">
+        select a.id,a.user_id,a.coupon_id,cast(d.user_name as char )
+        user_name,a.mobile,b.type,a.add_date,b.expiry_time,e.z_money,e.money,e.discount
+        from lkt_coupon_presentation_record as a
+        left join lkt_coupon as b on a.coupon_id = b.id
+        left join lkt_coupon_activity as e on e.id = b.hid
+        left join lkt_coupon_sno as c on a.coupon_id = c.coupon_id
+        left join lkt_user as d on a.user_id = d.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getCouponGiveInfoSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countCouponGiveInfo" parameterType="Map" resultType="int">
+        select count(a.id)
+        from lkt_coupon_presentation_record as a
+        left join lkt_coupon as b on a.coupon_id = b.id
+        left join lkt_coupon_activity as e on e.id = b.hid
+        left join lkt_coupon_sno as c on a.coupon_id = c.coupon_id
+        left join lkt_user as d on a.user_id = d.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getCouponGiveInfoSQL"/>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

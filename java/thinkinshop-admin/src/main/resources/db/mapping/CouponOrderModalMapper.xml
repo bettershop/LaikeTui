@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CouponOrderModalMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.coupon.CouponOrderModal" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="store_id" property="store_id" jdbcType="INTEGER" />
+    <result column="user_id" property="user_id" jdbcType="VARCHAR" />
+    <result column="coupon_id" property="coupon_id" jdbcType="INTEGER" />
+    <result column="sNo" property="sNo" jdbcType="VARCHAR" />
+    <result column="recycle" property="recycle" jdbcType="TINYINT" />
+    <result column="add_date" property="add_date" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

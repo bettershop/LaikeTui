@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.MchBrowseModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <where>
+            <trim prefixOverrides="and">
+                <if test="store_id != null">and store_id = #{store_id}</if>
+                <if test="mch_id != null">and mch_id = #{mch_id}</if>
+                <if test="user_id != null">and user_id = #{user_id}</if>
+                <if test="startDate != null and startDate != ''">and add_time <![CDATA[  >=  ]]> #{startDate}</if>
+                <if test="endDate != null and endDate != ''">and add_time <![CDATA[  <=  ]]> #{endDate}</if>
+            </trim>
+        </where>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_mch_browse
+        <include refid="selectDynamicSQL"/>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_mch_browse
+        <include refid="selectDynamicSQL"/>
+    </select>
+    <select id="countDynamicByUser" parameterType="Map" resultType="int">
+        select IFNULL(count(distinct user_id),0) num from lkt_mch_browse
+        <include refid="selectDynamicSQL"/>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="userid_group!=null">user_id,</if>
+            <if test="add_time_day_group!=null">DATE_FORMAT(add_time,'%Y-%m-%d'),</if>
+        </trim>
+    </select>
+
+    <sql id="getMchBrowseListDynamicSQL">
+        a.store_id = #{store_id}
+        <if test="mch_id!=null"> AND a.mch_id = #{mch_id} </if>
+        <if test="startDate !=null "> AND a.add_time <![CDATA[  >=  ]]> #{startDate} </if>
+        <if test="endDate !=null "> AND a.add_time <![CDATA[  <=  ]]> #{endDate} </if>
+        <if test="startDate_lt !=null "> AND a.add_time <![CDATA[  <  ]]> #{startDate_lt} </if>
+        <if test="mobile !=null "> and b.mobile like concat('%',#{mobile},'%') </if>
+    </sql>
+    <select id="getMchBrowseListDynamic" parameterType="Map" resultType="Map">
+        SELECT a.user_id, a.token, a.EVENT, max(a.add_time) add_time
+        FROM lkt_mch_browse a
+        left join lkt_user as b on a.user_id = b.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getMchBrowseListDynamicSQL"/>
+            </trim>
+        </where>
+        GROUP BY a.user_id
+        ORDER BY a.add_time DESC
+        <if test="pageNo!=null and pageSize!=null"> limit #{pageNo},#{pageSize} </if>
+    </select>
+
+
+    <select id="countMchBrowseListDynamic" parameterType="Map" resultType="int">
+        SELECT count(distinct a.user_id) FROM lkt_mch_browse a
+        left join lkt_user as b on a.user_id = b.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getMchBrowseListDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .merchants-list {
+    flex: 1;
+    /deep/.cell {
+      .OP-button {
+        .OP-button-top {
+          justify-content: center;
+        }
+      }
+    }
+  }
+  .dialog-block {
+      // 弹框样式
+      /deep/.el-dialog {
+        width: 580px;
+        height: 252px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        margin: 0 !important;
+        .el-dialog__header {
+          width: 100%;
+          height: 58px;
+          line-height: 58px;
+          font-size: 16px;
+          margin-left: 19px;
+          font-weight: bold;
+          border-bottom: 2px solid #E9ECEF;
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0 0 0 19px;
+          .el-dialog__headerbtn {
+            font-size: 18px;
+            top: 0 !important;
+          }
+          .el-dialog__title {
+            font-weight: normal;
+          }
+        }
+  
+        .el-dialog__body {
+          padding: 0 !important;
+          .el-form {
+            width: 100%;
+            .pass-input {
+                display: flex;
+                justify-content: center;
+            }
+            .el-form-item {
+              padding: 41px 0px 0px 20px !important;
+              width: 100%;
+              .el-input {
+                  width: 340px;
+                  height: 40px;
+              }
+            }
+          }
+          .el-form-item__label {
+            font-weight: normal;
+          }
+          .form-footer {
+              width: 100%;
+              height: 72px;
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              border-top: 1px solid #E9ECEF;
+              .el-form-item {
+                padding: 0 !important;
+                height: 100%;
+                display: flex;
+                justify-content: flex-end;
+                margin-right: 17px;
+                .el-form-item__content {
+                  height: 100%;
+                  line-height: 72px;
+                  margin: 0 !important;
+                  padding-right: 20px;
+                }
+              }
+              .bgColor:hover {
+                background-color: #fff;
+                color: #2890ff;
+                border: 1px solid #2890ff;
+              }
+          }
+        }
+      }
+  }
+}

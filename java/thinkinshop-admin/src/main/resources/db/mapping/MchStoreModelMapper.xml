@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.MchStoreModelMapper">
+
+    <sql id="getMchStoreDynamicSQL">
+        <if test="store_id != null">and store_id = #{store_id}</if>
+        <if test="mch_id != null">and mch_id = #{mch_id}</if>
+        <if test="name != null">and `name` like concat('%',#{name},'%')</if>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_mch_store
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getMchStoreDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="is_default_sort!=null and is_default_sort!=''">is_default ${is_default_sort},</if>
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_mch_store
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getMchStoreDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="getMchStoreDynamic" parameterType="Map" resultType="Map">
+        select count(1)
+        from lkt_mch_store
+        where store_id = #{store_id}
+        <if test="mch_id!=null">
+            and mch_id = #{mch_id}
+        </if>
+        <if test="name!=null">
+            and name = #{name}
+        </if>
+    </select>
+
+</mapper>

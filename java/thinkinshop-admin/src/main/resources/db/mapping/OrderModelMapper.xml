@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.OrderModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <trim prefixOverrides="and">
+            <if test="store_id != null and store_id != ''">and a.store_id = #{store_id}</if>
+            <choose>
+                <when test="recycle != null">and a.recycle=#{recycle}</when>
+                <otherwise>and a.recycle != 1</otherwise>
+            </choose>
+            <if test="status !=null">
+                <choose>
+                    <when test="status.toString() == 'notClose'">and a.status <![CDATA[ <> ]]> 7</when>
+                    <otherwise>and a.status = #{status}</otherwise>
+                </choose>
+            </if>
+            <if test="startDate!=null">and a.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+            <if test="endDate!=null">and a.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+            <if test="self_lifting!=null">and a.self_lifting=#{self_lifting}</if>
+            <if test="otype!=null">and a.otype=#{otype}</if>
+            <if test="p_sNo != null">and a.p_sNo=#{p_sNo}</if>
+            <if test="mch_id!=null">and a.mch_id=concat(',',#{mch_id},',')</if>
+            <if test="toDayOrder!=null">and DATE_FORMAT(a.add_time,'%Y-%m-%d') = #{toDayOrder}</if>
+            <if test="statusList != null">
+                <foreach collection="statusList" item="status" separator="," open="and status in(" close=")">
+                    #{status,jdbcType=INTEGER}
+                </foreach>
+            </if>
+            <if test=" orderTypeList_not != null ">
+                <foreach collection="orderTypeList_not" item="type" separator="," open="and a.otype not in(" close=")">
+                    #{type}
+                </foreach>
+            </if>
+            <if test="orderType!=null and orderType != '' ">
+                <choose>
+                    <when test="orderType == 'payment'">and a.status = 0</when>
+                    <when test="orderType == 'send'">and a.status = 1</when>
+                    <when test="orderType == 'receipt'">and a.status = 2</when>
+                    <when test="orderType == 'evaluete'">and a.status = 5</when>
+                    <when test="orderType == 'return'">and a.sNo in (
+                        select distinct r_sNo from lkt_order_details where store_id = #{storeId} and user_id = #{userId}
+                        and re_type > 0 )
+                    </when>
+                </choose>
+            </if>
+        </trim>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_order a
+        <where>
+            <include refid="selectDynamicSQL"/>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="status_sort!=null and status_sort!=''">status ${status_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_order a
+        <where>
+            <include refid="selectDynamicSQL"/>
+        </where>
+    </select>
+
+    <sql id="sumMchTurnoverReportSQL">
+        b.recycle = 0 and b.status = 0 and a.status in (1,2,5)
+        <if test="startDate!=null">and a.add_time <![CDATA[  >  ]]> #{startDate}</if>
+        <if test="startEnd!=null">and a.add_time <![CDATA[  <  ]]> #{startEnd}</if>
+        <if test="mchName!=null">and b.name like concat('%',#{mchName},'%')</if>
+        <if test="addTimeStartBetween!=null and addTimeEndBetween">and a.add_time between #{addTimeStartBetween} and
+            #{addTimeEndBetween}
+        </if>
+    </sql>
+    <select id="sumMchTurnoverReport" parameterType="Map" resultType="Map">
+        select sum(a.z_price) as total,b.name,b.id mchId from lkt_order as a left join lkt_customer as b on a.store_id =
+        b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="sumMchTurnoverReportSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_store_id!=null">a.store_id,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="total_sort!=null and total_sort!=''">total ${total_sort},</if>
+        </trim>
+        <if test="startPage != null and pageEnd != ''">limit #{startPage},#{pageEnd}</if>
+    </select>
+    <select id="countMchTurnoverReport" parameterType="Map" resultType="int">
+        select count(distinct a.store_id) from lkt_order as a left join lkt_customer as b on a.store_id = b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="sumMchTurnoverReportSQL"/>
+            </trim>
+        </where>
+    </select>
+    <select id="sumMchTurnoverOrderReport" parameterType="Map" resultType="Map">
+        select a.store_id,count(a.id) as total,b.name from lkt_order as a left join lkt_customer as b on a.store_id =
+        b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="sumMchTurnoverReportSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_store_id!=null">a.store_id,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="total_sort!=null and total_sort!=''">total ${total_sort},</if>
+        </trim>
+        <if test="startPage != null and pageEnd != ''">limit #{startPage},#{pageEnd}</if>
+    </select>
+    <select id="countMchTurnoverOrderReport" parameterType="Map" resultType="int">
+        select count(distinct a.store_id) from lkt_order as a left join lkt_customer as b on a.store_id = b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="sumMchTurnoverReportSQL"/>
+            </trim>
+        </where>
+    </select>
+
+
+    <sql id="getOrdersNumDynamicSQL">
+        and store_id = #{store_id}
+        <if test="recycle != null">and recycle != #{recycle}</if>
+        <if test="id != null">and id = #{id}</if>
+        <if test="user_id != null">and user_id = #{user_id}</if>
+        <if test="likeOrderno != null and likeOrderno!=''">and sNo like CONCAT('%',#{likeOrderno},'%')</if>
+        <if test="orderno != null ">and sNo = #{orderno}</if>
+        <if test="orderType != null ">and otype = #{orderType}</if>
+        <if test="orderStauts != null ">and status = #{orderStauts}</if>
+        <if test="mch_id != null and mch_id!=''">and mch_id like CONCAT('%,',#{mch_id},',%')</if>
+        <if test="platform_activities_id != null">and platform_activities_id =platform_activities_id</if>
+        <if test="startDay != null">and add_time <![CDATA[  >=  ]]> #{startDay}</if>
+        <if test="endDay != null ">and add_time <![CDATA[  <=  ]]> #{endDay}</if>
+        <if test="notOtype != null">and otype != #{notOtype}</if>
+        <if test="statusType == 1">and `status` != 7</if>
+        <if test="notStatusType !=null">and `status` != #{notStatusType}</if>
+        <if test="orderFailureTime !=null and sysDate !=null">and date_add(add_time, interval #{orderFailureTime} second) <![CDATA[  <  ]]> #{sysDate}</if>
+        <if test="statusType == 2">and ((status = 1 and self_lifting = 0 ) or (status = 2 and self_lifting = 1 ))</if>
+        <if test="extraction_code != null">and extraction_code like CONCAT('%',#{extraction_code},'%')</if>
+        <if test="coupon_id != null">and coupon_id like CONCAT('%,',#{coupon_id},',%')</if>
+        <if test="recycleList != null">
+            <foreach collection="recycleList" item="status" separator="," open="and recycle in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="statusList != null">
+            <foreach collection="statusList" item="status" separator="," open="and status in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </sql>
+    <select id="getOrdersNumDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_order a
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getOrdersNumDynamicSQL"/>
+            </trim>
+        </where>
+        order by add_time desc
+        <if test="pageNo!=null and pageSize!=null">
+            limit #{pageNo},#{pageSize}
+        </if>
+    </select>
+    <select id="countOrdersNumDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_order
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getOrdersNumDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="getOrderInfoListDynamce" parameterType="Map" resultType="Map">
+        SELECT
+        a.p_sNo,
+        a.coupon_price,
+        a.coupon_id,
+        a.otype,
+        b.id,
+        b.r_sNo,
+        b.user_id,
+        b.p_id,
+        b.p_name,
+        b.p_price,
+        b.num,
+        b.r_status,
+        b.sid,
+        b.size,
+        c.imgurl,
+        a.otype,
+        a.ptcode,
+        c.product_class,
+        d.brand_name,
+        e.costprice,
+        e.price
+        FROM
+        lkt_order a
+        left join lkt_order_details b on a.sno = b.r_sNo
+        left join lkt_product_list c on b.p_id=c.id
+        left join lkt_brand_class d on d.brand_id = c.brand_id
+        left join lkt_configure e on b.sid=e.id
+        where a.store_id = #{store_id}
+        <if test="sNo != null">
+            and a.sNo = #{sNo}
+        </if>
+        <if test="status != null">
+            and a.status = #{status}
+        </if>
+    </select>
+
+    <select id="getOrderInfoLeftDetailDynamic" parameterType="Map" resultType="Map">
+        select a.sNo, a.z_price, a.allow, a.status, a.pay, a.consumer_money, a.extraction_code,
+        a.extraction_code_img, a.mch_id, b.id detailId, b.express_id, b.after_discount, b.freight,
+        b.p_id, b.num, b.p_price, b.sid,a.add_time
+        from lkt_order as a
+        left join lkt_order_details as b on a.sNo = b.r_sNo
+        where a.store_id = #{store_id}
+        <choose>
+            <when test="recycle != null">and a.recycle=#{recycle}</when>
+            <otherwise>and a.recycle != 1</otherwise>
+        </choose>
+        <if test="id != null"> and a.id = #{id} </if>
+        <if test="detailId != null"> and b.id = #{detailId} </if>
+        <if test="mch_id != null"> and a.mch_id like CONCAT('%,',#{mch_id},',%') </if>
+        <if test="extraction_code != null"> and a.extraction_code like CONCAT('%',#{extraction_code},'%') </if>
+        <if test="r_status != null"> and b.r_status = #{r_status} </if>
+        <if test="settlement_type != null"> and b.settlement_type = #{settlement_type} </if>
+        <if test="orderType != null"> and a.otype = #{orderType} </if>
+    </select>
+
+    <update id="updateByOrdernoDynamic" parameterType="Map">
+        update lkt_order
+        <set>
+            <trim suffixOverrides=",">
+                <if test="status!=null">
+                    status=#{status},
+                </if>
+                <if test="recycle != null ">
+                    recycle = #{recycle},
+                </if>
+                <if test="name != null ">
+                    name = #{name},
+                </if>
+                <if test="mobile != null ">
+                    mobile = #{mobile},
+                </if>
+                <if test="address != null ">
+                    address = #{address},
+                </if>
+                <!--                <if test="z_price != null ">-->
+                <!--                    z_price = #{z_price},-->
+                <!--                </if>-->
+                <if test="sheng != null ">
+                    sheng = #{sheng},
+                </if>
+                <if test="shi != null ">
+                    shi = #{shi},
+                </if>
+                <if test="xian != null ">
+                    xian = #{xian},
+                </if>
+                <if test="remarks != null ">
+                    remarks = #{remarks},
+                </if>
+                <if test="recycle != null ">
+                    recycle = #{recycle},
+                </if>
+                <if test="readd!=null">
+                    readd = #{readd},
+                </if>
+            </trim>
+        </set>
+        <where>
+            <trim suffixOverrides="and">
+                <if test="storeId!=null">
+                    and store_id = #{storeId}
+                </if>
+                <if test="orderno!=null">
+                    and sNo = #{orderno}
+                </if>
+                <if test="statusType!=null">
+                    and status = #{statusType}
+                </if>
+                <if test="statusList!=null">
+                    <foreach collection="statusList" item="status" separator="," open="and status in(" close=")">
+                        #{status,jdbcType=INTEGER}
+                    </foreach>
+                </if>
+            </trim>
+        </where>
+    </update>
+
+    <!-- 个人中心 通过订单状态获取订单数量 -->
+    <select id="getUserCenterOrderNumByStatus" parameterType="Map" resultType="int">
+        select count(1) from lkt_order as o where o.store_id = #{storeId} and o.status = #{status} and o.recycle = 0 and
+        o.user_id =#{userId}
+        <if test="status == 5">
+            and not EXISTS ( select 'x' from lkt_comments as c where c.oid = o.sNo )
+        </if>
+    </select>
+
+    <sql id="getUserCenterOrderListSQL">
+        <if test="status !=null">
+            <choose>
+                <when test="status == 'notClose'">and a.status <![CDATA[ <> ]]> 7</when>
+                <otherwise>and a.status = #{status}</otherwise>
+            </choose>
+        </if>
+        <if test="userId!=null">and a.user_id=#{userId}</if>
+        <if test="otype!=null">and a.otype=#{otype}</if>
+        <if test=" keyWord != '' and keyWord != null ">
+            and (a.sNo like '%${keyWord}%' or p.product_title like '%${keyWord}%' )
+        </if>
+        <if test="statusNotList!=null">
+            <foreach collection="statusNotList" item="status" separator="," open="and a.status not in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="orderType!=null and orderType != '' ">
+            <choose>
+                <when test="orderType == 'payment'">and a.status = 0</when>
+                <when test="orderType == 'send'">and a.status = 1</when>
+                <when test="orderType == 'receipt'">and a.status = 2</when>
+                <when test="orderType == 'evaluete'">and a.status = 5 and not EXISTS (select x.id from lkt_comments x where x.oid = sno)</when>
+                <when test="orderType == 'return'">and a.sNo in (
+                    select r_sNo from lkt_order_details where store_id = #{storeId} and user_id = #{userId}
+                    and re_type > 0 )
+                </when>
+            </choose>
+        </if>
+    </sql>
+    <!-- 个人中心获取订单列表信息 -->
+    <select id="getUserCenterOrderList" parameterType="Map" resultType="Map">
+        SELECT a.allow,a.id, a.z_price,a.sNo,a.add_time,a.status,a.delivery_status,a.otype,a.mch_id,d.sid,a.offset_balance,
+               p.is_distribution,a.self_lifting,a.spz_price,a.single_store
+        FROM lkt_order a
+        RIGHT JOIN lkt_order_details d ON a.sNo = d.r_sNo
+        LEFT JOIN lkt_product_list as p on p.id = d.p_id
+        <where>
+            a.store_id = #{storeId} and a.user_id = #{userId} and a.recycle = 0
+            <include refid="getUserCenterOrderListSQL"/>
+        </where>
+        GROUP BY a.sNo order by add_time desc
+        <if test="start != null">
+            <choose>
+                <when test="pageSize!=null">limit #{start},#{pageSize}</when>
+                <otherwise>LIMIT #{start},10</otherwise>
+            </choose>
+        </if>
+    </select>
+
+    <!-- 个人中心订单数量 -->
+    <select id="getUserCenterOrderListCount" parameterType="Map" resultType="int">
+        SELECT count(distinct a.sNo)
+        FROM lkt_order a
+        RIGHT JOIN lkt_order_details d ON a.sNo = d.r_sNo
+        LEFT JOIN lkt_product_list as p on p.id = d.p_id
+        <where>
+            a.store_id = #{storeId} and a.user_id = #{userId} and a.recycle = 0
+            <include refid="getUserCenterOrderListSQL"></include>
+        </where>
+    </select>
+
+    <select id="selectOrdersReportDynamic" parameterType="Map" resultType="Map">
+        select COUNT(*) as num ,SUM(z_price) as z_price,DATE_FORMAT(add_time,'%Y-%m-%d') as r_date,
+        (select count(1) from lkt_order x where x.store_id = a.store_id
+        <if test="startDate != null and startDate != ''">and x.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and x.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+        and x.`status` in (1,2,5)) yx_num,
+        (select sum(z_price) from lkt_order x where x.store_id = a.store_id
+        <if test="startDate != null and startDate != ''">and x.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and x.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+        and x.`status` in (1,2,5)) yx_amt
+        from lkt_order a
+        where a.store_id = #{store_id}
+        <if test="statusList_not != null">
+            <foreach collection="statusList_not" item="status" separator="," open="and a.status not in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="statusList != null">
+            <foreach collection="statusList" item="status" separator="," open="and a.status in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="startDate != null and startDate != ''">and a.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and a.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+
+        <if test="groupbyDate != null">group by r_date</if>
+    </select>
+
+    <!-- 更新订单 -->
+    <update id="updateOrderInfo" parameterType="map">
+        update lkt_order
+        <set>
+            <trim suffixOverrides=",">
+                <if test="status!=null">
+                    status=#{status},
+                </if>
+                <if test="cancleOrder != null">
+                    coupon_id = 0,
+                </if>
+            </trim>
+        </set>
+        <where>
+            <trim suffixOverrides="and">
+                <if test="storeId!=null">
+                    and store_id = #{storeId}
+                </if>
+                <if test="orderno!=null">
+                    and sNo = #{orderno}
+                </if>
+
+                <if test="userId!=null">
+                    and user_id = #{userId}
+                </if>
+
+                <if test="id!=null">
+                    and id = #{id}
+                </if>
+            </trim>
+        </where>
+    </update>
+
+    <update id="wallectPayUpdateOrder" parameterType="map">
+        update lkt_order
+        <set>
+            <trim suffixOverrides=",">
+                <!--                <if test=" zPrice != null">-->
+                <!--                    z_price = offset_balance + #{zPrice},-->
+                <!--                </if>-->
+                <if test="status != null">
+                    status = #{status},
+                </if>
+                <if test="pay != null">
+                    pay = #{pay} ,
+                </if>
+                <if test="payTime != null">
+                    pay_time = #{payTime} ,
+                </if>
+                <if test="tradeNo != null">
+                    trade_no = #{tradeNo} ,
+                </if>
+            </trim>
+        </set>
+        <where>
+            <trim suffixOverrides="and">
+                <if test="storeId!=null">
+                    and store_id = #{storeId}
+                </if>
+                <if test="orderno!=null">
+                    and sNo = #{orderno}
+                </if>
+                <if test="sNo!=null">
+                    and sNo = #{sNo}
+                </if>
+                <if test="userId!=null">
+                    and user_id = #{userId}
+                </if>
+            </trim>
+        </where>
+    </update>
+
+    <select id="getAdminOrderCount" parameterType="Map" resultType="int">
+        select COUNT(distinct o.id) as num from lkt_order as o
+        left join lkt_user as lu on o.user_id = lu.user_id
+        right join lkt_order_details as d on o.sNo = d.r_sNo
+        right join lkt_product_list as p on p.id = d.p_id
+        right join lkt_mch as m on p.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="adminOrderListSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_sNo!=null and group_sNo!=''">o.sNo,</if>
+        </trim>
+    </select>
+
+    <sql id="adminOrderListSQL">
+        <if test=" store_id != null and store_id !=0"> o.store_id = #{store_id} and lu.store_id = #{store_id} </if>
+        <choose>
+            <when test="recycle != null">and o.recycle=#{recycle}</when>
+            <otherwise>and o.recycle != 1</otherwise>
+        </choose>
+        <if test=" recycleList != null ">
+            <foreach collection="recycleList" item="recycle" separator="," open="and o.recycle in(" close=")">
+                #{recycle,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test=" orderId != null ">and o.id = #{orderId}</if>
+        <if test=" orderType != null ">and o.otype = #{orderType}</if>
+        <if test=" orderTypeList_not != null ">
+            <foreach collection="orderTypeList_not" item="type" separator="," open="and o.otype not in(" close=")">
+                #{type}
+            </foreach>
+        </if>
+        <if test=" self_lifting != null ">and o.self_lifting = #{self_lifting}</if>
+        <if test=" operation_type != null ">and o.operation_type = #{operation_type}</if>
+        <if test=" settlement_status != null ">and o.settlement_status = #{settlement_status}</if>
+        <if test=" settlement_status_not != null ">and o.settlement_status != #{settlement_status_not}</if>
+        <if test="orderno!=null">and o.sNo like concat('%',#{orderno},'%')</if>
+        <if test="orderNo1!=null">and o.sNo like concat('%',#{orderNo1},'%')</if>
+        <if test=" brand != null ">and lpl.brand_id = #{brand}</if>
+        <if test="mch_name!=null">and m.name like concat('%',#{mch_name},'%')</if>
+        <if test="source!=null">and o.source = #{source}</if>
+        <if test="xOrder!=null">and (o.status = 0 or o.status = 1)</if>
+        <if test="startdate!=null">and o.add_time <![CDATA[  >=  ]]> #{startdate}</if>
+        <if test="enddate!=null">and o.add_time <![CDATA[  <=  ]]> #{enddate}</if>
+        <if test="settlement_StartDate!=null">and o.arrive_time <![CDATA[  >=  ]]> #{settlement_StartDate}</if>
+        <if test="settlement_EndDate!=null">and o.arrive_time <![CDATA[  <=  ]]> #{settlement_EndDate}</if>
+        <if test="search!=null">and (o.sNo like concat('%',#{search},'%') or o.id = #{search} )</if>
+        <if test="sNo!=null">and (o.sNo like concat('%',#{sNo},'%') or lu.user_name like concat('%',#{sNo},'%') or o.mobile like concat('%',#{sNo},'%')  ) </if>
+        <if test="mchId!=null">and o.mch_id = concat(',',#{mchId},',')</if>
+        <!--  提现发货 -->
+        <if test="deliveryStatus!=null"> and o.delivery_status = #{deliveryStatus} </if>
+        <if test=" newsStatus=='0'  ">and o.status in (0,1)</if>
+        <if test=" newsStatus=='1'  ">and o.status = 1</if>
+        <if test="readd!=null">and o.readd = #{readd}</if>
+        <if test="status !=null">and o.status = #{status}</if>
+        <if test="statusList != null ">
+            <foreach collection="statusList" item="status" separator="," open="and o.status in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <choose>
+            <when test=" otype == 't2' ">
+                and o.otype = 'pt'
+                <choose>
+                    <when test="status == 'g0'">and o.status= 0</when>
+                    <when test="status == 'g1'">and o.status= 9</when>
+                    <when test="status == 'g2'">and o.status &gt; 0 and o.status &lt; 9</when>
+                    <when test="status == 'g3'">and o.status &gt; 9</when>
+                </choose>
+            </when>
+            <when test=" otype == 't3' ">and o.otype = 'KJ'</when>
+            <when test=" otype == 't4' ">and o.otype = 'JP'</when>
+            <when test=" otype == 't5' ">and o.otype = 'FX'</when>
+            <when test=" otype == 't7' ">and o.otype = 'integral'</when>
+            <when test=" otype == 't8' ">and o.otype = 'MS'</when>
+            <when test=" otype == 'ti' ">and (o.otype = '' or o.otype = 'GM')</when>
+        </choose>
+        <if test="ostatus!=null">and o.status=#{ostatus}</if>
+    </sql>
+    <!-- 后台订单管理界面 -->
+    <select id="adminOrderList" parameterType="Map" resultType="Map">
+        select d.p_id,o.real_sno,o.id,o.consumer_money,o.num,o.sNo,o.name,o.sheng,o.shi,o.xian,o.source,o.address,o.add_time,o.mobile,o.z_price,o.z_freight,count(d.id) goodsNum,
+        o.status,o.reduce_price,o.coupon_price,o.preferential_amount,o.allow,o.drawid,o.otype,o.ptstatus,o.spz_price,o.pay,o.drawid,lu.user_name,o.user_id,o.mch_id,o.p_sNo,m.id
+        as shop_id,m.name shopName,o.arrive_time,o.settlement_status,o.operation_type,p.product_title,attr.attribute,attr.img,d.num
+        needNum,d.express_id,d.courier_num,d.freight,attr.price goodsAmt,d.after_discount
+        from lkt_order as o
+        left join lkt_user as lu on o.user_id = lu.user_id
+        right join lkt_order_details as d on o.sNo = d.r_sNo
+        RIGHT JOIN lkt_configure attr on attr.id=d.sid
+        right join lkt_product_list as p on p.id = attr.pid
+        right join lkt_mch as m on p.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="adminOrderListSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_sNo!=null and group_sNo!=''">o.sNo,</if>
+            <if test="group_detail_id!=null and group_detail_id!=''">d.id,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="diy_status_sort!=null and diy_status_sort!=''">FIELD(o.`status`, 1, 0, 2,5,7) ${diy_status_sort}, </if>
+            <if test="add_time_sort!=null and add_time_sort!=''">o.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="start != null and pagesize != ''">limit #{start},#{pagesize}</if>
+    </select>
+
+    <select id="countAdminOrderList" parameterType="Map" resultType="int">
+        select count(distinct o.sNo)
+        from lkt_order as o
+        left join lkt_user as lu on o.user_id = lu.user_id
+        right join lkt_order_details as d on o.sNo = d.r_sNo
+        RIGHT JOIN lkt_configure attr on attr.id=d.sid
+        right join lkt_product_list as p on p.id = attr.pid
+        right join lkt_mch as m on p.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+            </trim>
+            <include refid="adminOrderListSQL"/>
+        </where>
+    </select>
+
+    <!-- 后台订单列表商品信息 -->
+    <select id="adminOrderListProductInfo" resultType="Map" parameterType="Map">
+        select lpl.imgurl,lpl.product_title,lpl.product_number,lod.p_price,lod.unit,lod.num,lod.size,
+        lod.p_id,lod.courier_num,lod.express_id,lod.freight,lpl.brand_id ,lm.name as mchname,lod.r_status
+        from lkt_order_details as lod
+        left join lkt_product_list as lpl on lpl.id=lod.p_id
+        LEFT JOIN lkt_mch as lm on lm.id = lpl.mch_id
+        where r_sNo= #{sNo}
+        <if test=" brand != null ">
+            and lpl.brand_id = #{brand}
+        </if>
+    </select>
+
+    <!-- 获取订单发货信息列表 -->
+    <select id="getDeleiveryOrders" resultType="Map" parameterType="Map">
+        select o.p_sNo,
+               o.otype,
+               d.id,
+               d.r_sNo,
+               d.user_id,
+               d.p_id,
+               d.p_name,
+               d.p_price,
+               d.num,
+               d.r_status,
+               d.sid,
+               d.size,
+               p.imgurl,
+               o.otype
+        from lkt_order_details as d
+         left join lkt_configure as attr on attr.id = d.sid
+         left join lkt_product_list as p on p.id = attr.pid
+         left join lkt_order as o on d.r_sNo = o.sNo
+        where d.store_id = #{storeId}
+          and d.r_sNo = #{orderNo}
+          and d.r_status = 1
+          and not EXISTS(
+                select x.id from lkt_return_order x where x.p_id = d.id and x.r_type not in (2, 4, 5, 8, 9, 10, 12))
+    </select>
+
+    <!-- 发货时候获取订单详情  -->
+    <select id="getDeliveryOrdersInfo" resultType="Map" parameterType="Map">
+        select o.id,
+               o.user_id,
+               o.sNo,
+               d.p_name,
+               d.p_id,
+               d.sid,
+               d.num,
+               o.name,
+               o.address
+        from lkt_order as o
+                 left join lkt_order_details as d on o.sNo = d.r_sNo
+        where o.store_id = #{storeId}
+          and d.id in (#{orderDetailsId})
+    </select>
+
+
+    <sql id="getOrderInfoListUserSQL">
+        <if test="store_id != null">and o.store_id = #{store_id}</if>
+        <if test="r_status != null">and d.r_status = #{r_status}</if>
+        <if test="r_status_not != null">and d.r_status != #{r_status_not}</if>
+        <if test="ptcode != null">and o.ptcode = #{ptcode}</if>
+    </sql>
+
+    <select id="getOrderInfoListUser" resultType="Map" parameterType="Map">
+        SELECT u.user_name,d.p_name,c.img,d.p_id as goods_id,d.sid as attr_id,o.* ,d.size,c.price goodsPrice
+        from lkt_order as o
+        LEFT JOIN lkt_user as u on o.user_id = u.user_id
+        LEFT JOIN lkt_order_details as d on o.sNo = d.r_sNo
+        LEFT JOIN lkt_configure as c on d.sid = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getOrderInfoListUserSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">o.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countOrderInfoListUser" resultType="int" parameterType="Map">
+        SELECT count(1)
+        from lkt_order as o
+        LEFT JOIN lkt_user as u on o.user_id = u.user_id
+        LEFT JOIN lkt_order_details as d on o.sNo = d.r_sNo
+        LEFT JOIN lkt_configure as c on d.sid = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getOrderInfoListUserSQL"/>
+            </trim>
+        </where>
+    </select>
+
+
+    <sql id="selectbMchOrderIndexSQL">
+        and o.status != 8 and o.recycle in (0,2)
+        <if test="store_id != null">and o.store_id = #{store_id} and lu.store_id = o.store_id</if>
+        <if test="source != null">and o.source = #{source}</if>
+        <if test="otype != null">and o.otype = #{otype}</if>
+        <if test="status != null">and o.status = #{status}</if>
+        <if test="mch_id != null">and o.mch_id = concat(',',#{mch_id},',')</if>
+        <if test="order_like != null">and (o.sNo like concat('%',#{order_like},'%') or o.name like
+            concat('%',#{order_like},'%')
+            or o.mobile like concat('%',#{order_like},'%') or o.user_id like concat('%',#{order_like},'%') or o.p_sNo
+            like
+            concat('%',#{order_like},'%')
+        </if>
+        <if test="startDate != null">and o.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null">and o.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+    </sql>
+    <select id="selectbMchOrderIndex" resultType="Map" parameterType="Map">
+        select
+        o.id,o.consumer_money,o.num,o.sNo,o.name,o.sheng,o.shi,o.xian,o.source,o.address,o.add_time,o.mobile,o.z_price,o.status,o.reduce_price,o.coupon_price,o.allow,o.drawid,
+        o.otype,o.ptcode,o.ptstatus,o.spz_price,o.pay,o.drawid,lu.user_name,o.user_id,o.mch_id,o.p_sNo
+        ,o.coupon_price,o.coupon_id,o.self_lifting,o.arrive_time,pay.name payName
+        from lkt_order as o
+        left join lkt_user as lu on o.user_id = lu.user_id
+        left join lkt_payment pay on pay.class_name = o.pay
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectbMchOrderIndexSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <if test="group_sNo!=null and group_sNo!=''">o.sNo,</if>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">o.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countbMchOrderIndex" resultType="int" parameterType="Map">
+        select count(1)
+        from lkt_order as o
+        left join lkt_user as lu on o.user_id = lu.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectbMchOrderIndexSQL"/>
+            </trim>
+        </where>
+    </select>
+    <select id="sumbMchOrderIndexByPrice" resultType="Map" parameterType="Map">
+        select SUM(o.z_price) z_price,COUNT(o.id) num
+        from lkt_order as o
+        left join lkt_user as lu on o.user_id = lu.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectbMchOrderIndexSQL"/>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

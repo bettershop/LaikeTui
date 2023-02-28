@@ -1,0 +1,115 @@
+//tbl页
+/deep/.el-radio-group {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  font-size: 0;
+  .el-radio-button {
+    width: 120px;
+    height: 40px;
+    .el-radio-button__inner {
+      width: 120px !important;
+      height: 40px;
+    }
+  }
+}
+
+.el-main {
+  width: 100%;
+  padding: 0 5px 20px 5px !important;
+}
+
+//分割
+.hr {
+  height: 16px;
+  min-height: 16px;
+}
+
+//主体
+.card {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  //标题
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 20px;
+    border-bottom: 1px solid #E9ECEF;
+    font-size: 16px;
+    font-weight: 400;
+    color: #414658;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    // position: sticky;
+    top: 0;
+    background-color: #FFFFFF;
+    // z-index: 1000;
+  }
+
+  .dialog-block {
+    /deep/.el-dialog {
+      width: 420px;
+      min-height: 400px;
+      .el-dialog__header{
+        border-bottom: 1px solid #E9ECEF;
+      }
+      .el-dialog__body {
+        padding-bottom: 0;
+      }
+      .pass-input{
+        margin-left: -35px;
+      }
+      .form-footer{
+        width: 110%;
+        display: flex;
+        height: 68px;
+        justify-content: flex-end;
+        align-items: center;
+        border-top: 1px solid #E9ECEF;
+        margin-top: 40px;
+        padding-top: 30px;
+        margin-left: -5%;
+        .el-form-item{
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+
+  img{
+    width: 50px;
+    height: 50px;
+  }
+}
+.merchants-list{
+  margin-top: 10px;
+}
+
+.api-config {
+  margin-top: 0 !important;
+}
+
+.intro {
+  background-color: #FFFFFF;
+  padding-bottom: 40px;
+}
+
+.footerBox {
+  position: fixed;
+  right: 0;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  border-top: 1px solid #E9ECEF;
+  background: #FFFFFF;
+  width: 300%;
+  z-index: 10;
+  button {
+    width: 70px;
+    height: 40px;
+  }
+}

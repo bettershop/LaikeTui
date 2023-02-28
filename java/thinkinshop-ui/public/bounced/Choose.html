@@ -1,0 +1,1298 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="../bounced/style/index.css">
+		<link rel="stylesheet" href="../bounced/style/style.css?v=20200904">
+		<script src="../bounced/vue/vue.js"></script>
+		<script src="../bounced/js/index.js"></script>
+		<script src="../bounced/jquery/1.11.1/jquery.min.js?v=20200904"></script>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<style>
+			#app {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+				height: 100%;
+				padding: 40px;
+				box-sizing: border-box;
+			}
+
+			.app_left, .app_right {
+				display: flex;
+				flex-direction: column;
+				width: 280px;
+				height: 100%;
+				border: 1px solid rgba(213, 219, 232, 1);
+				box-sizing: border-box;
+			}
+			
+			.app_center{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 54px;
+				height: 36px;
+				background: #2890FF;
+				border-radius: 2px;
+				cursor: pointer;
+			}
+
+			.app_left_top, .app_right_top {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				height: 40px;
+				background: rgba(244, 247, 249, 1);
+				border-bottom: 1px solid rgba(213, 219, 232, 1);
+				border-radius: 2px;
+				box-sizing: border-box;
+				padding-left: 13px;
+			}
+
+			.app_left_top label, .app_right_top label {
+				font-size: 14px;
+				font-weight: bold;
+				color: #414658;
+				line-height: 14px;
+			}
+
+			.app_right_top {
+				justify-content: space-between;
+			}
+			
+			.app_right_top a {
+				margin-right: 16px;
+				text-decoration: none;
+				font-size: 14px;
+				color: #2890FF;
+			}
+			
+			.app_right_top .add{
+				margin-left: auto;
+				margin-right: 10px;
+				padding-right: 10px;
+				border-right: 1px solid #D5DBE8;
+			}
+
+			.app_left_bottom, .app_right_bottom {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+			}
+			
+			.el-tree{
+				flex: 1;
+				overflow: hidden auto;
+				margin: 10px 0;
+			}
+			
+			.app_left_bottom .el-input{
+				position: relative;
+				padding: 0 14px 0 10px;
+				margin-top: 20px;
+				box-sizing: border-box;
+			}
+			
+			.app_left_bottom .el-input input{
+				width: 100%;
+				box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
+				border-radius: 2px;
+			}
+			
+			.app_left_bottom .el-input .el-input__icon{
+				line-height: 36px;
+			}
+			
+			.app_left_bottom .el-input .el-input__suffix{
+				right: 20px;
+			}
+
+			.app_right_bottom {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				overflow: hidden auto;
+			}
+
+			.app_right_bottom > div {
+				display: inline-flex;
+				align-items: center;
+				justify-content: space-between;
+				border-radius: 2px;
+				width: 100%;
+				min-height: 34px;
+				padding: 0 13px;
+				box-sizing: border-box;
+			}
+			
+			.app_right_bottom > div div {
+				font-size: 14px;
+				line-height: 15px;
+				color: #6A7076;
+				max-width: 210px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			
+			.el-tree-node__label{
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			
+			.el-tree__empty-block{
+				height: auto;
+			}
+
+			.app_right_bottom > div img {
+				cursor: pointer;
+				width: 14px;
+				height: 14px;
+				margin-left: 6px;
+				display: none;
+			}
+			
+			.app_right_bottom > div:hover{
+				background: rgba(244, 247, 249, 1);
+			}
+			
+			.app_right_bottom > div:hover img{
+				display: inline-block;
+			}
+
+			.el-input__inner {
+				height: 36px;
+				line-height: 36px;
+				width: 246px;
+				padding: 0 10px;
+				font-size: 14px;
+				box-sizing: border-box;
+			}
+
+			.checkbox i {
+				background-color: #FFFFFF;
+			}
+			
+			.el-tree-node__content{
+				height: 36px;
+			}
+			
+			.el-tree-node__content>.el-tree-node__expand-icon{
+				padding: 0;
+			}
+			
+			.noAttr{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding-top: 60px;
+				font-size: 14px;
+				color: #414658;
+			}
+			
+			.noAttr img{
+				margin-bottom: 20px;
+			}
+			
+			.loading{
+				font-size: 14px;
+				color: #414658;
+				text-align: center;
+			}
+			
+			a#checkQX{
+				text-decoration: none;
+				font-size: 14px;
+				color: #2890FF;
+				margin-left: auto;
+				margin-right: 13px;
+			}
+		</style>
+	</head>
+	<body style="margin: 0;background-color: #FFFFFF;display: none;opacity: 1;">
+		<div id="app">
+			<div class="app_left">
+				<div class="app_left_top">
+					<label class="checkbox" style="padding: 0;">
+						选择属性/属性值
+					</label>
+					
+					<a @click="checkQX" id="checkQX" href="javascript:;">{{qxFlag?'取消全选':'全选'}}</a>
+				</div>
+				<div class="app_left_bottom">
+					<el-input placeholder="请输入属性名称过滤" v-model="filterText" clearable>
+					</el-input>
+
+					<el-tree v-if="data.length>0" class="filter-tree" :data="data" @check="getCheck" node-key="sid" show-checkbox :props="defaultProps"
+					 :filter-node-method="filterNode" ref="tree" check-on-click-node>
+					</el-tree>
+					
+					<div v-else-if="loadFlag" class="noAttr">
+						<img src="../bounced/img/noAttr.png" alt="">
+						无匹配数据，请重新搜索
+					</div>
+					
+					<template v-if="data.length>5">
+						<div class="loading" v-if="loadingType == 1">正在加载中</div>
+					</template>
+				</div>
+			</div>
+
+			<div class="app_center" @click="saveCheck" :style="checkAll1.length==0?'opacity:0.5':''">
+				<img src="../bounced/img/jiantou_r_w.png" alt="">
+			</div>
+
+			<div class="app_right">
+				<div class="app_right_top">
+					<label>已选</label>
+					<a class="add" href="javascript:;" @click="addAttr">添加新属性</a>
+					<a href="javascript:;" @click="removeCheck">清空</a>
+				</div>
+
+				<div class="app_right_bottom">
+					<div v-for="(item,index) in checkAll" :key="index">
+						<div :title="item.name">{{item.name1}}</div>
+						<img src="../bounced/img/close_bb.png" @click="delCheck(index)">
+					</div>
+				</div>
+			</div>
+
+			
+		</div>
+	</body>
+
+	<script>
+		var Main = {
+			data() {
+				return {
+					loadFlag: false,
+					filterText: '',
+					data: [],
+					data1: [],
+					defaultProps: {
+						children: 'children',
+						label: 'label',
+					},
+
+					fenlei: [], //分类，二维数组，下标0-4代表五个等级的分类
+
+					checkAll: [], //所有选中的类
+					checkAll1: [],
+					oldAll: [],
+
+					clickAttr: true,
+					url: '',
+					loadingType: 0,
+					page: 1,
+					
+					qxFlag: false,
+
+					taggle: true,
+
+					title: '',
+					is_alert: false
+				};
+			},
+
+			watch: {
+				filterText(val) {
+					// this.$refs.tree.filter(val);
+					
+					this.page = 1
+					this.getSearch()
+					
+				}
+			},
+
+			mounted() {
+				let zoom = $('body',parent.document).css('zoom');
+				setTimeout(()=>{
+					$('body').css('display','').css('zoom', zoom)
+				},0)
+				var arr = location.href.split('//')
+				var str = arr[1].split('/')
+				var url1 = '';
+				for (var k in str) {
+					if (str[k] == 'webapp') {
+						break;
+					} else {
+						url1 += str[k] + '/'
+					}
+				}
+				
+				arr[1] = url1
+				this.url = arr.join('//');
+				if ($('body', parent.document).find('#iframe_box iframe').contents().find("#strArr").length > 0) {
+					this.checkAll = [];
+					if($('body', parent.document).find('#iframe_box iframe').contents().find("#strArr").html()){
+						this.checkAll = JSON.parse($('body', parent.document).find('#iframe_box iframe').contents().find("#strArr").html())
+					}
+					
+				}
+				
+				const me = this
+				this.axios(function(){
+					setTimeout(()=>{
+						// me.setScroll();
+						me.getSearch()
+
+						for(let i=0;i<$('.app_left_bottom .el-tree-node__label').length;i++){
+							let text = $('.app_left_bottom .el-tree-node__label').eq(i).text()
+							$('.app_left_bottom .el-tree-node__label').eq(i).attr('title', text)
+						}
+					},100)
+				})
+			},
+
+			methods: {
+				setScroll(){
+					const me = this
+					
+					$('.app_left_bottom .el-tree').scroll(function() {
+						//当时滚动条离底部60px时开始加载下一页的内容
+						let scrollTop = Math.ceil($(this)[0].scrollTop + $(this).height())+4
+						if (scrollTop >= $(this)[0].scrollHeight) {
+							//这里用 [ off_on ] 来控制是否加载 （这样就解决了 当上页的条件满足时，一下子加载多次的问题啦）
+							if (me.loadingType == 0) {
+							   me.loadingType = 1
+							   me.page++
+							   me.getSearch()
+							}
+						}
+					});
+				},
+				getSearch(){
+					let checkAll1 = JSON.parse(JSON.stringify(this.checkAll1))
+
+					this.checkAll1 = []
+					
+					if(this.page == 1){
+						checkAll1 = []
+					}
+					$.ajax({
+						cache: true,
+						type: "POST",
+						dataType: "json",
+						url: $('body', parent.document).find('#hhhh')[0].__vue__.goodsEditorBase,
+						data: {
+							api: 'saas.dic.getSkuList',
+							pageNo: this.page,
+							storeId: $('body', parent.document).find('#hhhh')[0].__vue__.storeIds,
+							keyword: this.filterText
+						},
+						async: true,
+						success: (data) => {
+							this.loadFlag = true
+							console.log(data);
+							if(data.data.list){
+								if(data.data.list.length>0){
+									this.loadingType = 0
+								}else{
+									this.loadingType = 2
+								}
+								
+								data.data.list.filter(item => {
+									item.id1 = item.id + ':' + item.sid;
+									item.name1 = item.name + ':' + item.sname;
+									item.label = item.name1
+								})
+								
+								if(this.page == 1){
+									this.data1 = JSON.parse(JSON.stringify(data.data.list))
+								}else{
+									this.data1.push(...JSON.parse(JSON.stringify(data.data.list)))
+								}
+								
+								this.data1.filter(items => {
+									
+									this.checkAll.filter(item=>{
+										
+										if(items.name1 == item.name1){
+											items.ischeck = true
+										}
+										
+									})
+									
+								})
+								
+								this.data = this.data1.filter(item => !item.ischeck)
+								if(this.data.length == 0) {
+									this.data = this.data1
+								}
+								
+								// $('#checkQX').prop('checked', false)
+								this.qxFlag = false
+								
+								setTimeout(()=>{
+									this.setScroll();
+									
+									for(let i=0;i<$('.app_left_bottom .el-tree-node__label').length;i++){
+										let text = $('.app_left_bottom .el-tree-node__label').eq(i).text()
+										$('.app_left_bottom .el-tree-node__label').eq(i).attr('title', text)
+									}
+									
+									if(checkAll1 && checkAll1.length>0){
+										this.$refs.tree.setCheckedNodes(checkAll1)
+										
+										this.checkAll1 = this.$refs.tree.getCheckedNodes()
+									}
+								},100)
+							}else{
+								this.data = []
+								this.data1 = []
+							}
+							
+							
+						}	
+					})
+					if($('body', parent.document).find('#hhhh')[0].__vue__.check_attr.length !== 0 && this.taggle) {
+						this.checkAll = $('body', parent.document).find('#hhhh')[0].__vue__.check_attr
+					}
+				},
+				addAttr() {
+					const me = this
+					if (!this.clickAttr) {
+						return
+					}
+					this.clickAttr = false
+					setTimeout(() => {
+						this.clickAttr = true
+					}, 5000)
+
+					$.ajax({
+						cache: true,
+						type: "GET",
+						dataType: "json",
+						url: $('body', parent.document).find('#hhhh')[0].__vue__.goodsEditorBase,
+						data: {
+							api: 'saas.dic.getSkuAttributeList',
+							storeId: $('body', parent.document).find('#hhhh')[0].__vue__.storeIds,
+							pageSize: 100
+							// page: '',
+							// name: ''
+						},
+						async: true,
+						success: (res) => {
+							console.log(res);
+							this.clickAttr = true
+
+							var attrName = res.data.list
+							var attrStr = `
+								<div style="display: flex; align-items: center; justify-content: center; padding: 10px 0;background: #ffffff;">
+									<input id="searchAttrIpt" type="text" placeholder="请输入搜索关键字" value="" style="padding: 0 8px;width: 90%; height: 30px;">
+								</div>
+								<div id="noAttr" style="
+								    display: none;
+								    flex-direction: column;
+								    align-items: center;
+								    padding: 25px 0;
+								">
+								<img src="../bounced/img/noAttr.png">
+									<p style="
+										margin-top: 17px;
+										text-align: center;
+										font-size: 14px;
+										color: #414658;
+									">无匹配数据，请重新搜索<br>或去添加属性名称</p>
+								</div>
+							`
+							attrName.filter(item => {
+								attrStr +=
+									`<li style="height: 34px; lin-height: 34px; color: color: #414658;font-size: 14px;">
+										<label>
+										<label class="checkbox" style="padding: 0;font-weight: 400;">
+										<input name="attr_name" type="checkbox" value="${item.id}">
+										${item.name}
+										</label>
+										</label>
+									</li>`
+							})
+
+							var str =
+								`
+									<div id="attrMask" class="maskNew">
+										<div class="maskNewContent mask-content">
+											<p class="mask-title">添加新属性</p>
+											<a href="javascript:void(0);" class="closeA closeAttr" style="display: block;">
+												<img src="/bounced/img/gb.png" />
+											</a>
+											<div class="mask-content-data">
+												<div>
+													<label style="margin-right: 10px;margin-bottom: 0;height: 27px;line-height: 27px;">添加方式：</label>
+													<div>
+														<div style="display: flex;">
+															<div class="radio" style="margin-right: 20px; color: #515a6e;">
+																<input id="radio1" name="attrStyle" type="radio" value="2" checked }>
+																<label for="radio1">添加属性名称</label>
+															</div>
+															<div class="radio" style="color: #515a6e;">
+																<input id="radio2" name="attrStyle" type="radio" value="1" }>
+																<label for="radio2">添加属性值</label>
+															</div>
+														</div>
+														<div id="shooser_attrDiv" class="shooser_attrDiv" style="display: none;">
+															<div style="padding-bottom: 20px;">
+																<span>属性名称：</span>
+																<div style="position: relative;">
+																	<select name="" id="chooseAttr" style="padding-left: 8px;">
+																		<option value="">请选择属性名称</option>
+																	</select>
+																	<div style="position: absolute;left: 0;top: 0;width: 280px;height: 36px;"></div>
+																	<ul id="choose_ul" style="display: none;">
+																		${attrStr}
+																	</ul>
+																</div>
+															</div>
+						
+															<div id="choose_attrDiv" class="custom_attrDiv" style="display: block;">
+																
+															</div>
+														</div>
+						
+														<div id="custom_attrDiv" class="shooser_attrDiv custom_attrDiv">
+															<div style="padding-bottom: 20px;">
+																<span class="left_text">属性名称：</span>
+																<input type="text" placeholder="请输入属性名称" style="width: 310px;">
+																<a class="addBtn addA" href="javascript:;">添加属性</a>
+															</div>
+															
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="mask-bottom">
+												<input type="button" class="closeAttr" value="取消">
+												<input type="button" value="添加" id="confirmMask">
+											</div>
+										</div>
+									</div>
+									`
+
+							$('body', parent.document).append(str)
+							
+							$('body', parent.document).find('#searchAttrIpt').off().on('input',function(){
+								let val = $(this).val()
+								let lis = $(this).parents('#choose_ul').find('li')
+								
+								let i = 0;
+								lis.each(function(e){
+									if($(this).text().includes(val)){
+										$(this).css('display','')
+									}else{
+										i++;
+										$(this).css('display','none')
+									}
+								})
+								if(i == lis.length){
+									$(this).parents('#choose_ul').find('#noAttr').css('display','flex')
+								}else{
+									$(this).parents('#choose_ul').find('#noAttr').css('display','none')
+								}
+							})
+
+							// 打开关闭添加属性弹窗
+							$('body', parent.document).find('#chooseAttr').next().off()
+							$('body', parent.document).find('#chooseAttr').next().on('click', function() {
+								$('body', parent.document).find('#choose_ul').toggle()
+								
+								window.event? window.event.cancelBubble = true : e.stopPropagation();
+							})
+							
+							// 关闭添加属性弹窗
+							$('body', parent.document).find('#attrMask').off()
+							$('body', parent.document).find('#attrMask').on('click',function(){
+								$('body', parent.document).find('#choose_ul').hide()
+							})
+							
+							$('body', parent.document).find('#choose_ul').off()
+							$('body', parent.document).find('#choose_ul').on('click',function(){
+								window.event? window.event.cancelBubble = true : e.stopPropagation();
+							})
+							
+							// 选择属性名
+							$('body', parent.document).find('[name="attr_name"]').off()
+							$('body', parent.document).find('[name="attr_name"]').on('change', function() {
+								var val = $(this).val()
+								var str = '' //显示在选择框中的内容  颜色,大小尺寸
+								var attrStr = '' //显示在选择框下面的属性与属性值
+								
+								attrName.filter((item, index) => {
+									if (item.id == val) {
+										item.status = !item.status
+									}
+									if (item.status) {
+										str += ',' + item.name
+
+										attrStr +=
+											`
+													<div class="custom_attr" style="padding-bottom: 10px;">
+														<span class="left_text" value="${item.name}" title="${item.name}">${item.name}：</span>
+														<input type="text" placeholder="请输入属性值" style="width: 212px;">
+														<a class="addBtn addB" href="javascript:;">添加属性值</a>
+														<a class="removeBtn" href="javascript:;">删除属性</a>
+													</div>
+													<div class="custom_attrVlue" style="padding: 0 70px 10px;display: flex">
+														
+													</div>
+													`
+
+
+									}
+								})
+								str = str.replace(',', '')
+								
+								if(str == ''){
+									str = '请选择属性名称'
+								}
+								
+								let _Div = $('body', parent.document).find('#choose_attrDiv .custom_attr');
+								oldAttr = []
+								for (let i = 0; i < $(_Div).length; i++) {
+									let name0 = $(_Div).eq(i).find('.left_text').attr('value')
+									oldAttr.push({
+										name: name0,
+										list: []
+									})
+								
+									for (let j = 0; j < $(_Div).eq(i).next().find('>a').length; j++) {
+										
+										let name1 = $(_Div).eq(i).next().find('>a').eq(j).attr('value')
+										
+										oldAttr[i].list.push(name1)
+								
+									}
+								
+								}
+
+								// console.log(oldAttr);
+								
+								$(this).parents('#attrMask').find('#chooseAttr').empty()
+								$(this).parents('#attrMask').find('#chooseAttr').append(
+									`
+											<option value="">${str}</option>
+										`)
+								$(this).parents('#attrMask').find('#shooser_attrDiv #choose_attrDiv').empty()
+								$(this).parents('#attrMask').find('#shooser_attrDiv #choose_attrDiv').append(attrStr)
+								
+								let _attrDiv = $(this).parents('#attrMask').find('#choose_attrDiv .custom_attr')
+								for(let i=0;i<$(_attrDiv).length;i++){
+									let text = $(_attrDiv).eq(i).find('.left_text').attr('value')
+									
+									oldAttr.filter(items=>{
+										if(items.name == text){
+											items.list.filter(item=>{
+												let str =
+													`<a href="javascript:;" value="${item}">
+														    <span style="display: inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 300px;" title="${item}">${item}</span>
+														    <img src="../bounced/img/gb.png">
+														</a>`
+														
+												$(_attrDiv).eq(i).next().append(str)
+												
+												// 删除属性值
+												$(this).parents('#attrMask').find('#shooser_attrDiv .custom_attrVlue a').off()
+												$(this).parents('#attrMask').find('#shooser_attrDiv .custom_attrVlue a').on('click', function() {
+													$(this).remove()
+												})
+											})
+										}
+									})
+									
+								}
+								
+
+								$(this).parents('#attrMask').find('#shooser_attrDiv #choose_attrDiv .addB').off()
+								$(this).parents('#attrMask').find('#shooser_attrDiv #choose_attrDiv .addB').on('click', function() {
+									var val = $(this).prev().val().trim()
+									val = val.replace("//s/g", "");
+									if (val == '') {
+										var str = `<div id="alert" style="width: 150px;
+										height: 50px;
+										position: absolute;
+										top: 50%;
+										left: 50%;
+										transform: translate(-50%,-50%);
+										background-color: rgba(0, 0, 0, 0.6);
+										color: #fff;
+										text-align: center;
+										line-height: 50px;
+										z-index: 9999999999;">
+											<span>请输入属性值</span>
+										</div>`
+										$('body', parent.document).append(str)
+										setTimeout(function() {
+											$('body', parent.document).find('#alert').remove()
+										},1500)
+										return
+									}
+
+									for (let i = 0; i < $(this).parent().next().find('>a').length; i++) {
+										let val1 = $(this).parent().next().find('>a').eq(i).attr('value')
+										if (val == val1) {
+											var str = `<div id="alert" style="width: 150px;
+											height: 50px;
+											position: absolute;
+											top: 50%;
+											left: 50%;
+											transform: translate(-50%,-50%);
+											background-color: rgba(0, 0, 0, 0.6);
+											color: #fff;
+											text-align: center;
+											line-height: 50px;
+											z-index: 9999999999;">
+												<span>属性值重复</span>
+											</div>`
+											$('body', parent.document).append(str)
+											setTimeout(function() {
+												$('body', parent.document).find('#alert').remove()
+											},1500)
+											return
+										}
+									}
+
+
+									var str =
+										`<a href="javascript:;" value="${val}">
+											    <span style="display: inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 300px;" title="${val}">${val}</span>
+											    <img src="../bounced/img/gb.png">
+											</a>`
+									$(this).parent().next().append(str)
+									$(this).prev().val('')
+
+									// 删除属性值
+									$(this).parents('#attrMask').find('#shooser_attrDiv .custom_attrVlue a').off()
+									$(this).parents('#attrMask').find('#shooser_attrDiv .custom_attrVlue a').on('click', function() {
+										$(this).remove()
+									})
+								})
+
+
+								// 删除属性名称
+								$(this).parents('#attrMask').find('#shooser_attrDiv #choose_attrDiv .removeBtn').off()
+								$(this).parents('#attrMask').find('#shooser_attrDiv #choose_attrDiv .removeBtn').on('click', function() {
+									var index = $(this).parent().index() / 2
+
+
+									$(this).parent().next().remove()
+									$(this).parent().remove()
+									let attrName1 = attrName.filter(item => item.status)
+
+									var text1 = '';
+									let _Div = $('body', parent.document).find('#choose_attrDiv .custom_attr');
+									for (let i = 0; i < $(_Div).length; i++) {
+									
+										let name0 = $(_Div).eq(i).find('.left_text').attr('value')
+										
+										text1 += ',' + name0
+									
+									}
+									
+									text1 = text1.replace(',','')
+									
+									if(text1 == ''){
+										text1 = '请选择属性名称'
+									}
+									$('body', parent.document).find('#shooser_attrDiv #chooseAttr option').text(text1)
+
+									let i;
+									attrName.filter((item, indexs) => {
+										if (item.name == attrName1[index].name) {
+											i = indexs
+											item.status = false
+										}
+									})
+									$('body', parent.document).find('#shooser_attrDiv #choose_ul li').eq(i).find('input').attr('checked',
+										false)
+								})
+							})
+
+							// 切换选择还是自定义属性
+							$('body', parent.document).find('.radio input').off()
+							$('body', parent.document).find('.radio input').on('change', function() {
+								var index = $(this).context.defaultValue
+								if (index == 1) {
+									$(this).parents('#attrMask').find('#shooser_attrDiv').css('display', '')
+									$(this).parents('#attrMask').find('#custom_attrDiv').css('display', 'none')
+								} else {
+									$(this).parents('#attrMask').find('#shooser_attrDiv').css('display', 'none')
+									$(this).parents('#attrMask').find('#custom_attrDiv').css('display', '')
+								}
+								
+								attrName.filter(item=>{
+									item.status = false
+								})
+								
+								$(this).parents('#attrMask').find('#chooseAttr option').text('请选择属性名称')
+								$(this).parents('#attrMask').find('#choose_ul input').prop('checked',false)
+								$(this).parents('#attrMask').find('#choose_attrDiv').empty()
+								$(this).parents('#attrMask').find('#custom_attrDiv input').val('')
+								$(this).parents('#attrMask').find('#custom_attrDiv>div:not(:first-child)').remove()
+							})
+
+							// 添加属性名称
+							$('body', parent.document).find('#custom_attrDiv .addA').off()
+							$('body', parent.document).find('#custom_attrDiv .addA').on('click', function() {
+								var val = $(this).prev().val().trim()
+								val = val.replace("//s/g", "");
+								if (val == '') {
+									var str = `<div id="alert" style="width: 150px;
+												height: 50px;
+												position: absolute;
+												top: 50%;
+												left: 50%;
+												transform: translate(-50%,-50%);
+												background-color: rgba(0, 0, 0, 0.6);
+												color: #fff;
+												text-align: center;
+												line-height: 50px;
+												z-index: 9999999999;">
+													<span>请输入属性名称</span>
+												</div>`
+									$('body', parent.document).append(str)
+									setTimeout(function() {
+										$('body', parent.document).find('#alert').remove()
+									},1500)
+									return
+								}
+								$(this).parents('.alert').empty()
+
+								for (let i = 0; i < $(this).parents('#attrMask').find('#custom_attrDiv .left_text').length; i++) {
+									let val1 = $(this).parents('#attrMask').find('#custom_attrDiv .left_text').eq(i).attr('value')
+									if (val == val1) {
+										var str = `<div id="alert" style="width: 150px;
+										height: 50px;
+										position: absolute;
+										top: 50%;
+										left: 50%;
+										transform: translate(-50%,-50%);
+										background-color: rgba(0, 0, 0, 0.6);
+										color: #fff;
+										text-align: center;
+										line-height: 50px;
+										z-index: 9999999999;">
+											<span>属性名称重复</span>
+										</div>`
+										$('body', parent.document).append(str)
+										setTimeout(function() {
+											$('body', parent.document).find('#alert').remove()
+										},1500)
+										return
+									}
+								}
+
+
+								var attr_list = [];
+
+								var str =
+									`<div class="custom_attr" style="padding-bottom: 10px;">
+										<span class="left_text" value="${val}" title="${val}">${val}：</span>
+										<input type="text" placeholder="请输入属性值" style="width: 212px;">
+										<a class="addBtn addB" href="javascript:;">添加属性值</a>
+										<a class="removeBtn" href="javascript:;">删除属性</a>
+									</div>
+									<div class="custom_attrVlue" style="padding: 0 70px 10px;">
+										
+									</div>`
+								$(this).parents('#attrMask').find('#custom_attrDiv').append(str)
+
+
+
+								$(this).prev().val('')
+
+								// 删除属性值
+								$(this).parents('#attrMask').find('.custom_attrVlue a').off()
+								$(this).parents('#attrMask').find('.custom_attrVlue a').on('click', function() {
+
+									$(this).remove()
+								})
+								// 添加属性值
+								$(this).parents('#attrMask').find('#custom_attrDiv .addB').off()
+								$(this).parents('#attrMask').find('#custom_attrDiv .addB').on('click', function() {
+									var val = $(this).prev().val().trim()
+									val = val.replace("//s/g", "");
+									if (val == '') {
+										var str = `<div id="alert" style="width: 150px;
+												height: 50px;
+												position: absolute;
+												top: 50%;
+												left: 50%;
+												transform: translate(-50%,-50%);
+												background-color: rgba(0, 0, 0, 0.6);
+												color: #fff;
+												text-align: center;
+												line-height: 50px;
+												z-index: 9999999999;">
+													<span>请输入属性值</span>
+												</div>`
+										$('body', parent.document).append(str)
+										setTimeout(function() {
+											$('body', parent.document).find('#alert').remove()
+										},1500)
+										return
+									}
+
+									for (let i = 0; i < $(this).parent().next().find('>a').length; i++) {
+										let val1 = $(this).parent().next().find('>a').eq(i).attr('value')
+										if (val == val1) {
+											var str = `<div id="alert" style="width: 150px;
+												height: 50px;
+												position: absolute;
+												top: 50%;
+												left: 50%;
+												transform: translate(-50%,-50%);
+												background-color: rgba(0, 0, 0, 0.6);
+												color: #fff;
+												text-align: center;
+												line-height: 50px;
+												z-index: 9999999999;">
+													<span>属性值重复</span>
+												</div>`
+											$('body', parent.document).append(str)
+											setTimeout(function() {
+												$('body', parent.document).find('#alert').remove()
+											},1500)
+											return
+										}
+									}
+
+									var str =
+										`<a href="javascript:;" value="${val}">
+											<span style="display: inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 300px;" title="${val}">${val}</span>
+											<img src="../bounced/img/gb.png">
+										</a>`
+									$(this).parent().next().append(str)
+									$(this).prev().val('')
+
+									// 删除属性值
+									$(this).parents('#attrMask').find('.custom_attrVlue a').off()
+									$(this).parents('#attrMask').find('.custom_attrVlue a').on('click', function() {
+										$(this).remove()
+									})
+								})
+
+								// 删除属性名称
+								$(this).parents('#attrMask').find('#custom_attrDiv .removeBtn').off()
+								$(this).parents('#attrMask').find('#custom_attrDiv .removeBtn').on('click', function() {
+
+									$(this).parent().next().remove()
+									$(this).parent().remove()
+								})
+							})
+
+							// 关闭弹窗
+							$('body', parent.document).find('.closeAttr').off()
+							$('body', parent.document).find('.closeAttr').on('click', function() {
+								console.log($(this).parents('.maskNew'));
+								$(this).parents('.maskNew').remove()
+							})
+
+							// 点击确定
+							$('body', parent.document).find('#confirmMask').off()
+							$('body', parent.document).find('#confirmMask').on('click', function() {
+
+								var index = $('body', parent.document).find('[name="attrStyle"]:checked').val()
+								let attrArr = []
+								let _Div;
+								if (index == 1) {
+									_Div = $('body', parent.document).find('#choose_attrDiv .custom_attr')
+								} else {
+									_Div = $('body', parent.document).find('#custom_attrDiv .custom_attr')
+								}
+								for (let i = 0; i < $(_Div).length; i++) {
+
+									for (let j = 0; j < $(_Div).eq(i).next().find('>a').length; j++) {
+										let name0 = $(_Div).eq(i).find('.left_text').attr('value')
+										let name1 = $(_Div).eq(i).next().find('>a').eq(j).attr('value')
+										// attrArr.push({
+										// 	label: name0 + ':' + name1,
+										// 	name: name0 + ':' + name1,
+										// 	name0: name0,
+										// 	name1: name1,
+										// 	isHave: false
+										// })
+										
+										attrArr.push({
+											label: name0 + ':' + name1,
+											name1: name0 + ':' + name1,
+											name0: name0,
+											name: name0,
+											sname: name1,
+											isHave: false
+										})
+
+									}
+
+								}
+								
+								if (attrArr.length == 0) {
+									var str = `<div id="alert" style="width: 150px;
+										height: 50px;
+										position: absolute;
+										top: 50%;
+										left: 50%;
+										transform: translate(-50%,-50%);
+										background-color: rgba(0, 0, 0, 0.6);
+										color: #fff;
+										text-align: center;
+										line-height: 50px;
+										z-index: 9999999999;">
+											<span>请输入属性及属性值</span>
+										</div>`
+									$('body', parent.document).append(str)
+									setTimeout(function() {
+										$('body', parent.document).find('#alert').remove()
+									},1500)
+									return
+								}
+								
+
+								// 修改的地方
+								// me.data1.filter(items => {
+
+								// 	attrArr.filter((item, index) => {
+								// 		if (items.name == item.name && items.ischeck) {
+								// 			item.isHave = true
+								// 		} else if (items.name == item.name) {
+								// 			items.ischeck = true
+
+								// 			attrArr[index] = items
+								// 		}
+								// 	})
+
+								// })
+
+								// me.data = me.data1.filter(item => !item.ischeck)
+
+								attrArr = attrArr.filter(item => !item.isHave)
+								if (attrArr.length == 0) {
+									var str = `<div id="alert" style="width: 150px;
+										height: 50px;
+										position: absolute;
+										top: 50%;
+										left: 50%;
+										transform: translate(-50%,-50%);
+										background-color: rgba(0, 0, 0, 0.6);
+										color: #fff;
+										text-align: center;
+										line-height: 50px;
+										z-index: 9999999999;">
+											<span>该属性值已添加</span>
+										</div>`
+									$('body', parent.document).append(str)
+									setTimeout(function() {
+										$('body', parent.document).find('#alert').remove()
+									},1500)
+									return
+								}
+								me.checkAll.push(...attrArr)
+
+								console.log(6666666666666666666);
+								console.log(me.checkAll);
+								
+								let filterAll = []
+								me.checkAll.filter(item=>{
+									if(filterAll.length == 0){
+										filterAll.push({
+											attrName: item.name0,
+											list: [item]
+										})
+									}else{
+										
+										let i = filterAll.findIndex(it=>{
+											return it.attrName == item.name0
+										})
+										
+										if(i<0){
+											filterAll.push({
+												attrName: item.name0,
+												list: [item]
+											})
+										}else{
+											filterAll[i].list.push(item)
+										}
+										
+									}
+								})
+								
+								let resultAll = []
+								filterAll.filter(item=>{
+									item.list.filter(it=>{
+										resultAll.push(it)
+									})
+								})
+								
+								me.checkAll = resultAll
+
+								$(this).parents('.maskNew').remove()
+							})
+						}
+					});
+				},
+				saveCheck() {
+					if(!this.qxFlag) {
+						console.log('hhhhhhhh');
+						this.page += 1
+					}
+					this.page += 1
+					if (this.checkAll1.length == 0) {
+						return
+					}
+					let checkAll = JSON.parse(JSON.stringify(this.checkAll1))
+					this.checkAll.push(...checkAll)
+					// console.log(this.checkAll);
+					this.checkAll1 = []
+
+					this.data1.filter(items => {
+						items.ischeck = false
+						this.checkAll.filter(item => {
+							if (items.name == item.name) {
+								items.ischeck = true
+							}
+						})
+					})
+
+					this.data = this.data1.filter(item => !item.ischeck)
+					
+					let filterAll = []
+					this.checkAll.filter(item=>{
+						if(filterAll.length == 0){
+							filterAll.push({
+								attrName: item.name0,
+								list: [item]
+							})
+						}else{
+							
+							let i = filterAll.findIndex(it=>{
+								return it.attrName == item.name0
+							})
+							
+							if(i<0){
+								filterAll.push({
+									attrName: item.name0,
+									list: [item]
+								})
+							}else{
+								filterAll[i].list.push(item)
+							}
+							
+						}
+					})
+					
+					let resultAll = []
+					filterAll.filter(item=>{
+						item.list.filter(it=>{
+							resultAll.push(it)
+						})
+					})
+					
+					this.checkAll = resultAll
+
+					// $('#checkQX').prop('checked', false)
+					
+					console.log(this.qxFlag);
+
+					console.log(this.page);
+					
+					this.qxFlag = false
+					
+					this.loadFlag = false
+					this.getSearch()
+					
+					console.log(9999999);
+					console.log(this.checkAll);
+
+				},
+				axios(callback) {
+					$.ajax({
+						cache: true,
+						type: "POST",
+						dataType: "json",
+						url: $('body', parent.document).find('#hhhh')[0].__vue__.goodsEditorBase,
+						data: {
+							api: 'saas.dic.getSkuList',
+							pageNo: 1,
+							storeId: $('body', parent.document).find('#hhhh')[0].__vue__.storeIds
+						},
+						async: true,
+						success: (data) => {
+							this.loadFlag = true
+							
+							if (data.data.list) {
+								data.data.list.filter(item => {
+									item.id1 = item.id + ':' + item.sid;
+									item.name1 = item.name + ':' + item.sname;
+									item.label = item.sname;
+								})
+
+								console.log(1234567);
+								console.log(data.data.list);
+								this.data1 = JSON.parse(JSON.stringify(data.data.list))
+
+								this.data1.filter(item => {
+									if (item.status) {
+										item.ischeck = true
+									}
+								})
+
+								console.log(this.data1);
+								this.data = this.data1.filter(item => !item.ischeck)
+								this.checkAll = this.data1.filter(item => item.ischeck)
+								callback && callback()
+							}
+						}
+					});
+				},
+				checkQX() {
+					this.qxFlag = !this.qxFlag
+					if (this.qxFlag) {
+						this.$refs.tree.setCheckedNodes(this.data)
+
+						this.checkAll1 = this.$refs.tree.getCheckedNodes()
+					} else {
+						this.$refs.tree.setCheckedNodes([])
+
+						this.checkAll1 = []
+					}
+				},
+				removeCheck() {
+					this.checkAll = []
+					this.checkAll1 = []
+
+					this.qxFlag = false
+					this.taggle = false
+					this.page = 1
+					this.loadFlag = false
+					this.getSearch()
+				},
+				delCheck(index) {
+					this.checkAll.splice(index, 1)
+					this.page = 1
+					this.loadFlag = false
+					this.getSearch()
+				},
+				filterNode(value, data) {
+					if (!value) return true;
+					return data.label.indexOf(value) !== -1;
+				},
+				getCheck(checked, checkAll) {
+					this.checkAll1 = JSON.parse(JSON.stringify(checkAll.checkedNodes))
+
+					// 全选按钮变选中状态
+					if (this.data.length == checkAll.checkedNodes.length && this.data.length != 0) {
+						// $('#checkQX').prop('checked', true)
+						this.qxFlag = true
+					} else {
+						// $('#checkQX').prop('checked', false)
+						this.qxFlag = false
+					}
+				}
+			},
+		};
+		var Ctor = Vue.extend(Main)
+		var app = new Ctor().$mount('#app')
+	</script>
+
+</html>

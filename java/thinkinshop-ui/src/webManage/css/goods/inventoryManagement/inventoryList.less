@@ -1,0 +1,154 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /deep/.btn-nav {
+    span {
+    height: 42px;
+    font-size: 16px;
+    border: none;
+    margin-right:1px
+    }
+  }
+
+  /deep/.Search{
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 10px;
+      margin: 16px 0;
+      .Search-condition{
+        display: flex;
+        align-items: center;
+        .query-input {
+          display: flex;
+          margin-right: 10px;
+          .Search-input{
+            width: 280px;
+            margin-right: 10px;
+          }
+        }
+      }
+  }
+
+  .menu-list {
+    // height: 593px;
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 4px;
+    /deep/.el-table__header {
+      thead {
+        tr {
+          th{
+            height: 61px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #414658;
+          }
+        }
+      }
+    }
+    /deep/.el-table__body {
+      tbody {
+        tr {
+          td{
+            height: 92px;
+            text-align: center;
+            font-size: 14px;
+            color: #414658;
+            font-weight: 400;
+          }
+        }
+      }
+      .cell {
+        .goods-info {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    /deep/.el-table{
+      .OP-button{
+        .OP-button-top{
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+
+  .dialog-block {
+    // 弹框样式
+    /deep/.el-dialog {
+      width: 540px;
+      height: 379px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      margin: 0 !important;
+      .el-dialog__header {
+        width: 100%;
+        height: 58px;
+        line-height: 58px;
+        font-size: 16px;
+        margin-left: 19px;
+        font-weight: bold;
+        border-bottom: 2px solid #E9ECEF;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 0 0 19px;
+        .el-dialog__headerbtn {
+          font-size: 18px;
+          top: 0 !important;
+        }
+        .el-dialog__title {
+          font-weight: normal;
+        }
+      }
+
+      .el-dialog__body {
+        width: 100%;
+        height: 249px;
+        padding: 0 !important;
+        .el-form {
+          width: 100%;
+          height: 249px;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          .el-input {
+            width: 300px;
+            height: 40px;
+          }
+        }
+      }
+
+      .el-dialog__footer {
+        width: 100%;
+        height: 72px;
+        border-top: 1px solid #E9ECEF;
+        .form-footer {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          .bgColor:hover {
+            background-color: #fff;
+            color: #2890ff;
+            border: 1px solid #2890ff;
+          }
+        }
+      }
+    }
+  }
+}

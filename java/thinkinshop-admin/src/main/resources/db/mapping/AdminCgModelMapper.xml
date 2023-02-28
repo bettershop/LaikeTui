@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.AdminCgModelMapper">
+    <sql id="getAdminCgInfoDynamicSQL">
+        <if test="G_Level != null">G_Level = #{G_Level}</if>
+        <if test="G_ParentID != null">G_ParentID = #{G_ParentID}</if>
+        <if test="name != null">G_CName = #{name}</if>
+        <if test="nameList != null">
+            <foreach collection="nameList" item="name" separator="," open="and G_CName in(" close=")">
+                #{name}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="getAdminCgInfoDynamic" resultType="Map" parameterType="Map">
+        SELECT * FROM admin_cg_group
+        <where>
+            <trim suffixOverrides="and">
+                <include refid="getAdminCgInfoDynamicSQL"/>
+            </trim>
+        </where>
+        <trim suffixOverrides="," prefix="order by">
+            <if test="GroupID_sort != null"> GroupID ${GroupID_sort}, </if>
+        </trim>
+        <if test="pageNo!=null and pageSize!=null"> limit #{pageNo},#{pageSize} </if>
+    </select>
+</mapper>

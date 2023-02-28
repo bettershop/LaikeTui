@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ProductListModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and store_id = #{store_id}</if>
+        <if test="recycle != null">and recycle = #{recycle}</if>
+        <if test="mch_status != null">and mch_status = #{mch_status}</if>
+        <if test="active != null">and active = #{active}</if>
+        <if test="status != null">and status = #{status}</if>
+        <if test="mch_id != null">and mch_id = #{mch_id}</if>
+        <if test="product_title != null">and product_title like concat('%',#{product_title},'%')</if>
+        <if test="classId != null">AND product_class like CONCAT('%-',#{classId},'-%')</if>
+        <if test="brandId != null">AND brand_id like CONCAT('%',#{brandId},'%')</if>
+        <if test="goodsIdList != null">
+            <foreach collection="goodsIdList" item="id" separator="," open="and id in (" close=")">
+                #{id,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="GoodsStatus != null">
+            <foreach collection="GoodsStatus" item="status" separator="," open="and STATUS in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_product_list
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="sort_sort!=null and sort_sort!=''">sort ${sort_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_product_list
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+    <select id="sumDynamic" parameterType="Map" resultType="BigDecimal">
+        select if(sum(volume) IS NULL, 0, sum(volume))
+        from lkt_product_list
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="getProductListSQL">
+        <if test="store_id != null">AND a.store_id = #{store_id}</if>
+        <if test="GoodsStatus != null">
+            <foreach collection="GoodsStatus" item="status" separator="," open="and a.status in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="mch_id != null">AND a.mch_id = #{mch_id}</if>
+        <if test="show_adr != null and show_adr!=''">AND a.show_adr LIKE CONCAT('%,', #{show_adr},',%')</if>
+        <if test="s_type != null">AND a.s_type LIKE CONCAT('%,', #{s_type},',%')</if>
+        <if test="cid != null">AND a.product_class LIKE CONCAT('%-', #{cid},'-%')</if>
+        <if test="minPrice != null">AND c.price <![CDATA[  >=  ]]> #{minPrice}</if>
+        <if test="maxPrice != null">AND c.price <![CDATA[  <=  ]]> #{maxPrice}</if>
+        <if test="keyword != null">AND (a.keyword LIKE CONCAT('%-', #{keyword},'-%') or a.product_title LIKE CONCAT('%',
+            #{keyword},'%'))
+        </if>
+        <if test="goodsName != null">AND a.product_title =#{goodsName}</if>
+        <if test="goodsNameLike != null">AND a.product_title LIKE CONCAT('%', #{goodsNameLike},'%')</if>
+        <if test="stockNumNot0 != null">AND c.num>0</if>
+        <if test="classId != null">AND a.product_class like CONCAT('%-',#{classId},'-%')</if>
+        <if test="brandId != null">AND a.brand_id like CONCAT('%',#{brandId},'%')</if>
+        <if test="classIdList != null">
+            <foreach collection="classIdList" item="classId" separator="or" open="and (" close=")">
+                a.product_class LIKE CONCAT('%,', #{classId}, ',%')
+            </foreach>
+        </if>
+        <if test="brandClassIdList != null">
+            <foreach collection="brandClassIdList" item="bid" separator="or" open="and (" close=")">
+                a.brand_id LIKE CONCAT('%,', #{bid}, ',%')
+            </foreach>
+        </if>
+        AND a.mch_status = 2
+        AND a.recycle = 0
+        AND a.active = 1
+        AND m.is_open = 1
+        AND c.recycle = 0
+    </sql>
+    <select id="countProductList" parameterType="Map" resultType="int">
+        SELECT count(distinct a.id) FROM lkt_product_list AS a
+        RIGHT JOIN lkt_configure AS c ON a.id = c.pid
+        LEFT JOIN lkt_mch AS m ON a.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductListSQL"/>
+            </trim>
+        </where>
+    </select>
+    <select id="getProductList" parameterType="Map" resultType="Map">
+        SELECT a.id, a.product_title, a.imgurl, a.status, a.volume, a.s_type,a.cover_map,
+        min(c.price) AS price, m.logo, m.name as mch_name
+        FROM lkt_product_list AS a
+        RIGHT JOIN lkt_configure AS c ON a.id = c.pid
+        LEFT JOIN lkt_mch AS m ON a.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductListSQL"/>
+            </trim>
+        </where>
+        GROUP BY c.pid
+        <trim prefix="order by" suffixOverrides=",">
+            <choose>
+                <when test="sort_sort!=null and sort_sort!=''">a.sort ${sort_sort}</when>
+                <when test="price_sort!=null and price_sort!=''">a.price ${price_sort}</when>
+                <when test="volume_sort!=null and volume_sort!=''">a.volume ${volume_sort}</when>
+                <otherwise>a.sort DESC</otherwise>
+            </choose>
+        </trim>
+        <if test="page != null and pageSize!=null">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getGoodsInfoDynamic" parameterType="Map" resultType="Map">
+        SELECT * FROM lkt_product_list WHERE
+        store_id = #{store_id}
+        AND recycle = 0
+        AND active = 1
+        <if test="pid != null and pid!=''">AND id = #{pid}</if>
+        <if test="status != null and status!=''">AND status = #{status}</if>
+        <if test="mch_status == null and mch_status=''">AND mch_status =#{mch_status}</if>
+        <if test="mch_id != null and mch_id!=''">AND mch_id = #{mch_id}</if>
+        <if test="product_title != null and product_title!=''">AND product_title like CONCAT('%',#{product_title},'%')
+        </if>
+        <if test="GoodsStatus != null">
+            <foreach collection="GoodsStatus" item="status" separator="," open="and STATUS in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+            <if test="sort_sort!=null and sort_sort!=''">sort ${sort_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">
+            LIMIT #{pageStart},#{pageEnd}
+        </if>
+    </select>
+
+    <select id="getHotGoods" parameterType="Map" resultType="com.laiketui.domain.product.ProductListModel">
+        SELECT
+        *
+        FROM
+        lkt_product_list
+        WHERE
+        store_id = #{store_id}
+        AND recycle = 0
+        <if test="active == null or active=''">
+            AND active = 1
+        </if>
+        <if test="mch_status != null and mch_status!=''">
+            AND mch_status =#{mch_status}
+        </if>
+        <if test="keyword != null and keyword!=''">
+            AND keyword like CONCAT('%', #{keyword},'%')
+        </if>
+        <if test="mch_id != null and mch_id!=''">
+            AND mch_id = #{mch_id}
+        </if>
+        <if test="product_title != null and product_title!=''">
+            AND product_title like CONCAT('%', #{product_title},'%')
+        </if>
+        AND num > 0
+        <foreach collection="GoodsStatus" item="status" separator="," open="and STATUS in(" close=")">
+            #{status,jdbcType=INTEGER}
+        </foreach>
+        ORDER BY
+        search_num DESC,
+        add_date DESC
+        <if test="page != null and pageSize!=null">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+
+    <select id="countProductListByTotal" parameterType="Map" resultType="Map">
+        SELECT sum(a.volume) volumeNum,
+        count(c.pid) onSaleNum,
+        (select count(b.id) from lkt_user_collection b where b.store_id = a.store_id AND b.mch_id = a.mch_id)
+        collectionNum
+        FROM lkt_product_list a
+        left join lkt_configure c on c.pid = a.id AND c.recycle = 0
+        WHERE a.store_id = #{store_id}
+        AND a.mch_id = #{mch_id}
+        <foreach collection="GoodsStatus" item="status" separator="," open="and a.STATUS in(" close=")">
+            #{status,jdbcType=INTEGER}
+        </foreach>
+        AND a.mch_status = 2
+        AND a.recycle = 0
+        AND a.active = 1
+    </select>
+
+    <sql id="getProductListDynamicSQL">a.store_id = #{store_id}
+        AND a.recycle = 0
+        AND a.mch_status = 2
+        <if test="is_open!=null">AND m.is_open = #{is_open}</if>
+        <choose>
+            <when test="active!=null">AND a.active = #{active}</when>
+            <otherwise>AND a.active = 1</otherwise>
+        </choose>
+        <if test="pid != null and pid!=''">AND a.id = #{pid}</if>
+        <if test="attrId != null and attrId!=''">AND c.id =#{attrId}</if>
+        <if test="cid != null and cid!=''">AND a.product_class LIKE CONCAT('%', #{cid},'%')</if>
+        <if test="mch_id != null and mch_id!=''">AND a.mch_id = #{mch_id}</if>
+        <if test="shop_id != null ">AND a.mch_id = #{shop_id}</if>
+        <if test="stockNum != null and stockNum!=''">AND a.num <![CDATA[ >  ]]>  0</if>
+        <if test="bargain != null and bargain!=''">AND not EXISTS (select x.id from lkt_bargain_goods x where
+            x.goods_id=a.id)
+        </if>
+        <if test="keyword != null and keyword!=''">AND (
+            a.product_title LIKE CONCAT('%', #{keyword},'%')
+            OR a.keyword LIKE CONCAT('%', #{keyword},'%')
+            )
+        </if>
+        <if test="show_adr!=null and show_adr!=''">AND a.show_adr LIKE CONCAT('%,', #{show_adr},',%')</if>
+        <if test="product_title!=null and product_title!=''">AND a.product_title LIKE CONCAT('%',
+            #{product_title},'%')
+        </if>
+        <if test="classLeve!=null and classLeve!=''">AND a.product_class LIKE CONCAT('%-', #{classLeve},'-%')</if>
+        <if test="likeClassIdList!=null">
+            <foreach collection="likeClassIdList" item="id" separator=" or " open="and (" close=")">
+                a.product_class LIKE CONCAT('%-', #{id},'-%')
+            </foreach>
+        </if>
+        <if test="brandIdList!=null">
+            <foreach collection="brandIdList" item="id" separator="," open="and a.brand_id in(" close=")">
+                #{id,jdbcType=INTEGER}
+            </foreach>
+        </if>
+
+        <choose>
+            <when test="GoodsStatus!=null">
+                <foreach collection="GoodsStatus" item="status" separator="," open="and a.STATUS in(" close=")">
+                    #{status,jdbcType=INTEGER}
+                </foreach>
+            </when>
+            <otherwise>
+                <choose>
+                    <when test="goodsStaus!=null">AND a.status = #{goodsStaus}</when>
+                    <otherwise>AND a.status = 2</otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+        <if test="notInGoodsId!=null">
+            <foreach collection="notInGoodsId" item="goodsId" separator="," open="and a.id not in(" close=")">
+                #{goodsId,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="is_zixuan != null">AND a.is_zixuan = #{is_zixuan}</if>
+        <if test="s_type != null and s_type!=''">AND a.s_type like CONCAT('%,', #{s_type},',%')</if>
+        <if test="brand_id != null and brand_id!=''">AND a.brand_id = #{brand_id}</if>
+        <if test="min_price != null and min_price!=''">AND c.price <![CDATA[  >=  ]]> #{min_price}</if>
+        <if test="max_price != null and max_price!=''">AND c.price <![CDATA[  <=  ]]> #{max_price}</if>
+    </sql>
+
+    <select id="getProductListDynamic" parameterType="Map" resultType="Map">
+        SELECT a.id, a.mch_id, a.product_title, a.keyword, a.subtitle, a.product_class, a.brand_id, a.imgurl, a.status,
+        a.freight, IF(a.volume <![CDATA[ < ]]> 0, 0, a.volume) volume, a.s_type, c.id AS cid, c.num, c.pid, c.yprice,
+        c.img, c.name, c.size,c.id AS sizeid, c.attribute, c.color,m.id mchId,m.logo,m.is_open,m.name as mch_name, min(c.price) AS
+        price FROM lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid LEFT JOIN lkt_mch AS m ON
+        a.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductListDynamicSQL"/>
+            </trim>
+        </where>
+        GROUP BY
+        c.pid
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="sortCriteria_sort != null">${sortCriteria_sort} ${sortCriteria_sort_type}</if>
+            <if test="else_sort != null and else_sort!=''">a.sort ${else_sort},a.search_num ${else_sort},a.add_date
+                ${else_sort}
+            </if>
+            <if test="sort_sort != null and sort_sort!=''">a.sort ${sort_sort},</if>
+            <if test="volume_sort != null and volume_sort!=''">a.volume ${volume_sort},</if>
+            <if test="price_sort != null and price_sort!=''">c.price ${price_sort},</if>
+            <if test="commentNum_sort != null and commentNum_sort!=''">a.comment_num ${commentNum_sort},</if>
+            <if test="addDate_sort != null and addDate_sort!=''">a.add_date ${addDate_sort},</if>
+            <if test="class_sort_sort != null and class_sort_sort!=''">a.class_sort ${class_sort_sort},</if>
+            <if test="upper_shelf_time_sort != null and upper_shelf_time_sort!=''">a.upper_shelf_time
+                ${upper_shelf_time_sort},
+            </if>
+            <if test="status_sort != null and status_sort!=''">a.status ${status_sort},</if>
+        </trim>
+        <if test="pageNo!=null and pageSize!=null">
+            limit #{pageNo},#{pageSize}
+        </if>
+    </select>
+    <select id="countProductListDynamic" parameterType="Map" resultType="int">
+        SELECT count(distinct a.id) FROM lkt_product_list AS a RIGHT JOIN lkt_configure AS c ON a.id = c.pid LEFT JOIN
+        lkt_mch AS m
+        ON a.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getProductListDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="getProductListLeftJoinMchDynamicSQL">
+        <where>
+            <trim prefixOverrides="and">
+                AND a.store_id = #{store_id}
+                AND a.recycle = 0
+                <if test="goodsId != null">AND a.id = #{goodsId}</if>
+                <if test="stockNumGt != null">AND a.num > #{stockNumGt}</if>
+                <if test="mch_id != null">AND a.mch_id = #{mch_id}</if>
+                <if test="is_zixuan != null">AND a.is_zixuan = #{is_zixuan}</if>
+                <if test="commodity_type != null">AND a.commodity_type = #{commodity_type}</if>
+                <if test="mch_status != null">
+                    <choose>
+                        <when test="mch_status == -1">AND a.mch_status != 1</when>
+                        <when test="mch_status == -2">AND a.mch_status != 2</when>
+                        <otherwise>AND a.mch_status = #{mch_status}</otherwise>
+                    </choose>
+                </if>
+                <if test="statusList != null">
+                    <foreach collection="statusList" item="status" separator="," open="and a.status in (" close=")">
+                        #{status,jdbcType=INTEGER}
+                    </foreach>
+                </if>
+                <if test="goodsStatus != null">AND a.status = #{goodsStatus}</if>
+                <if test="status != null">
+                    <choose>
+                        <when test="status == -1">AND a.mch_status != 1</when>
+                        <otherwise>AND a.mch_status = #{status}</otherwise>
+                    </choose>
+                </if>
+                <if test="productClass != null and productClass!=''">AND a.product_class=#{productClass}</if>
+                <if test="product_class != null and product_class!=''">AND a.product_class like CONCAT('%-',
+                    #{product_class},'-%')
+                </if>
+                <if test="s_type != null and s_type!=''">AND a.s_type like CONCAT('%,', #{s_type},',%')</if>
+                <if test="brand_id != null">AND a.brand_id = #{brand_id}</if>
+                <if test="active != null">AND a.active =#{active}</if>
+                <if test="product_title != null and product_title!=''">AND a.product_title like CONCAT('%',
+                    #{product_title},'%')
+                </if>
+                <if test="keyName != null and keyName!=''">AND (a.product_title like CONCAT('%', #{keyName},'%') or
+                    a.id=#{keyName})
+                </if>
+                <if test="mchNameOrGoodsName != null">AND(a.product_title like CONCAT('%', #{mchNameOrGoodsName},'%') or
+                    b.name like CONCAT('%', #{mchNameOrGoodsName},'%'))
+                </if>
+                <if test="mch_name != null and mch_name!=''">AND b.name like CONCAT('%', #{mch_name},'%')</if>
+                <if test="show_adr != null and show_adr!=''">AND a.show_adr like CONCAT('%,', #{show_adr},',%')</if>
+                <if test="productTitleList != null">
+                    <foreach collection="productTitleList" item="title" separator="or" open="and (" close=")">
+                        a.product_title LIKE CONCAT('%,', #{title}, ',%')
+                    </foreach>
+                </if>
+                <if test="not_label_id != null">and not EXISTS (select x.id from lkt_seconds_activity x where
+                     x.label_id=#{not_label_id} and a.id=x.goodsId and x.is_delete=0)
+                </if>
+                <if test="not_exists_integral != null">and not EXISTS(select id from lkt_integral_goods x where
+                    x.goods_id=a.id and x.is_delete=0)
+                </if>
+            </trim>
+        </where>
+    </sql>
+    <select id="getProductListLeftJoinMchCountDynamic" parameterType="Map" resultType="int">
+        SELECT count(1)
+        FROM lkt_product_list AS a
+        LEFT JOIN lkt_mch AS b ON a.mch_id = b.id
+        <include refid="getProductListLeftJoinMchDynamicSQL"/>
+    </select>
+
+    <select id="getProductListLeftJoinMchDynamic" parameterType="Map" resultType="Map">
+        SELECT a.*,b.name FROM lkt_product_list AS a
+        LEFT JOIN lkt_mch AS b ON a.mch_id = b.id
+        <include refid="getProductListLeftJoinMchDynamicSQL"/>
+        <trim prefix=" ORDER BY " suffixOverrides=",">
+            <if test="sort_sort != null">a.sort ${sort_sort},</if>
+            <if test="diy_sort != null">a.sort desc ,a.upper_shelf_time desc,a.add_date desc,</if>
+        </trim>
+        <if test="page != null and pageSize!=null">LIMIT #{page},#{pageSize}</if>
+    </select>
+
+    <sql id="getProductListJoinConfigureDynamicSQL">
+        <trim prefixOverrides="and">
+            and a.mch_status = 2 and a.recycle = 0
+            <choose>
+                <when test="status==null">and a.status=2</when>
+                <otherwise>and a.status=#{status}</otherwise>
+            </choose>
+            <if test="store_id != null">and a.store_id = #{store_id}</if>
+            <if test="is_distribution != null">and a.is_distribution = #{is_distribution}</if>
+            <if test="product_class != null and product_class!=''">AND a.product_class like CONCAT('%-',
+                #{product_class},'-%')
+            </if>
+            <if test="brand_id != null">AND a.brand_id like CONCAT('%', #{brand_id},'%')</if>
+            <if test="product_title!=null and product_title!=''">AND a.product_title LIKE CONCAT('%',
+                #{product_title},'%')
+            </if>
+            <if test="recycle != null">AND a.recycle = #{recycle}</if>
+            <if test="pid != null">AND a.id = #{pid}</if>
+            <if test="mch_id != null">AND a.mch_id = #{mch_id}</if>
+            <if test="attr_id != null">AND c.id = #{attr_id}</if>
+            <if test="attributeIdList != null">
+                <foreach collection="attributeIdList" item="aid" separator="," open="and c.id in (" close=")">
+                    #{aid,jdbcType=INTEGER}
+                </foreach>
+            </if>
+            <if test="attrIdNotList != null">
+                <foreach collection="attrIdNotList" item="attrId" separator="," open="and c.id not in (" close=")">
+                    #{attrId,jdbcType=INTEGER}
+                </foreach>
+            </if>
+        </trim>
+    </sql>
+
+    <select id="getProductListJoinConfigureDynamic" parameterType="Map" resultType="Map">
+        SELECT a.*,
+        c.price,
+        c.yprice,
+        c.num stockNum,
+        c.min_inventory attrMinInventory,
+        c.img,
+        c.unit,
+        c.attribute,
+        c.costprice,
+        c.id attrId
+        FROM lkt_product_list AS a
+        LEFT JOIN lkt_configure AS c ON a.id = c.pid and c.recycle=0
+        <where>
+            <include refid="getProductListJoinConfigureDynamicSQL"/>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="attrPrice_sort!=null">c.price ${attrPrice_sort},</if>
+            <if test="add_date_sort!=null">a.add_date ${add_date_sort},</if>
+            <if test="status_sort!=null">a.status ${status_sort},</if>
+            <if test="sort_sort!=null">a.status ${sort_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd!=null">LIMIT #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countProductListJoinConfigureDynamic" parameterType="Map" resultType="int">
+        SELECT count(1)
+        FROM lkt_product_list AS a
+        LEFT JOIN lkt_configure AS c ON a.id = c.pid and c.recycle=0
+        <where>
+            <include refid="getProductListJoinConfigureDynamicSQL"/>
+        </where>
+    </select>
+
+
+    <select id="getProductListJoinFreightDynamic" parameterType="Map" resultType="Map">
+        SELECT f.NAME,
+               f.freight,
+               p.mch_id
+        FROM lkt_product_list AS p
+                 LEFT JOIN lkt_freight AS f ON p.freight = f.id
+        WHERE p.id = #{p_id}
+    </select>
+
+    <select id="getProductListJoinOrderDetailsDynamic" parameterType="Map" resultType="Map">
+        select a.*
+        from lkt_product_list as a
+        left join lkt_order_details as b on a.id = b.p_id
+        where a.store_id = #{store_id}
+        and a.recycle = 0
+        <if test="mch_status != null and mch_status!=''">
+            AND a.mch_status = #{mch_status}
+        </if>
+        <if test="rstatusList != null">
+            <foreach collection="rstatusList" item="status" separator="," open="and b.r_status in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="goodsId != null">
+            and a.id = #{goodsId}
+        </if>
+    </select>
+
+    <select id="countProdcuctListDynamic" parameterType="Map" resultType="int">
+        SELECT
+        count(1)
+        FROM
+        lkt_product_list AS a
+        RIGHT JOIN lkt_configure AS c ON a.id = c.pid
+        LEFT JOIN lkt_mch AS m ON a.mch_id = m.id
+        WHERE
+        a.store_id = #{store_id}
+        AND a.recycle = 0
+        AND a.active = 1
+        AND a.mch_status = 2
+        AND m.is_open = 1
+        <if test="keyword != null and keyword!=''">
+            AND (
+            a.product_title LIKE CONCAT('%', #{keyword},'%')
+            OR a.keyword LIKE CONCAT('%', #{keyword},'%')
+            )
+        </if>
+        <if test="show_adr!=null and show_adr!=''">
+            AND a.show_adr LIKE CONCAT('%,', #{show_adr},',%')
+        </if>
+        <foreach collection="GoodsStatus" item="status" separator="," open="and a.STATUS in(" close=")">
+            #{status,jdbcType=INTEGER}
+        </foreach>
+        <if test="shop_id != null and shop_id!=''">
+            AND a.mch_id = #{shop_id}
+        </if>
+        <if test="s_type != null and s_type!=''">
+            AND a.s_type like CONCAT('%,', #{s_type},',%')
+        </if>
+        <if test="brand_id != null and brand_id!=''">
+            AND a.brand_id = #{brand_id}
+        </if>
+        <if test="min_price != null and min_price!=''">
+            AND c.price <![CDATA[  >=  ]]> #{min_price}
+        </if>
+        <if test="max_price != null and max_price!=''">
+            AND c.price <![CDATA[  <=  ]]> #{max_price}
+        </if>
+        GROUP BY
+        c.pid
+        order by
+        <trim suffixOverrides=",">
+            <if test="else_sort != null and else_sort!=''">
+                a.sort ${else_sort},a.search_num ${else_sort},a.add_date ${else_sort}
+            </if>
+            <if test="sort_sort != null and sort_sort!=''">
+                a.sort ${sort_sort},
+            </if>
+            <if test="volume_sort != null and volume_sort!=''">
+                a.volume ${volume_sort},
+            </if>
+            <if test="price_sort != null and price_sort!=''">
+                c.price ${price_sort},
+            </if>
+            <if test="commentNum_sort != null and commentNum_sort!=''">
+                a.comment_num ${commentNum_sort},
+            </if>
+        </trim>
+        <if test="pageNo!=null and pageSize!=null">
+            limit #{pageNo},#{pageSize}
+        </if>
+    </select>
+</mapper>

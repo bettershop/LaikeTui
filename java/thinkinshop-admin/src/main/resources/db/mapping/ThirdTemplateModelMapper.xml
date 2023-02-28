@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ThirdTemplateModelMapper">
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select *
+        from lkt_third_template
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and id =#{id}</if>
+                <if test="store_id != null">and store_id = #{store_id}</if>
+                <if test="trade_data != null">and trade_data =#{trade_data}</if>
+                <if test="title != null">and title like concat('%',#{title},'%')</if>
+                <if test="is_use != null">and is_use = #{is_use}</if>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="id_sort!=null and id_sort!=''">id ${id_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_third_template
+        <where>
+            <trim prefixOverrides="and">
+                <if test="id != null">and id =#{id}</if>
+                <if test="store_id != null">and store_id = #{store_id}</if>
+                <if test="trade_data != null">and trade_data =#{trade_data}</if>
+                <if test="title != null">and title like concat('%',#{title},'%')</if>
+                <if test="is_use != null">and is_use = #{is_use}</if>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

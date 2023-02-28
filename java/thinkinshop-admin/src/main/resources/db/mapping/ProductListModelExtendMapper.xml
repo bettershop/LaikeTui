@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ProductListModelExtendMapper">
+    <insert id="saveGoods" parameterType="com.laiketui.domain.product.ProductListModel" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO lkt_product_list
+        (store_id, product_title, subtitle, scan, label, product_number, sort, product_class, brand_id, keyword, weight,
+         imgurl, content, richList, num, min_inventory, s_type, add_date, is_distribution, distributor_id, freight,
+         active, mch_id, mch_status, show_adr, initial, publisher, cover_map)
+        VALUES (#{store_id}, #{product_title}, #{subtitle}, #{scan}, #{label}, #{product_number}, #{sort},
+                #{product_class}, #{brand_id}, #{keyword}, #{weight}, #{imgurl}, #{content}, #{richList}, #{num},
+                #{min_inventory}, #{s_type}, #{add_date}, #{is_distribution}, #{distributor_id}, #{freight}, #{active},
+                #{mch_id}, #{mch_status}, #{show_adr}, #{initial}, #{publisher}, #{cover_map})
+    </insert>
+</mapper>

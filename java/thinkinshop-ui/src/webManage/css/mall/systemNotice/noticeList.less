@@ -1,0 +1,43 @@
+.container{
+  width: 100%;
+  height: 737px;
+  background-color: #FFFFFF;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  // margin: 20px;
+  header {
+    height: 58px;
+    box-sizing: border-box;
+    padding: 19px;
+    border-bottom: 1px solid #E9ECEF;
+    font-size: 16px;
+    color: #414658;
+  }
+  .list {
+    padding: 0 60px;
+    overflow: auto;
+    // height: 980px;
+    .item {
+      width: 100%;
+      height: 75px;
+      padding: 10px 0;
+      border-bottom: 1px solid #E9ECEF;
+      position: relative;
+      cursor: pointer;
+      .title {
+        color: #020202;
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 5px;
+        display: inline-block;
+        position: relative;
+      }
+      .date {
+        color: #97A0B4;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+}

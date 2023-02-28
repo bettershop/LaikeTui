@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ActivityProModelMapper">
+
+    <sql id="selectGoodsDynamicSQL">
+        <if test="activityId != null">AND pro.activity_id = #{activityId} and pro.p_id=a.id</if>
+        <if test="store_id != null">AND a.store_id = #{store_id}</if>
+        <if test="cid != null">AND a.product_class LIKE CONCAT('%-', #{cid},'-%')</if>
+        <if test="goodsIdList != null">
+            <foreach collection="goodsIdList" item="id" separator="," open="and pro.p_id in(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        AND a.mch_status = 2
+        AND a.recycle = 0
+        AND a.active = 1
+        AND c.recycle = 0
+    </sql>
+
+    <select id="selectGoodsDynamic" parameterType="Map" resultType="Map">
+        SELECT
+        pro.*,
+        a.product_title,
+        a.imgurl,
+        c.num,
+        min(c.price) AS price
+        FROM
+        lkt_activity_pro pro
+        inner JOIN lkt_product_list AS a on pro.p_id=a.id
+        left JOIN lkt_configure AS c ON a.id = c.pid
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectGoodsDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="group by" suffixOverrides=",">
+            <choose>
+                <when test="group_goodsId!=null">c.pid,</when>
+            </choose>
+        </trim>
+        <trim prefix="order by" suffixOverrides=",">
+            <choose>
+                <when test="sort_sort!=null and sort_sort!=''">pro.sort ${sort_sort}</when>
+                <otherwise>a.sort DESC</otherwise>
+            </choose>
+        </trim>
+        <if test="page != null and pageSize!=null">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+
+    <select id="countGoodsDynamic" parameterType="Map" resultType="int">
+        SELECT count(distinct a.id)
+        FROM
+        lkt_activity_pro pro
+        inner JOIN lkt_product_list AS a on pro.p_id=a.id
+        left JOIN lkt_configure AS c ON a.id = c.pid
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectGoodsDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

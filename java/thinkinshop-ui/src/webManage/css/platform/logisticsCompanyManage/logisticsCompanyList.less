@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /deep/.jump-list {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      .laiketui-add:before {
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      button {
+        width: 150px;
+        height: 40px;
+        background: #28B6FF;
+        border-radius: 4px;
+        padding: 0;
+        border: none;
+        &:hover {
+          opacity: 0.8;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+
+      .fontColor {
+        color: #6a7076;
+        background-color: #fff !important;
+        border-radius: 4px;
+      }
+  }
+
+  .merchants-list {
+    flex: 1;
+    /deep/.el-table{
+      .OP-button{
+        .OP-button-top{
+          margin-bottom: 8px;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

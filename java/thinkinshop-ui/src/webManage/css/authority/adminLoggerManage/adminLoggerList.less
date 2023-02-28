@@ -1,0 +1,85 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /deep/.Search{
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 16px;
+      .Search-condition{
+        display: flex;
+        align-items: center;
+        .query-input {
+          display: flex;
+          margin-right: 10px;
+          .select-date {
+            margin-left: 10px;
+          }
+          .Search-input{
+            width: 280px;
+            margin-right: 10px;
+            .el-input__inner {
+                height: 40px;
+              line-height: 40px;
+              border: 1px solid #d5dbe8;
+            }
+            .el-input__inner:hover {
+              border: 1px solid #b2bcd4;
+            }
+            .el-input__inner:focus {
+              border-color: #409eff;
+            }
+            .el-input__inner::-webkit-input-placeholder {
+              color: #97a0b4;
+            }
+          }
+        }
+  
+        .btn-list {
+          .bgColor {
+            background-color: #2890ff;
+          }
+          .bgColor:hover {
+            background-color: #70aff3;
+          }
+          .fontColor {
+            color: #6a7076;
+            border: 1px solid #d5dbe8;
+          }
+          .fontColor:hover {
+            color: #2890FF;
+            border: 1px solid #2890FF;
+            background-color: #fff;
+          }
+          .export {
+            position: absolute;
+            right: 30px;
+          }
+        }
+      }
+      
+  }
+
+  /deep/.jump-list {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      .fontColor {
+        width: 120px;
+        height: 42px;
+        color: #6a7076;
+        background-color: #fff;
+        border-radius: 4px;
+      }
+  }
+
+  .merchants-list {
+    width: 100%;
+    // height: 671px;
+    flex: 1;
+  }
+    
+}

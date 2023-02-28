@@ -1,0 +1,199 @@
+//tbl页
+
+.container {
+  height: 737px;
+}
+
+.m-table {
+  height: 623px;
+}
+
+.el-main {
+  padding: 0px !important;
+  height: 100%;
+}
+
+//分割
+.hr {
+  height: 16px;
+  min-height: 16px;
+}
+
+//主体
+.card {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  //标题
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 20px;
+    border-bottom: 1px solid #E9ECEF;
+    font-size: 16px;
+    font-weight: 400;
+    color: #414658;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    position: sticky;
+    top: 0;
+    background-color: #FFFFFF;
+    z-index: 1000;
+  }
+  img{
+    width: 50px;
+    height: 50px;
+  }
+
+}
+
+/deep/.btn-nav {
+  span {
+    width: 112px;
+    height: 42px;
+    font-size: 16px;
+    border: none;
+  }
+  .el-radio-group {
+    .el-radio-button {
+      &:not(:last-child) {
+        span {
+          border-right: 1px solid #d5dbe8;
+        }
+      }
+    }
+  }
+      
+}
+
+/deep/.jump-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  .laiketui-add:before {
+      font-size: 14px;
+      margin-right: 8px;
+  }
+  .laiketui-shangjia:before {
+      font-size: 14px;
+      margin-right: 8px;
+      position: relative;
+      top: 1px;
+  }
+  button {
+      width: 120px;
+      height: 40px;
+      background: #28B6FF;
+      border-radius: 4px;
+      padding: 0;
+      border: none;
+  &:hover {
+      opacity: 0.8;
+  }
+  span {
+      font-size: 14px;
+  }
+  }
+  
+  .fontColor {
+      width: 120px;
+      height: 42px;
+      color: #6a7076;
+      background-color: #fff;
+      border-radius: 4px;
+  }
+
+  .el-icon-printer:before  {
+      margin-right: 8px;
+  }
+}
+
+.core-set {
+  height: 679px;
+  background-color: #fff;
+  padding: 40px 0 0 40px;
+  display: flex;
+  justify-content: center;
+  .el-input {
+    width: 400px;
+    height: 40px;
+    input {
+      width: 400px;
+      height: 40px;
+    }
+  }
+  .left {
+    margin-left: 10px;
+  }
+}
+
+// .footerBox {
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-end;
+//   padding: 0 20px;
+//   height: 72px;
+//   background: #FFFFFF;
+//   border-top: 1px solid #E9ECEF;
+//   box-sizing: border-box;
+// }
+
+.footer-button {
+  position: fixed;
+  right: 0;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  border-top: 1px solid #E9ECEF;
+  background: #FFFFFF;
+  width: 300%;
+  z-index: 10;
+  button {
+  width: 70px;
+  height: 40px;
+  }
+}
+
+.merchants-list {
+  height: 623px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  /deep/.el-table__header {
+    thead {
+      tr {
+        th{
+          height: 61px;
+          text-align: center;
+          font-size: 14px;
+          font-weight: bold;
+          color: #414658;
+        }
+      }
+    }
+  }
+  /deep/.el-table__body {
+    tbody {
+      tr {
+        td{
+          height: 92px;
+          text-align: center;
+          font-size: 14px;
+          color: #414658;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  /deep/.el-table{
+    .OP-button{
+      .OP-button-top{
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

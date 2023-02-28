@@ -1,0 +1,116 @@
+.container {
+  width: 100%;
+  height: 737px;
+  background-color: #fff;
+  padding: 60px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
+  /deep/.el-form {
+    .el-form-item__label {
+      font-weight: normal;
+    }
+    .copyright, .record{
+      .el-form-item__content {
+        .el-input {
+          width: 580px;
+          height: 40px;
+          input {
+            width: 580px;
+            height: 40px;
+          }
+        }
+      }
+    }
+    .linkBox{
+      display: flex;
+      margin-top: 10px;
+    }
+
+    .link {
+      .el-form-item__content {
+        display: flex;
+        flex-direction: column;
+        .link-name {
+          width: 180px;
+          height: 40px;
+          input {
+            width: 180px;
+            height: 40px;
+          }
+        }
+        .link-local {
+          width: 390px;
+          height: 40px;
+          margin-left: 10px;
+          input {
+            width: 390px;
+            height: 40px;
+          }
+        }
+
+        .add-reduction {
+          i {
+            font-size: 20px;
+            margin-left: 10px;
+          }
+          .el-icon-circle-plus-outline {
+            color: #2890FF;
+          }
+          span {
+            margin-left: 14px;
+            position: relative;
+            bottom: 3px;
+            color: #97A0B4;
+          }
+        }
+      }
+    }
+
+    .add-link {
+      .el-form-item__content {
+        display: flex;
+        flex-direction: column;
+
+        .add-info {
+          display: flex;
+          &:not(:last-child) {
+            margin-bottom: 20px;
+          }
+          .link-names {
+            width: 180px;
+            height: 40px;
+            input {
+              width: 180px;
+              height: 40px;
+            }
+          }
+          .link-locals {
+            width: 390px;
+            height: 40px;
+            margin-left: 10px;
+            input {
+              width: 390px;
+              height: 40px;
+            }
+          }
+
+          .add-reduction {
+            i {
+              font-size: 20px;
+              margin-left: 10px;
+            }
+            .el-icon-circle-plus-outline {
+              color: #2890FF;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+}

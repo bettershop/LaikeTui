@@ -1,0 +1,113 @@
+.l-upload {
+  display: flex;
+  .img-item {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+    position: relative;
+    //border-radius: 6px;
+    overflow: hidden;
+    img {
+      width: 80px;
+      height: 80px;
+    }
+    .img-main{
+      line-height: 22px;
+      position: absolute;
+      background: #2890ff;
+      z-index: 9;
+      width: 40px;
+      font-size: 11px;
+      height: 22px;
+      bottom: 0;
+      left: 0;
+      color: #fff;
+      text-align: center;
+    }
+    .actions {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      cursor: default;
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      font-size: 20px;
+      background-color: rgba(0,0,0,.5);
+      transition: opacity .3s;
+      display: flex;
+      align-items: center;
+      // justify-content: center;
+      flex-direction:column;
+      // justify-content: space-between;
+      & .el-icon-delete{
+        line-height: 80px;
+      }
+      & .set-main{
+        margin-top: -20px;
+      }
+      &:hover {
+        opacity: 1;
+        .el-icon-delete:hover {
+          cursor: pointer;
+        }
+      }
+      .set-main{
+        line-height: 22px;
+        font-size: 15px;
+        background: #4f4e57;
+        z-index: 99999999;
+        width: 100%;
+        height: 22px;
+        cursor: pointer;
+      }
+    }
+  }
+  .upload {
+    //border-radius: 6px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #c0ccda;
+    box-sizing: border-box;
+    margin-right: 15px;
+
+    &:hover {
+      border: 1px dashed #409eef;
+      cursor: pointer;
+    }
+    .el-icon-plus {
+      color: #8c939d;
+      font-size: 20px;
+    }
+  }
+  .desc {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #97A0B4;
+  }
+
+  // .dialog {
+  //   position: fixed;
+  //   top: 50%;
+  //   left: 50%;
+  //   transform: translate(-50%,-50%);
+  //   z-index: 9999999999 !important;
+  //   .el-dialog__wrapper {
+  //     position: static !important;
+  //     z-index: 9999999999 !important;
+  //   }
+  // }
+}
+
+.hideUploadBtn {
+  .el-upload {
+    display: none; /* 上传按钮隐藏 */
+  }
+}

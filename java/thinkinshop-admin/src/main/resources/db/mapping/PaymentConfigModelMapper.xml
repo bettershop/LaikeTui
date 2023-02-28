@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.PaymentConfigModelMapper">
+
+    <select id="getPaymentConfigDynamic" parameterType="Map" resultType="Map">
+        SELECT
+        c.status statusSwitch,
+        p.status,
+        p.class_name
+        FROM
+        lkt_payment_config c
+        LEFT JOIN lkt_payment p ON c.pid = p.id
+        WHERE
+        c.store_id = #{store_id}
+        <if test="class_name!=null">
+            p.class_name = #{class_name}
+        </if>
+    </select>
+
+</mapper>

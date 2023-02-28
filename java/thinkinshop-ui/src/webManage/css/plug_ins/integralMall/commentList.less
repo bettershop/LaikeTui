@@ -1,0 +1,151 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .Search {
+    .query-input {
+      margin-right: 10px !important;
+    }
+    .select-input {
+      margin-right: 10px;
+    }
+
+    .order-no {
+      width: 280px;
+    }
+
+    .Search-condition {
+      .select-date {
+        margin-right: 10px;
+      }
+    }
+    .btn-list {
+      .bgColor {
+        border: none !important;
+      }
+    }
+  }
+  .merchants-list {
+    flex: 1;
+    .contents {
+      text-align: left;
+    }
+  }
+
+  /deep/.el-table {
+    .cell {
+      display: flex;
+      justify-content: center;
+      .comment-img {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+
+  .dialog-block {
+    // 弹框样式
+    /deep/.el-dialog {
+      width: 580px;
+      height: 272px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0 !important;
+      .el-dialog__header {
+        width: 100%;
+        height: 58px;
+        line-height: 58px;
+        font-size: 16px;
+        margin-left: 19px;
+        font-weight: bold;
+        border-bottom: 1px solid #e9ecef;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 0 0 19px;
+        .el-dialog__headerbtn {
+          font-size: 18px;
+          top: 0 !important;
+        }
+        .el-dialog__title {
+          font-weight: normal;
+          font-size: 16px;
+          color: #414658;
+        }
+      }
+
+      .el-dialog__body {
+        padding: 41px 60px 16px 60px !important;
+        .el-form {
+          width: 340px;
+          .pass-input {
+            .el-form-item {
+              width: 340px;
+              .el-form-item__content {
+                .el-textarea {
+                  width: 340px;
+                  height: 60px !important;
+                  textarea {
+                    width: 340px;
+                    height: 60px !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .form-footer {
+          width: 100%;
+          height: 72px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          border-top: 1px solid #e9ecef;
+          .el-form-item {
+            padding: 0 !important;
+            height: 100%;
+            .el-form-item__content {
+              height: 100%;
+              line-height: 72px;
+              margin: 0 !important;
+              padding-right: 20px;
+              text-align: right;
+            }
+          }
+
+          .qxcolor {
+            color: #6a7076;
+            border: 1px solid #d5dbc6;
+          }
+          .qdcolor {
+            background-color: #2890ff;
+          }
+          .qdcolor {
+            background-color: #2890ff;
+          }
+          .qdcolor:hover {
+            opacity: 0.8;
+          }
+          .qxcolor {
+            color: #6a7076;
+            border: 1px solid #d5dbe8;
+          }
+          .qxcolor:hover {
+            color: #2890ff;
+            border: 1px solid #2890ff;
+            background-color: #fff;
+          }
+        }
+      }
+    }
+    /deep/.el-form-item__label {
+      font-weight: normal;
+      color: #414658;
+    }
+  }
+}

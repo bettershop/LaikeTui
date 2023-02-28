@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ThirdModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.home.ThirdModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ticket" property="ticket" jdbcType="VARCHAR" />
+    <result column="ticket_time" property="ticket_time" jdbcType="TIMESTAMP" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="token_expires" property="token_expires" jdbcType="INTEGER" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="appsecret" property="appsecret" jdbcType="VARCHAR" />
+    <result column="check_token" property="check_token" jdbcType="VARCHAR" />
+    <result column="encrypt_key" property="encrypt_key" jdbcType="VARCHAR" />
+    <result column="serve_domain" property="serve_domain" jdbcType="VARCHAR" />
+    <result column="work_domain" property="work_domain" jdbcType="VARCHAR" />
+    <result column="redirect_url" property="redirect_url" jdbcType="VARCHAR" />
+    <result column="mini_url" property="mini_url" jdbcType="VARCHAR" />
+    <result column="kefu_url" property="kefu_url" jdbcType="VARCHAR" />
+    <result column="qr_code" property="qr_code" jdbcType="VARCHAR" />
+    <result column="H5" property="h5" jdbcType="VARCHAR" />
+    <result column="endurl" property="endurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, ticket, ticket_time, token, token_expires, appid, appsecret, check_token, encrypt_key, 
+    serve_domain, work_domain, redirect_url, mini_url, kefu_url, qr_code, H5, endurl
+  </sql>
+</mapper>

@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  height: 737px;
+  background-color: #fff;
+  padding: 40px 0 0 0;
+  color: #414658;
+  /deep/.add-menu {
+    display: flex;
+    justify-content: center;
+    .el-form-item {
+      display: flex;
+      &:not(:last-child) {
+        .el-form-item__content {
+          margin-left: 0px !important;
+        }
+      }
+      .el-form-item__content {
+        width: 580px;
+      }
+      .select-input {
+        width: 200px;
+        height: 40px;
+      }
+    }
+
+  }
+
+  .merchants-list {
+    width: 100%;
+    height: 671px;
+    background-color: #fff;
+  }
+
+  /deep/.el-form-item__label {
+    font-weight: normal;
+  }
+}
+

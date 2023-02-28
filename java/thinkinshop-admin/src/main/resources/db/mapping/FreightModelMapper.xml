@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.FreightModelMapper">
+
+    <select id="countFreightDynamic" resultType="int" parameterType="Map">
+        SELECT count(1)
+        FROM lkt_freight
+        <where>
+            <trim suffixOverrides="and">
+                <if test="store_id!=null">
+                    and store_id = #{store_id}
+                </if>
+                <if test="mch_id!=null">
+                    and store_id = #{store_id}
+                </if>
+                <if test="likeName!=null">
+                    and `name` like concat('%',#{likeName},'%')
+                </if>
+                <if test="name!=null">
+                    and `name` =#{name}
+                </if>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="getFreightInfoLeftGoodsDynamicSQL">
+        <where>
+            <trim suffixOverrides="and">
+                <if test="store_id!=null">and f.store_id = #{store_id}</if>
+                <if test="mch_id!=null">and f.mch_id = #{mch_id}</if>
+                <if test="likeName!=null">and f.`name` like concat('%',#{likeName},'%')</if>
+                <if test="is_default!=null">and f.is_default =#{is_default}</if>
+                <if test="isNotNullId!=null">and p.id is not null</if>
+                <if test="isNullId!=null">and p.id is null</if>
+            </trim>
+        </where>
+    </sql>
+
+    <select id="getFreightInfoLeftGoodsDynamic" resultType="Map" parameterType="Map">
+        SELECT
+        f.*, p.id AS p_id,
+        CASE
+        WHEN p.id IS NOT NULL THEN 1 ELSE 0 END is_use
+        FROM
+        lkt_freight AS f
+        LEFT JOIN lkt_product_list AS p ON p.freight = f.id and p.recycle = 0
+        <include refid="getFreightInfoLeftGoodsDynamicSQL"/>
+        GROUP by f.id
+        <trim suffixOverrides="," prefix="order by">
+            <if test="is_default_sort != null">f.is_default ${is_default_sort},</if>
+            <if test="add_time_sort != null">f.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageNo!=null and pageSize!=null">limit #{pageNo},#{pageSize}</if>
+    </select>
+    <select id="countFreightInfoLeftGoodsDynamic" resultType="int" parameterType="Map">
+        SELECT
+        count(distinct f.id)
+        FROM
+        lkt_freight AS f
+        LEFT JOIN lkt_product_list AS p ON p.freight = f.id
+        <include refid="getFreightInfoLeftGoodsDynamicSQL"/>
+    </select>
+
+    <select id="getFreightInfoDynamic" resultType="Map" parameterType="Map">
+        SELECT
+        f.*
+        FROM
+        lkt_freight AS f
+        <where>
+            <trim suffixOverrides="and">
+                <if test="store_id!=null">
+                    and f.store_id = #{store_id}
+                </if>
+                <if test="mch_id!=null">
+                    and f.mch_id = #{mch_id}
+                </if>
+                <if test="likeName!=null">
+                    and f.`name` like concat('%',#{likeName},'%')
+                </if>
+            </trim>
+        </where>
+        <trim suffixOverrides="," prefix="order by">
+            <if test="is_default_sort != null">
+                f.is_default ${is_default_sort},
+            </if>
+            <if test="add_time_sort != null">
+                f.add_time ${add_time_sort},
+            </if>
+        </trim>
+        <if test="pageNo!=null and pageSize!=null">
+            limit #{pageNo},#{pageSize}
+        </if>
+    </select>
+
+</mapper>

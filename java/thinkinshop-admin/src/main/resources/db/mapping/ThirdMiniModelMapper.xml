@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ThirdMiniInfoModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="id != null and id != ''">and id = #{id}</if>
+        <if test="store_id != null">and store_id = #{store_id}</if>
+        <if test="nick_name != null and nick_name != ''">and nick_name like concat('%',#{nick_name},'%')</if>
+        <if test="review_mark != null ">and review_mark = #{review_mark}</if>
+        <if test="issue_mark != null ">and issue_mark = #{issue_mark}</if>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select *
+        from lkt_third_mini_info
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="id_sort!=null and id_sort!=''">id ${id_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_third_mini_info
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

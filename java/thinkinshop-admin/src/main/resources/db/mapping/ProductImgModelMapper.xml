@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ProductImgModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.product.ProductImgModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="product_url" property="product_url" jdbcType="VARCHAR" />
+    <result column="product_id" property="product_id" jdbcType="INTEGER" />
+    <result column="seller_id" property="seller_id" jdbcType="CHAR" />
+    <result column="add_date" property="add_date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, product_url, product_id, seller_id, add_date
+  </sql>
+</mapper>

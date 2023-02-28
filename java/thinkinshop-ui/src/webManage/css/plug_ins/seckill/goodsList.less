@@ -1,0 +1,145 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  
+  /deep/.Search{
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 10px;
+      .Search-condition{
+        display: flex;
+        align-items: center;
+        .query-input {
+          display: flex;
+          margin-right: 10px;
+          .Search-input{
+            width: 200px;
+            margin-right: 10px;
+          }
+          .select-input {
+            margin-right: 8px;
+            width: 180px;
+          }
+
+          .Search-input {
+              width: 240px;
+          }
+
+          .select-date {
+              width: 400px;
+          }
+        }
+      }
+  }
+
+  /deep/.jump-list {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 16px 0;
+      .laiketui-add:before {
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      button {
+        width: 120px;
+        height: 40px;
+        background: #28B6FF;
+        border-radius: 4px;
+        padding: 0;
+        border: none;
+        &:hover {
+          opacity: 0.8;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+      
+      .fontColor {
+        width: 120px;
+        height: 42px;
+        color: #6a7076;
+        background-color: #fff;
+        border-radius: 4px;
+      }
+
+      .el-icon-printer:before  {
+          margin-right: 8px;
+      }
+  }
+
+  .menu-list {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+        thead {
+          tr {
+            th{
+              height: 61px;
+              text-align: center;
+              font-size: 14px;
+              font-weight: bold;
+              color: #414658;
+            }
+          }
+        }
+      }
+      /deep/.el-table__body {
+        tbody {
+          tr {
+            td{
+              height: 92px;
+              text-align: center;
+              font-size: 14px;
+              color: #414658;
+              font-weight: 400;
+            }
+          }
+        }
+        .cell {
+          .goods-info {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            img {
+              width: 60px;
+              height: 60px;
+            }
+            span {
+              margin-left: 10px;
+              text-align: left;
+            }
+          }
+
+          .statusNamn {
+            span {
+              &.active {
+                color: #FF453D;
+              }
+              &.active1 {
+                color: #13CE66;
+              }
+            }
+          }
+        }
+      }
+  
+      /deep/.el-table{
+          .OP-button{
+            .OP-button-top{
+              margin-bottom: 8px;
+              display: flex;
+              justify-content: start;
+            }
+            .OP-button-bottom {
+              display: flex;
+              justify-content: start;
+            }
+          }
+      }
+  }
+}

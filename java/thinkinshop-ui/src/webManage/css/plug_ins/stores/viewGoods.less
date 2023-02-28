@@ -1,0 +1,147 @@
+.container {
+    width: 100%;
+    height: 737px;
+    overflow: hidden;
+    overflow-y: auto;
+    /deep/.el-form {
+      width: 100%;
+      .header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        border-bottom: 1px solid #E9ECEF;
+        padding-left: 20px;
+        span {
+          font-weight: 400;
+          font-size: 16px;
+          color: #414658;
+        }
+      }
+      .basic-info {
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 16px;
+        .basic-block {
+          margin-top: 40px;
+          padding: 0 0 20px 52px;
+          .goosdImg {
+            img {
+                width: 80px;
+                height: 80px;
+            }
+            .goods-show {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                span {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: #eb784f;
+                    display: inline-block;
+                    height: 30px;
+                    line-height: 30px;
+                    color: #fff;
+                    text-align: center;
+                    opacity: 0.8;
+                }
+            }
+          }
+        }
+      }
+
+      .goods-attribute {
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 16px;
+        .attribute-block {
+          width: 100%;
+          margin-top: 40px;
+          padding: 0 40px 20px 40px;
+          display: flex;
+          justify-content: center;
+          .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 60px;
+                height: 60px;
+            }
+          }
+        }
+      }
+
+      .goods-set {
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 16px;
+        .set-block {
+          width: 100%;
+          margin-top: 40px;
+          padding: 0 40px 20px 40px;
+          .activity-class {
+            .el-checkbox__inner {
+              border-radius: 50px;
+            }
+          }
+  
+          .show-local {
+            .show-font {
+              color: #97a0b4;
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+
+      .detailed-content {
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 16px;
+        .detailed-block {
+          width: 100%;
+          margin-top: 40px;
+          padding: 0 40px 60px 40px;
+        }
+      }
+  
+      .footer-button {
+        position: fixed;
+        right: 0;
+        bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 15px 20px;
+        border-top: 1px solid #E9ECEF;
+        background: #FFFFFF;
+        width: 300%;
+        z-index: 10;
+        button {
+          width: 70px;
+          height: 40px;
+        }
+        .bgColor {
+          margin-left: 14px;
+        }
+        .bgColor:hover {
+          opacity: 0.8;
+        }
+  
+        .fontColor {
+          color: #6a7076;
+          border: 1px solid #d5dbe8;
+          margin-left: 14px;
+        }
+        .fontColor:hover {
+          color: #2890ff;
+          border: 1px solid #2890ff;
+        }
+      }
+      .el-form-item__label {
+        font-weight: normal;
+      }
+    }
+}

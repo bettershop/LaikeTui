@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CoreMenuModelMapper">
+    <sql id="selectDynamicSQL">
+        <if test="id != null">and id =#{id}</if>
+        <if test="sid != null">and s_id =#{sid}</if>
+        <if test="type != null">and type =#{type}</if>
+        <if test="isCore != null">and is_core =#{isCore}</if>
+        <if test="recycle != null">and recycle =#{recycle}</if>
+        <if test="title != null">and title =#{title}</if>
+        <if test="titleORid != null">and (title like concat('%',#{titleORid},'%') or id like concat('%',#{titleORid},'%')) </if>
+        <if test="titleLike != null and titleLike != ''">and title like concat('%',#{titleLike},'%')</if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_core_menu
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="sort_sort!=null and sort_sort!=''">sort ${sort_sort},</if>
+            <if test="id_sort!=null and id_sort!=''">id ${id_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_core_menu
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+
+    <sql id="getFunctionOverviewSQL">
+        <if test="id!=null">and a.id = #{id}</if>
+        <if test="recycle!=null">and a.recycle = #{recycle}</if>
+        <if test="s_id!=null">and a.s_id = #{s_id}</if>
+        <if test="store_id!=null">and b.store_id = #{store_id}</if>
+        <if test="isdisplay!=null">and a.is_display = #{isdisplay}</if>
+        <if test="is_display!=null">and b.is_display = #{is_display}</if>
+        <if test="is_core!=null">and a.is_core = #{is_core}</if>
+        <if test="roleId!=null">and c.id = #{roleId}</if>
+        <if test="name!=null">and (a.id = #{name} or a.title like concat('%',#{name},'%') or a.guide_name like concat('%',#{name},'%') )</if>
+        <if test="levelList != null">
+            <foreach collection="levelList" item="level" separator="," open="and level in (" close=")">
+                #{level,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </sql>
+    <select id="getFunctionOverview" parameterType="Map" resultType="Map">
+        select a.id,b.id guidId,a.s_id,title,a.image,a.image1,a.level,a.url,a.briefintroduction,
+               b.is_display,b.guide_sort,a.guide_name,b.role_id,a.type
+        from lkt_core_menu as a
+                 left join lkt_guide_menu as b on a.id = b.menu_id
+                 left join lkt_role as c on b.role_id = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getFunctionOverviewSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="sort_sort!=null and sort_sort!=''">a.sort ${sort_sort},</if>
+            <if test="guide_sort!=null and guide_sort!=''">b.guide_sort ${guide_sort},</if>
+            <if test="is_display_sort!=null and is_display_sort!=''">b.is_display ${is_display_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countFunctionOverview" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_core_menu as a
+        left join lkt_guide_menu as b on a.id = b.menu_id
+        left join lkt_role as c on b.role_id = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getFunctionOverviewSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="getRoleMenuIds" parameterType="Map" resultType="int">
+        select a.id from lkt_core_menu as a
+        left join lkt_guide_menu as b on a.id = b.menu_id
+        left join lkt_role as c on b.role_id = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getFunctionOverviewSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="sort_sort!=null and sort_sort!=''">a.sort ${sort_sort},</if>
+            <if test="guide_sort!=null and guide_sort!=''">b.guide_sort ${guide_sort},</if>
+            <if test="is_display_sort!=null and is_display_sort!=''">b.is_display ${is_display_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="getRoleMenuInfos" parameterType="Map" resultType="Map">
+        select a.* from lkt_core_menu as a
+        left join lkt_guide_menu as b on a.id = b.menu_id
+        left join lkt_role as c on b.role_id = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getFunctionOverviewSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="sort_sort!=null and sort_sort!=''">a.sort ${sort_sort},</if>
+            <if test="guide_sort!=null and guide_sort!=''">b.guide_sort ${guide_sort},</if>
+            <if test="is_display_sort!=null and is_display_sort!=''">b.is_display ${is_display_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.MchModelMapper">
+    <select id="getMchDynamic" parameterType="com.laiketui.domain.mch.MchModel"
+            resultType="com.laiketui.domain.mch.MchModel">
+        SELECT
+        *
+        FROM
+        lkt_mch
+        WHERE
+        review_status = 1
+        AND store_id = #{store_id}
+        <if test="mchList!=null">
+            <foreach collection="mchList" item="mchid" separator="," open="and id in(" close=")">
+                #{mchid,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </select>
+
+    <sql id="getMchUserInfoSQL">
+        <if test="store_id != null and store_id != ''">and a.store_id = #{store_id}</if>
+        <if test="recovery != null">
+            <choose>
+                <when test="recovery == null">and a.recovery = 0</when>
+                <otherwise>and a.recovery = #{recovery}</otherwise>
+            </choose>
+        </if>
+        <if test="id != null">and a.id = #{id}</if>
+        <if test="is_open != null ">and a.is_open =#{is_open}</if>
+        <if test="review_status != null">and a.review_status =#{review_status}</if>
+        <if test="not_examine != null">and (a.review_status = 0 or a.review_status = 2)</if>
+        <if test="promiseStatus != null">
+            <choose>
+                <when test="promiseStatus==1">and EXISTS (select x.id from lkt_mch_promise x where x.mch_id=a.id and status=1)</when>
+                <otherwise>and not EXISTS (select x.id from lkt_mch_promise x where x.mch_id=a.id and status=1)</otherwise>
+            </choose>
+        </if>
+        <if test="mchName1 != null and mchName1 != ''">and (a.user_id like concat('%',#{mchName1},'%') or a.name
+            like concat('%',#{mchName1},'%'))
+        </if>
+    </sql>
+    <select id="getMchUserInfo" parameterType="Map" resultType="Map">
+        select a.*,cast(u.user_name as char) user_name,u.headimgurl,u.source,p.status promiseStatus from lkt_mch a
+        left join lkt_user as u on a.user_id = u.user_id
+        left join lkt_mch_promise p on p.mch_id=a.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getMchUserInfoSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">a.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countMchUserInfo" parameterType="Map" resultType="int">
+        select count(1) from lkt_mch a
+        left join lkt_user as u on a.user_id = u.user_id
+        left join lkt_mch_promise p on p.mch_id=a.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getMchUserInfoSQL"/>
+            </trim>
+        </where>
+    </select>
+
+
+</mapper>

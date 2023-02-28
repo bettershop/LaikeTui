@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.TaoBaoWorkModelMapper">
+
+    <sql id="getTaoBaoInfoListSQL">
+        <if test="store_id!=null">
+            and store_id =#{store_id}
+        </if>
+        <if test="title_like!=null">
+            and title like concat('%',#{title_like},'%')
+        </if>
+        <if test="status!=null">
+            and `status` = #{status}
+        </if>
+    </sql>
+
+    <select id="getTaoBaoInfoList" parameterType="Map" resultType="Map">
+        select * from lkt_taobao_work
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getTaoBaoInfoListSQL"/>
+            </trim>
+        </where>
+        order by creattime desc
+        <if test="pageStart != null and pageEnd!=null">
+            LIMIT #{pageStart},#{pageEnd}
+        </if>
+    </select>
+    <select id="getTaoBaoInfoCount" parameterType="Map" resultType="integer">
+        select count(1) from lkt_taobao_work
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getTaoBaoInfoListSQL"/>
+            </trim>
+        </where>
+        order by creattime desc
+    </select>
+
+    <delete id="batDelById" parameterType="Map">
+        delete from lkt_taobao_work where
+        <foreach collection="taskIds" item="id" separator="," open="id in(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

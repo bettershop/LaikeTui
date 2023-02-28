@@ -1,0 +1,161 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /deep/.btn-nav {
+    span {
+      width: 112px;
+      height: 42px;
+      font-size: 16px;
+      border: none;
+    }
+    .el-radio-group {
+      .el-radio-button {
+        &:not(:last-child) {
+          span {
+            border-right: 1px solid #d5dbe8;
+          }
+        }
+      }
+    }
+        
+  }
+
+  /deep/.Search{
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 10px;
+      margin: 16px 0;
+      .Search-condition{
+        display: flex;
+        align-items: center;
+        .query-input {
+          display: flex;
+          margin-right: 10px;
+          .Search-input{
+            width: 200px;
+            margin-right: 10px;
+          }
+          .select-input {
+            margin-right: 8px;
+            width: 180px;
+          }
+        }
+      }
+  }
+
+  // /deep/.jump-list {
+  //   width: 100%;
+  //   display: flex;
+  //   align-items: center;
+  //   margin-bottom: 16px;
+  //   .laiketui-add:before {
+  //     font-size: 14px;
+  //     margin-right: 8px;
+  //   }
+    
+  //   button {
+  //     width: 120px;
+  //     height: 40px;
+  //     background: #28B6FF;
+  //     border-radius: 4px;
+  //     padding: 0;
+  //     border: none;
+  //     &:hover {
+  //       opacity: 0.8;
+  //     }
+  //     span {
+  //       font-size: 14px;
+  //     }
+  //   }
+  // }
+
+  .menu-list {
+      // height: 593px;
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+        thead {
+          tr {
+            th{
+              height: 61px;
+              text-align: center;
+              font-size: 14px;
+              font-weight: bold;
+              color: #414658;
+            }
+          }
+        }
+      }
+      /deep/.el-table__body {
+        tbody {
+          tr {
+            td{
+              height: 92px;
+              text-align: center;
+              font-size: 14px;
+              color: #414658;
+              font-weight: 400;
+            }
+          }
+        }
+        .cell {
+          .stores-info {
+            display: flex;
+            align-items: center;
+            margin-left: 40px;
+            .head-img {
+              img {
+                width: 60px;
+                height: 60px;
+              }
+            }
+
+            .store-info {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: flex-start;
+              margin-left: 20px;
+              .name {
+                font-size: 14px;
+                font-weight: bold
+              }
+
+              .center {
+                margin: 6px 0;
+              }
+
+              .grey {
+                color: #888f9e;
+              }
+            }
+          }
+        }
+
+        .cell {
+          .ststus {
+            &.active1 {
+              color: #18c364;
+            }
+            &.active2 {
+              color: #414658;
+            }
+            &.active3 {
+              color: #ff453d;
+            }
+          }
+        }
+      }
+  
+      /deep/.el-table{
+        .OP-button{
+          .OP-button-top{
+            margin-bottom: 8px;
+          }
+        }
+      }
+  }
+}

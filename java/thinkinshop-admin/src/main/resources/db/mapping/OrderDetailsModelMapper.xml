@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.OrderDetailsModelMapper">
+    <select id="getOrderDetailByGoodsInfo" parameterType="Map" resultType="Map">
+        SELECT
+        a.id,
+        a.p_id AS commodityId,
+        a.p_name,
+        a.p_price,
+        a.num,
+        a.size,
+        a.sid,
+        a.r_status,
+        a.re_type,
+        a.r_type,
+        a.freight,
+        goods.id goodsId,
+        goods.imgurl goodsUrl,
+        goods.is_distribution,
+        m.img,
+        goods.product_title product_title
+        FROM lkt_order_details AS a
+        LEFT JOIN lkt_configure AS m ON a.sid = m.id
+        left join lkt_product_list goods on goods.id = m.pid
+        WHERE a.store_id = #{store_id}
+        <if test="r_statusList!=null">
+            <foreach collection="r_statusList" item="status" separator="," open="and a.r_status in(" close=")">
+                #{status,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <if test="oderDetailId>0"> AND a.id = #{oderDetailId} </if>
+        <if test="orderno!=null"> AND a.r_sNo = #{orderno} </if>
+        <if test="mch_id!=null"> AND goods.mch_id = #{mch_id} </if>
+        <if test="recycle!=null"> AND a.recycle = #{recycle} </if>
+        <if test="page != null and pageSize!=null"> LIMIT #{page},#{pageSize} </if>
+    </select>
+
+
+    <select id="countOrderDetailDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_order_details
+        where store_id = #{store_id}
+        <if test="orderno != null and orderno!=''">
+            and r_sNo like CONCAT('%',#{orderno},'%')
+        </if>
+        <if test="notStatus != null and notStatus!=''">
+            and r_status != #{notStatus}
+        </if>
+    </select>
+
+    <update id="updateByOrdernoDynamic" parameterType="Map">
+        update lkt_order_details
+        <set>
+            <trim suffixOverrides=",">
+                <if test="r_status!=null">
+                    r_status=#{r_status},
+                </if>
+                <if test="express_id!=null">
+                    express_id=#{express_id},
+                </if>
+                <if test="courier_num!=null">
+                    courier_num=#{courier_num},
+                </if>
+                <if test="deliver_time!=null">
+                    deliver_time=#{deliver_time},
+                </if>
+                <if test="recycle != null ">
+                    recycle = #{recycle},
+                </if>
+                <if test="afterDiscount != null ">
+                    after_discount = #{afterDiscount},
+                </if>
+                <if test="arrive_time != null ">
+                    arrive_time = #{arrive_time},
+                </if>
+            </trim>
+        </set>
+        <where>
+            <trim suffixOverrides="and">
+                <if test="by_id!=null">and id=by_id</if>
+                <if test="orderno!=null">
+                    and r_sNo = #{orderno}
+                </if>
+                <if test=" ids != null  ">
+                    and id in (${ids})
+                </if>
+                <if test="rstatus!=null">
+                    and r_status = #{rstatus}
+                </if>
+                <if test="detailId!=null">
+                    and id = #{detailId}
+                </if>
+                <if test="storeId!=null">
+                    and store_id = #{storeId}
+                </if>
+                <if test="orderDetailIds!=null">
+                    <foreach collection="orderDetailIds" item="id" separator="," open="and id in(" close=")">
+                        #{id,jdbcType=INTEGER}
+                    </foreach>
+                </if>
+            </trim>
+        </where>
+    </update>
+
+    <sql id="selectOrderInfoListDynamceSQL">
+        <if test="store_id!=null">and d.store_id = #{store_id}</if>
+        <if test="orderno!=null">and d.r_sNo = #{orderno}</if>
+        <if test="r_status!=null">and d.r_status = #{r_status}</if>
+    </sql>
+    <select id="selectOrderInfoListDynamce" parameterType="Map" resultType="Map">
+        select
+        o.p_sNo,o.coupon_price,o.coupon_id,o.otype,d.id,d.r_sNo,d.user_id,d.p_id,d.p_name,d.p_price,d.num,d.r_status,d.sid,d.size,p.imgurl,o.otype
+        ,o.ptcode ,p.product_class,b.brand_name,c.costprice,c.price,c.img from lkt_order_details as d left join lkt_configure
+        as c on d.sid = c.id left join lkt_product_list as p on p.id=c.pid left join lkt_order as o on d.r_sNo=o.sNo
+        left join lkt_brand_class as b on p.brand_id = b.brand_id
+        <where>
+            <trim suffixOverrides="and">
+                <include refid="selectOrderInfoListDynamceSQL"/>
+            </trim>
+        </where>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countOrderInfoListDynamce" parameterType="Map" resultType="int">
+        select count(1) from lkt_order_details as d left join lkt_configure
+        as c on d.sid = c.id left join lkt_product_list as p on p.id=c.pid left join lkt_order as o on d.r_sNo=o.sNo
+        left join lkt_brand_class as b on p.brand_id = b.brand_id
+        <where>
+            <trim suffixOverrides="and">
+                <include refid="selectOrderInfoListDynamceSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

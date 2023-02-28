@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.WithdrawModelMapper">
+
+    <select id="getWithdrawLeftUserBankAndMch" parameterType="Map" resultType="Map">
+        SELECT w.id, w.user_id, w.NAME, w.add_date AS addtime, w.money, w.s_charge, w.mobile, w.STATUS status,
+               w.refuse,w.examine_date,b.Bank_name,b.Bank_card_number
+        FROM lkt_withdraw AS w
+        LEFT JOIN lkt_bank_card AS b ON w.Bank_id = b.id
+        LEFT JOIN lkt_mch AS m ON m.user_id = w.user_id
+        WHERE w.store_id = #{store_id}
+        AND w.store_id = m.store_id
+        AND m.review_status = 1
+        AND w.is_mch = 1
+        AND w.recovery = 0
+        <if test="user_id != null"> AND w.user_id = #{user_id} </if>
+        <if test="id != null"> AND w.id = #{id} </if>
+        <if test="status != null"> and w.status = #{status} </if>
+        ORDER BY w.add_date
+        <if test="pageNo!=null and pageSize!=null"> LIMIT #{pageNo},#{pageSize} </if>
+    </select>
+
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        SELECT count(1) FROM lkt_withdraw WHERE
+        store_id = #{store_id}
+        <if test="user_id!=null and user_id!=''"> AND user_id = #{user_id} </if>
+        <if test="is_mch!=null"> AND is_mch = #{is_mch} </if>
+        <if test="status!=null"> AND STATUS = #{status} </if>
+        <if test="startTime!=null and startTime!=''"> AND add_date <![CDATA[  >=  ]]> #{startTime} </if>
+        <if test="endTime!=null and endTime!=''"> AND STATUS <![CDATA[  <=  ]]> #{endTime} </if>
+    </select>
+
+    <sql id="getWithdrawLeftUserBankSQL">
+        <if test="store_id != null">
+            and a.store_id = #{store_id}
+            AND a.store_id = c.store_id
+        </if>
+        <if test="wid != null">AND a.id = #{wid}</if>
+        <if test="status != null">AND a.status = #{status}</if>
+        <if test="is_mch != null">AND a.is_mch = #{is_mch}</if>
+        <if test="like_name != null">AND a.name like concat('%',#{like_name},'%')</if>
+        <if test="like_user_name != null">AND c.user_name like concat('%',#{like_user_name},'%')</if>
+        <if test="like_mobile != null">AND a.mobile like concat('%',#{like_mobile},'%')</if>
+        <if test="startDate != null">AND a.add_date <![CDATA[ >= ]]> #{startDate}</if>
+        <if test="endDate != null">AND a.add_date <![CDATA[ <= ]]> #{endDate}</if>
+    </sql>
+    <select id="getWithdrawLeftUserBank" parameterType="Map" resultType="Map">
+        select
+        a.id,a.user_id,a.name,a.add_date,a.money,a.s_charge,a.mobile,a.status,b.Cardholder,b.Bank_name,b.Bank_card_number,c.source,b.branch,
+        cast(c.user_name as char) userName,dic.text sourceName,
+        CASE a.status WHEN 0 THEN '待审核' WHEN 1 THEN '审核通过' WHEN 2 THEN '审核拒绝' ELSE '未知' END as type_name
+        from lkt_withdraw as a left join lkt_bank_card as b on a.Bank_id = b.id right join lkt_user as c on
+        a.user_id = c.user_id
+        left join lkt_data_dictionary_list dic  on dic.sid=5 and dic.value=c.source
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getWithdrawLeftUserBankSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">a.add_date ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart!=null and pageEnd!=null">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countWithdrawLeftUserBank" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_withdraw as a left join lkt_user_bank_card as b on a.Bank_id = b.id right join lkt_user as c on
+        a.user_id = c.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getWithdrawLeftUserBankSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="getWithdrawLeftMchBankSQL">
+        and w.store_id = #{store_id} and m.store_id = w.store_id
+        <if test="wid != null">and w.id = #{wid}</if>
+        <if test="review_status != null">and m.review_status = #{review_status}</if>
+        <if test="status != null">and w.status = #{status}</if>
+        <if test="is_mch != null">and w.is_mch = #{is_mch}</if>
+        <if test="like_name != null">and c.user_name like concat('%',#{like_name},'%') </if>
+        <if test="like_mchName != null">and m.name like concat('%',#{like_mchName},'%') </if>
+        <if test="like_mobile != null">and w.mobile like concat('%',#{like_mobile},'%')
+        </if>
+        <if test="startDate != null and startDate != ''">and w.add_date <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null and endDate != ''">and w.add_date <![CDATA[  <=  ]]> #{endDate}</if>
+    </sql>
+
+    <select id="getWithdrawLeftMchBank" parameterType="Map" resultType="Map">
+        select w.id,w.user_id,w.name,w.add_date,w.money,w.s_charge,w.mobile,w.status,b.Cardholder,b.Bank_name,b.Bank_card_number,b.branch,w.refuse,
+        m.id as mch_id,m.name as mch_name,m.logo,c.source,cast(c.user_name as char) userName,dic.text sourceName
+        from lkt_withdraw as w
+        left join lkt_bank_card as b on w.Bank_id = b.id
+        left join lkt_mch as m on m.user_id = w.user_id
+        right join lkt_user as c on c.user_id = w.user_id
+        left join lkt_data_dictionary_list dic  on dic.sid=5 and dic.value=c.source
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getWithdrawLeftMchBankSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countWithdrawLeftMchBank" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_withdraw as w
+        left join lkt_bank_card as b on w.Bank_id = b.id
+        left join lkt_mch as m on m.user_id = w.user_id
+        right join lkt_user as c on c.user_id = w.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getWithdrawLeftMchBankSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

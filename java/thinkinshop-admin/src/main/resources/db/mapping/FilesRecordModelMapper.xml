@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.FilesRecordModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="store_type != null">and a.store_type = #{store_type}</if>
+        <if test="groupId != null">and a.`group` = #{groupId}</if>
+        <if test="startDate != null">AND a.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate != null">and a.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+        <if test="title != null">AND a.title LIKE CONCAT('%', #{title},'%')</if>
+        <if test="mch_name != null">AND b.name LIKE CONCAT('%', #{mch_name},'%')</if>
+        <choose>
+            <when test="recycle==null">and a.recycle = 0</when>
+            <otherwise>and a.recycle = #{recycle}</otherwise>
+        </choose>
+        <if test="imgIds != null">
+            <foreach collection="imgIds" item="id" separator="," open="and id in(" close=")">
+                #{id,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select *,b.name mchName from lkt_files_record a left join lkt_mch b on a.mch_id=b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">a.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_files_record a left join lkt_mch b on a.mch_id=b.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

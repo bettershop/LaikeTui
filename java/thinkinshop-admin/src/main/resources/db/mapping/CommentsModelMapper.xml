@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CommentsModelMapper">
+    <select id="getCommentsDynamicByPid" parameterType="Map" resultType="com.laiketui.domain.product.CommentsModel">
+        SELECT *
+        FROM lkt_comments
+        WHERE store_id = #{store_id}
+        AND pid = #{pid}
+        <if test="like_oid!=null and like_oid!=''">
+            AND oid LIKE CONCAT(#{like_oid},'%')
+        </if>
+        ORDER BY add_time DESC
+        <if test="pageNo!=null and pageSize!=null">
+            limit #{pageNo},#{pageSize}
+        </if>
+    </select>
+
+    <sql id="getCommentsUserDynamicByPidSQL">
+        <if test="commentId!=null and commentId!=''">
+            AND a.id = #{commentId}
+        </if>
+        <if test="pid!=null and pid!=''">
+            AND pid = #{pid}
+        </if>
+        <if test="attribute_id!=null">
+            and a.attribute_id = #{attribute_id}
+        </if>
+        <if test="like_oid!=null and like_oid!=''">
+            AND oid LIKE CONCAT(#{like_oid},'%')
+        </if>
+        <if test="type!=0 and type == 1">
+            and a.CommentType <![CDATA[  >=  ]]> 4
+        </if>
+        <if test="type!=0 and type == 2">
+            and a.CommentType = 3
+        </if>
+        <if test="type!=0 and type == 3">
+            and a.CommentType <![CDATA[  >=  ]]> 1
+            and a.CommentType <![CDATA[  <=  ]]> 2
+        </if>
+        <if test="type!=0 and type == 4">
+            and (a.id in (select comments_id from lkt_comments_img where comments_id = a.id))
+        </if>
+    </sql>
+    <select id="getCommentsUserDynamicByPid" parameterType="Map" resultType="Map">
+        SELECT a.id, DATE_FORMAT(a.add_time,'%Y-%m-%d %H:%i:%s') add_time, a.content, a.CommentType,
+        a.anonymous, a.review, DATE_FORMAT(a.review_time,'%Y-%m-%d %H:%i:%s') review_time, a.pid,
+        a.attribute_id, m.user_name, m.headimgurl,
+        case when CommentType <![CDATA[  >=  ]]> 4 then '5'
+        when CommentType = 3 then '3'
+        when CommentType <![CDATA[  >=  ]]>1 and CommentType <![CDATA[  <=  ]]> 2 then '2'
+        end plType FROM lkt_comments AS a
+        LEFT JOIN lkt_user AS m ON a.uid = m.user_id
+        AND a.store_id = m.store_id
+        WHERE a.store_id = #{store_id}
+        <include refid="getCommentsUserDynamicByPidSQL"/>
+        ORDER BY add_time DESC
+        <if test="pageNo!=null and pageSize!=null">
+            limit #{pageNo},#{pageSize}
+        </if>
+    </select>
+
+    <select id="countCommentsUserDynamicByPid" parameterType="Map" resultType="int">
+        SELECT count(1)
+        FROM
+        lkt_comments AS a
+        LEFT JOIN lkt_user AS m ON a.uid = m.user_id
+        AND a.store_id = m.store_id
+        WHERE a.store_id = #{store_id}
+        <include refid="getCommentsUserDynamicByPidSQL"/>
+    </select>
+
+    <sql id="getCommentsOrderSQL">
+        and c.store_id = #{store_id}
+        <if test="orderno!=null and orderno!=''">AND o.sNo LIKE CONCAT('%',#{orderno},'%')</if>
+        <if test="orderType!=null">and o.otype=#{orderType}</if>
+        <if test="status==1">and a.r_status in (5,12)</if>
+        <if test="status==2">and a.r_status in (66,99)</if>
+        <if test='type=="GOOD"'>and c.CommentType > 3</if>
+        <if test='type=="NOTBAD"'>and c.CommentType =3</if>
+        <if test='type=="BAD"'>and c.CommentType <![CDATA[  <  ]]> 3</if>
+        <if test="startDate!=null">and c.add_time <![CDATA[  >=  ]]> #{startDate}</if>
+        <if test="endDate!=null">and c.add_time <![CDATA[  <=  ]]> #{endDate}</if>
+        <if test="commentId!=null">and c.id=#{commentId}</if>
+    </sql>
+
+    <select id="getCommentsOrderDynamic" parameterType="Map" resultType="Map">
+        select a.id as odid,a.r_sNo,a.p_price,a.p_name,a.r_status,o.z_price,c.*,o.otype,o.mch_id ,lm.name as shop_name,
+               reply.content replyText,cast(u.user_name as char) user_name
+        from lkt_order_details AS a
+        LEFT JOIN lkt_comments AS c ON a.r_sNo = c.oid AND a.sid = c.attribute_id
+        left join lkt_reply_comments reply on reply.cid=c.id
+        LEFT JOIN lkt_order as o on a.r_sNo = o.sNo
+        LEFT join lkt_configure as attr on attr.id = a.sid
+        LEFT JOIN lkt_product_list as lpl on lpl.id = attr.pid
+        LEFT JOIN lkt_mch as lm on lm.id = lpl.mch_id
+        left join lkt_user as u on u.user_id=o.user_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getCommentsOrderSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <choose>
+                <when test="add_time_sort!=null and add_time_sort!=''">c.add_time ${add_time_sort}</when>
+                <otherwise>c.add_time desc</otherwise>
+            </choose>
+        </trim>
+        <if test="pageStart>=0 and pageEnd>0">
+            limit #{pageStart},#{pageEnd}
+        </if>
+    </select>
+    <select id="countCommentsOrderDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_order_details AS a
+        LEFT JOIN lkt_comments AS c ON a.r_sNo = c.oid AND a.sid = c.attribute_id
+        LEFT JOIN lkt_order as o on a.r_sNo = o.sNo
+        LEFT join lkt_configure as attr on attr.id = a.sid
+        LEFT JOIN lkt_product_list as lpl on lpl.id = attr.pid
+        LEFT JOIN lkt_mch as lm on lm.id = lpl.mch_id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getCommentsOrderSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laiketui.common.mapper.UserAddressMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="uid!=null">and a.uid=#{uid}</if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_user_address a
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="id_sort!=null and id_sort!=''">a.id ${id_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_user_address a
+        <where>
+            <include refid="selectDynamicSQL"/>
+        </where>
+    </select>
+
+
+    <update id="updateById" parameterType="UserAddress">
+        UPDATE lkt_user_address
+        <set>
+            <trim suffixOverrides=",">
+                <if test="store_id!=null and store_id!=''">
+                    store_id = #{store_id},
+                </if>
+                <if test="name!=null and name!=''">
+                    NAME = #{name},
+                </if>
+                <if test="tel!=null and tel!=''">
+                    tel = #{tel},
+                </if>
+                <if test="sheng!=null and sheng!=''">
+                    sheng = #{sheng},
+                </if>
+                <if test="city!=null and city!=''">
+                    city = #{city},
+                </if>
+                <if test="quyu!=null and quyu!=''">
+                    quyu = #{quyu},
+                </if>
+                <if test="address!=null and address!=''">
+                    address = #{address},
+                </if>
+                <if test="address_xq!=null and address_xq!=''">
+                    address_xq = #{address_xq},
+                </if>
+                <if test="code!=null and code!=''">
+                    CODE = #{code},
+                </if>
+                <if test="is_default!=null">
+                    is_default = #{is_default},
+                </if>
+            </trim>
+        </set>
+        WHERE
+        <trim prefixOverrides="AND">
+            <if test="id!=null and id!=''">
+                AND id = #{id}
+            </if>
+            AND uid = #{uid}
+        </trim>
+    </update>
+
+</mapper>

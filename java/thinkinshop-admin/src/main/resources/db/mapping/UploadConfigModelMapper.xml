@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.UploadConfigModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.upload.UploadConfigModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="upserver" property="upserver" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="attr" property="attr" jdbcType="CHAR" />
+    <result column="attrvalue" property="attrvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, upserver, type, attr, attrvalue
+  </sql>
+</mapper>

@@ -1,0 +1,83 @@
+.container {
+  background-color: #fff;
+  overflow-y: auto;
+  height: 730px;
+    .header {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      border-bottom: 1px solid #E9ECEF;
+      padding-left: 20px;
+      span {
+        font-weight: 400;
+        font-size: 16px;
+        color: #414658;
+      }
+    }
+    /deep/.form-search {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+        .el-form-item {
+          margin-bottom: 20px;
+        }
+        .el-input {
+          width: 300px;
+          height: 40px;
+          input {
+            width: 300px;
+            height: 40px;
+          }
+        }
+        .el-color-picker{
+          margin-left: 14px;
+        }
+
+        .el-textarea {
+          width: 400px;
+        }
+    
+    
+        .basic-info {
+          .basic-block {
+            margin-top: 40px;
+            padding: 0 0 40px 0;
+            .preferentialGoods {
+              .el-form-item__content {
+                display: flex;
+                .allGoods {
+                  margin-right: 20px;
+                }
+              }
+            }
+
+            .discount {
+              input {
+                padding-right: 0px !important;
+              }
+            }
+          }
+        }
+    
+          // button {
+          //   width: 70px;
+          //   height: 40px;
+          // }
+          .bgColor:hover {
+            opacity: 0.8;
+          }
+    
+          .fontColor {
+            color: #6a7076;
+            border: 1px solid #d5dbe8;
+            margin-left: 14px;
+          }
+          .fontColor:hover {
+            color: #2890ff;
+            border: 1px solid #2890ff;
+          }
+        }
+        .el-form-item__label {
+          font-weight: normal;
+        }
+}

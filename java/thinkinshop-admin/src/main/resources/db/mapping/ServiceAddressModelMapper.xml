@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.ServiceAddressModelMapper">
+
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null and store_id != ''">and store_id = #{store_id}</if>
+        <if test="id != null">and id = #{id}</if>
+        <if test="type != null">and `type` = #{type}</if>
+        <if test="uid != null and uid != ''">and uid = #{uid}</if>
+        <if test="nameOrTel != null">and (`name` like concat('%',#{nameOrTel},'%') or tel
+            like concat('%',#{nameOrTel},'%'))
+        </if>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select * from lkt_service_address
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="is_default_sort!=null and is_default_sort!=''">is_default ${is_default_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_service_address
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

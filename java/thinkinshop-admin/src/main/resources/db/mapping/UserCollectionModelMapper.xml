@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.UserCollectionModelMapper">
+    <sql id="selectDynamicSQL">
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="type != null">and c.type=#{type}</if>
+        <if test="user_id != null">and c.user_id = #{user_id}</if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select m.id shopid,c.id,c.p_id,a.product_title,a.id goodsId,a.status,m.is_open,m.logo,m.name as
+        mch_name,m.collection_num from lkt_user_collection as c left join lkt_product_list as a on c.p_id = a.id left
+        join lkt_mch as m on c.mch_id = m.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_time_sort!=null and add_time_sort!=''">c.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_user_collection as c left join lkt_product_list as
+        a on c.p_id = a.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.UserGradeModelMapper">
+    <sql id="selectDynamicSQL">
+        <where>
+            <trim prefixOverrides="and">
+                <if test="store_id != null">and store_id = #{store_id}</if>
+            </trim>
+        </where>
+    </sql>
+
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        select *
+        from lkt_distribution_grade
+        <include refid="selectDynamicSQL"/>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="id_sort!=null and id_sort!=''">id ${id_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        select count(1) from lkt_distribution_grade
+        <include refid="selectDynamicSQL"/>
+    </select>
+
+    <select id="getUserGradeInfoDynamic" parameterType="Map" resultType="Map">
+        select rate,money, money_j, money_n from lkt_user_grade
+        where store_id = #{store_id}
+        <if test="id!=null">and id = #{id}</if>
+        <if test="current_rate!=null">and rate != #{current_rate}</if>
+        <if test="rate_symbol!=null and rate!=null">
+            <choose>
+                <when test="rate_symbol=='lt'">and rate <![CDATA[  <  ]]> #{rate}</when>
+                <when test="rate_symbol=='gt'">and rate <![CDATA[  >  ]]> #{rate}</when>
+                <otherwise>and rate = #{rate}</otherwise>
+            </choose>
+        </if>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="rate_sort!=null and rate_sort!=''">rate ${rate_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd!=null">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+</mapper>

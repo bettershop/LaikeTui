@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.DictionaryNameModelMapper">
+    <resultMap id="BaseResultMap" type="com.laiketui.domain.dictionary.DictionaryNameModel">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="admin_name" property="admin_name" jdbcType="VARCHAR"/>
+        <result column="recycle" property="recycle" jdbcType="TINYINT"/>
+        <result column="add_date" property="add_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="resultDetail" type="DictionaryNameModel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="admin_name" property="admin_name" jdbcType="VARCHAR"/>
+        <result column="recycle" property="recycle" jdbcType="TINYINT"/>
+        <result column="add_date" property="add_date" jdbcType="TIMESTAMP"/>
+
+        <collection property="dic_list" column="id" select="getDicDetail"/>
+    </resultMap>
+    <select id="getDicDetail" parameterType="int" resultMap="resultDetail">
+        select *
+        from lkt_data_dictionary_list
+        where sid = #{id}
+    </select>
+
+    <sql id="Base_Column_List">
+        id, name, status, admin_name, recycle, add_date
+    </sql>
+
+    <select id="getSmsTemplate" parameterType="com.laiketui.domain.dictionary.DictionaryNameModel"
+            resultMap="resultDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from lkt_data_dictionary_name a where a.name = '短信模板类型'
+    </select>
+
+    <sql id="selectDynamicInfoSQL">
+        and b.recycle = 0
+        <if test="name_like != null and name_like != ''">and b.name like concat('%',#{name_like},'%')</if>
+    </sql>
+
+    <select id="selectDynamicInfo" parameterType="Map" resultType="Map">
+        select a.*,b.name,b.id sid,b.status dicStatus from lkt_data_dictionary_list as a left join
+        lkt_data_dictionary_name as b on a.sid =
+        b.id
+        <where>
+            <trim prefixOverrides="and">
+                and b.name != '属性名' and b.name != '属性值'
+                <include refid="selectDynamic1SQL"/>
+                <include refid="selectDynamicInfoSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">a.add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+    <select id="countDynamicInfo" parameterType="Map" resultType="int">
+        select count(1) from lkt_data_dictionary_list as a left join lkt_data_dictionary_name as b on a.sid = b.id
+        <where>
+            <trim prefixOverrides="and">
+                and b.name != '属性名' and b.name != '属性值'
+                <include refid="selectDynamic1SQL"/>
+                <include refid="selectDynamicInfoSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="selectDynamic1SQL">
+        and a.recycle = 0
+        <if test="id != null">and a.id = #{id}</if>
+        <if test="code_like != null and code_like != ''">and a.code like concat('%',#{code_like},'%')</if>
+        <if test="dicName != null and dicName != ''">and a.name like concat('%',#{dicName},'%')</if>
+        <if test="text_like != null and text_like != ''">and a.text like concat('%',#{text},'%')</if>
+        <if test="status != null">and a.status = #{status}</if>
+    </sql>
+    <select id="selectDynamic1" parameterType="Map" resultType="Map">
+        select * from lkt_data_dictionary_name as a
+        <where>
+            <include refid="selectDynamic1SQL"/>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="add_date_sort!=null and add_date_sort!=''">a.add_date ${add_date_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <select id="countDynamic1" parameterType="Map" resultType="int">
+        select count(1) from lkt_data_dictionary_name as a
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamic1SQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <sql id="selectDynamicSQL">
+        and a.id = b.sid
+        and b.recycle = 0
+        <if test="name != null and name != ''">and a.name = #{name}</if>
+        <if test="sname != null and sname != ''">and b.s_name = #{sname}</if>
+        <if test="value != null">and b.value = #{value}</if>
+    </sql>
+    <select id="selectDynamic" parameterType="Map" resultType="Map">
+        SELECT b.text,
+        b.value,
+        b.s_name
+        FROM lkt_data_dictionary_name a,
+        lkt_data_dictionary_list b
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+    <select id="countDynamic" parameterType="Map" resultType="int">
+        SELECT count(1)
+        FROM lkt_data_dictionary_name a,
+        lkt_data_dictionary_list b
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectDynamicSQL"/>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

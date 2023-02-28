@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  height: 737px;
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  .header {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    border-bottom: 1px solid #E9ECEF;
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      color: #414658;
+    }
+  }
+
+  .info-block {
+    flex: 1;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    /deep/.el-form {
+        padding: 40px 0 0 0px;
+        display: flex;
+        flex-direction: column;
+        .members-head {
+            img {
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+            }
+        }
+
+        .footer-button {
+          margin-left: 100Px;
+          padding-bottom: 20px;
+          button {
+            width: 70px;
+            height: 40px;
+            margin: 0 !important;
+          }
+        }
+    }
+  }
+}

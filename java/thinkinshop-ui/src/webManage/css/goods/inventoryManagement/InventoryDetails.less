@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .menu-list {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+        thead {
+          tr {
+            th{
+              height: 61px;
+              text-align: center;
+              font-size: 14px;
+              font-weight: bold;
+              color: #414658;
+            }
+          }
+        }
+      }
+      /deep/.el-table__body {
+        tbody {
+          tr {
+            td{
+              height: 92px;
+              text-align: center;
+              font-size: 14px;
+              color: #414658;
+              font-weight: 400;
+            }
+          }
+        }
+        .cell {
+          .goods-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+              width: 60px;
+              height: 60px;
+              margin-right: 10px;
+            }
+          }
+
+          .num-Detailds {
+            &.active {
+              color: rgb(19, 195, 102);
+              font-weight: bold;
+            }
+            &.actives {
+              color: #ff453d;
+              font-weight: bold;
+            }
+          }
+        }
+
+        .cell {
+          .ststus {
+            display: inline-block;
+            text-align: center;
+            color: #fff;
+            width: 58px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            &.active1 {
+              background-color: #18c364;
+            }
+            &.active2 {
+              background-color: #97a0b4;
+            }
+            &.active3 {
+              background-color: #97a0b4;
+            }
+          }
+        }
+      }
+  
+      /deep/.el-table{
+          .OP-button{
+            button{
+              padding: 5px;
+              height: 22px;
+              background: #FFFFFF;
+              border: 1px solid #D5DBE8;
+              border-radius: 2px;
+              font-size: 12px;
+              font-weight: 400;
+              color: #888F9E;
+              line-height: 9px;
+            }
+            button:hover{
+              border:1px solid rgb(64, 158, 255);
+              color: rgb(64, 158, 255);
+            }
+            button:hover i{
+              color: rgb(64, 158, 255);
+            }
+            .OP-button-top{
+              margin-bottom: 8px;
+              button {
+                &:not(:first-child) {
+                  margin-left: 8px !important;
+                }
+              }
+            }
+          }
+      }
+  }
+}

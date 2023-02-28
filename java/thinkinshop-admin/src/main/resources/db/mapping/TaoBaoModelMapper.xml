@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.TaoBaoModelMapper">
+
+    <delete id="batDelById" parameterType="Map">
+        delete from lkt_taobao where
+        <foreach collection="workIds" item="wid" separator="," open="w_id in(" close=")">
+            #{wid}
+        </foreach>
+    </delete>
+
+</mapper>

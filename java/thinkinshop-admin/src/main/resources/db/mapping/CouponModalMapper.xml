@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CouponModalMapper">
+
+    <select id="getUsersCoupons" resultType="Map" parameterType="Map" flushCache="true" useCache="false">
+        select
+        a.id,a.hid,a.expiry_time,b.name,b.activity_type,b.money,b.discount,b.z_money,b.type,b.product_class_id,b.product_id
+        from lkt_coupon as a
+        left join lkt_coupon_activity as b on a.hid = b.id
+        where a.store_id = #{store_id} and a.user_id = #{user_id}
+        and a.status = 0 and b.recycle = 0 and a.recycle=b.recycle
+        <if test=" mch_id != null "> and b.mch_id = #{mch_id} </if>
+        <if test=" type != null "> and a.type = #{type} </if>
+        order by b.money desc,a.expiry_time asc
+    </select>
+
+    <select id="getCouponInfoListDynamic" resultType="Map" parameterType="Map">
+        select * from lkt_coupon as a
+        where a.store_id = #{store_id}
+        and a.status = 0
+        and a.recycle = 0
+        <if test="user_id != null"> and a.user_id = #{user_id} </if>
+        <if test="type != null"> and a.type = #{type} </if>
+
+        <if test="typeList != null">
+            <foreach collection="typeList" item="type" separator="," open="and a.type in(" close=")">
+                #{type,jdbcType=INTEGER}
+            </foreach>
+        </if>
+        <trim prefix=" ORDER BY " suffixOverrides=",">
+            <if test="type_sort != null">a.type ${sort_sort},</if>
+            <if test="add_time_sort != null">a.add_time ${add_time_sort},</if>
+        </trim>
+        <if test="page != null and pageSize!=null">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+
+    <sql id="getUserCouponActivityDynamicSQL">
+        a.store_id = #{store_id}
+        AND a.recycle = 0
+        <if test="status != null">AND a.STATUS = #{status}</if>
+        <if test="hid != null">AND a.hid = #{hid}</if>
+        <if test="mch_id != null">AND a.mch_id = #{mch_id}</if>
+        <if test="likeOrderno != null">AND c.sNo like concat('%',#{likeOrderno},'%')</if>
+        <if test="user_name != null and user_name != ''">and d.user_name like concat('%',#{user_name},'%')</if>
+        <if test="userName != null">AND( c.sNo like concat('%',#{userName},'%') or d.user_id like
+            concat('%',#{userName},'%') or d.mobile like concat('%',#{userName},'%'))
+        </if>
+        <if test="couponType != null">AND a.type = #{couponType}</if>
+        <if test="notCouponType != null">AND a.type != #{notCouponType}</if>
+        <if test="free_or_not != null">AND a.free_or_not = #{free_or_not}</if>
+    </sql>
+    <select id="getUserCouponActivityDynamic" parameterType="Map" resultType="Map">
+        SELECT a.id, a.hid, a.user_id, a.add_time, a.expiry_time, a.type,
+        b. NAME, b.activity_type, b.money, b.discount, CAST(d.user_name AS char) user_name, d.headimgurl
+        FROM lkt_coupon AS a
+        LEFT JOIN lkt_coupon_activity AS b ON a.hid = b.id
+        LEFT JOIN lkt_coupon_sno AS c ON c.coupon_id = a.id
+        LEFT JOIN lkt_user AS d ON a.user_id = d.user_id
+        <where>
+            <include refid="getUserCouponActivityDynamicSQL"/>
+        </where>
+        <trim prefix=" ORDER BY " suffixOverrides=",">
+            <if test="add_time_sort != null">
+                add_time ${add_time_sort}
+            </if>
+        </trim>
+        <if test="page != null and pageSize!=null">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+    <select id="countUserCouponActivityDynamic" parameterType="Map" resultType="int">
+        SELECT count(1) FROM lkt_coupon AS a
+        LEFT JOIN lkt_coupon_activity AS b ON a.hid = b.id
+        LEFT JOIN lkt_coupon_sno AS c ON c.coupon_id = a.id
+        LEFT JOIN lkt_user AS d ON a.user_id = d.user_id
+        <where>
+            <include refid="getUserCouponActivityDynamicSQL"/>
+        </where>
+    </select>
+
+    <select id="countCouponDynamic" resultType="int" parameterType="Map">
+        select count(1) from lkt_coupon as a
+        where a.store_id = #{store_id}
+        <if test="status != null"> and a.status = #{status} </if>
+        <if test="recycle != null"> and a.recycle = #{recycle} </if>
+        <if test="user_id != null"> and a.user_id = #{user_id} </if>
+        <if test="hid != null"> and a.hid = #{hid} </if>
+        <if test="typeList != null">
+            <foreach collection="typeList" item="type" separator="," open="and a.type in(" close=")">
+                #{type,jdbcType=INTEGER}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

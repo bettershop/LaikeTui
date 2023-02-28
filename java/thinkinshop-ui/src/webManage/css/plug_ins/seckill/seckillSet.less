@@ -1,0 +1,210 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /deep/.btn-nav {
+    margin-bottom: 20px;
+    span {
+      width: 120px;
+      height: 42px;
+      font-size: 16px;
+      border: none;
+      display: flex;
+      justify-content: center;
+    }
+    .el-radio-group {
+      .el-radio-button {
+        &:not(:last-child) {
+          span {
+            border-right: 1px solid #d5dbe8;
+          }
+        }
+      }
+    }
+
+    .order_dfhNum {
+      color: red;
+      border-right: none !important;
+      &.active {
+        color: #fff;
+      }
+    }
+        
+  }
+
+  /deep/.el-form {
+    .header {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      border-bottom: 1px solid #E9ECEF;
+      padding-left: 20px;
+      span {
+        font-weight: 400;
+        font-size: 16px;
+        color: #414658;
+      }
+    }
+
+    .basic-info {
+      width: 100%;
+      background-color: #fff;
+      margin-bottom: 16px;
+      .basic-block {
+        margin-top: 40px;
+        padding: 0 20px 40px 20px;
+        .limit-input {
+          .el-input {
+            width: 400px;
+          }
+        }
+
+        .trailen {
+          .isOpen-trailen {
+            display: flex;
+            align-items: center;
+            .gray {
+              color: #97A0B4;
+              margin-left: 20px;
+            }
+          }
+          .trailen-time {
+            width: 580px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            background-color: #f4f7f9;
+            .red {
+              color: #FF453B ;
+            }
+            .el-input {
+              width: 400px;
+              margin-left: 14px;
+            }
+          }
+        }
+
+        .activity-push {
+          .el-input {
+            width: 140px;
+            margin: 0 10px;
+          }
+          span {
+            color: #414658;
+          }
+        }
+      }
+    }
+
+    .order-info {
+      width: 100%;
+      background-color: #fff;
+      margin-bottom: 16px;
+      .order-block {
+        margin-top: 40px;
+        padding: 0 20px 40px 20px;
+        
+        .package-mail {
+          .package_set {
+            width: 580px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            background-color: #f4f7f9;
+            .red {
+              color: #FF453B ;
+            }
+            .el-input {
+              width: 140px;
+              margin: 0 14px;
+            }
+          }
+        }
+
+        .order-time {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          .el-input {
+            width: 400px;
+          }
+        }
+
+        .remind-limit {
+          .el-form-item__content {
+            display: flex;
+            align-items: center;
+            .el-input {
+              width: 140px;
+            }
+  
+            span {
+              margin: 0 6px;
+            }
+
+            .gray {
+              color: #97A0B4;
+            }
+          }
+        }
+      }
+    }
+
+    .rules-set {
+      width: 100%;
+      background-color: #fff;
+      margin-bottom: 16px;
+      .rules-block {
+        margin-top: 40px;
+        padding: 0 20px 120px 20px;
+        .quillWrapper {
+          height: 341px;
+          .quillWrapper {
+            .ql-container {
+              height: 300px;
+            }
+          }
+        }
+      }
+    }
+
+    .footer-button {
+      position: fixed;
+      right: 0;
+      bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 15px 20px;
+      border-top: 1px solid #E9ECEF;
+      background: #FFFFFF;
+      width: 300%;
+      z-index: 10;
+      button {
+        width: 70px;
+        height: 40px;
+      }
+      .bgColor {
+        margin-left: 14px;
+      }
+      .bgColor:hover {
+        opacity: 0.8;
+      }
+
+      .fontColor {
+        color: #6a7076;
+        border: 1px solid #d5dbe8;
+        margin-left: 14px;
+      }
+      .fontColor:hover {
+        color: #2890ff;
+        border: 1px solid #2890ff;
+      }
+    }
+    .el-form-item__label {
+      font-weight: normal;
+    }
+  }
+    
+}

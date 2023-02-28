@@ -1,0 +1,910 @@
+<?php /* Smarty version 2.6.26, created on 2021-02-15 13:08:24
+         compiled from index.tpl */ ?>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<?php include BASE_PATH."/modules/assets/templates/top.tpl"; ?>
+
+<?php echo '
+<style type="text/css">
+i{
+    cursor: pointer;
+}
+
+.textIpt{
+	border: 1px solid #eee;
+	padding-left:20px;
+	height: 30px;
+	line-height: 30px;
+}
+</style>
+<script type="text/javascript">
+    setSize();
+    addEventListener(\'resize\',setSize);
+    function setSize() {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth/750*100+\'px\';
+    }   
+    function ShowElement(element)
+        {
+        var oldhtml = element.innerHTML;
+        var newobj = document.createElement(\'input\');
+        //创建新的input元素
+        newobj.type = \'text\';
+        //为新增元素添加类型
+        newobj.onblur = function(){
+        element.innerHTML = this.value ? this.value : oldhtml;
+        //当触发时判断新增元素值是否为空，为空则不修改，并返回原有值 
+        }
+        element.innerHTML = \'\';
+        element.appendChild(newobj);
+        newobj.focus();
+        }
+    /*alert弹出层*/
+    function jqalert(param) {
+        var title = param.title,
+            content = param.content,
+            yestext = param.yestext,
+            notext = param.notext,
+            yesfn = param.yesfn,
+            nofn = param.nofn,
+            id = param.id,
+            url = param.url,
+            nolink = param.nolink,
+            yeslink = param.yeslink,
+            prompt = param.prompt,
+            click_bg = param.click_bg,
+            obj = param.obj,
+            type = param.type,
+            price = param.price,
+            status = param.status,
+            str = `<a style="text-decoration:none" class="ml-5" href="index.php?module=return&action=view&id=${id}" title="查看">
+            		<div style="align-items: center;font-size: 12px;display: flex;">
+                    	<div style="margin: 0 auto;display: flex;align-items: center;">
+                        <img src="images/icon1/ck.png"/>&nbsp;查看
+                        </div>
+                    </div>
+            		</a>`,
+            
+            td = $(obj).parent("td");
+            
+        if (click_bg === undefined){
+            click_bg = true;
+        }
+        if (yestext === undefined){
+            yestext = \'确认\';
+        }
+        if (!nolink){
+            nolink = \'javascript:void(0);\';
+        }
+        if (!yeslink){
+            yeslink = \'javascript:void(0);\';
+        }
+
+         var htm = \'\';
+                htm +=`<div class="maskNew" id="jq-alert" style="text-align:center;"><div class="alert maskNewContent">`
+                if(title) htm+=`<div class="MaskTitle">${title}</div>`;
+                if (prompt){
+                    htm += `<div class="content" style="text-align:center;margin-bottom:30px;"><div class="prompt">
+                    		<a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
+		                     <p class="prompt-content" style="text-align:center;font-size:22px;margin:30px auto;">${prompt}</p>
+		                    <input type="text" class="prompt-text textIpt"></div>
+		                    </div>`
+                }else {
+                    if(type == 1 || type == 6){
+                        htm+=`<div class="content" style="text-align:center;margin:30px auto;font-size:22px;">${content}</div>`
+                    }else{
+                        htm +=`<div class="content">
+                        	<div class="prompt">
+                       	 		<p class="prompt-content" style="text-align:center;font-size:22px;margin:30px auto;">${content}</p>
+                       	 		<div style="text-align:center;margin-bottom:20px;">
+                       	 			<span class="pd20" >应退：${price} <input type="hidden" value="${price}" class="ytje"> &nbsp; 实退:</span>
+                                    <input type="text" oninput="ShowElement(this)" style="width:100px" value="${price}" class="prompt-text inp_maie textIpt">
+                        	
+                        		</div>
+                       	 	</div>
+                        	
+                        </div>`;
+                    }
+                }
+                if (!notext){
+                    htm+=`<div class="fd-btn">
+                   		 <a href="${yeslink}" class="confirm closeMask" style="display:inline-block;font-size:14px" id="yes_btn">${yestext}</a>
+                    	</div>
+                   	</div>`
+                }else {
+                    htm+=`<div class="fd-btn">
+                    	<a href="${yeslink}" class="confirm closeMask"   style="display:inline-block;font-size:14px;margin-right:30px;"  id="yes_btn">${yestext}</a>
+                       	<a href="${nolink}"  data-role="cancel" class="cancel closeMask" style="display:inline-block;font-size:14px;background-color:#fff;color:#666;">${notext}</a>
+                         </div>
+                        </div>`
+                }
+
+        $(\'body\').append(htm);
+        var al = $(\'#jq-alert\');
+        al.on(\'click\',\'[data-role="cancel"]\',function () {
+            al.remove();
+           
+            if (nofn){
+                param.nofn();
+                nofn = \'\';
+            }
+            param = {};
+        });
+        $(document).delegate(\'.alert\',\'click\',function (event) {
+            event.stopPropagation();
+        });
+        $("#yes_btn").click( function () {
+            if(status != 1){
+                 window.location.href="index.php?module=return&action=set";
+            }
+
+            if(type == 2 || type == 5 || type == 8){
+
+                    var text = $(".prompt-text").val();
+            console.log(text);
+
+                    if(text == \'\'){
+                       // jqtoast(\'理由不能为空\');
+                       layer.msg(\'理由不能为空\');
+                       return false;
+
+                    }
+                       $.ajax({
+                           type: "POST",
+                           url: url,
+                           data: "id="+id+\'&text=\'+text+\'&m=\'+type,
+                           success: function(res){
+                            console.log(res);
+                            if(res){
+                                td.html(str);
+                                td.prev().html(\'<span style="color:#ff2a1f;">已拒绝</span>\');
+                                layer.msg(\'提交成功\');
+                                setTimeout(function () {
+                                    al.remove();
+                                },300);     
+                            }else{
+                                layer.msg(\'操作失败!\');
+                            }
+                           }
+                        });
+            }else{
+
+                    var text = $(".prompt-text").val();
+                    if(type == 1 || type == 6){
+
+                        $.ajax({
+                           type: "POST",
+                           url: url,
+                           data: "id="+id+\'&m=\'+type,
+                           success: function(res){
+                           	console.log(res);
+                            if(res == 1){
+                                td.html(str);
+                                if(type == \'4\' || type == \'9\'){
+                                   var status = \'<span style="color:#8FBC8F;">已退款</span>\';
+                                }else{
+                                   var status = \'<span style="color:#A4D3EE;">待买家发货</span>\';
+                                }
+                                td.prev().html(\'<span style="color:#30c02d;">\'+status+\'</span>\');
+                                layer.msg(\'提交成功\');
+                                setTimeout(function () {
+                                    al.remove();
+                                },300);     
+                            }else{
+                                layer.msg(\'操作失败!\');
+                            }
+                           }
+                        });
+                    }else{
+                    	console.log(Number(text))
+
+                         if(Number(text) > 0 || Number(text) == 0 ){
+                            $.ajax({
+                               type: "POST",
+                               url: url,
+                               data: "id="+id+\'&m=\'+type+\'&price=\'+Number(text),
+                               success: function(res){
+                               	 console.log(res);
+                                if(res == 1){
+                                    td.html(str);
+                                    if(type == \'4\' || type == \'9\'){
+                                       var status = \'<span style="color:#8FBC8F;">已退款</span>\';
+                                    }else{
+                                       var status = \'<span style="color:#A4D3EE;">待买家发货</span>\';
+                                    }
+                                    td.prev().html(\'<span style="color:#30c02d;">\'+status+\'</span>\');
+                                    layer.msg(\'退款成功\'+text);
+                                    setTimeout(function () {
+                                        al.remove();
+                                    },300);     
+                                }else{
+                                    layer.msg(\'操作失败!\');
+                                }
+                               }
+                            });
+                        }else{
+                            layer.msg(\'输入金额有误,请重新输入!\');
+                        }
+                                              
+                    }
+            }
+
+        });
+
+        if(click_bg === true){
+            $(document).delegate(\'#jq-alert\',\'click\',function () {
+                setTimeout(function () {
+                    al.remove();
+                },300);
+                yesfn =\'\';
+                nofn = \'\';
+                param = {};
+            });
+        }
+
+    }
+    /*toast 弹出提示*/
+    function jqtoast(text,sec) {
+        var _this = text;
+        var this_sec = sec;
+        var htm = \'\';
+        htm += \'<div class="jq-toast" style="display: none;">\';
+        if (_this){
+            htm +=\'<div class="toast">\'+_this+\'</div></div>\';
+            $(\'body\').append(htm);
+            $(\'.jq-toast\').fadeIn();
+
+        }else {
+            jqalert({
+                title:\'提示\',
+                content:\'提示文字不能为空\',
+                yestext:\'确定\'
+            })
+        }
+        if (!sec){
+            this_sec = 2000;
+        }
+        setTimeout(function () {
+            $(\'.jq-toast\').fadeOut(function () {
+                $(this).remove();
+            });
+            _this = \'\';
+        },this_sec);
+    }
+</script>
+
+<style>
+        .show-list{
+            width:80%;
+            margin: 0 auto;
+        }
+        .show-list li{
+            height: 10px;
+            font-size: 18px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #dcdcdc;
+        }
+            *{
+                margin: 0;
+                padding:0;
+                list-style: none;
+            }
+            a{
+                text-decoration: none;
+            }
+
+            /*jq-alert弹出层封装样式*/
+            .jq-alert{
+                position: fixed;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-flex-direction: row;
+                flex-direction: row;
+                -webkit-justify-content: center;
+                -webkit-align-items: center;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(0,0,0,.3);
+                z-index: 99;
+            }
+            .jq-alert .alert{
+                background-color: #FFF;
+                width:440px;
+                height:250px;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            .jq-alert .alert .title{
+                position: relative;
+                margin: 0;
+                font-size: 18px;
+                text-align: center;
+                font-weight: normal;
+                color: rgba(0,0,0,.8);
+            }
+            .jq-alert .alert .content{
+                padding:0 18px;
+                font-size: 18px;
+                color: rgba(0,0,0,.6);
+                height: 56%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            .jq-alert .alert .content .prompt{
+                width:100%;
+            }
+            .jq-alert .alert .content .prompt .prompt-content{
+                font-size: 18px;
+                color: rgba(0,0,0,.54);
+                margin: 0;
+                margin-bottom: 20px;
+                /*text-align: center;*/
+            }
+            .jq-alert .alert .content .prompt .prompt-text{
+                height: 73px;
+                background:none;
+                border:none;
+                outline: none;
+                width: 100%;
+                box-sizing: border-box;
+                margin-top: 20px;
+                background-color: #FFF;
+                border:1px solid #dcdcdc;
+                text-indent:5px;
+            }
+            .jq-alert .alert .content .prompt .prompt-text:focus{
+                border: 1px solid #2196F3;
+                background-color: rgba(33,150,243,.08);
+            }
+            .jq-alert .alert .fd-btn{
+                height: 50px;
+                position: relative;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-flex-direction: row;
+                flex-direction: row;
+                -webkit-justify-content: center;
+                -webkit-align-items: center;
+                justify-content: center;
+                align-items: center;
+            }
+            .jq-alert .alert .fd-btn:after{
+                position: absolute;
+                content: "";
+                top:0;
+                left:0;
+                width:100%;
+                height: 1px;
+                background-color: #F3F3F3;
+            }
+            .jq-alert .alert .fd-btn a{
+                width:100%;
+                font-size: 18px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                color: rgba(0,0,0,.8);
+            }
+            .jq-alert .alert .fd-btn a.cancel{
+                position: relative;
+                color: rgba(0,0,0,.5);
+                line-height: 50px;
+            }
+            .jq-alert .alert .fd-btn a.cancel:after{
+                content: "";
+                position: absolute;
+                top:.1rem;
+                right:0;
+                width: 1px;
+                height: .6rem;
+                background-color: #F3F3F3;
+            }
+            .jq-alert .alert .fd-btn a.confirm{
+                color: #2196F3;
+            }
+            .jq-alert .alert .fd-btn a.confirm:active{
+                background-color: #2196F3;
+                color: #FFF;
+            }
+
+            /*toast弹出层*/
+            .jq-toast{
+                z-index: 999;
+                position:fixed;
+                top:0;
+                left:0;
+                width:100%;
+                height: 100%;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                flex-direction: row;
+                -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                justify-content: center;
+                -webkit-justify-content: center;
+                align-items: center;
+                -webkit-align-items: center;
+            }
+            .jq-toast .toast{
+                max-width: 80%;
+                padding: 10px 20px;
+                background-color: rgba(0,0,0,.48);
+                color: #FFF;
+                border-radius: 4px;
+                font-size: 18px;
+            }
+            .confirm .cancel{
+                text-decoration: none !important;
+            }
+            .inp_maie{
+                height: 32px !important;
+                width: 20% !important;
+                margin-top: 0 !important;
+            }
+
+           	td a{
+                width: 28%!important;
+                margin: 2%!important;
+                float: left;
+            }
+</style>
+'; ?>
+
+<title>退货列表</title>
+</head>
+<body>
+
+<nav class="breadcrumb">
+    订单管理 <span class="c-gray en">&gt;</span> 
+    <a href="index.php?module=return">退货列表</a>
+</nav>
+
+
+<div class="pd-20">
+<input type="hidden" class="price" value="">
+    <div class="text-c"> 
+        <form name="form1" action="index.php" method="get">
+            <input type="hidden" name="module" value="return" />
+            <input type="text" name="p_name" size='8' value="<?php echo $this->_tpl_vars['p_name']; ?>
+" id="" placeholder="订单号/用户ID" autocomplete="off" style="width:200px" class="input-text">
+            <select name="r_type" class="select" style="width: 120px;height: 31px;vertical-align: middle;">
+                <option value="">订单状态</option>
+<option <?php if ($this->_tpl_vars['r_type'] == 1): ?>selected="selected"<?php endif; ?> value="1">审核中</option>
+<option <?php if ($this->_tpl_vars['r_type'] == 2): ?>selected="selected"<?php endif; ?> value="2">待买家发货</option>
+<option <?php if ($this->_tpl_vars['r_type'] == 3): ?>selected="selected"<?php endif; ?> value="3">已拒绝</option>
+<option <?php if ($this->_tpl_vars['r_type'] == 4): ?>selected="selected"<?php endif; ?> value="4">待商家收货</option>
+<option <?php if ($this->_tpl_vars['r_type'] == 5): ?>selected="selected"<?php endif; ?> value="5">已退款</option>
+<option <?php if ($this->_tpl_vars['r_type'] == 6): ?>selected="selected"<?php endif; ?> value="6" >拒绝并退回商品</option>
+            </select>
+          	<div style="position: relative;display: inline-block;">
+				<input name="startdate" id="startdate" placeholder="请输入开始时间" value="<?php echo $this->_tpl_vars['startdate']; ?>
+" size="8" readonly class="scinput_s iptRl" style="" />
+				</div>
+                至
+				<div style="position: relative;display: inline-block;">
+				<input  placeholder="请输入结束时间" name="enddate" id="enddate" value="<?php echo $this->_tpl_vars['enddate']; ?>
+" size="8" readonly class="scinput_s iptRl" style="" />
+				
+                </div>
+			<input name="" id="btn1" class="btn btn-success" type="submit" value="查询">
+            <input type="button" id="btn2"  value="导出" class="btn btn-success" onclick="excel('all')">
+        </form>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+                <tr class="text-c">
+                    <th width="50">序号</th>
+                    <th width="150" aria-valuetext="user_id">用户ID</th>
+                    <th width="130" aria-valuetext="p_name">产品名称</th>
+                    <th width="150" aria-valuetext="p_price">产品价格</th>
+                    <th width="150" aria-valuetext="p_price">运费</th>
+                    <th width="150" aria-valuetext="num">数量</th>
+                    <th width="150" aria-valuetext="r_sNo">订单号</th>
+                    <th width="150" aria-valuetext="add_time">发布时间</th>
+                    <th width="150" aria-valuetext="re_type">类型</th>
+                    <th width="100" aria-valuetext="status">状态</th>
+                    <th style="width:250px;" width="250px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['f1'] = array('total' => count($_from), 'iteration' => 0);
+if ($this->_foreach['f1']['total'] > 0):
+    foreach ($_from as $this->_tpl_vars['item']):
+        $this->_foreach['f1']['iteration']++;
+?>
+                <tr class="text-c">   
+                    <td><?php echo $this->_tpl_vars['item']->id; ?>
+</td>
+                    <td><?php echo $this->_tpl_vars['item']->user_id; ?>
+</td>
+                    <td style="text-align:left!important;width: 400px;"><?php echo $this->_tpl_vars['item']->p_name; ?>
+</td>
+                    <td><?php echo $this->_tpl_vars['item']->p_price; ?>
+</td>
+                    <td><?php echo $this->_tpl_vars['item']->freight; ?>
+</td>
+                    <td><?php echo $this->_tpl_vars['item']->num; ?>
+</td>
+                    <td><?php echo $this->_tpl_vars['item']->r_sNo; ?>
+</td>
+                    <td><?php echo $this->_tpl_vars['item']->add_time; ?>
+</td>
+                    <td style="width: 120px;">
+                        <?php if ($this->_tpl_vars['item']->re_type == 2): ?>
+                            <span >仅退款</span>
+                        <?php elseif ($this->_tpl_vars['item']->re_type == 1): ?>
+                            <span >退货退款</span>
+                        <?php else: ?>
+                            <span >换货</span>
+                        <?php endif; ?>
+                    </td>
+                    <td style="width: 230px;">
+                        <?php if ($this->_tpl_vars['item']->r_type == 0): ?><span>审核中</span>
+                        <?php elseif ($this->_tpl_vars['item']->r_type == 1 || $this->_tpl_vars['item']->r_type == 6): ?><span >待买家发货</span>
+                        <?php elseif ($this->_tpl_vars['item']->r_type == 2 || $this->_tpl_vars['item']->r_type == 8): ?><span >已拒绝</span>
+                        <?php elseif ($this->_tpl_vars['item']->r_type == 3): ?><span>待商家收货</span>
+                        <?php elseif ($this->_tpl_vars['item']->r_type == 4 || $this->_tpl_vars['item']->r_type == 9): ?><span >已退款</span>
+                        <?php else: ?><span style="color: #ff2a1f;">拒绝并退回商品</span><?php endif; ?>
+                    </td>
+
+                    <td width="250px"> 
+                        <a style="text-decoration:none;" class="ml-5" href="index.php?module=return&action=view&id=<?php echo $this->_tpl_vars['item']->id; ?>
+" title="查看">
+                        	<div style="align-items: center;font-size: 12px;display: flex;">
+                            	<div style="margin: 0 auto;display: flex;align-items: center;">
+                                <img src="images/icon1/ck.png"/>&nbsp;查看
+                                </div>
+                            </div>
+                        </a>
+                        <?php if ($this->_tpl_vars['item']->r_type == 0): ?>
+                            <?php if ($this->_tpl_vars['item']->re_type == 1): ?>
+                                <?php if ($this->_tpl_vars['status1'] == 1): ?>  <!-- 有地址 -->
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_ok(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,1,'确定要通过该用户的申请,并让用户寄回?')">
+                                        <div style="align-items: center;font-size: 12px;display: flex;">
+                                            <div style="margin: 0 auto;display: flex;align-items: center;">
+                                            <img src="images/icon1/qy.png"/>&nbsp;通过
+                                            </div>
+                                        </div>
+                                    </a>
+                                <?php else: ?>
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="通过" onclick="is_add(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,1,'请添加售后地址')">
+                                    <div style="align-items: center;font-size: 12px;display: flex;">
+                                        <div style="margin: 0 auto;display: flex;align-items: center;">
+                                        <img src="images/icon1/qy.png"/>&nbsp;通过
+                                        </div>
+                                    </div>
+                                    </a>
+                                <?php endif; ?>
+                                
+                                <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核拒绝" onclick="refuse(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,2)">
+                                    <div style="align-items: center;font-size: 12px;display: flex;">
+	                                    <div style="margin: 0 auto;display: flex;align-items: center;">
+	                                    <img src="images/icon1/jy.png"/>&nbsp;拒绝
+	                                    </div>
+                                    </div>
+                                </a>
+                            <?php elseif ($this->_tpl_vars['item']->re_type == 2): ?>
+                                <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_ok(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,9,'确定要通过该用户的申请,并将钱款原路返还?')">
+                                    <div style="align-items: center;font-size: 12px;display: flex;">
+	                                    <div style="margin: 0 auto;display: flex;align-items: center;">
+	                                    <img src="images/icon1/qy.png"/>&nbsp;通过
+	                                    </div>
+                                    </div>
+                                </a>
+                                <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核拒绝" onclick="refuse(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,8)">
+                                    <div style="align-items: center;font-size: 12px;display: flex;">
+	                                    <div style="margin: 0 auto;display: flex;align-items: center;">
+	                                    <img src="images/icon1/jy.png"/>&nbsp;拒绝
+	                                    </div>
+                                    </div>
+                                </a>
+                            <?php else: ?>
+
+                                <?php if ($this->_tpl_vars['status1'] == 1): ?>  <!-- 有地址 -->
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_ok(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,6,'确定要通过该用户的申请,并让用户寄回?')"><div style="align-items: center;font-size: 12px;display: flex;">
+                                        <div style="margin: 0 auto;display: flex;align-items: center;">
+                                        <img src="images/icon1/qy.png"/>&nbsp;通过
+                                        </div>
+                                        </div>
+                                    </a>
+                                <?php else: ?>
+
+                                    <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核通过" onclick="is_add(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,6,',请添加售后地址')"><div style="align-items: center;font-size: 12px;display: flex;">
+                                        <div style="margin: 0 auto;display: flex;align-items: center;">
+                                        <img src="images/icon1/qy.png"/>&nbsp;通过
+                                        </div>
+                                        </div>
+                                    </a>
+                                <?php endif; ?>
+                                <a style="text-decoration:none" class="ml-5" href="javascript:;" title="审核拒绝" onclick="refuse(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,2)"><div style="align-items: center;font-size: 12px;display: flex;">
+                                    <div style="margin: 0 auto;display: flex;align-items: center;">
+                                    <img src="images/icon1/jy.png"/>&nbsp;拒绝
+                                    </div>
+                                    </div>
+                                </a>
+                            <?php endif; ?>
+                        <?php elseif ($this->_tpl_vars['item']->r_type == 3): ?>
+
+                            <?php if ($this->_tpl_vars['item']->re_type < 3): ?>
+                             <a style="text-decoration:none" class="ml-5" href="javascript:;" title="同意并退款" onclick="is_ok(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,4,'确定已到货并退款到用户?')">
+                             	<div style="align-items: center;font-size: 12px;display: flex;">
+                                    <div style="margin: 0 auto;display: flex;align-items: center;">
+                                    <img src="images/icon1/qy.png"/>&nbsp;通过
+                                    </div>
+                                    </div>
+                                </a>
+                            <?php else: ?>
+                                 <a style="text-decoration:none" class="ml-5" href="javascript:;" title="已收到货并回寄" onclick="zxfahuo('<?php echo $this->_tpl_vars['item']->r_sNo; ?>
+','<?php echo $this->_tpl_vars['item']->id; ?>
+')">
+                                 	<div style="align-items: center;font-size: 12px;display: flex;">
+                                    <div style="margin: 0 auto;display: flex;align-items: center;">
+                                    <img src="images/icon1/sx.png"/>&nbsp;收到货并回寄
+                                    </div>
+                                    </div>
+                                </a>
+                            <?php endif; ?>
+                           
+                            <a style="text-decoration:none" class="ml-5" href="javascript:;" title="拒绝并退回商品" onclick="refuse(this,<?php echo $this->_tpl_vars['item']->id; ?>
+,5)">
+                            	<div style="align-items: center;font-size: 12px;display: flex;">
+                                    <div style="margin: 0 auto;display: flex;align-items: center;">
+                                    <img src="images/icon1/jy.png"/>&nbsp;拒绝
+                                    </div>
+                                    </div>
+                                </a>
+
+                        <?php endif; ?>
+
+
+                    </td>
+                </tr>
+            <?php endforeach; endif; unset($_from); ?>
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center;display: flex;justify-content: center;"><?php echo $this->_tpl_vars['pages_show']; ?>
+</div>
+</div>
+
+<?php include BASE_PATH."/modules/assets/templates/footer.tpl"; ?>
+<script type="text/javascript" src="style/js/H-ui.js"></script> 
+<script type="text/javascript" src="style/js/H-ui.admin.js"></script>
+
+<?php echo '
+<script type="text/javascript">
+
+laydate.render({
+          elem: \'#startdate\', //指定元素
+           trigger: \'click\',
+          type: \'date\',
+
+        });
+       
+        laydate.render({
+          elem: \'#enddate\',
+          trigger: \'click\',
+          type: \'date\'
+        });
+
+
+function excel(pageto) {
+    var pagesize = 1000;
+    var page = 1;
+    var sort_name = \'id\';
+    var sort = \'desc\';
+    location.href=location.href+\'&pageto=\'+pageto+\'&pagesize=\'+pagesize+\'&page=\'+page+\'&sort=\'+sort+\'&sort_name=\'+sort_name;
+}
+
+function refuse(obj,id,type) {
+    jqalert({
+        title:\'提示\',
+        prompt:\'请填写拒绝理由?\',
+        yestext:\'提交\',
+        notext:\'取消\',
+        id:id,
+        url:"index.php?module=return&action=examine",
+        obj:obj,
+        type:type,
+        status:1
+    })
+};
+
+function zxfahuo(sNo,id) {
+     layer_show(\'添加快递信息\',\'index.php?module=return&action=addsign&id=\'+id+\'&sNo=\'+sNo,600,400);
+}
+
+function is_ok(obj,id,type,content) {
+    console.log(type == 4 || type == 9);
+    if(type == 4 || type == 9){
+        $.ajax({
+            type: "GET",
+            url: "index.php?module=return&action=examine",
+            data: "id="+id+\'&f=check\'+\'&m=\'+type,
+            success: function(res){
+                if(res){
+                    $(".price").val(res);
+                    jqalert({
+                        title:\'提示\',
+                        content:content,
+                        yestext:\'是的\',
+                        url:"index.php?module=return&action=examine",
+                        id:id,
+                        notext:\'取消\',
+                        obj:obj,
+                        type:type,
+                        price:res,
+                        status: 1
+                    })
+                }else{
+                    jqtoast(\'操作失败!\');
+                }
+            }
+        });
+    }else if(type == 7){
+        send_btn(id);
+    }else{
+        jqalert({
+            title:\'提示\',
+            content:content,
+            yestext:\'是的\',
+            url:"index.php?module=return&action=examine",
+            id:id,
+            notext:\'取消\',
+            obj:obj,
+            type:type,
+            status: 1
+        })
+    }
+
+};
+
+function is_add(obj,id,type,content) {  
+        $.ajax({
+            type: "GET",
+            url: "index.php?module=return&action=examine",
+            success: function(res){
+                if(res){
+                    $(".price").val(res);
+                    jqalert({
+                        title:\'提示\',
+                        content:content,
+                        yestext:\'去添加\',
+                        id:id,
+                        notext:\'取消\',
+                        obj:obj,
+                        type:type,
+                        price:res
+                    })
+                   
+                }else{
+                    jqtoast(\'操作失败!\');
+                }
+            }
+        });
+    
+
+};
+        function appendMask(content,src){
+			$("body").append(`
+					<div class="maskNew">
+						<div class="maskNewContent">
+							<a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
+							<div class="maskTitle">删除订单</div>	
+							<div style="text-align:center;margin-top:30px"><img src="images/icon1/${src}.png"></div>
+							<div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
+								${content}
+							</div>
+							<div style="text-align:center;margin-top:30px">
+								<button class="closeMask" onclick=closeMask1() >确认</button>
+							</div>
+							
+						</div>
+					</div>	
+				`)
+		}
+		function closeMask(id){
+			 $.get("index.php?module=return&action=del",{\'id\':id},function(res){
+                    if(res.status=="1"){
+                       appendMask("删除成功","cg");
+                    }else{
+                        appendMask("删除失败","ts");
+                    }
+                },"json");
+		    $(".maskNew").remove();
+		}
+		function closeMask2(strId){
+			$.get("index.php?module=product&action=del",{\'id\':strId},function(res){
+                if(res.status=="1"){
+                    appendMask("删除成功","cg")
+                }else{
+                    appendMask("删除失败","ts")
+                }
+            },"json");
+		    $(".maskNew").remove();
+		}
+		function closeMask1(){
+			$(".maskNew").remove();
+			location.replace(location.href);
+		}
+		function confirm (obj,id,type,content){
+			console.log(obj)
+			if(type == 1 || type == 6){
+				$("body").append(`
+					<div class="maskNew">
+						<div class="maskNewContent">
+							<a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
+							<div class="maskTitle">提示</div>	
+							<div style="text-align:center;margin-top:30px"><img src="images/icon1/ts.png"></div>
+							<div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
+								${content}
+							</div>
+							<div><span class="pd20">应退：\'+price+\' <input type="hidden" value="\'+price+\'" class="ytje">   &nbsp; 实退:</span>
+							<input type="text" value="\'+price+\'" class="prompt-text inp_maie"></div>
+							<div style="text-align:center;margin-top:30px">
+								<button class="closeMask" style="margin-right:20px" onclick=closeMask("${id}"}) >确认</button>
+								<button class="closeMask" onclick=closeMask1() >取消</button>
+							</div>
+						</div>
+					</div>	
+				`)
+			}
+			
+		}
+		function confirm1 (content,strId,type){
+			$("body").append(`
+					<div class="maskNew">
+						<div class="maskNewContent">
+							<a href="javascript:void(0);" class="closeA" onclick=closeMask1() ><img src="images/icon1/gb.png"/></a>
+							<div class="maskTitle">删除订单</div>	
+							<div style="text-align:center;margin-top:30px"><img src="images/icon1/ts.png"></div>
+							<div style="height: 50px;position: relative;top:20px;font-size: 22px;text-align: center;">
+								${content}
+							</div>
+							<div style="text-align:center;margin-top:30px">
+								<button class="closeMask" style="margin-right:20px" onclick=closeMask2("${strId}") >确认</button>
+								<button class="closeMask" onclick=closeMask1() >取消</button>
+							</div>
+						</div>
+					</div>	
+				`)
+			
+		}
+
+</script>
+
+'; ?>
+
+</body>
+</html>

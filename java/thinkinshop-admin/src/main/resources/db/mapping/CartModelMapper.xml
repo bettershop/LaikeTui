@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.CartModelMapper">
+    <select id="getUserShopCartList" resultType="Map" parameterType="Map">
+        SELECT
+        a.*, m.product_title,
+        m.mch_id,m.status,
+        c.id AS attribute_id,
+        c.pid,
+        c.price,
+        c.img,
+        c.num,
+        c.unit,
+        c.attribute
+        FROM
+        lkt_cart AS a
+        LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id
+        LEFT JOIN lkt_configure AS c ON a.Size_id = c.id
+        LEFT JOIN lkt_mch AS mc ON m.mch_id = mc.id
+        WHERE
+        a.store_id = #{store_id}
+        AND m.recycle = 0
+        AND m. STATUS != 1
+        AND m.mch_status = 2
+        AND mc.is_open = 1
+        <if test="yk_token!=null and yk_token!=''">AND a.token = #{yk_token} AND a.user_id=''</if>
+        <if test="user_id!=null and user_id!=''">AND a.user_id = #{user_id}</if>
+        ORDER BY
+        a.Create_time DESC
+    </select>
+
+
+    <sql id="getUserPcShopCartListSQL">
+        <if test="store_id!=null">a.store_id=#{store_id}</if>
+        <if test="recycle!=null">m.recycle=#{recycle}</if>
+        <if test="status!=null">m.status=#{status}</if>
+        <if test="mch_status!=null">m.mch_status=#{mch_status}</if>
+        <if test="user_id!=null">a.user_id=#{user_id}</if>
+        <if test="token!=null">a.token=#{token}</if>
+    </sql>
+    <select id="getUserPcShopCartList" resultType="Map" parameterType="Map">
+        SELECT a.*, m.product_title, m.mch_id,m.status, c.id AS attribute_id, c.pid, c.price, c.img, c.num, c.unit,
+        c.attribute
+        FROM lkt_cart AS a LEFT JOIN lkt_product_list AS m ON a.Goods_id = m.id LEFT JOIN lkt_configure AS c ON
+        a.Size_id = c.id
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="getUserPcShopCartListSQL"/>
+            </trim>
+        </where>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="create_time_sort!=null and create_time_sort!=''">a.Create_time ${create_time_sort},</if>
+        </trim>
+        <if test="pageStart != null and pageEnd != ''">limit #{pageStart},#{pageEnd}</if>
+    </select>
+
+    <update id="updateCartById" parameterType="Map">
+        UPDATE lkt_cart
+        <set>
+            <trim suffixOverrides=",">
+                <if test="Goods_num!=null and Goods_num!=''">
+                    Goods_num = #{Goods_num},
+                </if>
+                <if test="attributeId!=null and attributeId!=''">
+                    Size_id = #{attributeId},
+                </if>
+            </trim>
+        </set>
+        WHERE
+        id = #{cart_id}
+        <if test="access_id!=null and access_id!=''">
+            AND token = #{access_id}
+        </if>
+        <if test="user_id!=null and user_id!=''">
+            AND user_id = #{user_id}
+        </if>
+    </update>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.GuideMenuModelMapper" >
+  <resultMap id="BaseResultMap" type="com.laiketui.domain.role.GuideMenuModel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="store_id" property="store_id" jdbcType="INTEGER" />
+    <result column="role_id" property="role_id" jdbcType="INTEGER" />
+    <result column="menu_id" property="menu_id" jdbcType="INTEGER" />
+    <result column="is_display" property="is_display" jdbcType="TINYINT" />
+    <result column="guide_sort" property="guide_sort" jdbcType="INTEGER" />
+    <result column="add_date" property="add_date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, store_id, role_id, menu_id, is_display, guide_sort, add_date
+  </sql>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.UserMapper">
+    <sql id="selectOneSQL">
+        <if test="id != null">and a.id = #{id}</if>
+        <if test="store_id != null">and a.store_id = #{store_id}</if>
+        <if test="user_id != null">and a.user_id = #{user_id}</if>
+        <if test="user_name != null and user_name != ''">and a.user_name = #{user_name}</if>
+        <if test="access_id != null and access_id != ''">and a.access_id = #{access_id}</if>
+        <if test="access_key != null and access_key != ''">and a.access_key = #{access_key}</if>
+        <if test="wx_id != null and wx_id != ''">and a.wx_id = #{wx_id}</if>
+        <if test="wx_name != null and wx_name != ''">and a.wx_name = #{wx_name}</if>
+        <if test="gzh_id != null and gzh_id != ''">and a.gzh_id = #{gzh_id}</if>
+        <if test="zfb_id != null and zfb_id != ''">and a.zfb_id = #{zfb_id}</if>
+        <if test="bd_id != null and bd_id != ''">and a.bd_id = #{bd_id}</if>
+        <if test="tt_id != null and tt_id != ''">and a.tt_id = #{tt_id}</if>
+        <if test="clientid != null and clientid != ''">and a.clientid = #{clientid}</if>
+        <if test="sex != null">and a.sex = #{sex}</if>
+        <if test="headimgurl != null and headimgurl != ''">and a.headimgurl = #{headimgurl}</if>
+        <if test="city != null">and a.city = #{city}</if>
+        <if test="score != null">and a.score = #{score}</if>
+        <if test="password != null">and a.password = #{password}</if>
+        <if test="mobile != null">and a.mobile = #{mobile}</if>
+        <if test="zhanghao != null">and a.zhanghao = #{zhanghao}</if>
+        <if test="mima != null">and a.mima = #{mima}</if>
+        <if test="source != null">and a.source = #{source}</if>
+        <if test="login_num != null">and a.login_num = #{login_num}</if>
+        <if test="grade != null">and a.grade = #{grade}</if>
+        <if test="grade_end != null">and a.grade_end = #{grade_end}</if>
+        <if test="access_token != null">and a.access_token = #{access_token}</if>
+    </sql>
+    <select id="selectOne" parameterType="User" resultType="User">
+        select a.*,b.id mchId from lkt_user a left join lkt_mch b on a.user_id=b.user_id and b.recovery=0
+        <where>
+            <trim prefixOverrides="and">
+                <include refid="selectOneSQL"/>
+            </trim>
+        </where>
+    </select>
+</mapper>

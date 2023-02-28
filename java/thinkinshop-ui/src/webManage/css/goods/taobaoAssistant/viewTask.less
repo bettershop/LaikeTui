@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .dictionary-list {
+      // height: 727px;
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 4px;
+      /deep/.el-table__header {
+        thead {
+          tr {
+            th{
+              height: 61px;
+              text-align: center;
+              font-size: 14px;
+              font-weight: bold;
+              color: #414658;
+            }
+          }
+        }
+      }
+      /deep/.el-table__body {
+        tbody {
+          tr {
+            td{
+              height: 92px;
+              text-align: center;
+              font-size: 14px;
+              color: #414658;
+              font-weight: 400;
+            }
+          }
+        }
+  
+        .cell {
+          span {
+              &.active1 {
+                  color: red;
+              }
+              &.active2 {
+                  color: #14C261;
+              }
+          }
+        }
+      }
+  
+      /deep/.el-table{
+        .OP-button{
+          .OP-button-top{
+            margin-bottom: 8px;
+          }
+        }
+      }
+  }
+}

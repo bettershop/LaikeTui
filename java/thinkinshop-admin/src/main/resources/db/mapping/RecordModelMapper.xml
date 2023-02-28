@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiketui.common.mapper.RecordModelMapper">
+
+    <select id="getUserWalletRecordInfo" parameterType="Map" resultType="Map">
+        select a.user_id, c.user_name, c.mobile, c.source, c.Register_data
+        from lkt_record as a
+        left join lkt_user as c on c.user_id = a.user_id
+        <where>
+            c.store_id=#{store_id}
+            <if test="id != null">
+                and a.id=#{id}
+            </if>
+            <if test="userid != null">
+                and c.userid=#{userid}
+            </if>
+            <if test="type='record'">
+                and (a.type = 1 or a.type = 14 or type = 11)
+            </if>
+            <if test="like_name != null">
+                AND c.name like concat('%',#{like_name},'%')
+            </if>
+            <if test="like_mobile != null">
+                AND c.mobile like concat('%',#{like_mobile},'%')
+            </if>
+            <if test="startDate != null">
+                AND a.add_date <![CDATA[ >= ]]> #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND a.add_date <![CDATA[ <= ]]> #{endDate}
+            </if>
+        </where>
+        order by a.add_date desc
+        <if test="pageStart!=null and pageEnd!=null">
+            LIMIT #{pageStart},#{pageEnd}
+        </if>
+    </select>
+    <select id="countUserWalletRecordInfo" parameterType="Map" resultType="int">
+        select count(1)
+        from lkt_record as a
+        left join lkt_user as c on c.user_id = a.user_id
+        <where>
+            c.store_id=#{store_id}
+            <if test="type='record'">
+                and (a.type = 1 or a.type = 14 or type = 11)
+            </if>
+            <if test="like_name != null">
+                AND c.name like concat('%',#{like_name},'%')
+            </if>
+            <if test="like_mobile != null">
+                AND c.mobile like concat('%',#{like_mobile},'%')
+            </if>
+            <if test="startDate != null">
+                AND a.add_date <![CDATA[ >= ]]> #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND a.add_date <![CDATA[ <= ]]> #{endDate}
+            </if>
+        </where>
+    </select>
+
+</mapper>

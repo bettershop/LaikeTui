@@ -1,0 +1,130 @@
+<template>
+  <div class="container">
+    <div class="btn-nav">
+      <el-radio-group fill="#2890ff" text-color="#fff" v-model="radio1">
+        <el-radio-button label="提现审核" @click.native.prevent="$router.push('/finance/withdrawalManage/withdrawalExamineList')"></el-radio-button>
+        <el-radio-button label="提现记录" @click.native.prevent="$router.push('/finance/withdrawalManage/withdrawalRecordList')"></el-radio-button>
+        <el-radio-button label="钱包参数" @click.native.prevent="$router.push('/finance/withdrawalManage/walletConfig')"></el-radio-button>
+      </el-radio-group>
+    </div>
+
+    <div class="Search">
+      <div class="Search-condition">
+        <div class="query-input">
+          <el-input v-model="page.inputInfo.name" size="medium" @keyup.enter.native="demand" class="Search-input" placeholder="请输入会员名称"></el-input>
+          <el-input v-model="page.inputInfo.phone" size="medium" @keyup.enter.native="demand" class="Search-input" placeholder="请输入联系电话"></el-input>
+          <div class="select-date">
+            <el-date-picker v-model="page.inputInfo.date"
+              type="datetimerange" range-separator="至" start-placeholder="开始日期"
+              end-placeholder="结束日期" value-format="yyyy-MM-dd HH:mm:ss"
+            :editable="false">
+            </el-date-picker>
+          </div>
+        </div>
+        <div class="btn-list">
+          <el-button class="fontColor" @click="reset">{{$t('DemoPage.tableExamplePage.reset')}}</el-button>
+          <el-button class="bgColor" type="primary" @click="demand">{{$t('DemoPage.tableExamplePage.demand')}}</el-button>
+          <el-button class="bgColor export" type="primary" @click="dialogShow">导出</el-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-list" ref="tableFather">
+      <el-table element-loading-text="拼命加载中..." v-loading="page.loading" :data="page.tableData" ref="table" class="el-table" style="width: 100%"
+      :height="tableHeight">
+        <el-table-column fixed="left" label="序号" width="70">
+          <template slot-scope="scope">
+            <span>{{ scope.$index + 1 }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="store_info" label="会员名称" width="130">
+          <template slot-scope="scope">
+            <div class="store-info">
+              <div class="store-info">
+                {{ scope.row.userName }}
+              </div>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="sourceName" label="来源" width="130">
+        </el-table-column>
+        <el-table-column prop="add_date" label="提交时间" width="200">
+          <template slot-scope="scope">
+            <span>{{ scope.row.add_date | dateFormat }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="money" label="提现金额" width="100">
+          <template slot-scope="scope" v-if="scope.row.money">
+            <span>{{ scope.row.money.toFixed(2) }}元</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="s_charge" label="提现手续费" width="100">
+          <template slot-scope="scope" v-if="scope.row.s_charge">
+            <span>{{ scope.row.s_charge.toFixed(2) }}元</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="Bank_name" label="银行名称" width="100">
+        </el-table-column>
+        <el-table-column prop="branch" label="支行名称" width="100">
+        </el-table-column>
+        <el-table-column prop="Cardholder" label="持卡人姓名" width="130">
+        </el-table-column>
+        <el-table-column prop="Bank_card_number" label="卡号" width="200">
+        </el-table-column>
+        <el-table-column prop="mobile" label="联系电话" width="130">
+        </el-table-column>
+        <el-table-column prop="status" label="状态" width="100">
+          <template slot-scope="scope">
+            <span class="ststus" :class="[[ scope.row.status == 0 ? 'active1' : scope.row.status == 1 ? 'active2' : 'active3' ]]">{{ scope.row.status == 0 ? '待审核' : scope.row.status == 1 ? '审核通过' : '已拒绝'}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column show-overflow-tooltip prop="refuse" label="备注" width="130">
+        </el-table-column>
+
+      </el-table>
+      <div class="pageBox" ref="pageBox" v-if="page.showPagebox">
+        <div class="pageLeftText">显示</div>
+        <el-pagination layout="sizes, slot, prev, pager, next" prev-text="上一页" next-text="下一页"
+            @size-change="handleSizeChange"
+            :page-sizes="pagesizes" :current-page="pagination.page"
+            @current-change="handleCurrentChange" :total="total">
+          <div class="pageRightText">当前显示{{currpage}}-{{current_num}}条，共 {{total}} 条记录</div>
+        </el-pagination>
+      </div>
+    </div>
+
+    <div class="dialog-export">
+      <!-- 弹框组件 -->
+      <el-dialog
+        title="导出数据"
+        :visible.sync="dialogVisible"
+        :before-close="handleClose"
+      >
+        <div class="item" @click="exportPage">
+          <i class="el-icon-document"></i>
+          <span>导出本页</span>
+        </div>
+        <div class="item item-center" @click="exportAll">
+          <i class="el-icon-document-copy"></i>
+          <span>导出全部</span>
+        </div>
+        <div class="item" @click="exportQuery">
+          <i class="el-icon-document"></i>
+          <span>导出查询</span>
+        </div>
+      </el-dialog>
+    </div>
+
+  </div>
+</template>
+
+
+<script>
+import main from '@/webManage/js/finance/withdrawalManage/withdrawalRecordList'
+export default main
+</script>
+
+<style scoped lang="less">
+@import  '../../../webManage/css/plug_ins/stores/withdrawalAudit.less';
+@import  '../../../webManage/css/finance/withdrawalManage/withdrawalRecordList.less';
+</style>
