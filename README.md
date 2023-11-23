@@ -26,7 +26,7 @@ QQ交流群 (入群前，请在网页右上角点 "Star" )
 
 [![输入图片说明](https://foruda.gitee.com/images/1664178711821043702/8a672ed1_11650488.png "JAVA.png")](http://www.laiketui.com/cpc/web/index.html?source=github)
 
-### PHP开源商城ThinkPHP架构
+### PHP开源商城ThinkPHP6.0架构
 
 [![输入图片说明](https://foruda.gitee.com/images/1664178722881050897/2ce635bc_11650488.png "php.png")](http://www.laiketui.com/cpc/web/product/phpExtension.html?source=github)
 
