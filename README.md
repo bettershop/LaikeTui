@@ -12,20 +12,20 @@ QQ交流群 (入群前，请在网页右上角点 "Star" )
 
 ### 安装教程、开发文档、操作手册请进入官网查询
 
-[![输入图片说明](https://www.laiketui.com/github/569eb415_11650488.png "官网.png")](http://www.laiketui.com)
+[![输入图片说明](https://raw.githubusercontent.com/bettershop/LaikeTui/refs/heads/master/php/app/install/style/install/images/569eb415_11650488.png "官网.png")](http://www.laiketui.com)
 ### JAVA开源商城Spring架构
 
-[![输入图片说明](https://www.laiketui.com/github/8a672ed1_11650488.png "JAVA.png")](http://www.laiketui.com/cpc/web/index.html?source=github)
+[![输入图片说明](https://raw.githubusercontent.com/bettershop/LaikeTui/refs/heads/master/php/app/install/style/install/images/8a672ed1_11650488.png "JAVA.png")](http://www.laiketui.com/cpc/web/index.html?source=github)
 
 ### PHP开源商城ThinkPHP6.0架构
 
-[![输入图片说明](https://www.laiketui.com/github/2ce635bc_11650488.png "php.png")](http://www.laiketui.com/cpc/web/product/phpExtension.html?source=github)
+[![输入图片说明](https://raw.githubusercontent.com/bettershop/LaikeTui/refs/heads/master/php/app/install/style/install/images/2ce635bc_11650488.png "php.png")](http://www.laiketui.com/cpc/web/product/phpExtension.html?source=github)
 
 #### 移动端截图
-![输入图片说明](https://www.laiketui.com/github/2a13392c_11650488.png "组 2347.png")
+![输入图片说明](https://raw.githubusercontent.com/bettershop/LaikeTui/refs/heads/master/php/app/install/style/install/images/2a13392c_11650488.png "组 2347.png")
 
 #### PC端截图
-![输入图片说明](https://www.laiketui.com/github/153642_4638f4ac_2029865.png "组 2347.png")
+![输入图片说明](https://raw.githubusercontent.com/bettershop/LaikeTui/refs/heads/master/php/app/install/style/install/images/153642_4638f4ac_2029865.png "组 2347.png")
 
 #### 后台截图
 ![输入图片说明](https://www.laiketui.com/github/bd452747_11650488.png "组 2346.png")
